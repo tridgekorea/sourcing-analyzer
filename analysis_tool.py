@@ -632,9 +632,14 @@ def check_password():
     if configured_hash is None:
         st.title(T('password_setup_title'))
         st.caption(T('password_setup_caption'))
-        pw1 = st.text_input(T('password_setup_new'), type="password", key="_setup_pw1")
-        pw2 = st.text_input(T('password_setup_confirm'), type="password", key="_setup_pw2")
-        if st.button(T('password_setup_button')):
+        # st.form으로 감싸서 입력값과 제출 버튼 클릭이 한 번에 서버로 전달되도록 함
+        # (form 없이 개별 위젯 + 버튼 조합이면, 버튼 클릭 순간 입력창의 최신 값이
+        #  아직 서버에 반영되기 전이라 '빈 값'으로 읽히는 경우가 있음)
+        with st.form("_password_setup_form"):
+            pw1 = st.text_input(T('password_setup_new'), type="password")
+            pw2 = st.text_input(T('password_setup_confirm'), type="password")
+            submitted = st.form_submit_button(T('password_setup_button'))
+        if submitted:
             if not pw1:
                 st.warning(T('password_setup_empty'))
             elif pw1 != pw2:
