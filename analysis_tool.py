@@ -345,6 +345,39 @@ TEXTS = {
         'p7_missing_cols_error': "필수 컬럼이 부족합니다: {cols}. 파일 내용을 확인해주세요.",
         'p7_no_data_warning': '집계할 데이터가 없습니다.',
         'p7_table_subheader': '데이터 표',
+
+        'pdf_generate_btn': '📄 PDF 보고서 생성',
+        'pdf_download_btn': '📥 PDF 다운로드',
+        'pdf_generating_msg': 'PDF를 생성하고 있습니다...',
+        'pdf_error_msg': 'PDF 생성 중 오류가 발생했습니다: {msg}',
+        'multi_product_label': '품목 검색 (여러 개 선택 가능)',
+        'multi_product_help': '실제 수입신고 명칭은 같은 상품이라도 표기가 조금씩 다를 수 있어요. 관련된 품목명을 모두 선택하면 하나로 합쳐서 분석합니다.',
+        'insight_box_title': '💡 이번 분석에서 확인할 수 있는 것',
+        'insight_cheapest_month': '과거 데이터 기준, {month}에 구매하면 평균 대비 가장 저렴했습니다 ({pct}% 낮음).',
+        'insight_current_vs_seasonal_avg': '최근월 단가는 계절 평균 대비 {sign}{pct}% {direction}.',
+        'insight_low_confidence': '⚠️ 이 품목은 데이터가 {years}년치뿐이라, 지금 나온 "계절 패턴"이 우연일 수도 있습니다. 2년 이상 데이터가 쌓이면 신뢰도가 높아집니다.',
+        'direction_higher': '높습니다',
+        'direction_lower': '낮습니다',
+        'p6_scope_label': '범위',
+        'p6_scope_all': '전체 시장 (모든 수입사 포함)',
+        'p6_scope_importer': '특정 수입사만 (우리 회사 관점)',
+        'p6_scope_entity_label': '수입사 선택',
+        'p6_scope_all_caption': '※ "전체" 선택 시, 시장 전체에서 사라지거나 새로 생긴 거래관계를 보여줍니다 (특정 회사 관점이 아닙니다).',
+        'p3_compare_years_label': '두 기간 비교하기',
+        'p3_period_a': '기간 A',
+        'p3_period_b': '기간 B',
+        'p3_compare_col_a': '기간 A 물량',
+        'p3_compare_col_b': '기간 B 물량',
+        'p3_compare_col_diff': '증감',
+        'p3_compare_col_diff_pct': '증감률',
+        'p3_compare_subheader': "'{left}' 기준, {right_axis}별 기간 A→B 비교",
+        'p7_filter_label': '필터 (선택)',
+        'p7_filter_col': '필터할 컬럼',
+        'p7_filter_none': '없음',
+        'p7_filter_values': '포함할 값',
+        'p7_view_pie': '파이',
+        'p7_view_stacked': '누적 막대',
+        'p7_metric_label_multi': '지표 (복수 선택 가능)',
     },
     'en': {
         'app_menu_title': 'Menu',
@@ -670,6 +703,39 @@ TEXTS = {
         'p7_missing_cols_error': "Required columns are missing: {cols}. Please check the file contents.",
         'p7_no_data_warning': 'No data to aggregate.',
         'p7_table_subheader': 'Data table',
+
+        'pdf_generate_btn': '📄 Generate PDF Report',
+        'pdf_download_btn': '📥 Download PDF',
+        'pdf_generating_msg': 'Generating PDF...',
+        'pdf_error_msg': 'An error occurred while generating the PDF: {msg}',
+        'multi_product_label': 'Search products (multi-select)',
+        'multi_product_help': "Import declarations often spell the same product slightly differently. Select all related product names to combine them into one analysis.",
+        'insight_box_title': '💡 What this analysis shows',
+        'insight_cheapest_month': 'Historically, buying in {month} was cheapest on average ({pct}% below average).',
+        'insight_current_vs_seasonal_avg': "The latest month's price is {sign}{pct}% {direction} the seasonal average.",
+        'insight_low_confidence': '⚠️ This product only has {years} year(s) of data, so the "seasonal pattern" shown may be coincidental. Confidence improves with 2+ years of history.',
+        'direction_higher': 'higher',
+        'direction_lower': 'lower',
+        'p6_scope_label': 'Scope',
+        'p6_scope_all': 'Entire market (all importers)',
+        'p6_scope_importer': 'Specific importer only (our company)',
+        'p6_scope_entity_label': 'Select importer',
+        'p6_scope_all_caption': '※ With "Entire market" selected, this shows relationships that appeared or disappeared market-wide (not from one company\'s perspective).',
+        'p3_compare_years_label': 'Compare two periods',
+        'p3_period_a': 'Period A',
+        'p3_period_b': 'Period B',
+        'p3_compare_col_a': 'Period A Volume',
+        'p3_compare_col_b': 'Period B Volume',
+        'p3_compare_col_diff': 'Change',
+        'p3_compare_col_diff_pct': 'Change %',
+        'p3_compare_subheader': "'{left}' by {right_axis}: Period A → B comparison",
+        'p7_filter_label': 'Filter (optional)',
+        'p7_filter_col': 'Filter column',
+        'p7_filter_none': 'None',
+        'p7_filter_values': 'Values to include',
+        'p7_view_pie': 'Pie',
+        'p7_view_stacked': 'Stacked bar',
+        'p7_metric_label_multi': 'Metrics (multi-select)',
     },
 }
 
@@ -695,7 +761,7 @@ def preprocess_product_name(name):
     name = name.split('_')[0]
     name = re.sub(r'(\(?\s*\d+\.?\d*\s*(kg|g|l|ml)\s*\)?)', '', name, flags=re.I)
     name = re.sub(r'[^A-Za-z0-9가-힣]', '', name)
-    return name.strip()
+    return name.strip().upper()  # 대소문자만 다른 표기(예: "Frozen"↔"FROZEN")도 같은 품목으로 묶이도록 대문자로 통일
 
 def get_cluster_name(cluster_labels, preprocessed_names):
     """각 클러스터의 이름을 생성하는 함수"""
@@ -904,6 +970,154 @@ def detect_standard_columns(headers):
         'volume': find_column(headers, ['Volume', 'volume']),
         'price': find_column(headers, ['Unit Price', 'unit_price']),
     }
+
+
+def detect_extra_dimension_columns(df, cols, max_unique_ratio=0.5):
+    """표준 8개 컬럼 외에, 업로드된 파일에 실제로 존재하는 다른 '축으로 쓸 수 있는' 컬럼을
+    동적으로 찾는다 (예: HS Code, Incoterm, Port of Discharge 등). 날짜/수치형이 아니고,
+    사실상 자유서술 텍스트가 아닌(고유값 비율이 너무 높지 않은) 컬럼만 후보로 삼는다."""
+    used = {cols.get(k) for k in ('date', 'importer', 'exporter', 'origin', 'export_country', 'product', 'volume', 'price')}
+    extras = []
+    n = max(len(df), 1)
+    for c in df.columns:
+        if c in used or c is None:
+            continue
+        if df[c].dtype == object:
+            nunique = df[c].nunique(dropna=True)
+            if 1 < nunique <= max(50, n * max_unique_ratio):
+                extras.append(c)
+    return extras
+
+
+def build_axis_map(standard_pairs, df, cols):
+    """(라벨, 컬럼명) 표준 축 목록 + 파일에서 동적으로 찾은 추가 컬럼들을 합쳐
+    선택창(selectbox)에 바로 쓸 수 있는 {라벨: 컬럼명} dict를 만든다."""
+    axis_map = {label: col for label, col in standard_pairs if col}
+    for extra_col in detect_extra_dimension_columns(df, cols):
+        if extra_col not in axis_map.values():
+            axis_map[extra_col] = extra_col
+    return axis_map
+
+
+def load_uploaded_df(uploaded_file, raw_df_key, headers_key, fileid_key):
+    """파일이 '새로' 업로드된 경우에만 실제로 파싱하고, 그 외에는 세션에 캐시된 걸 그대로 재사용한다.
+    (이게 없으면 위젯을 하나 바꿀 때마다 Streamlit이 스크립트를 처음부터 다시 실행하면서
+    매번 파일 전체를 재파싱해서 체감 속도가 크게 느려진다.)"""
+    if uploaded_file is None:
+        return st.session_state.get(raw_df_key)
+    file_id = getattr(uploaded_file, 'file_id', None) or (uploaded_file.name, uploaded_file.size)
+    if st.session_state.get(fileid_key) != file_id:
+        raw_df = read_uploaded_table(uploaded_file)
+        if raw_df is None:
+            st.error(T('p1_file_read_fail_error'))
+            st.stop()
+        st.session_state[raw_df_key] = raw_df
+        st.session_state[headers_key] = list(raw_df.columns)
+        st.session_state[fileid_key] = file_id
+    return st.session_state.get(raw_df_key)
+
+
+def cluster_product_names(raw_names):
+    """제품명을 전처리 후 정확히 일치하는 것끼리 묶어 '품목군' 사전을 만든다
+    (같은 상품이라도 실제 수입신고 명칭이 조금씩 다르게 들어오는 문제 대응).
+    반환: {대표명(그룹 내 가장 짧은 원본명): [해당 그룹에 속한 원본 품목명 리스트]}"""
+    groups = {}
+    for name in raw_names:
+        key = preprocess_product_name(name) or name
+        groups.setdefault(key, []).append(name)
+    result = {}
+    for key, names in groups.items():
+        uniq = sorted(set(names))
+        rep = min(uniq, key=len)
+        result[rep] = uniq
+    return result
+
+
+def fig_to_png_bytes(fig, width=900, height=500, scale=2):
+    """Plotly figure를 PNG 바이트로 변환 (PDF에 삽입하기 위함). kaleido 필요."""
+    try:
+        return fig.to_image(format="png", width=width, height=height, scale=scale)
+    except Exception:
+        return None
+
+
+def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
+    """제목 + KPI 텍스트 + Plotly 차트(이미지로 변환) + 표를 하나의 PDF로 조립해 바이트로 반환.
+    reportlab + kaleido 필요."""
+    import io
+    import glob
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.units import mm
+    from reportlab.platypus import SimpleDocTemplate, Image as RLImage, Paragraph, Spacer, Table, TableStyle
+    from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.lib import colors
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+
+    buf = io.BytesIO()
+    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=15 * mm, rightMargin=15 * mm)
+    styles = getSampleStyleSheet()
+
+    # 한글이 깨지지 않도록, 시스템 폰트 파일을 파일시스템에서 '직접' 찾아 등록한다.
+    # (matplotlib.font_manager는 자체 캐시를 쓰는데, 이 캐시가 fonts-nanum 등을 나중에
+    #  설치한 뒤에도 갱신이 안 될 수 있어서 신뢰할 수 없었음 — 그래서 직접 glob으로 탐색)
+    # 주의: reportlab의 TTFont는 .ttc(트루타입 컬렉션)를 지원하지 않으므로 .ttf 파일만 사용
+    font_name = 'Helvetica'
+    try:
+        search_patterns = [
+            '/usr/share/fonts/**/NanumGothic.ttf',
+            '/usr/share/fonts/**/Nanum*.ttf',
+            '/usr/share/fonts/**/NotoSansKR*.ttf',
+            '/usr/share/fonts/**/NotoSansCJK*.ttf',
+            '/usr/share/fonts/**/malgun.ttf',
+            '/System/Library/Fonts/**/*.ttf',
+        ]
+        found_path = None
+        for pattern in search_patterns:
+            matches = [m for m in glob.glob(pattern, recursive=True) if m.lower().endswith('.ttf')]
+            if matches:
+                found_path = matches[0]
+                break
+        if found_path:
+            pdfmetrics.registerFont(TTFont('KoreanFont', found_path))
+            font_name = 'KoreanFont'
+    except Exception:
+        pass
+    for s in styles.byName.values():
+        s.fontName = font_name
+
+    story = [Paragraph(title, styles['Title']), Spacer(1, 6)]
+    for line in kpi_lines:
+        story.append(Paragraph(line, styles['Normal']))
+    story.append(Spacer(1, 10))
+
+    for fig in figs:
+        img_bytes = fig_to_png_bytes(fig)
+        if img_bytes:
+            story.append(RLImage(io.BytesIO(img_bytes), width=180 * mm, height=180 * mm * 500 / 900))
+            story.append(Spacer(1, 8))
+
+    if df_table is not None and not df_table.empty:
+        if table_title:
+            story.append(Paragraph(table_title, styles['Heading3']))
+        display_table = df_table.copy()
+        for c in display_table.columns:
+            display_table[c] = display_table[c].astype(str)
+        data = [list(display_table.columns)] + display_table.values.tolist()
+        t = Table(data, repeatRows=1)
+        t.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d9488')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+            ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
+            ('FONTSIZE', (0, 0), (-1, -1), 7.5),
+            ('FONTNAME', (0, 0), (-1, -1), font_name),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
+        ]))
+        story.append(t)
+
+    doc.build(story)
+    buf.seek(0)
+    return buf.getvalue()
 
 # --- [추가 4] 'find_column' 함수 정의 (NameError 해결) ---
 def find_column(columns, candidates):
@@ -1946,6 +2160,10 @@ if selected == T('menu_opt_market'):
 # ==============================================================================
 # 페이지 3: 공급망 흐름도 (Sankey)
 # ==============================================================================
+
+# ==============================================================================
+# 페이지 3: 공급망 흐름도 (Sankey) — 2개 기간 비교 지원
+# ==============================================================================
 if selected == T('menu_opt_flow'):
     st.title(T('p3_title'))
 
@@ -1955,88 +2173,35 @@ if selected == T('menu_opt_flow'):
     if st.session_state.flow_result is None:
         flow_file = st.file_uploader(T('p3_upload_label'), type=['csv', 'xlsx'], key="flow_uploader")
         st.caption(T('p3_upload_caption'))
+        raw_df = load_uploaded_df(flow_file, 'flow_raw_df', 'flow_headers', 'flow_fileid')
 
-        if flow_file:
-            try:
-                raw_df = None
-                if flow_file.name.endswith('.csv'):
-                    try:
-                        flow_file.seek(0)
-                        raw_df = pd.read_csv(flow_file, encoding='utf-8')
-                    except UnicodeDecodeError:
-                        try:
-                            flow_file.seek(0)
-                            raw_df = pd.read_csv(flow_file, encoding='euc-kr')
-                        except UnicodeDecodeError:
-                            flow_file.seek(0)
-                            raw_df = pd.read_csv(flow_file, encoding='cp949')
-                elif flow_file.name.endswith('.xlsx'):
-                    flow_file.seek(0)
-                    raw_df = pd.read_excel(flow_file)
-
-                if raw_df is None:
-                    st.error(T('p1_file_read_fail_error'))
-                    st.stop()
-
-                st.session_state.flow_raw_df = raw_df
-                st.session_state.flow_headers = list(raw_df.columns)
-            except Exception as e:
-                st.error(T('p1_file_read_error_generic', e=e))
-                st.stop()
-
-        if st.session_state.flow_raw_df is not None:
+        if raw_df is not None:
             headers = st.session_state.flow_headers
-            date_col = find_column(headers, ['Date', 'date'])
-            importer_col = find_column(headers, ['Raw Importer Name', 'importer_name'])
-            exporter_col = find_column(headers, ['Exporter', 'exporter'])
-            origin_col = find_column(headers, ['Origin Country', 'origin_country'])
-            export_col = find_column(headers, ['Export Country', 'export_country', '수출국'])
-            product_col = find_column(headers, ['Reported Product Name', 'product_name'])
-            volume_col = find_column(headers, ['Volume', 'volume'])
-            price_col = find_column(headers, ['Unit Price', 'unit_price'])
-
-            missing = []
-            if not date_col: missing.append('date')
-            if not importer_col: missing.append('importer_name')
-            if not exporter_col: missing.append('Exporter')
-            if not origin_col: missing.append('origin_country')
-            if not export_col: missing.append('export_country')
-            if not product_col: missing.append('product_name')
-            if not volume_col: missing.append('volume')
-            if not price_col: missing.append('unit_price')
+            cols = detect_standard_columns(headers)
+            missing = [k for k in ['date', 'importer', 'exporter', 'origin', 'export_country', 'product', 'volume', 'price'] if not cols[k]]
             if missing:
                 st.error(T('p3_missing_cols_error', cols=', '.join(missing)))
                 st.stop()
 
-            AXIS_COL_MAP = {
-                T('p3_axis_exporter'): exporter_col,
-                T('p3_axis_importer'): importer_col,
-                T('p3_axis_origin'): origin_col,
-            }
-            RIGHT_AXIS_COL_MAP = {
-                T('p3_axis_country'): export_col,
-                T('p3_axis_exporter'): exporter_col,
-                T('p3_axis_importer'): importer_col,
-                T('p3_axis_origin'): origin_col,
-                T('p3_axis_product'): product_col,
-            }
-
-            # 날짜 선택창 기본값은 '오늘'이 아니라 실제 업로드된 데이터의 최소~최대 날짜로 설정
-            # (기본값이 오늘로 남아있으면 사용자가 직접 날짜를 안 바꿨을 때 항상 '데이터 없음'이 뜨는 문제 방지)
-            _flow_parsed_dates = pd.to_datetime(st.session_state.flow_raw_df[date_col], errors='coerce').dropna()
-            if len(_flow_parsed_dates) > 0:
-                _flow_min_date = _flow_parsed_dates.min().date()
-                _flow_max_date = _flow_parsed_dates.max().date()
-            else:
-                _flow_min_date = datetime.date.today()
-                _flow_max_date = datetime.date.today()
+            AXIS_COL_MAP = build_axis_map([
+                (T('p3_axis_exporter'), cols['exporter']),
+                (T('p3_axis_importer'), cols['importer']),
+                (T('p3_axis_origin'), cols['origin']),
+            ], raw_df, cols)
+            RIGHT_AXIS_COL_MAP = build_axis_map([
+                (T('p3_axis_country'), cols['export_country']),
+                (T('p3_axis_exporter'), cols['exporter']),
+                (T('p3_axis_importer'), cols['importer']),
+                (T('p3_axis_origin'), cols['origin']),
+                (T('p3_axis_product'), cols['product']),
+            ], raw_df, cols)
 
             col1, col2 = st.columns(2)
             with col1:
                 st.markdown(f"**{T('p3_left_axis_label')}**")
                 left_axis_label = st.selectbox(T('p3_left_axis_label'), options=list(AXIS_COL_MAP.keys()), label_visibility="collapsed", key="flow_left_axis")
                 left_col = AXIS_COL_MAP[left_axis_label]
-                left_entity_options = sorted(st.session_state.flow_raw_df[left_col].dropna().astype(str).unique())
+                left_entity_options = sorted(raw_df[left_col].dropna().astype(str).unique())
                 left_entity = st.selectbox(T('p3_left_entity_label'), options=left_entity_options, key="flow_left_entity")
             with col2:
                 st.markdown(f"**{T('p3_right_axis_label')}**")
@@ -2044,111 +2209,157 @@ if selected == T('menu_opt_flow'):
                 right_col = RIGHT_AXIS_COL_MAP[right_axis_label]
             st.caption(T('p3_axis_hint'))
 
-            col3, col4 = st.columns(2)
-            with col3:
-                start_date = st.date_input(T('p3_date_start'), value=_flow_min_date, key="flow_start_date")
-            with col4:
-                end_date = st.date_input(T('p3_date_end'), value=_flow_max_date, key="flow_end_date")
+            _parsed_dates = pd.to_datetime(raw_df[cols['date']], errors='coerce').dropna()
+            _min_date = _parsed_dates.min().date() if len(_parsed_dates) else datetime.date.today()
+            _max_date = _parsed_dates.max().date() if len(_parsed_dates) else datetime.date.today()
+            _mid_date = _min_date + (_max_date - _min_date) / 2
+
+            compare_mode = st.checkbox(T('p3_compare_years_label'), key="flow_compare_mode")
+
+            if not compare_mode:
+                col3, col4 = st.columns(2)
+                with col3:
+                    start_date = st.date_input(T('p3_date_start'), value=_min_date, key="flow_start_date")
+                with col4:
+                    end_date = st.date_input(T('p3_date_end'), value=_max_date, key="flow_end_date")
+            else:
+                st.markdown(f"**{T('p3_period_a')}**")
+                colA1, colA2 = st.columns(2)
+                with colA1:
+                    a_start = st.date_input(T('p4_date_start'), value=_min_date, key="flow_a_start")
+                with colA2:
+                    a_end = st.date_input(T('p4_date_end'), value=_mid_date, key="flow_a_end")
+                st.markdown(f"**{T('p3_period_b')}**")
+                colB1, colB2 = st.columns(2)
+                with colB1:
+                    b_start = st.date_input(T('p4_date_start'), value=_mid_date, key="flow_b_start")
+                with colB2:
+                    b_end = st.date_input(T('p4_date_end'), value=_max_date, key="flow_b_end")
 
             if st.button(T('p3_run_btn')):
-                df = st.session_state.flow_raw_df.copy()
-                df['_date'] = pd.to_datetime(df[date_col], errors='coerce')
-                df['_volume'] = pd.to_numeric(df[volume_col], errors='coerce')
-                df['_price'] = pd.to_numeric(df[price_col], errors='coerce')
-                df = df.dropna(subset=['_date', '_volume', '_price', left_col, right_col])
+                df = raw_df.copy()
+                df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
+                df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
+                df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                df = df.dropna(subset=['_date', '_volume', left_col, right_col])
 
-                mask = (
-                    (df['_date'] >= pd.to_datetime(start_date))
-                    & (df['_date'] <= pd.to_datetime(end_date))
-                    & (df[left_col].astype(str) == str(left_entity))
-                )
-                sub = df[mask]
+                def _flow_grouped_for_range(d_start, d_end):
+                    m = (df['_date'] >= pd.to_datetime(d_start)) & (df['_date'] <= pd.to_datetime(d_end)) & (df[left_col].astype(str) == str(left_entity))
+                    s = df[m]
+                    if s.empty:
+                        return None
+                    g = s.groupby(right_col).agg(volume=('_volume', 'sum'), avg_price=('_price', 'mean')).reset_index()
+                    return g.sort_values('volume', ascending=False)
 
-                if sub.empty:
-                    st.warning(T('p3_no_data_warning'))
+                if not compare_mode:
+                    grouped = _flow_grouped_for_range(start_date, end_date)
+                    if grouped is None:
+                        st.warning(T('p3_no_data_warning'))
+                    else:
+                        TOP_N = 8
+                        truncated = len(grouped) > TOP_N
+                        if truncated:
+                            top = grouped.iloc[:TOP_N].copy()
+                            rest = grouped.iloc[TOP_N:]
+                            others_vol = rest['volume'].sum()
+                            others_price = (rest['volume'] * rest['avg_price']).sum() / others_vol if others_vol > 0 else 0
+                            others_row = pd.DataFrame([{right_col: T('p2_others_label'), 'volume': others_vol, 'avg_price': others_price}])
+                            grouped = pd.concat([top, others_row], ignore_index=True)
+                        st.session_state.flow_result = {
+                            'mode': 'single', 'left_axis_label': left_axis_label, 'left_entity': left_entity,
+                            'right_axis_label': right_axis_label, 'grouped': grouped, 'right_col': right_col,
+                            'start_date': start_date, 'end_date': end_date, 'top_n': TOP_N, 'truncated': truncated,
+                        }
+                        st.rerun()
                 else:
-                    grouped = sub.groupby(right_col).agg(volume=('_volume', 'sum'), avg_price=('_price', 'mean')).reset_index()
-                    grouped = grouped.sort_values('volume', ascending=False)
+                    grouped_a = _flow_grouped_for_range(a_start, a_end)
+                    grouped_b = _flow_grouped_for_range(b_start, b_end)
+                    if grouped_a is None or grouped_b is None:
+                        st.warning(T('p3_no_data_warning'))
+                    else:
+                        merged = pd.merge(
+                            grouped_a[[right_col, 'volume']].rename(columns={'volume': 'volume_a'}),
+                            grouped_b[[right_col, 'volume']].rename(columns={'volume': 'volume_b'}),
+                            on=right_col, how='outer'
+                        ).fillna(0)
+                        merged['diff'] = merged['volume_b'] - merged['volume_a']
+                        merged['diff_pct'] = merged.apply(lambda r: (r['diff'] / r['volume_a'] * 100) if r['volume_a'] > 0 else None, axis=1)
+                        merged = merged.sort_values('volume_b', ascending=False)
 
-                    TOP_N = 8
-                    truncated = len(grouped) > TOP_N
-                    if truncated:
-                        top = grouped.iloc[:TOP_N].copy()
-                        rest = grouped.iloc[TOP_N:]
-                        others_vol = rest['volume'].sum()
-                        others_price = (rest['volume'] * rest['avg_price']).sum() / others_vol if others_vol > 0 else 0
-                        others_row = pd.DataFrame([{right_col: T('p2_others_label'), 'volume': others_vol, 'avg_price': others_price}])
-                        grouped = pd.concat([top, others_row], ignore_index=True)
-
-                    st.session_state.flow_result = {
-                        'left_axis_label': left_axis_label,
-                        'left_entity': left_entity,
-                        'right_axis_label': right_axis_label,
-                        'grouped': grouped,
-                        'right_col': right_col,
-                        'start_date': start_date,
-                        'end_date': end_date,
-                        'top_n': TOP_N,
-                        'truncated': truncated,
-                    }
-                    st.rerun()
+                        st.session_state.flow_result = {
+                            'mode': 'compare', 'left_axis_label': left_axis_label, 'left_entity': left_entity,
+                            'right_axis_label': right_axis_label, 'right_col': right_col,
+                            'grouped_a': grouped_a.head(8), 'grouped_b': grouped_b.head(8), 'merged': merged,
+                            'a_start': a_start, 'a_end': a_end, 'b_start': b_start, 'b_end': b_end,
+                        }
+                        st.rerun()
 
     if st.session_state.flow_result is not None:
         R = st.session_state.flow_result
-        grouped = R['grouped']
-        total_vol = grouped['volume'].sum()
+        pdf_figs = []
+        pdf_table = None
 
-        st.subheader(T('p3_result_subheader', left=R['left_entity'], left_axis=R['left_axis_label'], right_axis=R['right_axis_label'], start=R['start_date'], end=R['end_date']))
+        if R['mode'] == 'single':
+            grouped = R['grouped']
+            st.subheader(T('p3_result_subheader', left=R['left_entity'], left_axis=R['left_axis_label'], right_axis=R['right_axis_label'], start=R['start_date'], end=R['end_date']))
 
-        labels = [R['left_entity']] + grouped[R['right_col']].astype(str).tolist()
-        n_targets = len(grouped)
-        source_indices = [0] * n_targets
-        target_indices = list(range(1, n_targets + 1))
-        values = grouped['volume'].tolist()
+            labels = [R['left_entity']] + grouped[R['right_col']].astype(str).tolist()
+            n_targets = len(grouped)
+            fig = go.Figure(data=[go.Sankey(
+                node=dict(pad=20, thickness=20, line=dict(color='rgba(0,0,0,0.2)', width=0.5), label=labels, color=['#0d9488'] + ['#60a5fa'] * n_targets),
+                link=dict(source=[0] * n_targets, target=list(range(1, n_targets + 1)), value=grouped['volume'].tolist(), color=['rgba(13,148,136,0.35)'] * n_targets)
+            )])
+            fig.update_layout(title=T('p3_sankey_title', left=R['left_entity'], right_axis=R['right_axis_label']), font_size=13, height=max(350, 60 * n_targets))
+            st.plotly_chart(fig, use_container_width=True)
+            pdf_figs.append(fig)
 
-        node_colors = ['#0d9488'] + ['#60a5fa'] * n_targets
-        link_colors = ['rgba(13, 148, 136, 0.35)'] * n_targets
+            if R.get('truncated'):
+                st.caption(T('p3_others_note', n=R['top_n']))
 
-        fig = go.Figure(data=[go.Sankey(
-            node=dict(
-                pad=20, thickness=20,
-                line=dict(color='rgba(0,0,0,0.2)', width=0.5),
-                label=labels,
-                color=node_colors,
-            ),
-            link=dict(
-                source=source_indices,
-                target=target_indices,
-                value=values,
-                color=link_colors,
-            )
-        )])
-        fig.update_layout(
-            title=T('p3_sankey_title', left=R['left_entity'], right_axis=R['right_axis_label']),
-            font_size=13,
-            height=max(350, 60 * n_targets),
-        )
-        st.plotly_chart(fig, use_container_width=True)
+            st.subheader(T('p3_table_subheader'))
+            category_col_label = T('p3_col_category', right_axis=R['right_axis_label'])
+            display_df = grouped.copy()
+            display_df['share'] = display_df['volume'] / display_df['volume'].sum()
+            display_df = display_df.rename(columns={R['right_col']: category_col_label, 'volume': T('p3_col_volume'), 'avg_price': T('p3_col_avg_price'), 'share': T('p3_col_share')})
+            display_df = display_df[[category_col_label, T('p3_col_volume'), T('p3_col_share'), T('p3_col_avg_price')]]
+            st.dataframe(display_df.style.format({T('p3_col_volume'): '{:,.0f}', T('p3_col_share'): '{:.1%}', T('p3_col_avg_price'): '${:,.2f}'}))
+            pdf_table = display_df
+        else:
+            st.subheader(T('p3_compare_subheader', left=R['left_entity'], right_axis=R['right_axis_label']))
+            colA, colB = st.columns(2)
+            for col_ui, grouped, period_label, period_range in [
+                (colA, R['grouped_a'], T('p3_period_a'), f"{R['a_start']} ~ {R['a_end']}"),
+                (colB, R['grouped_b'], T('p3_period_b'), f"{R['b_start']} ~ {R['b_end']}"),
+            ]:
+                with col_ui:
+                    st.caption(f"{period_label}: {period_range}")
+                    labels = [R['left_entity']] + grouped[R['right_col']].astype(str).tolist()
+                    n_targets = len(grouped)
+                    fig = go.Figure(data=[go.Sankey(
+                        node=dict(pad=15, thickness=16, line=dict(color='rgba(0,0,0,0.2)', width=0.5), label=labels, color=['#0d9488'] + ['#60a5fa'] * n_targets),
+                        link=dict(source=[0] * n_targets, target=list(range(1, n_targets + 1)), value=grouped['volume'].tolist(), color=['rgba(13,148,136,0.35)'] * n_targets)
+                    )])
+                    fig.update_layout(font_size=11, height=max(300, 50 * n_targets), margin=dict(l=10, r=10, t=10, b=10))
+                    st.plotly_chart(fig, use_container_width=True)
+                    pdf_figs.append(fig)
 
-        if R.get('truncated'):
-            st.caption(T('p3_others_note', n=R['top_n']))
+            st.subheader(T('p3_table_subheader'))
+            category_col_label = T('p3_col_category', right_axis=R['right_axis_label'])
+            merged = R['merged'].rename(columns={R['right_col']: category_col_label, 'volume_a': T('p3_compare_col_a'), 'volume_b': T('p3_compare_col_b'), 'diff': T('p3_compare_col_diff'), 'diff_pct': T('p3_compare_col_diff_pct')})
+            st.dataframe(merged.style.format({T('p3_compare_col_a'): '{:,.0f}', T('p3_compare_col_b'): '{:,.0f}', T('p3_compare_col_diff'): '{:+,.0f}', T('p3_compare_col_diff_pct'): '{:+.1f}%'}))
+            pdf_table = merged
 
-        st.subheader(T('p3_table_subheader'))
-        category_col_label = T('p3_col_category', right_axis=R['right_axis_label'])
-        display_df = grouped.copy()
-        display_df['share'] = display_df['volume'] / total_vol
-        display_df = display_df.rename(columns={
-            R['right_col']: category_col_label,
-            'volume': T('p3_col_volume'),
-            'avg_price': T('p3_col_avg_price'),
-            'share': T('p3_col_share'),
-        })
-        display_df = display_df[[category_col_label, T('p3_col_volume'), T('p3_col_share'), T('p3_col_avg_price')]]
-        st.dataframe(display_df.style.format({
-            T('p3_col_volume'): '{:,.0f}',
-            T('p3_col_share'): '{:.1%}',
-            T('p3_col_avg_price'): '${:,.2f}',
-        }))
+        if st.button(T('pdf_generate_btn'), key="flow_pdf_btn"):
+            with st.spinner(T('pdf_generating_msg')):
+                try:
+                    pdf_bytes = build_pdf_report(
+                        title=T('p3_title'),
+                        kpi_lines=[f"{T('p3_left_entity_label')}: {R['left_entity']} ({R['left_axis_label']})"],
+                        figs=pdf_figs, df_table=pdf_table, table_title=T('p3_table_subheader'),
+                    )
+                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="supply_chain_flow.pdf", mime="application/pdf", key="flow_pdf_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
 
 # ==============================================================================
 # 페이지 4: 집중도 리스크 진단
@@ -2162,16 +2373,9 @@ if selected == T('menu_opt_risk'):
     if st.session_state.risk_result is None:
         risk_file = st.file_uploader(T('p4_upload_label'), type=['csv', 'xlsx'], key="risk_uploader")
         st.caption(T('p4_upload_caption'))
+        raw_df = load_uploaded_df(risk_file, 'risk_raw_df', 'risk_headers', 'risk_fileid')
 
-        if risk_file:
-            raw_df = read_uploaded_table(risk_file)
-            if raw_df is None:
-                st.error(T('p1_file_read_fail_error'))
-                st.stop()
-            st.session_state.risk_raw_df = raw_df
-            st.session_state.risk_headers = list(raw_df.columns)
-
-        if st.session_state.risk_raw_df is not None:
+        if raw_df is not None:
             headers = st.session_state.risk_headers
             cols = detect_standard_columns(headers)
             missing = [k for k in ['date', 'exporter', 'origin', 'product', 'volume'] if not cols[k]]
@@ -2179,11 +2383,11 @@ if selected == T('menu_opt_risk'):
                 st.error(T('p4_missing_cols_error', cols=', '.join(missing)))
                 st.stop()
 
-            AXIS_MAP = {
-                T('p4_axis_exporter'): cols['exporter'],
-                T('p4_axis_origin'): cols['origin'],
-                T('p4_axis_product'): cols['product'],
-            }
+            AXIS_MAP = build_axis_map([
+                (T('p4_axis_exporter'), cols['exporter']),
+                (T('p4_axis_origin'), cols['origin']),
+                (T('p4_axis_product'), cols['product']),
+            ], raw_df, cols)
 
             col1, col2 = st.columns(2)
             with col1:
@@ -2194,10 +2398,10 @@ if selected == T('menu_opt_risk'):
 
             scope_entity = None
             if scope_label == T('p4_scope_importer') and cols['importer']:
-                importer_options = sorted(st.session_state.risk_raw_df[cols['importer']].dropna().astype(str).unique())
+                importer_options = sorted(raw_df[cols['importer']].dropna().astype(str).unique())
                 scope_entity = st.selectbox(T('p4_scope_entity_label'), options=importer_options, key="risk_scope_entity")
 
-            _parsed_dates = pd.to_datetime(st.session_state.risk_raw_df[cols['date']], errors='coerce').dropna()
+            _parsed_dates = pd.to_datetime(raw_df[cols['date']], errors='coerce').dropna()
             _min_date = _parsed_dates.min().date() if len(_parsed_dates) else datetime.date.today()
             _max_date = _parsed_dates.max().date() if len(_parsed_dates) else datetime.date.today()
 
@@ -2210,7 +2414,7 @@ if selected == T('menu_opt_risk'):
             threshold = st.slider(T('p4_threshold_label'), min_value=20, max_value=80, value=50, step=5, key="risk_threshold")
 
             if st.button(T('p4_run_btn')):
-                df = st.session_state.risk_raw_df.copy()
+                df = raw_df.copy()
                 df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                 df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
                 df = df.dropna(subset=['_date', '_volume', axis_col])
@@ -2234,13 +2438,9 @@ if selected == T('menu_opt_risk'):
                     monthly_total = sub_copy.groupby('_ym')['_volume'].sum().rename('total')
                     monthly = monthly.merge(monthly_total, on='_ym')
                     monthly['share'] = monthly['_volume'] / monthly['total'] * 100
-                    trend = monthly.sort_values(['_ym', 'share'], ascending=[True, False]).groupby('_ym').first().reset_index()
-                    trend = trend.sort_values('_ym')
+                    trend = monthly.sort_values(['_ym', 'share'], ascending=[True, False]).groupby('_ym').first().reset_index().sort_values('_ym')
 
-                    st.session_state.risk_result = {
-                        'axis_label': axis_label, 'grouped': grouped, 'total': total,
-                        'threshold': threshold, 'trend': trend,
-                    }
+                    st.session_state.risk_result = {'axis_label': axis_label, 'grouped': grouped, 'threshold': threshold, 'trend': trend}
                     st.rerun()
 
     if st.session_state.risk_result is not None:
@@ -2286,14 +2486,28 @@ if selected == T('menu_opt_risk'):
         fig.update_layout(title=T('p4_bar_chart_title', axis=R['axis_label'], t=threshold), xaxis_title=T('p4_axis_share'), yaxis=dict(autorange='reversed'))
         st.plotly_chart(fig, use_container_width=True)
 
+        figs_for_pdf = [fig]
         if len(R['trend']) > 1:
             fig2 = go.Figure()
             fig2.add_trace(go.Scatter(x=R['trend']['_ym'], y=R['trend']['share'], mode='lines+markers', line=dict(color='#0d9488')))
             fig2.update_layout(title=T('p4_trend_chart_title'), xaxis_title=T('axis_yearmonth'), yaxis_title=T('p4_axis_share'))
             st.plotly_chart(fig2, use_container_width=True)
+            figs_for_pdf.append(fig2)
 
         display_df = grouped.rename(columns={'name': T('p4_col_name'), 'volume': T('p4_col_volume'), 'share': T('p4_col_share')})
         st.dataframe(display_df.style.format({T('p4_col_volume'): '{:,.0f}', T('p4_col_share'): '{:.1f}%'}))
+
+        if st.button(T('pdf_generate_btn'), key="risk_pdf_btn"):
+            with st.spinner(T('pdf_generating_msg')):
+                try:
+                    pdf_bytes = build_pdf_report(
+                        title=T('p4_title'),
+                        kpi_lines=[f"{T('p4_kpi_top1')}: {top1['share']:.1f}%", f"{T('p4_kpi_top3')}: {top3_share:.1f}%", f"{T('p4_kpi_risk')}: {risk_label} ({reason})"],
+                        figs=figs_for_pdf, df_table=display_df, table_title=T('p4_col_name'),
+                    )
+                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="concentration_risk.pdf", mime="application/pdf", key="risk_pdf_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
 
 # ==============================================================================
 # 페이지 5: 가격 추세 & 계절성
@@ -2307,16 +2521,9 @@ if selected == T('menu_opt_season'):
     if st.session_state.season_result is None:
         season_file = st.file_uploader(T('p5_upload_label'), type=['csv', 'xlsx'], key="season_uploader")
         st.caption(T('p5_upload_caption'))
+        raw_df = load_uploaded_df(season_file, 'season_raw_df', 'season_headers', 'season_fileid')
 
-        if season_file:
-            raw_df = read_uploaded_table(season_file)
-            if raw_df is None:
-                st.error(T('p1_file_read_fail_error'))
-                st.stop()
-            st.session_state.season_raw_df = raw_df
-            st.session_state.season_headers = list(raw_df.columns)
-
-        if st.session_state.season_raw_df is not None:
+        if raw_df is not None:
             headers = st.session_state.season_headers
             cols = detect_standard_columns(headers)
             missing = [k for k in ['date', 'product', 'price'] if not cols[k]]
@@ -2324,8 +2531,10 @@ if selected == T('menu_opt_season'):
                 st.error(T('p5_missing_cols_error', cols=', '.join(missing)))
                 st.stop()
 
-            product_options = sorted(st.session_state.season_raw_df[cols['product']].dropna().astype(str).unique())
-            product_name = st.selectbox(T('p5_product_label'), options=product_options, key="season_product")
+            raw_products = raw_df[cols['product']].dropna().astype(str).unique()
+            product_groups = cluster_product_names(raw_products)
+            selected_reps = st.multiselect(T('multi_product_label'), options=sorted(product_groups.keys()), key="season_products")
+            st.caption(T('multi_product_help'))
 
             col1, col2 = st.columns(2)
             with col1:
@@ -2340,44 +2549,59 @@ if selected == T('menu_opt_season'):
                 breakdown = breakdown_options[breakdown_label]
 
             if st.button(T('p5_run_btn')):
-                df = st.session_state.season_raw_df.copy()
-                df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
-                df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
-                df = df.dropna(subset=['_date', '_price', cols['product']])
-                sub = df[df[cols['product']].astype(str) == str(product_name)]
-
-                if sub.empty:
+                if not selected_reps:
                     st.warning(T('p5_no_data_warning'))
                 else:
-                    sub = sub.copy()
-                    sub['_ym'] = sub['_date'].dt.to_period('M')
-                    sub['_month'] = sub['_date'].dt.month
-                    sub['_year'] = sub['_date'].dt.year
+                    selected_raw_names = set()
+                    for rep in selected_reps:
+                        selected_raw_names.update(product_groups[rep])
 
-                    overall = sub.groupby('_ym')['_price'].mean().reset_index().sort_values('_ym')
-                    overall['_ym_str'] = overall['_ym'].astype(str)
+                    df = raw_df.copy()
+                    df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
+                    df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                    df = df.dropna(subset=['_date', '_price', cols['product']])
+                    sub = df[df[cols['product']].astype(str).isin(selected_raw_names)]
 
-                    latest_year = sub['_year'].max()
-                    monthly_avg_by_month = sub[sub['_year'] == latest_year].groupby('_month')['_price'].mean()
-                    peak_months = []
-                    if len(monthly_avg_by_month) >= 3:
-                        overall_mean = monthly_avg_by_month.mean()
-                        peak_months = sorted(monthly_avg_by_month[monthly_avg_by_month > overall_mean * 1.05].index.tolist())
+                    if sub.empty:
+                        st.warning(T('p5_no_data_warning'))
+                    else:
+                        sub = sub.copy()
+                        sub['_ym'] = sub['_date'].dt.to_period('M')
+                        sub['_month'] = sub['_date'].dt.month
+                        sub['_year'] = sub['_date'].dt.year
 
-                    breakdown_series = {}
-                    if breakdown != 'none':
-                        bcol = cols[breakdown]
-                        for name, g in sub.groupby(bcol):
-                            s = g.groupby('_ym')['_price'].mean().reset_index().sort_values('_ym')
-                            s['_ym_str'] = s['_ym'].astype(str)
-                            breakdown_series[str(name)] = s
+                        overall = sub.groupby('_ym')['_price'].mean().reset_index().sort_values('_ym')
+                        overall['_ym_str'] = overall['_ym'].astype(str)
 
-                    st.session_state.season_result = {
-                        'product_name': product_name, 'overall': overall,
-                        'show_prev_year': show_prev_year, 'breakdown': breakdown,
-                        'breakdown_series': breakdown_series, 'peak_months': peak_months,
-                    }
-                    st.rerun()
+                        month_avg = sub.groupby('_month')['_price'].mean()
+                        years_count = sub['_year'].nunique()
+                        overall_avg = sub['_price'].mean()
+                        cheapest_month = int(month_avg.idxmin())
+                        cheapest_month_pct = (overall_avg - month_avg.min()) / overall_avg * 100
+
+                        latest_year = sub['_year'].max()
+                        monthly_avg_latest_year = sub[sub['_year'] == latest_year].groupby('_month')['_price'].mean()
+                        peak_months = []
+                        if len(monthly_avg_latest_year) >= 3:
+                            lyr_mean = monthly_avg_latest_year.mean()
+                            peak_months = sorted(monthly_avg_latest_year[monthly_avg_latest_year > lyr_mean * 1.05].index.tolist())
+
+                        breakdown_series = {}
+                        if breakdown != 'none':
+                            bcol = cols[breakdown]
+                            for name, g in sub.groupby(bcol):
+                                s = g.groupby('_ym')['_price'].mean().reset_index().sort_values('_ym')
+                                s['_ym_str'] = s['_ym'].astype(str)
+                                breakdown_series[str(name)] = s
+
+                        st.session_state.season_result = {
+                            'product_label': ', '.join(selected_reps), 'overall': overall,
+                            'show_prev_year': show_prev_year, 'breakdown': breakdown,
+                            'breakdown_series': breakdown_series, 'peak_months': peak_months,
+                            'cheapest_month': cheapest_month, 'cheapest_month_pct': cheapest_month_pct,
+                            'years_count': years_count, 'overall_avg': overall_avg,
+                        }
+                        st.rerun()
 
     if st.session_state.season_result is not None:
         R = st.session_state.season_result
@@ -2407,20 +2631,53 @@ if selected == T('menu_opt_season'):
         fig = go.Figure()
         if R['breakdown'] == 'none':
             fig.add_trace(go.Scatter(x=overall['_ym_str'], y=overall['_price'], mode='lines+markers', name=T('p5_legend_this_year'), line=dict(color='#0d9488')))
-            if R['show_prev_year']:
-                prev_year_prices = [ym_to_price.get(ym - 12) for ym in overall['_ym']]
-                if any(v is not None for v in prev_year_prices):
-                    fig.add_trace(go.Scatter(x=overall['_ym_str'], y=prev_year_prices, mode='lines', name=T('p5_legend_prev_year'), line=dict(color='#94a3b8', dash='dash'), connectgaps=True))
         else:
             colors = ['#0d9488', '#e11d48', '#2563eb', '#f59e0b', '#a855f7']
             for i, (name, s) in enumerate(R['breakdown_series'].items()):
                 fig.add_trace(go.Scatter(x=s['_ym_str'], y=s['_price'], mode='lines+markers', name=name, line=dict(color=colors[i % len(colors)])))
 
-        fig.update_layout(title=T('p5_chart_title', product=R['product_name']), xaxis_title=T('p5_axis_month'), yaxis_title=T('p5_axis_price'))
+        prev_year_added = False
+        if R['show_prev_year']:
+            prev_year_prices = [ym_to_price.get(ym - 12) for ym in overall['_ym']]
+            if any(v is not None for v in prev_year_prices):
+                fig.add_trace(go.Scatter(x=overall['_ym_str'], y=prev_year_prices, mode='lines', name=T('p5_legend_prev_year'), line=dict(color='#94a3b8', dash='dash'), connectgaps=True))
+                prev_year_added = True
+
+        fig.update_layout(title=T('p5_chart_title', product=R['product_label']), xaxis_title=T('p5_axis_month'), yaxis_title=T('p5_axis_price'))
         st.plotly_chart(fig, use_container_width=True)
 
+        if R['show_prev_year'] and not prev_year_added:
+            st.caption('※ ' + ('전년도에 해당하는 데이터가 없어 전년 비교선을 표시하지 못했습니다 (최소 13개월치 데이터가 필요합니다).' if st.session_state.lang == 'ko' else 'No prior-year data available to overlay (needs at least 13 months of history).'))
+
+        st.markdown(f"### {T('insight_box_title')}")
+        month_label = f"{R['cheapest_month']}월" if st.session_state.lang == 'ko' else f"Month {R['cheapest_month']}"
+        st.write("- " + T('insight_cheapest_month', month=month_label, pct=f"{R['cheapest_month_pct']:.1f}"))
+        cur_vs_avg_pct = (current_price - R['overall_avg']) / R['overall_avg'] * 100
+        direction = T('direction_higher') if cur_vs_avg_pct >= 0 else T('direction_lower')
+        sign = '+' if cur_vs_avg_pct >= 0 else ''
+        st.write("- " + T('insight_current_vs_seasonal_avg', sign=sign, pct=f"{abs(cur_vs_avg_pct):.1f}", direction=direction))
+        if R['years_count'] < 2:
+            st.warning(T('insight_low_confidence', years=R['years_count']))
+
+        if st.button(T('pdf_generate_btn'), key="season_pdf_btn"):
+            with st.spinner(T('pdf_generating_msg')):
+                try:
+                    pdf_bytes = build_pdf_report(
+                        title=T('p5_title'),
+                        kpi_lines=[
+                            f"{T('p5_kpi_current')}: ${current_price:.2f}",
+                            f"{T('p5_kpi_yoy')}: {yoy:+.1f}%" if yoy is not None else f"{T('p5_kpi_yoy')}: N/A",
+                            f"{T('p5_kpi_frompeak')}: {from_peak:+.1f}%",
+                        ],
+                        figs=[fig], df_table=overall[['_ym_str', '_price']].rename(columns={'_ym_str': T('p5_axis_month'), '_price': T('p5_axis_price')}),
+                        table_title=T('p5_axis_month'),
+                    )
+                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="price_seasonality.pdf", mime="application/pdf", key="season_pdf_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
+
 # ==============================================================================
-# 페이지 6: 신규·이탈 거래처 추적 (범용화)
+# 페이지 6: 신규·이탈 거래처 추적 (범위 토글 추가)
 # ==============================================================================
 if selected == T('menu_opt_churn'):
     st.title(T('p6_title'))
@@ -2431,16 +2688,9 @@ if selected == T('menu_opt_churn'):
     if st.session_state.churn_result is None:
         churn_file = st.file_uploader(T('p6_upload_label'), type=['csv', 'xlsx'], key="churn_uploader")
         st.caption(T('p6_upload_caption'))
+        raw_df = load_uploaded_df(churn_file, 'churn_raw_df', 'churn_headers', 'churn_fileid')
 
-        if churn_file:
-            raw_df = read_uploaded_table(churn_file)
-            if raw_df is None:
-                st.error(T('p1_file_read_fail_error'))
-                st.stop()
-            st.session_state.churn_raw_df = raw_df
-            st.session_state.churn_headers = list(raw_df.columns)
-
-        if st.session_state.churn_raw_df is not None:
+        if raw_df is not None:
             headers = st.session_state.churn_headers
             cols = detect_standard_columns(headers)
             missing = [k for k in ['date', 'volume'] if not cols[k]]
@@ -2448,24 +2698,31 @@ if selected == T('menu_opt_churn'):
                 st.error(T('p6_missing_cols_error', cols=', '.join(missing)))
                 st.stop()
 
-            AXIS_MAP = {}
-            if cols['exporter']:
-                AXIS_MAP[T('p6_axis_exporter')] = cols['exporter']
-            if cols['origin']:
-                AXIS_MAP[T('p6_axis_origin')] = cols['origin']
-            if cols['product']:
-                AXIS_MAP[T('p6_axis_product')] = cols['product']
-            if cols['importer']:
-                AXIS_MAP[T('p6_axis_importer')] = cols['importer']
-
+            AXIS_MAP = build_axis_map([
+                (T('p6_axis_exporter'), cols['exporter']),
+                (T('p6_axis_origin'), cols['origin']),
+                (T('p6_axis_product'), cols['product']),
+                (T('p6_axis_importer'), cols['importer']),
+            ], raw_df, cols)
             if not AXIS_MAP:
                 st.error(T('p6_missing_cols_error', cols='Exporter/origin_country/product_name/importer_name'))
                 st.stop()
 
-            axis_label = st.selectbox(T('p6_axis_label'), options=list(AXIS_MAP.keys()), key="churn_axis")
-            axis_col = AXIS_MAP[axis_label]
+            col1, col2 = st.columns(2)
+            with col1:
+                axis_label = st.selectbox(T('p6_axis_label'), options=list(AXIS_MAP.keys()), key="churn_axis")
+                axis_col = AXIS_MAP[axis_label]
+            with col2:
+                scope_label = st.selectbox(T('p6_scope_label'), options=[T('p6_scope_all'), T('p6_scope_importer')], key="churn_scope")
 
-            _parsed_dates = pd.to_datetime(st.session_state.churn_raw_df[cols['date']], errors='coerce').dropna()
+            scope_entity = None
+            if scope_label == T('p6_scope_all'):
+                st.caption(T('p6_scope_all_caption'))
+            elif cols['importer']:
+                importer_options = sorted(raw_df[cols['importer']].dropna().astype(str).unique())
+                scope_entity = st.selectbox(T('p6_scope_entity_label'), options=importer_options, key="churn_scope_entity")
+
+            _parsed_dates = pd.to_datetime(raw_df[cols['date']], errors='coerce').dropna()
             _min_date = _parsed_dates.min().date() if len(_parsed_dates) else datetime.date.today()
             _max_date = _parsed_dates.max().date() if len(_parsed_dates) else datetime.date.today()
             _mid_date = _min_date + (_max_date - _min_date) / 2
@@ -2485,10 +2742,12 @@ if selected == T('menu_opt_churn'):
                 b_end = st.date_input(T('p4_date_end'), value=_max_date, key="churn_b_end")
 
             if st.button(T('p6_run_btn')):
-                df = st.session_state.churn_raw_df.copy()
+                df = raw_df.copy()
                 df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                 df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
                 df = df.dropna(subset=['_date', '_volume', axis_col])
+                if scope_entity and cols['importer']:
+                    df = df[df[cols['importer']].astype(str) == str(scope_entity)]
 
                 a_df = df[(df['_date'] >= pd.to_datetime(a_start)) & (df['_date'] <= pd.to_datetime(a_end))]
                 b_df = df[(df['_date'] >= pd.to_datetime(b_start)) & (df['_date'] <= pd.to_datetime(b_end))]
@@ -2509,19 +2768,24 @@ if selected == T('menu_opt_churn'):
                     lost_list = sorted([(n, float(a_vol.get(n, 0))) for n in lost_items], key=lambda x: -x[1])
 
                     st.session_state.churn_result = {
-                        'axis_label': axis_label, 'new_list': new_list, 'lost_list': lost_list,
-                        'kept_count': len(kept_items),
+                        'axis_label': axis_label, 'scope_label': scope_label, 'scope_entity': scope_entity,
+                        'new_list': new_list, 'lost_list': lost_list, 'kept_count': len(kept_items),
                     }
                     st.rerun()
 
     if st.session_state.churn_result is not None:
         R = st.session_state.churn_result
+        scope_desc = R['scope_entity'] if R['scope_entity'] else R['scope_label']
+        st.caption(f"{T('p6_scope_label')}: {scope_desc}")
+
         c1, c2, c3 = st.columns(3)
         c1.metric(T('p6_kpi_new'), f"{len(R['new_list'])}")
         c2.metric(T('p6_kpi_kept'), f"{R['kept_count']}")
         c3.metric(T('p6_kpi_lost'), f"{len(R['lost_list'])}")
 
         col1, col2 = st.columns(2)
+        new_df = None
+        lost_df = None
         with col1:
             st.subheader(T('p6_new_header'))
             if R['new_list']:
@@ -2537,8 +2801,23 @@ if selected == T('menu_opt_churn'):
             else:
                 st.caption(T('p6_no_lost'))
 
+        if st.button(T('pdf_generate_btn'), key="churn_pdf_btn"):
+            with st.spinner(T('pdf_generating_msg')):
+                try:
+                    combined = pd.concat([
+                        (new_df if new_df is not None else pd.DataFrame(columns=[T('p6_col_name'), T('p6_col_volume')])).assign(**{T('p6_kpi_new'): 'O'}),
+                    ], ignore_index=True) if new_df is not None else None
+                    pdf_bytes = build_pdf_report(
+                        title=T('p6_title'),
+                        kpi_lines=[f"{T('p6_kpi_new')}: {len(R['new_list'])}", f"{T('p6_kpi_kept')}: {R['kept_count']}", f"{T('p6_kpi_lost')}: {len(R['lost_list'])}"],
+                        figs=[], df_table=new_df, table_title=T('p6_new_header'),
+                    )
+                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="new_lost_partners.pdf", mime="application/pdf", key="churn_pdf_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
+
 # ==============================================================================
-# 페이지 7: 자유 피벗 빌더
+# 페이지 7: 자유 피벗 빌더 (동적 컬럼 + 필터 + 보기 확장)
 # ==============================================================================
 if selected == T('menu_opt_pivot'):
     st.title(T('p7_title'))
@@ -2546,17 +2825,13 @@ if selected == T('menu_opt_pivot'):
     if st.session_state.pivot_raw_df is None:
         pivot_file = st.file_uploader(T('p7_upload_label'), type=['csv', 'xlsx'], key="pivot_uploader")
         st.caption(T('p7_upload_caption'))
-        if pivot_file:
-            raw_df = read_uploaded_table(pivot_file)
-            if raw_df is None:
-                st.error(T('p1_file_read_fail_error'))
-                st.stop()
-            st.session_state.pivot_raw_df = raw_df
-            st.session_state.pivot_headers = list(raw_df.columns)
+        load_uploaded_df(pivot_file, 'pivot_raw_df', 'pivot_headers', 'pivot_fileid')
+        if st.session_state.pivot_raw_df is not None:
             st.rerun()
 
     if st.session_state.pivot_raw_df is not None:
         st.button(T('p7_reset_btn'), on_click=reset_pivot_states)
+        raw_df = st.session_state.pivot_raw_df
 
         headers = st.session_state.pivot_headers
         cols = detect_standard_columns(headers)
@@ -2565,52 +2840,63 @@ if selected == T('menu_opt_pivot'):
             st.error(T('p7_missing_cols_error', cols=', '.join(missing)))
             st.stop()
 
-        ROW_MAP = {T('p7_row_month'): ('month', None)}
-        if cols['exporter']:
-            ROW_MAP[T('p7_row_exporter')] = ('col', cols['exporter'])
-        if cols['origin']:
-            ROW_MAP[T('p7_row_origin')] = ('col', cols['origin'])
-        if cols['product']:
-            ROW_MAP[T('p7_row_product')] = ('col', cols['product'])
-        if cols['importer']:
-            ROW_MAP[T('p7_row_importer')] = ('col', cols['importer'])
+        DIM_MAP = build_axis_map([
+            (T('p7_row_exporter'), cols['exporter']),
+            (T('p7_row_origin'), cols['origin']),
+            (T('p7_row_product'), cols['product']),
+            (T('p7_row_importer'), cols['importer']),
+        ], raw_df, cols)
 
-        COL_MAP = {T('p7_col_none'): None}
-        if cols['origin']:
-            COL_MAP[T('p7_col_origin')] = cols['origin']
-        if cols['exporter']:
-            COL_MAP[T('p7_col_exporter')] = cols['exporter']
+        ROW_OPTIONS = [T('p7_row_month')] + list(DIM_MAP.keys())
+        COL_OPTIONS = [T('p7_col_none')] + list(DIM_MAP.keys())
 
         METRIC_MAP = {
             T('p7_metric_volume'): 'volume',
             T('p7_metric_price'): 'price',
             T('p7_metric_count'): 'count',
         }
-        VIEW_MAP = {T('p7_view_bar'): 'bar', T('p7_view_line'): 'line', T('p7_view_table'): 'table'}
+        VIEW_MAP = {
+            T('p7_view_bar'): 'bar', T('p7_view_line'): 'line',
+            T('p7_view_pie'): 'pie', T('p7_view_stacked'): 'stacked', T('p7_view_table'): 'table',
+        }
 
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            row_label = st.selectbox(T('p7_row_label'), options=list(ROW_MAP.keys()), key="pivot_row")
+            row_label = st.selectbox(T('p7_row_label'), options=ROW_OPTIONS, key="pivot_row")
         with col2:
-            col_label = st.selectbox(T('p7_col_label'), options=list(COL_MAP.keys()), key="pivot_col")
+            col_label = st.selectbox(T('p7_col_label'), options=COL_OPTIONS, key="pivot_col")
         with col3:
             metric_label = st.selectbox(T('p7_metric_label'), options=list(METRIC_MAP.keys()), key="pivot_metric")
         with col4:
             view_label = st.selectbox(T('p7_view_label'), options=list(VIEW_MAP.keys()), key="pivot_view")
 
+        st.markdown(f"**{T('p7_filter_label')}**")
+        colF1, colF2 = st.columns(2)
+        with colF1:
+            filter_col_label = st.selectbox(T('p7_filter_col'), options=[T('p7_filter_none')] + list(DIM_MAP.keys()), key="pivot_filter_col")
+        filter_values = []
+        if filter_col_label != T('p7_filter_none'):
+            filter_col = DIM_MAP[filter_col_label]
+            with colF2:
+                filter_options = sorted(raw_df[filter_col].dropna().astype(str).unique())
+                filter_values = st.multiselect(T('p7_filter_values'), options=filter_options, key="pivot_filter_values")
+
         if st.button(T('p7_run_btn')):
-            df = st.session_state.pivot_raw_df.copy()
+            df = raw_df.copy()
             df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
             df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
             df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
 
-            row_kind, row_col = ROW_MAP[row_label]
-            if row_kind == 'month':
+            if filter_col_label != T('p7_filter_none') and filter_values:
+                fcol = DIM_MAP[filter_col_label]
+                df = df[df[fcol].astype(str).isin(filter_values)]
+
+            if row_label == T('p7_row_month'):
                 df['_row'] = df['_date'].dt.to_period('M').astype(str)
             else:
-                df['_row'] = df[row_col].astype(str)
+                df['_row'] = df[DIM_MAP[row_label]].astype(str)
 
-            group_col = COL_MAP[col_label]
+            group_col = None if col_label == T('p7_col_none') else DIM_MAP[col_label]
             if group_col:
                 df['_col'] = df[group_col].astype(str)
                 group_keys = ['_row', '_col']
@@ -2639,23 +2925,30 @@ if selected == T('menu_opt_pivot'):
         if st.session_state.get('pivot_result'):
             R = st.session_state.pivot_result
             agg = R['agg']
+            fig = None
 
-            if R['view'] != 'table':
+            if R['view'] == 'pie':
+                pie_data = agg.groupby('_row')['_value'].sum().reset_index().sort_values('_value', ascending=False)
+                fig = go.Figure(data=[go.Pie(labels=pie_data['_row'], values=pie_data['_value'])])
+                fig.update_layout(title=R['metric_label'])
+                st.plotly_chart(fig, use_container_width=True)
+            elif R['view'] != 'table':
                 fig = go.Figure()
                 if R['has_col']:
                     for name, g in agg.groupby('_col'):
                         g = g.sort_values('_row')
-                        if R['view'] == 'bar':
+                        if R['view'] in ('bar', 'stacked'):
                             fig.add_trace(go.Bar(x=g['_row'], y=g['_value'], name=name))
                         else:
                             fig.add_trace(go.Scatter(x=g['_row'], y=g['_value'], mode='lines+markers', name=name))
+                    fig.update_layout(barmode='stack' if R['view'] == 'stacked' else 'group')
                 else:
                     g = agg.sort_values('_row')
-                    if R['view'] == 'bar':
+                    if R['view'] in ('bar', 'stacked'):
                         fig.add_trace(go.Bar(x=g['_row'], y=g['_value'], marker_color='#0d9488'))
                     else:
                         fig.add_trace(go.Scatter(x=g['_row'], y=g['_value'], mode='lines+markers', line=dict(color='#0d9488')))
-                fig.update_layout(yaxis_title=R['metric_label'], barmode='group')
+                fig.update_layout(yaxis_title=R['metric_label'])
                 st.plotly_chart(fig, use_container_width=True)
 
             st.subheader(T('p7_table_subheader'))
@@ -2664,3 +2957,15 @@ if selected == T('menu_opt_pivot'):
             else:
                 pivot_table = agg.set_index('_row')[['_value']].rename(columns={'_value': R['metric_label']})
             st.dataframe(pivot_table)
+
+            if st.button(T('pdf_generate_btn'), key="pivot_pdf_btn"):
+                with st.spinner(T('pdf_generating_msg')):
+                    try:
+                        pdf_bytes = build_pdf_report(
+                            title=T('p7_title'),
+                            kpi_lines=[f"{T('p7_row_label')}: {R['row_label']}", f"{T('p7_col_label')}: {R['col_label']}", f"{T('p7_metric_label')}: {R['metric_label']}"],
+                            figs=[fig] if fig else [], df_table=pivot_table.reset_index(), table_title=T('p7_table_subheader'),
+                        )
+                        st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="pivot_report.pdf", mime="application/pdf", key="pivot_pdf_dl")
+                    except Exception as e:
+                        st.error(T('pdf_error_msg', msg=str(e)))

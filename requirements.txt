@@ -6,3 +6,5 @@ plotly
 streamlit-option-menu
 statsmodels
 openpyxl
+kaleido==0.2.1
+reportlab
