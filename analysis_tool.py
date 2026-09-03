@@ -208,6 +208,7 @@ TEXTS = {
         'password_setup_empty': '비밀번호를 입력해주세요.',
         'password_setup_mismatch': '두 비밀번호가 일치하지 않습니다.',
         'password_setup_success': '비밀번호가 설정되었습니다!',
+        'guide_download_btn': '📖 사용법 가이드 (PDF)',
 
         'p3_title': '🔀 공급망 흐름도 (Sankey)',
         'p3_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
@@ -318,6 +319,16 @@ TEXTS = {
         'p6_no_lost': '이탈 항목 없음',
         'p6_col_name': '이름',
         'p6_col_volume': '물량(KG)',
+        'p6_price_compare_subheader': '💰 가격으로 보면',
+        'p6_kpi_new_price': '신규 거래처 평균단가',
+        'p6_kpi_kept_price': '유지 거래처 평균단가',
+        'p6_kpi_lost_price': '이탈 거래처 평균단가',
+        'p6_price_insight_cheaper': '신규 거래처가 유지 거래처보다 평균 {pct}% {direction}.',
+        'p6_price_insight_none': '가격 비교에 필요한 단가 데이터가 부족합니다.',
+        'p6_concentration_subheader': '⚠️ 집중도 변화',
+        'p6_concentration_warning': '기간 A→B 사이 1위 거래처 의존도가 {a}% → {b}%로 상승했습니다 (현재 1위: {name}). 거래처가 줄면서 남은 곳에 더 쏠리고 있는 신호일 수 있어요.',
+        'p6_concentration_stable': '1위 거래처 의존도: {a}% → {b}% (큰 변화 없음)',
+        'p6_concentration_improved': '1위 거래처 의존도가 {a}% → {b}%로 오히려 낮아졌습니다 (공급처 분산 개선).',
 
         'p7_title': '🧩 자유 피벗 빌더',
         'p7_upload_label': '분석할 데이터를 업로드하세요',
@@ -377,6 +388,21 @@ TEXTS = {
         'p7_filter_values': '포함할 값',
         'p7_view_pie': '파이',
         'p7_view_stacked': '누적 막대',
+        'p7_view_heatmap': '히트맵',
+        'p7_row_label_multi': '행 (기준, 여러 개 선택 가능 — 선택 순서대로 중첩됩니다)',
+        'p7_col_label_multi': '열 (나눠보기, 여러 개 선택 가능)',
+        'p7_values_label': '값 (지표, 여러 개 선택 가능)',
+        'p7_metric_volume_sum': '물량 합계',
+        'p7_metric_volume_mean': '물량 평균',
+        'p7_metric_price_mean': '단가 평균',
+        'p7_metric_price_max': '단가 최대',
+        'p7_metric_price_min': '단가 최소',
+        'p7_metric_count': '거래건수',
+        'p7_filter_cols_label': '필터링할 컬럼 (여러 개 가능)',
+        'p7_no_rows_warning': '행 기준을 최소 1개는 선택해주세요.',
+        'p7_no_values_warning': '값(지표)을 최소 1개는 선택해주세요.',
+        'p7_multi_metric_chart_note': '※ 지표를 여러 개 고르시면 표/히트맵만 지원됩니다. 차트는 첫 번째로 고른 지표만 그립니다.',
+        'p7_heatmap_needs_dims_note': '※ 히트맵은 행과 열이 각각 1개일 때 가장 보기 좋습니다.',
         'p7_metric_label_multi': '지표 (복수 선택 가능)',
     },
     'en': {
@@ -566,6 +592,7 @@ TEXTS = {
         'password_setup_empty': 'Please enter a password.',
         'password_setup_mismatch': 'Passwords do not match.',
         'password_setup_success': 'Password has been set!',
+        'guide_download_btn': '📖 User Guide (PDF)',
 
         'p3_title': '🔀 Supply Chain Flow (Sankey)',
         'p3_upload_label': 'Upload the full market/supply chain data',
@@ -676,6 +703,16 @@ TEXTS = {
         'p6_no_lost': 'No lost items',
         'p6_col_name': 'Name',
         'p6_col_volume': 'Volume (KG)',
+        'p6_price_compare_subheader': '💰 Looking at price',
+        'p6_kpi_new_price': 'New Partners Avg Price',
+        'p6_kpi_kept_price': 'Kept Partners Avg Price',
+        'p6_kpi_lost_price': 'Lost Partners Avg Price',
+        'p6_price_insight_cheaper': 'New partners are on average {pct}% {direction} than kept partners.',
+        'p6_price_insight_none': 'Not enough price data available for comparison.',
+        'p6_concentration_subheader': '⚠️ Concentration Change',
+        'p6_concentration_warning': "Top-1 partner dependency rose from {a}% to {b}% between Period A and B (current #1: {name}). This may signal increased reliance on fewer partners.",
+        'p6_concentration_stable': 'Top-1 partner dependency: {a}% → {b}% (little change)',
+        'p6_concentration_improved': 'Top-1 partner dependency actually fell from {a}% to {b}% (supplier base more diversified).',
 
         'p7_title': '🧩 Free Pivot Builder',
         'p7_upload_label': 'Upload the data to analyze',
@@ -735,6 +772,21 @@ TEXTS = {
         'p7_filter_values': 'Values to include',
         'p7_view_pie': 'Pie',
         'p7_view_stacked': 'Stacked bar',
+        'p7_view_heatmap': 'Heatmap',
+        'p7_row_label_multi': 'Rows (group by, multi-select — nested in the order chosen)',
+        'p7_col_label_multi': 'Columns (split by, multi-select)',
+        'p7_values_label': 'Values (metrics, multi-select)',
+        'p7_metric_volume_sum': 'Total volume',
+        'p7_metric_volume_mean': 'Average volume',
+        'p7_metric_price_mean': 'Average price',
+        'p7_metric_price_max': 'Max price',
+        'p7_metric_price_min': 'Min price',
+        'p7_metric_count': 'Transaction count',
+        'p7_filter_cols_label': 'Columns to filter by (multi-select)',
+        'p7_no_rows_warning': 'Please select at least one row field.',
+        'p7_no_values_warning': 'Please select at least one value (metric).',
+        'p7_multi_metric_chart_note': '※ With multiple metrics selected, only Table/Heatmap views are supported. Charts use only the first selected metric.',
+        'p7_heatmap_needs_dims_note': '※ Heatmap looks best with exactly one row field and one column field.',
         'p7_metric_label_multi': 'Metrics (multi-select)',
     },
 }
@@ -1041,11 +1093,30 @@ def fig_to_png_bytes(fig, width=900, height=500, scale=2):
         return None
 
 
+def _find_korean_font_path():
+    """시스템에서 한글을 지원하는 .ttf 폰트 파일 경로를 찾는다 (없으면 None).
+    matplotlib.font_manager는 자체 캐시가 낡아있을 수 있어 신뢰하지 않고, 파일시스템에서 직접 찾는다.
+    reportlab의 TTFont는 .ttc(트루타입 컬렉션)를 지원하지 않으므로 .ttf 파일만 대상으로 한다."""
+    import glob
+    search_patterns = [
+        '/usr/share/fonts/**/NanumGothic.ttf',
+        '/usr/share/fonts/**/Nanum*.ttf',
+        '/usr/share/fonts/**/NotoSansKR*.ttf',
+        '/usr/share/fonts/**/NotoSansCJK*.ttf',
+        '/usr/share/fonts/**/malgun.ttf',
+        '/System/Library/Fonts/**/*.ttf',
+    ]
+    for pattern in search_patterns:
+        matches = [m for m in glob.glob(pattern, recursive=True) if m.lower().endswith('.ttf')]
+        if matches:
+            return matches[0]
+    return None
+
+
 def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
     """제목 + KPI 텍스트 + Plotly 차트(이미지로 변환) + 표를 하나의 PDF로 조립해 바이트로 반환.
     reportlab + kaleido 필요."""
     import io
-    import glob
     from reportlab.lib.pagesizes import A4
     from reportlab.lib.units import mm
     from reportlab.platypus import SimpleDocTemplate, Image as RLImage, Paragraph, Spacer, Table, TableStyle
@@ -1058,26 +1129,9 @@ def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
     doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=15 * mm, rightMargin=15 * mm)
     styles = getSampleStyleSheet()
 
-    # 한글이 깨지지 않도록, 시스템 폰트 파일을 파일시스템에서 '직접' 찾아 등록한다.
-    # (matplotlib.font_manager는 자체 캐시를 쓰는데, 이 캐시가 fonts-nanum 등을 나중에
-    #  설치한 뒤에도 갱신이 안 될 수 있어서 신뢰할 수 없었음 — 그래서 직접 glob으로 탐색)
-    # 주의: reportlab의 TTFont는 .ttc(트루타입 컬렉션)를 지원하지 않으므로 .ttf 파일만 사용
     font_name = 'Helvetica'
     try:
-        search_patterns = [
-            '/usr/share/fonts/**/NanumGothic.ttf',
-            '/usr/share/fonts/**/Nanum*.ttf',
-            '/usr/share/fonts/**/NotoSansKR*.ttf',
-            '/usr/share/fonts/**/NotoSansCJK*.ttf',
-            '/usr/share/fonts/**/malgun.ttf',
-            '/System/Library/Fonts/**/*.ttf',
-        ]
-        found_path = None
-        for pattern in search_patterns:
-            matches = [m for m in glob.glob(pattern, recursive=True) if m.lower().endswith('.ttf')]
-            if matches:
-                found_path = matches[0]
-                break
+        found_path = _find_korean_font_path()
         if found_path:
             pdfmetrics.registerFont(TTFont('KoreanFont', found_path))
             font_name = 'KoreanFont'
@@ -1119,7 +1173,169 @@ def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
     buf.seek(0)
     return buf.getvalue()
 
-# --- [추가 4] 'find_column' 함수 정의 (NameError 해결) ---
+
+# --------------------------------#
+# 사용법 가이드 PDF (사이드바에서 다운로드)  #
+# --------------------------------#
+GUIDE_CONTENT = {
+    'ko': {
+        'doc_title': '소싱 분석기 사용 가이드',
+        'sections': [
+            ('🔒 로그인', [
+                '이 앱을 처음 실행하면 비밀번호를 직접 설정하는 화면이 나옵니다. 새 비밀번호와 확인란을 똑같이 입력하고 "비밀번호 설정하고 시작하기"를 누르면 됩니다.',
+                '이후 접속할 때부터는 방금 설정한 비밀번호로 로그인합니다.',
+            ]),
+            ('🌐 언어 전환', [
+                '왼쪽 사이드바 상단의 한국어 / English 버튼으로 전체 화면 언어를 전환할 수 있습니다.',
+            ]),
+            ('📁 공통 — 파일 업로드', [
+                '모든 메뉴는 CSV 또는 XLSX 파일을 업로드해서 시작합니다.',
+                '컬럼명은 정확히 같지 않아도 됩니다 (예: "Date"나 "date" 둘 다 인식). 다만 Date, Volume, Unit Price 같은 핵심 컬럼은 반드시 있어야 합니다.',
+                'HS코드, Incoterm처럼 표준 8개 컬럼 외의 컬럼도 파일에 있으면 자동으로 인식되어 일부 메뉴(공급망 흐름도, 집중도 진단, 신규·이탈 거래처, 피벗 빌더)의 축/필터 선택지에 추가됩니다.',
+            ]),
+            ('💲 ① 고객사 효율 분석', [
+                '용도: 계약 시작일 전후로 특정 수입사의 구매 단가가 얼마나 절감됐는지 분석합니다.',
+                '업로드할 파일: 한 회사의 거래 내역만 담긴 파일 (여러 회사가 섞여 있어도 자동으로 최빈값 회사를 기준으로 분석합니다).',
+                '사용법: 파일 업로드 → 계약 시작일 선택 → "분석 실행" 클릭.',
+                '결과: 품목군별 절감액, 수입 품목 클러스터, 월별 수입 추이, 최근 3개월 비중, 계약 이후 새로 생기거나 사라진 품목·원산지·공급사.',
+            ]),
+            ('🏆 ② 시장 경쟁력 분석', [
+                '용도: 특정 품목을 두고 여러 수입사가 경쟁하는 시장 데이터에서, 우리 회사의 구매 경쟁력이 어느 정도인지 분석합니다.',
+                '업로드할 파일: 하나의 품목에 대해 여러 회사의 거래 데이터가 섞인 파일.',
+                '사용법: 파일 업로드 → 분석할 고객사·품목명·계약일 입력 → 이상치 제거 민감도 조절(선택) → 분석 시작.',
+                '결과: 구매 경쟁력 순위, 경쟁 우위 그룹 대비 단가 추이, 벤치마킹 시뮬레이션(얼마나 절감할 수 있었는지), 시장 점유율, 공급망(공급사·원산지)별 대안 소싱 옵션.',
+            ]),
+            ('🔀 ③ 공급망 흐름도', [
+                '용도: 특정 공급사·수입사·원산지 하나를 고르면, 그 대상이 어디서 와서 어디로 흘러가는지 Sankey 흐름도로 보여줍니다.',
+                '사용법: 왼쪽 축(구분+대상)과 오른쪽 축(비교 기준)을 각각 고르고, 기간을 설정한 뒤 "흐름도 그리기" 클릭.',
+                '"두 기간 비교하기" 체크박스를 켜면 기간 A와 기간 B를 나란히 비교해서, 어느 흐름이 늘고 줄었는지 표로 확인할 수 있습니다.',
+                '주의: "원산지"는 물건이 생산된 나라, "수출대상국"은 물건이 팔려나가는 나라로 서로 다른 개념입니다.',
+            ]),
+            ('⚠️ ④ 집중도 리스크 진단', [
+                '용도: 특정 공급사·원산지·품목 하나에 거래가 너무 쏠려 있지 않은지 자동으로 진단합니다.',
+                '사용법: 진단 기준(공급사/원산지/품목별) 선택 → 범위(전체 또는 특정 수입사만) 선택 → 위험 기준선(%) 조절 → "진단 실행".',
+                '결과: 1위 비중, 상위 3개 합산 비중, 위험도 배지(안전/주의/위험)와 그 이유, 월별 1위 비중 추이.',
+            ]),
+            ('📈 ⑤ 가격 추세 & 계절성', [
+                '용도: 특정 품목의 단가가 시기별로 어떻게 움직이는지, 언제 사는 게 유리한지 분석합니다.',
+                '사용법: 품목을 여러 개 선택(비슷한 표기의 품목명은 자동으로 묶여서 후보에 나타남) → 전년 비교 여부·비교 축 설정 → "추세 그리기".',
+                '결과: 최근월 평균단가, 전년 동월 대비, 연중 최고가 대비 현재 위치, 계절 고점 자동 감지, "○월에 사면 가장 저렴했다" 같은 인사이트 문장.',
+                '주의: 데이터가 1년치뿐이면 계절 패턴이 우연일 수 있다는 경고가 함께 표시됩니다.',
+            ]),
+            ('🔀 ⑥ 신규·이탈 거래처 추적', [
+                '용도: 임의의 두 기간을 비교해서, 새로 생기거나 사라진 거래처(공급사/원산지/품목/수입사)를 찾아냅니다.',
+                '사용법: 추적 기준 선택 → 범위(전체 시장 또는 특정 수입사) 선택 → 기간 A·기간 B 설정 → "비교 실행".',
+                '결과: 신규/유지/이탈 개수와 목록, 신규·유지·이탈 거래처의 평균단가 비교(가격이 유리해졌는지), 거래처가 줄면서 특정 공급사 의존도가 높아졌는지 자동 경고.',
+            ]),
+            ('🧩 ⑦ 자유 피벗 빌더', [
+                '용도: 정해진 화면 없이, 원하는 축과 지표를 직접 조합해서 원하는 차트·표를 만듭니다.',
+                '사용법: 행(기준) → 열(나눠보기, 선택) → 지표(물량/단가/건수) → 보기(막대/선/파이/누적막대/표) 선택. 필요하면 필터로 특정 값만 남기고 "피벗 생성".',
+            ]),
+            ('📄 공통 — PDF 다운로드', [
+                '각 분석 결과 화면 하단의 "PDF 보고서 생성" 버튼을 누르면, 해당 화면의 차트와 표가 담긴 PDF를 만들어 다운로드할 수 있습니다.',
+            ]),
+        ],
+    },
+    'en': {
+        'doc_title': 'Sourcing Analyzer User Guide',
+        'sections': [
+            ('🔒 Login', [
+                'The first time you run this app, you\'ll be asked to set a password yourself. Enter a new password and confirm it, then click "Set password and start".',
+                'From then on, log in with that same password each time.',
+            ]),
+            ('🌐 Language toggle', [
+                'Use the 한국어 / English buttons at the top of the sidebar to switch the entire app\'s language.',
+            ]),
+            ('📁 Common — File upload', [
+                'Every menu starts by uploading a CSV or XLSX file.',
+                'Column names don\'t need to match exactly (e.g. "Date" or "date" are both recognized), but core columns like Date, Volume, and Unit Price must be present.',
+                'Columns beyond the standard 8 (e.g. HS Code, Incoterm) are automatically detected and added as axis/filter options in some menus (Supply Chain Flow, Concentration Risk, New/Lost Partners, Pivot Builder).',
+            ]),
+            ('💲 ① Customer Efficiency Analysis', [
+                'Purpose: analyzes how much a specific importer\'s purchase price dropped before vs. after a contract start date.',
+                'Upload: a file containing one company\'s transactions (if mixed, the most frequent importer is used automatically).',
+                'How to use: upload file → select contract start date → click "Run Analysis".',
+                'Results: savings by product group, import product clusters, monthly import trend, last-3-month share, new/lost products, origins, and suppliers since the contract.',
+            ]),
+            ('🏆 ② Market Competitiveness Analysis', [
+                'Purpose: analyzes how competitive your purchasing is relative to other importers for a given product.',
+                'Upload: a file with multiple companies\' transactions for a single product.',
+                'How to use: upload file → enter the customer, product name, and contract date → adjust outlier sensitivity (optional) → run.',
+                'Results: purchasing competitiveness ranking, price trend vs. the competitive advantage group, benchmarking simulation, market share, and alternative sourcing options by supplier/origin.',
+            ]),
+            ('🔀 ③ Supply Chain Flow', [
+                'Purpose: pick a supplier, importer, or origin and see where it flows from/to as a Sankey diagram.',
+                'How to use: choose the left axis (type + entity) and right axis (compare by), set the date range, then click "Draw flow diagram".',
+                'Enable "Compare two periods" to view Period A and B side by side, with a table showing what grew or shrank.',
+                'Note: "Origin" is where the product was produced; "Export destination" is where it was sold — these are different columns.',
+            ]),
+            ('⚠️ ④ Concentration Risk Diagnosis', [
+                'Purpose: automatically flags whether your trade is too concentrated in one supplier, origin, or product.',
+                'How to use: choose the axis (supplier/origin/product) → scope (entire market or one importer) → adjust the risk threshold (%) → "Run diagnosis".',
+                'Results: top-1 share, top-3 combined share, a risk badge (safe/caution/high) with the reason, and the monthly trend of top-1 share.',
+            ]),
+            ('📈 ⑤ Price Trend & Seasonality', [
+                'Purpose: shows how a product\'s price moves over time and when it\'s cheapest to buy.',
+                'How to use: multi-select products (similarly-named variants are automatically grouped as candidates) → set previous-year overlay and comparison axis → "Draw trend".',
+                'Results: latest month\'s average price, year-over-year change, position vs. the yearly peak, automatic seasonal-peak detection, and insight sentences like "buying in March was historically cheapest."',
+                'Note: with only one year of data, a warning notes the seasonal pattern could be coincidental.',
+            ]),
+            ('🔀 ⑥ New/Lost Trading Partners', [
+                'Purpose: compares any two periods to find trading partners (supplier/origin/product/importer) that appeared or disappeared.',
+                'How to use: choose what to track → scope (entire market or one importer) → set Period A and B → "Compare".',
+                'Results: counts and lists of new/kept/lost partners, an average-price comparison across the three groups (did the change save money?), and an automatic warning if losing partners increased dependency on the remaining ones.',
+            ]),
+            ('🧩 ⑦ Free Pivot Builder', [
+                'Purpose: build your own chart or table by freely combining axes and metrics, with no fixed screen.',
+                'How to use: pick Rows → Columns (optional) → Metric (volume/price/count) → View (bar/line/pie/stacked/table). Optionally filter to specific values, then "Generate pivot".',
+            ]),
+            ('📄 Common — PDF download', [
+                'Click "Generate PDF Report" at the bottom of any results screen to download a PDF containing that screen\'s charts and tables.',
+            ]),
+        ],
+    },
+}
+
+
+def build_user_guide_pdf(lang):
+    """앱 전체 사용법을 정리한 정적 PDF 가이드를 생성해 바이트로 반환한다 (차트 없이 텍스트 위주라 가볍다)."""
+    import io
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.units import mm
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
+    from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+
+    content = GUIDE_CONTENT.get(lang, GUIDE_CONTENT['ko'])
+
+    buf = io.BytesIO()
+    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=18 * mm, rightMargin=18 * mm)
+    styles = getSampleStyleSheet()
+
+    font_name = 'Helvetica'
+    try:
+        found_path = _find_korean_font_path()
+        if found_path:
+            pdfmetrics.registerFont(TTFont('KoreanFont', found_path))
+            font_name = 'KoreanFont'
+    except Exception:
+        pass
+    for s in styles.byName.values():
+        s.fontName = font_name
+
+    story = [Paragraph(content['doc_title'], styles['Title']), Spacer(1, 12)]
+    for heading, bullets in content['sections']:
+        story.append(Paragraph(heading, styles['Heading2']))
+        items = [ListItem(Paragraph(b, styles['Normal']), bulletColor='#0d9488') for b in bullets]
+        story.append(ListFlowable(items, bulletType='bullet', leftIndent=14))
+        story.append(Spacer(1, 10))
+
+    doc.build(story)
+    buf.seek(0)
+    return buf.getvalue()
+
+
 def find_column(columns, candidates):
     """가능한 컬럼명 후보 중에서 실제 데이터에 있는 컬럼명을 찾는 함수"""
     for col in candidates:
@@ -1403,6 +1619,12 @@ with st.sidebar:
         menu_icon="cast",
         default_index=0,
     )
+    st.markdown("---")
+    try:
+        _guide_pdf_bytes = build_user_guide_pdf(st.session_state.lang)
+        st.download_button(T('guide_download_btn'), data=_guide_pdf_bytes, file_name="user_guide.pdf", mime="application/pdf", use_container_width=True)
+    except Exception:
+        pass  # 가이드 PDF 생성에 실패해도 앱 나머지 기능에는 영향 없도록 조용히 넘어감
     st.markdown("---")
     st.markdown(
         """
@@ -2745,6 +2967,8 @@ if selected == T('menu_opt_churn'):
                 df = raw_df.copy()
                 df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                 df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
+                if cols['price']:
+                    df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
                 df = df.dropna(subset=['_date', '_volume', axis_col])
                 if scope_entity and cols['importer']:
                     df = df[df[cols['importer']].astype(str) == str(scope_entity)]
@@ -2767,9 +2991,38 @@ if selected == T('menu_opt_churn'):
                     new_list = sorted([(n, float(b_vol.get(n, 0))) for n in new_items], key=lambda x: -x[1])
                     lost_list = sorted([(n, float(a_vol.get(n, 0))) for n in lost_items], key=lambda x: -x[1])
 
+                    # --- ① 가격 비교: 신규/유지/이탈 거래처의 평균단가 ---
+                    new_price = lost_price = kept_price = None
+                    if cols['price']:
+                        if new_items:
+                            v = b_df[b_df[axis_col].astype(str).isin(new_items)]['_price'].mean()
+                            new_price = float(v) if pd.notna(v) else None
+                        if lost_items:
+                            v = a_df[a_df[axis_col].astype(str).isin(lost_items)]['_price'].mean()
+                            lost_price = float(v) if pd.notna(v) else None
+                        if kept_items:
+                            v = b_df[b_df[axis_col].astype(str).isin(kept_items)]['_price'].mean()
+                            kept_price = float(v) if pd.notna(v) else None
+
+                    # --- ② 집중도 변화: 기간 A→B 사이 1위 거래처 의존도가 어떻게 바뀌었는지 ---
+                    def _top1_share(sub_df):
+                        if sub_df.empty:
+                            return None, None
+                        g = sub_df.groupby(axis_col)['_volume'].sum().sort_values(ascending=False)
+                        total = g.sum()
+                        if total <= 0:
+                            return None, None
+                        return g.index[0], float(g.iloc[0] / total * 100)
+
+                    top1_name_a, top1_share_a = _top1_share(a_df)
+                    top1_name_b, top1_share_b = _top1_share(b_df)
+
                     st.session_state.churn_result = {
                         'axis_label': axis_label, 'scope_label': scope_label, 'scope_entity': scope_entity,
                         'new_list': new_list, 'lost_list': lost_list, 'kept_count': len(kept_items),
+                        'new_price': new_price, 'lost_price': lost_price, 'kept_price': kept_price,
+                        'top1_name_a': top1_name_a, 'top1_share_a': top1_share_a,
+                        'top1_name_b': top1_name_b, 'top1_share_b': top1_share_b,
                     }
                     st.rerun()
 
@@ -2800,6 +3053,32 @@ if selected == T('menu_opt_churn'):
                 st.dataframe(lost_df.style.format({T('p6_col_volume'): '{:,.0f}'}))
             else:
                 st.caption(T('p6_no_lost'))
+
+        # --- ① 가격 비교 인사이트 ---
+        if R.get('new_price') is not None or R.get('lost_price') is not None or R.get('kept_price') is not None:
+            st.markdown(f"### {T('p6_price_compare_subheader')}")
+            pc1, pc2, pc3 = st.columns(3)
+            pc1.metric(T('p6_kpi_new_price'), f"${R['new_price']:.2f}" if R['new_price'] is not None else "N/A")
+            pc2.metric(T('p6_kpi_kept_price'), f"${R['kept_price']:.2f}" if R['kept_price'] is not None else "N/A")
+            pc3.metric(T('p6_kpi_lost_price'), f"${R['lost_price']:.2f}" if R['lost_price'] is not None else "N/A")
+            if R['new_price'] is not None and R['kept_price'] is not None and R['kept_price'] > 0:
+                diff_pct = (R['new_price'] - R['kept_price']) / R['kept_price'] * 100
+                direction = T('direction_lower') if diff_pct < 0 else T('direction_higher')
+                st.info(T('p6_price_insight_cheaper', pct=f"{abs(diff_pct):.1f}", direction=direction))
+        else:
+            st.caption(T('p6_price_insight_none'))
+
+        # --- ② 집중도 변화 인사이트 ---
+        if R.get('top1_share_a') is not None and R.get('top1_share_b') is not None:
+            st.markdown(f"### {T('p6_concentration_subheader')}")
+            a_pct, b_pct = R['top1_share_a'], R['top1_share_b']
+            delta = b_pct - a_pct
+            if delta >= 5:
+                st.warning(T('p6_concentration_warning', a=f"{a_pct:.1f}", b=f"{b_pct:.1f}", name=str(R['top1_name_b'])))
+            elif delta <= -5:
+                st.success(T('p6_concentration_improved', a=f"{a_pct:.1f}", b=f"{b_pct:.1f}"))
+            else:
+                st.caption(T('p6_concentration_stable', a=f"{a_pct:.1f}", b=f"{b_pct:.1f}"))
 
         if st.button(T('pdf_generate_btn'), key="churn_pdf_btn"):
             with st.spinner(T('pdf_generating_msg')):
@@ -2848,123 +3127,180 @@ if selected == T('menu_opt_pivot'):
         ], raw_df, cols)
 
         ROW_OPTIONS = [T('p7_row_month')] + list(DIM_MAP.keys())
-        COL_OPTIONS = [T('p7_col_none')] + list(DIM_MAP.keys())
 
-        METRIC_MAP = {
-            T('p7_metric_volume'): 'volume',
-            T('p7_metric_price'): 'price',
-            T('p7_metric_count'): 'count',
+        METRIC_OPTIONS = {
+            T('p7_metric_volume_sum'): ('_volume', 'sum'),
+            T('p7_metric_volume_mean'): ('_volume', 'mean'),
+            T('p7_metric_price_mean'): ('_price', 'mean'),
+            T('p7_metric_price_max'): ('_price', 'max'),
+            T('p7_metric_price_min'): ('_price', 'min'),
+            T('p7_metric_count'): (None, 'count'),
         }
         VIEW_MAP = {
-            T('p7_view_bar'): 'bar', T('p7_view_line'): 'line',
-            T('p7_view_pie'): 'pie', T('p7_view_stacked'): 'stacked', T('p7_view_table'): 'table',
+            T('p7_view_table'): 'table',
+            T('p7_view_heatmap'): 'heatmap',
+            T('p7_view_bar'): 'bar',
+            T('p7_view_line'): 'line',
+            T('p7_view_pie'): 'pie',
+            T('p7_view_stacked'): 'stacked',
         }
 
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2 = st.columns(2)
         with col1:
-            row_label = st.selectbox(T('p7_row_label'), options=ROW_OPTIONS, key="pivot_row")
+            row_labels = st.multiselect(T('p7_row_label_multi'), options=ROW_OPTIONS, default=[ROW_OPTIONS[0]], key="pivot_rows")
         with col2:
-            col_label = st.selectbox(T('p7_col_label'), options=COL_OPTIONS, key="pivot_col")
-        with col3:
-            metric_label = st.selectbox(T('p7_metric_label'), options=list(METRIC_MAP.keys()), key="pivot_metric")
-        with col4:
-            view_label = st.selectbox(T('p7_view_label'), options=list(VIEW_MAP.keys()), key="pivot_view")
+            col_labels = st.multiselect(T('p7_col_label_multi'), options=list(DIM_MAP.keys()), key="pivot_cols")
+
+        value_labels = st.multiselect(T('p7_values_label'), options=list(METRIC_OPTIONS.keys()), default=[T('p7_metric_volume_sum')], key="pivot_values")
+        view_label = st.selectbox(T('p7_view_label'), options=list(VIEW_MAP.keys()), key="pivot_view")
 
         st.markdown(f"**{T('p7_filter_label')}**")
-        colF1, colF2 = st.columns(2)
-        with colF1:
-            filter_col_label = st.selectbox(T('p7_filter_col'), options=[T('p7_filter_none')] + list(DIM_MAP.keys()), key="pivot_filter_col")
-        filter_values = []
-        if filter_col_label != T('p7_filter_none'):
-            filter_col = DIM_MAP[filter_col_label]
-            with colF2:
-                filter_options = sorted(raw_df[filter_col].dropna().astype(str).unique())
-                filter_values = st.multiselect(T('p7_filter_values'), options=filter_options, key="pivot_filter_values")
+        filter_col_labels = st.multiselect(T('p7_filter_cols_label'), options=list(DIM_MAP.keys()), key="pivot_filter_cols")
+        filter_selections = {}
+        for fc_label in filter_col_labels:
+            fcol = DIM_MAP[fc_label]
+            with st.expander(fc_label):
+                opts = sorted(raw_df[fcol].dropna().astype(str).unique())
+                filter_selections[fcol] = st.multiselect(T('p7_filter_values'), options=opts, key=f"pivot_filter_vals_{fcol}")
 
         if st.button(T('p7_run_btn')):
-            df = raw_df.copy()
-            df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
-            df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
-            df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
-
-            if filter_col_label != T('p7_filter_none') and filter_values:
-                fcol = DIM_MAP[filter_col_label]
-                df = df[df[fcol].astype(str).isin(filter_values)]
-
-            if row_label == T('p7_row_month'):
-                df['_row'] = df['_date'].dt.to_period('M').astype(str)
+            if not row_labels:
+                st.warning(T('p7_no_rows_warning'))
+            elif not value_labels:
+                st.warning(T('p7_no_values_warning'))
             else:
-                df['_row'] = df[DIM_MAP[row_label]].astype(str)
+                df = raw_df.copy()
+                df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
+                df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
+                df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
 
-            group_col = None if col_label == T('p7_col_none') else DIM_MAP[col_label]
-            if group_col:
-                df['_col'] = df[group_col].astype(str)
-                group_keys = ['_row', '_col']
-            else:
-                group_keys = ['_row']
+                for fcol, vals in filter_selections.items():
+                    if vals:
+                        df = df[df[fcol].astype(str).isin(vals)]
 
-            df = df.dropna(subset=['_row', '_volume'])
+                if T('p7_row_month') in row_labels:
+                    df['_row_month'] = df['_date'].dt.to_period('M').astype(str)
 
-            metric = METRIC_MAP[metric_label]
-            if metric == 'volume':
-                agg = df.groupby(group_keys)['_volume'].sum().reset_index(name='_value')
-            elif metric == 'price':
-                agg = df.groupby(group_keys)['_price'].mean().reset_index(name='_value')
-            else:
-                agg = df.groupby(group_keys).size().reset_index(name='_value')
+                row_fields = []
+                for rl in row_labels:
+                    if rl == T('p7_row_month'):
+                        row_fields.append('_row_month')
+                    else:
+                        actual_col = DIM_MAP[rl]
+                        df[f'_row_{actual_col}'] = df[actual_col].astype(str)
+                        row_fields.append(f'_row_{actual_col}')
 
-            if agg.empty:
-                st.warning(T('p7_no_data_warning'))
-                st.session_state.pivot_result = None
-            else:
-                st.session_state.pivot_result = {
-                    'agg': agg, 'has_col': bool(group_col), 'row_label': row_label,
-                    'col_label': col_label, 'metric_label': metric_label, 'view': VIEW_MAP[view_label],
-                }
+                col_fields = []
+                for cl in col_labels:
+                    actual_col = DIM_MAP[cl]
+                    df[f'_col_{actual_col}'] = df[actual_col].astype(str)
+                    col_fields.append(f'_col_{actual_col}')
+
+                needed = row_fields + col_fields + ['_volume']
+                df = df.dropna(subset=[c for c in needed if c in df.columns])
+
+                if df.empty:
+                    st.warning(T('p7_no_data_warning'))
+                    st.session_state.pivot_result = None
+                else:
+                    tables = {}
+                    group_keys = row_fields + col_fields
+                    for vl in value_labels:
+                        source_col, aggfunc = METRIC_OPTIONS[vl]
+                        if aggfunc == 'count':
+                            s = df.groupby(group_keys).size()
+                        else:
+                            s = df.groupby(group_keys)[source_col].agg(aggfunc)
+                        if col_fields:
+                            tables[vl] = s.unstack(col_fields)
+                        else:
+                            tables[vl] = s.rename(vl)
+
+                    combined = pd.concat(tables, axis=1)
+
+                    if combined.empty:
+                        st.warning(T('p7_no_data_warning'))
+                        st.session_state.pivot_result = None
+                    else:
+                        st.session_state.pivot_result = {
+                            'combined': combined, 'row_labels': row_labels, 'col_labels': col_labels,
+                            'value_labels': value_labels, 'view': VIEW_MAP[view_label], 'has_col': bool(col_fields),
+                        }
 
         if st.session_state.get('pivot_result'):
             R = st.session_state.pivot_result
-            agg = R['agg']
-            fig = None
+            combined = R['combined']
+            multi_metric = len(R['value_labels']) > 1
 
-            if R['view'] == 'pie':
-                pie_data = agg.groupby('_row')['_value'].sum().reset_index().sort_values('_value', ascending=False)
-                fig = go.Figure(data=[go.Pie(labels=pie_data['_row'], values=pie_data['_value'])])
-                fig.update_layout(title=R['metric_label'])
+            fig = None
+            first_metric = R['value_labels'][0]
+            cdata = combined[first_metric]
+            if isinstance(cdata, pd.Series):
+                cdata = cdata.to_frame(first_metric)
+
+            def _flat_label(idx_val):
+                return ' | '.join(str(x) for x in idx_val) if isinstance(idx_val, tuple) else str(idx_val)
+
+            if R['view'] == 'table':
+                pass
+            elif R['view'] == 'heatmap':
+                if multi_metric:
+                    st.caption(T('p7_multi_metric_chart_note'))
+                x_labels = [_flat_label(c) for c in cdata.columns]
+                y_labels = [_flat_label(i) for i in cdata.index]
+                fig = go.Figure(data=go.Heatmap(z=cdata.values, x=x_labels, y=y_labels, colorscale='Teal'))
+                fig.update_layout(title=first_metric, height=max(350, 32 * len(y_labels)))
+                if len(R['row_labels']) > 1 or len(R['col_labels']) > 1:
+                    st.caption(T('p7_heatmap_needs_dims_note'))
                 st.plotly_chart(fig, use_container_width=True)
-            elif R['view'] != 'table':
+            else:
+                if multi_metric:
+                    st.caption(T('p7_multi_metric_chart_note'))
+                x_labels = [_flat_label(i) for i in cdata.index]
                 fig = go.Figure()
-                if R['has_col']:
-                    for name, g in agg.groupby('_col'):
-                        g = g.sort_values('_row')
+                if R['view'] == 'pie':
+                    series = cdata.iloc[:, 0].fillna(0)
+                    fig = go.Figure(data=[go.Pie(labels=x_labels, values=series)])
+                    fig.update_layout(title=first_metric)
+                elif R['has_col']:
+                    for c in cdata.columns:
+                        y = cdata[c]
                         if R['view'] in ('bar', 'stacked'):
-                            fig.add_trace(go.Bar(x=g['_row'], y=g['_value'], name=name))
+                            fig.add_trace(go.Bar(x=x_labels, y=y, name=_flat_label(c)))
                         else:
-                            fig.add_trace(go.Scatter(x=g['_row'], y=g['_value'], mode='lines+markers', name=name))
-                    fig.update_layout(barmode='stack' if R['view'] == 'stacked' else 'group')
+                            fig.add_trace(go.Scatter(x=x_labels, y=y, mode='lines+markers', name=_flat_label(c)))
+                    fig.update_layout(barmode='stack' if R['view'] == 'stacked' else 'group', yaxis_title=first_metric)
                 else:
-                    g = agg.sort_values('_row')
+                    y = cdata.iloc[:, 0]
                     if R['view'] in ('bar', 'stacked'):
-                        fig.add_trace(go.Bar(x=g['_row'], y=g['_value'], marker_color='#0d9488'))
+                        fig.add_trace(go.Bar(x=x_labels, y=y, marker_color='#0d9488'))
                     else:
-                        fig.add_trace(go.Scatter(x=g['_row'], y=g['_value'], mode='lines+markers', line=dict(color='#0d9488')))
-                fig.update_layout(yaxis_title=R['metric_label'])
+                        fig.add_trace(go.Scatter(x=x_labels, y=y, mode='lines+markers', line=dict(color='#0d9488')))
+                    fig.update_layout(yaxis_title=first_metric)
                 st.plotly_chart(fig, use_container_width=True)
 
             st.subheader(T('p7_table_subheader'))
-            if R['has_col']:
-                pivot_table = agg.pivot(index='_row', columns='_col', values='_value')
+            display_combined = combined.copy()
+            display_combined.index = display_combined.index.rename(' | '.join(R['row_labels']))
+            if R['has_col'] and isinstance(display_combined.columns, pd.MultiIndex):
+                display_combined.columns = display_combined.columns.set_names([T('p7_values_label')] + R['col_labels'])
             else:
-                pivot_table = agg.set_index('_row')[['_value']].rename(columns={'_value': R['metric_label']})
-            st.dataframe(pivot_table)
+                display_combined.columns = display_combined.columns.rename(T('p7_values_label'))
+            st.dataframe(display_combined)
 
             if st.button(T('pdf_generate_btn'), key="pivot_pdf_btn"):
                 with st.spinner(T('pdf_generating_msg')):
                     try:
+                        pdf_table = display_combined.reset_index()
+                        pdf_table.columns = [_flat_label(c) for c in pdf_table.columns]
                         pdf_bytes = build_pdf_report(
                             title=T('p7_title'),
-                            kpi_lines=[f"{T('p7_row_label')}: {R['row_label']}", f"{T('p7_col_label')}: {R['col_label']}", f"{T('p7_metric_label')}: {R['metric_label']}"],
-                            figs=[fig] if fig else [], df_table=pivot_table.reset_index(), table_title=T('p7_table_subheader'),
+                            kpi_lines=[
+                                f"{T('p7_row_label_multi')}: {', '.join(R['row_labels'])}",
+                                f"{T('p7_col_label_multi')}: {', '.join(R['col_labels']) if R['col_labels'] else '-'}",
+                                f"{T('p7_values_label')}: {', '.join(R['value_labels'])}",
+                            ],
+                            figs=[fig] if fig else [], df_table=pdf_table, table_title=T('p7_table_subheader'),
                         )
                         st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="pivot_report.pdf", mime="application/pdf", key="pivot_pdf_dl")
                     except Exception as e:
