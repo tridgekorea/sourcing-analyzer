@@ -209,6 +209,93 @@ TEXTS = {
         'password_setup_mismatch': '두 비밀번호가 일치하지 않습니다.',
         'password_setup_success': '비밀번호가 설정되었습니다!',
         'guide_download_btn': '📖 사용법 가이드 (PDF)',
+        'menu_opt_scorer': '신규사업 스코어러',
+        'p8_title': '🔬 원료 수입 신규사업 스코어러',
+        'p8_intro': '전체 시장 거래 데이터에서 "최근 급상승한 기존 품목"과 "완전히 새로 등장한 품목"을 찾아, 우리 회사 기존 사업과의 적합도까지 반영해 진입 우선순위를 매깁니다.',
+        'p8_upload_label': '전체 시장 거래 데이터를 업로드하세요',
+        'p8_upload_caption': '※ 여러 수입사·공급사·원산지 정보가 담긴 TDS raw file을 업로드해주세요. HS코드명, Detailed HS-CODE, 카테고리, 한글품목명 컬럼이 있으면 자동으로 인식됩니다.',
+        'p8_settings_header': '⚙️ 분석 설정',
+        'p8_months_label': '분석 기간 (최근 N개월)',
+        'p8_floor_label': '최소 물량 기준 (KG)',
+        'p8_dim_label': '분석 기준',
+        'p8_minship_label': '최소 선적 횟수 (신규진입 판정)',
+        'p8_newkey_label': '신규 판정 기준 축',
+        'p8_preset_label': '점수 가중치 프리셋',
+        'p8_preset_growth': '성장 중심',
+        'p8_preset_size': '규모 중심',
+        'p8_preset_easy': '진입 용이성 중심',
+        'p8_fitw_label': '적합도 반영 비중 (%)',
+        'p8_fit_context_header': '🎯 우리 회사 적합도 기준 (선택 — 입력하면 4분면 분류까지 나옵니다)',
+        'p8_fit_context_caption': '입력하지 않아도 분석은 되지만, 아래를 채우면 "우리 사업과 얼마나 잘 맞는지"까지 점수화됩니다.',
+        'p8_fit_suppliers_label': '기존 공급사 목록 (쉼표 또는 줄바꿈으로 구분)',
+        'p8_fit_origins_label': '기존 원산지 목록',
+        'p8_fit_keywords_label': '기존 취급 품목 키워드',
+        'p8_fit_moat_label': '가점 키워드 (선택, 있으면 추가 점수)',
+        'p8_run_btn': '분석 실행',
+        'p8_reset_btn': '새로운 분석 시작 (다시하기)',
+        'p8_missing_cols_error': "필수 컬럼이 부족합니다: {cols}. 파일 내용을 확인해주세요.",
+        'p8_no_data_warning': '설정 조건에 해당하는 데이터가 없습니다. 기간·최소물량 기준을 조정해보세요.',
+        'p8_kpi_window': '분석 윈도우',
+        'p8_kpi_total_yoy': '전체 물량 YoY',
+        'p8_kpi_growing': '급상승 기존',
+        'p8_kpi_new': '신규 진입',
+        'p8_kpi_price': '가격 데이터',
+        'p8_kpi_price_linked': '연동됨 (단가 YoY 반영)',
+        'p8_kpi_price_none': '미연동 (물량 기준만)',
+        'p8_section_s': '🏆 통합 추천 순위 (TOP 10)',
+        'p8_section_a': '📈 기존 급상승 품목',
+        'p8_section_b': '🆕 신규 진입 품목',
+        'p8_col_rank': '#',
+        'p8_col_type': '구분',
+        'p8_col_item': '품목',
+        'p8_col_score': '점수',
+        'p8_col_fit': '적합도',
+        'p8_col_quadrant': '4분면',
+        'p8_col_reason': '근거',
+        'p8_col_flags': '주의',
+        'p8_col_yoy': 'YoY',
+        'p8_col_rec_vol': '최근 물량',
+        'p8_col_ly_vol': '전년 물량',
+        'p8_col_delta': '증가량',
+        'p8_col_price_yoy': '단가 YoY',
+        'p8_col_concentration': '집중도',
+        'p8_col_vol': '최근 물량',
+        'p8_col_ship': '선적횟수',
+        'p8_col_top_importer': '주수입사',
+        'p8_type_existing': '기존·급상승',
+        'p8_type_new': '신규진입',
+        'p8_flag_low_base': '⚠ 저베이스 반등',
+        'p8_flag_single_ship': '⚠ 단일선적 편중',
+        'p8_flag_suspect': '⚠ 표기변형 의심',
+        'p8_quad_priority': '우선 타깃',
+        'p8_quad_growth': '성장 주도',
+        'p8_quad_safe': '안전 인접',
+        'p8_quad_low': '후순위',
+        'p8_signal_premium': '프리미엄',
+        'p8_signal_commodity': '코모디티화',
+        'p8_signal_shock': '공급쇼크',
+        'p8_label_growth': '성장',
+        'p8_label_cagr': 'CAGR',
+        'p8_label_share': '점유율',
+        'p8_label_importer_count': '수입사',
+        'p8_label_origin_count': '원산지',
+        'p8_label_origin_unit': '국',
+        'p8_label_fit': '적합',
+        'p8_label_top_importer': '주수입사',
+        'p8_label_recent': '최근',
+        'p8_label_shipment': '선적',
+        'p8_label_shipment_unit': '회',
+        'p8_fitwhy_supplier': '공급사',
+        'p8_fitwhy_origin': '원산지',
+        'p8_fitwhy_keyword': '취급인접',
+        'p8_fitwhy_moat': '가점KW',
+        'p8_fitwhy_none': '매칭없음',
+        'p8_chart_title': '통합 추천 순위 TOP 10 — 점수',
+        'p8_dim_hs_name': 'HS Code Name',
+        'p8_dim_detailed_hs': 'Detailed HS-CODE',
+        'p8_dim_product': 'Reported Product Name',
+        'p8_dim_importer': 'Importer',
+        'p8_dim_origin': 'Origin Country',
 
         'p3_title': '🔀 공급망 흐름도 (Sankey)',
         'p3_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
@@ -593,6 +680,93 @@ TEXTS = {
         'password_setup_mismatch': 'Passwords do not match.',
         'password_setup_success': 'Password has been set!',
         'guide_download_btn': '📖 User Guide (PDF)',
+        'menu_opt_scorer': 'New Business Scorer',
+        'p8_title': '🔬 Raw Material New-Business Scorer',
+        'p8_intro': 'Finds "recently surging existing items" and "brand-new entrants" from full market trade data, ranked by opportunity — with an optional fit score against your own existing business.',
+        'p8_upload_label': 'Upload the full market trade data',
+        'p8_upload_caption': '※ Please upload a TDS raw file with multiple importers, suppliers, and origins. HS Code Name, Detailed HS-CODE, Category, and Korean product name columns are auto-detected if present.',
+        'p8_settings_header': '⚙️ Analysis Settings',
+        'p8_months_label': 'Analysis window (last N months)',
+        'p8_floor_label': 'Minimum volume threshold (KG)',
+        'p8_dim_label': 'Analysis dimension',
+        'p8_minship_label': 'Minimum shipment count (for new entrants)',
+        'p8_newkey_label': 'Dimension used to detect "new"',
+        'p8_preset_label': 'Scoring weight preset',
+        'p8_preset_growth': 'Growth-focused',
+        'p8_preset_size': 'Size-focused',
+        'p8_preset_easy': 'Ease-of-entry-focused',
+        'p8_fitw_label': 'Fit score weight (%)',
+        'p8_fit_context_header': '🎯 Your Company Fit Criteria (optional — enables quadrant classification)',
+        'p8_fit_context_caption': "Analysis works without this, but filling it in scores how well each candidate fits your existing business.",
+        'p8_fit_suppliers_label': 'Existing suppliers (comma or newline separated)',
+        'p8_fit_origins_label': 'Existing origin countries',
+        'p8_fit_keywords_label': 'Keywords for products you already handle',
+        'p8_fit_moat_label': 'Bonus keywords (optional, adds extra score)',
+        'p8_run_btn': 'Run Analysis',
+        'p8_reset_btn': 'Start New Analysis (Reset)',
+        'p8_missing_cols_error': "Required columns are missing: {cols}. Please check the file contents.",
+        'p8_no_data_warning': 'No data matches the settings. Try adjusting the window or minimum volume.',
+        'p8_kpi_window': 'Analysis Window',
+        'p8_kpi_total_yoy': 'Total Volume YoY',
+        'p8_kpi_growing': 'Surging Existing',
+        'p8_kpi_new': 'New Entrants',
+        'p8_kpi_price': 'Price Data',
+        'p8_kpi_price_linked': 'Linked (unit price YoY applied)',
+        'p8_kpi_price_none': 'Not linked (volume only)',
+        'p8_section_s': '🏆 Combined Recommendation Ranking (Top 10)',
+        'p8_section_a': '📈 Surging Existing Items',
+        'p8_section_b': '🆕 New Entrant Items',
+        'p8_col_rank': '#',
+        'p8_col_type': 'Type',
+        'p8_col_item': 'Item',
+        'p8_col_score': 'Score',
+        'p8_col_fit': 'Fit',
+        'p8_col_quadrant': 'Quadrant',
+        'p8_col_reason': 'Reason',
+        'p8_col_flags': 'Flags',
+        'p8_col_yoy': 'YoY',
+        'p8_col_rec_vol': 'Recent Volume',
+        'p8_col_ly_vol': 'Last Year Volume',
+        'p8_col_delta': 'Change',
+        'p8_col_price_yoy': 'Price YoY',
+        'p8_col_concentration': 'Concentration',
+        'p8_col_vol': 'Recent Volume',
+        'p8_col_ship': 'Shipments',
+        'p8_col_top_importer': 'Top Importer',
+        'p8_type_existing': 'Existing·Surging',
+        'p8_type_new': 'New Entrant',
+        'p8_flag_low_base': '⚠ Low-base rebound',
+        'p8_flag_single_ship': '⚠ Single-shipment skew',
+        'p8_flag_suspect': '⚠ Possible re-labeling',
+        'p8_quad_priority': 'Priority Target',
+        'p8_quad_growth': 'Growth-led',
+        'p8_quad_safe': 'Safe Adjacent',
+        'p8_quad_low': 'Lower Priority',
+        'p8_signal_premium': 'Premium',
+        'p8_signal_commodity': 'Commoditizing',
+        'p8_signal_shock': 'Supply Shock',
+        'p8_label_growth': 'Growth',
+        'p8_label_cagr': 'CAGR',
+        'p8_label_share': 'Share',
+        'p8_label_importer_count': 'Importers',
+        'p8_label_origin_count': 'Origins',
+        'p8_label_origin_unit': '',
+        'p8_label_fit': 'Fit',
+        'p8_label_top_importer': 'Top importer',
+        'p8_label_recent': 'Recent',
+        'p8_label_shipment': 'Shipments',
+        'p8_label_shipment_unit': '',
+        'p8_fitwhy_supplier': 'supplier',
+        'p8_fitwhy_origin': 'origin',
+        'p8_fitwhy_keyword': 'adjacent product',
+        'p8_fitwhy_moat': 'bonus keyword',
+        'p8_fitwhy_none': 'no match',
+        'p8_chart_title': 'Top 10 Combined Ranking — Score',
+        'p8_dim_hs_name': 'HS Code Name',
+        'p8_dim_detailed_hs': 'Detailed HS-CODE',
+        'p8_dim_product': 'Reported Product Name',
+        'p8_dim_importer': 'Importer',
+        'p8_dim_origin': 'Origin Country',
 
         'p3_title': '🔀 Supply Chain Flow (Sankey)',
         'p3_upload_label': 'Upload the full market/supply chain data',
@@ -991,6 +1165,13 @@ def reset_pivot_states():
     st.session_state.pivot_headers = None
 
 
+def reset_scorer_states():
+    """신규사업 스코어러(페이지 8) 상태만 초기화하는 함수"""
+    st.session_state.scorer_raw_df = None
+    st.session_state.scorer_headers = None
+    st.session_state.scorer_result = None
+
+
 def read_uploaded_table(uploaded_file):
     """CSV(인코딩 자동 판별)/XLSX 파일을 읽어 DataFrame으로 반환하는 공통 헬퍼.
     실패 시 None을 반환한다 (호출부에서 오류 메시지 처리)."""
@@ -1049,6 +1230,418 @@ def build_axis_map(standard_pairs, df, cols):
         if extra_col not in axis_map.values():
             axis_map[extra_col] = extra_col
     return axis_map
+
+
+# ============================================================
+# 신규사업 스코어러 (페이지 8) — 원본 HTML 도구의 스코어링 엔진을 그대로 이식
+# ============================================================
+def detect_scorer_columns(headers):
+    """표준 8개 컬럼 + 스코어러 전용 추가 컬럼(HS코드명, Detailed HS-CODE, 카테고리, 한글품목명)을 찾는다."""
+    base = detect_standard_columns(headers)
+    base['hs_name'] = find_column(headers, ['HS Code Name', 'hs_name', 'HSCodeName', 'HS코드명', '품목명'])
+    base['detailed_hs'] = find_column(headers, ['Detailed HS-CODE', 'Detailed HS Code', 'detailed_hs', 'HS Code', 'HS코드'])
+    base['category'] = find_column(headers, ['Category', 'category', '카테고리', '분류'])
+    base['label_kr'] = find_column(headers, ['한글품목명', '국문품명', '품명국문', '한글명', 'label_kr', 'Korean Name'])
+    return base
+
+
+def _p8_norm_name(s):
+    if s is None or (isinstance(s, float) and pd.isna(s)):
+        return ''
+    return re.sub(r'\s+', ' ', str(s).strip().upper())
+
+
+def _p8_split_list(s):
+    if not s:
+        return set()
+    parts = re.split(r'[,\n;]+', s)
+    return set(_p8_norm_name(p) for p in parts if p and p.strip())
+
+
+def _p8_minmax_norm(value, arr):
+    if not arr:
+        return 50.0
+    mn, mx = min(arr), max(arr)
+    if mx <= mn:
+        return 50.0
+    return (value - mn) / (mx - mn) * 100.0
+
+
+def _p8_mode_or_none(items):
+    items = [x for x in items if x is not None and not (isinstance(x, float) and pd.isna(x)) and str(x).strip() != '']
+    if not items:
+        return None
+    counts = {}
+    for x in items:
+        counts[x] = counts.get(x, 0) + 1
+    return max(counts.items(), key=lambda kv: kv[1])[0]
+
+
+def _p8_fit_of(supplier_set, origin_set, name_text, fit_ctx):
+    """적합도(fit) 점수 계산: 공급사/원산지/키워드/가점키워드 매칭 여부로 0~100점."""
+    if not fit_ctx['has_ctx']:
+        return None, ''
+    sup = ori = kw = moat = 0
+    if fit_ctx['suppliers'] and supplier_set:
+        for s in supplier_set:
+            sn = _p8_norm_name(s)
+            if any(sn in m or m in sn for m in fit_ctx['suppliers'] if m):
+                sup = 1
+                break
+    if fit_ctx['origins'] and origin_set:
+        for o in origin_set:
+            if o and _p8_norm_name(o) in fit_ctx['origins']:
+                ori = 1
+                break
+    name_norm = _p8_norm_name(name_text)
+    if fit_ctx['keywords']:
+        kw = 1 if any(w and w in name_norm for w in fit_ctx['keywords']) else 0
+    if fit_ctx['moat']:
+        moat = 1 if any(w and w in name_norm for w in fit_ctx['moat']) else 0
+    score = max(0, min(100, round(sup * 45 + ori * 25 + kw * 25 + moat * 15)))
+    why_parts = []
+    if sup: why_parts.append(T('p8_fitwhy_supplier'))
+    if ori: why_parts.append(T('p8_fitwhy_origin'))
+    if kw: why_parts.append(T('p8_fitwhy_keyword'))
+    if moat: why_parts.append(T('p8_fitwhy_moat'))
+    why = '·'.join(why_parts) if why_parts else T('p8_fitwhy_none')
+    return score, why
+
+
+def compute_scorer(df, dim_col, months, floor, minship, new_key_col, preset, fit_ctx, fitw,
+                    has_price, importer_col, exporter_col, origin_col, detailed_hs_col, label_kr_col, product_col):
+    """원본 JS run() 함수를 그대로 이식한 핵심 계산. A(기존급상승)/B(신규진입)/S(통합순위) 를 반환."""
+    latest = df['_date'].max()
+    earliest = df['_date'].min()
+    rec_start = (latest - pd.DateOffset(months=months - 1)).replace(day=1)
+    ly_start = pd.Timestamp(year=rec_start.year - 1, month=rec_start.month, day=1)
+    ly_end = pd.Timestamp(year=latest.year - 1, month=latest.month, day=latest.day)
+
+    recent = df[(df['_date'] >= rec_start) & (df['_date'] <= latest)]
+    lastyr = df[(df['_date'] >= ly_start) & (df['_date'] <= ly_end)]
+    hist = df[df['_date'] < rec_start]
+
+    tot_rec = recent['_volume'].sum()
+    tot_ly = lastyr['_volume'].sum()
+    span_months = max(1, round((latest - earliest).days / 30.44))
+
+    # ---------- Section A: 기존 급상승 품목 ----------
+    A_rows = []
+    for key, g in recent.groupby(dim_col):
+        if key is None or (isinstance(key, float) and pd.isna(key)):
+            continue
+        rec_vol = g['_volume'].sum()
+        max_row = g['_volume'].max()
+        top1_imp, top1_share = None, 0.0
+        if importer_col and importer_col in g.columns:
+            imp_vol = g.groupby(importer_col)['_volume'].sum().sort_values(ascending=False)
+            if len(imp_vol):
+                top1_imp, top1_share = imp_vol.index[0], (imp_vol.iloc[0] / rec_vol * 100 if rec_vol > 0 else 0)
+        price_rec = None
+        if has_price:
+            valid = g.dropna(subset=['_value'])
+            if valid['_volume'].sum() > 0:
+                price_rec = valid['_value'].sum() / valid['_volume'].sum()
+        dhs_set = set(g[detailed_hs_col].dropna().unique()) if detailed_hs_col else set()
+        kr_name = _p8_mode_or_none(g[label_kr_col].tolist()) if label_kr_col else None
+        supplier_set = set(g[exporter_col].dropna().unique()) if exporter_col else set()
+        origin_set = set(g[origin_col].dropna().unique()) if origin_col else set()
+
+        ly_g = lastyr[lastyr[dim_col] == key]
+        ly_vol = ly_g['_volume'].sum()
+        price_ly = None
+        if has_price and len(ly_g):
+            valid_ly = ly_g.dropna(subset=['_value'])
+            if valid_ly['_volume'].sum() > 0:
+                price_ly = valid_ly['_value'].sum() / valid_ly['_volume'].sum()
+
+        en_name = preprocess_product_name(str(key)) if dim_col == 'product' else str(key)
+        A_rows.append({
+            'k': key, 'rec_vol': rec_vol, 'ly_vol': ly_vol, 'max_row': max_row, 'rows_n': len(g),
+            'top1_imp': top1_imp, 'top1_share': top1_share, 'price_rec': price_rec, 'price_ly': price_ly,
+            'dhs_set': dhs_set, 'kr_name': kr_name, 'en_name': en_name,
+            'display_name': kr_name or str(key), 'supplier_set': supplier_set, 'origin_set': origin_set,
+            'dim_is_importer': (dim_col == importer_col),
+        })
+
+    A = pd.DataFrame(A_rows)
+    if not A.empty:
+        A = A[(A['ly_vol'] > 0) & (A['rec_vol'] >= floor)].copy()
+    if not A.empty:
+        A['yoy'] = (A['rec_vol'] - A['ly_vol']) / A['ly_vol'] * 100
+        A['delta'] = A['rec_vol'] - A['ly_vol']
+        A['share'] = A['rec_vol'] / tot_rec * 100 if tot_rec > 0 else 0
+        A['low_base'] = (A['ly_vol'] > 0) & (A['ly_vol'] < floor * 0.5)
+        A['single_ship'] = A['max_row'] >= A['rec_vol'] * 0.6
+        A['price_yoy'] = A.apply(lambda r: (r['price_rec'] - r['price_ly']) / r['price_ly'] * 100
+                                  if (r['price_rec'] is not None and r['price_ly']) else None, axis=1)
+        A = A.sort_values('yoy', ascending=False)
+
+        pos_a = A[A['yoy'] > 0].copy()
+        yoy_arr = pos_a['yoy'].tolist()
+        share_arr = pos_a['share'].tolist()
+        ease_arr = [50.0 if r['dim_is_importer'] else 100 - r['top1_share'] for _, r in pos_a.iterrows()]
+        price_arr = [0 if pd.isna(v) else v for v in pos_a['price_yoy'].tolist()] if has_price else []
+
+        W = {
+            'growth': {'growth': .5, 'size': .2, 'ease': .2, 'price': .1},
+            'size': {'growth': .2, 'size': .45, 'ease': .15, 'price': .2},
+            'easy': {'growth': .25, 'size': .15, 'ease': .45, 'price': .15},
+        }.get(preset, {'growth': .5, 'size': .2, 'ease': .2, 'price': .1})
+
+        def _score_a(row):
+            if row['yoy'] <= 0:
+                return 0
+            g = _p8_minmax_norm(row['yoy'], yoy_arr)
+            s = _p8_minmax_norm(row['share'], share_arr)
+            e = 50.0 if row['dim_is_importer'] else _p8_minmax_norm(100 - row['top1_share'], ease_arr)
+            w = dict(W)
+            p_comp = None
+            if has_price:
+                pv = 0 if pd.isna(row['price_yoy']) else row['price_yoy']
+                p_comp = _p8_minmax_norm(pv, price_arr)
+            else:
+                s_sum = w['growth'] + w['size'] + w['ease']
+                w = {'growth': w['growth'] / s_sum, 'size': w['size'] / s_sum, 'ease': w['ease'] / s_sum, 'price': 0}
+            sc = g * w['growth'] + s * w['size'] + e * w['ease'] + (p_comp * w['price'] if p_comp is not None else 0)
+            if row['low_base']:
+                sc -= 10
+            if row['single_ship']:
+                sc -= 10
+            return max(0, min(100, round(sc)))
+
+        A['score'] = A.apply(_score_a, axis=1)
+    else:
+        A['yoy'] = []; A['score'] = []
+
+    # ---------- Section B: 신규 진입 품목 ----------
+    hist_norm_set = set(_p8_norm_name(v) for v in hist[new_key_col].dropna().unique()) if new_key_col in hist.columns else set()
+    hist_dhs_set = set(_p8_norm_name(v) for v in hist[detailed_hs_col].dropna().unique()) if detailed_hs_col and detailed_hs_col in hist.columns else set()
+
+    B_rows = []
+    if new_key_col in recent.columns:
+        recent_new = recent[~recent[new_key_col].apply(lambda v: _p8_norm_name(v) in hist_norm_set if pd.notna(v) else True)]
+        recent_new = recent_new.dropna(subset=[new_key_col])
+        for nk, g in recent_new.groupby(recent_new[new_key_col].apply(_p8_norm_name)):
+            if not nk:
+                continue
+            vol = g['_volume'].sum()
+            ship = len(g)
+            max_row = g['_volume'].max()
+            top1_imp, top1_share = None, 0.0
+            if importer_col and importer_col in g.columns:
+                imp_vol = g.groupby(importer_col)['_volume'].sum().sort_values(ascending=False)
+                if len(imp_vol):
+                    top1_imp, top1_share = imp_vol.index[0], (imp_vol.iloc[0] / vol * 100 if vol > 0 else 0)
+            disp_raw = _p8_mode_or_none(g[new_key_col].tolist())
+            dom_dhs = _p8_norm_name(_p8_mode_or_none(g[detailed_hs_col].tolist())) if detailed_hs_col else None
+            suspect = (new_key_col == product_col) and bool(dom_dhs) and (dom_dhs in hist_dhs_set)
+            single_ship = max_row >= vol * 0.6
+            kr_name = _p8_mode_or_none(g[label_kr_col].tolist()) if label_kr_col else None
+            origin_val = _p8_mode_or_none(g[origin_col].tolist()) if origin_col else None
+            en_name = preprocess_product_name(str(disp_raw)) if disp_raw else nk
+            B_rows.append({
+                'k': disp_raw, 'vol': vol, 'ship': ship, 'origin': origin_val, 'top1_imp': top1_imp,
+                'top1_share': top1_share, 'suspect': suspect, 'single_ship': single_ship,
+                'kr_name': kr_name, 'en_name': en_name, 'display_name': kr_name or str(disp_raw),
+                'dhs_set': set(g[detailed_hs_col].dropna().unique()) if detailed_hs_col else set(),
+                'origin_set': set(g[origin_col].dropna().unique()) if origin_col else set(),
+            })
+
+    B = pd.DataFrame(B_rows)
+    if not B.empty:
+        B = B[(B['ship'] >= minship) & (B['vol'] >= floor)].copy()
+    if not B.empty:
+        B = B.sort_values('vol', ascending=False)
+        vol_arr = B['vol'].tolist()
+        ship_arr = B['ship'].tolist()
+        ease_arr_b = (100 - B['top1_share']).tolist()
+
+        def _score_b(row):
+            s = _p8_minmax_norm(row['vol'], vol_arr)
+            sh = _p8_minmax_norm(row['ship'], ship_arr)
+            e = _p8_minmax_norm(100 - row['top1_share'], ease_arr_b)
+            sc = s * .35 + sh * .35 + e * .30
+            if row['single_ship']:
+                sc -= 10
+            if row['suspect']:
+                sc -= 15
+            return max(0, min(100, round(sc)))
+
+        B['score'] = B.apply(_score_b, axis=1)
+
+    # ---------- 확장 지표: CAGR / 수입사수 증감 / 원산지수 / 가격신호 / 적합도 ----------
+    def _cagr_of(key):
+        rows_k = df[df[dim_col] == key]
+        if rows_k.empty:
+            return None
+        yb = {}
+        for _, r in rows_k.iterrows():
+            mo = (latest.year - r['_date'].year) * 12 + (latest.month - r['_date'].month)
+            if mo < 0:
+                continue
+            yi = mo // 12
+            yb[yi] = yb.get(yi, 0) + r['_volume']
+        if not yb:
+            return None
+        cur = yb.get(0, 0)
+        old_i = None
+        for i in sorted([k for k in yb.keys() if k >= 1], reverse=True):
+            if yb.get(i, 0) > 0:
+                old_i = i
+                break
+        if old_i is None or cur <= 0 or yb.get(old_i, 0) <= 0:
+            return None
+        return (pow(cur / yb[old_i], 1 / old_i) - 1) * 100
+
+    def _price_signal(yoy, price_yoy):
+        if price_yoy is None or pd.isna(price_yoy):
+            return '-'
+        if yoy > 0 and price_yoy >= 0:
+            return T('p8_signal_premium')
+        if yoy > 0 and price_yoy < 0:
+            return T('p8_signal_commodity')
+        if yoy <= 0 and price_yoy > 0:
+            return T('p8_signal_shock')
+        return '-'
+
+    if not A.empty:
+        A['cagr'] = A['k'].apply(_cagr_of)
+        if importer_col:
+            imp_rec_map = recent.groupby(dim_col)[importer_col].apply(lambda s: set(s.dropna().unique()))
+            imp_ly_map = lastyr.groupby(dim_col)[importer_col].apply(lambda s: set(s.dropna().unique()))
+            A['imp_delta'] = A['k'].apply(lambda k: len(imp_rec_map.get(k, set())) - len(imp_ly_map.get(k, set())))
+        else:
+            A['imp_delta'] = None
+        A['origin_n'] = A['origin_set'].apply(len)
+        A['price_signal'] = A.apply(lambda r: _price_signal(r['yoy'], r['price_yoy']) if has_price else '-', axis=1)
+
+        fit_results = A.apply(lambda r: _p8_fit_of(r['supplier_set'], r['origin_set'], f"{r['display_name']} {r['en_name']}", fit_ctx), axis=1)
+        A['fit_score'] = [f[0] for f in fit_results]
+        A['fit_why'] = [f[1] for f in fit_results]
+
+        def _final_a(r):
+            fs = r['score'] if r['fit_score'] is None else round(r['score'] * (1 - fitw) + r['fit_score'] * fitw)
+            if r['price_signal'] == T('p8_signal_premium'):
+                fs = max(0, min(100, fs + 4))
+            elif r['price_signal'] == T('p8_signal_commodity'):
+                fs = max(0, min(100, fs - 6))
+            return fs
+        A['final_score'] = A.apply(_final_a, axis=1)
+
+    if not B.empty:
+        B['cagr'] = None
+        B['imp_delta'] = None
+        B['origin_n'] = B['origin_set'].apply(len)
+        B['price_signal'] = '-'
+        fit_results_b = B.apply(lambda r: _p8_fit_of(None, r['origin_set'], f"{r['display_name']} {r['en_name']}", fit_ctx), axis=1)
+        B['fit_score'] = [f[0] for f in fit_results_b]
+        B['fit_why'] = [f[1] for f in fit_results_b]
+        B['final_score'] = B.apply(lambda r: r['score'] if r['fit_score'] is None else round(r['score'] * (1 - fitw) + r['fit_score'] * fitw), axis=1)
+
+    # ---------- 4분면 분류 ----------
+    has_ctx = fit_ctx['has_ctx']
+    pos_a_final = A[A['yoy'] > 0] if not A.empty else A
+    pooled_scores = (pos_a_final['score'].tolist() if not pos_a_final.empty else []) + (B['score'].tolist() if not B.empty else [])
+    pooled_fits = ([0 if pd.isna(x) or x is None else x for x in pos_a_final['fit_score'].tolist()] if not pos_a_final.empty else []) + \
+                  ([0 if pd.isna(x) or x is None else x for x in B['fit_score'].tolist()] if not B.empty else [])
+
+    def _median(arr):
+        if not arr:
+            return 50
+        a = sorted(arr)
+        return a[len(a) // 2]
+
+    if has_ctx and pooled_scores:
+        g_med = _median(pooled_scores)
+        f_med = _median(pooled_fits)
+
+        def _quadrant(score, fit_score):
+            fv = 0 if fit_score is None or pd.isna(fit_score) else fit_score
+            g_ok = score >= g_med
+            f_ok = fv > 0 and fv >= f_med
+            if g_ok and f_ok:
+                return T('p8_quad_priority')
+            if g_ok and not f_ok:
+                return T('p8_quad_growth')
+            if (not g_ok) and f_ok:
+                return T('p8_quad_safe')
+            return T('p8_quad_low')
+
+        if not A.empty:
+            A['quadrant'] = A.apply(lambda r: _quadrant(r['score'], r['fit_score']) if r['yoy'] > 0 else '-', axis=1)
+        if not B.empty:
+            B['quadrant'] = B.apply(lambda r: _quadrant(r['score'], r['fit_score']), axis=1)
+    else:
+        if not A.empty:
+            A['quadrant'] = '-'
+        if not B.empty:
+            B['quadrant'] = '-'
+
+    # ---------- 통합 추천 S ----------
+    S = []
+    if not A.empty:
+        for _, r in A[A['yoy'] > 0].iterrows():
+            S.append({'type': 'existing', 'name': r['display_name'], 'score': r['final_score'], 'row': r})
+    if not B.empty:
+        for _, r in B.iterrows():
+            S.append({'type': 'new', 'name': r['display_name'], 'score': r['final_score'], 'row': r})
+    S.sort(key=lambda x: x['score'], reverse=True)
+
+    meta = {
+        'rec_start': rec_start, 'latest': latest, 'ly_start': ly_start, 'ly_end': ly_end,
+        'tot_rec': tot_rec, 'tot_ly': tot_ly, 'span_months': span_months, 'has_price': has_price,
+        'has_ctx': has_ctx, 'months': months,
+    }
+    return A, B, S, meta
+
+
+def _p8_reason_a(r, dim_is_importer):
+    parts = []
+    sign = '+' if r['yoy'] >= 0 else ''
+    parts.append(f"{T('p8_label_growth')} {sign}{r['yoy']:.0f}%")
+    if r.get('cagr') is not None and not pd.isna(r.get('cagr')):
+        sign2 = '+' if r['cagr'] >= 0 else ''
+        parts.append(f"{T('p8_label_cagr')} {sign2}{r['cagr']:.0f}%")
+    parts.append(f"{T('p8_label_share')} {r['share']:.1f}%")
+    if r.get('imp_delta') is not None and r['imp_delta'] != 0:
+        sign3 = '+' if r['imp_delta'] >= 0 else ''
+        parts.append(f"{T('p8_label_importer_count')} {sign3}{int(r['imp_delta'])}")
+    if r.get('origin_n', 0) > 1:
+        parts.append(f"{T('p8_label_origin_count')} {int(r['origin_n'])}{T('p8_label_origin_unit')}")
+    if r.get('price_signal') and r['price_signal'] != '-':
+        parts.append(r['price_signal'])
+    if r.get('fit_score') is not None:
+        parts.append(f"{T('p8_label_fit')} {r['fit_score']}({r['fit_why']})")
+    if not dim_is_importer:
+        top_name = str(r['top1_imp'])[:14] if r['top1_imp'] else '-'
+        parts.append(f"{T('p8_label_top_importer')} {top_name} {r['top1_share']:.0f}%")
+    return ' · '.join(parts)
+
+
+def _p8_reason_b(r):
+    parts = [f"{T('p8_label_recent')} {r['vol']:,.0f}", f"{T('p8_label_shipment')} {r['ship']}{T('p8_label_shipment_unit')}"]
+    top_name = str(r['top1_imp'])[:14] if r['top1_imp'] else '-'
+    parts.append(f"{T('p8_label_top_importer')} {top_name} {r['top1_share']:.0f}%")
+    return ' · '.join(parts)
+
+
+def _p8_flags_a(r):
+    f = []
+    if r.get('low_base'):
+        f.append(T('p8_flag_low_base'))
+    if r.get('single_ship'):
+        f.append(T('p8_flag_single_ship'))
+    return ' '.join(f) if f else '-'
+
+
+def _p8_flags_b(r):
+    f = []
+    if r.get('suspect'):
+        f.append(T('p8_flag_suspect'))
+    if r.get('single_ship'):
+        f.append(T('p8_flag_single_ship'))
+    return ' '.join(f) if f else '-'
 
 
 def load_uploaded_df(uploaded_file, raw_df_key, headers_key, fileid_key):
@@ -1597,6 +2190,11 @@ if 'pivot_raw_df' not in st.session_state:
     st.session_state.pivot_headers = None
     st.session_state.pivot_result = None
 
+if 'scorer_raw_df' not in st.session_state:
+    st.session_state.scorer_raw_df = None
+    st.session_state.scorer_headers = None
+    st.session_state.scorer_result = None
+
 # --- [비밀번호 기능] 비밀번호가 맞을 때까지 이 아래 앱 본문을 그리지 않음 ---
 if not check_password():
     st.stop()
@@ -1614,8 +2212,8 @@ with st.sidebar:
     st.markdown("---")
     selected = option_menu(
         menu_title=T('app_menu_title'),
-        options=[T('menu_opt_customer'), T('menu_opt_market'), T('menu_opt_flow'), T('menu_opt_risk'), T('menu_opt_season'), T('menu_opt_churn'), T('menu_opt_pivot')],
-        icons=["person-bounding-box", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "grid-3x3"],
+        options=[T('menu_opt_customer'), T('menu_opt_market'), T('menu_opt_flow'), T('menu_opt_risk'), T('menu_opt_season'), T('menu_opt_churn'), T('menu_opt_pivot'), T('menu_opt_scorer')],
+        icons=["person-bounding-box", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "grid-3x3", "binoculars"],
         menu_icon="cast",
         default_index=0,
     )
@@ -3305,3 +3903,199 @@ if selected == T('menu_opt_pivot'):
                         st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="pivot_report.pdf", mime="application/pdf", key="pivot_pdf_dl")
                     except Exception as e:
                         st.error(T('pdf_error_msg', msg=str(e)))
+
+# ==============================================================================
+# 페이지 8: 신규사업 스코어러 (원본 HTML 도구 100% 이식 + 공용화)
+# ==============================================================================
+if selected == T('menu_opt_scorer'):
+    st.title(T('p8_title'))
+    st.caption(T('p8_intro'))
+
+    if st.session_state.scorer_result is not None:
+        st.button(T('p8_reset_btn'), on_click=reset_scorer_states)
+
+    if st.session_state.scorer_result is None:
+        scorer_file = st.file_uploader(T('p8_upload_label'), type=['csv', 'xlsx'], key="scorer_uploader")
+        st.caption(T('p8_upload_caption'))
+        raw_df = load_uploaded_df(scorer_file, 'scorer_raw_df', 'scorer_headers', 'scorer_fileid')
+
+        if raw_df is not None:
+            headers = st.session_state.scorer_headers
+            cols = detect_scorer_columns(headers)
+            missing = [k for k in ['date', 'volume'] if not cols[k]]
+            if missing:
+                st.error(T('p8_missing_cols_error', cols=', '.join(missing)))
+                st.stop()
+
+            DIM_MAP = {}
+            if cols['hs_name']: DIM_MAP[T('p8_dim_hs_name')] = cols['hs_name']
+            if cols['detailed_hs']: DIM_MAP[T('p8_dim_detailed_hs')] = cols['detailed_hs']
+            if cols['product']: DIM_MAP[T('p8_dim_product')] = cols['product']
+            if cols['importer']: DIM_MAP[T('p8_dim_importer')] = cols['importer']
+            if cols['origin']: DIM_MAP[T('p8_dim_origin')] = cols['origin']
+
+            if not DIM_MAP:
+                st.error(T('p8_missing_cols_error', cols='HS Code Name / Detailed HS-CODE / Reported Product Name / Importer / Origin Country'))
+                st.stop()
+
+            st.markdown(f"**{T('p8_settings_header')}**")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                months = st.slider(T('p8_months_label'), min_value=1, max_value=24, value=6, key="scorer_months")
+            with col2:
+                floor = st.number_input(T('p8_floor_label'), min_value=0, value=1000, step=100, key="scorer_floor")
+            with col3:
+                dim_label = st.selectbox(T('p8_dim_label'), options=list(DIM_MAP.keys()), key="scorer_dim")
+
+            col4, col5, col6 = st.columns(3)
+            with col4:
+                minship = st.number_input(T('p8_minship_label'), min_value=1, value=2, step=1, key="scorer_minship")
+            with col5:
+                newkey_label = st.selectbox(T('p8_newkey_label'), options=list(DIM_MAP.keys()), key="scorer_newkey")
+            with col6:
+                preset_map = {T('p8_preset_growth'): 'growth', T('p8_preset_size'): 'size', T('p8_preset_easy'): 'easy'}
+                preset_label = st.selectbox(T('p8_preset_label'), options=list(preset_map.keys()), key="scorer_preset")
+
+            fitw_pct = st.slider(T('p8_fitw_label'), min_value=0, max_value=100, value=30, step=5, key="scorer_fitw")
+
+            with st.expander(T('p8_fit_context_header'), expanded=False):
+                st.caption(T('p8_fit_context_caption'))
+                fit_suppliers_txt = st.text_area(T('p8_fit_suppliers_label'), key="scorer_fit_suppliers")
+                fit_origins_txt = st.text_area(T('p8_fit_origins_label'), key="scorer_fit_origins")
+                fit_keywords_txt = st.text_area(T('p8_fit_keywords_label'), key="scorer_fit_keywords")
+                fit_moat_txt = st.text_area(T('p8_fit_moat_label'), key="scorer_fit_moat")
+
+            if st.button(T('p8_run_btn')):
+                df = raw_df.copy()
+                df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
+                df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
+                has_price = bool(cols['price'])
+                if has_price:
+                    # 원본 도구는 '금액(Value)' 컬럼을 직접 쓰지만, 우리 표준 컬럼은 '단가(Unit Price)'라서
+                    # 단가×물량으로 총액을 역산해 동일한 물량가중평균 단가 로직을 그대로 재사용한다.
+                    df['_value'] = pd.to_numeric(df[cols['price']], errors='coerce') * df['_volume']
+                else:
+                    df['_value'] = None
+                df = df.dropna(subset=['_date', '_volume'])
+
+                dim_col = DIM_MAP[dim_label]
+                new_key_col = DIM_MAP[newkey_label]
+
+                fit_ctx = {
+                    'suppliers': _p8_split_list(fit_suppliers_txt),
+                    'origins': _p8_split_list(fit_origins_txt),
+                    'keywords': _p8_split_list(fit_keywords_txt),
+                    'moat': _p8_split_list(fit_moat_txt),
+                }
+                fit_ctx['has_ctx'] = bool(fit_ctx['suppliers'] or fit_ctx['origins'] or fit_ctx['keywords'])
+
+                A, B, S, meta = compute_scorer(
+                    df, dim_col, months, floor, minship, new_key_col, preset_map[preset_label],
+                    fit_ctx, fitw_pct / 100, has_price,
+                    cols['importer'], cols['exporter'], cols['origin'], cols['detailed_hs'], cols['label_kr'],
+                    cols['product'],
+                )
+
+                if A.empty and B.empty:
+                    st.warning(T('p8_no_data_warning'))
+                else:
+                    st.session_state.scorer_result = {'A': A, 'B': B, 'S': S, 'meta': meta, 'dim_label': dim_label}
+                    st.rerun()
+
+    if st.session_state.scorer_result is not None:
+        R = st.session_state.scorer_result
+        A, B, S, meta = R['A'], R['B'], R['S'], R['meta']
+
+        tot_yoy = ((meta['tot_rec'] - meta['tot_ly']) / meta['tot_ly'] * 100) if meta['tot_ly'] > 0 else 0
+        a_growing = A[A['yoy'] > 0] if not A.empty else A
+
+        c1, c2, c3, c4, c5 = st.columns(5)
+        month_unit = '개월' if st.session_state.lang == 'ko' else ' mo'
+        c1.metric(T('p8_kpi_window'), f"{meta['months']}{month_unit}")
+        c2.metric(T('p8_kpi_total_yoy'), f"{tot_yoy:+.0f}%")
+        c3.metric(T('p8_kpi_growing'), f"{len(a_growing)}")
+        c4.metric(T('p8_kpi_new'), f"{len(B)}")
+        with c5:
+            st.markdown(f"**{T('p8_kpi_price')}**")
+            st.caption(T('p8_kpi_price_linked') if meta['has_price'] else T('p8_kpi_price_none'))
+
+        fig = None
+        s_df = None
+
+        st.subheader(T('p8_section_s'))
+        S_top = S[:10]
+        if S_top:
+            names = [s['name'] for s in S_top][::-1]
+            scores = [s['score'] for s in S_top][::-1]
+            colors_bar = ['#e11d48' if s['type'] == 'new' else '#0d9488' for s in S_top][::-1]
+            fig = go.Figure()
+            fig.add_trace(go.Bar(y=names, x=scores, orientation='h', marker_color=colors_bar))
+            fig.update_layout(title=T('p8_chart_title'), xaxis_title=T('p8_col_score'))
+            st.plotly_chart(fig, use_container_width=True)
+
+            s_rows = []
+            for i, s in enumerate(S_top):
+                r = s['row']
+                reason = _p8_reason_a(r, r.get('dim_is_importer', False)) if s['type'] == 'existing' else _p8_reason_b(r)
+                flags = _p8_flags_a(r) if s['type'] == 'existing' else _p8_flags_b(r)
+                s_rows.append({
+                    T('p8_col_rank'): i + 1,
+                    T('p8_col_type'): T('p8_type_existing') if s['type'] == 'existing' else T('p8_type_new'),
+                    T('p8_col_item'): s['name'],
+                    T('p8_col_score'): s['score'],
+                    T('p8_col_fit'): r['fit_score'] if r.get('fit_score') is not None else '-',
+                    T('p8_col_quadrant'): r.get('quadrant', '-'),
+                    T('p8_col_reason'): reason,
+                    T('p8_col_flags'): flags,
+                })
+            s_df = pd.DataFrame(s_rows)
+            st.dataframe(s_df, use_container_width=True)
+        else:
+            st.caption(T('p8_no_data_warning'))
+
+        with st.expander(T('p8_section_a'), expanded=False):
+            if not a_growing.empty:
+                a_rows = []
+                for _, r in a_growing.iterrows():
+                    a_rows.append({
+                        T('p8_col_item'): r['display_name'], T('p8_col_score'): r['final_score'],
+                        T('p8_col_yoy'): f"{r['yoy']:+.0f}%", T('p8_col_rec_vol'): f"{r['rec_vol']:,.0f}",
+                        T('p8_col_ly_vol'): f"{r['ly_vol']:,.0f}", T('p8_col_delta'): f"{r['delta']:+,.0f}",
+                        T('p8_col_concentration'): f"{r['top1_share']:.0f}%",
+                        T('p8_col_reason'): _p8_reason_a(r, r['dim_is_importer']),
+                        T('p8_col_flags'): _p8_flags_a(r),
+                    })
+                st.dataframe(pd.DataFrame(a_rows), use_container_width=True)
+            else:
+                st.caption(T('p8_no_data_warning'))
+
+        with st.expander(T('p8_section_b'), expanded=False):
+            if not B.empty:
+                b_rows = []
+                for _, r in B.iterrows():
+                    b_rows.append({
+                        T('p8_col_item'): r['display_name'], T('p8_col_score'): r['final_score'],
+                        T('p8_col_vol'): f"{r['vol']:,.0f}", T('p8_col_ship'): r['ship'],
+                        T('p8_col_top_importer'): f"{r['top1_imp']} {r['top1_share']:.0f}%" if r['top1_imp'] else '-',
+                        T('p8_col_reason'): _p8_reason_b(r),
+                        T('p8_col_flags'): _p8_flags_b(r),
+                    })
+                st.dataframe(pd.DataFrame(b_rows), use_container_width=True)
+            else:
+                st.caption(T('p8_no_data_warning'))
+
+        if st.button(T('pdf_generate_btn'), key="scorer_pdf_btn"):
+            with st.spinner(T('pdf_generating_msg')):
+                try:
+                    pdf_bytes = build_pdf_report(
+                        title=T('p8_title'),
+                        kpi_lines=[
+                            f"{T('p8_kpi_total_yoy')}: {tot_yoy:+.0f}%",
+                            f"{T('p8_kpi_growing')}: {len(a_growing)}",
+                            f"{T('p8_kpi_new')}: {len(B)}",
+                        ],
+                        figs=[fig] if fig else [], df_table=s_df, table_title=T('p8_section_s'),
+                    )
+                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="new_business_scorer.pdf", mime="application/pdf", key="scorer_pdf_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
