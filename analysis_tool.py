@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import re
 import time
+import datetime
 import os   # <--- [비밀번호 기능] 환경변수(Codespaces secret) 읽기용
 import hmac # <--- [비밀번호 기능] 타이밍 공격에 안전한 문자열 비교용
 import hashlib # <--- [비밀번호 기능] 최초 실행 시 설정한 비밀번호를 해시로 저장하기 위함
@@ -24,6 +25,11 @@ TEXTS = {
         'app_menu_title': '메뉴',
         'menu_opt_customer': '고객사 효율 분석',
         'menu_opt_market': '시장 경쟁력 분석',
+        'menu_opt_flow': '공급망 흐름도',
+        'menu_opt_risk': '집중도 리스크 진단',
+        'menu_opt_season': '가격 추세 & 계절성',
+        'menu_opt_churn': '신규·이탈 거래처 추적',
+        'menu_opt_pivot': '자유 피벗 빌더',
         'summary_table_no_data': '요약할 데이터가 없습니다.',
         'summary_table_header_price': '수입 단가(USD/KG)',
         'summary_table_max': '최대',
@@ -202,11 +208,153 @@ TEXTS = {
         'password_setup_empty': '비밀번호를 입력해주세요.',
         'password_setup_mismatch': '두 비밀번호가 일치하지 않습니다.',
         'password_setup_success': '비밀번호가 설정되었습니다!',
+
+        'p3_title': '🔀 공급망 흐름도 (Sankey)',
+        'p3_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
+        'p3_upload_caption': '※ 여러 공급사·수입사·원산지 정보가 포함된 TDS raw file을 업로드해주세요.',
+        'p3_left_axis_label': '왼쪽 축 — 구분',
+        'p3_left_entity_label': '왼쪽 축 — 대상 선택',
+        'p3_right_axis_label': '오른쪽 축 — 비교 기준',
+        'p3_axis_exporter': '공급사',
+        'p3_axis_importer': '수입사',
+        'p3_axis_origin': '원산지',
+        'p3_axis_country': '수출대상국',
+        'p3_axis_product': '품목',
+        'p3_axis_hint': '※ 원산지 = 물건이 생산된 나라, 수출대상국 = 물건이 팔려나가는 나라 (서로 다른 컬럼입니다)',
+        'p3_date_start': '시작일',
+        'p3_date_end': '종료일',
+        'p3_run_btn': '흐름도 그리기',
+        'p3_reset_btn': '새로운 흐름도 분석 시작 (다시하기)',
+        'p3_missing_cols_error': "필수 컬럼이 부족합니다: {cols}. 파일 내용을 확인해주세요.",
+        'p3_no_data_warning': '선택하신 조건에 해당하는 데이터가 없습니다. 대상/기간을 다시 확인해주세요.',
+        'p3_result_subheader': "'{left}' ({left_axis}) 기준 {right_axis}별 흐름 ({start} ~ {end})",
+        'p3_sankey_title': "'{left}' → {right_axis}별 물량 흐름",
+        'p3_table_subheader': '정렬된 상세 표',
+        'p3_col_category': '{right_axis}',
+        'p3_col_volume': '물량(KG)',
+        'p3_col_share': '비중',
+        'p3_col_avg_price': '평균 단가(USD/KG)',
+        'p3_others_note': '※ 상위 {n}개 외 나머지는 "기타"로 묶었습니다.',
+
+        'p4_title': '⚠️ 집중도 리스크 진단',
+        'p4_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
+        'p4_upload_caption': '※ 여러 공급사·수입사·원산지 정보가 포함된 TDS raw file을 업로드해주세요.',
+        'p4_axis_label': '기준',
+        'p4_axis_exporter': '공급사별',
+        'p4_axis_origin': '원산지별',
+        'p4_axis_product': '품목별',
+        'p4_scope_label': '범위',
+        'p4_scope_all': '전체',
+        'p4_scope_importer': '특정 수입사만',
+        'p4_scope_entity_label': '수입사 선택',
+        'p4_date_start': '시작일',
+        'p4_date_end': '종료일',
+        'p4_threshold_label': '위험 기준선',
+        'p4_run_btn': '진단 실행',
+        'p4_reset_btn': '새로운 진단 시작 (다시하기)',
+        'p4_missing_cols_error': "필수 컬럼이 부족합니다: {cols}. 파일 내용을 확인해주세요.",
+        'p4_no_data_warning': '선택하신 조건에 해당하는 데이터가 없습니다.',
+        'p4_kpi_top1': '1위 비중',
+        'p4_kpi_top3': '상위 3개 합산',
+        'p4_kpi_count': '총 거래처 수',
+        'p4_kpi_risk': '위험도',
+        'p4_risk_danger': '위험',
+        'p4_risk_caution': '주의',
+        'p4_risk_safe': '안전',
+        'p4_risk_reason_top1': '1위 비중 {v}%가 기준({t}%) 초과',
+        'p4_risk_reason_top3': '상위3개 합산 {v}%가 {t}% 초과',
+        'p4_risk_reason_ok': '기준선 이내',
+        'p4_bar_chart_title': '{axis} 비중 (점선 = 위험 기준선 {t}%)',
+        'p4_trend_chart_title': '1위 비중 월별 추이',
+        'p4_axis_share': '비중(%)',
+        'p4_col_name': '이름',
+        'p4_col_volume': '물량(KG)',
+        'p4_col_share': '비중',
+
+        'p5_title': '📈 가격 추세 & 계절성',
+        'p5_upload_label': '전체 시장 데이터를 업로드하세요',
+        'p5_upload_caption': '※ 하나 이상의 품목에 대한 시계열 데이터가 포함된 TDS raw file을 업로드해주세요.',
+        'p5_product_label': '품목 검색',
+        'p5_prevyear_label': '전년 동기 겹쳐보기',
+        'p5_breakdown_label': '비교 축',
+        'p5_breakdown_none': '전체 평균만',
+        'p5_breakdown_origin': '원산지별로 나눠보기',
+        'p5_breakdown_exporter': '공급사별로 나눠보기',
+        'p5_run_btn': '추세 그리기',
+        'p5_reset_btn': '새로운 가격 추세 분석 시작 (다시하기)',
+        'p5_missing_cols_error': "필수 컬럼이 부족합니다: {cols}. 파일 내용을 확인해주세요.",
+        'p5_no_data_warning': '선택하신 품목에 해당하는 데이터가 없습니다.',
+        'p5_kpi_current': '최근월 평균단가',
+        'p5_kpi_yoy': '전년 동월 대비',
+        'p5_kpi_frompeak': '연중 최고 대비 현재',
+        'p5_season_badge': '계절 고점: {months}',
+        'p5_no_season': '뚜렷한 계절 패턴 없음',
+        'p5_chart_title': "'{product}' 월별 평균 단가 추이",
+        'p5_axis_month': '연-월',
+        'p5_axis_price': '단가(USD/KG)',
+        'p5_legend_this_year': '선택 기간',
+        'p5_legend_prev_year': '전년 동기',
+
+        'p6_title': '🔀 신규·이탈 거래처 추적',
+        'p6_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
+        'p6_upload_caption': '※ 여러 공급사·수입사·원산지 정보가 포함된 TDS raw file을 업로드해주세요.',
+        'p6_axis_label': '추적 기준',
+        'p6_axis_exporter': '공급사',
+        'p6_axis_origin': '원산지',
+        'p6_axis_product': '품목',
+        'p6_axis_importer': '수입사',
+        'p6_period_a': '기간 A (비교 대상)',
+        'p6_period_b': '기간 B (기준)',
+        'p6_run_btn': '비교 실행',
+        'p6_reset_btn': '새로운 추적 시작 (다시하기)',
+        'p6_missing_cols_error': "필수 컬럼이 부족합니다: {cols}. 파일 내용을 확인해주세요.",
+        'p6_no_data_warning': '두 기간 중 하나 이상에 해당하는 데이터가 없습니다.',
+        'p6_kpi_new': '신규',
+        'p6_kpi_kept': '유지',
+        'p6_kpi_lost': '이탈',
+        'p6_new_header': '🟢 신규 거래처',
+        'p6_lost_header': '🔴 이탈 거래처',
+        'p6_no_new': '신규 항목 없음',
+        'p6_no_lost': '이탈 항목 없음',
+        'p6_col_name': '이름',
+        'p6_col_volume': '물량(KG)',
+
+        'p7_title': '🧩 자유 피벗 빌더',
+        'p7_upload_label': '분석할 데이터를 업로드하세요',
+        'p7_upload_caption': '※ TDS raw file을 업로드해주세요. (고객사/시장 데이터 모두 가능)',
+        'p7_row_label': '행 (기준)',
+        'p7_row_month': '월별',
+        'p7_row_exporter': '공급사별',
+        'p7_row_origin': '원산지별',
+        'p7_row_product': '품목별',
+        'p7_row_importer': '수입사별',
+        'p7_col_label': '열 (나눠보기)',
+        'p7_col_none': '없음',
+        'p7_col_origin': '원산지별',
+        'p7_col_exporter': '공급사별',
+        'p7_metric_label': '지표',
+        'p7_metric_volume': '물량 합계',
+        'p7_metric_price': '평균 단가',
+        'p7_metric_count': '거래 건수',
+        'p7_view_label': '보기',
+        'p7_view_bar': '막대',
+        'p7_view_line': '선',
+        'p7_view_table': '표만',
+        'p7_run_btn': '피벗 생성',
+        'p7_reset_btn': '새로운 피벗 시작 (다시하기)',
+        'p7_missing_cols_error': "필수 컬럼이 부족합니다: {cols}. 파일 내용을 확인해주세요.",
+        'p7_no_data_warning': '집계할 데이터가 없습니다.',
+        'p7_table_subheader': '데이터 표',
     },
     'en': {
         'app_menu_title': 'Menu',
         'menu_opt_customer': 'Customer Efficiency Analysis',
         'menu_opt_market': 'Market Competitiveness Analysis',
+        'menu_opt_flow': 'Supply Chain Flow',
+        'menu_opt_risk': 'Concentration Risk',
+        'menu_opt_season': 'Price Trend & Seasonality',
+        'menu_opt_churn': 'New/Lost Trading Partners',
+        'menu_opt_pivot': 'Free Pivot Builder',
         'summary_table_no_data': 'No data to summarize.',
         'summary_table_header_price': 'Import Unit Price (USD/KG)',
         'summary_table_max': 'Max',
@@ -385,6 +533,143 @@ TEXTS = {
         'password_setup_empty': 'Please enter a password.',
         'password_setup_mismatch': 'Passwords do not match.',
         'password_setup_success': 'Password has been set!',
+
+        'p3_title': '🔀 Supply Chain Flow (Sankey)',
+        'p3_upload_label': 'Upload the full market/supply chain data',
+        'p3_upload_caption': '※ Please upload a TDS raw file containing multiple suppliers, importers, and origins.',
+        'p3_left_axis_label': 'Left axis — Type',
+        'p3_left_entity_label': 'Left axis — Select entity',
+        'p3_right_axis_label': 'Right axis — Compare by',
+        'p3_axis_exporter': 'Supplier',
+        'p3_axis_importer': 'Importer',
+        'p3_axis_origin': 'Origin',
+        'p3_axis_country': 'Export destination',
+        'p3_axis_product': 'Product',
+        'p3_axis_hint': '※ Origin = country where the product was produced. Export destination = country it was sold to (different columns).',
+        'p3_date_start': 'Start date',
+        'p3_date_end': 'End date',
+        'p3_run_btn': 'Draw flow diagram',
+        'p3_reset_btn': 'Start New Flow Analysis (Reset)',
+        'p3_missing_cols_error': "Required columns are missing: {cols}. Please check the file contents.",
+        'p3_no_data_warning': 'No data matches the selected conditions. Please check the entity/date range.',
+        'p3_result_subheader': "Flow for '{left}' ({left_axis}) by {right_axis} ({start} to {end})",
+        'p3_sankey_title': "'{left}' → volume flow by {right_axis}",
+        'p3_table_subheader': 'Sorted detail table',
+        'p3_col_category': '{right_axis}',
+        'p3_col_volume': 'Volume (KG)',
+        'p3_col_share': 'Share',
+        'p3_col_avg_price': 'Avg Price (USD/KG)',
+        'p3_others_note': '※ Everything outside the top {n} is grouped as "Others".',
+
+        'p4_title': '⚠️ Concentration Risk Diagnosis',
+        'p4_upload_label': 'Upload the full market/supply chain data',
+        'p4_upload_caption': '※ Please upload a TDS raw file containing multiple suppliers, importers, and origins.',
+        'p4_axis_label': 'By',
+        'p4_axis_exporter': 'Supplier',
+        'p4_axis_origin': 'Origin',
+        'p4_axis_product': 'Product',
+        'p4_scope_label': 'Scope',
+        'p4_scope_all': 'All',
+        'p4_scope_importer': 'Specific importer only',
+        'p4_scope_entity_label': 'Select importer',
+        'p4_date_start': 'Start date',
+        'p4_date_end': 'End date',
+        'p4_threshold_label': 'Risk threshold',
+        'p4_run_btn': 'Run diagnosis',
+        'p4_reset_btn': 'Start New Diagnosis (Reset)',
+        'p4_missing_cols_error': "Required columns are missing: {cols}. Please check the file contents.",
+        'p4_no_data_warning': 'No data matches the selected conditions.',
+        'p4_kpi_top1': 'Top-1 share',
+        'p4_kpi_top3': 'Top-3 combined',
+        'p4_kpi_count': 'Total trading partners',
+        'p4_kpi_risk': 'Risk level',
+        'p4_risk_danger': 'High',
+        'p4_risk_caution': 'Caution',
+        'p4_risk_safe': 'Safe',
+        'p4_risk_reason_top1': 'Top-1 share {v}% exceeds threshold ({t}%)',
+        'p4_risk_reason_top3': 'Top-3 combined {v}% exceeds {t}%',
+        'p4_risk_reason_ok': 'Within threshold',
+        'p4_bar_chart_title': 'Share by {axis} (dashed = risk threshold {t}%)',
+        'p4_trend_chart_title': 'Monthly Trend of Top-1 Share',
+        'p4_axis_share': 'Share (%)',
+        'p4_col_name': 'Name',
+        'p4_col_volume': 'Volume (KG)',
+        'p4_col_share': 'Share',
+
+        'p5_title': '📈 Price Trend & Seasonality',
+        'p5_upload_label': 'Upload the full market data',
+        'p5_upload_caption': '※ Please upload a TDS raw file with time-series data for one or more products.',
+        'p5_product_label': 'Search product',
+        'p5_prevyear_label': 'Overlay previous year',
+        'p5_breakdown_label': 'Compare by',
+        'p5_breakdown_none': 'Overall average only',
+        'p5_breakdown_origin': 'Split by origin',
+        'p5_breakdown_exporter': 'Split by supplier',
+        'p5_run_btn': 'Draw trend',
+        'p5_reset_btn': 'Start New Price Trend Analysis (Reset)',
+        'p5_missing_cols_error': "Required columns are missing: {cols}. Please check the file contents.",
+        'p5_no_data_warning': 'No data found for the selected product.',
+        'p5_kpi_current': 'Latest month avg price',
+        'p5_kpi_yoy': 'YoY (same month)',
+        'p5_kpi_frompeak': 'Current vs. yearly peak',
+        'p5_season_badge': 'Seasonal peak: {months}',
+        'p5_no_season': 'No clear seasonal pattern',
+        'p5_chart_title': "'{product}' Monthly Average Price Trend",
+        'p5_axis_month': 'Year-Month',
+        'p5_axis_price': 'Unit Price (USD/KG)',
+        'p5_legend_this_year': 'Selected period',
+        'p5_legend_prev_year': 'Previous year',
+
+        'p6_title': '🔀 New/Lost Trading Partners',
+        'p6_upload_label': 'Upload the full market/supply chain data',
+        'p6_upload_caption': '※ Please upload a TDS raw file containing multiple suppliers, importers, and origins.',
+        'p6_axis_label': 'Track by',
+        'p6_axis_exporter': 'Supplier',
+        'p6_axis_origin': 'Origin',
+        'p6_axis_product': 'Product',
+        'p6_axis_importer': 'Importer',
+        'p6_period_a': 'Period A (comparison)',
+        'p6_period_b': 'Period B (baseline)',
+        'p6_run_btn': 'Compare',
+        'p6_reset_btn': 'Start New Tracking (Reset)',
+        'p6_missing_cols_error': "Required columns are missing: {cols}. Please check the file contents.",
+        'p6_no_data_warning': 'No data found for one or both periods.',
+        'p6_kpi_new': 'New',
+        'p6_kpi_kept': 'Kept',
+        'p6_kpi_lost': 'Lost',
+        'p6_new_header': '🟢 New Partners',
+        'p6_lost_header': '🔴 Lost Partners',
+        'p6_no_new': 'No new items',
+        'p6_no_lost': 'No lost items',
+        'p6_col_name': 'Name',
+        'p6_col_volume': 'Volume (KG)',
+
+        'p7_title': '🧩 Free Pivot Builder',
+        'p7_upload_label': 'Upload the data to analyze',
+        'p7_upload_caption': '※ Please upload a TDS raw file (customer or market data both work).',
+        'p7_row_label': 'Rows (group by)',
+        'p7_row_month': 'By month',
+        'p7_row_exporter': 'By supplier',
+        'p7_row_origin': 'By origin',
+        'p7_row_product': 'By product',
+        'p7_row_importer': 'By importer',
+        'p7_col_label': 'Columns (split by)',
+        'p7_col_none': 'None',
+        'p7_col_origin': 'By origin',
+        'p7_col_exporter': 'By supplier',
+        'p7_metric_label': 'Metric',
+        'p7_metric_volume': 'Total volume',
+        'p7_metric_price': 'Average price',
+        'p7_metric_count': 'Transaction count',
+        'p7_view_label': 'View',
+        'p7_view_bar': 'Bar',
+        'p7_view_line': 'Line',
+        'p7_view_table': 'Table only',
+        'p7_run_btn': 'Generate pivot',
+        'p7_reset_btn': 'Start New Pivot (Reset)',
+        'p7_missing_cols_error': "Required columns are missing: {cols}. Please check the file contents.",
+        'p7_no_data_warning': 'No data to aggregate.',
+        'p7_table_subheader': 'Data table',
     },
 }
 
@@ -552,6 +837,73 @@ def reset_market_analysis_states():
     # [추가] 원산지 필터 세션도 리셋
     if 'analysis_countries' in st.session_state:
         del st.session_state['analysis_countries']
+
+
+def reset_flow_states():
+    """공급망 흐름도(페이지 3) 상태만 초기화하는 함수"""
+    st.session_state.flow_raw_df = None
+    st.session_state.flow_headers = None
+    st.session_state.flow_result = None
+
+
+def reset_risk_states():
+    """집중도 리스크 진단(페이지 4) 상태만 초기화하는 함수"""
+    st.session_state.risk_raw_df = None
+    st.session_state.risk_headers = None
+    st.session_state.risk_result = None
+
+
+def reset_season_states():
+    """가격 추세 & 계절성(페이지 5) 상태만 초기화하는 함수"""
+    st.session_state.season_raw_df = None
+    st.session_state.season_headers = None
+    st.session_state.season_result = None
+
+
+def reset_churn_states():
+    """신규·이탈 거래처 추적(페이지 6) 상태만 초기화하는 함수"""
+    st.session_state.churn_raw_df = None
+    st.session_state.churn_headers = None
+    st.session_state.churn_result = None
+
+
+def reset_pivot_states():
+    """자유 피벗 빌더(페이지 7) 상태만 초기화하는 함수"""
+    st.session_state.pivot_raw_df = None
+    st.session_state.pivot_headers = None
+
+
+def read_uploaded_table(uploaded_file):
+    """CSV(인코딩 자동 판별)/XLSX 파일을 읽어 DataFrame으로 반환하는 공통 헬퍼.
+    실패 시 None을 반환한다 (호출부에서 오류 메시지 처리)."""
+    if uploaded_file is None:
+        return None
+    if uploaded_file.name.endswith('.csv'):
+        for enc in ('utf-8', 'euc-kr', 'cp949'):
+            try:
+                uploaded_file.seek(0)
+                return pd.read_csv(uploaded_file, encoding=enc)
+            except UnicodeDecodeError:
+                continue
+        return None
+    elif uploaded_file.name.endswith('.xlsx'):
+        uploaded_file.seek(0)
+        return pd.read_excel(uploaded_file)
+    return None
+
+
+def detect_standard_columns(headers):
+    """TDS raw file에서 공통적으로 쓰는 8개 컬럼을 표준 이름으로 찾아 dict로 반환."""
+    return {
+        'date': find_column(headers, ['Date', 'date']),
+        'importer': find_column(headers, ['Raw Importer Name', 'importer_name']),
+        'exporter': find_column(headers, ['Exporter', 'exporter']),
+        'origin': find_column(headers, ['Origin Country', 'origin_country']),
+        'export_country': find_column(headers, ['Export Country', 'export_country', '수출국']),
+        'product': find_column(headers, ['Reported Product Name', 'product_name']),
+        'volume': find_column(headers, ['Volume', 'volume']),
+        'price': find_column(headers, ['Unit Price', 'unit_price']),
+    }
 
 # --- [추가 4] 'find_column' 함수 정의 (NameError 해결) ---
 def find_column(columns, candidates):
@@ -790,6 +1142,31 @@ if 'market_analysis_done' not in st.session_state:
     st.session_state.top_competitors_list = []
     st.session_state.all_competitors_ranked = None
 
+if 'flow_raw_df' not in st.session_state:
+    st.session_state.flow_raw_df = None
+    st.session_state.flow_headers = None
+    st.session_state.flow_result = None
+
+if 'risk_raw_df' not in st.session_state:
+    st.session_state.risk_raw_df = None
+    st.session_state.risk_headers = None
+    st.session_state.risk_result = None
+
+if 'season_raw_df' not in st.session_state:
+    st.session_state.season_raw_df = None
+    st.session_state.season_headers = None
+    st.session_state.season_result = None
+
+if 'churn_raw_df' not in st.session_state:
+    st.session_state.churn_raw_df = None
+    st.session_state.churn_headers = None
+    st.session_state.churn_result = None
+
+if 'pivot_raw_df' not in st.session_state:
+    st.session_state.pivot_raw_df = None
+    st.session_state.pivot_headers = None
+    st.session_state.pivot_result = None
+
 # --- [비밀번호 기능] 비밀번호가 맞을 때까지 이 아래 앱 본문을 그리지 않음 ---
 if not check_password():
     st.stop()
@@ -807,8 +1184,8 @@ with st.sidebar:
     st.markdown("---")
     selected = option_menu(
         menu_title=T('app_menu_title'),
-        options=[T('menu_opt_customer'), T('menu_opt_market')],
-        icons=["person-bounding-box", "graph-up-arrow"],
+        options=[T('menu_opt_customer'), T('menu_opt_market'), T('menu_opt_flow'), T('menu_opt_risk'), T('menu_opt_season'), T('menu_opt_churn'), T('menu_opt_pivot')],
+        icons=["person-bounding-box", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "grid-3x3"],
         menu_icon="cast",
         default_index=0,
     )
@@ -1565,3 +1942,725 @@ if selected == T('menu_opt_market'):
         # --- [수정 28] 경고 메시지 변경 ---
         else:
             st.warning(T('p2_no_supply_chain_cols_warning'))
+
+# ==============================================================================
+# 페이지 3: 공급망 흐름도 (Sankey)
+# ==============================================================================
+if selected == T('menu_opt_flow'):
+    st.title(T('p3_title'))
+
+    if st.session_state.flow_result is not None:
+        st.button(T('p3_reset_btn'), on_click=reset_flow_states)
+
+    if st.session_state.flow_result is None:
+        flow_file = st.file_uploader(T('p3_upload_label'), type=['csv', 'xlsx'], key="flow_uploader")
+        st.caption(T('p3_upload_caption'))
+
+        if flow_file:
+            try:
+                raw_df = None
+                if flow_file.name.endswith('.csv'):
+                    try:
+                        flow_file.seek(0)
+                        raw_df = pd.read_csv(flow_file, encoding='utf-8')
+                    except UnicodeDecodeError:
+                        try:
+                            flow_file.seek(0)
+                            raw_df = pd.read_csv(flow_file, encoding='euc-kr')
+                        except UnicodeDecodeError:
+                            flow_file.seek(0)
+                            raw_df = pd.read_csv(flow_file, encoding='cp949')
+                elif flow_file.name.endswith('.xlsx'):
+                    flow_file.seek(0)
+                    raw_df = pd.read_excel(flow_file)
+
+                if raw_df is None:
+                    st.error(T('p1_file_read_fail_error'))
+                    st.stop()
+
+                st.session_state.flow_raw_df = raw_df
+                st.session_state.flow_headers = list(raw_df.columns)
+            except Exception as e:
+                st.error(T('p1_file_read_error_generic', e=e))
+                st.stop()
+
+        if st.session_state.flow_raw_df is not None:
+            headers = st.session_state.flow_headers
+            date_col = find_column(headers, ['Date', 'date'])
+            importer_col = find_column(headers, ['Raw Importer Name', 'importer_name'])
+            exporter_col = find_column(headers, ['Exporter', 'exporter'])
+            origin_col = find_column(headers, ['Origin Country', 'origin_country'])
+            export_col = find_column(headers, ['Export Country', 'export_country', '수출국'])
+            product_col = find_column(headers, ['Reported Product Name', 'product_name'])
+            volume_col = find_column(headers, ['Volume', 'volume'])
+            price_col = find_column(headers, ['Unit Price', 'unit_price'])
+
+            missing = []
+            if not date_col: missing.append('date')
+            if not importer_col: missing.append('importer_name')
+            if not exporter_col: missing.append('Exporter')
+            if not origin_col: missing.append('origin_country')
+            if not export_col: missing.append('export_country')
+            if not product_col: missing.append('product_name')
+            if not volume_col: missing.append('volume')
+            if not price_col: missing.append('unit_price')
+            if missing:
+                st.error(T('p3_missing_cols_error', cols=', '.join(missing)))
+                st.stop()
+
+            AXIS_COL_MAP = {
+                T('p3_axis_exporter'): exporter_col,
+                T('p3_axis_importer'): importer_col,
+                T('p3_axis_origin'): origin_col,
+            }
+            RIGHT_AXIS_COL_MAP = {
+                T('p3_axis_country'): export_col,
+                T('p3_axis_exporter'): exporter_col,
+                T('p3_axis_importer'): importer_col,
+                T('p3_axis_origin'): origin_col,
+                T('p3_axis_product'): product_col,
+            }
+
+            # 날짜 선택창 기본값은 '오늘'이 아니라 실제 업로드된 데이터의 최소~최대 날짜로 설정
+            # (기본값이 오늘로 남아있으면 사용자가 직접 날짜를 안 바꿨을 때 항상 '데이터 없음'이 뜨는 문제 방지)
+            _flow_parsed_dates = pd.to_datetime(st.session_state.flow_raw_df[date_col], errors='coerce').dropna()
+            if len(_flow_parsed_dates) > 0:
+                _flow_min_date = _flow_parsed_dates.min().date()
+                _flow_max_date = _flow_parsed_dates.max().date()
+            else:
+                _flow_min_date = datetime.date.today()
+                _flow_max_date = datetime.date.today()
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown(f"**{T('p3_left_axis_label')}**")
+                left_axis_label = st.selectbox(T('p3_left_axis_label'), options=list(AXIS_COL_MAP.keys()), label_visibility="collapsed", key="flow_left_axis")
+                left_col = AXIS_COL_MAP[left_axis_label]
+                left_entity_options = sorted(st.session_state.flow_raw_df[left_col].dropna().astype(str).unique())
+                left_entity = st.selectbox(T('p3_left_entity_label'), options=left_entity_options, key="flow_left_entity")
+            with col2:
+                st.markdown(f"**{T('p3_right_axis_label')}**")
+                right_axis_label = st.selectbox(T('p3_right_axis_label'), options=list(RIGHT_AXIS_COL_MAP.keys()), label_visibility="collapsed", key="flow_right_axis")
+                right_col = RIGHT_AXIS_COL_MAP[right_axis_label]
+            st.caption(T('p3_axis_hint'))
+
+            col3, col4 = st.columns(2)
+            with col3:
+                start_date = st.date_input(T('p3_date_start'), value=_flow_min_date, key="flow_start_date")
+            with col4:
+                end_date = st.date_input(T('p3_date_end'), value=_flow_max_date, key="flow_end_date")
+
+            if st.button(T('p3_run_btn')):
+                df = st.session_state.flow_raw_df.copy()
+                df['_date'] = pd.to_datetime(df[date_col], errors='coerce')
+                df['_volume'] = pd.to_numeric(df[volume_col], errors='coerce')
+                df['_price'] = pd.to_numeric(df[price_col], errors='coerce')
+                df = df.dropna(subset=['_date', '_volume', '_price', left_col, right_col])
+
+                mask = (
+                    (df['_date'] >= pd.to_datetime(start_date))
+                    & (df['_date'] <= pd.to_datetime(end_date))
+                    & (df[left_col].astype(str) == str(left_entity))
+                )
+                sub = df[mask]
+
+                if sub.empty:
+                    st.warning(T('p3_no_data_warning'))
+                else:
+                    grouped = sub.groupby(right_col).agg(volume=('_volume', 'sum'), avg_price=('_price', 'mean')).reset_index()
+                    grouped = grouped.sort_values('volume', ascending=False)
+
+                    TOP_N = 8
+                    truncated = len(grouped) > TOP_N
+                    if truncated:
+                        top = grouped.iloc[:TOP_N].copy()
+                        rest = grouped.iloc[TOP_N:]
+                        others_vol = rest['volume'].sum()
+                        others_price = (rest['volume'] * rest['avg_price']).sum() / others_vol if others_vol > 0 else 0
+                        others_row = pd.DataFrame([{right_col: T('p2_others_label'), 'volume': others_vol, 'avg_price': others_price}])
+                        grouped = pd.concat([top, others_row], ignore_index=True)
+
+                    st.session_state.flow_result = {
+                        'left_axis_label': left_axis_label,
+                        'left_entity': left_entity,
+                        'right_axis_label': right_axis_label,
+                        'grouped': grouped,
+                        'right_col': right_col,
+                        'start_date': start_date,
+                        'end_date': end_date,
+                        'top_n': TOP_N,
+                        'truncated': truncated,
+                    }
+                    st.rerun()
+
+    if st.session_state.flow_result is not None:
+        R = st.session_state.flow_result
+        grouped = R['grouped']
+        total_vol = grouped['volume'].sum()
+
+        st.subheader(T('p3_result_subheader', left=R['left_entity'], left_axis=R['left_axis_label'], right_axis=R['right_axis_label'], start=R['start_date'], end=R['end_date']))
+
+        labels = [R['left_entity']] + grouped[R['right_col']].astype(str).tolist()
+        n_targets = len(grouped)
+        source_indices = [0] * n_targets
+        target_indices = list(range(1, n_targets + 1))
+        values = grouped['volume'].tolist()
+
+        node_colors = ['#0d9488'] + ['#60a5fa'] * n_targets
+        link_colors = ['rgba(13, 148, 136, 0.35)'] * n_targets
+
+        fig = go.Figure(data=[go.Sankey(
+            node=dict(
+                pad=20, thickness=20,
+                line=dict(color='rgba(0,0,0,0.2)', width=0.5),
+                label=labels,
+                color=node_colors,
+            ),
+            link=dict(
+                source=source_indices,
+                target=target_indices,
+                value=values,
+                color=link_colors,
+            )
+        )])
+        fig.update_layout(
+            title=T('p3_sankey_title', left=R['left_entity'], right_axis=R['right_axis_label']),
+            font_size=13,
+            height=max(350, 60 * n_targets),
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+        if R.get('truncated'):
+            st.caption(T('p3_others_note', n=R['top_n']))
+
+        st.subheader(T('p3_table_subheader'))
+        category_col_label = T('p3_col_category', right_axis=R['right_axis_label'])
+        display_df = grouped.copy()
+        display_df['share'] = display_df['volume'] / total_vol
+        display_df = display_df.rename(columns={
+            R['right_col']: category_col_label,
+            'volume': T('p3_col_volume'),
+            'avg_price': T('p3_col_avg_price'),
+            'share': T('p3_col_share'),
+        })
+        display_df = display_df[[category_col_label, T('p3_col_volume'), T('p3_col_share'), T('p3_col_avg_price')]]
+        st.dataframe(display_df.style.format({
+            T('p3_col_volume'): '{:,.0f}',
+            T('p3_col_share'): '{:.1%}',
+            T('p3_col_avg_price'): '${:,.2f}',
+        }))
+
+# ==============================================================================
+# 페이지 4: 집중도 리스크 진단
+# ==============================================================================
+if selected == T('menu_opt_risk'):
+    st.title(T('p4_title'))
+
+    if st.session_state.risk_result is not None:
+        st.button(T('p4_reset_btn'), on_click=reset_risk_states)
+
+    if st.session_state.risk_result is None:
+        risk_file = st.file_uploader(T('p4_upload_label'), type=['csv', 'xlsx'], key="risk_uploader")
+        st.caption(T('p4_upload_caption'))
+
+        if risk_file:
+            raw_df = read_uploaded_table(risk_file)
+            if raw_df is None:
+                st.error(T('p1_file_read_fail_error'))
+                st.stop()
+            st.session_state.risk_raw_df = raw_df
+            st.session_state.risk_headers = list(raw_df.columns)
+
+        if st.session_state.risk_raw_df is not None:
+            headers = st.session_state.risk_headers
+            cols = detect_standard_columns(headers)
+            missing = [k for k in ['date', 'exporter', 'origin', 'product', 'volume'] if not cols[k]]
+            if missing:
+                st.error(T('p4_missing_cols_error', cols=', '.join(missing)))
+                st.stop()
+
+            AXIS_MAP = {
+                T('p4_axis_exporter'): cols['exporter'],
+                T('p4_axis_origin'): cols['origin'],
+                T('p4_axis_product'): cols['product'],
+            }
+
+            col1, col2 = st.columns(2)
+            with col1:
+                axis_label = st.selectbox(T('p4_axis_label'), options=list(AXIS_MAP.keys()), key="risk_axis")
+                axis_col = AXIS_MAP[axis_label]
+            with col2:
+                scope_label = st.selectbox(T('p4_scope_label'), options=[T('p4_scope_all'), T('p4_scope_importer')], key="risk_scope")
+
+            scope_entity = None
+            if scope_label == T('p4_scope_importer') and cols['importer']:
+                importer_options = sorted(st.session_state.risk_raw_df[cols['importer']].dropna().astype(str).unique())
+                scope_entity = st.selectbox(T('p4_scope_entity_label'), options=importer_options, key="risk_scope_entity")
+
+            _parsed_dates = pd.to_datetime(st.session_state.risk_raw_df[cols['date']], errors='coerce').dropna()
+            _min_date = _parsed_dates.min().date() if len(_parsed_dates) else datetime.date.today()
+            _max_date = _parsed_dates.max().date() if len(_parsed_dates) else datetime.date.today()
+
+            col3, col4 = st.columns(2)
+            with col3:
+                start_date = st.date_input(T('p4_date_start'), value=_min_date, key="risk_start_date")
+            with col4:
+                end_date = st.date_input(T('p4_date_end'), value=_max_date, key="risk_end_date")
+
+            threshold = st.slider(T('p4_threshold_label'), min_value=20, max_value=80, value=50, step=5, key="risk_threshold")
+
+            if st.button(T('p4_run_btn')):
+                df = st.session_state.risk_raw_df.copy()
+                df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
+                df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
+                df = df.dropna(subset=['_date', '_volume', axis_col])
+
+                mask = (df['_date'] >= pd.to_datetime(start_date)) & (df['_date'] <= pd.to_datetime(end_date))
+                if scope_entity and cols['importer']:
+                    mask &= (df[cols['importer']].astype(str) == str(scope_entity))
+                sub = df[mask]
+
+                if sub.empty:
+                    st.warning(T('p4_no_data_warning'))
+                else:
+                    grouped = sub.groupby(axis_col)['_volume'].sum().reset_index().rename(columns={axis_col: 'name', '_volume': 'volume'})
+                    grouped = grouped.sort_values('volume', ascending=False)
+                    total = grouped['volume'].sum()
+                    grouped['share'] = grouped['volume'] / total * 100
+
+                    sub_copy = sub.copy()
+                    sub_copy['_ym'] = sub_copy['_date'].dt.to_period('M').astype(str)
+                    monthly = sub_copy.groupby(['_ym', axis_col])['_volume'].sum().reset_index()
+                    monthly_total = sub_copy.groupby('_ym')['_volume'].sum().rename('total')
+                    monthly = monthly.merge(monthly_total, on='_ym')
+                    monthly['share'] = monthly['_volume'] / monthly['total'] * 100
+                    trend = monthly.sort_values(['_ym', 'share'], ascending=[True, False]).groupby('_ym').first().reset_index()
+                    trend = trend.sort_values('_ym')
+
+                    st.session_state.risk_result = {
+                        'axis_label': axis_label, 'grouped': grouped, 'total': total,
+                        'threshold': threshold, 'trend': trend,
+                    }
+                    st.rerun()
+
+    if st.session_state.risk_result is not None:
+        R = st.session_state.risk_result
+        grouped = R['grouped']
+        threshold = R['threshold']
+        top1 = grouped.iloc[0]
+        top3_share = grouped.iloc[:3]['share'].sum()
+
+        danger_top3 = min(95, threshold + 30)
+        caution_top1 = threshold * 0.6
+        caution_top3 = threshold + 10
+
+        if top1['share'] >= threshold or top3_share >= danger_top3:
+            risk_label = T('p4_risk_danger')
+            reason = T('p4_risk_reason_top1', v=round(top1['share'], 1), t=threshold) if top1['share'] >= threshold else T('p4_risk_reason_top3', v=round(top3_share, 1), t=round(danger_top3, 1))
+            risk_color = 'red'
+        elif top1['share'] >= caution_top1 or top3_share >= caution_top3:
+            risk_label = T('p4_risk_caution')
+            reason = T('p4_risk_reason_top1', v=round(top1['share'], 1), t=round(caution_top1, 1)) if top1['share'] >= caution_top1 else T('p4_risk_reason_top3', v=round(top3_share, 1), t=round(caution_top3, 1))
+            risk_color = 'orange'
+        else:
+            risk_label = T('p4_risk_safe')
+            reason = T('p4_risk_reason_ok')
+            risk_color = 'green'
+
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric(T('p4_kpi_top1'), f"{top1['share']:.1f}%", help=str(top1['name']))
+        c2.metric(T('p4_kpi_top3'), f"{top3_share:.1f}%")
+        c3.metric(T('p4_kpi_count'), f"{len(grouped)}")
+        with c4:
+            st.markdown(f"**{T('p4_kpi_risk')}**")
+            badge_bg = {'red': '#fdecec', 'orange': '#fff7e6', 'green': '#e9f9ee'}[risk_color]
+            badge_fg = {'red': '#b3261e', 'orange': '#92620b', 'green': '#0f7a3c'}[risk_color]
+            st.markdown(f"<span style='background:{badge_bg};color:{badge_fg};padding:4px 12px;border-radius:8px;font-weight:700;'>{risk_label}</span>", unsafe_allow_html=True)
+        st.caption(reason)
+
+        display_grouped = grouped.head(12)
+        bar_colors = ['#e11d48' if s >= threshold else '#0d9488' for s in display_grouped['share']]
+        fig = go.Figure()
+        fig.add_trace(go.Bar(y=display_grouped['name'], x=display_grouped['share'], orientation='h', marker_color=bar_colors))
+        fig.add_vline(x=threshold, line_dash='dash', line_color='#e11d48')
+        fig.update_layout(title=T('p4_bar_chart_title', axis=R['axis_label'], t=threshold), xaxis_title=T('p4_axis_share'), yaxis=dict(autorange='reversed'))
+        st.plotly_chart(fig, use_container_width=True)
+
+        if len(R['trend']) > 1:
+            fig2 = go.Figure()
+            fig2.add_trace(go.Scatter(x=R['trend']['_ym'], y=R['trend']['share'], mode='lines+markers', line=dict(color='#0d9488')))
+            fig2.update_layout(title=T('p4_trend_chart_title'), xaxis_title=T('axis_yearmonth'), yaxis_title=T('p4_axis_share'))
+            st.plotly_chart(fig2, use_container_width=True)
+
+        display_df = grouped.rename(columns={'name': T('p4_col_name'), 'volume': T('p4_col_volume'), 'share': T('p4_col_share')})
+        st.dataframe(display_df.style.format({T('p4_col_volume'): '{:,.0f}', T('p4_col_share'): '{:.1f}%'}))
+
+# ==============================================================================
+# 페이지 5: 가격 추세 & 계절성
+# ==============================================================================
+if selected == T('menu_opt_season'):
+    st.title(T('p5_title'))
+
+    if st.session_state.season_result is not None:
+        st.button(T('p5_reset_btn'), on_click=reset_season_states)
+
+    if st.session_state.season_result is None:
+        season_file = st.file_uploader(T('p5_upload_label'), type=['csv', 'xlsx'], key="season_uploader")
+        st.caption(T('p5_upload_caption'))
+
+        if season_file:
+            raw_df = read_uploaded_table(season_file)
+            if raw_df is None:
+                st.error(T('p1_file_read_fail_error'))
+                st.stop()
+            st.session_state.season_raw_df = raw_df
+            st.session_state.season_headers = list(raw_df.columns)
+
+        if st.session_state.season_raw_df is not None:
+            headers = st.session_state.season_headers
+            cols = detect_standard_columns(headers)
+            missing = [k for k in ['date', 'product', 'price'] if not cols[k]]
+            if missing:
+                st.error(T('p5_missing_cols_error', cols=', '.join(missing)))
+                st.stop()
+
+            product_options = sorted(st.session_state.season_raw_df[cols['product']].dropna().astype(str).unique())
+            product_name = st.selectbox(T('p5_product_label'), options=product_options, key="season_product")
+
+            col1, col2 = st.columns(2)
+            with col1:
+                show_prev_year = st.checkbox(T('p5_prevyear_label'), value=True, key="season_prevyear")
+            with col2:
+                breakdown_options = {T('p5_breakdown_none'): 'none'}
+                if cols['origin']:
+                    breakdown_options[T('p5_breakdown_origin')] = 'origin'
+                if cols['exporter']:
+                    breakdown_options[T('p5_breakdown_exporter')] = 'exporter'
+                breakdown_label = st.selectbox(T('p5_breakdown_label'), options=list(breakdown_options.keys()), key="season_breakdown")
+                breakdown = breakdown_options[breakdown_label]
+
+            if st.button(T('p5_run_btn')):
+                df = st.session_state.season_raw_df.copy()
+                df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
+                df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                df = df.dropna(subset=['_date', '_price', cols['product']])
+                sub = df[df[cols['product']].astype(str) == str(product_name)]
+
+                if sub.empty:
+                    st.warning(T('p5_no_data_warning'))
+                else:
+                    sub = sub.copy()
+                    sub['_ym'] = sub['_date'].dt.to_period('M')
+                    sub['_month'] = sub['_date'].dt.month
+                    sub['_year'] = sub['_date'].dt.year
+
+                    overall = sub.groupby('_ym')['_price'].mean().reset_index().sort_values('_ym')
+                    overall['_ym_str'] = overall['_ym'].astype(str)
+
+                    latest_year = sub['_year'].max()
+                    monthly_avg_by_month = sub[sub['_year'] == latest_year].groupby('_month')['_price'].mean()
+                    peak_months = []
+                    if len(monthly_avg_by_month) >= 3:
+                        overall_mean = monthly_avg_by_month.mean()
+                        peak_months = sorted(monthly_avg_by_month[monthly_avg_by_month > overall_mean * 1.05].index.tolist())
+
+                    breakdown_series = {}
+                    if breakdown != 'none':
+                        bcol = cols[breakdown]
+                        for name, g in sub.groupby(bcol):
+                            s = g.groupby('_ym')['_price'].mean().reset_index().sort_values('_ym')
+                            s['_ym_str'] = s['_ym'].astype(str)
+                            breakdown_series[str(name)] = s
+
+                    st.session_state.season_result = {
+                        'product_name': product_name, 'overall': overall,
+                        'show_prev_year': show_prev_year, 'breakdown': breakdown,
+                        'breakdown_series': breakdown_series, 'peak_months': peak_months,
+                    }
+                    st.rerun()
+
+    if st.session_state.season_result is not None:
+        R = st.session_state.season_result
+        overall = R['overall']
+
+        ym_to_price = dict(zip(overall['_ym'], overall['_price']))
+        current_ym = overall['_ym'].iloc[-1]
+        current_price = overall['_price'].iloc[-1]
+        peak_price = overall['_price'].max()
+        from_peak = (current_price - peak_price) / peak_price * 100
+
+        prev_ym = current_ym - 12
+        prev_price = ym_to_price.get(prev_ym)
+        yoy = (current_price - prev_price) / prev_price * 100 if prev_price else None
+
+        c1, c2, c3 = st.columns(3)
+        c1.metric(T('p5_kpi_current'), f"${current_price:.2f}")
+        c2.metric(T('p5_kpi_yoy'), f"{yoy:+.1f}%" if yoy is not None else "N/A")
+        c3.metric(T('p5_kpi_frompeak'), f"{from_peak:+.1f}%")
+
+        if R['peak_months']:
+            months_str = ', '.join([f"{m}월" if st.session_state.lang == 'ko' else f"Month {m}" for m in R['peak_months']])
+            st.info(T('p5_season_badge', months=months_str))
+        else:
+            st.caption(T('p5_no_season'))
+
+        fig = go.Figure()
+        if R['breakdown'] == 'none':
+            fig.add_trace(go.Scatter(x=overall['_ym_str'], y=overall['_price'], mode='lines+markers', name=T('p5_legend_this_year'), line=dict(color='#0d9488')))
+            if R['show_prev_year']:
+                prev_year_prices = [ym_to_price.get(ym - 12) for ym in overall['_ym']]
+                if any(v is not None for v in prev_year_prices):
+                    fig.add_trace(go.Scatter(x=overall['_ym_str'], y=prev_year_prices, mode='lines', name=T('p5_legend_prev_year'), line=dict(color='#94a3b8', dash='dash'), connectgaps=True))
+        else:
+            colors = ['#0d9488', '#e11d48', '#2563eb', '#f59e0b', '#a855f7']
+            for i, (name, s) in enumerate(R['breakdown_series'].items()):
+                fig.add_trace(go.Scatter(x=s['_ym_str'], y=s['_price'], mode='lines+markers', name=name, line=dict(color=colors[i % len(colors)])))
+
+        fig.update_layout(title=T('p5_chart_title', product=R['product_name']), xaxis_title=T('p5_axis_month'), yaxis_title=T('p5_axis_price'))
+        st.plotly_chart(fig, use_container_width=True)
+
+# ==============================================================================
+# 페이지 6: 신규·이탈 거래처 추적 (범용화)
+# ==============================================================================
+if selected == T('menu_opt_churn'):
+    st.title(T('p6_title'))
+
+    if st.session_state.churn_result is not None:
+        st.button(T('p6_reset_btn'), on_click=reset_churn_states)
+
+    if st.session_state.churn_result is None:
+        churn_file = st.file_uploader(T('p6_upload_label'), type=['csv', 'xlsx'], key="churn_uploader")
+        st.caption(T('p6_upload_caption'))
+
+        if churn_file:
+            raw_df = read_uploaded_table(churn_file)
+            if raw_df is None:
+                st.error(T('p1_file_read_fail_error'))
+                st.stop()
+            st.session_state.churn_raw_df = raw_df
+            st.session_state.churn_headers = list(raw_df.columns)
+
+        if st.session_state.churn_raw_df is not None:
+            headers = st.session_state.churn_headers
+            cols = detect_standard_columns(headers)
+            missing = [k for k in ['date', 'volume'] if not cols[k]]
+            if missing:
+                st.error(T('p6_missing_cols_error', cols=', '.join(missing)))
+                st.stop()
+
+            AXIS_MAP = {}
+            if cols['exporter']:
+                AXIS_MAP[T('p6_axis_exporter')] = cols['exporter']
+            if cols['origin']:
+                AXIS_MAP[T('p6_axis_origin')] = cols['origin']
+            if cols['product']:
+                AXIS_MAP[T('p6_axis_product')] = cols['product']
+            if cols['importer']:
+                AXIS_MAP[T('p6_axis_importer')] = cols['importer']
+
+            if not AXIS_MAP:
+                st.error(T('p6_missing_cols_error', cols='Exporter/origin_country/product_name/importer_name'))
+                st.stop()
+
+            axis_label = st.selectbox(T('p6_axis_label'), options=list(AXIS_MAP.keys()), key="churn_axis")
+            axis_col = AXIS_MAP[axis_label]
+
+            _parsed_dates = pd.to_datetime(st.session_state.churn_raw_df[cols['date']], errors='coerce').dropna()
+            _min_date = _parsed_dates.min().date() if len(_parsed_dates) else datetime.date.today()
+            _max_date = _parsed_dates.max().date() if len(_parsed_dates) else datetime.date.today()
+            _mid_date = _min_date + (_max_date - _min_date) / 2
+
+            st.markdown(f"**{T('p6_period_a')}**")
+            colA1, colA2 = st.columns(2)
+            with colA1:
+                a_start = st.date_input(T('p4_date_start'), value=_min_date, key="churn_a_start")
+            with colA2:
+                a_end = st.date_input(T('p4_date_end'), value=_mid_date, key="churn_a_end")
+
+            st.markdown(f"**{T('p6_period_b')}**")
+            colB1, colB2 = st.columns(2)
+            with colB1:
+                b_start = st.date_input(T('p4_date_start'), value=_mid_date, key="churn_b_start")
+            with colB2:
+                b_end = st.date_input(T('p4_date_end'), value=_max_date, key="churn_b_end")
+
+            if st.button(T('p6_run_btn')):
+                df = st.session_state.churn_raw_df.copy()
+                df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
+                df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
+                df = df.dropna(subset=['_date', '_volume', axis_col])
+
+                a_df = df[(df['_date'] >= pd.to_datetime(a_start)) & (df['_date'] <= pd.to_datetime(a_end))]
+                b_df = df[(df['_date'] >= pd.to_datetime(b_start)) & (df['_date'] <= pd.to_datetime(b_end))]
+
+                if a_df.empty or b_df.empty:
+                    st.warning(T('p6_no_data_warning'))
+                else:
+                    a_set = set(a_df[axis_col].astype(str).unique())
+                    b_set = set(b_df[axis_col].astype(str).unique())
+                    new_items = b_set - a_set
+                    lost_items = a_set - b_set
+                    kept_items = a_set & b_set
+
+                    b_vol = b_df.groupby(axis_col)['_volume'].sum()
+                    a_vol = a_df.groupby(axis_col)['_volume'].sum()
+
+                    new_list = sorted([(n, float(b_vol.get(n, 0))) for n in new_items], key=lambda x: -x[1])
+                    lost_list = sorted([(n, float(a_vol.get(n, 0))) for n in lost_items], key=lambda x: -x[1])
+
+                    st.session_state.churn_result = {
+                        'axis_label': axis_label, 'new_list': new_list, 'lost_list': lost_list,
+                        'kept_count': len(kept_items),
+                    }
+                    st.rerun()
+
+    if st.session_state.churn_result is not None:
+        R = st.session_state.churn_result
+        c1, c2, c3 = st.columns(3)
+        c1.metric(T('p6_kpi_new'), f"{len(R['new_list'])}")
+        c2.metric(T('p6_kpi_kept'), f"{R['kept_count']}")
+        c3.metric(T('p6_kpi_lost'), f"{len(R['lost_list'])}")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.subheader(T('p6_new_header'))
+            if R['new_list']:
+                new_df = pd.DataFrame(R['new_list'], columns=[T('p6_col_name'), T('p6_col_volume')])
+                st.dataframe(new_df.style.format({T('p6_col_volume'): '{:,.0f}'}))
+            else:
+                st.caption(T('p6_no_new'))
+        with col2:
+            st.subheader(T('p6_lost_header'))
+            if R['lost_list']:
+                lost_df = pd.DataFrame(R['lost_list'], columns=[T('p6_col_name'), T('p6_col_volume')])
+                st.dataframe(lost_df.style.format({T('p6_col_volume'): '{:,.0f}'}))
+            else:
+                st.caption(T('p6_no_lost'))
+
+# ==============================================================================
+# 페이지 7: 자유 피벗 빌더
+# ==============================================================================
+if selected == T('menu_opt_pivot'):
+    st.title(T('p7_title'))
+
+    if st.session_state.pivot_raw_df is None:
+        pivot_file = st.file_uploader(T('p7_upload_label'), type=['csv', 'xlsx'], key="pivot_uploader")
+        st.caption(T('p7_upload_caption'))
+        if pivot_file:
+            raw_df = read_uploaded_table(pivot_file)
+            if raw_df is None:
+                st.error(T('p1_file_read_fail_error'))
+                st.stop()
+            st.session_state.pivot_raw_df = raw_df
+            st.session_state.pivot_headers = list(raw_df.columns)
+            st.rerun()
+
+    if st.session_state.pivot_raw_df is not None:
+        st.button(T('p7_reset_btn'), on_click=reset_pivot_states)
+
+        headers = st.session_state.pivot_headers
+        cols = detect_standard_columns(headers)
+        missing = [k for k in ['date', 'volume', 'price'] if not cols[k]]
+        if missing:
+            st.error(T('p7_missing_cols_error', cols=', '.join(missing)))
+            st.stop()
+
+        ROW_MAP = {T('p7_row_month'): ('month', None)}
+        if cols['exporter']:
+            ROW_MAP[T('p7_row_exporter')] = ('col', cols['exporter'])
+        if cols['origin']:
+            ROW_MAP[T('p7_row_origin')] = ('col', cols['origin'])
+        if cols['product']:
+            ROW_MAP[T('p7_row_product')] = ('col', cols['product'])
+        if cols['importer']:
+            ROW_MAP[T('p7_row_importer')] = ('col', cols['importer'])
+
+        COL_MAP = {T('p7_col_none'): None}
+        if cols['origin']:
+            COL_MAP[T('p7_col_origin')] = cols['origin']
+        if cols['exporter']:
+            COL_MAP[T('p7_col_exporter')] = cols['exporter']
+
+        METRIC_MAP = {
+            T('p7_metric_volume'): 'volume',
+            T('p7_metric_price'): 'price',
+            T('p7_metric_count'): 'count',
+        }
+        VIEW_MAP = {T('p7_view_bar'): 'bar', T('p7_view_line'): 'line', T('p7_view_table'): 'table'}
+
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            row_label = st.selectbox(T('p7_row_label'), options=list(ROW_MAP.keys()), key="pivot_row")
+        with col2:
+            col_label = st.selectbox(T('p7_col_label'), options=list(COL_MAP.keys()), key="pivot_col")
+        with col3:
+            metric_label = st.selectbox(T('p7_metric_label'), options=list(METRIC_MAP.keys()), key="pivot_metric")
+        with col4:
+            view_label = st.selectbox(T('p7_view_label'), options=list(VIEW_MAP.keys()), key="pivot_view")
+
+        if st.button(T('p7_run_btn')):
+            df = st.session_state.pivot_raw_df.copy()
+            df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
+            df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
+            df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+
+            row_kind, row_col = ROW_MAP[row_label]
+            if row_kind == 'month':
+                df['_row'] = df['_date'].dt.to_period('M').astype(str)
+            else:
+                df['_row'] = df[row_col].astype(str)
+
+            group_col = COL_MAP[col_label]
+            if group_col:
+                df['_col'] = df[group_col].astype(str)
+                group_keys = ['_row', '_col']
+            else:
+                group_keys = ['_row']
+
+            df = df.dropna(subset=['_row', '_volume'])
+
+            metric = METRIC_MAP[metric_label]
+            if metric == 'volume':
+                agg = df.groupby(group_keys)['_volume'].sum().reset_index(name='_value')
+            elif metric == 'price':
+                agg = df.groupby(group_keys)['_price'].mean().reset_index(name='_value')
+            else:
+                agg = df.groupby(group_keys).size().reset_index(name='_value')
+
+            if agg.empty:
+                st.warning(T('p7_no_data_warning'))
+                st.session_state.pivot_result = None
+            else:
+                st.session_state.pivot_result = {
+                    'agg': agg, 'has_col': bool(group_col), 'row_label': row_label,
+                    'col_label': col_label, 'metric_label': metric_label, 'view': VIEW_MAP[view_label],
+                }
+
+        if st.session_state.get('pivot_result'):
+            R = st.session_state.pivot_result
+            agg = R['agg']
+
+            if R['view'] != 'table':
+                fig = go.Figure()
+                if R['has_col']:
+                    for name, g in agg.groupby('_col'):
+                        g = g.sort_values('_row')
+                        if R['view'] == 'bar':
+                            fig.add_trace(go.Bar(x=g['_row'], y=g['_value'], name=name))
+                        else:
+                            fig.add_trace(go.Scatter(x=g['_row'], y=g['_value'], mode='lines+markers', name=name))
+                else:
+                    g = agg.sort_values('_row')
+                    if R['view'] == 'bar':
+                        fig.add_trace(go.Bar(x=g['_row'], y=g['_value'], marker_color='#0d9488'))
+                    else:
+                        fig.add_trace(go.Scatter(x=g['_row'], y=g['_value'], mode='lines+markers', line=dict(color='#0d9488')))
+                fig.update_layout(yaxis_title=R['metric_label'], barmode='group')
+                st.plotly_chart(fig, use_container_width=True)
+
+            st.subheader(T('p7_table_subheader'))
+            if R['has_col']:
+                pivot_table = agg.pivot(index='_row', columns='_col', values='_value')
+            else:
+                pivot_table = agg.set_index('_row')[['_value']].rename(columns={'_value': R['metric_label']})
+            st.dataframe(pivot_table)
