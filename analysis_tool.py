@@ -296,6 +296,35 @@ TEXTS = {
         'p8_dim_product': 'Reported Product Name',
         'p8_dim_importer': 'Importer',
         'p8_dim_origin': 'Origin Country',
+        'p8_report_title': '수입 신규사업 스코어링 리포트',
+        'p8_report_subtitle': 'SOURCING OPPORTUNITY SCORER',
+        'p8_report_meta': '분석기간 {start} ~ {end} · 전년 동기({ly_start}~{ly_end}) 대비 · 윈도우 {months} · 발행 {today}',
+        'p8_report_insights_header': '◆ 핵심 인사이트',
+        'p8_report_data_summary': '분석 데이터: 거래 {n_tx}건 · 기간 {span} · 수입사 {n_imp}곳 · 품목 {n_prod}종 · 원산지 {n_origin}개국',
+        'p8_report_top10_header': '★ 추천 TOP 10 (진입매력도 점수 통합순위)',
+        'p8_report_top10_sub': '기존 급상승 품목과 신규 진입 품목을 하나의 점수(성장률·규모·가격추세·집중도 종합)로 통합 정렬했습니다.',
+        'p8_report_section_a_header': 'A. 급상승 기존 품목 상세 (상위 {n})',
+        'p8_report_section_a_sub': '작년에도 수입되던 품목 중 물량이 늘어난 항목, 점수순.',
+        'p8_report_section_b_header': 'B. 신규 진입 품목 상세 (상위 {n})',
+        'p8_report_section_b_sub': '과거에는 없다가 최근 처음 등장한 항목(최소 선적·물량 하한 적용), 점수순.',
+        'p8_report_footer': '데이터: 업로드된 거래내역. 최근 기간 합계를 전년 동기 같은 기간과 비교(YoY)했습니다. 신규는 과거 전체 기간에 없다가 최근 등장한 항목 기준입니다. 진입매력도 점수는 성장률·물량규모·(가능시)단가추세·수입사 집중도를 정규화해 합산한 자체 지표이며, 저베이스 반등·단일선적 편중·표기변형 의심 항목은 감점됩니다. 관세율·수입규제·물류비·계약조건 등은 반영하지 않으므로 1차 스크리닝 용도로만 사용하고, 최종 판단 전 사람의 검수를 거치시기 바랍니다.',
+        'p8_ins_total': '최근 {month_label} 총 수입은 전년 동기 대비 {sign}{pct}% ({ly} → {rec}).',
+        'p8_ins_top_candidate': '진입매력도 최고 후보: {name} ({type}, 점수 {score}).',
+        'p8_ins_top_growth': '성장률 최고: {name} — {sign}{pct}%.',
+        'p8_ins_top_new': '신규 진입 주도: {name} ({vol}{origin_part}).',
+        'p8_ins_top_new_origin_part': ', 주력 수입국 {origin}',
+        'p8_ins_price_up': '단가도 함께 오른 품목: {name} — 단가 {sign}{pct}%.',
+        'p8_ins_fit': '적합도 반영 결과 우선 타깃(성장·적합 모두 상위) {n}건 도출{rep_part}.',
+        'p8_ins_fit_rep_part': ' — 대표: {name} (적합도 {fit})',
+        'p8_detail_a_narrative': '전년 대비 {sign}{pct}% ({ly}→{rec}), 점유율 {share}%.{tags}',
+        'p8_detail_big_tag': ' 대형 물량',
+        'p8_detail_lowbase_tag': ' 저베이스',
+        'p8_detail_b_narrative': '{tag} 최근 {vol} · 선적 {ship}회 · 주수입사 {imp} {share}%.{suspect}',
+        'p8_detail_new_tag': '신규',
+        'p8_detail_suspect_tag': ' 표기변형 의심',
+        'p8_generate_report_btn': '📊 리포트 PDF 생성 (상세)',
+        'p8_download_report_btn': '📥 리포트 PDF 다운로드',
+        'p8_cat_all': '전체 품목',
 
         'p3_title': '🔀 공급망 흐름도 (Sankey)',
         'p3_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
@@ -767,6 +796,35 @@ TEXTS = {
         'p8_dim_product': 'Reported Product Name',
         'p8_dim_importer': 'Importer',
         'p8_dim_origin': 'Origin Country',
+        'p8_report_title': 'Import New-Business Scoring Report',
+        'p8_report_subtitle': 'SOURCING OPPORTUNITY SCORER',
+        'p8_report_meta': 'Period {start} ~ {end} · vs. same period last year ({ly_start}~{ly_end}) · Window {months} · Published {today}',
+        'p8_report_insights_header': '◆ Key Insights',
+        'p8_report_data_summary': 'Data analyzed: {n_tx} transactions · {span} · {n_imp} importers · {n_prod} products · {n_origin} origin countries',
+        'p8_report_top10_header': '★ Top 10 Recommendations (Combined Opportunity Score)',
+        'p8_report_top10_sub': 'Surging existing items and new entrants ranked together on one score (growth, size, price trend, concentration).',
+        'p8_report_section_a_header': 'A. Surging Existing Items — Detail (Top {n})',
+        'p8_report_section_a_sub': 'Items imported last year too, with growing volume, ranked by score.',
+        'p8_report_section_b_header': 'B. New Entrant Items — Detail (Top {n})',
+        'p8_report_section_b_sub': 'Items absent in the entire prior history but recently appearing (min. shipment/volume applied), ranked by score.',
+        'p8_report_footer': 'Data: uploaded transaction records. Recent-period totals compared to the same period last year (YoY). "New" means absent from the entire prior history but appearing recently. The opportunity score is a proprietary normalized combination of growth rate, volume, (where available) price trend, and importer concentration; low-base rebounds, single-shipment skew, and possible re-labeling are penalized. Tariffs, import regulations, logistics costs, and contract terms are not reflected — use this for initial screening only, and have a person review before final decisions.',
+        'p8_ins_total': 'Total imports over the last {month_label} were {sign}{pct}% vs. the same period last year ({ly} → {rec}).',
+        'p8_ins_top_candidate': 'Top opportunity candidate: {name} ({type}, score {score}).',
+        'p8_ins_top_growth': 'Highest growth: {name} — {sign}{pct}%.',
+        'p8_ins_top_new': 'Leading new entrant: {name} ({vol}{origin_part}).',
+        'p8_ins_top_new_origin_part': ', primarily from {origin}',
+        'p8_ins_price_up': 'Price also rose for: {name} — price {sign}{pct}%.',
+        'p8_ins_fit': 'With fit criteria applied, {n} "Priority Target" (both high growth and high fit) items were found{rep_part}.',
+        'p8_ins_fit_rep_part': ' — top example: {name} (fit {fit})',
+        'p8_detail_a_narrative': '{sign}{pct}% vs. last year ({ly}→{rec}), share {share}%.{tags}',
+        'p8_detail_big_tag': ' Large volume',
+        'p8_detail_lowbase_tag': ' Low base',
+        'p8_detail_b_narrative': '{tag} Recent {vol} · {ship} shipments · top importer {imp} {share}%.{suspect}',
+        'p8_detail_new_tag': 'New',
+        'p8_detail_suspect_tag': ' Possible re-labeling',
+        'p8_generate_report_btn': '📊 Generate Detailed Report PDF',
+        'p8_download_report_btn': '📥 Download Report PDF',
+        'p8_cat_all': 'All items',
 
         'p3_title': '🔀 Supply Chain Flow (Sankey)',
         'p3_upload_label': 'Upload the full market/supply chain data',
@@ -1596,13 +1654,23 @@ def compute_scorer(df, dim_col, months, floor, minship, new_key_col, preset, fit
     return A, B, S, meta
 
 
+def _p8_fmt_pct(v):
+    """비정상적으로 극단적인 %(작년 물량이 0에 가까울 때 수학적으로 폭발하는 값)를
+    보기 좋게 상한선을 씌워 표시한다. 실제 값이 아니라 표시용 캡이며, 이런 경우는
+    '저베이스 반등' 플래그로 별도 표시되므로 근거 문장에서는 신뢰도를 과장하지 않는다."""
+    if v is None or pd.isna(v):
+        return 'N/A'
+    if abs(v) >= 999:
+        return f"{'+' if v >= 0 else '-'}999%+"
+    sign = '+' if v >= 0 else ''
+    return f"{sign}{v:.0f}%"
+
+
 def _p8_reason_a(r, dim_is_importer):
     parts = []
-    sign = '+' if r['yoy'] >= 0 else ''
-    parts.append(f"{T('p8_label_growth')} {sign}{r['yoy']:.0f}%")
+    parts.append(f"{T('p8_label_growth')} {_p8_fmt_pct(r['yoy'])}")
     if r.get('cagr') is not None and not pd.isna(r.get('cagr')):
-        sign2 = '+' if r['cagr'] >= 0 else ''
-        parts.append(f"{T('p8_label_cagr')} {sign2}{r['cagr']:.0f}%")
+        parts.append(f"{T('p8_label_cagr')} {_p8_fmt_pct(r['cagr'])}")
     parts.append(f"{T('p8_label_share')} {r['share']:.1f}%")
     if r.get('imp_delta') is not None and r['imp_delta'] != 0:
         sign3 = '+' if r['imp_delta'] >= 0 else ''
@@ -1706,6 +1774,23 @@ def _find_korean_font_path():
     return None
 
 
+def _pdf_table_col_widths(rows_as_str, total_width, min_ratio=0.05, max_ratio=0.32):
+    """표 각 컬럼의 폭을, 그 컬럼에 실제로 들어가는 글자 수 비례로 배분한다.
+    (min/max 클램프를 걸어서 어떤 컬럼은 안 보일 만큼 좁아지거나, 다른 컬럼을 다 밀어낼 만큼
+    넓어지는 걸 방지 — 긴 '근거' 같은 텍스트 컬럼은 대신 뒤에서 Paragraph로 줄바꿈 처리한다.)"""
+    ncols = len(rows_as_str[0])
+    max_lens = []
+    for c in range(ncols):
+        col_vals = [row[c] for row in rows_as_str]
+        max_lens.append(max((len(v) for v in col_vals), default=1) or 1)
+    total_len = sum(max_lens) or 1
+    raw = [total_width * (l / total_len) for l in max_lens]
+    min_w, max_w = total_width * min_ratio, total_width * max_ratio
+    clamped = [max(min_w, min(max_w, w)) for w in raw]
+    scale = total_width / sum(clamped)
+    return [w * scale for w in clamped]
+
+
 def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
     """제목 + KPI 텍스트 + Plotly 차트(이미지로 변환) + 표를 하나의 PDF로 조립해 바이트로 반환.
     reportlab + kaleido 필요."""
@@ -1747,20 +1832,298 @@ def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
     if df_table is not None and not df_table.empty:
         if table_title:
             story.append(Paragraph(table_title, styles['Heading3']))
+
         display_table = df_table.copy()
         for c in display_table.columns:
             display_table[c] = display_table[c].astype(str)
-        data = [list(display_table.columns)] + display_table.values.tolist()
-        t = Table(data, repeatRows=1)
+
+        header_style = styles['Normal'].clone('PdfTableHeader')
+        header_style.textColor = colors.white
+        header_style.fontSize = 7.5
+        header_style.leading = 9.5
+        cell_style = styles['Normal'].clone('PdfTableCell')
+        cell_style.fontSize = 7.5
+        cell_style.leading = 9.5
+
+        headers = [str(c) for c in display_table.columns]
+        rows_as_str = [headers] + display_table.values.tolist()
+        total_width = doc.width  # 페이지 여백을 뺀 실제 사용 가능 폭
+        col_widths = _pdf_table_col_widths(rows_as_str, total_width)
+
+        data = [[Paragraph(h, header_style) for h in headers]]
+        for row in display_table.values.tolist():
+            data.append([Paragraph(v, cell_style) for v in row])
+
+        t = Table(data, colWidths=col_widths, repeatRows=1)
         t.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d9488')),
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
             ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
-            ('FONTSIZE', (0, 0), (-1, -1), 7.5),
-            ('FONTNAME', (0, 0), (-1, -1), font_name),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
         ]))
         story.append(t)
+
+    doc.build(story)
+    buf.seek(0)
+    return buf.getvalue()
+
+
+# ============================================================
+# 신규사업 스코어러 전용 — "리포트" PDF (원본 buildReport() 100% 이식)
+# 범용 build_pdf_report()보다 훨씬 상세한, 보고용 리포트 포맷
+# ============================================================
+def _p8_ton(v):
+    if v is None or pd.isna(v):
+        return '-'
+    return f"{v / 1000:,.1f}t"
+
+
+def _p8_split_signed_pct(v, cap=999):
+    """부호와 숫자를 분리해서 반환 (극단치는 상한선 캡). 템플릿의 {sign}{pct}%에 그대로 끼워 넣는다."""
+    if v is None or pd.isna(v):
+        return '', 'N/A'
+    if abs(v) >= cap:
+        return ('+' if v >= 0 else '-'), f'{cap}+'
+    return ('+' if v >= 0 else ''), f'{v:.0f}'
+
+
+def _p8_build_insights(A, B, S, meta):
+    lang = st.session_state.lang
+    ins = []
+    tot_yoy = ((meta['tot_rec'] - meta['tot_ly']) / meta['tot_ly'] * 100) if meta['tot_ly'] > 0 else 0
+    months = meta['months']
+    if months >= 12 and months % 12 == 0:
+        yrs = months // 12
+        month_label = f"{yrs}년" if lang == 'ko' else f"{yrs} year(s)"
+    else:
+        month_label = f"{months}개월" if lang == 'ko' else f"{months} months"
+    sign, pct = _p8_split_signed_pct(tot_yoy)
+    ins.append(T('p8_ins_total', month_label=month_label, sign=sign, pct=pct, ly=_p8_ton(meta['tot_ly']), rec=_p8_ton(meta['tot_rec'])))
+
+    if S:
+        top = S[0]
+        type_label = T('p8_type_existing') if top['type'] == 'existing' else T('p8_type_new')
+        ins.append(T('p8_ins_top_candidate', name=top['name'], type=type_label, score=top['score']))
+
+    if not A.empty:
+        pos_a = A[A['yoy'] > 0]
+        if not pos_a.empty:
+            top_a = pos_a.loc[pos_a['yoy'].idxmax()]
+            sign2, pct2 = _p8_split_signed_pct(top_a['yoy'])
+            ins.append(T('p8_ins_top_growth', name=top_a['display_name'], sign=sign2, pct=pct2))
+
+    if not B.empty:
+        top_b = B.iloc[0]
+        origin_part = T('p8_ins_top_new_origin_part', origin=top_b['origin']) if top_b.get('origin') else ''
+        ins.append(T('p8_ins_top_new', name=top_b['display_name'], vol=_p8_ton(top_b['vol']), origin_part=origin_part))
+
+    if meta.get('has_price') and not A.empty and 'price_yoy' in A.columns:
+        priced = A.dropna(subset=['price_yoy'])
+        if not priced.empty:
+            top_p = priced.loc[priced['price_yoy'].idxmax()]
+            sign3, pct3 = _p8_split_signed_pct(top_p['price_yoy'])
+            ins.append(T('p8_ins_price_up', name=top_p['display_name'], sign=sign3, pct=pct3))
+
+    if meta.get('has_ctx'):
+        prio_a = A[A.get('quadrant', pd.Series(dtype=object)) == T('p8_quad_priority')] if not A.empty and 'quadrant' in A.columns else pd.DataFrame()
+        prio_b = B[B.get('quadrant', pd.Series(dtype=object)) == T('p8_quad_priority')] if not B.empty and 'quadrant' in B.columns else pd.DataFrame()
+        prio_count = len(prio_a) + len(prio_b)
+        rep_part = ''
+        combined_prio = pd.concat([prio_a, prio_b]) if (not prio_a.empty or not prio_b.empty) else pd.DataFrame()
+        if not combined_prio.empty:
+            best = combined_prio.loc[combined_prio['fit_score'].fillna(0).idxmax()]
+            rep_part = T('p8_ins_fit_rep_part', name=best['display_name'], fit=best['fit_score'])
+        ins.append(T('p8_ins_fit', n=prio_count, rep_part=rep_part))
+
+    return ins
+
+
+def build_scorer_report_pdf(A, B, S, meta, dim_label):
+    """신규사업 스코어러 전용 상세 리포트 PDF — 핵심 인사이트, TOP10, 품목별 서술형 상세까지 포함."""
+    import io
+    import datetime as _dt
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.units import mm
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as RLImage, KeepTogether
+    from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.lib import colors
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+
+    lang = st.session_state.lang
+    buf = io.BytesIO()
+    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=15 * mm, rightMargin=15 * mm)
+    styles = getSampleStyleSheet()
+
+    font_name = 'Helvetica'
+    try:
+        found_path = _find_korean_font_path()
+        if found_path:
+            pdfmetrics.registerFont(TTFont('KoreanFont', found_path))
+            font_name = 'KoreanFont'
+    except Exception:
+        pass
+    for s in styles.byName.values():
+        s.fontName = font_name
+
+    normal = styles['Normal']
+    normal.fontSize = 9
+    normal.leading = 13
+    small = normal.clone('Small')
+    small.fontSize = 7.5
+    small.leading = 10
+    small.textColor = colors.HexColor('#5c554a')
+    header_cell = normal.clone('HeaderCell')
+    header_cell.fontSize = 7.5
+    header_cell.textColor = colors.white
+    body_cell = normal.clone('BodyCell')
+    body_cell.fontSize = 7.5
+    body_cell.leading = 10
+    narrative_cell = normal.clone('NarrativeCell')
+    narrative_cell.fontSize = 7.5
+    narrative_cell.leading = 10
+    narrative_cell.textColor = colors.HexColor('#5c554a')
+
+    story = [Paragraph(T('p8_report_subtitle'), small), Paragraph(T('p8_report_title'), styles['Title'])]
+    today = _dt.date.today().isoformat()
+    months = meta['months']
+    month_label = f"{months}개월" if lang == 'ko' else f"{months} months"
+    story.append(Paragraph(T('p8_report_meta',
+        start=meta['rec_start'].strftime('%Y-%m'), end=meta['latest'].strftime('%Y-%m'),
+        ly_start=meta['ly_start'].strftime('%Y-%m'), ly_end=meta['ly_end'].strftime('%Y-%m'),
+        months=month_label, today=today), small))
+    story.append(Spacer(1, 10))
+
+    # KPI
+    tot_yoy = ((meta['tot_rec'] - meta['tot_ly']) / meta['tot_ly'] * 100) if meta['tot_ly'] > 0 else 0
+    a_growing = A[A['yoy'] > 0] if not A.empty else A
+    kpi_data = [
+        [Paragraph(T('p8_kpi_total_yoy'), body_cell), Paragraph(T('p8_kpi_growing'), body_cell), Paragraph(T('p8_kpi_new'), body_cell)],
+        [Paragraph(f"{tot_yoy:+.0f}%", styles['Heading2']), Paragraph(str(len(a_growing)), styles['Heading2']), Paragraph(str(len(B)), styles['Heading2'])],
+    ]
+    kpi_t = Table(kpi_data, colWidths=[doc.width / 3] * 3)
+    kpi_t.setStyle(TableStyle([
+        ('BOX', (0, 0), (-1, -1), 0.5, colors.HexColor('#ddd4c4')),
+        ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#ddd4c4')),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#faf7f0')),
+        ('TOPPADDING', (0, 0), (-1, -1), 6), ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+    ]))
+    story.append(kpi_t)
+    story.append(Spacer(1, 10))
+
+    # 핵심 인사이트
+    insights = _p8_build_insights(A, B, S, meta)
+    ins_block = [Paragraph(T('p8_report_insights_header'), styles['Heading3'])]
+    for line in insights:
+        ins_block.append(Paragraph('• ' + line, normal))
+    story.append(KeepTogether(ins_block))
+    story.append(Spacer(1, 6))
+
+    story.append(Paragraph(T('p8_report_data_summary',
+        n_tx=f"{meta.get('n_tx', 0):,}", span=meta.get('span_str', ''),
+        n_imp=f"{meta.get('n_imp', 0):,}", n_prod=f"{meta.get('n_prod', 0):,}", n_origin=f"{meta.get('n_origin', 0):,}"), small))
+    story.append(Spacer(1, 10))
+
+    # TOP 10
+    story.append(Paragraph(T('p8_report_top10_header'), styles['Heading2']))
+    story.append(Paragraph(T('p8_report_top10_sub'), small))
+    S_top = S[:10]
+    has_ctx = meta.get('has_ctx')
+    if S_top:
+        names = [s['name'] for s in S_top][::-1]
+        scores = [s['score'] for s in S_top][::-1]
+        bar_colors = ['#e11d48' if s['type'] == 'new' else '#0d9488' for s in S_top][::-1]
+        fig = go.Figure()
+        fig.add_trace(go.Bar(y=names, x=scores, orientation='h', marker_color=bar_colors))
+        chart_h = max(220, 32 * len(S_top))
+        fig.update_layout(margin=dict(l=160, r=30, t=10, b=30), height=chart_h, font=dict(size=13))
+        img_bytes = fig_to_png_bytes(fig, width=800, height=chart_h)
+        if img_bytes:
+            story.append(RLImage(io.BytesIO(img_bytes), width=170 * mm, height=170 * mm * chart_h / 800))
+            story.append(Spacer(1, 4))
+
+        headers = ['#', T('p8_col_type'), T('p8_col_item'), T('p8_col_score')]
+        if has_ctx:
+            headers += [T('p8_col_fit'), T('p8_col_quadrant')]
+        headers += [T('p8_col_reason')]
+        rows_raw = [headers]
+        for i, s in enumerate(S_top):
+            r = s['row']
+            reason = _p8_reason_a(r, r.get('dim_is_importer', False)) if s['type'] == 'existing' else _p8_reason_b(r)
+            row = [str(i + 1), T('p8_type_existing') if s['type'] == 'existing' else T('p8_type_new'), s['name'], str(s['score'])]
+            if has_ctx:
+                row += [str(r['fit_score']) if r.get('fit_score') is not None else '-', r.get('quadrant', '-')]
+            row += [reason]
+            rows_raw.append(row)
+        col_widths = _pdf_table_col_widths(rows_raw, doc.width)
+        data = [[Paragraph(h, header_cell) for h in rows_raw[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw[1:]]
+        t = Table(data, colWidths=col_widths, repeatRows=1)
+        t.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#17140f')),
+            ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
+        ]))
+        story.append(t)
+    story.append(Spacer(1, 14))
+
+    # Section A 상세
+    if not a_growing.empty:
+        a_top = a_growing.head(15)
+        story.append(Paragraph(T('p8_report_section_a_header', n=len(a_top)), styles['Heading2']))
+        story.append(Paragraph(T('p8_report_section_a_sub'), small))
+        headers_a = ['#', T('p8_col_item'), T('p8_col_score'), T('p8_col_yoy'), T('p8_col_rec_vol'), T('p8_col_ly_vol')]
+        rows_raw_a = [headers_a]
+        narratives_a = []
+        for i, (_, r) in enumerate(a_top.iterrows()):
+            rows_raw_a.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_fmt_pct(r['yoy']), _p8_ton(r['rec_vol']), _p8_ton(r['ly_vol'])])
+            big = bool(meta['tot_rec']) and r['rec_vol'] >= meta['tot_rec'] * 0.1
+            tags = (T('p8_detail_big_tag') if big else '') + (T('p8_detail_lowbase_tag') if r.get('low_base') else '')
+            sign, pct = _p8_split_signed_pct(r['yoy'])
+            narratives_a.append(T('p8_detail_a_narrative', sign=sign, pct=pct, ly=_p8_ton(r['ly_vol']), rec=_p8_ton(r['rec_vol']), share=f"{r['share']:.1f}", tags=tags))
+        col_widths_a = _pdf_table_col_widths(rows_raw_a, doc.width)
+        data_a = [[Paragraph(h, header_cell) for h in rows_raw_a[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw_a[1:]]
+        t_a = Table(data_a, colWidths=col_widths_a, repeatRows=1)
+        t_a.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d9488')),
+            ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
+        ]))
+        story.append(t_a)
+        for nline in narratives_a:
+            story.append(Paragraph(nline, narrative_cell))
+        story.append(Spacer(1, 14))
+
+    # Section B 상세
+    if not B.empty:
+        b_top = B.head(15)
+        story.append(Paragraph(T('p8_report_section_b_header', n=len(b_top)), styles['Heading2']))
+        story.append(Paragraph(T('p8_report_section_b_sub'), small))
+        headers_b = ['#', T('p8_col_item'), T('p8_col_score'), T('p8_col_vol'), T('p8_col_ship'), T('p8_col_top_importer')]
+        rows_raw_b = [headers_b]
+        narratives_b = []
+        for i, (_, r) in enumerate(b_top.iterrows()):
+            top_imp_disp = f"{r['top1_imp']} {r['top1_share']:.0f}%" if r['top1_imp'] else '-'
+            rows_raw_b.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_ton(r['vol']), f"{r['ship']}회" if lang == 'ko' else str(r['ship']), top_imp_disp])
+            suspect = T('p8_detail_suspect_tag') if r.get('suspect') else ''
+            narratives_b.append(T('p8_detail_b_narrative', tag=T('p8_detail_new_tag'), vol=_p8_ton(r['vol']), ship=r['ship'],
+                                    imp=r['top1_imp'] or '-', share=f"{r['top1_share']:.0f}", suspect=suspect))
+        col_widths_b = _pdf_table_col_widths(rows_raw_b, doc.width)
+        data_b = [[Paragraph(h, header_cell) for h in rows_raw_b[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw_b[1:]]
+        t_b = Table(data_b, colWidths=col_widths_b, repeatRows=1)
+        t_b.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#e11d48')),
+            ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
+        ]))
+        story.append(t_b)
+        for nline in narratives_b:
+            story.append(Paragraph(nline, narrative_cell))
+        story.append(Spacer(1, 14))
+
+    story.append(Paragraph(T('p8_report_footer'), small))
 
     doc.build(story)
     buf.seek(0)
@@ -1773,134 +2136,351 @@ def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
 GUIDE_CONTENT = {
     'ko': {
         'doc_title': '소싱 분석기 사용 가이드',
+        'intro': '이 문서는 앱의 각 기능을 처음 쓰시는 분도 화면을 보면서 그대로 따라 할 수 있도록 정리한 가이드입니다. 왼쪽 사이드바의 "📖 사용법 가이드" 버튼을 누르면 언제든 최신 버전을 다시 받으실 수 있습니다.',
+        'label_steps': '따라하기',
+        'label_results': '결과 해석',
         'sections': [
-            ('🔒 로그인', [
-                '이 앱을 처음 실행하면 비밀번호를 직접 설정하는 화면이 나옵니다. 새 비밀번호와 확인란을 똑같이 입력하고 "비밀번호 설정하고 시작하기"를 누르면 됩니다.',
-                '이후 접속할 때부터는 방금 설정한 비밀번호로 로그인합니다.',
-            ]),
-            ('🌐 언어 전환', [
-                '왼쪽 사이드바 상단의 한국어 / English 버튼으로 전체 화면 언어를 전환할 수 있습니다.',
-            ]),
-            ('📁 공통 — 파일 업로드', [
-                '모든 메뉴는 CSV 또는 XLSX 파일을 업로드해서 시작합니다.',
-                '컬럼명은 정확히 같지 않아도 됩니다 (예: "Date"나 "date" 둘 다 인식). 다만 Date, Volume, Unit Price 같은 핵심 컬럼은 반드시 있어야 합니다.',
-                'HS코드, Incoterm처럼 표준 8개 컬럼 외의 컬럼도 파일에 있으면 자동으로 인식되어 일부 메뉴(공급망 흐름도, 집중도 진단, 신규·이탈 거래처, 피벗 빌더)의 축/필터 선택지에 추가됩니다.',
-            ]),
-            ('💲 ① 고객사 효율 분석', [
-                '용도: 계약 시작일 전후로 특정 수입사의 구매 단가가 얼마나 절감됐는지 분석합니다.',
-                '업로드할 파일: 한 회사의 거래 내역만 담긴 파일 (여러 회사가 섞여 있어도 자동으로 최빈값 회사를 기준으로 분석합니다).',
-                '사용법: 파일 업로드 → 계약 시작일 선택 → "분석 실행" 클릭.',
-                '결과: 품목군별 절감액, 수입 품목 클러스터, 월별 수입 추이, 최근 3개월 비중, 계약 이후 새로 생기거나 사라진 품목·원산지·공급사.',
-            ]),
-            ('🏆 ② 시장 경쟁력 분석', [
-                '용도: 특정 품목을 두고 여러 수입사가 경쟁하는 시장 데이터에서, 우리 회사의 구매 경쟁력이 어느 정도인지 분석합니다.',
-                '업로드할 파일: 하나의 품목에 대해 여러 회사의 거래 데이터가 섞인 파일.',
-                '사용법: 파일 업로드 → 분석할 고객사·품목명·계약일 입력 → 이상치 제거 민감도 조절(선택) → 분석 시작.',
-                '결과: 구매 경쟁력 순위, 경쟁 우위 그룹 대비 단가 추이, 벤치마킹 시뮬레이션(얼마나 절감할 수 있었는지), 시장 점유율, 공급망(공급사·원산지)별 대안 소싱 옵션.',
-            ]),
-            ('🔀 ③ 공급망 흐름도', [
-                '용도: 특정 공급사·수입사·원산지 하나를 고르면, 그 대상이 어디서 와서 어디로 흘러가는지 Sankey 흐름도로 보여줍니다.',
-                '사용법: 왼쪽 축(구분+대상)과 오른쪽 축(비교 기준)을 각각 고르고, 기간을 설정한 뒤 "흐름도 그리기" 클릭.',
-                '"두 기간 비교하기" 체크박스를 켜면 기간 A와 기간 B를 나란히 비교해서, 어느 흐름이 늘고 줄었는지 표로 확인할 수 있습니다.',
-                '주의: "원산지"는 물건이 생산된 나라, "수출대상국"은 물건이 팔려나가는 나라로 서로 다른 개념입니다.',
-            ]),
-            ('⚠️ ④ 집중도 리스크 진단', [
-                '용도: 특정 공급사·원산지·품목 하나에 거래가 너무 쏠려 있지 않은지 자동으로 진단합니다.',
-                '사용법: 진단 기준(공급사/원산지/품목별) 선택 → 범위(전체 또는 특정 수입사만) 선택 → 위험 기준선(%) 조절 → "진단 실행".',
-                '결과: 1위 비중, 상위 3개 합산 비중, 위험도 배지(안전/주의/위험)와 그 이유, 월별 1위 비중 추이.',
-            ]),
-            ('📈 ⑤ 가격 추세 & 계절성', [
-                '용도: 특정 품목의 단가가 시기별로 어떻게 움직이는지, 언제 사는 게 유리한지 분석합니다.',
-                '사용법: 품목을 여러 개 선택(비슷한 표기의 품목명은 자동으로 묶여서 후보에 나타남) → 전년 비교 여부·비교 축 설정 → "추세 그리기".',
-                '결과: 최근월 평균단가, 전년 동월 대비, 연중 최고가 대비 현재 위치, 계절 고점 자동 감지, "○월에 사면 가장 저렴했다" 같은 인사이트 문장.',
-                '주의: 데이터가 1년치뿐이면 계절 패턴이 우연일 수 있다는 경고가 함께 표시됩니다.',
-            ]),
-            ('🔀 ⑥ 신규·이탈 거래처 추적', [
-                '용도: 임의의 두 기간을 비교해서, 새로 생기거나 사라진 거래처(공급사/원산지/품목/수입사)를 찾아냅니다.',
-                '사용법: 추적 기준 선택 → 범위(전체 시장 또는 특정 수입사) 선택 → 기간 A·기간 B 설정 → "비교 실행".',
-                '결과: 신규/유지/이탈 개수와 목록, 신규·유지·이탈 거래처의 평균단가 비교(가격이 유리해졌는지), 거래처가 줄면서 특정 공급사 의존도가 높아졌는지 자동 경고.',
-            ]),
-            ('🧩 ⑦ 자유 피벗 빌더', [
-                '용도: 정해진 화면 없이, 원하는 축과 지표를 직접 조합해서 원하는 차트·표를 만듭니다.',
-                '사용법: 행(기준) → 열(나눠보기, 선택) → 지표(물량/단가/건수) → 보기(막대/선/파이/누적막대/표) 선택. 필요하면 필터로 특정 값만 남기고 "피벗 생성".',
-            ]),
-            ('📄 공통 — PDF 다운로드', [
-                '각 분석 결과 화면 하단의 "PDF 보고서 생성" 버튼을 누르면, 해당 화면의 차트와 표가 담긴 PDF를 만들어 다운로드할 수 있습니다.',
-            ]),
+            {
+                'heading': '🔒 로그인',
+                'intro': '이 앱을 처음 실행하면 비밀번호를 직접 설정하는 화면이 나옵니다. 이후 접속할 때부터는 방금 설정한 비밀번호로 로그인하면 됩니다.',
+                'steps': [
+                    '새 비밀번호 입력란과 확인란에 동일한 비밀번호를 입력합니다.',
+                    '"비밀번호 설정하고 시작하기" 버튼을 누르면 바로 앱으로 들어갑니다.',
+                    '다음 접속부터는 "🔒 접근 제한" 화면에서 방금 정한 비밀번호를 입력하면 됩니다.',
+                ],
+                'tips': ['비밀번호는 별도 서버가 아니라 이 앱이 실행되는 환경(Codespace 등)에 저장되므로, 완전히 새로운 환경에서 처음 실행하면 다시 설정 화면이 나옵니다.'],
+            },
+            {
+                'heading': '🌐 언어 전환 & 공통 파일 업로드 규칙',
+                'intro': '왼쪽 사이드바 상단의 "한국어 / English" 버튼으로 화면 전체(제목, 버튼, 차트, 표 컬럼명까지) 언어가 즉시 전환됩니다.',
+                'results': [
+                    '모든 메뉴는 CSV 또는 XLSX 파일을 업로드하면서 시작합니다.',
+                    '컬럼명은 정확히 같지 않아도 자동으로 인식됩니다 (예: "Date", "date", "거래일자" 모두 인식). 다만 날짜·물량·단가에 해당하는 컬럼은 반드시 있어야 합니다.',
+                    'HS코드, Incoterm처럼 표준 항목 외의 컬럼도 파일에 있으면 자동으로 인식되어, 일부 메뉴(공급망 흐름도·집중도 진단·신규 이탈 거래처·피벗 빌더·신규사업 스코어러)의 축/필터 선택지에 그대로 추가됩니다.',
+                ],
+            },
+            {
+                'heading': '💲 ① 고객사 효율 분석',
+                'image': 'p1_customer.png',
+                'intro': '계약을 시작한 뒤로 우리(또는 특정 수입사)의 구매 단가가 실제로 얼마나 절감됐는지 숫자로 확인하고 싶을 때 씁니다. 계약 갱신이나 성과 보고 자료를 만들 때 가장 먼저 여는 화면이에요.',
+                'steps': [
+                    '거래 내역 파일을 업로드합니다 (여러 회사 데이터가 섞여 있어도 자동으로 가장 많이 등장하는 회사를 기준으로 분석합니다).',
+                    '계약 시작일을 선택합니다.',
+                    '"분석 실행" 버튼을 클릭합니다.',
+                ],
+                'results': [
+                    '총 예상 절감액 — 계약일 전후로 실제 구매 단가 변화에 따른 절감 규모.',
+                    '품목군별 카드 — 어떤 품목에서 얼마나 절감(또는 손해)됐는지 개별 확인.',
+                    '수입 품목 클러스터 — 표기가 조금씩 다른 품목명을 자동으로 묶어서 정리.',
+                    '월별 수입 추이, 최근 3개월 비중 — 최근 구매 패턴 파악.',
+                    '계약 이후 새로 생기거나 사라진 품목·원산지·공급사 목록.',
+                ],
+            },
+            {
+                'heading': '🏆 ② 시장 경쟁력 분석',
+                'image': 'p2_market.png',
+                'intro': '특정 품목을 두고 여러 수입사가 같은 시장에서 경쟁하고 있을 때, 우리 회사가 그중 얼마나 잘 사고 있는지(=구매 경쟁력)를 확인하고 싶을 때 씁니다.',
+                'steps': [
+                    '한 품목에 대해 여러 회사의 거래 데이터가 섞인 시장 데이터를 업로드합니다.',
+                    '분석할 고객사, 품목명, 계약(기준)일을 입력합니다.',
+                    '필요하면 이상치 제거 민감도를 조절합니다.',
+                    '"시장 경쟁력 분석 시작"을 클릭합니다.',
+                ],
+                'results': [
+                    '구매 경쟁력 순위 — 시장 내 몇 위인지.',
+                    '경쟁 우위 그룹(나보다 잘 사는 상위 그룹) 대비 단가 추이.',
+                    '벤치마킹 시뮬레이션 — 그 그룹만큼만 샀어도 얼마를 아꼈을지.',
+                    '시장 점유율, 원산지(수출국) 필터.',
+                    '공급망(공급사·원산지)별 더 저렴한 대안 소싱 옵션.',
+                ],
+            },
+            {
+                'heading': '🔀 ③ 공급망 흐름도 (Sankey)',
+                'image': 'p3_flow.png',
+                'intro': '특정 공급사·수입사·원산지 "하나"를 골랐을 때, 그 대상이 정확히 어디서 와서 어디로 흘러가는지 시각적으로 보고 싶을 때 씁니다. 예: "이 공급사는 어느 나라로 얼마나 수출하고 있지?"',
+                'steps': [
+                    '전체 시장 데이터를 업로드합니다.',
+                    '왼쪽 축(기준 구분 + 대상)을 고릅니다 — 예: 공급사 → 특정 회사명.',
+                    '오른쪽 축(비교 기준)을 고릅니다 — 예: 수출대상국.',
+                    '기간을 설정하고 "흐름도 그리기"를 클릭합니다.',
+                ],
+                'results': [
+                    'Sankey 다이어그램 — 굵기가 물량 비중을 의미합니다.',
+                    '정렬된 상세 표 — 물량, 비중, 평균 단가.',
+                    '"두 기간 비교하기"를 켜면 기간 A/B 흐름도를 나란히 놓고, 어느 흐름이 늘고 줄었는지 증감표까지 확인할 수 있습니다.',
+                ],
+                'tips': ['"원산지"는 물건이 생산된 나라, "수출대상국"은 물건이 팔려나가는 나라로 서로 다른 개념입니다 — 헷갈리기 쉬우니 화면의 안내 문구를 확인하세요.'],
+            },
+            {
+                'heading': '⚠️ ④ 집중도 리스크 진단',
+                'image': 'p4_risk.png',
+                'intro': '특정 공급사·원산지·품목 "하나"에 거래가 너무 쏠려있어서 위험하지는 않은지 자동으로 점검하고 싶을 때 씁니다. 공급망 리스크 관리 관점에서 정기적으로 확인하면 좋습니다.',
+                'steps': [
+                    '전체 시장 데이터를 업로드합니다.',
+                    '진단 기준(공급사/원산지/품목별)을 고릅니다.',
+                    '범위(전체 또는 특정 수입사만)를 고릅니다.',
+                    '위험 기준선(%)을 필요하면 조절하고 "진단 실행"을 클릭합니다.',
+                ],
+                'results': [
+                    '1위 비중, 상위 3개 합산 비중.',
+                    '위험도 배지(안전/주의/위험)와 그 이유 — 기준선을 왜 넘었는지 문장으로 설명.',
+                    '월별 1위 비중 추이 — 쏠림이 점점 심해지는지 확인.',
+                ],
+            },
+            {
+                'heading': '📈 ⑤ 가격 추세 & 계절성',
+                'image': 'p5_season.png',
+                'intro': '특정 품목의 단가가 시기별로 어떻게 움직이는지, 언제 사는 게 유리한지 알고 싶을 때 씁니다. 구매 시점을 계획할 때 참고하세요.',
+                'steps': [
+                    '전체 시장 데이터를 업로드합니다.',
+                    '품목을 검색해 하나 이상 선택합니다 (표기가 비슷한 품목명은 자동으로 묶여서 후보에 뜹니다).',
+                    '전년 비교 여부와 비교 축(원산지별/공급사별)을 설정합니다.',
+                    '"추세 그리기"를 클릭합니다.',
+                ],
+                'results': [
+                    '최근월 평균단가, 전년 동월 대비, 연중 최고가 대비 현재 위치.',
+                    '계절 고점 자동 감지 — 매년 특정 시기에 비싸지는 패턴이 있는지.',
+                    '"○월에 사면 가장 저렴했다" 같은 인사이트 문장이 자동 생성됩니다.',
+                ],
+                'tips': ['데이터가 1년치뿐이면 "이 계절 패턴은 우연일 수 있다"는 경고가 함께 표시됩니다 — 2년 이상 데이터가 쌓이면 신뢰도가 높아집니다.'],
+            },
+            {
+                'heading': '🔀 ⑥ 신규·이탈 거래처 추적',
+                'image': 'p6_churn.png',
+                'intro': '임의의 두 기간을 비교해서, 그 사이에 새로 생기거나 사라진 거래처(공급사/원산지/품목/수입사)를 찾고 싶을 때 씁니다. "우리가 최근에 거래처를 바꿨는데 그게 잘한 선택이었나?"에 답합니다.',
+                'steps': [
+                    '전체 시장 데이터를 업로드합니다.',
+                    '추적 기준(공급사/원산지/품목/수입사)을 고릅니다.',
+                    '범위(전체 시장 또는 특정 수입사)를 고릅니다.',
+                    '기간 A(비교 대상)와 기간 B(기준)를 설정하고 "비교 실행"을 클릭합니다.',
+                ],
+                'results': [
+                    '신규/유지/이탈 개수와 각각의 목록(물량 포함).',
+                    '💰 가격으로 보면 — 신규·유지·이탈 거래처의 평균단가를 비교해서, 이번 변화가 비용 절감으로 이어졌는지 알려줍니다.',
+                    '⚠️ 집중도 변화 — 거래처가 줄면서 특정 공급사 의존도가 위험하게 높아졌는지 자동으로 경고합니다.',
+                ],
+            },
+            {
+                'heading': '🔬 ⑦ 신규사업 스코어러',
+                'image': 'p7_scorer.png',
+                'intro': '시장 전체 데이터에서 "최근 급상승한 기존 품목"과 "완전히 새로 등장한 품목"을 찾아, 새로운 소싱 기회의 우선순위를 매기고 싶을 때 씁니다. 다른 7개 메뉴가 "우리가 이미 하는 거래"를 들여다본다면, 이 메뉴는 "아직 안 하고 있지만 해볼 만한 것"을 찾아줍니다.',
+                'steps': [
+                    'HS코드명/Detailed HS-CODE 등이 포함된 전체 시장 데이터를 업로드합니다.',
+                    '분석 기간, 최소 물량 기준, 분석 기준(HS코드명/품목명/수입사 등)을 설정합니다.',
+                    '(선택) 우리 회사의 기존 공급사·원산지·취급 키워드를 입력하면, "우리 사업과 얼마나 잘 맞는지"까지 점수화됩니다.',
+                    '"분석 실행"을 클릭합니다.',
+                ],
+                'results': [
+                    '통합 추천 순위(TOP 10) — 기존 급상승 품목과 신규 진입 품목을 하나의 점수로 비교한 최종 순위.',
+                    '적합도 기준을 입력했다면, 4분면(우선 타깃/성장 주도/안전 인접/후순위)까지 자동 분류됩니다.',
+                    '⚠ 저베이스 반등, ⚠ 단일선적 편중, ⚠ 표기변형 의심 같은 주의 플래그로 착시 데이터를 걸러줍니다.',
+                ],
+                'tips': ['적합도 기준을 안 넣어도 분석 자체는 되지만, 넣으면 "우리 사업 맥락에서" 우선순위가 훨씬 정교해집니다.'],
+            },
+            {
+                'heading': '🧩 ⑧ 자유 피벗 빌더',
+                'image': 'p8_pivot.png',
+                'intro': '정해진 화면으로는 답이 안 나올 때, 엑셀 피벗테이블처럼 원하는 축과 지표를 직접 조합해서 나만의 표·차트를 만들고 싶을 때 씁니다.',
+                'steps': [
+                    '데이터를 업로드합니다.',
+                    '행(기준)을 하나 이상 고릅니다 — 여러 개 고르면 고른 순서대로 중첩됩니다.',
+                    '열(나눠보기)을 선택합니다 (선택 사항).',
+                    '값(지표)을 하나 이상 고릅니다 — 물량 합계/평균, 단가 평균/최대/최소, 거래건수 중 복수 선택 가능.',
+                    '보기(표/히트맵/막대/선/파이/누적막대)를 고르고, 필요하면 필터를 걸어서 "피벗 생성"을 클릭합니다.',
+                ],
+                'results': [
+                    '고른 조합대로 즉시 표와 차트가 생성됩니다.',
+                    '지표를 여러 개 고르면 표·히트맵에는 전부 표시되지만, 막대·선·파이 차트는 첫 번째로 고른 지표만 그려집니다 (단위가 다른 지표를 한 차트에 억지로 섞으면 오히려 헷갈리기 때문입니다).',
+                ],
+            },
+            {
+                'heading': '📄 공통 — PDF 다운로드',
+                'intro': '각 분석 결과 화면 하단의 "📄 PDF 보고서 생성" 버튼을 누르면, 해당 화면의 차트와 표가 담긴 PDF가 만들어지고 "📥 PDF 다운로드" 버튼으로 저장할 수 있습니다.',
+                'tips': ['지금 읽고 계신 이 가이드 자체도 사이드바의 "📖 사용법 가이드" 버튼으로 언제든 다시 받을 수 있습니다.'],
+            },
         ],
     },
     'en': {
         'doc_title': 'Sourcing Analyzer User Guide',
+        'intro': 'This guide walks first-time users through every feature step by step. You can re-download the latest version anytime via the "📖 User Guide" button in the sidebar.',
+        'label_steps': 'Steps',
+        'label_results': 'What the results mean',
         'sections': [
-            ('🔒 Login', [
-                'The first time you run this app, you\'ll be asked to set a password yourself. Enter a new password and confirm it, then click "Set password and start".',
-                'From then on, log in with that same password each time.',
-            ]),
-            ('🌐 Language toggle', [
-                'Use the 한국어 / English buttons at the top of the sidebar to switch the entire app\'s language.',
-            ]),
-            ('📁 Common — File upload', [
-                'Every menu starts by uploading a CSV or XLSX file.',
-                'Column names don\'t need to match exactly (e.g. "Date" or "date" are both recognized), but core columns like Date, Volume, and Unit Price must be present.',
-                'Columns beyond the standard 8 (e.g. HS Code, Incoterm) are automatically detected and added as axis/filter options in some menus (Supply Chain Flow, Concentration Risk, New/Lost Partners, Pivot Builder).',
-            ]),
-            ('💲 ① Customer Efficiency Analysis', [
-                'Purpose: analyzes how much a specific importer\'s purchase price dropped before vs. after a contract start date.',
-                'Upload: a file containing one company\'s transactions (if mixed, the most frequent importer is used automatically).',
-                'How to use: upload file → select contract start date → click "Run Analysis".',
-                'Results: savings by product group, import product clusters, monthly import trend, last-3-month share, new/lost products, origins, and suppliers since the contract.',
-            ]),
-            ('🏆 ② Market Competitiveness Analysis', [
-                'Purpose: analyzes how competitive your purchasing is relative to other importers for a given product.',
-                'Upload: a file with multiple companies\' transactions for a single product.',
-                'How to use: upload file → enter the customer, product name, and contract date → adjust outlier sensitivity (optional) → run.',
-                'Results: purchasing competitiveness ranking, price trend vs. the competitive advantage group, benchmarking simulation, market share, and alternative sourcing options by supplier/origin.',
-            ]),
-            ('🔀 ③ Supply Chain Flow', [
-                'Purpose: pick a supplier, importer, or origin and see where it flows from/to as a Sankey diagram.',
-                'How to use: choose the left axis (type + entity) and right axis (compare by), set the date range, then click "Draw flow diagram".',
-                'Enable "Compare two periods" to view Period A and B side by side, with a table showing what grew or shrank.',
-                'Note: "Origin" is where the product was produced; "Export destination" is where it was sold — these are different columns.',
-            ]),
-            ('⚠️ ④ Concentration Risk Diagnosis', [
-                'Purpose: automatically flags whether your trade is too concentrated in one supplier, origin, or product.',
-                'How to use: choose the axis (supplier/origin/product) → scope (entire market or one importer) → adjust the risk threshold (%) → "Run diagnosis".',
-                'Results: top-1 share, top-3 combined share, a risk badge (safe/caution/high) with the reason, and the monthly trend of top-1 share.',
-            ]),
-            ('📈 ⑤ Price Trend & Seasonality', [
-                'Purpose: shows how a product\'s price moves over time and when it\'s cheapest to buy.',
-                'How to use: multi-select products (similarly-named variants are automatically grouped as candidates) → set previous-year overlay and comparison axis → "Draw trend".',
-                'Results: latest month\'s average price, year-over-year change, position vs. the yearly peak, automatic seasonal-peak detection, and insight sentences like "buying in March was historically cheapest."',
-                'Note: with only one year of data, a warning notes the seasonal pattern could be coincidental.',
-            ]),
-            ('🔀 ⑥ New/Lost Trading Partners', [
-                'Purpose: compares any two periods to find trading partners (supplier/origin/product/importer) that appeared or disappeared.',
-                'How to use: choose what to track → scope (entire market or one importer) → set Period A and B → "Compare".',
-                'Results: counts and lists of new/kept/lost partners, an average-price comparison across the three groups (did the change save money?), and an automatic warning if losing partners increased dependency on the remaining ones.',
-            ]),
-            ('🧩 ⑦ Free Pivot Builder', [
-                'Purpose: build your own chart or table by freely combining axes and metrics, with no fixed screen.',
-                'How to use: pick Rows → Columns (optional) → Metric (volume/price/count) → View (bar/line/pie/stacked/table). Optionally filter to specific values, then "Generate pivot".',
-            ]),
-            ('📄 Common — PDF download', [
-                'Click "Generate PDF Report" at the bottom of any results screen to download a PDF containing that screen\'s charts and tables.',
-            ]),
+            {
+                'heading': '🔒 Login',
+                'intro': 'The first time you run this app, you will be asked to set a password yourself. From then on, log in with that same password.',
+                'steps': [
+                    'Enter the same password in both the "new password" and "confirm" fields.',
+                    'Click "Set password and start" to enter the app immediately.',
+                    'On future visits, enter that password on the "🔒 Restricted Access" screen.',
+                ],
+                'tips': ['The password is stored in the environment the app runs in (e.g. the Codespace), not on an external server — a brand-new environment will show the setup screen again.'],
+            },
+            {
+                'heading': '🌐 Language Toggle & Common File Upload Rules',
+                'intro': 'Use the "한국어 / English" buttons at the top of the sidebar to switch the entire interface — titles, buttons, charts, and even table column names — instantly.',
+                'results': [
+                    'Every menu starts by uploading a CSV or XLSX file.',
+                    'Column names do not need to match exactly (e.g. "Date", "date" are both recognized), but date, volume, and unit price columns must be present.',
+                    'Columns beyond the standard set (e.g. HS Code, Incoterm) are auto-detected and added as axis/filter options in several menus (Supply Chain Flow, Concentration Risk, New/Lost Partners, Pivot Builder, New Business Scorer).',
+                ],
+            },
+            {
+                'heading': '💲 ① Customer Efficiency Analysis',
+                'image': 'p1_customer.png',
+                'intro': "Use this when you want to prove, in numbers, how much a company's purchase price dropped after a contract started. It's usually the first screen opened for renewal or performance reporting.",
+                'steps': [
+                    'Upload transaction data (if multiple companies are mixed in, the most frequent one is used automatically).',
+                    'Select the contract start date.',
+                    'Click "Run Analysis".',
+                ],
+                'results': [
+                    'Total estimated savings before vs. after the contract.',
+                    'Savings by product group.',
+                    'Import product clusters — similarly-worded product names grouped automatically.',
+                    'Monthly import trend and last-3-month share.',
+                    'New/lost products, origins, and suppliers since the contract.',
+                ],
+            },
+            {
+                'heading': '🏆 ② Market Competitiveness Analysis',
+                'image': 'p2_market.png',
+                'intro': 'Use this when several importers compete for the same product, and you want to see how competitively your company is buying.',
+                'steps': [
+                    "Upload market data with multiple companies' transactions for one product.",
+                    'Enter the customer, product name, and reference (contract) date.',
+                    'Adjust outlier sensitivity if needed.',
+                    'Click "Start Market Competitiveness Analysis".',
+                ],
+                'results': [
+                    'Purchasing competitiveness ranking.',
+                    'Price trend vs. the competitive advantage group.',
+                    'Benchmarking simulation — potential savings if you matched that group.',
+                    'Market share and an origin (export country) filter.',
+                    'Cheaper alternative sourcing options by supplier/origin.',
+                ],
+            },
+            {
+                'heading': '🔀 ③ Supply Chain Flow (Sankey)',
+                'image': 'p3_flow.png',
+                'intro': 'Use this to see exactly where a single supplier, importer, or origin flows from and to. E.g. "Where does this supplier export to, and how much?"',
+                'steps': [
+                    'Upload the full market data.',
+                    'Choose the left axis (type + entity), e.g. Supplier → a specific company.',
+                    'Choose the right axis (compare by), e.g. export destination.',
+                    'Set the date range and click "Draw flow diagram".',
+                ],
+                'results': [
+                    'A Sankey diagram — ribbon width represents volume share.',
+                    'A sorted detail table with volume, share, and average price.',
+                    'Enabling "Compare two periods" shows Period A/B side by side plus a change table.',
+                ],
+                'tips': ['"Origin" is where the product was produced; "Export destination" is where it was sold — easy to mix up, so check the on-screen hint.'],
+            },
+            {
+                'heading': '⚠️ ④ Concentration Risk Diagnosis',
+                'image': 'p4_risk.png',
+                'intro': 'Use this to automatically check whether your trade is dangerously concentrated in a single supplier, origin, or product. Good to check periodically for supply chain risk management.',
+                'steps': [
+                    'Upload the full market data.',
+                    'Choose the diagnosis axis (supplier/origin/product).',
+                    'Choose the scope (entire market or one importer).',
+                    'Adjust the risk threshold if needed and click "Run diagnosis".',
+                ],
+                'results': [
+                    'Top-1 share and top-3 combined share.',
+                    'A risk badge (safe/caution/high) with a plain-language reason.',
+                    'Monthly trend of top-1 share, to see if concentration is worsening.',
+                ],
+            },
+            {
+                'heading': '📈 ⑤ Price Trend & Seasonality',
+                'image': 'p5_season.png',
+                'intro': "Use this to see how a product's price moves over time and when it is cheapest to buy — useful for planning purchase timing.",
+                'steps': [
+                    'Upload the full market data.',
+                    'Search and select one or more products (similarly-worded variants are grouped automatically as candidates).',
+                    'Set the previous-year overlay and comparison axis.',
+                    'Click "Draw trend".',
+                ],
+                'results': [
+                    "Latest month's average price, year-over-year change, and position vs. the yearly peak.",
+                    'Automatic seasonal-peak detection.',
+                    'Auto-generated insight sentences like "buying in March was historically cheapest."',
+                ],
+                'tips': ['With only one year of data, a warning notes the seasonal pattern could be coincidental — confidence improves with 2+ years of history.'],
+            },
+            {
+                'heading': '🔀 ⑥ New/Lost Trading Partners',
+                'image': 'p6_churn.png',
+                'intro': 'Use this to compare any two periods and find trading partners (supplier/origin/product/importer) that appeared or disappeared — answering "did switching partners actually pay off?"',
+                'steps': [
+                    'Upload the full market data.',
+                    'Choose what to track (supplier/origin/product/importer).',
+                    'Choose the scope (entire market or one importer).',
+                    'Set Period A (comparison) and Period B (baseline), then click "Compare".',
+                ],
+                'results': [
+                    'Counts and lists of new/kept/lost partners, with volume.',
+                    '💰 Looking at price — compares average prices across the three groups to show whether the change saved money.',
+                    '⚠️ Concentration Change — automatically warns if losing partners pushed dependency on the remaining ones to a risky level.',
+                ],
+            },
+            {
+                'heading': '🔬 ⑦ New Business Scorer',
+                'image': 'p7_scorer.png',
+                'intro': 'Use this to find "recently surging existing items" and "brand-new entrants" across the whole market, ranked by opportunity. While the other 7 menus examine trade you already do, this one surfaces opportunities you are not yet pursuing.',
+                'steps': [
+                    'Upload full market data that includes HS Code Name / Detailed HS-CODE if possible.',
+                    'Set the analysis window, minimum volume threshold, and analysis dimension.',
+                    "(Optional) Enter your company's existing suppliers, origins, and product keywords to get a fit score against your own business.",
+                    'Click "Run Analysis".',
+                ],
+                'results': [
+                    'Combined Recommendation Ranking (Top 10) — surging existing items and new entrants ranked on one scale.',
+                    'If fit criteria were entered, items are auto-classified into a quadrant (Priority Target / Growth-led / Safe Adjacent / Lower Priority).',
+                    'Warning flags such as low-base rebound, single-shipment skew, and possible re-labeling filter out misleading data.',
+                ],
+                'tips': ['Analysis works without fit criteria, but filling them in makes the ranking far more relevant to your specific business.'],
+            },
+            {
+                'heading': '🧩 ⑧ Free Pivot Builder',
+                'image': 'p8_pivot.png',
+                'intro': 'Use this when no fixed screen answers your question — build your own table or chart by freely combining axes and metrics, Excel-pivot-table style.',
+                'steps': [
+                    'Upload the data.',
+                    'Pick one or more Row fields — multiple fields nest in the order chosen.',
+                    'Optionally pick Column fields.',
+                    'Pick one or more Value metrics — total/average volume, average/max/min price, transaction count (multi-select).',
+                    'Pick a View (table/heatmap/bar/line/pie/stacked), optionally filter, then click "Generate pivot".',
+                ],
+                'results': [
+                    'A table and chart are generated instantly from your chosen combination.',
+                    'With multiple metrics selected, the table and heatmap show all of them, but bar/line/pie charts plot only the first selected metric (mixing metrics with different units in one chart would be confusing).',
+                ],
+            },
+            {
+                'heading': '📄 Common — PDF Download',
+                'intro': 'Click "📄 Generate PDF Report" at the bottom of any results screen to build a PDF with that screen\'s charts and tables, then save it via "📥 Download PDF".',
+                'tips': ['This very guide can be re-downloaded anytime from the "📖 User Guide" button in the sidebar.'],
+            },
         ],
     },
 }
-
-
 def build_user_guide_pdf(lang):
-    """앱 전체 사용법을 정리한 정적 PDF 가이드를 생성해 바이트로 반환한다 (차트 없이 텍스트 위주라 가볍다)."""
+    """앱 전체 사용법을 스크린샷과 함께 정리한 PDF 가이드를 생성해 바이트로 반환한다."""
     import io
+    import os
     from reportlab.lib.pagesizes import A4
     from reportlab.lib.units import mm
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem, Image as RLImage, KeepTogether
     from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.lib import colors
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
 
     content = GUIDE_CONTENT.get(lang, GUIDE_CONTENT['ko'])
+    assets_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'guide')
 
     buf = io.BytesIO()
     doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=18 * mm, rightMargin=18 * mm)
@@ -1916,13 +2496,52 @@ def build_user_guide_pdf(lang):
         pass
     for s in styles.byName.values():
         s.fontName = font_name
+    styles['Normal'].fontSize = 9.5
+    styles['Normal'].leading = 13
+    tip_style = styles['Normal'].clone('TipStyle')
+    tip_style.textColor = colors.HexColor('#6b7280')
+    tip_style.fontSize = 8.5
 
-    story = [Paragraph(content['doc_title'], styles['Title']), Spacer(1, 12)]
-    for heading, bullets in content['sections']:
-        story.append(Paragraph(heading, styles['Heading2']))
-        items = [ListItem(Paragraph(b, styles['Normal']), bulletColor='#0d9488') for b in bullets]
-        story.append(ListFlowable(items, bulletType='bullet', leftIndent=14))
-        story.append(Spacer(1, 10))
+    story = [Paragraph(content['doc_title'], styles['Title'])]
+    if content.get('intro'):
+        story.append(Paragraph(content['intro'], styles['Normal']))
+    story.append(Spacer(1, 10))
+
+    for sec in content['sections']:
+        block = [Paragraph(sec['heading'], styles['Heading2'])]
+        if sec.get('intro'):
+            block.append(Paragraph(sec['intro'], styles['Normal']))
+            block.append(Spacer(1, 4))
+        if sec.get('steps'):
+            block.append(Paragraph(content['label_steps'], styles['Heading4']))
+            items = [ListItem(Paragraph(b, styles['Normal'])) for b in sec['steps']]
+            block.append(ListFlowable(items, bulletType='1', leftIndent=14))
+            block.append(Spacer(1, 4))
+        if sec.get('results'):
+            block.append(Paragraph(content['label_results'], styles['Heading4']))
+            items = [ListItem(Paragraph(b, styles['Normal']), bulletColor='#0d9488') for b in sec['results']]
+            block.append(ListFlowable(items, bulletType='bullet', leftIndent=14))
+            block.append(Spacer(1, 4))
+        if sec.get('tips'):
+            for tip in sec['tips']:
+                block.append(Paragraph('💡 ' + tip, tip_style))
+        story.append(KeepTogether(block))
+
+        img_file = sec.get('image')
+        if img_file:
+            img_path = os.path.join(assets_dir, img_file)
+            if os.path.exists(img_path):
+                try:
+                    from PIL import Image as PILImage
+                    with PILImage.open(img_path) as im:
+                        iw, ih = im.size
+                    disp_w = 110 * mm
+                    disp_h = disp_w * ih / iw
+                    story.append(Spacer(1, 4))
+                    story.append(RLImage(img_path, width=disp_w, height=disp_h))
+                except Exception:
+                    pass
+        story.append(Spacer(1, 12))
 
     doc.build(story)
     buf.seek(0)
@@ -2212,8 +2831,8 @@ with st.sidebar:
     st.markdown("---")
     selected = option_menu(
         menu_title=T('app_menu_title'),
-        options=[T('menu_opt_customer'), T('menu_opt_market'), T('menu_opt_flow'), T('menu_opt_risk'), T('menu_opt_season'), T('menu_opt_churn'), T('menu_opt_pivot'), T('menu_opt_scorer')],
-        icons=["person-bounding-box", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "grid-3x3", "binoculars"],
+        options=[T('menu_opt_customer'), T('menu_opt_market'), T('menu_opt_flow'), T('menu_opt_risk'), T('menu_opt_season'), T('menu_opt_churn'), T('menu_opt_scorer'), T('menu_opt_pivot')],
+        icons=["person-bounding-box", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "binoculars", "grid-3x3"],
         menu_icon="cast",
         default_index=0,
     )
@@ -3999,6 +4618,18 @@ if selected == T('menu_opt_scorer'):
                 if A.empty and B.empty:
                     st.warning(T('p8_no_data_warning'))
                 else:
+                    n_tx = len(df)
+                    n_imp = df[cols['importer']].nunique() if cols['importer'] else 0
+                    n_prod = df[cols['product']].nunique() if cols['product'] else 0
+                    n_origin = df[cols['origin']].nunique() if cols['origin'] else 0
+                    span_str = f"{df['_date'].min().strftime('%Y-%m')} ~ {df['_date'].max().strftime('%Y-%m')}"
+                    cat_label = T('p8_cat_all')
+                    if cols['category']:
+                        mode_cat = _p8_mode_or_none(df[cols['category']].tolist())
+                        if mode_cat:
+                            cat_label = str(mode_cat)
+                    meta.update({'n_tx': n_tx, 'n_imp': n_imp, 'n_prod': n_prod, 'n_origin': n_origin,
+                                 'span_str': span_str, 'cat_label': cat_label})
                     st.session_state.scorer_result = {'A': A, 'B': B, 'S': S, 'meta': meta, 'dim_label': dim_label}
                     st.rerun()
 
@@ -4059,7 +4690,7 @@ if selected == T('menu_opt_scorer'):
                 for _, r in a_growing.iterrows():
                     a_rows.append({
                         T('p8_col_item'): r['display_name'], T('p8_col_score'): r['final_score'],
-                        T('p8_col_yoy'): f"{r['yoy']:+.0f}%", T('p8_col_rec_vol'): f"{r['rec_vol']:,.0f}",
+                        T('p8_col_yoy'): _p8_fmt_pct(r['yoy']), T('p8_col_rec_vol'): f"{r['rec_vol']:,.0f}",
                         T('p8_col_ly_vol'): f"{r['ly_vol']:,.0f}", T('p8_col_delta'): f"{r['delta']:+,.0f}",
                         T('p8_col_concentration'): f"{r['top1_share']:.0f}%",
                         T('p8_col_reason'): _p8_reason_a(r, r['dim_is_importer']),
@@ -4084,18 +4715,10 @@ if selected == T('menu_opt_scorer'):
             else:
                 st.caption(T('p8_no_data_warning'))
 
-        if st.button(T('pdf_generate_btn'), key="scorer_pdf_btn"):
+        if st.button(T('p8_generate_report_btn'), key="scorer_pdf_btn"):
             with st.spinner(T('pdf_generating_msg')):
                 try:
-                    pdf_bytes = build_pdf_report(
-                        title=T('p8_title'),
-                        kpi_lines=[
-                            f"{T('p8_kpi_total_yoy')}: {tot_yoy:+.0f}%",
-                            f"{T('p8_kpi_growing')}: {len(a_growing)}",
-                            f"{T('p8_kpi_new')}: {len(B)}",
-                        ],
-                        figs=[fig] if fig else [], df_table=s_df, table_title=T('p8_section_s'),
-                    )
-                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="new_business_scorer.pdf", mime="application/pdf", key="scorer_pdf_dl")
+                    pdf_bytes = build_scorer_report_pdf(A, B, S, meta, R['dim_label'])
+                    st.download_button(T('p8_download_report_btn'), data=pdf_bytes, file_name="new_business_scorer_report.pdf", mime="application/pdf", key="scorer_pdf_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
