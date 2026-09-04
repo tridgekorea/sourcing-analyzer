@@ -56,6 +56,16 @@ TEXTS = {
         'p1_total_savings_subheader': '총 예상 절감액',
         'p1_total_savings_caption': '※ 계약일({date}) 이후, 고객사의 자체 구매 단가 변화에 따른 총 예상 절감액입니다.',
         'p1_savings_detail_subheader': '품목군별 상세 절감 내역',
+        'p1_mix_changed_badge': '품목 구성 변화',
+        'p1_mix_changed_tooltip': '계약 전후로 이 그룹 안에서 실제로 산 품목명이 크게 바뀌었습니다. 절감액이 협상 성과가 아니라 품목 변경 때문일 수 있습니다.',
+        'p1_mix_changed_caption': '⚠ 표시된 품목군은 계약 전후로 실제 구매 품목 구성이 크게 바뀌었습니다 (겹치는 품목명 30% 미만). 절감액을 협상 성과로 해석하기 전에 확인해보세요.',
+        'p1_col_avg_price_before': '계약전 평균단가(물량가중)',
+        'p1_col_avg_price_after': '계약후 평균단가(물량가중)',
+        'p1_col_volume_after': '계약후 물량',
+        'p1_col_savings': '절감액',
+        'p1_col_mix_overlap': '품목 구성 유지율',
+        'p1_col_mix_changed': '구성변화 경고',
+        'p1_vwap_note': '※ 평균단가는 거래건수가 아니라 물량 기준 가중평균(VWAP)입니다. 이상치는 클러스터·기간별로 자동 제거했습니다.',
         'p1_exp2_title': '2. 수입 품목군 정제 및 군집화 (DBSCAN & PCA)',
         'p1_too_many_clusters_info': '클러스터가 너무 많아, 수입량 기준 상위 {n}개 품목군만 그리드에 시각화합니다.',
         'p1_scatter_title': '[{customer}] 품목 유사도 기반 군집화 (상위 품목군 Grid)',
@@ -559,6 +569,16 @@ TEXTS = {
         'p1_total_savings_subheader': 'Total Estimated Savings',
         'p1_total_savings_caption': "※ Total estimated savings from the customer's own purchase price changes after the contract date ({date}).",
         'p1_savings_detail_subheader': 'Detailed Savings by Product Group',
+        'p1_mix_changed_badge': 'Product mix changed',
+        'p1_mix_changed_tooltip': 'The actual products purchased within this group changed significantly before vs. after the contract. The savings figure may reflect a product switch rather than negotiation.',
+        'p1_mix_changed_caption': "⚠ Flagged product groups had a major shift in which specific products were purchased before vs. after the contract (less than 30% overlap). Check before interpreting the savings as negotiation success.",
+        'p1_col_avg_price_before': 'Avg Price Before (VWAP)',
+        'p1_col_avg_price_after': 'Avg Price After (VWAP)',
+        'p1_col_volume_after': 'Volume After',
+        'p1_col_savings': 'Savings',
+        'p1_col_mix_overlap': 'Product Mix Overlap',
+        'p1_col_mix_changed': 'Mix Changed',
+        'p1_vwap_note': '※ Average price is volume-weighted (VWAP), not a simple transaction average. Outliers are removed automatically per cluster and period.',
         'p1_exp2_title': '2. Import Product Group Refinement & Clustering (DBSCAN & PCA)',
         'p1_too_many_clusters_info': 'Too many clusters — visualizing only the top {n} product groups by import volume.',
         'p1_scatter_title': '[{customer}] Product Similarity-Based Clustering (Top Product Groups Grid)',
@@ -2975,7 +2995,8 @@ if selected == T('menu_opt_customer'):
                     customer_df['product_preprocessed'] = customer_df['product_name'].apply(preprocess_product_name)
                     vectorizer = TfidfVectorizer(min_df=1, ngram_range=(1,2))
                     tfidf_matrix = vectorizer.fit_transform(customer_df['product_preprocessed'])
-                    dbscan = DBSCAN(eps=0.9, min_samples=3, metric='cosine')
+                    # DBSCAN eps: 0.9는 코사인거리 기준 너무 느슨해서 서로 다른 품목이 한 클러스터로 묶이기 쉬웠음 → 0.6으로 강화
+                    dbscan = DBSCAN(eps=0.6, min_samples=3, metric='cosine')
                     cluster_labels = dbscan.fit_predict(tfidf_matrix)
                     cluster_name_map = get_cluster_name(cluster_labels, customer_df['product_preprocessed'])
                     customer_df['cluster'] = cluster_labels
@@ -2985,11 +3006,50 @@ if selected == T('menu_opt_customer'):
                     contract_date = pd.to_datetime(contract_date_input)
                     before_contract_df = plot_df[plot_df['date'] < contract_date]
                     after_contract_df = plot_df[plot_df['date'] >= contract_date]
-                    avg_price_before = before_contract_df.groupby('cluster_name')['unit_price'].mean().rename('avg_price_before')
-                    avg_price_after = after_contract_df.groupby('cluster_name')['unit_price'].mean().rename('avg_price_after')
-                    volume_after = after_contract_df.groupby('cluster_name')['volume'].sum().rename('volume_after')
+
+                    def _vwap(g):
+                        """물량가중평균단가. 거래건수가 아니라 실제 산 물량 기준으로 가중해야
+                        '소량 고가 거래 1건'이 '대량 저가 거래 1건'과 똑같은 비중으로 평균을 왜곡하지 않는다."""
+                        tv = g['volume'].sum()
+                        return (g['unit_price'] * g['volume']).sum() / tv if tv > 0 else np.nan
+
+                    def _clean_and_vwap(g):
+                        """클러스터+기간별로 이상치를 먼저 제거한 뒤 물량가중평균을 계산한다
+                        (전체를 한번에 돌리면 원래 비싼 품목이 다른 클러스터들 사이에서 '이상치'로 잘못 걸러질 수 있음)."""
+                        g_clean = remove_outliers_iqr(g, 'unit_price', cap_percent=0.07, iqr_multiplier=1.5)
+                        return _vwap(g_clean)
+
+                    def _clean_volume_sum(g):
+                        g_clean = remove_outliers_iqr(g, 'unit_price', cap_percent=0.07, iqr_multiplier=1.5)
+                        return g_clean['volume'].sum()
+
+                    if not before_contract_df.empty:
+                        avg_price_before = before_contract_df.groupby('cluster_name').apply(_clean_and_vwap).rename('avg_price_before')
+                    else:
+                        avg_price_before = pd.Series(dtype=float, name='avg_price_before')
+
+                    if not after_contract_df.empty:
+                        avg_price_after = after_contract_df.groupby('cluster_name').apply(_clean_and_vwap).rename('avg_price_after')
+                        volume_after = after_contract_df.groupby('cluster_name').apply(_clean_volume_sum).rename('volume_after')
+                    else:
+                        avg_price_after = pd.Series(dtype=float, name='avg_price_after')
+                        volume_after = pd.Series(dtype=float, name='volume_after')
+
                     savings_df = pd.concat([avg_price_before, avg_price_after, volume_after], axis=1).dropna()
                     savings_df['savings'] = (savings_df['avg_price_before'] - savings_df['avg_price_after']) * savings_df['volume_after']
+
+                    # 품목 구성 변화(Mix Drift) 체크: 계약 전후로 같은 클러스터 안에서도 실제 사는 품목명 세트가
+                    # 얼마나 겹치는지 확인. 많이 안 겹치면 "협상 성과"가 아니라 "품목을 바꿔서 생긴 가격차"일 수 있음.
+                    def _mix_overlap(cluster_name):
+                        b = set(before_contract_df.loc[before_contract_df['cluster_name'] == cluster_name, 'product_preprocessed'])
+                        a = set(after_contract_df.loc[after_contract_df['cluster_name'] == cluster_name, 'product_preprocessed'])
+                        if not b or not a:
+                            return None
+                        union = b | a
+                        return len(b & a) / len(union) if union else None
+
+                    savings_df['mix_overlap'] = [_mix_overlap(idx) for idx in savings_df.index]
+                    savings_df['mix_changed'] = savings_df['mix_overlap'].apply(lambda v: v is not None and v < 0.3)
                     savings_df = savings_df.sort_values('savings', ascending=False)
                     total_savings = savings_df['savings'].sum()
 
@@ -3017,14 +3077,28 @@ if selected == T('menu_opt_customer'):
             for i, row in enumerate(st.session_state.savings_df.itertuples()):
                 col = cols[i % 4]
                 color, arrow, val = ("blue", "▼", row.savings) if row.savings >= 0 else ("red", "▲", -row.savings)
-                col.markdown(f"""<div style="border: 1px solid #e6e6e6; border-radius: 0.5rem; padding: 1rem; text-align: center; height: 120px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 1rem;"><strong>{row.Index}</strong><p style="font-size: 1.5rem; font-weight: bold; color: {color}; margin-top: 8px; margin-bottom: 0;">{arrow} ${val:,.0f}</p></div>""", unsafe_allow_html=True)
-            
-            st.dataframe(st.session_state.savings_df.style.format({
-                'avg_price_before': '${:,.2f}',
-                'avg_price_after': '${:,.2f}',
-                'volume_after': '{:,.0f} KG',
-                'savings': '${:,.2f}'
+                warn_html = f"""<div style="font-size:11px;color:#b3261e;margin-top:4px;" title="{T('p1_mix_changed_tooltip')}">⚠ {T('p1_mix_changed_badge')}</div>""" if row.mix_changed else ""
+                col.markdown(f"""<div style="border: 1px solid #e6e6e6; border-radius: 0.5rem; padding: 1rem; text-align: center; height: 120px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 1rem;"><strong>{row.Index}</strong><p style="font-size: 1.5rem; font-weight: bold; color: {color}; margin-top: 8px; margin-bottom: 0;">{arrow} ${val:,.0f}</p>{warn_html}</div>""", unsafe_allow_html=True)
+
+            if st.session_state.savings_df['mix_changed'].any():
+                st.caption(T('p1_mix_changed_caption'))
+
+            display_savings_df = st.session_state.savings_df.rename(columns={
+                'avg_price_before': T('p1_col_avg_price_before'),
+                'avg_price_after': T('p1_col_avg_price_after'),
+                'volume_after': T('p1_col_volume_after'),
+                'savings': T('p1_col_savings'),
+                'mix_overlap': T('p1_col_mix_overlap'),
+                'mix_changed': T('p1_col_mix_changed'),
+            })
+            st.dataframe(display_savings_df.style.format({
+                T('p1_col_avg_price_before'): '${:,.2f}',
+                T('p1_col_avg_price_after'): '${:,.2f}',
+                T('p1_col_volume_after'): '{:,.0f} KG',
+                T('p1_col_savings'): '${:,.2f}',
+                T('p1_col_mix_overlap'): '{:.0%}',
             }))
+            st.caption(T('p1_vwap_note'))
 
         with st.expander(T('p1_exp2_title'), expanded=True): # 인쇄 시 이 섹션부터 새 페이지
             if st.session_state.tfidf_matrix is not None and st.session_state.tfidf_matrix.shape[0] > 0:
