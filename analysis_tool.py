@@ -325,7 +325,9 @@ TEXTS = {
         'p8_generate_report_btn': '📊 리포트 PDF 생성 (상세)',
         'p8_download_report_btn': '📥 리포트 PDF 다운로드',
         'p8_cat_all': '전체 품목',
-        'p8_report_excluded_note': '※ 저베이스(작년 물량 거의 0)이면서 점유율도 미미한 {n}건은 상세 목록에서 제외했습니다.',
+        'p8_report_excluded_note_a': '※ 저베이스(작년 물량 거의 0)로 수치가 왜곡된 {n}건은 상세 목록에서 제외했습니다.',
+        'p8_report_excluded_note_b': '※ 표기변형 의심(기존 품목이 이름만 바뀐 것으로 추정되는) {n}건은 상세 목록에서 제외했습니다.',
+        'p8_report_note_col': '비고',
 
         'p3_title': '🔀 공급망 흐름도 (Sankey)',
         'p3_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
@@ -826,7 +828,9 @@ TEXTS = {
         'p8_generate_report_btn': '📊 Generate Detailed Report PDF',
         'p8_download_report_btn': '📥 Download Report PDF',
         'p8_cat_all': 'All items',
-        'p8_report_excluded_note': '※ {n} items with a near-zero prior-year base and negligible share were excluded from the detail list.',
+        'p8_report_excluded_note_a': '※ {n} items with a near-zero prior-year base (distorted figures) were excluded from the detail list.',
+        'p8_report_excluded_note_b': '※ {n} items suspected to be re-labeled existing products were excluded from the detail list.',
+        'p8_report_note_col': 'Note',
 
         'p3_title': '🔀 Supply Chain Flow (Sankey)',
         'p3_upload_label': 'Upload the full market/supply chain data',
@@ -1438,7 +1442,9 @@ def compute_scorer(df, dim_col, months, floor, minship, new_key_col, preset, fit
         A = A.sort_values('yoy', ascending=False)
 
         pos_a = A[A['yoy'] > 0].copy()
-        yoy_arr = pos_a['yoy'].tolist()
+        YOY_SCORE_CAP = 300  # 저베이스 극단치(YoY 수만 %)가 정규화 척도 전체를 왜곡하는 걸 방지하기 위한 상한선.
+        # (표시용 '+999%+' 캡과는 별개 — 이건 점수 계산에만 쓰이는 내부 상한)
+        yoy_arr = pos_a['yoy'].clip(upper=YOY_SCORE_CAP).tolist()
         share_arr = pos_a['share'].tolist()
         ease_arr = [50.0 if r['dim_is_importer'] else 100 - r['top1_share'] for _, r in pos_a.iterrows()]
         price_arr = [0 if pd.isna(v) else v for v in pos_a['price_yoy'].tolist()] if has_price else []
@@ -1452,7 +1458,7 @@ def compute_scorer(df, dim_col, months, floor, minship, new_key_col, preset, fit
         def _score_a(row):
             if row['yoy'] <= 0:
                 return 0
-            g = _p8_minmax_norm(row['yoy'], yoy_arr)
+            g = _p8_minmax_norm(min(row['yoy'], YOY_SCORE_CAP), yoy_arr)
             s = _p8_minmax_norm(row['share'], share_arr)
             e = 50.0 if row['dim_is_importer'] else _p8_minmax_norm(100 - row['top1_share'], ease_arr)
             w = dict(W)
@@ -2071,22 +2077,18 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
 
     # Section A 상세
     if not a_growing.empty:
-        # 저베이스(작년 물량이 거의 0)이면서 점유율도 미미한(0.05% 미만) 항목은
-        # 상위 15 '상세' 목록에서 제외한다 — 감점만으로는 리스트가 노이즈로 채워지는 걸 못 막았음.
-        meaningful_a = a_growing[~(a_growing['low_base'] & (a_growing['share'] < 0.05))]
+        # 저베이스(작년 물량이 거의 0) 항목은 점유율과 무관하게 상세 목록에서 제외한다
+        # (감점만으로는 리스트가 노이즈로 채워지는 걸 못 막았고, '상위 15'는 진짜 볼만한 기회만 보여줘야 함)
+        meaningful_a = a_growing[~a_growing['low_base']]
         excluded_n = len(a_growing) - len(meaningful_a)
         a_top = meaningful_a.head(15)
-        story.append(Paragraph(T('p8_report_section_a_header', n=len(a_top)), styles['Heading2']))
-        story.append(Paragraph(T('p8_report_section_a_sub'), small))
-        headers_a = ['#', T('p8_col_item'), T('p8_col_score'), T('p8_col_yoy'), T('p8_col_rec_vol'), T('p8_col_ly_vol')]
+        headers_a = ['#', T('p8_col_item'), T('p8_col_score'), T('p8_col_yoy'), T('p8_col_rec_vol'), T('p8_col_ly_vol'), T('p8_col_concentration'), T('p8_report_note_col')]
         rows_raw_a = [headers_a]
-        narratives_a = []
         for i, (_, r) in enumerate(a_top.iterrows()):
-            rows_raw_a.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_fmt_pct(r['yoy']), _p8_ton(r['rec_vol']), _p8_ton(r['ly_vol'])])
             big = bool(meta['tot_rec']) and r['rec_vol'] >= meta['tot_rec'] * 0.1
-            tags = (T('p8_detail_big_tag') if big else '') + (T('p8_detail_lowbase_tag') if r.get('low_base') else '')
-            sign, pct = _p8_split_signed_pct(r['yoy'])
-            narratives_a.append(T('p8_detail_a_narrative', sign=sign, pct=pct, ly=_p8_ton(r['ly_vol']), rec=_p8_ton(r['rec_vol']), share=f"{r['share']:.1f}", tags=tags))
+            note = T('p8_detail_big_tag').strip() if big else '-'
+            rows_raw_a.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_fmt_pct(r['yoy']),
+                                _p8_ton(r['rec_vol']), _p8_ton(r['ly_vol']), f"{r['share']:.1f}%", note])
         col_widths_a = _pdf_table_col_widths(rows_raw_a, doc.width)
         data_a = [[Paragraph(h, header_cell) for h in rows_raw_a[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw_a[1:]]
         t_a = Table(data_a, colWidths=col_widths_a, repeatRows=1)
@@ -2096,27 +2098,25 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
         ]))
-        story.append(t_a)
-        for nline in narratives_a:
-            story.append(Paragraph(nline, narrative_cell))
-        if excluded_n > 0:
-            story.append(Paragraph(T('p8_report_excluded_note', n=excluded_n), small))
+        excluded_note = [Paragraph(T('p8_report_excluded_note_a', n=excluded_n), small)] if excluded_n > 0 else []
+        story.append(KeepTogether([
+            Paragraph(T('p8_report_section_a_header', n=len(a_top)), styles['Heading2']),
+            Paragraph(T('p8_report_section_a_sub'), small),
+            Spacer(1, 4), t_a,
+        ] + excluded_note))
         story.append(Spacer(1, 14))
 
     # Section B 상세
     if not B.empty:
-        b_top = B.head(15)
-        story.append(Paragraph(T('p8_report_section_b_header', n=len(b_top)), styles['Heading2']))
-        story.append(Paragraph(T('p8_report_section_b_sub'), small))
+        # 표기변형 의심(사실상 기존 품목이 이름만 바뀐 것) 항목은 무조건 제외
+        meaningful_b = B[~B['suspect']]
+        excluded_n_b = len(B) - len(meaningful_b)
+        b_top = meaningful_b.head(15)
         headers_b = ['#', T('p8_col_item'), T('p8_col_score'), T('p8_col_vol'), T('p8_col_ship'), T('p8_col_top_importer')]
         rows_raw_b = [headers_b]
-        narratives_b = []
         for i, (_, r) in enumerate(b_top.iterrows()):
             top_imp_disp = f"{r['top1_imp']} {r['top1_share']:.0f}%" if r['top1_imp'] else '-'
             rows_raw_b.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_ton(r['vol']), f"{r['ship']}회" if lang == 'ko' else str(r['ship']), top_imp_disp])
-            suspect = T('p8_detail_suspect_tag') if r.get('suspect') else ''
-            narratives_b.append(T('p8_detail_b_narrative', tag=T('p8_detail_new_tag'), vol=_p8_ton(r['vol']), ship=r['ship'],
-                                    imp=r['top1_imp'] or '-', share=f"{r['top1_share']:.0f}", suspect=suspect))
         col_widths_b = _pdf_table_col_widths(rows_raw_b, doc.width)
         data_b = [[Paragraph(h, header_cell) for h in rows_raw_b[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw_b[1:]]
         t_b = Table(data_b, colWidths=col_widths_b, repeatRows=1)
@@ -2126,9 +2126,12 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
         ]))
-        story.append(t_b)
-        for nline in narratives_b:
-            story.append(Paragraph(nline, narrative_cell))
+        excluded_note_b = [Paragraph(T('p8_report_excluded_note_b', n=excluded_n_b), small)] if excluded_n_b > 0 else []
+        story.append(KeepTogether([
+            Paragraph(T('p8_report_section_b_header', n=len(b_top)), styles['Heading2']),
+            Paragraph(T('p8_report_section_b_sub'), small),
+            Spacer(1, 4), t_b,
+        ] + excluded_note_b))
         story.append(Spacer(1, 14))
 
     story.append(Paragraph(T('p8_report_footer'), small))
