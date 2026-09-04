@@ -325,6 +325,7 @@ TEXTS = {
         'p8_generate_report_btn': '📊 리포트 PDF 생성 (상세)',
         'p8_download_report_btn': '📥 리포트 PDF 다운로드',
         'p8_cat_all': '전체 품목',
+        'p8_report_excluded_note': '※ 저베이스(작년 물량 거의 0)이면서 점유율도 미미한 {n}건은 상세 목록에서 제외했습니다.',
 
         'p3_title': '🔀 공급망 흐름도 (Sankey)',
         'p3_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
@@ -825,6 +826,7 @@ TEXTS = {
         'p8_generate_report_btn': '📊 Generate Detailed Report PDF',
         'p8_download_report_btn': '📥 Download Report PDF',
         'p8_cat_all': 'All items',
+        'p8_report_excluded_note': '※ {n} items with a near-zero prior-year base and negligible share were excluded from the detail list.',
 
         'p3_title': '🔀 Supply Chain Flow (Sankey)',
         'p3_upload_label': 'Upload the full market/supply chain data',
@@ -2069,7 +2071,11 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
 
     # Section A 상세
     if not a_growing.empty:
-        a_top = a_growing.head(15)
+        # 저베이스(작년 물량이 거의 0)이면서 점유율도 미미한(0.05% 미만) 항목은
+        # 상위 15 '상세' 목록에서 제외한다 — 감점만으로는 리스트가 노이즈로 채워지는 걸 못 막았음.
+        meaningful_a = a_growing[~(a_growing['low_base'] & (a_growing['share'] < 0.05))]
+        excluded_n = len(a_growing) - len(meaningful_a)
+        a_top = meaningful_a.head(15)
         story.append(Paragraph(T('p8_report_section_a_header', n=len(a_top)), styles['Heading2']))
         story.append(Paragraph(T('p8_report_section_a_sub'), small))
         headers_a = ['#', T('p8_col_item'), T('p8_col_score'), T('p8_col_yoy'), T('p8_col_rec_vol'), T('p8_col_ly_vol')]
@@ -2093,6 +2099,8 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
         story.append(t_a)
         for nline in narratives_a:
             story.append(Paragraph(nline, narrative_cell))
+        if excluded_n > 0:
+            story.append(Paragraph(T('p8_report_excluded_note', n=excluded_n), small))
         story.append(Spacer(1, 14))
 
     # Section B 상세
