@@ -1099,6 +1099,27 @@ def get_cluster_name(cluster_labels, preprocessed_names):
     return final_cluster_names
 
 # --- [수정 2] iqr_multiplier 파라미터 추가 (슬라이더 연동) ---
+def weighted_avg(df, value_col, weight_col='volume'):
+    """물량가중평균(VWAP). 거래건수가 아니라 실제 물량 기준으로 가중해야
+    '소량 거래 1건'이 '대량 거래 1건'과 똑같은 비중으로 평균을 왜곡하지 않는다.
+    weight_col 합이 0/NaN이면 NaN을 반환한다."""
+    if df.empty:
+        return np.nan
+    w = df[weight_col]
+    tw = w.sum()
+    if tw == 0 or pd.isna(tw):
+        return np.nan
+    return (df[value_col] * w).sum() / tw
+
+
+def weighted_avg_groupby(df, group_cols, value_col, weight_col='volume', out_name=None):
+    """group_cols 기준으로 물량가중평균을 계산해 Series(또는 group_cols가 여러 개면
+    MultiIndex Series)로 반환하는 공통 헬퍼. groupby().apply()를 중첩 사용하지 않아
+    최신 pandas에서 그룹 기준 컬럼이 사라지는 문제를 피한다."""
+    result = df.groupby(group_cols).apply(lambda g: weighted_avg(g, value_col, weight_col))
+    return result.rename(out_name or value_col)
+
+
 def remove_outliers_iqr(df, column_name, cap_percent=0.07, iqr_multiplier=1.5):
     """IQR 방식을 사용하되, 제거 비율을 최대 7%로 제한하여 이상치를 제거하는 함수"""
     if df.empty:
@@ -3343,7 +3364,7 @@ if selected == T('menu_opt_market'):
                     market_df['expected_price'] = np.interp(market_df['volume'], lowess_results[:, 0], lowess_results[:, 1])
                     market_df['competitiveness_index'] = market_df['expected_price'] - market_df['unit_price']
                     
-                    all_competitors_ranked = market_df.groupby('importer_name')['competitiveness_index'].mean().sort_values(ascending=False).reset_index()
+                    all_competitors_ranked = weighted_avg_groupby(market_df, 'importer_name', 'competitiveness_index', 'volume').sort_values(ascending=False).reset_index()
                     
                     customer_rank_info = all_competitors_ranked[all_competitors_ranked['importer_name'] == customer_name_selection]
                     customer_rank = customer_rank_info.index[0] if not customer_rank_info.empty else len(all_competitors_ranked)
@@ -3420,7 +3441,7 @@ if selected == T('menu_opt_market'):
         # --- [수정 15] 필터 적용 로직 끝 ---
         
         # --- [수정 16] 필터링된 market_df를 기준으로 경쟁사 랭킹 *다시 계산* ---
-        filtered_competitors_ranked = market_df.groupby('importer_name')['competitiveness_index'].mean().sort_values(ascending=False).reset_index()
+        filtered_competitors_ranked = weighted_avg_groupby(market_df, 'importer_name', 'competitiveness_index', 'volume').sort_values(ascending=False).reset_index()
         customer_rank_info_filtered = filtered_competitors_ranked[filtered_competitors_ranked['importer_name'] == customer_name]
         customer_rank_filtered = customer_rank_info_filtered.index[0] if not customer_rank_info_filtered.empty else len(filtered_competitors_ranked)
         top_competitors_list_filtered = filtered_competitors_ranked.iloc[:customer_rank_filtered]['importer_name'].tolist()
@@ -3457,7 +3478,7 @@ if selected == T('menu_opt_market'):
 
         with st.expander(T('p2_exp2_title', product=analyzed_product_name), expanded=True): # 새 페이지
             st.markdown(f"##### {T('p2_monthly_comp_subheader')}")
-            monthly_competitiveness = market_df.groupby(['year_month', 'importer_name'])['competitiveness_index'].mean().unstack()
+            monthly_competitiveness = weighted_avg_groupby(market_df, ['year_month', 'importer_name'], 'competitiveness_index', 'volume').unstack()
             
             market_avg_monthly_comp = monthly_competitiveness.mean(axis=1)
             customer_monthly_comp = monthly_competitiveness.get(customer_name)
@@ -3479,9 +3500,9 @@ if selected == T('menu_opt_market'):
             st.markdown("---")
 
             st.markdown(f"##### {T('p2_price_trend_subheader')}")
-            market_avg_price = market_df.groupby('year_month')['unit_price'].mean().rename('market_avg_price')
+            market_avg_price = weighted_avg_groupby(market_df, 'year_month', 'unit_price', 'volume', out_name='market_avg_price')
             customer_market_df = market_df[market_df['importer_name'] == customer_name]
-            customer_avg_price = customer_market_df.groupby('year_month')['unit_price'].mean().rename('customer_avg_price')
+            customer_avg_price = weighted_avg_groupby(customer_market_df, 'year_month', 'unit_price', 'volume', out_name='customer_avg_price')
             
             fig4 = go.Figure()
             fig4.add_trace(go.Scatter(x=market_avg_price.index.to_timestamp(), y=market_avg_price, mode='lines+markers', name=T('legend_market_avg_price'), line=dict(width=3)))
@@ -3492,7 +3513,7 @@ if selected == T('menu_opt_market'):
                 st.info(T('p2_benchmark_info'))
                 st.caption(T('p2_benchmark_caption'))
                 top_competitors_df = market_df[market_df['importer_name'].isin(top_competitors_list_filtered)] 
-                top_competitors_avg_price = top_competitors_df.groupby('year_month')['unit_price'].mean().rename('top_competitors_avg_price')
+                top_competitors_avg_price = weighted_avg_groupby(top_competitors_df, 'year_month', 'unit_price', 'volume', out_name='top_competitors_avg_price')
                 fig4.add_trace(go.Scatter(x=top_competitors_avg_price.index.to_timestamp(), y=top_competitors_avg_price, mode='lines+markers', name=T('legend_top_group_avg_price'), line=dict(color='green', dash='dash')))
             else:
                 st.success(T('p2_benchmark_success', customer=customer_name))
@@ -3502,11 +3523,11 @@ if selected == T('menu_opt_market'):
 
             st.markdown(f"##### {T('p2_price_compare_subheader')}")
             col1, col2, col3 = st.columns(3)
-            col1.metric(T('metric_market_avg'), f"${market_df['unit_price'].mean():.2f}")
-            col2.metric(T('metric_customer_avg', customer=customer_name), f"${customer_market_df['unit_price'].mean():.2f}")
+            col1.metric(T('metric_market_avg'), f"${weighted_avg(market_df, 'unit_price', 'volume'):.2f}")
+            col2.metric(T('metric_customer_avg', customer=customer_name), f"${weighted_avg(customer_market_df, 'unit_price', 'volume'):.2f}")
             # --- [수정 21] 필터링된 랭킹 사용 ---
             if top_competitors_list_filtered: 
-                col3.metric(T('metric_top_group_avg'), f"${top_competitors_df['unit_price'].mean():.2f}")
+                col3.metric(T('metric_top_group_avg'), f"${weighted_avg(top_competitors_df, 'unit_price', 'volume'):.2f}")
 
         # --- [수정 22] 필터링된 랭킹 사용 ---
         if top_competitors_list_filtered: 
@@ -3566,7 +3587,7 @@ if selected == T('menu_opt_market'):
                     top_importers_by_vol = price_comp_df.groupby('importer_name')['volume'].sum().nlargest(5).index.tolist()
                     if customer_name not in top_importers_by_vol: top_importers_by_vol.append(customer_name)
                     price_comp_data = price_comp_df[price_comp_df['importer_name'].isin(top_importers_by_vol)]
-                    avg_price_by_importer = price_comp_data.groupby('importer_name')['unit_price'].mean().sort_values().reset_index()
+                    avg_price_by_importer = weighted_avg_groupby(price_comp_data, 'importer_name', 'unit_price', 'volume').sort_values().reset_index()
                     
                     competitors = [imp for imp in avg_price_by_importer['importer_name'] if imp != customer_name]
                     blue_shades = px.colors.sequential.Blues_r[::(len(px.colors.sequential.Blues_r)//(len(competitors)+1)) if competitors else 1]
@@ -3593,7 +3614,10 @@ if selected == T('menu_opt_market'):
                                   labels={'quarter': T('axis_quarter'), 'unit_price': T('axis_unit_price')})
                     st.plotly_chart(fig9, use_container_width=True)
                     with st.expander(T('p2_detail_data_expander')):
-                        summary_df_exp = exporter_analysis_df_top10.groupby('Exporter')['unit_price'].agg(['max', 'mean', 'min']).reset_index()
+                        summary_df_exp = exporter_analysis_df_top10.groupby('Exporter')['unit_price'].agg(['max', 'min']).reset_index()
+                        exp_vwap = weighted_avg_groupby(exporter_analysis_df_top10, 'Exporter', 'unit_price', 'volume')
+                        summary_df_exp['mean'] = summary_df_exp['Exporter'].map(exp_vwap)
+                        summary_df_exp = summary_df_exp[['Exporter', 'max', 'mean', 'min']]
                         summary_df_exp.columns = [T('col_supplier'), T('col_max_price'), T('col_avg_price'), T('col_min_price')]
                         st.dataframe(summary_df_exp.style.format({T('col_max_price'): '${:,.2f}', T('col_avg_price'): '${:,.2f}', T('col_min_price'): '${:,.2f}'}))
                     
@@ -3608,8 +3632,10 @@ if selected == T('menu_opt_market'):
                             st.subheader(T('p2_volume_price_compare_subheader'))
                             importer_summary = single_exporter_df.groupby('importer_name').agg(
                                 total_volume=('volume', 'sum'),
-                                avg_unit_price=('unit_price', 'mean')
-                            ).sort_values('total_volume', ascending=False).reset_index()
+                            ).reset_index()
+                            importer_vwap = weighted_avg_groupby(single_exporter_df, 'importer_name', 'unit_price', 'volume')
+                            importer_summary['avg_unit_price'] = importer_summary['importer_name'].map(importer_vwap)
+                            importer_summary = importer_summary.sort_values('total_volume', ascending=False)
 
                             fig8 = go.Figure()
                             fig8.add_trace(go.Bar(
@@ -3650,14 +3676,22 @@ if selected == T('menu_opt_market'):
                                            labels={'importer_name': T('col_importer'), 'unit_price': T('axis_unit_price')}, color='importer_name', color_discrete_map=color_map_box)
                             st.plotly_chart(fig10, use_container_width=True)
                             with st.expander(T('p2_detail_data_expander')):
-                                summary_df_imp = single_exporter_df_top10.groupby('importer_name')['unit_price'].agg(['max', 'mean', 'min']).reset_index()
+                                summary_df_imp = single_exporter_df_top10.groupby('importer_name')['unit_price'].agg(['max', 'min']).reset_index()
+                                imp_vwap = weighted_avg_groupby(single_exporter_df_top10, 'importer_name', 'unit_price', 'volume')
+                                summary_df_imp['mean'] = summary_df_imp['importer_name'].map(imp_vwap)
+                                summary_df_imp = summary_df_imp[['importer_name', 'max', 'mean', 'min']]
                                 summary_df_imp.columns = [T('col_importer'), T('col_max_price'), T('col_avg_price'), T('col_min_price')]
                                 st.dataframe(summary_df_imp.style.format({T('col_max_price'): '${:,.2f}', T('col_avg_price'): '${:,.2f}', T('col_min_price'): '${:,.2f}'}))
 
                     st.subheader(T('p2_alt_sourcing_subheader', year=selected_year_exporter))
                     
-                    # --- [수정 24] 'export_country'를 사용하도록 groupby 컬럼 변경 ---
-                    avg_prices = exporter_analysis_df.groupby(['quarter', 'Exporter', 'export_country']).agg(avg_price=('unit_price', 'mean'), representative_product=('product_name', 'first')).reset_index()
+                    # --- [수정 24] 'export_country'를 사용하도록 groupby 컬럼 변경 (+ 물량가중평균으로 변경) ---
+                    avg_prices = exporter_analysis_df.groupby(['quarter', 'Exporter', 'export_country']).agg(
+                        representative_product=('product_name', 'first'),
+                        volume=('volume', 'sum'),
+                    ).reset_index()
+                    _avg_price_vwap = weighted_avg_groupby(exporter_analysis_df, ['quarter', 'Exporter', 'export_country'], 'unit_price', 'volume', out_name='avg_price').reset_index()
+                    avg_prices = avg_prices.merge(_avg_price_vwap, on=['quarter', 'Exporter', 'export_country'])
                     
                     # --- [수정 25] 'export_country'를 기준으로 고객사 원산지 추출 ---
                     customer_origins = exporter_analysis_df[exporter_analysis_df['importer_name'] == customer_name]['export_country'].unique()
@@ -3678,15 +3712,16 @@ if selected == T('menu_opt_market'):
                             else:
                                 st.write(T('p2_no_exporter_deals'))
                             
-                            # --- [수정 26] 'export_country' 기준으로 현재 원산지 옵션 표시 ---
-                            customer_origins_q_df = q_df[q_df['export_country'].isin(customer_origins)].groupby('export_country')['avg_price'].mean().reset_index().sort_values('avg_price')
+                            # --- [수정 26] 'export_country' 기준으로 현재 원산지 옵션 표시 (물량가중평균) ---
+                            customer_origins_q_sub = q_df[q_df['export_country'].isin(customer_origins)]
+                            customer_origins_q_df = weighted_avg_groupby(customer_origins_q_sub, 'export_country', 'avg_price', 'volume').reset_index().sort_values('avg_price')
                             if not customer_origins_q_df.empty:
                                 st.dataframe(customer_origins_q_df.rename(columns={'export_country': T('col_origin'), 'avg_price': T('col_avg_price2')}).style.format({T('col_avg_price2'): '${:,.2f}'}))
                             else:
                                 st.write(T('p2_no_origin_deals'))
 
                             st.markdown(T('p2_alt_recommend_md'))
-                            customer_avg_price_q = q_df[q_df['Exporter'].isin(customer_exporters_in_year)]['avg_price'].mean()
+                            customer_avg_price_q = weighted_avg(q_df[q_df['Exporter'].isin(customer_exporters_in_year)], 'avg_price', 'volume')
                             if not pd.isna(customer_avg_price_q):
                                 cheaper_exporters = q_df[(~q_df['Exporter'].isin(customer_exporters_in_year)) & (q_df['avg_price'] < customer_avg_price_q)].sort_values('avg_price')
                                 if not cheaper_exporters.empty:
@@ -3694,10 +3729,10 @@ if selected == T('menu_opt_market'):
                                 else:
                                     st.write(T('p2_no_cheaper_exporter'))
                             
-                            # --- [수정 27] 'export_country' 기준으로 대안 원산지 탐색 ---
-                            customer_origin_avg_price_q = q_df[q_df['export_country'].isin(customer_origins)].groupby('export_country')['avg_price'].mean().mean()
+                            # --- [수정 27] 'export_country' 기준으로 대안 원산지 탐색 (물량가중평균) ---
+                            customer_origin_avg_price_q = weighted_avg(customer_origins_q_sub, 'avg_price', 'volume')
                             if not pd.isna(customer_origin_avg_price_q):
-                                cheaper_origins = q_df.groupby('export_country')['avg_price'].mean().reset_index()
+                                cheaper_origins = weighted_avg_groupby(q_df, 'export_country', 'avg_price', 'volume').reset_index()
                                 cheaper_origins = cheaper_origins[(~cheaper_origins['export_country'].isin(customer_origins)) & (cheaper_origins['avg_price'] < customer_origin_avg_price_q)].sort_values('avg_price')
                                 if not cheaper_origins.empty:
                                     st.dataframe(cheaper_origins.rename(columns={'export_country': T('col_recommend_origin'), 'avg_price': T('col_avg_price2')}).style.format({T('col_avg_price2'): '${:,.2f}'}))
@@ -3798,7 +3833,8 @@ if selected == T('menu_opt_flow'):
                     s = df[m]
                     if s.empty:
                         return None
-                    g = s.groupby(right_col).agg(volume=('_volume', 'sum'), avg_price=('_price', 'mean')).reset_index()
+                    g = s.groupby(right_col).agg(volume=('_volume', 'sum')).reset_index()
+                    g['avg_price'] = g[right_col].map(weighted_avg_groupby(s, right_col, '_price', '_volume'))
                     return g.sort_values('volume', ascending=False)
 
                 if not compare_mode:
@@ -4076,7 +4112,7 @@ if selected == T('menu_opt_season'):
         if raw_df is not None:
             headers = st.session_state.season_headers
             cols = detect_standard_columns(headers)
-            missing = [k for k in ['date', 'product', 'price'] if not cols[k]]
+            missing = [k for k in ['date', 'product', 'price', 'volume'] if not cols[k]]
             if missing:
                 st.error(T('p5_missing_cols_error', cols=', '.join(missing)))
                 st.stop()
@@ -4109,6 +4145,7 @@ if selected == T('menu_opt_season'):
                     df = raw_df.copy()
                     df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                     df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                    df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
                     df = df.dropna(subset=['_date', '_price', cols['product']])
                     sub = df[df[cols['product']].astype(str).isin(selected_raw_names)]
 
@@ -4120,17 +4157,17 @@ if selected == T('menu_opt_season'):
                         sub['_month'] = sub['_date'].dt.month
                         sub['_year'] = sub['_date'].dt.year
 
-                        overall = sub.groupby('_ym')['_price'].mean().reset_index().sort_values('_ym')
+                        overall = weighted_avg_groupby(sub, '_ym', '_price', '_volume').reset_index().sort_values('_ym')
                         overall['_ym_str'] = overall['_ym'].astype(str)
 
-                        month_avg = sub.groupby('_month')['_price'].mean()
+                        month_avg = weighted_avg_groupby(sub, '_month', '_price', '_volume')
                         years_count = sub['_year'].nunique()
-                        overall_avg = sub['_price'].mean()
+                        overall_avg = weighted_avg(sub, '_price', '_volume')
                         cheapest_month = int(month_avg.idxmin())
                         cheapest_month_pct = (overall_avg - month_avg.min()) / overall_avg * 100
 
                         latest_year = sub['_year'].max()
-                        monthly_avg_latest_year = sub[sub['_year'] == latest_year].groupby('_month')['_price'].mean()
+                        monthly_avg_latest_year = weighted_avg_groupby(sub[sub['_year'] == latest_year], '_month', '_price', '_volume')
                         peak_months = []
                         if len(monthly_avg_latest_year) >= 3:
                             lyr_mean = monthly_avg_latest_year.mean()
@@ -4140,7 +4177,7 @@ if selected == T('menu_opt_season'):
                         if breakdown != 'none':
                             bcol = cols[breakdown]
                             for name, g in sub.groupby(bcol):
-                                s = g.groupby('_ym')['_price'].mean().reset_index().sort_values('_ym')
+                                s = weighted_avg_groupby(g, '_ym', '_price', '_volume').reset_index().sort_values('_ym')
                                 s['_ym_str'] = s['_ym'].astype(str)
                                 breakdown_series[str(name)] = s
 
@@ -4319,17 +4356,17 @@ if selected == T('menu_opt_churn'):
                     new_list = sorted([(n, float(b_vol.get(n, 0))) for n in new_items], key=lambda x: -x[1])
                     lost_list = sorted([(n, float(a_vol.get(n, 0))) for n in lost_items], key=lambda x: -x[1])
 
-                    # --- ① 가격 비교: 신규/유지/이탈 거래처의 평균단가 ---
+                    # --- ① 가격 비교: 신규/유지/이탈 거래처의 물량가중평균단가 ---
                     new_price = lost_price = kept_price = None
                     if cols['price']:
                         if new_items:
-                            v = b_df[b_df[axis_col].astype(str).isin(new_items)]['_price'].mean()
+                            v = weighted_avg(b_df[b_df[axis_col].astype(str).isin(new_items)], '_price', '_volume')
                             new_price = float(v) if pd.notna(v) else None
                         if lost_items:
-                            v = a_df[a_df[axis_col].astype(str).isin(lost_items)]['_price'].mean()
+                            v = weighted_avg(a_df[a_df[axis_col].astype(str).isin(lost_items)], '_price', '_volume')
                             lost_price = float(v) if pd.notna(v) else None
                         if kept_items:
-                            v = b_df[b_df[axis_col].astype(str).isin(kept_items)]['_price'].mean()
+                            v = weighted_avg(b_df[b_df[axis_col].astype(str).isin(kept_items)], '_price', '_volume')
                             kept_price = float(v) if pd.notna(v) else None
 
                     # --- ② 집중도 변화: 기간 A→B 사이 1위 거래처 의존도가 어떻게 바뀌었는지 ---
