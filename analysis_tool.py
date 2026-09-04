@@ -489,6 +489,7 @@ TEXTS = {
         'p7_missing_cols_error': "필수 컬럼이 부족합니다: {cols}. 파일 내용을 확인해주세요.",
         'p7_no_data_warning': '집계할 데이터가 없습니다.',
         'p7_table_subheader': '데이터 표',
+        'p7_total_col': '합계',
 
         'pdf_generate_btn': '📄 PDF 보고서 생성',
         'pdf_download_btn': '📥 PDF 다운로드',
@@ -1006,6 +1007,7 @@ TEXTS = {
         'p7_missing_cols_error': "Required columns are missing: {cols}. Please check the file contents.",
         'p7_no_data_warning': 'No data to aggregate.',
         'p7_table_subheader': 'Data table',
+        'p7_total_col': 'Total',
 
         'pdf_generate_btn': '📄 Generate PDF Report',
         'pdf_download_btn': '📥 Download PDF',
@@ -4536,6 +4538,15 @@ if selected == T('menu_opt_pivot'):
         with col2:
             col_labels = st.multiselect(T('p7_col_label_multi'), options=COL_OPTIONS, key="pivot_cols")
 
+        _parsed_dates = pd.to_datetime(raw_df[cols['date']], errors='coerce').dropna()
+        _min_date = _parsed_dates.min().date() if len(_parsed_dates) else datetime.date.today()
+        _max_date = _parsed_dates.max().date() if len(_parsed_dates) else datetime.date.today()
+        colD1, colD2 = st.columns(2)
+        with colD1:
+            pivot_date_start = st.date_input(T('p4_date_start'), value=_min_date, key="pivot_date_start")
+        with colD2:
+            pivot_date_end = st.date_input(T('p4_date_end'), value=_max_date, key="pivot_date_end")
+
         value_labels = st.multiselect(T('p7_values_label'), options=list(METRIC_OPTIONS.keys()), default=[T('p7_metric_volume_sum')], key="pivot_values")
         view_label = st.selectbox(T('p7_view_label'), options=list(VIEW_MAP.keys()), key="pivot_view")
 
@@ -4545,8 +4556,11 @@ if selected == T('menu_opt_pivot'):
         for fc_label in filter_col_labels:
             fcol = DIM_MAP[fc_label]
             with st.expander(fc_label):
-                opts = sorted(raw_df[fcol].dropna().astype(str).unique())
-                filter_selections[fcol] = st.multiselect(T('p7_filter_values'), options=opts, key=f"pivot_filter_vals_{fcol}")
+                value_counts = raw_df[fcol].dropna().astype(str).value_counts()  # 건수 많은 순
+                unit = '건' if st.session_state.lang == 'ko' else ''
+                label_to_value = {f"{val} ({cnt:,}{unit})": val for val, cnt in value_counts.items()}
+                selected_labels = st.multiselect(T('p7_filter_values'), options=list(label_to_value.keys()), key=f"pivot_filter_vals_{fcol}")
+                filter_selections[fcol] = [label_to_value[l] for l in selected_labels]
 
         if st.button(T('p7_run_btn')):
             if not row_labels:
@@ -4558,6 +4572,7 @@ if selected == T('menu_opt_pivot'):
                 df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                 df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
                 df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                df = df[(df['_date'] >= pd.to_datetime(pivot_date_start)) & (df['_date'] <= pd.to_datetime(pivot_date_end))]
 
                 for fcol, vals in filter_selections.items():
                     if vals:
@@ -4693,11 +4708,37 @@ if selected == T('menu_opt_pivot'):
                 display_combined.index = display_combined.index.set_names(R['row_labels'])
             else:
                 display_combined.index = display_combined.index.rename(' | '.join(R['row_labels']))
+
+            # 열이 여러 칸으로 나뉜 경우, 지표별로 '합계' 컬럼을 맨 앞에 추가 (연간 합계 등 한눈에 보기용)
             if R['has_col'] and isinstance(display_combined.columns, pd.MultiIndex):
+                total_label = T('p7_total_col')
+                pieces = []
+                for metric_name in R['value_labels']:
+                    sub = display_combined[metric_name]
+                    total_series = sub.sum(axis=1, skipna=True)
+                    sub_with_total = pd.concat([total_series.rename(total_label), sub], axis=1)
+                    sub_with_total.columns = pd.MultiIndex.from_product([[metric_name], sub_with_total.columns])
+                    pieces.append(sub_with_total)
+                display_combined = pd.concat(pieces, axis=1)
                 display_combined.columns = display_combined.columns.set_names([T('p7_values_label')] + R['col_labels'])
             else:
                 display_combined.columns = display_combined.columns.rename(T('p7_values_label'))
-            st.dataframe(display_combined)
+
+            # 지표 종류에 맞춰 숫자 포맷(천단위 콤마·단가는 $ 소수점) 적용 — 단위를 못 알아보는 문제 방지
+            def _is_price_metric(name):
+                return ('단가' in name) or ('price' in name.lower())
+
+            def _fmt_cell(v, is_price):
+                if pd.isna(v):
+                    return '-'
+                return f"${v:,.2f}" if is_price else f"{v:,.0f}"
+
+            display_str = display_combined.copy()
+            for c in display_combined.columns:
+                metric_name = c[0] if isinstance(c, tuple) else c
+                is_price = _is_price_metric(metric_name)
+                display_str[c] = display_combined[c].apply(lambda v: _fmt_cell(v, is_price))
+            st.dataframe(display_str)
 
             if st.button(T('pdf_generate_btn'), key="pivot_pdf_btn"):
                 with st.spinner(T('pdf_generating_msg')):
