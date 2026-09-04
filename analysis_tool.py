@@ -464,6 +464,10 @@ TEXTS = {
         'p7_upload_caption': '※ TDS raw file을 업로드해주세요. (고객사/시장 데이터 모두 가능)',
         'p7_row_label': '행 (기준)',
         'p7_row_month': '월별',
+        'p7_dim_year': '연도별',
+        'p7_dim_quarter': '분기별',
+        'p7_dim_month_only': '월별(연도 무관)',
+        'p7_capped_note': "※ '{field}' 항목 수가 너무 많아, 물량 상위 {n}개만 표시하고 나머지는 '기타'로 묶었습니다.",
         'p7_row_exporter': '공급사별',
         'p7_row_origin': '원산지별',
         'p7_row_product': '품목별',
@@ -977,6 +981,10 @@ TEXTS = {
         'p7_upload_caption': '※ Please upload a TDS raw file (customer or market data both work).',
         'p7_row_label': 'Rows (group by)',
         'p7_row_month': 'By month',
+        'p7_dim_year': 'By year',
+        'p7_dim_quarter': 'By quarter',
+        'p7_dim_month_only': 'By month (all years)',
+        'p7_capped_note': "※ '{field}' had too many distinct values — showing the top {n} by volume, with the rest grouped as \"Others\".",
         'p7_row_exporter': 'By supplier',
         'p7_row_origin': 'By origin',
         'p7_row_product': 'By product',
@@ -1116,8 +1124,18 @@ def weighted_avg_groupby(df, group_cols, value_col, weight_col='volume', out_nam
     """group_cols 기준으로 물량가중평균을 계산해 Series(또는 group_cols가 여러 개면
     MultiIndex Series)로 반환하는 공통 헬퍼. groupby().apply()를 중첩 사용하지 않아
     최신 pandas에서 그룹 기준 컬럼이 사라지는 문제를 피한다."""
+    name = out_name or value_col
+    if df.empty:
+        # 빈 데이터프레임에 groupby().apply()를 하면 pandas가 Series가 아니라
+        # 빈 DataFrame을 반환해서 이후 .rename(문자열)이 깨짐 — 미리 빈 Series로 처리.
+        return pd.Series(dtype=float, name=name)
     result = df.groupby(group_cols).apply(lambda g: weighted_avg(g, value_col, weight_col))
-    return result.rename(out_name or value_col)
+    if isinstance(result, pd.DataFrame):
+        # 일부 pandas 버전/엣지케이스(그룹이 1개뿐이거나 특이한 조합)에서
+        # Series 대신 DataFrame이 나올 수 있어 명시적으로 Series로 강제 변환.
+        result = result.iloc[:, 0] if result.shape[1] >= 1 else pd.Series(dtype=float)
+    result.name = name
+    return result
 
 
 def remove_outliers_iqr(df, column_name, cap_percent=0.07, iqr_multiplier=1.5):
@@ -4491,7 +4509,9 @@ if selected == T('menu_opt_pivot'):
             (T('p7_row_importer'), cols['importer']),
         ], raw_df, cols)
 
-        ROW_OPTIONS = [T('p7_row_month')] + list(DIM_MAP.keys())
+        DATE_DIM_LABELS = [T('p7_row_month'), T('p7_dim_year'), T('p7_dim_quarter'), T('p7_dim_month_only')]
+        ROW_OPTIONS = DATE_DIM_LABELS + list(DIM_MAP.keys())
+        COL_OPTIONS = DATE_DIM_LABELS + list(DIM_MAP.keys())
 
         METRIC_OPTIONS = {
             T('p7_metric_volume_sum'): ('_volume', 'sum'),
@@ -4514,7 +4534,7 @@ if selected == T('menu_opt_pivot'):
         with col1:
             row_labels = st.multiselect(T('p7_row_label_multi'), options=ROW_OPTIONS, default=[ROW_OPTIONS[0]], key="pivot_rows")
         with col2:
-            col_labels = st.multiselect(T('p7_col_label_multi'), options=list(DIM_MAP.keys()), key="pivot_cols")
+            col_labels = st.multiselect(T('p7_col_label_multi'), options=COL_OPTIONS, key="pivot_cols")
 
         value_labels = st.multiselect(T('p7_values_label'), options=list(METRIC_OPTIONS.keys()), default=[T('p7_metric_volume_sum')], key="pivot_values")
         view_label = st.selectbox(T('p7_view_label'), options=list(VIEW_MAP.keys()), key="pivot_view")
@@ -4543,23 +4563,43 @@ if selected == T('menu_opt_pivot'):
                     if vals:
                         df = df[df[fcol].astype(str).isin(vals)]
 
-                if T('p7_row_month') in row_labels:
-                    df['_row_month'] = df['_date'].dt.to_period('M').astype(str)
+                MAX_CATEGORIES = 20
+                capped_fields = []
+
+                def _build_dim_field(label):
+                    """행/열로 고른 라벨(날짜류 또는 DIM_MAP의 일반 컬럼) 하나에 대해 문자열 컬럼을 만든다.
+                    고유값이 MAX_CATEGORIES를 넘으면 물량 상위 항목만 남기고 나머지는 '기타'로 묶어서,
+                    품목명처럼 종류가 수천 개인 컬럼을 열로 골랐을 때 표가 통째로 깨지는 걸 방지한다."""
+                    if label == T('p7_row_month'):
+                        s = df['_date'].dt.to_period('M').astype(str)
+                    elif label == T('p7_dim_year'):
+                        s = df['_date'].dt.year.astype('Int64').astype(str)
+                    elif label == T('p7_dim_quarter'):
+                        s = df['_date'].dt.year.astype(str) + '-Q' + df['_date'].dt.quarter.astype('Int64').astype(str)
+                    elif label == T('p7_dim_month_only'):
+                        month_unit = '월' if st.session_state.lang == 'ko' else ''
+                        s = df['_date'].dt.month.astype('Int64').astype(str) + month_unit
+                    else:
+                        s = df[DIM_MAP[label]].astype(str)
+
+                    if s.nunique(dropna=True) > MAX_CATEGORIES:
+                        totals = df.assign(_tmp_dim=s).groupby('_tmp_dim')['_volume'].sum()
+                        top_vals = set(totals.nlargest(MAX_CATEGORIES).index)
+                        s = s.where(s.isin(top_vals), T('p2_others_label'))
+                        capped_fields.append(label)
+                    return s
 
                 row_fields = []
-                for rl in row_labels:
-                    if rl == T('p7_row_month'):
-                        row_fields.append('_row_month')
-                    else:
-                        actual_col = DIM_MAP[rl]
-                        df[f'_row_{actual_col}'] = df[actual_col].astype(str)
-                        row_fields.append(f'_row_{actual_col}')
+                for i, rl in enumerate(row_labels):
+                    fname = f'_row_{i}'
+                    df[fname] = _build_dim_field(rl)
+                    row_fields.append(fname)
 
                 col_fields = []
-                for cl in col_labels:
-                    actual_col = DIM_MAP[cl]
-                    df[f'_col_{actual_col}'] = df[actual_col].astype(str)
-                    col_fields.append(f'_col_{actual_col}')
+                for i, cl in enumerate(col_labels):
+                    fname = f'_col_{i}'
+                    df[fname] = _build_dim_field(cl)
+                    col_fields.append(fname)
 
                 needed = row_fields + col_fields + ['_volume']
                 df = df.dropna(subset=[c for c in needed if c in df.columns])
@@ -4590,6 +4630,7 @@ if selected == T('menu_opt_pivot'):
                         st.session_state.pivot_result = {
                             'combined': combined, 'row_labels': row_labels, 'col_labels': col_labels,
                             'value_labels': value_labels, 'view': VIEW_MAP[view_label], 'has_col': bool(col_fields),
+                            'capped_fields': capped_fields,
                         }
 
         if st.session_state.get('pivot_result'):
@@ -4645,8 +4686,13 @@ if selected == T('menu_opt_pivot'):
                 st.plotly_chart(fig, use_container_width=True)
 
             st.subheader(T('p7_table_subheader'))
+            for capped_label in R.get('capped_fields', []):
+                st.caption(T('p7_capped_note', field=capped_label, n=20))
             display_combined = combined.copy()
-            display_combined.index = display_combined.index.rename(' | '.join(R['row_labels']))
+            if isinstance(display_combined.index, pd.MultiIndex):
+                display_combined.index = display_combined.index.set_names(R['row_labels'])
+            else:
+                display_combined.index = display_combined.index.rename(' | '.join(R['row_labels']))
             if R['has_col'] and isinstance(display_combined.columns, pd.MultiIndex):
                 display_combined.columns = display_combined.columns.set_names([T('p7_values_label')] + R['col_labels'])
             else:
