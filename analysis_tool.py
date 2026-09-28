@@ -1474,23 +1474,61 @@ def reset_health_states():
     st.session_state.health_result = None
 
 
+_HS_COL_RE = re.compile(r'(?<![a-z])hs(?![a-z])')
+_CODE_COL_RE = re.compile(r'(?<![a-z])hs(?![a-z])|code|코드')
+
+
+def is_code_like_column(name):
+    """컬럼명이 HS코드 등 '코드' 컬럼인지 판별 (예: 'HS Code', 'Detailed HS-CODE', 'HS코드').
+    이런 컬럼은 0303890000처럼 숫자로만 되어 있어도 식별자이므로 문자열로 다뤄야 앞자리 0이 보존된다.
+    'hs'는 단어 단위로만 인식해서 'Months' 같은 컬럼명은 제외한다."""
+    return isinstance(name, str) and bool(_CODE_COL_RE.search(name.lower()))
+
+
+def is_hs_column(name):
+    """코드 컬럼 중 컬럼명에 'hs'가 단어로 들어간 HS코드 컬럼인지 판별 (앞자리 0 복원 대상)."""
+    return isinstance(name, str) and bool(_HS_COL_RE.search(name.lower()))
+
+
+def _pad_hs_code(value):
+    """HS코드는 항상 짝수 자리(6/8/10자리)라서, 엑셀 숫자 셀 등으로 앞자리 0이 사라져 홀수 자리가 된 값을 복원한다.
+    예: '303890000' → '0303890000', '303890000.0' → '0303890000'. 숫자가 아닌 값(HS Code Name 등)은 그대로."""
+    if not isinstance(value, str):
+        return value
+    code = re.sub(r'\.0+$', '', value.strip())
+    if code.isdigit() and len(code) % 2 == 1:
+        code = '0' + code
+    return code if code.isdigit() else value
+
+
 def read_uploaded_table(uploaded_file):
     """CSV(인코딩 자동 판별)/XLSX 파일을 읽어 DataFrame으로 반환하는 공통 헬퍼.
+    코드 컬럼(is_code_like_column)은 문자열로 읽어 앞자리 0을 보존하고,
+    HS코드 컬럼(is_hs_column)은 이미 사라진 앞자리 0까지 복원한다 (_pad_hs_code).
     실패 시 None을 반환한다 (호출부에서 오류 메시지 처리)."""
     if uploaded_file is None:
         return None
+    df = None
     if uploaded_file.name.endswith('.csv'):
         for enc in ('utf-8', 'euc-kr', 'cp949'):
             try:
                 uploaded_file.seek(0)
-                return pd.read_csv(uploaded_file, encoding=enc)
+                header = pd.read_csv(uploaded_file, encoding=enc, nrows=0).columns
+                uploaded_file.seek(0)
+                df = pd.read_csv(uploaded_file, encoding=enc, dtype={c: str for c in header if is_code_like_column(c)})
+                break
             except UnicodeDecodeError:
                 continue
-        return None
     elif uploaded_file.name.endswith('.xlsx'):
         uploaded_file.seek(0)
-        return pd.read_excel(uploaded_file)
-    return None
+        header = pd.read_excel(uploaded_file, nrows=0).columns
+        uploaded_file.seek(0)
+        df = pd.read_excel(uploaded_file, dtype={c: str for c in header if is_code_like_column(c)})
+    if df is not None:
+        for c in df.columns:
+            if is_hs_column(c):
+                df[c] = df[c].map(_pad_hs_code)
+    return df
 
 
 def detect_standard_columns(headers):
@@ -1517,8 +1555,9 @@ def detect_extra_dimension_columns(df, cols, max_unique_ratio=0.5):
     for c in df.columns:
         if c in used or c is None:
             continue
-        # pandas 3부터 문자열 컬럼이 object가 아니라 StringDtype으로 읽히므로 둘 다 허용
-        if pd.api.types.is_object_dtype(df[c]) or pd.api.types.is_string_dtype(df[c]):
+        # pandas 3부터 문자열 컬럼이 object가 아니라 StringDtype으로 읽히므로 둘 다 허용.
+        # HS코드처럼 숫자로만 된 코드 컬럼은 숫자형이어도 축 후보에 포함한다.
+        if is_code_like_column(c) or pd.api.types.is_object_dtype(df[c]) or pd.api.types.is_string_dtype(df[c]):
             nunique = df[c].nunique(dropna=True)
             if 1 < nunique <= max(50, n * max_unique_ratio):
                 extras.append(c)
