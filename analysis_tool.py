@@ -495,6 +495,7 @@ TEXTS = {
         'pdf_download_btn': '📥 PDF 다운로드',
         'pdf_generating_msg': 'PDF를 생성하고 있습니다...',
         'pdf_error_msg': 'PDF 생성 중 오류가 발생했습니다: {msg}',
+        'pdf_chart_export_warning': '차트 이미지를 PDF에 넣지 못했습니다 (차트가 빠진 채로 생성됩니다): {msg}',
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
         'multi_product_help': '실제 수입신고 명칭은 같은 상품이라도 표기가 조금씩 다를 수 있어요. 관련된 품목명을 모두 선택하면 하나로 합쳐서 분석합니다.',
         'insight_box_title': '💡 이번 분석에서 확인할 수 있는 것',
@@ -1013,6 +1014,7 @@ TEXTS = {
         'pdf_download_btn': '📥 Download PDF',
         'pdf_generating_msg': 'Generating PDF...',
         'pdf_error_msg': 'An error occurred while generating the PDF: {msg}',
+        'pdf_chart_export_warning': 'Could not add a chart image to the PDF (the PDF will be generated without it): {msg}',
         'multi_product_label': 'Search products (multi-select)',
         'multi_product_help': "Import declarations often spell the same product slightly differently. Select all related product names to combine them into one analysis.",
         'insight_box_title': '💡 What this analysis shows',
@@ -1816,18 +1818,26 @@ def cluster_product_names(raw_names):
 
 
 def fig_to_png_bytes(fig, width=900, height=500, scale=2):
-    """Plotly figure를 PNG 바이트로 변환 (PDF에 삽입하기 위함). kaleido 필요."""
+    """Plotly figure를 PNG 바이트로 변환 (PDF에 삽입하기 위함). kaleido 필요.
+    kaleido는 시스템 폰트를 쓰므로 한글이 깨지지 않도록 복사본에 NanumGothic을 지정한다 (원본 fig는 그대로)."""
     try:
-        return fig.to_image(format="png", width=width, height=height, scale=scale)
-    except Exception:
+        export_fig = go.Figure(fig)
+        export_fig.update_layout(font_family='NanumGothic')
+        return export_fig.to_image(format="png", width=width, height=height, scale=scale)
+    except Exception as e:
+        st.warning(T('pdf_chart_export_warning', msg=e))
         return None
 
 
 def _find_korean_font_path():
     """시스템에서 한글을 지원하는 .ttf 폰트 파일 경로를 찾는다 (없으면 None).
     matplotlib.font_manager는 자체 캐시가 낡아있을 수 있어 신뢰하지 않고, 파일시스템에서 직접 찾는다.
-    reportlab의 TTFont는 .ttc(트루타입 컬렉션)를 지원하지 않으므로 .ttf 파일만 대상으로 한다."""
+    reportlab의 TTFont는 .ttc(트루타입 컬렉션)를 지원하지 않으므로 .ttf 파일만 대상으로 한다.
+    리포에 번들된 assets/fonts/NanumGothic-Regular.ttf를 최우선으로 쓰고, 없을 때만 시스템 경로를 찾는다."""
     import glob
+    bundled_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'fonts', 'NanumGothic-Regular.ttf')
+    if os.path.isfile(bundled_path):
+        return bundled_path
     search_patterns = [
         '/usr/share/fonts/**/NanumGothic.ttf',
         '/usr/share/fonts/**/Nanum*.ttf',
@@ -1841,6 +1851,21 @@ def _find_korean_font_path():
         if matches:
             return matches[0]
     return None
+
+
+def install_bundled_font_for_charts():
+    """번들 폰트를 ~/.fonts/에 복사해 kaleido(차트 PNG 내보내기)가 한글 폰트를 찾을 수 있게 한다.
+    이미 있으면 건너뛰고, 실패해도 앱은 계속 동작한다."""
+    try:
+        import shutil
+        src = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'fonts', 'NanumGothic-Regular.ttf')
+        dst_dir = os.path.join(os.path.expanduser('~'), '.fonts')
+        dst = os.path.join(dst_dir, 'NanumGothic-Regular.ttf')
+        if os.path.isfile(src) and not os.path.isfile(dst):
+            os.makedirs(dst_dir, exist_ok=True)
+            shutil.copyfile(src, dst)
+    except Exception:
+        pass
 
 
 def _pdf_table_col_widths(rows_as_str, total_width, min_ratio=0.05, max_ratio=0.32):
@@ -2743,6 +2768,7 @@ def check_password():
 # --------------------------#
 
 st.set_page_config(layout="wide")
+install_bundled_font_for_charts()
 
 # --------------------------#
 #  <<< 인쇄용 CSS 추가 >>>  #
