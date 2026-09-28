@@ -23,7 +23,8 @@ import codecs # <--- [추가 1] 인코딩 처리를 위해 추가
 TEXTS = {
     'ko': {
         'app_menu_title': '메뉴',
-        'menu_opt_customer': '고객사 효율 분석',
+        'menu_opt_customer': '도입 효과 분석',
+        'menu_opt_health': '포트폴리오 헬스체크',
         'menu_opt_market': '시장 경쟁력 분석',
         'menu_opt_flow': '공급망 흐름도',
         'menu_opt_risk': '집중도 리스크 진단',
@@ -38,7 +39,7 @@ TEXTS = {
         'outlier_warning_capped': '이상치가 전체의 {cap_percent:.0%}를 초과하여, 가장 극단적인 {removed_rows}건(상한 적용)만 제거했습니다.',
         'outlier_warning_removed': '분석의 정확도를 위해 시장 데이터의 단가(Unit Price) 이상치 {n}건을 제거했습니다.',
 
-        'p1_title': '💲 고객사 효율 분석 (Overview)',
+        'p1_title': '💲 도입 효과 분석',
         'p1_reset_btn': '새로운 분석 시작 (다시하기)',
         'p1_settings_header': '⚙️ 분석 설정',
         'p1_upload_label': '고객사 데이터 파일을 업로드하세요',
@@ -496,6 +497,89 @@ TEXTS = {
         'pdf_generating_msg': 'PDF를 생성하고 있습니다...',
         'pdf_error_msg': 'PDF 생성 중 오류가 발생했습니다: {msg}',
         'pdf_chart_export_warning': '차트 이미지를 PDF에 넣지 못했습니다 (차트가 빠진 채로 생성됩니다): {msg}',
+        # --- 포트폴리오 헬스체크 ---
+        'ph_title': '🩺 포트폴리오 헬스체크',
+        'ph_intro': '품목(또는 원산지 등) 단위로 공급 집중도·공급사 이탈·단가 변화·물량 변화를 한 번에 점검해, 지금 어디가 위험한지 빠르게 확인합니다.',
+        'ph_reset_btn': '새로운 점검 시작 (다시하기)',
+        'ph_upload_label': '점검할 수입 데이터 파일을 업로드하세요',
+        'ph_upload_caption': '※ 날짜, 수입사, 공급사, 품목, 물량, 단가 컬럼이 포함된 TDS raw file을 업로드해주세요.',
+        'ph_missing_cols_error': '필수 컬럼이 없습니다: {cols}',
+        'ph_importer_label': '점검할 수입사 (물량 큰 순)',
+        'ph_importer_auto': '수입사: {name} (파일에 수입사가 1곳뿐이라 자동 적용)',
+        'ph_unit_label': '점검 단위',
+        'ph_unit_product': '품목',
+        'ph_unit_origin': '원산지',
+        'ph_unit_caption': '공급사는 점검 항목(집중도·이탈)의 기준 축이라 점검 단위에서 제외됩니다. 품목은 표기가 조금씩 다른 이름을 자동으로 묶어 점검합니다.',
+        'ph_base_period': '기준 기간 (현재)',
+        'ph_comp_period': '비교 기간 (직전)',
+        'ph_period_overlap_warning': '기준 기간과 비교 기간이 겹칩니다. 겹치는 거래는 양쪽에 모두 반영됩니다.',
+        'ph_period_invalid_error': '기간의 시작일이 종료일보다 늦습니다. 날짜를 확인해주세요.',
+        'ph_threshold_expander': '⚙️ 기준값 조정',
+        'ph_th_conc_red': '공급 집중도 🔴 기준 (1위 공급사 비중 %, 이상)',
+        'ph_th_conc_yellow': '공급 집중도 🟡 기준 (1위 공급사 비중 %, 이상)',
+        'ph_th_churn_major': '공급사 이탈 🔴 기준 (이탈 공급사의 비교 기간 비중 %, 이상)',
+        'ph_th_price_red': '단가 변화 🔴 기준 (상승률 %, 이상)',
+        'ph_th_price_yellow': '단가 변화 🟡 기준 (상승률 %, 이상)',
+        'ph_th_volume_red': '물량 변화 🔴 기준 (월평균 감소율 %, 이상)',
+        'ph_th_volume_yellow': '물량 변화 🟡 기준 (월평균 감소율 %, 이상)',
+        'ph_th_min_volume': '최소 물량 (기준 기간, kg) — 미만인 단위는 점검 제외',
+        'ph_th_order_warning': '🟡 기준이 🔴 기준보다 엄격하게 설정되어 있습니다. 기준값을 확인해주세요.',
+        'ph_run_btn': '헬스체크 실행',
+        'ph_spinner': '점검 중입니다...',
+        'ph_no_data_warning': '선택한 수입사·기간에 점검할 데이터가 없습니다.',
+        'ph_no_units_warning': '최소 물량 이상인 점검 단위가 없습니다. 기준값 조정에서 최소 물량을 낮춰보세요.',
+        'ph_summary_caption': '수입사: {importer} · 점검 단위: {unit} · 기준 기간 {b_start} ~ {b_end} · 비교 기간 {c_start} ~ {c_end}',
+        'ph_kpi_total': '점검 대상',
+        'ph_excluded_caption': '기준 기간 물량이 {min_volume:,.0f}kg 미만인 {n}개 단위는 점검에서 제외했습니다.',
+        'ph_focus_header': '🔎 먼저 볼 것',
+        'ph_focus_none': '위험 단위가 없습니다.',
+        'ph_reason_conc': '1위 공급사 비중 {share:.0f}%',
+        'ph_reason_churn': '주요 공급사 {n}곳 이탈',
+        'ph_reason_price': '단가 {chg:+.0f}%',
+        'ph_reason_volume': '월평균 물량 {chg:+.0f}%',
+        'ph_table_header': '📋 점검 결과',
+        'ph_filter_label': '종합 판정 필터',
+        'ph_col_unit': '단위',
+        'ph_col_conc': '공급 집중도',
+        'ph_col_churn': '공급사 이탈',
+        'ph_col_price': '단가 변화',
+        'ph_col_volume': '물량 변화',
+        'ph_col_overall': '종합 판정',
+        'ph_status_risk': '위험',
+        'ph_status_caution': '주의',
+        'ph_status_safe': '안전',
+        'ph_status_new': '신규',
+        'ph_new_tag': ' (신규)',
+        'ph_cell_churn_none': '없음',
+        'ph_cell_churn_n': '{n}곳',
+        'ph_table_notes': '※ 단가는 물량가중평균(VWAP), 물량 변화는 두 기간의 월평균 물량 비교입니다. 단가 하락은 🟢로 표시합니다. 신규 = 비교 기간에 거래가 없던 단위 (변화 항목은 "-").',
+        'ph_mix_notice': '※ 점검 단위가 품목이 아니라서 한 단위 안에 여러 품목이 섞여 있습니다. 품목 구성이 바뀌면 단가 변화에 영향을 줄 수 있습니다.',
+        'ph_detail_header': '🔬 위험·주의 단위 상세',
+        'ph_detail_top5': '공급사별 비중 (기준 기간 상위 5)',
+        'ph_detail_lost': '이탈 공급사 (비교 기간 비중)',
+        'ph_detail_no_lost': '이탈한 공급사가 없습니다.',
+        'ph_detail_supplier': '공급사',
+        'ph_detail_share': '비중(%)',
+        'ph_detail_vwap': '평균 단가 (VWAP, USD/kg)',
+        'ph_detail_monthly': '월평균 물량 (kg)',
+        'ph_detail_base': '기준 기간',
+        'ph_detail_comp': '비교 기간',
+        'ph_detail_more': '자세히 보려면 [{risk}] · [{churn}] · [{season}] 메뉴를 참고하세요.',
+        'ph_excel_btn': '📥 Excel 다운로드',
+        'ph_sheet_result': '점검 결과',
+        'ph_sheet_suppliers': '공급사 비중',
+        'ph_x_base_volume': '기준 기간 물량(kg)',
+        'ph_x_top1': '1위 공급사',
+        'ph_x_top1_share': '1위 공급사 비중(%)',
+        'ph_x_lost': '이탈 공급사',
+        'ph_x_base_vwap': '기준 VWAP',
+        'ph_x_comp_vwap': '비교 VWAP',
+        'ph_x_price_chg': '단가 변화(%)',
+        'ph_x_base_monthly': '기준 월평균 물량(kg)',
+        'ph_x_comp_monthly': '비교 월평균 물량(kg)',
+        'ph_x_volume_chg': '물량 변화(%)',
+        'ph_x_base_share': '기준 기간 비중(%)',
+        'ph_x_comp_share': '비교 기간 비중(%)',
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
         'multi_product_help': '실제 수입신고 명칭은 같은 상품이라도 표기가 조금씩 다를 수 있어요. 관련된 품목명을 모두 선택하면 하나로 합쳐서 분석합니다.',
         'insight_box_title': '💡 이번 분석에서 확인할 수 있는 것',
@@ -542,7 +626,8 @@ TEXTS = {
     },
     'en': {
         'app_menu_title': 'Menu',
-        'menu_opt_customer': 'Customer Efficiency Analysis',
+        'menu_opt_customer': 'Adoption Impact',
+        'menu_opt_health': 'Portfolio Health Check',
         'menu_opt_market': 'Market Competitiveness Analysis',
         'menu_opt_flow': 'Supply Chain Flow',
         'menu_opt_risk': 'Concentration Risk',
@@ -557,7 +642,7 @@ TEXTS = {
         'outlier_warning_capped': "Outliers exceeded {cap_percent:.0%} of the total, so only the most extreme {removed_rows} records were removed (cap applied).",
         'outlier_warning_removed': 'Removed {n} unit price outliers from the market data for analysis accuracy.',
 
-        'p1_title': '💲 Customer Efficiency Analysis (Overview)',
+        'p1_title': '💲 Adoption Impact',
         'p1_reset_btn': 'Start New Analysis (Reset)',
         'p1_settings_header': '⚙️ Analysis Settings',
         'p1_upload_label': 'Upload the customer data file',
@@ -1015,6 +1100,89 @@ TEXTS = {
         'pdf_generating_msg': 'Generating PDF...',
         'pdf_error_msg': 'An error occurred while generating the PDF: {msg}',
         'pdf_chart_export_warning': 'Could not add a chart image to the PDF (the PDF will be generated without it): {msg}',
+        # --- Portfolio Health Check ---
+        'ph_title': '🩺 Portfolio Health Check',
+        'ph_intro': 'Checks supply concentration, supplier churn, unit price change, and volume change per product (or origin, etc.) at once, so you can quickly see where the risk is right now.',
+        'ph_reset_btn': 'Start a New Check (Reset)',
+        'ph_upload_label': 'Upload the import data file to check',
+        'ph_upload_caption': '※ Please upload a TDS raw file with date, importer, supplier, product, volume, and unit price columns.',
+        'ph_missing_cols_error': 'Required columns are missing: {cols}',
+        'ph_importer_label': 'Importer to check (largest volume first)',
+        'ph_importer_auto': 'Importer: {name} (applied automatically — the file has only one importer)',
+        'ph_unit_label': 'Check unit',
+        'ph_unit_product': 'Product',
+        'ph_unit_origin': 'Origin',
+        'ph_unit_caption': 'Supplier is excluded as a check unit because it is the basis of the concentration and churn checks. Product names spelled slightly differently are grouped automatically.',
+        'ph_base_period': 'Base period (current)',
+        'ph_comp_period': 'Comparison period (previous)',
+        'ph_period_overlap_warning': 'The base and comparison periods overlap. Overlapping transactions are counted in both.',
+        'ph_period_invalid_error': 'A period starts after it ends. Please check the dates.',
+        'ph_threshold_expander': '⚙️ Adjust thresholds',
+        'ph_th_conc_red': 'Supply concentration 🔴 (top supplier share %, at or above)',
+        'ph_th_conc_yellow': 'Supply concentration 🟡 (top supplier share %, at or above)',
+        'ph_th_churn_major': 'Supplier churn 🔴 (lost supplier share in comparison period %, at or above)',
+        'ph_th_price_red': 'Unit price change 🔴 (increase %, at or above)',
+        'ph_th_price_yellow': 'Unit price change 🟡 (increase %, at or above)',
+        'ph_th_volume_red': 'Volume change 🔴 (monthly average decrease %, at or above)',
+        'ph_th_volume_yellow': 'Volume change 🟡 (monthly average decrease %, at or above)',
+        'ph_th_min_volume': 'Minimum volume (base period, kg) — units below this are excluded',
+        'ph_th_order_warning': 'A 🟡 threshold is stricter than its 🔴 threshold. Please check the thresholds.',
+        'ph_run_btn': 'Run Health Check',
+        'ph_spinner': 'Checking...',
+        'ph_no_data_warning': 'No data to check for the selected importer and periods.',
+        'ph_no_units_warning': 'No unit meets the minimum volume. Try lowering the minimum volume under Adjust thresholds.',
+        'ph_summary_caption': 'Importer: {importer} · Check unit: {unit} · Base period {b_start} ~ {b_end} · Comparison period {c_start} ~ {c_end}',
+        'ph_kpi_total': 'Units checked',
+        'ph_excluded_caption': '{n} unit(s) with base-period volume under {min_volume:,.0f} kg were excluded.',
+        'ph_focus_header': '🔎 Look at these first',
+        'ph_focus_none': 'No units at risk.',
+        'ph_reason_conc': 'top supplier share {share:.0f}%',
+        'ph_reason_churn': '{n} major supplier(s) lost',
+        'ph_reason_price': 'unit price {chg:+.0f}%',
+        'ph_reason_volume': 'monthly volume {chg:+.0f}%',
+        'ph_table_header': '📋 Check results',
+        'ph_filter_label': 'Filter by overall status',
+        'ph_col_unit': 'Unit',
+        'ph_col_conc': 'Supply concentration',
+        'ph_col_churn': 'Supplier churn',
+        'ph_col_price': 'Unit price change',
+        'ph_col_volume': 'Volume change',
+        'ph_col_overall': 'Overall',
+        'ph_status_risk': 'At risk',
+        'ph_status_caution': 'Caution',
+        'ph_status_safe': 'Safe',
+        'ph_status_new': 'New',
+        'ph_new_tag': ' (new)',
+        'ph_cell_churn_none': 'None',
+        'ph_cell_churn_n': '{n} lost',
+        'ph_table_notes': '※ Unit price is volume-weighted (VWAP); volume change compares monthly average volume of the two periods. Price decreases are shown as 🟢. New = no transactions in the comparison period (change checks shown as "-").',
+        'ph_mix_notice': '※ The check unit is not a product, so each unit mixes several products. A change in product mix can affect the unit price change.',
+        'ph_detail_header': '🔬 Details for at-risk and caution units',
+        'ph_detail_top5': 'Supplier share (top 5, base period)',
+        'ph_detail_lost': 'Lost suppliers (share in comparison period)',
+        'ph_detail_no_lost': 'No suppliers were lost.',
+        'ph_detail_supplier': 'Supplier',
+        'ph_detail_share': 'Share (%)',
+        'ph_detail_vwap': 'Average unit price (VWAP, USD/kg)',
+        'ph_detail_monthly': 'Monthly average volume (kg)',
+        'ph_detail_base': 'Base period',
+        'ph_detail_comp': 'Comparison period',
+        'ph_detail_more': 'For more detail, see the [{risk}] · [{churn}] · [{season}] menus.',
+        'ph_excel_btn': '📥 Download Excel',
+        'ph_sheet_result': 'Results',
+        'ph_sheet_suppliers': 'Supplier share',
+        'ph_x_base_volume': 'Base period volume (kg)',
+        'ph_x_top1': 'Top supplier',
+        'ph_x_top1_share': 'Top supplier share (%)',
+        'ph_x_lost': 'Lost suppliers',
+        'ph_x_base_vwap': 'Base VWAP',
+        'ph_x_comp_vwap': 'Comparison VWAP',
+        'ph_x_price_chg': 'Unit price change (%)',
+        'ph_x_base_monthly': 'Base monthly avg volume (kg)',
+        'ph_x_comp_monthly': 'Comparison monthly avg volume (kg)',
+        'ph_x_volume_chg': 'Volume change (%)',
+        'ph_x_base_share': 'Base period share (%)',
+        'ph_x_comp_share': 'Comparison period share (%)',
         'multi_product_label': 'Search products (multi-select)',
         'multi_product_help': "Import declarations often spell the same product slightly differently. Select all related product names to combine them into one analysis.",
         'insight_box_title': '💡 What this analysis shows',
@@ -1299,6 +1467,13 @@ def reset_scorer_states():
     st.session_state.scorer_result = None
 
 
+def reset_health_states():
+    """포트폴리오 헬스체크 상태만 초기화하는 함수"""
+    st.session_state.health_raw_df = None
+    st.session_state.health_headers = None
+    st.session_state.health_result = None
+
+
 def read_uploaded_table(uploaded_file):
     """CSV(인코딩 자동 판별)/XLSX 파일을 읽어 DataFrame으로 반환하는 공통 헬퍼.
     실패 시 None을 반환한다 (호출부에서 오류 메시지 처리)."""
@@ -1342,7 +1517,8 @@ def detect_extra_dimension_columns(df, cols, max_unique_ratio=0.5):
     for c in df.columns:
         if c in used or c is None:
             continue
-        if df[c].dtype == object:
+        # pandas 3부터 문자열 컬럼이 object가 아니라 StringDtype으로 읽히므로 둘 다 허용
+        if pd.api.types.is_object_dtype(df[c]) or pd.api.types.is_string_dtype(df[c]):
             nunique = df[c].nunique(dropna=True)
             if 1 < nunique <= max(50, n * max_unique_ratio):
                 extras.append(c)
@@ -1357,6 +1533,201 @@ def build_axis_map(standard_pairs, df, cols):
         if extra_col not in axis_map.values():
             axis_map[extra_col] = extra_col
     return axis_map
+
+
+# ============================================================
+# 포트폴리오 헬스체크 — 단위(품목/원산지 등)별 공급 리스크 점검
+# ============================================================
+HEALTH_DEFAULT_THRESHOLDS = {'conc_red': 70, 'conc_yellow': 50, 'churn_major': 10,
+                             'price_red': 15, 'price_yellow': 8, 'volume_red': 30, 'volume_yellow': 15}
+HEALTH_OVERALL_ORDER = {'risk': 0, 'caution': 1, 'safe': 2, 'new': 3}
+HEALTH_OVERALL_KEY = {'risk': 'ph_status_risk', 'caution': 'ph_status_caution', 'safe': 'ph_status_safe', 'new': 'ph_status_new'}
+HEALTH_OVERALL_EMOJI = {'risk': '🔴', 'caution': '🟡', 'safe': '🟢', 'new': '⚪'}
+HEALTH_LEVEL_EMOJI = {'red': '🔴', 'yellow': '🟡', 'green': '🟢', 'na': '⚪'}
+HEALTH_LEVEL_KEY = {'red': 'ph_status_risk', 'yellow': 'ph_status_caution', 'green': 'ph_status_safe'}
+
+
+def prepare_health_df(raw_df, cols, unit_col, product_mode):
+    """헬스체크용 표준 데이터프레임(_date/_volume/_price/_exporter/_importer/_unit)을 만든다.
+    품목 단위면 cluster_product_names로 표기가 조금씩 다른 품목명을 대표명으로 묶는다."""
+    imp = raw_df[cols['importer']]
+    df = pd.DataFrame({
+        '_date': pd.to_datetime(raw_df[cols['date']], errors='coerce'),
+        '_volume': pd.to_numeric(raw_df[cols['volume']], errors='coerce'),
+        '_price': pd.to_numeric(raw_df[cols['price']], errors='coerce'),
+        '_exporter': raw_df[cols['exporter']].fillna('(N/A)').astype(str).str.strip(),
+        '_importer': imp.where(imp.isna(), imp.astype(str).str.strip()),
+        '_unit': raw_df[unit_col],
+    })
+    df = df.dropna(subset=['_date', '_volume', '_unit', '_importer'])
+    df = df[df['_volume'] > 0]
+    df['_unit'] = df['_unit'].astype(str).str.strip()
+    if product_mode:
+        groups = cluster_product_names(df['_unit'].unique())
+        name_to_rep = {name: rep for rep, names in groups.items() for name in names}
+        df['_unit'] = df['_unit'].map(name_to_rep)
+    return df
+
+
+def _period_months(start, end):
+    """기간 길이를 개월 수로 환산 (거래가 없던 달도 포함한 달력 기준)."""
+    days = (pd.Timestamp(end) - pd.Timestamp(start)).days + 1
+    return max(days, 1) / 30.44
+
+
+def compute_health_check(df, base_period, comp_period, thresholds, min_volume):
+    """prepare_health_df 결과(수입사 필터 후)로 단위별 4개 점검 항목과 종합 판정을 계산한다.
+    수치는 모두 % 단위, 항목 상태는 'red'/'yellow'/'green'/'na', 해당 없음(신규 단위의 변화 항목)은 None."""
+    th = thresholds
+    day = df['_date'].dt.normalize()
+
+    def _in(period):
+        return df[(day >= pd.Timestamp(period[0])) & (day <= pd.Timestamp(period[1]))]
+
+    base_df, comp_df = _in(base_period), _in(comp_period)
+    base_months, comp_months = _period_months(*base_period), _period_months(*comp_period)
+    comp_groups = dict(tuple(comp_df.groupby('_unit')))
+    rows, excluded = [], 0
+    for unit, b in base_df.groupby('_unit'):
+        b_vol = b['_volume'].sum()
+        if b_vol < min_volume:
+            excluded += 1
+            continue
+        c = comp_groups.get(unit, comp_df.iloc[0:0])
+        c_vol = c['_volume'].sum()
+
+        sup_b = b.groupby('_exporter')['_volume'].sum().sort_values(ascending=False)
+        share_b = sup_b / b_vol * 100
+        top1_share = float(share_b.iloc[0])
+        row = {
+            'unit': unit, 'base_volume': float(b_vol), 'is_new': c_vol <= 0,
+            'top1': sup_b.index[0], 'top1_share': top1_share,
+            'conc': 'red' if top1_share >= th['conc_red'] else 'yellow' if top1_share >= th['conc_yellow'] else 'green',
+            'top5': [(s, float(v)) for s, v in share_b.head(5).items()],
+            'lost': [], 'churn': None,
+            'price': None, 'price_chg': None, 'base_vwap': None, 'comp_vwap': None,
+            'volume': None, 'volume_chg': None,
+            'base_monthly': float(b_vol / base_months), 'comp_monthly': float(c_vol / comp_months),
+        }
+
+        share_c = pd.Series(dtype=float)
+        if not row['is_new']:
+            share_c = c.groupby('_exporter')['_volume'].sum() / c_vol * 100
+            lost = share_c[~share_c.index.isin(sup_b.index)].sort_values(ascending=False)
+            row['lost'] = [(s, float(v)) for s, v in lost.items()]
+            row['churn'] = 'red' if (lost >= th['churn_major']).any() else 'yellow' if len(lost) else 'green'
+
+            # 단가: 단가가 없거나 0 이하인 행은 VWAP 계산에서만 제외
+            bp = weighted_avg(b[b['_price'] > 0], '_price', '_volume')
+            cp = weighted_avg(c[c['_price'] > 0], '_price', '_volume')
+            row['base_vwap'] = None if pd.isna(bp) else float(bp)
+            row['comp_vwap'] = None if pd.isna(cp) else float(cp)
+            if row['base_vwap'] is not None and row['comp_vwap']:
+                chg = (row['base_vwap'] / row['comp_vwap'] - 1) * 100
+                row['price_chg'] = chg
+                # 단가 하락은 구매자 입장에서 위험이 아니므로 green
+                row['price'] = 'red' if chg >= th['price_red'] else 'yellow' if chg >= th['price_yellow'] else 'green'
+            else:
+                row['price'] = 'na'
+
+            # 물량: 두 기간 길이가 달라도 공정하도록 월평균으로 비교
+            chg = (row['base_monthly'] / row['comp_monthly'] - 1) * 100
+            row['volume_chg'] = chg
+            row['volume'] = 'red' if chg <= -th['volume_red'] else 'yellow' if chg <= -th['volume_yellow'] else 'green'
+
+        levels = [row['conc'], row['churn'], row['price'], row['volume']]
+        if 'red' in levels:
+            row['overall'] = 'risk'
+        elif row['is_new']:
+            row['overall'] = 'new'
+        elif levels.count('yellow') >= 2:
+            row['overall'] = 'caution'
+        else:
+            row['overall'] = 'safe'
+
+        sup_c = c.groupby('_exporter')['_volume'].sum() if not row['is_new'] else pd.Series(dtype=float)
+        all_sup = sorted(set(sup_b.index) | set(sup_c.index), key=lambda s: (-sup_b.get(s, 0), -sup_c.get(s, 0)))
+        row['suppliers'] = [(s, float(sup_b.get(s, 0)), float(share_b.get(s, 0)), float(share_c.get(s, 0))) for s in all_sup]
+        rows.append(row)
+
+    rows.sort(key=lambda r: (HEALTH_OVERALL_ORDER[r['overall']], -r['base_volume']))
+    return {'rows': rows, 'excluded': excluded}
+
+
+def _health_cell(level, text, plain):
+    """점검 항목 칸 문자열. plain=True면 이모지 대신 글자(PDF용 — NanumGothic에 이모지 글리프가 없음)."""
+    if level is None:
+        return '-'
+    if level == 'na':
+        return '-' if plain else f"{HEALTH_LEVEL_EMOJI['na']} -"
+    if plain:
+        return f"{text} ({T(HEALTH_LEVEL_KEY[level])})"
+    return f"{HEALTH_LEVEL_EMOJI[level]} {text}"
+
+
+def health_display_table(rows, plain=False):
+    """결과 표: 단위명 | 공급 집중도 | 공급사 이탈 | 단가 변화 | 물량 변화 | 종합"""
+    out = []
+    for r in rows:
+        churn_text = T('ph_cell_churn_n', n=len(r['lost'])) if r['lost'] else T('ph_cell_churn_none')
+        overall = T(HEALTH_OVERALL_KEY[r['overall']])
+        out.append({
+            T('ph_col_unit'): r['unit'] + (T('ph_new_tag') if r['is_new'] else ''),
+            T('ph_col_conc'): _health_cell(r['conc'], f"{r['top1_share']:.0f}%", plain),
+            T('ph_col_churn'): _health_cell(r['churn'], churn_text, plain),
+            T('ph_col_price'): _health_cell(r['price'], f"{r['price_chg']:+.1f}%" if r['price_chg'] is not None else '-', plain),
+            T('ph_col_volume'): _health_cell(r['volume'], f"{r['volume_chg']:+.1f}%" if r['volume_chg'] is not None else '-', plain),
+            T('ph_col_overall'): overall if plain else f"{HEALTH_OVERALL_EMOJI[r['overall']]} {overall}",
+        })
+    return pd.DataFrame(out)
+
+
+def health_focus_lines(rows, thresholds, n=3):
+    """'먼저 볼 것': 위험 단위 중 기준 기간 물량 상위 n개를 (단위명, 사유 문장)으로 반환."""
+    risk_rows = sorted([r for r in rows if r['overall'] == 'risk'], key=lambda r: -r['base_volume'])[:n]
+    lines = []
+    for r in risk_rows:
+        reasons = []
+        if r['conc'] == 'red':
+            reasons.append(T('ph_reason_conc', share=r['top1_share']))
+        if r['churn'] == 'red':
+            reasons.append(T('ph_reason_churn', n=sum(1 for _, sh in r['lost'] if sh >= thresholds['churn_major'])))
+        if r['price'] == 'red':
+            reasons.append(T('ph_reason_price', chg=r['price_chg']))
+        if r['volume'] == 'red':
+            reasons.append(T('ph_reason_volume', chg=r['volume_chg']))
+        lines.append((r['unit'], ', '.join(reasons)))
+    return lines
+
+
+def build_health_excel(rows):
+    """점검 결과 시트(표시용 칸 + 수치) + 공급사 비중 시트를 담은 xlsx 바이트를 반환."""
+    import io
+    numeric = pd.DataFrame([{
+        T('ph_x_base_volume'): r['base_volume'],
+        T('ph_x_top1'): r['top1'],
+        T('ph_x_top1_share'): round(r['top1_share'], 1),
+        T('ph_x_lost'): ', '.join(f"{s} ({sh:.1f}%)" for s, sh in r['lost']),
+        T('ph_x_base_vwap'): r['base_vwap'],
+        T('ph_x_comp_vwap'): r['comp_vwap'],
+        T('ph_x_price_chg'): None if r['price_chg'] is None else round(r['price_chg'], 1),
+        T('ph_x_base_monthly'): round(r['base_monthly'], 0),
+        T('ph_x_comp_monthly'): round(r['comp_monthly'], 0),
+        T('ph_x_volume_chg'): None if r['volume_chg'] is None else round(r['volume_chg'], 1),
+    } for r in rows])
+    summary = pd.concat([health_display_table(rows), numeric], axis=1)
+    suppliers = pd.DataFrame([{
+        T('ph_col_unit'): r['unit'],
+        T('ph_detail_supplier'): s,
+        T('ph_x_base_volume'): vol,
+        T('ph_x_base_share'): round(sh_b, 1),
+        T('ph_x_comp_share'): round(sh_c, 1),
+    } for r in rows for s, vol, sh_b, sh_c in r['suppliers']])
+    buf = io.BytesIO()
+    with pd.ExcelWriter(buf, engine='openpyxl') as writer:
+        summary.to_excel(writer, sheet_name=T('ph_sheet_result')[:31], index=False)
+        suppliers.to_excel(writer, sheet_name=T('ph_sheet_suppliers')[:31], index=False)
+    return buf.getvalue()
 
 
 # ============================================================
@@ -1885,6 +2256,24 @@ def _pdf_table_col_widths(rows_as_str, total_width, min_ratio=0.05, max_ratio=0.
     return [w * scale for w in clamped]
 
 
+_PDF_EMOJI_RE = re.compile('[\U0001F000-\U0001FAFF\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF\uFE00-\uFE0F\u200D]+ ?')  # 이모지(+ 뒤따르는 공백 1칸)
+
+
+def _pdf_safe_text(text):
+    """PDF 전용 글자 정리: 번들 폰트(NanumGothic)에 글리프가 없어 빈칸으로 찍히는 글자를 처리한다.
+    ①~⑳은 '1.'~'20.'으로 바꾸고 이모지는 제거한다 (화면 문구는 그대로 두고 PDF에만 적용)."""
+    if not isinstance(text, str):
+        return text
+    text = re.sub('[①-⑳]', lambda m: f"{ord(m.group()) - 0x245F}.", text)
+    text = _PDF_EMOJI_RE.sub('', text)
+    return re.sub(' {2,}', ' ', text).strip()
+
+
+def _pdf_safe_paragraph(paragraph_cls):
+    """reportlab Paragraph를 감싸 모든 PDF 텍스트가 _pdf_safe_text를 거치게 한다."""
+    return lambda text, *args, **kwargs: paragraph_cls(_pdf_safe_text(text), *args, **kwargs)
+
+
 def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
     """제목 + KPI 텍스트 + Plotly 차트(이미지로 변환) + 표를 하나의 PDF로 조립해 바이트로 반환.
     reportlab + kaleido 필요."""
@@ -1896,6 +2285,7 @@ def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
     from reportlab.lib import colors
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
+    Paragraph = _pdf_safe_paragraph(Paragraph)  # ①~⑨·이모지 빈칸 방지
 
     buf = io.BytesIO()
     doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=15 * mm, rightMargin=15 * mm)
@@ -2043,6 +2433,7 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
     from reportlab.lib import colors
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
+    Paragraph = _pdf_safe_paragraph(Paragraph)  # ①~⑨·이모지 빈칸 방지
 
     lang = st.session_state.lang
     buf = io.BytesIO()
@@ -2253,13 +2644,13 @@ GUIDE_CONTENT = {
                 'results': [
                     '모든 메뉴는 CSV 또는 XLSX 파일을 업로드하면서 시작합니다.',
                     '컬럼명은 정확히 같지 않아도 자동으로 인식됩니다 (예: "Date", "date", "거래일자" 모두 인식). 다만 날짜·물량·단가에 해당하는 컬럼은 반드시 있어야 합니다.',
-                    'HS코드, Incoterm처럼 표준 항목 외의 컬럼도 파일에 있으면 자동으로 인식되어, 일부 메뉴(공급망 흐름도·집중도 진단·신규 이탈 거래처·피벗 빌더·신규사업 스코어러)의 축/필터 선택지에 그대로 추가됩니다.',
+                    'HS코드, Incoterm처럼 표준 항목 외의 컬럼도 파일에 있으면 자동으로 인식되어, 일부 메뉴(포트폴리오 헬스체크·공급망 흐름도·집중도 진단·신규 이탈 거래처·피벗 빌더·신규사업 스코어러)의 축/필터 선택지에 그대로 추가됩니다.',
                 ],
             },
             {
-                'heading': '💲 ① 고객사 효율 분석',
+                'heading': '💲 ① 도입 효과 분석',
                 'image': 'p1_customer.png',
-                'intro': '계약을 시작한 뒤로 우리(또는 특정 수입사)의 구매 단가가 실제로 얼마나 절감됐는지 숫자로 확인하고 싶을 때 씁니다. 계약 갱신이나 성과 보고 자료를 만들 때 가장 먼저 여는 화면이에요.',
+                'intro': '계약을 시작한 뒤로 우리(또는 특정 수입사)의 구매 단가가 실제로 얼마나 절감됐는지 숫자로 확인하고 싶을 때 씁니다. 계약 갱신이나 성과 보고 자료를 만들 때 가장 먼저 여는 화면이에요. 트릿지 도입(계약일) 전후 비교용이며, 현재 상태 점검은 포트폴리오 헬스체크를 사용하세요.',
                 'steps': [
                     '거래 내역 파일을 업로드합니다 (여러 회사 데이터가 섞여 있어도 자동으로 가장 많이 등장하는 회사를 기준으로 분석합니다).',
                     '계약 시작일을 선택합니다.',
@@ -2274,7 +2665,31 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '🏆 ② 시장 경쟁력 분석',
+                'heading': '🩺 ② 포트폴리오 헬스체크',
+                'intro': '계약 여부와 상관없이, 지금 어느 품목이 위험한지 빠르게 훑어보고 싶을 때 씁니다. 품목(또는 원산지·HS코드 등) 단위로 공급 집중도·공급사 이탈·단가 변화·물량 변화 4가지를 한 번에 점검해 위험 / 주의 / 안전으로 판정합니다.',
+                'steps': [
+                    '거래 내역 파일을 업로드합니다 (날짜·수입사·공급사·품목·물량·단가 컬럼이 필요합니다).',
+                    '점검할 수입사를 선택합니다 (물량 큰 순으로 정렬되며, 파일에 수입사가 1곳뿐이면 자동 적용됩니다).',
+                    '점검 단위를 고릅니다 — 품목(기본), 원산지, 또는 파일에 있는 추가 컬럼(HS코드 등). 품목은 표기가 조금씩 다른 이름을 자동으로 묶어 점검합니다.',
+                    '기준 기간(기본: 데이터 마지막 날짜 기준 최근 6개월)과 비교 기간(기본: 그 직전 6개월)을 선택합니다. 필요하면 "기준값 조정"에서 기준값과 최소 물량(기본 10,000kg)을 바꿉니다.',
+                    '"헬스체크 실행"을 클릭합니다.',
+                ],
+                'results': [
+                    '공급 집중도 — 기준 기간 1위 공급사의 물량 비중. 70% 이상이면 위험, 50% 이상이면 주의.',
+                    '공급사 이탈 — 비교 기간에는 거래했지만 기준 기간에는 거래가 없는 공급사. 비교 기간 비중 10% 이상인 공급사가 이탈하면 위험, 그보다 작은 공급사만 이탈하면 주의.',
+                    '단가 변화 — 두 기간의 물량가중평균 단가(VWAP) 변화율. +15% 이상이면 위험, +8% 이상이면 주의. 단가 하락은 구매자에게 위험이 아니므로 안전으로 표시합니다.',
+                    '물량 변화 — 두 기간의 월평균 물량 변화율 (두 기간 길이가 달라도 공정하게 비교). -30% 이하이면 위험, -15% 이하이면 주의.',
+                    '종합 판정 — 위험 항목이 하나라도 있으면 위험, 주의 항목이 2개 이상이면 주의, 나머지는 안전. 비교 기간에 거래가 없던 단위는 "신규"로 표시하고 변화 항목은 "-" (단, 공급 집중도가 위험이면 위험).',
+                    '결과 읽는 법 — "먼저 볼 것"에서 물량이 큰 위험 단위 3개를 확인 → 결과 표에서 전체 판정을 훑어보기 → 위험·주의 단위의 상세를 펼쳐 공급사 비중·이탈 공급사·단가·물량 확인 → 더 깊이 볼 때는 집중도 리스크 진단 / 신규·이탈 거래처 추적 / 가격 추세 & 계절성 메뉴로 이동.',
+                ],
+                'tips': [
+                    '기준 기간 물량이 최소 물량보다 작은 단위는 점검에서 제외됩니다 (제외된 개수는 결과 화면에 표시).',
+                    '점검 단위가 품목이 아닐 때(원산지 등)는 한 단위 안에 여러 품목이 섞여 있어, 품목 구성 변화가 단가 변화에 영향을 줄 수 있습니다.',
+                    '결과는 Excel(점검 결과 + 공급사 비중 시트)과 PDF로 내려받을 수 있습니다.',
+                ],
+            },
+            {
+                'heading': '🏆 ③ 시장 경쟁력 분석',
                 'image': 'p2_market.png',
                 'intro': '특정 품목을 두고 여러 수입사가 같은 시장에서 경쟁하고 있을 때, 우리 회사가 그중 얼마나 잘 사고 있는지(=구매 경쟁력)를 확인하고 싶을 때 씁니다.',
                 'steps': [
@@ -2292,7 +2707,7 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '🔀 ③ 공급망 흐름도 (Sankey)',
+                'heading': '🔀 ④ 공급망 흐름도 (Sankey)',
                 'image': 'p3_flow.png',
                 'intro': '특정 공급사·수입사·원산지 "하나"를 골랐을 때, 그 대상이 정확히 어디서 와서 어디로 흘러가는지 시각적으로 보고 싶을 때 씁니다. 예: "이 공급사는 어느 나라로 얼마나 수출하고 있지?"',
                 'steps': [
@@ -2309,7 +2724,7 @@ GUIDE_CONTENT = {
                 'tips': ['"원산지"는 물건이 생산된 나라, "수출대상국"은 물건이 팔려나가는 나라로 서로 다른 개념입니다 — 헷갈리기 쉬우니 화면의 안내 문구를 확인하세요.'],
             },
             {
-                'heading': '⚠️ ④ 집중도 리스크 진단',
+                'heading': '⚠️ ⑤ 집중도 리스크 진단',
                 'image': 'p4_risk.png',
                 'intro': '특정 공급사·원산지·품목 "하나"에 거래가 너무 쏠려있어서 위험하지는 않은지 자동으로 점검하고 싶을 때 씁니다. 공급망 리스크 관리 관점에서 정기적으로 확인하면 좋습니다.',
                 'steps': [
@@ -2325,7 +2740,7 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '📈 ⑤ 가격 추세 & 계절성',
+                'heading': '📈 ⑥ 가격 추세 & 계절성',
                 'image': 'p5_season.png',
                 'intro': '특정 품목의 단가가 시기별로 어떻게 움직이는지, 언제 사는 게 유리한지 알고 싶을 때 씁니다. 구매 시점을 계획할 때 참고하세요.',
                 'steps': [
@@ -2342,7 +2757,7 @@ GUIDE_CONTENT = {
                 'tips': ['데이터가 1년치뿐이면 "이 계절 패턴은 우연일 수 있다"는 경고가 함께 표시됩니다 — 2년 이상 데이터가 쌓이면 신뢰도가 높아집니다.'],
             },
             {
-                'heading': '🔀 ⑥ 신규·이탈 거래처 추적',
+                'heading': '🔀 ⑦ 신규·이탈 거래처 추적',
                 'image': 'p6_churn.png',
                 'intro': '임의의 두 기간을 비교해서, 그 사이에 새로 생기거나 사라진 거래처(공급사/원산지/품목/수입사)를 찾고 싶을 때 씁니다. "우리가 최근에 거래처를 바꿨는데 그게 잘한 선택이었나?"에 답합니다.',
                 'steps': [
@@ -2358,9 +2773,9 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '🔬 ⑦ 신규사업 스코어러',
+                'heading': '🔬 ⑧ 신규사업 스코어러',
                 'image': 'p7_scorer.png',
-                'intro': '시장 전체 데이터에서 "최근 급상승한 기존 품목"과 "완전히 새로 등장한 품목"을 찾아, 새로운 소싱 기회의 우선순위를 매기고 싶을 때 씁니다. 다른 7개 메뉴가 "우리가 이미 하는 거래"를 들여다본다면, 이 메뉴는 "아직 안 하고 있지만 해볼 만한 것"을 찾아줍니다.',
+                'intro': '시장 전체 데이터에서 "최근 급상승한 기존 품목"과 "완전히 새로 등장한 품목"을 찾아, 새로운 소싱 기회의 우선순위를 매기고 싶을 때 씁니다. 다른 8개 메뉴가 "우리가 이미 하는 거래"를 들여다본다면, 이 메뉴는 "아직 안 하고 있지만 해볼 만한 것"을 찾아줍니다.',
                 'steps': [
                     'HS코드명/Detailed HS-CODE 등이 포함된 전체 시장 데이터를 업로드합니다.',
                     '분석 기간, 최소 물량 기준, 분석 기준(HS코드명/품목명/수입사 등)을 설정합니다.',
@@ -2375,7 +2790,7 @@ GUIDE_CONTENT = {
                 'tips': ['적합도 기준을 안 넣어도 분석 자체는 되지만, 넣으면 "우리 사업 맥락에서" 우선순위가 훨씬 정교해집니다.'],
             },
             {
-                'heading': '🧩 ⑧ 자유 피벗 빌더',
+                'heading': '🧩 ⑨ 자유 피벗 빌더',
                 'image': 'p8_pivot.png',
                 'intro': '정해진 화면으로는 답이 안 나올 때, 엑셀 피벗테이블처럼 원하는 축과 지표를 직접 조합해서 나만의 표·차트를 만들고 싶을 때 씁니다.',
                 'steps': [
@@ -2419,13 +2834,13 @@ GUIDE_CONTENT = {
                 'results': [
                     'Every menu starts by uploading a CSV or XLSX file.',
                     'Column names do not need to match exactly (e.g. "Date", "date" are both recognized), but date, volume, and unit price columns must be present.',
-                    'Columns beyond the standard set (e.g. HS Code, Incoterm) are auto-detected and added as axis/filter options in several menus (Supply Chain Flow, Concentration Risk, New/Lost Partners, Pivot Builder, New Business Scorer).',
+                    'Columns beyond the standard set (e.g. HS Code, Incoterm) are auto-detected and added as axis/filter options in several menus (Portfolio Health Check, Supply Chain Flow, Concentration Risk, New/Lost Partners, Pivot Builder, New Business Scorer).',
                 ],
             },
             {
-                'heading': '💲 ① Customer Efficiency Analysis',
+                'heading': '💲 ① Adoption Impact',
                 'image': 'p1_customer.png',
-                'intro': "Use this when you want to prove, in numbers, how much a company's purchase price dropped after a contract started. It's usually the first screen opened for renewal or performance reporting.",
+                'intro': "Use this when you want to prove, in numbers, how much a company's purchase price dropped after a contract started. It's usually the first screen opened for renewal or performance reporting. It is meant for before/after comparison around the Tridge adoption (contract) date — to check the current state, use Portfolio Health Check.",
                 'steps': [
                     'Upload transaction data (if multiple companies are mixed in, the most frequent one is used automatically).',
                     'Select the contract start date.',
@@ -2440,7 +2855,31 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '🏆 ② Market Competitiveness Analysis',
+                'heading': '🩺 ② Portfolio Health Check',
+                'intro': 'Use this when you want a quick scan of which products are at risk right now, regardless of any contract. It checks supply concentration, supplier churn, unit price change, and volume change per product (or origin, HS code, etc.) and rates each as At risk / Caution / Safe.',
+                'steps': [
+                    'Upload transaction data (date, importer, supplier, product, volume, and unit price columns are required).',
+                    'Select the importer to check (sorted by volume; applied automatically if the file has only one importer).',
+                    'Choose the check unit — Product (default), Origin, or an extra column in the file (e.g. HS code). Product names spelled slightly differently are grouped automatically.',
+                    'Select the base period (default: last 6 months up to the latest date in the data) and the comparison period (default: the 6 months before that). Adjust thresholds and the minimum volume (default 10,000 kg) under "Adjust thresholds" if needed.',
+                    'Click "Run Health Check".',
+                ],
+                'results': [
+                    'Supply concentration — volume share of the top supplier in the base period. At risk at 70% or more, Caution at 50% or more.',
+                    'Supplier churn — suppliers that traded in the comparison period but not in the base period. At risk if a supplier with 10% or more share in the comparison period is lost; Caution if only smaller suppliers are lost.',
+                    'Unit price change — change in volume-weighted average price (VWAP) between the periods. At risk at +15% or more, Caution at +8% or more. Price decreases are not a risk for the buyer, so they show as Safe.',
+                    'Volume change — change in monthly average volume between the periods (fair even when the periods differ in length). At risk at -30% or less, Caution at -15% or less.',
+                    'Overall — At risk if any check is at risk, Caution if two or more checks are caution, otherwise Safe. Units with no transactions in the comparison period are marked "New" with "-" for change checks (At risk if supply concentration is at risk).',
+                    'How to read the results — check the top 3 at-risk units by volume in "Look at these first" → scan the results table → expand details for at-risk and caution units (supplier share, lost suppliers, price, volume) → for a deeper look, go to Concentration Risk / New/Lost Trading Partners / Price Trend & Seasonality.',
+                ],
+                'tips': [
+                    'Units whose base-period volume is below the minimum volume are excluded (the count is shown on the results screen).',
+                    'When the check unit is not a product (e.g. origin), each unit mixes several products, so a change in product mix can affect the unit price change.',
+                    'Results can be downloaded as Excel (results + supplier share sheets) and PDF.',
+                ],
+            },
+            {
+                'heading': '🏆 ③ Market Competitiveness Analysis',
                 'image': 'p2_market.png',
                 'intro': 'Use this when several importers compete for the same product, and you want to see how competitively your company is buying.',
                 'steps': [
@@ -2458,7 +2897,7 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '🔀 ③ Supply Chain Flow (Sankey)',
+                'heading': '🔀 ④ Supply Chain Flow (Sankey)',
                 'image': 'p3_flow.png',
                 'intro': 'Use this to see exactly where a single supplier, importer, or origin flows from and to. E.g. "Where does this supplier export to, and how much?"',
                 'steps': [
@@ -2475,7 +2914,7 @@ GUIDE_CONTENT = {
                 'tips': ['"Origin" is where the product was produced; "Export destination" is where it was sold — easy to mix up, so check the on-screen hint.'],
             },
             {
-                'heading': '⚠️ ④ Concentration Risk Diagnosis',
+                'heading': '⚠️ ⑤ Concentration Risk Diagnosis',
                 'image': 'p4_risk.png',
                 'intro': 'Use this to automatically check whether your trade is dangerously concentrated in a single supplier, origin, or product. Good to check periodically for supply chain risk management.',
                 'steps': [
@@ -2491,7 +2930,7 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '📈 ⑤ Price Trend & Seasonality',
+                'heading': '📈 ⑥ Price Trend & Seasonality',
                 'image': 'p5_season.png',
                 'intro': "Use this to see how a product's price moves over time and when it is cheapest to buy — useful for planning purchase timing.",
                 'steps': [
@@ -2508,7 +2947,7 @@ GUIDE_CONTENT = {
                 'tips': ['With only one year of data, a warning notes the seasonal pattern could be coincidental — confidence improves with 2+ years of history.'],
             },
             {
-                'heading': '🔀 ⑥ New/Lost Trading Partners',
+                'heading': '🔀 ⑦ New/Lost Trading Partners',
                 'image': 'p6_churn.png',
                 'intro': 'Use this to compare any two periods and find trading partners (supplier/origin/product/importer) that appeared or disappeared — answering "did switching partners actually pay off?"',
                 'steps': [
@@ -2524,9 +2963,9 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '🔬 ⑦ New Business Scorer',
+                'heading': '🔬 ⑧ New Business Scorer',
                 'image': 'p7_scorer.png',
-                'intro': 'Use this to find "recently surging existing items" and "brand-new entrants" across the whole market, ranked by opportunity. While the other 7 menus examine trade you already do, this one surfaces opportunities you are not yet pursuing.',
+                'intro': 'Use this to find "recently surging existing items" and "brand-new entrants" across the whole market, ranked by opportunity. While the other 8 menus examine trade you already do, this one surfaces opportunities you are not yet pursuing.',
                 'steps': [
                     'Upload full market data that includes HS Code Name / Detailed HS-CODE if possible.',
                     'Set the analysis window, minimum volume threshold, and analysis dimension.',
@@ -2541,7 +2980,7 @@ GUIDE_CONTENT = {
                 'tips': ['Analysis works without fit criteria, but filling them in makes the ranking far more relevant to your specific business.'],
             },
             {
-                'heading': '🧩 ⑧ Free Pivot Builder',
+                'heading': '🧩 ⑨ Free Pivot Builder',
                 'image': 'p8_pivot.png',
                 'intro': 'Use this when no fixed screen answers your question — build your own table or chart by freely combining axes and metrics, Excel-pivot-table style.',
                 'steps': [
@@ -2575,6 +3014,7 @@ def build_user_guide_pdf(lang):
     from reportlab.lib import colors
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
+    Paragraph = _pdf_safe_paragraph(Paragraph)  # ①~⑨·이모지 빈칸 방지
 
     content = GUIDE_CONTENT.get(lang, GUIDE_CONTENT['ko'])
     assets_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'guide')
@@ -2912,6 +3352,11 @@ if 'scorer_raw_df' not in st.session_state:
     st.session_state.scorer_headers = None
     st.session_state.scorer_result = None
 
+if 'health_raw_df' not in st.session_state:
+    st.session_state.health_raw_df = None
+    st.session_state.health_headers = None
+    st.session_state.health_result = None
+
 # --- [비밀번호 기능] 비밀번호가 맞을 때까지 이 아래 앱 본문을 그리지 않음 ---
 if not check_password():
     st.stop()
@@ -2948,8 +3393,8 @@ with st.sidebar:
     st.markdown("---")
     selected = option_menu(
         menu_title=T('app_menu_title'),
-        options=[T('menu_opt_customer'), T('menu_opt_market'), T('menu_opt_flow'), T('menu_opt_risk'), T('menu_opt_season'), T('menu_opt_churn'), T('menu_opt_scorer'), T('menu_opt_pivot')],
-        icons=["person-bounding-box", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "binoculars", "grid-3x3"],
+        options=[T('menu_opt_customer'), T('menu_opt_health'), T('menu_opt_market'), T('menu_opt_flow'), T('menu_opt_risk'), T('menu_opt_season'), T('menu_opt_churn'), T('menu_opt_scorer'), T('menu_opt_pivot')],
+        icons=["person-bounding-box", "heart-pulse", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "binoculars", "grid-3x3"],
         menu_icon="cast",
         default_index=0,
         styles={
@@ -3280,6 +3725,198 @@ if selected == T('menu_opt_customer'):
                     st.dataframe(pd.DataFrame(new_exporter_details))
                 else:
                     st.info(T('p1_no_new_exporters_info'))
+
+# ==============================================================================
+# 페이지 1-2: 포트폴리오 헬스체크
+# ==============================================================================
+if selected == T('menu_opt_health'):
+    st.title(T('ph_title'))
+    st.write(T('ph_intro'))
+
+    if st.session_state.health_result is not None:
+        st.button(T('ph_reset_btn'), on_click=reset_health_states)
+
+    if st.session_state.health_result is None:
+        health_file = st.file_uploader(T('ph_upload_label'), type=['csv', 'xlsx'], key="health_uploader")
+        st.caption(T('ph_upload_caption'))
+        raw_df = load_uploaded_df(health_file, 'health_raw_df', 'health_headers', 'health_fileid')
+
+        if raw_df is not None:
+            headers = st.session_state.health_headers
+            cols = detect_standard_columns(headers)
+            missing = [k for k in ['date', 'importer', 'exporter', 'product', 'volume', 'price'] if not cols[k]]
+            if missing:
+                st.error(T('ph_missing_cols_error', cols=', '.join(missing)))
+                st.stop()
+
+            _imp = raw_df[cols['importer']].dropna().astype(str).str.strip()
+            _imp_vol = pd.to_numeric(raw_df.loc[_imp.index, cols['volume']], errors='coerce').groupby(_imp).sum().sort_values(ascending=False)
+            importer_order = list(_imp_vol.index)
+            if not importer_order:
+                st.warning(T('ph_no_data_warning'))
+                st.stop()
+            if len(importer_order) >= 2:
+                health_importer = st.selectbox(T('ph_importer_label'), options=importer_order,
+                                               format_func=lambda n: f"{n} ({_imp_vol[n]:,.0f} kg)", key="health_importer")
+            else:
+                health_importer = importer_order[0]
+                st.caption(T('ph_importer_auto', name=health_importer))
+
+            AXIS_MAP = build_axis_map([
+                (T('ph_unit_product'), cols['product']),
+                (T('ph_unit_origin'), cols['origin']),
+            ], raw_df, cols)
+            unit_label = st.selectbox(T('ph_unit_label'), options=list(AXIS_MAP.keys()), key="health_unit")
+            unit_col = AXIS_MAP[unit_label]
+            product_mode = unit_col == cols['product']
+            st.caption(T('ph_unit_caption'))
+
+            _parsed_dates = pd.to_datetime(raw_df[cols['date']], errors='coerce').dropna()
+            _max_date = _parsed_dates.max().date() if len(_parsed_dates) else datetime.date.today()
+            _base_start = (pd.Timestamp(_max_date) - pd.DateOffset(months=6)).date() + datetime.timedelta(days=1)
+            _comp_end = _base_start - datetime.timedelta(days=1)
+            _comp_start = (pd.Timestamp(_comp_end) - pd.DateOffset(months=6)).date() + datetime.timedelta(days=1)
+
+            st.markdown(f"**{T('ph_base_period')}**")
+            colB1, colB2 = st.columns(2)
+            with colB1:
+                base_start = st.date_input(T('p4_date_start'), value=_base_start, key="health_base_start")
+            with colB2:
+                base_end = st.date_input(T('p4_date_end'), value=_max_date, key="health_base_end")
+
+            st.markdown(f"**{T('ph_comp_period')}**")
+            colC1, colC2 = st.columns(2)
+            with colC1:
+                comp_start = st.date_input(T('p4_date_start'), value=_comp_start, key="health_comp_start")
+            with colC2:
+                comp_end = st.date_input(T('p4_date_end'), value=_comp_end, key="health_comp_end")
+
+            if base_start <= comp_end and comp_start <= base_end:
+                st.warning(T('ph_period_overlap_warning'))
+
+            d = HEALTH_DEFAULT_THRESHOLDS
+            with st.expander(T('ph_threshold_expander'), expanded=False):
+                th_c1, th_c2 = st.columns(2)
+                with th_c1:
+                    conc_red = st.slider(T('ph_th_conc_red'), 30, 100, d['conc_red'], 5, key="health_conc_red")
+                    price_red = st.slider(T('ph_th_price_red'), 1, 100, d['price_red'], 1, key="health_price_red")
+                    volume_red = st.slider(T('ph_th_volume_red'), 5, 100, d['volume_red'], 5, key="health_volume_red")
+                    churn_major = st.slider(T('ph_th_churn_major'), 1, 50, d['churn_major'], 1, key="health_churn_major")
+                with th_c2:
+                    conc_yellow = st.slider(T('ph_th_conc_yellow'), 10, 100, d['conc_yellow'], 5, key="health_conc_yellow")
+                    price_yellow = st.slider(T('ph_th_price_yellow'), 1, 100, d['price_yellow'], 1, key="health_price_yellow")
+                    volume_yellow = st.slider(T('ph_th_volume_yellow'), 5, 100, d['volume_yellow'], 5, key="health_volume_yellow")
+                    min_volume = st.number_input(T('ph_th_min_volume'), min_value=0, value=10000, step=1000, key="health_min_volume")
+                if conc_yellow > conc_red or price_yellow > price_red or volume_yellow > volume_red:
+                    st.warning(T('ph_th_order_warning'))
+            thresholds = {'conc_red': conc_red, 'conc_yellow': conc_yellow, 'churn_major': churn_major,
+                          'price_red': price_red, 'price_yellow': price_yellow,
+                          'volume_red': volume_red, 'volume_yellow': volume_yellow}
+
+            if st.button(T('ph_run_btn')):
+                if base_start > base_end or comp_start > comp_end:
+                    st.error(T('ph_period_invalid_error'))
+                    st.stop()
+                with st.spinner(T('ph_spinner')):
+                    df = prepare_health_df(raw_df, cols, unit_col, product_mode)
+                    df = df[df['_importer'] == health_importer]
+                    result = compute_health_check(df, (base_start, base_end), (comp_start, comp_end), thresholds, min_volume)
+                if df.empty:
+                    st.warning(T('ph_no_data_warning'))
+                elif not result['rows']:
+                    st.warning(T('ph_no_units_warning'))
+                else:
+                    result.update({
+                        'importer': health_importer, 'unit_label': unit_label, 'product_mode': product_mode,
+                        'periods': (base_start, base_end, comp_start, comp_end),
+                        'thresholds': thresholds, 'min_volume': min_volume,
+                    })
+                    st.session_state.health_result = result
+                    st.rerun()
+
+    if st.session_state.health_result is not None:
+        res = st.session_state.health_result
+        rows = res['rows']
+        b_start, b_end, c_start, c_end = res['periods']
+        summary_caption = T('ph_summary_caption', importer=res['importer'], unit=res['unit_label'],
+                            b_start=b_start, b_end=b_end, c_start=c_start, c_end=c_end)
+        st.caption(summary_caption)
+
+        counts = Counter(r['overall'] for r in rows)
+        kpi_items = [(T('ph_kpi_total'), len(rows))] + [(T(HEALTH_OVERALL_KEY[k]), counts.get(k, 0)) for k in ['risk', 'caution', 'safe', 'new']]
+        for kcol, (label, value) in zip(st.columns(5), kpi_items):
+            kcol.metric(label, value)
+        if res['excluded']:
+            st.caption(T('ph_excluded_caption', n=res['excluded'], min_volume=res['min_volume']))
+
+        st.subheader(T('ph_focus_header'))
+        focus_lines = health_focus_lines(rows, res['thresholds'])
+        if focus_lines:
+            for unit, reasons in focus_lines:
+                st.markdown(f"- 🔴 **{unit}**: {reasons}")
+        else:
+            st.info(T('ph_focus_none'))
+
+        st.subheader(T('ph_table_header'))
+        status_labels = {f"{HEALTH_OVERALL_EMOJI[k]} {T(HEALTH_OVERALL_KEY[k])}": k for k in ['risk', 'caution', 'safe', 'new'] if counts.get(k)}
+        selected_labels = st.multiselect(T('ph_filter_label'), options=list(status_labels), default=list(status_labels), key="health_filter")
+        selected_status = {status_labels[l] for l in selected_labels if l in status_labels}
+        shown_rows = [r for r in rows if r['overall'] in selected_status]
+        st.dataframe(health_display_table(shown_rows), hide_index=True, use_container_width=True)
+        st.caption(T('ph_table_notes'))
+        if not res['product_mode']:
+            st.info(T('ph_mix_notice'))
+
+        detail_rows = [r for r in shown_rows if r['overall'] in ('risk', 'caution')]
+        if detail_rows:
+            st.subheader(T('ph_detail_header'))
+            for r in detail_rows:
+                label = f"{HEALTH_OVERALL_EMOJI[r['overall']]} {r['unit']}{T('ph_new_tag') if r['is_new'] else ''} — {T(HEALTH_OVERALL_KEY[r['overall']])}"
+                with st.expander(label):
+                    dc1, dc2 = st.columns(2)
+                    with dc1:
+                        st.markdown(f"**{T('ph_detail_top5')}**")
+                        top5_df = pd.DataFrame(r['top5'], columns=[T('ph_detail_supplier'), T('ph_detail_share')])
+                        st.dataframe(top5_df.style.format({T('ph_detail_share'): '{:.1f}'}), hide_index=True, use_container_width=True)
+                    with dc2:
+                        st.markdown(f"**{T('ph_detail_lost')}**")
+                        if r['lost']:
+                            lost_df = pd.DataFrame(r['lost'], columns=[T('ph_detail_supplier'), T('ph_detail_share')])
+                            st.dataframe(lost_df.style.format({T('ph_detail_share'): '{:.1f}'}), hide_index=True, use_container_width=True)
+                        else:
+                            st.caption(T('ph_detail_no_lost'))
+                    _fmt = lambda v, f: '-' if v is None else f.format(v)
+                    mc1, mc2 = st.columns(2)
+                    with mc1:
+                        st.markdown(f"**{T('ph_detail_vwap')}**")
+                        st.write(f"{T('ph_detail_base')}: {_fmt(r['base_vwap'], '{:,.2f}')} · {T('ph_detail_comp')}: {_fmt(r['comp_vwap'], '{:,.2f}')}")
+                    with mc2:
+                        st.markdown(f"**{T('ph_detail_monthly')}**")
+                        st.write(f"{T('ph_detail_base')}: {r['base_monthly']:,.0f} · {T('ph_detail_comp')}: {r['comp_monthly']:,.0f}")
+                    st.caption(T('ph_detail_more', risk=T('menu_opt_risk'), churn=T('menu_opt_churn'), season=T('menu_opt_season')))
+
+        dl1, dl2 = st.columns(2)
+        with dl1:
+            try:
+                st.download_button(T('ph_excel_btn'), data=build_health_excel(rows), file_name="portfolio_health_check.xlsx",
+                                   mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", key="health_excel_dl")
+            except Exception as e:
+                st.error(str(e))
+        with dl2:
+            if st.button(T('pdf_generate_btn'), key="health_pdf_btn"):
+                with st.spinner(T('pdf_generating_msg')):
+                    try:
+                        kpi_lines = [summary_caption, ' · '.join(f"{label}: {value}" for label, value in kpi_items)]
+                        kpi_lines += [T('ph_focus_header') + ' — ' + f"{unit}: {reasons}" for unit, reasons in focus_lines]
+                        if not res['product_mode']:
+                            kpi_lines.append(T('ph_mix_notice'))
+                        pdf_bytes = build_pdf_report(
+                            title=T('ph_title'), kpi_lines=kpi_lines, figs=[],
+                            df_table=health_display_table(rows, plain=True), table_title=T('ph_table_header'),
+                        )
+                        st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="portfolio_health_check.pdf", mime="application/pdf", key="health_pdf_dl")
+                    except Exception as e:
+                        st.error(T('pdf_error_msg', msg=str(e)))
 
 # ==============================================================================
 # 페이지 2: 시장 경쟁력 분석 (모든 수정 사항이 이 섹션에 적용됨)
