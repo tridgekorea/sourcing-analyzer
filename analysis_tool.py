@@ -54,8 +54,24 @@ TEXTS = {
         'p1_missing_required_cols_error': '필수 컬럼이 부족합니다. 파일 내용을 확인해주세요.',
         'p1_analysis_complete_success': "'{customer_name}' 고객사 분석 완료!",
         'p1_exp1_title': '1. 계약 전후 예상 절감액 분석',
-        'p1_total_savings_subheader': '총 예상 절감액',
-        'p1_total_savings_caption': '※ 계약일({date}) 이후, 고객사의 자체 구매 단가 변화에 따른 총 예상 절감액입니다.',
+        'p1_total_savings_caption': '※ 계약일({date}) 이후 품목군별 절감액(계약 전후 단가 차이 × 계약 후 물량)을 모두 더한 순 절감액입니다. 절감·비용 증가 합계에는 변화 미미(±${th:,.0f} 이내)와 계약 후 구매 없음 품목이 빠져 있습니다.',
+        'p1_minor_threshold_label': '변화 미미 기준 ($, 절감·증가액 절대값이 이 값 이하면 변화 미미)',
+        'p1_kpi_net': '순 절감액',
+        'p1_kpi_saved': '절감 합계 ({n}개 품목)',
+        'p1_kpi_increased': '비용 증가 합계 ({n}개 품목)',
+        'p1_group_saved': '💰 절감 품목 ({n}개, ${amount:,.0f})',
+        'p1_group_increased': '📈 단가 상승 품목 ({n}개, ${amount:,.0f})',
+        'p1_group_minor': '➖ 변화 미미 ({n}개)',
+        'p1_group_empty': '해당하는 품목이 없습니다.',
+        'p1_minor_caption': '※ 절감·증가액의 절대값이 ${th:,.0f} 이하인 품목입니다. 카드의 $0은 단가 차이가 거의 없어 반올림된 값입니다.',
+        'p1_show_all_btn': '전체 보기 (나머지 {n}개)',
+        'p1_show_less_btn': '접기',
+        'p1_no_purchase_caption': '🚫 계약 후 구매 없음 ({n}개): {names} — 계약 후 물량이 0이라 절감·비용 증가 합계에서 제외했습니다.',
+        'p1_col_group': '구분',
+        'p1_grp_saved_label': '절감',
+        'p1_grp_increased_label': '단가 상승',
+        'p1_grp_minor_label': '변화 미미',
+        'p1_grp_no_purchase_label': '계약 후 구매 없음',
         'p1_savings_detail_subheader': '품목군별 상세 절감 내역',
         'p1_mix_changed_badge': '품목 구성 변화',
         'p1_mix_changed_tooltip': '계약 전후로 이 그룹 안에서 실제로 산 품목명이 크게 바뀌었습니다. 절감액이 협상 성과가 아니라 품목 변경 때문일 수 있습니다.',
@@ -685,8 +701,24 @@ TEXTS = {
         'p1_missing_required_cols_error': 'Required columns are missing. Please check the file contents.',
         'p1_analysis_complete_success': "Analysis for customer '{customer_name}' complete!",
         'p1_exp1_title': '1. Estimated Savings Before/After Contract',
-        'p1_total_savings_subheader': 'Total Estimated Savings',
-        'p1_total_savings_caption': "※ Total estimated savings from the customer's own purchase price changes after the contract date ({date}).",
+        'p1_total_savings_caption': '※ Net savings since the contract date ({date}): the sum of per-group savings (price difference before vs. after × post-contract volume). The savings and cost-increase totals exclude minor changes (within ±${th:,.0f}) and items with no purchases after the contract.',
+        'p1_minor_threshold_label': 'Minor-change threshold ($ — items whose absolute savings/increase is at or below this are "minor")',
+        'p1_kpi_net': 'Net savings',
+        'p1_kpi_saved': 'Total savings ({n} items)',
+        'p1_kpi_increased': 'Total cost increase ({n} items)',
+        'p1_group_saved': '💰 Savings ({n} items, ${amount:,.0f})',
+        'p1_group_increased': '📈 Price increases ({n} items, ${amount:,.0f})',
+        'p1_group_minor': '➖ Minor change ({n} items)',
+        'p1_group_empty': 'No items in this group.',
+        'p1_minor_caption': '※ Items whose absolute savings/increase is ${th:,.0f} or less. A $0 card means the price barely changed and was rounded.',
+        'p1_show_all_btn': 'Show all ({n} more)',
+        'p1_show_less_btn': 'Show less',
+        'p1_no_purchase_caption': '🚫 No purchases after the contract ({n}): {names} — excluded from the savings and cost-increase totals because post-contract volume is 0.',
+        'p1_col_group': 'Group',
+        'p1_grp_saved_label': 'Savings',
+        'p1_grp_increased_label': 'Price increase',
+        'p1_grp_minor_label': 'Minor change',
+        'p1_grp_no_purchase_label': 'No purchases after contract',
         'p1_savings_detail_subheader': 'Detailed Savings by Product Group',
         'p1_mix_changed_badge': 'Product mix changed',
         'p1_mix_changed_tooltip': 'The actual products purchased within this group changed significantly before vs. after the contract. The savings figure may reflect a product switch rather than negotiation.',
@@ -1453,13 +1485,69 @@ def generate_summary_table_html(df, group_by_col, header_name, value_col='unit_p
     html += "</tbody></table>"
     return html
 
+P1_SAVINGS_GROUP_LABEL_KEY = {'saved': 'p1_grp_saved_label', 'increased': 'p1_grp_increased_label',
+                              'minor': 'p1_grp_minor_label', 'no_purchase': 'p1_grp_no_purchase_label'}
+P1_CARDS_PER_GROUP = 12
+
+
+def split_savings_groups(savings_df, threshold):
+    """도입 효과 분석 절감액을 그룹으로 나눈다.
+    - saved: 절감액 > threshold (절감액 큰 순)
+    - increased: 절감액 < -threshold, 즉 단가 상승으로 비용이 늘어난 품목 (증가액 큰 순)
+    - minor: |절감액| <= threshold (카드에 $0으로 보이던 품목은 대부분 여기)
+    - no_purchase: 계약 후 물량 0 — 절감·증가 합계에서 제외"""
+    bought = savings_df['volume_after'] > 0
+    valid, no_purchase = savings_df[bought], savings_df[~bought]
+    return {
+        'saved': valid[valid['savings'] > threshold].sort_values('savings', ascending=False),
+        'increased': valid[valid['savings'] < -threshold].sort_values('savings'),
+        'minor': valid[valid['savings'].abs() <= threshold].sort_values('savings', ascending=False),
+        'no_purchase': no_purchase,
+    }
+
+
+def savings_table_with_group(groups):
+    """상세 절감 내역 표: '구분' 열을 붙여 절감 → 단가 상승 → 변화 미미 → 계약 후 구매 없음 순으로 합친다."""
+    parts = []
+    for key in ('saved', 'increased', 'minor', 'no_purchase'):
+        g = groups[key].copy()
+        g.insert(0, 'group', T(P1_SAVINGS_GROUP_LABEL_KEY[key]))
+        parts.append(g)
+    return pd.concat(parts)
+
+
+def _toggle_session_flag(key):
+    st.session_state[key] = not st.session_state.get(key, False)
+
+
+def render_savings_cards(group_df, group_key):
+    """기존 품목군별 절감 카드 디자인 그대로 그린다. 처음에는 상위 P1_CARDS_PER_GROUP개만, '전체 보기'로 나머지를 펼친다."""
+    if group_df.empty:
+        st.caption(T('p1_group_empty'))
+        return
+    state_key = f'p1_show_all_{group_key}'
+    show_all = st.session_state.get(state_key, False)
+    visible = group_df if show_all else group_df.head(P1_CARDS_PER_GROUP)
+    cols = st.columns(4)
+    for i, row in enumerate(visible.itertuples()):
+        col = cols[i % 4]
+        color, arrow, val = ("blue", "▼", row.savings) if row.savings >= 0 else ("red", "▲", -row.savings)
+        warn_html = f"""<div style="font-size:11px;color:#b3261e;margin-top:4px;" title="{T('p1_mix_changed_tooltip')}">⚠ {T('p1_mix_changed_badge')}</div>""" if row.mix_changed else ""
+        col.markdown(f"""<div style="border: 1px solid #e6e6e6; border-radius: 0.5rem; padding: 1rem; text-align: center; height: 120px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 1rem;"><strong>{row.Index}</strong><p style="font-size: 1.5rem; font-weight: bold; color: {color}; margin-top: 8px; margin-bottom: 0;">{arrow} ${val:,.0f}</p>{warn_html}</div>""", unsafe_allow_html=True)
+    hidden = len(group_df) - P1_CARDS_PER_GROUP
+    if hidden > 0:
+        label = T('p1_show_less_btn') if show_all else T('p1_show_all_btn', n=hidden)
+        st.button(label, key=f'{state_key}_btn', on_click=_toggle_session_flag, args=(state_key,))
+
+
 def reset_analysis_states():
     """모든 분석 상태를 초기화하는 함수"""
     st.session_state.analysis_done = False
     st.session_state.market_analysis_done = False
     keys_to_reset = ['customer_name', 'plot_df', 'customer_df', 'contract_date', 
                      'tfidf_matrix', 'savings_df', 'total_savings', 'market_df',
-                     'analyzed_product_name']
+                     'analyzed_product_name', 'p1_minor_threshold',
+                     'p1_show_all_saved', 'p1_show_all_increased', 'p1_show_all_minor']
     for key in keys_to_reset:
         if key in st.session_state:
             del st.session_state[key]
@@ -2453,8 +2541,9 @@ def _pdf_safe_paragraph(paragraph_cls):
     return lambda text, *args, **kwargs: paragraph_cls(_pdf_safe_text(text), *args, **kwargs)
 
 
-def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
+def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None, tables=None):
     """제목 + KPI 텍스트 + Plotly 차트(이미지로 변환) + 표를 하나의 PDF로 조립해 바이트로 반환.
+    tables에 [(섹션 제목, DataFrame), ...]을 넘기면 df_table 뒤에 섹션별 표를 차례로 붙인다.
     reportlab + kaleido 필요."""
     import io
     from reportlab.lib.pagesizes import A4
@@ -2492,11 +2581,14 @@ def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
             story.append(RLImage(io.BytesIO(img_bytes), width=180 * mm, height=180 * mm * 500 / 900))
             story.append(Spacer(1, 8))
 
-    if df_table is not None and not df_table.empty:
-        if table_title:
-            story.append(Paragraph(table_title, styles['Heading3']))
+    sections = ([(table_title, df_table)] if df_table is not None else []) + list(tables or [])
+    for sec_title, sec_df in sections:
+        if sec_df is None or sec_df.empty:
+            continue
+        if sec_title:
+            story.append(Paragraph(sec_title, styles['Heading3']))
 
-        display_table = df_table.copy()
+        display_table = sec_df.copy()
         for c in display_table.columns:
             display_table[c] = display_table[c].astype(str)
 
@@ -2525,6 +2617,7 @@ def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None):
             ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
         ]))
         story.append(t)
+        story.append(Spacer(1, 10))
 
     doc.build(story)
     buf.seek(0)
@@ -2833,11 +2926,13 @@ GUIDE_CONTENT = {
                 'steps': [
                     '거래 내역 파일을 업로드합니다 (여러 회사 데이터가 섞여 있어도 자동으로 가장 많이 등장하는 회사를 기준으로 분석합니다).',
                     '계약 시작일을 선택합니다.',
+                    '필요하면 "변화 미미 기준"($, 기본 10)을 조정합니다.',
                     '"분석 실행" 버튼을 클릭합니다.',
                 ],
                 'results': [
-                    '총 예상 절감액 — 계약일 전후로 실제 구매 단가 변화에 따른 절감 규모.',
-                    '품목군별 카드 — 어떤 품목에서 얼마나 절감(또는 손해)됐는지 개별 확인.',
+                    '순 절감액 / 절감 합계 / 비용 증가 합계 — 품목군별 절감액(계약 전후 단가 차이 × 계약 후 물량)의 순합계와, 절감·비용 증가 각각의 합계(품목 수 포함).',
+                    '품목군별 카드 — 절감 품목, 단가 상승 품목, 변화 미미(절감·증가액이 ±$10 이내, 기준 조정 가능) 세 그룹으로 나뉘어 금액 큰 순으로 보입니다. 그룹마다 처음 12개만 보이고 "전체 보기"로 나머지를 펼칩니다. 계약 후 구매가 없는 품목은 "계약 후 구매 없음"으로 따로 표시하고 합계에서 뺍니다.',
+                    '상세 절감 내역 표 — 같은 그룹을 "구분" 열로 보여주며, 결과는 PDF 보고서(KPI 3개 + 그룹별 섹션)로 내려받을 수 있습니다.',
                     '수입 품목 클러스터 — 표기가 조금씩 다른 품목명을 자동으로 묶어서 정리.',
                     '월별 수입 추이, 최근 3개월 비중 — 최근 구매 패턴 파악.',
                     '계약 이후 새로 생기거나 사라진 품목·원산지·공급사 목록.',
@@ -3025,11 +3120,13 @@ GUIDE_CONTENT = {
                 'steps': [
                     'Upload transaction data (if multiple companies are mixed in, the most frequent one is used automatically).',
                     'Select the contract start date.',
+                    'Adjust the "Minor-change threshold" ($, default 10) if needed.',
                     'Click "Run Analysis".',
                 ],
                 'results': [
-                    'Total estimated savings before vs. after the contract.',
-                    'Savings by product group.',
+                    'Net savings / total savings / total cost increase — the net sum of per-group savings (price difference before vs. after × post-contract volume), plus the savings and cost-increase totals with item counts.',
+                    'Cards by product group — split into Savings, Price increases, and Minor change (within ±$10, adjustable), largest amounts first. Each group shows the first 12 cards; "Show all" expands the rest. Items with no purchases after the contract are listed separately as "No purchases after contract" and excluded from the totals.',
+                    'Detailed savings table — the same groups appear in a "Group" column, and the results can be downloaded as a PDF report (3 KPIs + a section per group).',
                     'Import product clusters — similarly-worded product names grouped automatically.',
                     'Monthly import trend and last-3-month share.',
                     'New/lost products, origins, and suppliers since the contract.',
@@ -3653,6 +3750,7 @@ if selected == T('menu_opt_customer'):
                     st.stop() # 폼 실행 중지
                 
                 contract_date_input = st.date_input(T('p1_contract_date_input'))
+                minor_threshold_input = st.number_input(T('p1_minor_threshold_label'), min_value=0.0, value=10.0, step=5.0)
                 submitted = st.form_submit_button(T('p1_run_btn'))
 
             if submitted:
@@ -3730,8 +3828,13 @@ if selected == T('menu_opt_customer'):
                         avg_price_after = pd.Series(dtype=float, name='avg_price_after')
                         volume_after = pd.Series(dtype=float, name='volume_after')
 
-                    savings_df = pd.concat([avg_price_before, avg_price_after, volume_after], axis=1).dropna()
-                    savings_df['savings'] = (savings_df['avg_price_before'] - savings_df['avg_price_after']) * savings_df['volume_after']
+                    savings_df = pd.concat([avg_price_before, avg_price_after, volume_after], axis=1)
+                    # 계약 전 단가가 있는 품목군만 비교 대상. 계약 후 구매가 없으면(물량 0) 버리지 않고
+                    # '계약 후 구매 없음'으로 남겨 따로 표시한다 (절감액 0, 합계에서는 제외).
+                    savings_df = savings_df[savings_df['avg_price_before'].notna()].copy()
+                    no_after = savings_df['avg_price_after'].isna() | ~(savings_df['volume_after'] > 0)
+                    savings_df.loc[no_after, 'volume_after'] = 0.0
+                    savings_df['savings'] = ((savings_df['avg_price_before'] - savings_df['avg_price_after']) * savings_df['volume_after']).where(~no_after, 0.0)
 
                     # 품목 구성 변화(Mix Drift) 체크: 계약 전후로 같은 클러스터 안에서도 실제 사는 품목명 세트가
                     # 얼마나 겹치는지 확인. 많이 안 겹치면 "협상 성과"가 아니라 "품목을 바꿔서 생긴 가격차"일 수 있음.
@@ -3746,7 +3849,7 @@ if selected == T('menu_opt_customer'):
                     savings_df['mix_overlap'] = [_mix_overlap(idx) for idx in savings_df.index]
                     savings_df['mix_changed'] = savings_df['mix_overlap'].apply(lambda v: v is not None and v < 0.3)
                     savings_df = savings_df.sort_values('savings', ascending=False)
-                    total_savings = savings_df['savings'].sum()
+                    total_savings = savings_df.loc[savings_df['volume_after'] > 0, 'savings'].sum()
 
                     st.session_state.customer_name = customer_name
                     st.session_state.plot_df = plot_df
@@ -3755,45 +3858,89 @@ if selected == T('menu_opt_customer'):
                     st.session_state.tfidf_matrix = tfidf_matrix
                     st.session_state.savings_df = savings_df
                     st.session_state.total_savings = total_savings
+                    st.session_state.p1_minor_threshold = float(minor_threshold_input)
                     st.session_state.analysis_done = True
                     
                 st.success(T('p1_analysis_complete_success', customer_name=customer_name))
                 st.rerun()
 
     if st.session_state.analysis_done:
-        with st.expander(T('p1_exp1_title'), expanded=True):
-            st.subheader(T('p1_total_savings_subheader'))
-            total_savings = st.session_state.total_savings
-            color = "blue" if total_savings >= 0 else "red"
-            st.markdown(f"## <span style='color:{color};'>${total_savings:,.2f}</span>", unsafe_allow_html=True)
-            st.caption(T('p1_total_savings_caption', date=st.session_state.contract_date.date()))
-            st.subheader(T('p1_savings_detail_subheader'))
-            cols = st.columns(4)
-            for i, row in enumerate(st.session_state.savings_df.itertuples()):
-                col = cols[i % 4]
-                color, arrow, val = ("blue", "▼", row.savings) if row.savings >= 0 else ("red", "▲", -row.savings)
-                warn_html = f"""<div style="font-size:11px;color:#b3261e;margin-top:4px;" title="{T('p1_mix_changed_tooltip')}">⚠ {T('p1_mix_changed_badge')}</div>""" if row.mix_changed else ""
-                col.markdown(f"""<div style="border: 1px solid #e6e6e6; border-radius: 0.5rem; padding: 1rem; text-align: center; height: 120px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 1rem;"><strong>{row.Index}</strong><p style="font-size: 1.5rem; font-weight: bold; color: {color}; margin-top: 8px; margin-bottom: 0;">{arrow} ${val:,.0f}</p>{warn_html}</div>""", unsafe_allow_html=True)
+        # 안쪽에 그룹별 expander를 넣어야 해서(Streamlit은 expander 중첩 불가) 이 섹션만 테두리 컨테이너로 감싼다.
+        with st.container(border=True):
+            st.subheader(T('p1_exp1_title'))
+            savings_df = st.session_state.savings_df
+            minor_th = st.session_state.get('p1_minor_threshold', 10.0)
+            groups = split_savings_groups(savings_df, minor_th)
+            saved_total = float(groups['saved']['savings'].sum())
+            increased_total = float(-groups['increased']['savings'].sum())
+            net_total = float(st.session_state.total_savings)
+            kpi_net = (T('p1_kpi_net'), f"${net_total:,.2f}")
+            kpi_saved = (T('p1_kpi_saved', n=len(groups['saved'])), f"${saved_total:,.2f}")
+            kpi_increased = (T('p1_kpi_increased', n=len(groups['increased'])), f"${increased_total:,.2f}")
+            for kcol, (label, value) in zip(st.columns(3), [kpi_net, kpi_saved, kpi_increased]):
+                kcol.metric(label, value)
+            st.caption(T('p1_total_savings_caption', date=st.session_state.contract_date.date(), th=minor_th))
 
-            if st.session_state.savings_df['mix_changed'].any():
+            st.subheader(T('p1_savings_detail_subheader'))
+            group_titles = {
+                'saved': T('p1_group_saved', n=len(groups['saved']), amount=saved_total),
+                'increased': T('p1_group_increased', n=len(groups['increased']), amount=increased_total),
+                'minor': T('p1_group_minor', n=len(groups['minor'])),
+            }
+            for gkey, expanded in [('saved', True), ('increased', True), ('minor', False)]:
+                with st.expander(group_titles[gkey], expanded=expanded):
+                    render_savings_cards(groups[gkey], gkey)
+                    if gkey == 'minor' and not groups['minor'].empty:
+                        st.caption(T('p1_minor_caption', th=minor_th))
+            no_purchase_names = [str(n) for n in groups['no_purchase'].index]
+            if no_purchase_names:
+                st.caption(T('p1_no_purchase_caption', n=len(no_purchase_names), names=', '.join(no_purchase_names)))
+            if savings_df['mix_changed'].any():
                 st.caption(T('p1_mix_changed_caption'))
 
-            display_savings_df = st.session_state.savings_df.rename(columns={
+            p1_col_names = {
+                'group': T('p1_col_group'),
                 'avg_price_before': T('p1_col_avg_price_before'),
                 'avg_price_after': T('p1_col_avg_price_after'),
                 'volume_after': T('p1_col_volume_after'),
                 'savings': T('p1_col_savings'),
                 'mix_overlap': T('p1_col_mix_overlap'),
                 'mix_changed': T('p1_col_mix_changed'),
-            })
+            }
+            display_savings_df = savings_table_with_group(groups).rename(columns=p1_col_names)
             st.dataframe(display_savings_df.style.format({
                 T('p1_col_avg_price_before'): '${:,.2f}',
                 T('p1_col_avg_price_after'): '${:,.2f}',
                 T('p1_col_volume_after'): '{:,.0f} KG',
                 T('p1_col_savings'): '${:,.2f}',
                 T('p1_col_mix_overlap'): '{:.0%}',
-            }))
+            }, na_rep='-'))
             st.caption(T('p1_vwap_note'))
+
+            if st.button(T('pdf_generate_btn'), key="p1_pdf_btn"):
+                with st.spinner(T('pdf_generating_msg')):
+                    try:
+                        def _pdf_rows(g):
+                            fmt = lambda v, f: '-' if pd.isna(v) else f.format(v)
+                            return pd.DataFrame({
+                                T('legend_cluster'): [str(i) for i in g.index],
+                                T('p1_col_avg_price_before'): [fmt(v, '${:,.2f}') for v in g['avg_price_before']],
+                                T('p1_col_avg_price_after'): [fmt(v, '${:,.2f}') for v in g['avg_price_after']],
+                                T('p1_col_volume_after'): [fmt(v, '{:,.0f} KG') for v in g['volume_after']],
+                                T('p1_col_savings'): [fmt(v, '${:,.2f}') for v in g['savings']],
+                                T('p1_col_mix_changed'): ['⚠ ' + T('p1_mix_changed_badge') if v else '' for v in g['mix_changed']],
+                            })
+                        pdf_sections = [(group_titles[k], _pdf_rows(groups[k])) for k in ('saved', 'increased', 'minor')]
+                        pdf_sections.append((f"{T('p1_grp_no_purchase_label')} ({len(no_purchase_names)})", _pdf_rows(groups['no_purchase'])))
+                        pdf_bytes = build_pdf_report(
+                            title=f"{T('p1_title')} — {st.session_state.customer_name}",
+                            kpi_lines=[f"{label}: {value}" for label, value in [kpi_net, kpi_saved, kpi_increased]]
+                                      + [T('p1_total_savings_caption', date=st.session_state.contract_date.date(), th=minor_th)],
+                            figs=[], tables=pdf_sections,
+                        )
+                        st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="adoption_impact.pdf", mime="application/pdf", key="p1_pdf_dl")
+                    except Exception as e:
+                        st.error(T('pdf_error_msg', msg=str(e)))
 
         with st.expander(T('p1_exp2_title'), expanded=True): # 인쇄 시 이 섹션부터 새 페이지
             if st.session_state.tfidf_matrix is not None and st.session_state.tfidf_matrix.shape[0] > 0:
