@@ -1180,6 +1180,73 @@ TEXTS = {
         'ss_rp_close_v2_wait': '현재 단가가 계절 평균보다 높음 — {cm} 전후 구매 검토',
         'ss_rp_close_v2_data': '현재 단가가 계절 평균보다 높음 — 24개월 이상 데이터로 계절 패턴 재확인',
         'ss_rp_close_note': '월별 단가는 통관 신고 기준 추정치이며, 품질·규격·계약 조건 차이를 반영하지 않습니다. 본 자료의 수치는 계약 판단의 단일 근거로 사용할 수 없습니다.',
+        # --- ② 포트폴리오 헬스체크 새 PDF (ph_rp_) ---
+        'ph_rp_eyebrow': 'Portfolio Health Report',
+        'ph_rp_blind_toggle': 'PDF에 수입사명 대신 블라인드 표기 (수입사 A)',
+        'ph_rp_s1_eyebrow': '01  Summary',
+        'ph_rp_head_risk': '위험 {n}개 단위가 금액의 {p:.1f}%를 차지합니다',
+        'ph_rp_head_caution': '위험 단위는 없고, 주의 {n}개가 있습니다',
+        'ph_rp_head_safe': '위험·주의 단위가 없습니다',
+        'ph_rp_kpi_units': '점검 단위',
+        'ph_rp_kpi_units_note': '{unit} 기준',
+        'ph_rp_kpi_flag': '위험 + 주의',
+        'ph_rp_kpi_flag_note': '위험 {r} · 주의 {c}',
+        'ph_rp_kpi_safe': '안전 금액 비중',
+        'ph_rp_kpi_safe_note': '안전 {n}개 · 기준 기간 금액 기준',
+        'ph_rp_kpi_hold': '데이터 부족',
+        'ph_rp_kpi_hold_note': '선적 {s}건 미만 · 신규 {n}개 별도',
+        'ph_rp_f1_risk': '위험 {n}개 — {names}',
+        'ph_rp_f1_caution': '주의 {n}개 — {names}',
+        'ph_rp_f1_d': '금액 비중이 가장 큰 {unit}: {reasons}',
+        'ph_rp_f1_none': '위험·주의 단위가 없습니다',
+        'ph_rp_f1_none_d': '안전 {s}개, 신규 {n}개, 데이터 부족 {h}개입니다.',
+        'ph_rp_f2': '가장 큰 신호: {unit} — {signal}',
+        'ph_rp_f2_d': '금액 비중 {share:.1f}%, 단가 {price}, 월평균 물량 {vol} (비교 기간 대비).',
+        'ph_rp_f2_none': '단가·공급 신호가 있는 단위가 없습니다',
+        'ph_rp_f2_none_d': '비교 기간 대비 단가 상승·공급 차질·수급 경색이 기준을 넘지 않았습니다.',
+        'ph_rp_f3': '공급사 1곳·집중 구조 단위가 {n}개입니다',
+        'ph_rp_f3_d': '단일 {a}개, 집중(1위 ≥ {conc}%) {b}개 — 금액 비중 합계 {p:.1f}%. 단가가 오르면 바로 위험으로 올라갑니다.',
+        'ph_rp_f3_none': '단일·집중 구조 단위가 없습니다',
+        'ph_rp_f3_none_d': '모든 단위가 공급사 2곳 이상에 분산되어 있습니다.',
+        'ph_rp_f3_hold': ' 데이터 부족 {h}개는 선적이 {s}건 미만이라 단가 신호를 판단하지 않았습니다.',
+        'ph_rp_s2_eyebrow': '02  Focus',
+        'ph_rp_s2_head': '먼저 볼 단위',
+        'ph_rp_s2_sub': '비교 기간 대비 기준 기간의 단가·물량 변화와 판정입니다.',
+        'ph_rp_chart': '단가 변화 × 물량 변화',
+        'ph_rp_chart_note': '점 크기 = 금액 비중, 숫자 = 아래 표의 #. 점선 = 단가 +{red}%(위험)·+{yellow}%(주의), 세로 점선 = 물량 –{sq}%(수급 경색 기준). 축 밖의 값은 가장자리에 표시합니다.',
+        'ph_rp_axis_volume': '월평균 물량 변화',
+        'ph_rp_axis_price': '단가(VWAP) 변화',
+        'ph_rp_flag_table': '위험·주의 단위 ({n}개)',
+        'ph_rp_th_share': '금액<br/>비중',
+        'ph_rp_th_price': '단가<br/>변화',
+        'ph_rp_th_volume': '물량<br/>변화',
+        'ph_rp_s3_eyebrow': '03  All Units',
+        'ph_rp_s3_head': '전체 판정 ({n}개)',
+        'ph_rp_s3_sub': '위험 → 주의 → 안전 → 신규 → 데이터 부족 순, 같은 판정 안에서는 금액 비중 순입니다.',
+        'ph_rp_s4_eyebrow': '04  Methodology',
+        'ph_rp_lbl_importer': '수입사',
+        'ph_rp_lbl_unit': '점검 단위',
+        'ph_rp_lbl_rule': '판정 기준',
+        'ph_rp_lbl_hold': '데이터 부족·영향도',
+        'ph_rp_m_period': '기준 기간 {b0} – {b1} · 비교 기간 {c0} – {c1}',
+        'ph_rp_m_unit_product': '포장 단위·끝 제품 코드만 다른 품목명은 한 품목으로 묶음.',
+        'ph_rp_m_price': 'Unit Price 우선, 없으면 금액 ÷ 중량. 기간별 VWAP(물량가중평균), USD/kg. 물량은 월평균으로 비교',
+        'ph_rp_m_rule': '단가 +{red}% 이상 위험, +{yellow}% 이상 주의. 비중 {major}% 이상 공급사가 빠지고 대체 물량이 {ok}% 미만이면 공급 차질(위험). 물량 –{sq}% 이하 + 단가 주의 이상이면 수급 경색(위험)',
+        'ph_rp_m_structure': '공급사 1곳 단일, 1위 ≥ {conc}% 집중, 1위 < {spread}% 분산, 그 사이 보통. 단일·집중 + 단가 주의이면 위험으로 올림',
+        'ph_rp_m_hold': '두 기간 중 선적이 {s}건 미만이면 단가 판단 보류. 금액 비중 {share}% 미만 단위는 위험이어도 주의로 조정',
+        'ph_rp_unknown1': '같은 기간 시장 전체 시세 변화 (‘가격 추세 & 계절성’ 메뉴와 함께 보세요)',
+        'ph_rp_unknown2': '품질·규격 변경이나 계약 조건 변화에 따른 단가 차이',
+        'ph_rp_unknown3': '통관 이후 재고·국내 유통 물량',
+        'ph_rp_close_k1': '먼저 볼 단위',
+        'ph_rp_close_k2': '대체 공급처',
+        'ph_rp_close_k3': '확인 필요',
+        'ph_rp_close_v1': '위험: {names}',
+        'ph_rp_close_v1_caution': '위험 없음 · 주의: {names}',
+        'ph_rp_close_v1_none': '위험·주의 단위 없음 — 현재 조건 유지',
+        'ph_rp_close_v2_link': '위험 {n}개 단위 — {menu}에서 대체 공급처 확인',
+        'ph_rp_close_v2_ok': '위험 단위 없음 — 분기마다 다시 점검',
+        'ph_rp_close_v3': '데이터 부족 {h}개 · 신규 {n}개 — 기간을 넓혀 다시 점검, 시세 변화는 {menu}에서 확인',
+        'ph_rp_close_note': '판정은 통관 데이터의 단가·물량·공급사 변화로 만든 신호이며, 시세·품질·계약 조건의 영향을 함께 담고 있습니다. 본 자료의 수치는 계약 판단의 단일 근거로 사용할 수 없습니다.',
         'unit_n_years': '{n}년',
         'unit_n_months': '{n}개월',
         'unit_n_times': '{n}회',
@@ -2395,6 +2462,73 @@ TEXTS = {
         'ss_rp_close_v2_wait': 'Current price above the seasonal average — consider buying around {cm}',
         'ss_rp_close_v2_data': 'Current price above the seasonal average — re-check the pattern with 24+ months of data',
         'ss_rp_close_note': 'Monthly prices are estimates from customs declarations and do not reflect quality, specification or contract differences. Figures in this report must not be the sole basis for contract decisions.',
+        # --- ② Portfolio health new PDF (ph_rp_) ---
+        'ph_rp_eyebrow': 'Portfolio Health Report',
+        'ph_rp_blind_toggle': 'Blind importer names in the PDF (Importer A)',
+        'ph_rp_s1_eyebrow': '01  Summary',
+        'ph_rp_head_risk': '{n} risk unit(s) account for {p:.1f}% of spend',
+        'ph_rp_head_caution': 'No risk units; {n} on caution',
+        'ph_rp_head_safe': 'No risk or caution units',
+        'ph_rp_kpi_units': 'Units checked',
+        'ph_rp_kpi_units_note': 'By {unit}',
+        'ph_rp_kpi_flag': 'Risk + caution',
+        'ph_rp_kpi_flag_note': 'Risk {r} · caution {c}',
+        'ph_rp_kpi_safe': 'Safe spend share',
+        'ph_rp_kpi_safe_note': '{n} safe · base-period spend',
+        'ph_rp_kpi_hold': 'Insufficient data',
+        'ph_rp_kpi_hold_note': 'Under {s} shipments · {n} new shown separately',
+        'ph_rp_f1_risk': '{n} at risk — {names}',
+        'ph_rp_f1_caution': '{n} on caution — {names}',
+        'ph_rp_f1_d': 'Largest by spend, {unit}: {reasons}',
+        'ph_rp_f1_none': 'No risk or caution units',
+        'ph_rp_f1_none_d': '{s} safe, {n} new, {h} with insufficient data.',
+        'ph_rp_f2': 'Strongest signal: {unit} — {signal}',
+        'ph_rp_f2_d': 'Spend share {share:.1f}%, price {price}, monthly volume {vol} (vs. comparison period).',
+        'ph_rp_f2_none': 'No unit shows a price or supply signal',
+        'ph_rp_f2_none_d': 'Price increases, supply disruption and supply squeeze stayed within thresholds vs. the comparison period.',
+        'ph_rp_f3': '{n} unit(s) rely on a single or concentrated supplier',
+        'ph_rp_f3_d': '{a} single, {b} concentrated (top 1 ≥ {conc}%) — {p:.1f}% of spend combined. A price rise moves them straight to risk.',
+        'ph_rp_f3_none': 'No single- or concentrated-supplier units',
+        'ph_rp_f3_none_d': 'Every unit is spread across two or more suppliers.',
+        'ph_rp_f3_hold': ' {h} unit(s) with insufficient data had under {s} shipments, so price signals were not judged.',
+        'ph_rp_s2_eyebrow': '02  Focus',
+        'ph_rp_s2_head': 'Units to look at first',
+        'ph_rp_s2_sub': 'Price and volume change of the base period vs. the comparison period, with the verdict.',
+        'ph_rp_chart': 'Price change × volume change',
+        'ph_rp_chart_note': 'Dot size = spend share, numbers = # in the table below. Dashed lines = price +{red}% (risk) and +{yellow}% (caution); vertical dotted line = volume –{sq}% (squeeze threshold). Values beyond the axes are pinned to the edge.',
+        'ph_rp_axis_volume': 'Monthly volume change',
+        'ph_rp_axis_price': 'Price (VWAP) change',
+        'ph_rp_flag_table': 'Risk and caution units ({n})',
+        'ph_rp_th_share': 'Spend<br/>share',
+        'ph_rp_th_price': 'Price<br/>change',
+        'ph_rp_th_volume': 'Volume<br/>change',
+        'ph_rp_s3_eyebrow': '03  All Units',
+        'ph_rp_s3_head': 'All verdicts ({n})',
+        'ph_rp_s3_sub': 'Ordered risk → caution → safe → new → insufficient data, then by spend share.',
+        'ph_rp_s4_eyebrow': '04  Methodology',
+        'ph_rp_lbl_importer': 'Importer',
+        'ph_rp_lbl_unit': 'Unit',
+        'ph_rp_lbl_rule': 'Verdict rules',
+        'ph_rp_lbl_hold': 'Data & impact',
+        'ph_rp_m_period': 'Base {b0} – {b1} · comparison {c0} – {c1}',
+        'ph_rp_m_unit_product': 'Product names differing only in pack size or a trailing product code are combined.',
+        'ph_rp_m_price': 'Unit Price first, otherwise value ÷ weight. VWAP (volume-weighted) per period, USD/kg. Volumes compared as monthly averages',
+        'ph_rp_m_rule': 'Price +{red}% or more = risk, +{yellow}% or more = caution. A supplier with {major}%+ share drops out and replacement volume is under {ok}% = supply disruption (risk). Volume –{sq}% or less with price at caution or above = supply squeeze (risk)',
+        'ph_rp_m_structure': 'One supplier = single, top 1 ≥ {conc}% = concentrated, top 1 < {spread}% = spread, otherwise normal. Single/concentrated with a caution-level price rise is raised to risk',
+        'ph_rp_m_hold': 'Under {s} shipments in either period = price not judged. Units under {share}% of spend are capped at caution',
+        'ph_rp_unknown1': 'Market-wide price movement over the same period (see the Price Trend & Seasonality menu)',
+        'ph_rp_unknown2': 'Price differences from quality, specification or contract-term changes',
+        'ph_rp_unknown3': 'Post-customs inventory and domestic distribution',
+        'ph_rp_close_k1': 'Look first',
+        'ph_rp_close_k2': 'Alternatives',
+        'ph_rp_close_k3': 'To check',
+        'ph_rp_close_v1': 'Risk: {names}',
+        'ph_rp_close_v1_caution': 'No risk · caution: {names}',
+        'ph_rp_close_v1_none': 'No risk or caution units — keep current terms',
+        'ph_rp_close_v2_link': '{n} risk unit(s) — check alternative suppliers in {menu}',
+        'ph_rp_close_v2_ok': 'No risk units — re-check every quarter',
+        'ph_rp_close_v3': '{h} insufficient-data and {n} new unit(s) — re-check with a longer period; check market prices in {menu}',
+        'ph_rp_close_note': 'Verdicts are signals built from changes in customs price, volume and suppliers, and include market, quality and contract effects. Figures in this report must not be the sole basis for contract decisions.',
         'unit_n_years': '{n} year(s)',
         'unit_n_months': '{n} months',
         'unit_n_times': '{n}',
@@ -4108,6 +4242,8 @@ def _rp_pct(v, digits=1):
     """부호 있는 퍼센트 (음수는 en dash): +3.2% / –3.2%."""
     if v is None or pd.isna(v):
         return '-'
+    if round(v, digits) == 0:
+        return f"{0:.{digits}f}%"  # -0.0% 방지
     return f"+{v:.{digits}f}%" if v >= 0 else f"–{-v:.{digits}f}%"
 
 
@@ -4470,6 +4606,212 @@ def build_season_report(R):
     closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('ss_rp_close_note'),
                'items': [('01', T('ss_rp_close_k1'), T('ss_rp_close_v1', p=m['cur'], pct=_rp_pct(m['vs_avg']), yoy=_rp_pct(m['yoy']))),
                          ('02', T('ss_rp_close_k2'), v2), ('03', T('ss_rp_close_k3'), v3)]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4)] + [closing])
+
+
+# ---------- ② 포트폴리오 헬스체크 ----------
+# 판정별 브랜드 색 (PDF 산점도·배지 공통): 위험 Black, 주의 #3E50FE, 안정 #9BB3FF, 신규 #171CFD, 판단 보류 #CADDFF
+HEALTH_PDF_COLOR = {'risk': '#0A0A18', 'caution': '#3E50FE', 'safe': '#9BB3FF', 'new': '#171CFD', 'insufficient': '#CADDFF'}
+HEALTH_PDF_TEXT_DARK = {'safe', 'insufficient'}  # 밝은 배경은 검은 글씨
+
+
+def health_badge(rt, overall):
+    from reportlab.lib import colors as _c
+    return rt.Badge(T(HEALTH_OVERALL_KEY[overall]), _c.HexColor(HEALTH_PDF_COLOR[overall]),
+                    text_color=rt.BLACK if overall in HEALTH_PDF_TEXT_DARK else rt.WHITE)
+
+
+def health_signal(row):
+    """판정 근거가 된 가장 강한 신호 (TEXTS 키, 인자) 또는 None."""
+    for key, kw in row['reasons']:
+        if key in HEALTH_SIGNAL_REASONS:
+            return key, kw
+    return None
+
+
+def health_pdf_scatter(rows, th):
+    """② 단가 변화(세로) × 물량 변화(가로) 산점도. 점 크기 = 금액 비중, 색 = 판정(브랜드 규칙). 범례 = 판정 이름."""
+    import report_theme as rt
+    pts = [r for r in rows if not r['is_new'] and r['price_chg'] is not None and r['volume_chg'] is not None]
+    if not pts:
+        return None
+    fig, ax = rt.new_chart(3.1)
+    rt.apply_pdf_chart_style(ax)
+    xs = np.array([r['volume_chg'] for r in pts], dtype=float)
+    ys = np.array([r['price_chg'] for r in pts], dtype=float)
+    # 극단값 때문에 대부분의 점이 한쪽에 몰리지 않도록 축은 5~95 백분위 기준으로 자르고, 밖의 점은 가장자리에 붙인다
+    xlo, xhi = np.percentile(xs, [3, 97])
+    ylo, yhi = np.percentile(ys, [3, 97])
+    xlo, xhi = min(xlo, -th['squeeze_volume'] - 5), max(xhi, 10)
+    ylo, yhi = min(ylo, -10), max(yhi, th['price_red'] + 5)
+    px, py = (xhi - xlo) * 0.06, (yhi - ylo) * 0.08
+    xlo, xhi, ylo, yhi = xlo - px, xhi + px, ylo - py, yhi + py
+    ax.axhline(th['price_red'], color=rt.HEX['black'], linewidth=0.8, linestyle=(0, (3, 2)))
+    ax.axhline(th['price_yellow'], color=rt.HEX['mid'], linewidth=0.8, linestyle=(0, (3, 2)))
+    ax.axhline(0, color=rt.HEX['black'], linewidth=0.5, alpha=0.4)
+    ax.axvline(0, color=rt.HEX['black'], linewidth=0.5, alpha=0.4)
+    ax.axvline(-th['squeeze_volume'], color=rt.HEX['black'], linewidth=0.6, alpha=0.5, linestyle=(0, (1, 2)))
+    ax.text(xhi, th['price_red'], f" +{th['price_red']}%", fontsize=6.5, color=rt.HEX['black'], ha='right', va='bottom')
+    ax.text(xhi, th['price_yellow'], f" +{th['price_yellow']}%", fontsize=6.5, color=rt.HEX['mid'], ha='right', va='bottom')
+    max_share = max(r['share'] for r in pts) or 1
+    for status in ('safe', 'insufficient', 'caution', 'risk'):
+        grp = [r for r in pts if r['overall'] == status]
+        if not grp:
+            continue
+        gx = np.clip([r['volume_chg'] for r in grp], xlo + px * 0.3, xhi - px * 0.3)
+        gy = np.clip([r['price_chg'] for r in grp], ylo + py * 0.3, yhi - py * 0.3)
+        size = [18 + 260 * (r['share'] / max_share) for r in grp]
+        ax.scatter(gx, gy, s=size, color=HEALTH_PDF_COLOR[status], alpha=0.9 if status in ('risk', 'caution') else 0.75,
+                   edgecolor='white', linewidth=0.6, label=T(HEALTH_OVERALL_KEY[status]), zorder=3)
+    # 위험·주의 점에는 이름 대신 번호(아래 표의 # 열과 같음)를 달고, 가까운 번호끼리는 위로 비켜 겹치지 않게 한다
+    placed = []
+    for r in pts:
+        if r.get('_pdf_no') is None:
+            continue
+        x_ = float(np.clip(r['volume_chg'], xlo + px * 0.3, xhi - px * 0.3))
+        y_ = float(np.clip(r['price_chg'], ylo + py * 0.3, yhi - py * 0.3))
+        dy = 3
+        while any(abs(x_ - qx) < (xhi - xlo) * 0.035 and abs((y_ + dy * (yhi - ylo) / 220) - qy) < (yhi - ylo) * 0.045 for qx, qy in placed):
+            dy += 7
+        placed.append((x_, y_ + dy * (yhi - ylo) / 220))
+        ax.annotate(str(r['_pdf_no']), (x_, y_), xytext=(4, dy), textcoords='offset points', fontsize=6.5, color=rt.HEX['black'],
+                    fontweight='bold')
+    ax.set_xlim(xlo, xhi)
+    ax.set_ylim(ylo, yhi)
+    ax.xaxis.set_major_formatter(lambda v, _: f"{v:+.0f}%")
+    ax.yaxis.set_major_formatter(lambda v, _: f"{v:+.0f}%")
+    ax.set_xlabel(T('ph_rp_axis_volume'), fontsize=7.5, color=rt.HEX['black'])
+    ax.set_ylabel(T('ph_rp_axis_price'), fontsize=7.5, color=rt.HEX['black'])
+    leg = ax.legend(loc='lower left', bbox_to_anchor=(0, 1.0), fontsize=7, frameon=False, ncol=4, markerscale=0.6, borderaxespad=0.2)
+    for h in leg.legend_handles:
+        h.set_sizes([30])
+    fig.subplots_adjust(left=0.09, right=0.99, top=0.91, bottom=0.13)
+    return rt.chart_image(fig)
+
+
+def health_pdf_status_bar(counts):
+    """② 판정 분포 가로 막대 (판정별 브랜드 색)."""
+    import report_theme as rt
+    order = [k for k in ('risk', 'caution', 'safe', 'new', 'insufficient') if counts.get(k)]
+    fig, ax = rt.new_chart(0.24 * len(order) + 0.45)
+    rt.apply_pdf_chart_style(ax, grid_axis=None)
+    y = np.arange(len(order))[::-1]
+    vals = [counts[k] for k in order]
+    ax.barh(y, vals, height=0.62, color=[HEALTH_PDF_COLOR[k] for k in order], linewidth=0)
+    for yi, v in zip(y, vals):
+        ax.text(v + max(vals) * 0.01, yi, f"{v}", va='center', fontsize=7.5, color=rt.HEX['black'])
+    ax.set_yticks(y)
+    ax.set_yticklabels([T(HEALTH_OVERALL_KEY[k]) for k in order], fontsize=7.5)
+    ax.set_xticks([])
+    ax.set_xlim(0, max(vals) * 1.12)
+    fig.subplots_adjust(left=0.12, right=0.99, top=0.98, bottom=0.04)
+    return rt.chart_image(fig)
+
+
+def build_health_report(res, importer_label, blind):
+    """② 포트폴리오 헬스체크 PDF: 표지 → 요약(KPI 4 + 결론 3) → 먼저 볼 품목(산점도·위험/주의 표) → 전체 판정 → 방법론 → 클로징."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    rows, th = res['rows'], res['thresholds']
+    b_start, b_end, c_start, c_end = res['periods']
+    unit_label = res['unit_label']
+    counts = Counter(r['overall'] for r in rows)
+    n_risk, n_caution = counts.get('risk', 0), counts.get('caution', 0)
+    risk_rows = [r for r in rows if r['overall'] == 'risk']
+    caution_rows = [r for r in rows if r['overall'] == 'caution']
+    safe_share = sum(r['share'] for r in rows if r['overall'] == 'safe')
+    meta = _rp_meta(T('ph_rp_eyebrow'), [importer_label, T('menu_opt_health')], importer_label, unit_label, None,
+                    (c_start, b_end), blind, f"{importer_label} {T('menu_opt_health')}")
+    names = lambda rs: ', '.join(str(r['unit']) for r in sorted(rs, key=lambda r: -r['share'])[:3])
+
+    cards = [(T('ph_rp_kpi_units'), f"{len(rows):,}", T('ph_rp_kpi_units_note', unit=unit_label)),
+             (T('ph_rp_kpi_flag'), f"{n_risk + n_caution:,}", T('ph_rp_kpi_flag_note', r=n_risk, c=n_caution)),
+             (T('ph_rp_kpi_safe'), f"{safe_share:.1f}%", T('ph_rp_kpi_safe_note', n=counts.get('safe', 0))),
+             (T('ph_rp_kpi_hold'), f"{counts.get('insufficient', 0):,}", T('ph_rp_kpi_hold_note', s=th['min_ship'], n=counts.get('new', 0)))]
+    if n_risk:
+        head = T('ph_rp_head_risk', n=n_risk, p=sum(r['share'] for r in risk_rows))
+        top = max(risk_rows, key=lambda r: r['share'])
+        f1 = (T('ph_rp_f1_risk', n=n_risk, names=names(risk_rows)), T('ph_rp_f1_d', unit=top['unit'], reasons=' / '.join(health_reasons(top, True))))
+    elif n_caution:
+        head = T('ph_rp_head_caution', n=n_caution)
+        top = max(caution_rows, key=lambda r: r['share'])
+        f1 = (T('ph_rp_f1_caution', n=n_caution, names=names(caution_rows)), T('ph_rp_f1_d', unit=top['unit'], reasons=' / '.join(health_reasons(top, True))))
+    else:
+        head = T('ph_rp_head_safe')
+        f1 = (T('ph_rp_f1_none'), T('ph_rp_f1_none_d', s=counts.get('safe', 0), n=counts.get('new', 0), h=counts.get('insufficient', 0)))
+    sig_rows = [r for r in rows if health_signal(r)]
+    if sig_rows:
+        top = max(sig_rows, key=lambda r: r['share'])
+        key, kw = health_signal(top)
+        f2 = (T('ph_rp_f2', unit=top['unit'], signal=_health_reason_text(key, kw)),
+              T('ph_rp_f2_d', share=top['share'], price=_rp_pct(top['price_chg']), vol=_rp_pct(top['volume_chg'])))
+    else:
+        f2 = (T('ph_rp_f2_none'), T('ph_rp_f2_none_d'))
+    weak = [r for r in rows if not r['is_new'] and r['structure'] in ('single', 'conc')]
+    hold_txt = T('ph_rp_f3_hold', h=counts.get('insufficient', 0), s=th['min_ship']) if counts.get('insufficient') else ''
+    if weak:
+        f3 = (T('ph_rp_f3', n=len(weak)),
+              T('ph_rp_f3_d', a=sum(r['structure'] == 'single' for r in weak), b=sum(r['structure'] == 'conc' for r in weak),
+                conc=th['conc'], p=sum(r['share'] for r in weak)) + hold_txt)
+    else:
+        f3 = (T('ph_rp_f3_none'), T('ph_rp_f3_none_d') + hold_txt)
+    s1 = _rp_summary(rt, T('ph_rp_s1_eyebrow'), head, cards, [f1, f2, f3])
+
+    # 02 먼저 볼 품목 (위험·주의 단위에 번호를 매겨 산점도와 표를 잇는다)
+    flag_rows = sorted(risk_rows + caution_rows, key=lambda r: (HEALTH_OVERALL_ORDER[r['overall']], -r['share']))
+    rows = [dict(r, _pdf_no=None) for r in rows]
+    by_id = {id_: i + 1 for i, id_ in enumerate(r['unit'] for r in flag_rows)}
+    for r in rows:
+        if r['overall'] in ('risk', 'caution'):
+            r['_pdf_no'] = by_id.get(r['unit'])
+    s2 = _rp_body_header(T('ph_rp_s2_eyebrow'), T('ph_rp_s2_head'), T('ph_rp_s2_sub'))
+    chart = health_pdf_scatter(rows, th)
+    if chart is not None:
+        s2 += [rt.h3(T('ph_rp_chart')), rt.small(T('ph_rp_chart_note', red=th['price_red'], yellow=th['price_yellow'], sq=th['squeeze_volume'])),
+               Spacer(1, 2 * mm), chart, Spacer(1, 6 * mm)]
+    s2 += [rt.h3(T('ph_rp_flag_table', n=len(flag_rows))), Spacer(1, 2.5 * mm)]
+    if flag_rows:
+        s2.append(rt.brand_table(
+            ['#', T('ph_col_unit'), T('ph_col_overall'), T('ph_rp_th_share'), T('ph_rp_th_price'), T('ph_rp_th_volume'), T('ph_col_reason')],
+            [[str(i + 1), str(r['unit']), health_badge(rt, r['overall']), f"{r['share']:.1f}%", _rp_pct(r['price_chg']), _rp_pct(r['volume_chg']),
+              ' / '.join(health_reasons(r, True)) or ' / '.join(health_reasons(r))] for i, r in enumerate(flag_rows)],
+            rt.col_widths([4, 23, 11, 9, 9, 9, 35]), right_cols=(0, 3, 4, 5), header_markup=True))
+    else:
+        s2.append(rt.small(T('ph_focus_none')))
+
+    # 03 전체 판정
+    s3 = _rp_body_header(T('ph_rp_s3_eyebrow'), T('ph_rp_s3_head', n=len(rows)), T('ph_rp_s3_sub'))
+    s3 += [health_pdf_status_bar(counts), Spacer(1, 5 * mm),
+           rt.brand_table([T('ph_col_unit'), T('ph_col_overall'), T('ph_rp_th_share'), T('ph_col_structure'), T('ph_col_supply'),
+                           T('ph_rp_th_price'), T('ph_rp_th_volume')],
+                          [[str(r['unit']) + (T('ph_new_tag') if r['is_new'] else ''), health_badge(rt, r['overall']), f"{r['share']:.1f}%",
+                            f"{T(HEALTH_STRUCT_KEY[r['structure']])} ({r['top1_share']:.0f}%)",
+                            '-' if r['is_new'] else T(HEALTH_SUPPLY_KEY[r['supply']]),
+                            T('ph_price_hold') if r['price'] == 'hold' else _rp_pct(r['price_chg']),
+                            '-' if r['is_new'] else _rp_pct(r['volume_chg'])] for r in rows],
+                          rt.col_widths([28, 12, 10, 13, 13, 12, 12]), right_cols=(2, 5, 6), header_markup=True)]
+
+    fmt = lambda d: pd.Timestamp(d).strftime('%Y.%m.%d')
+    meth = [(T('p1_rp_lbl_data'), T('rk_rp_m_data')),
+            (T('ph_rp_lbl_importer'), importer_label),
+            (T('p1_rp_lbl_period'), T('ph_rp_m_period', b0=fmt(b_start), b1=fmt(b_end), c0=fmt(c_start), c1=fmt(c_end))),
+            (T('ph_rp_lbl_unit'), unit_label + ('. ' + T('ph_rp_m_unit_product') + ' ' + T('group_rule_generic_hs').lstrip('※ ')
+                                                 if res['product_mode'] else '. ' + T('ph_mix_notice'))),
+            (T('p1_rp_lbl_price'), T('ph_rp_m_price')),
+            (T('ph_rp_lbl_rule'), T('ph_rp_m_rule', red=th['price_red'], yellow=th['price_yellow'], major=th['churn_major'],
+                                   ok=th['replace_ok'], sq=th['squeeze_volume'])),
+            (T('ph_col_structure'), T('ph_rp_m_structure', conc=th['conc'], spread=th['spread'])),
+            (T('ph_rp_lbl_hold'), T('ph_rp_m_hold', s=th['min_ship'], share=th['min_share'])),
+            (T('p1_rp_lbl_blind'), T('rk_rp_m_blind_on') if blind else T('rk_rp_m_blind_off'))]
+    s4 = _rp_method(rt, T('ph_rp_s4_eyebrow'), T('p1_rp_s4_head'), meth, [f'ph_rp_unknown{i}' for i in range(1, 4)])
+
+    v1 = T('ph_rp_close_v1', names=names(risk_rows)) if n_risk else (
+        T('ph_rp_close_v1_caution', names=names(caution_rows)) if n_caution else T('ph_rp_close_v1_none'))
+    v2 = T('ph_rp_close_v2_link', n=n_risk, menu=_menu_ref('menu_opt_bid')) if n_risk else T('ph_rp_close_v2_ok')
+    v3 = T('ph_rp_close_v3', h=counts.get('insufficient', 0), n=counts.get('new', 0), menu=_menu_ref('menu_opt_season'))
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('ph_rp_close_note'),
+               'items': [('01', T('ph_rp_close_k1'), v1), ('02', T('ph_rp_close_k2'), v2), ('03', T('ph_rp_close_k3'), v3)]}
     return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4)] + [closing])
 
 
@@ -5478,6 +5820,7 @@ GUIDE_CONTENT = {
                     '공급 차질(변화 신호) — 비교 기간 비중 10% 이상인 주요 공급사가 기준 기간에 사라졌는데, 신규 공급사가 빠진 물량(월평균)의 50%도 채우지 못했으면 위험. 50% 이상 채웠으면 신호가 아니라 "전환"으로 표시하고, 단가까지 내려갔으면 "전환·단가 개선"으로 표시합니다.',
                     '물량 변화 — 두 기간의 월평균 물량 변화율. 단독으로는 판정에 쓰지 않고 수치만 보여줍니다. 단, 물량 -15% 이하이면서 단가 +8% 이상이면 "수급 경색"으로 위험.',
                     '공급 구조(취약성) — 공급사 1곳이면 "단일", 1위 비중 70% 이상이면 "집중", 50% 미만이면 "분산", 그 사이는 "보통". 태그만으로는 판정에 영향이 없지만, 단일·집중이면서 단가 주의(+8% 이상)이면 위험으로 올립니다.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(점검 단위·위험+주의·안전 금액 비중·데이터 부족)·핵심 결론 3줄 → 단가 변화 × 물량 변화 산점도(위험 Black·주의·안전·신규 색 구분)와 위험·주의 표 → 전체 판정 표 → 방법론 → 다음 단계 제안)를 내려받습니다. 위험 단위가 있으면 "입찰 대응 분석" 메뉴에서 대체 공급처를 확인하도록 안내하고, 수입사명은 "수입사 A"로 가릴 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
                     '금액 비중(영향도) — 금액 = 물량 × VWAP, 기준 기간 전체 금액 대비 비중. 1% 미만인 단위는 신호가 있어도 종합 판정이 최대 "주의"입니다.',
                     '신뢰도 — 두 기간 중 하나라도 선적이 3건 미만이면 단가 신호는 "판단 보류"로 두고, 공급 차질 판정은 그대로 합니다.',
                     '종합 판정 — 위험 신호가 하나라도 있거나 단일·집중 + 단가 주의이면 위험, 주의 신호만 있거나 금액 비중이 작아 위험에서 내려온 경우 주의, 나머지는 안전. 비교 기간에 거래가 없던 단위는 "신규", 단가가 판단 보류이고 공급 변화도 없으면 "데이터 부족".',
@@ -5721,6 +6064,7 @@ GUIDE_CONTENT = {
                     'Supply disruption (change signal) — a major supplier (10%+ share in the comparison period) is gone in the base period and new suppliers replaced less than 50% of its monthly volume: At risk. If 50% or more was replaced it is not a signal but tagged "Switched", or "Switched · better price" if the unit price also fell.',
                     'Volume change — change in monthly average volume. Shown as a number only and not used on its own; but volume -15% or less together with unit price +8% or more is a "supply squeeze" (At risk).',
                     'Supply structure (vulnerability) — one supplier is "Single", top supplier 70%+ is "Concentrated", below 50% is "Diversified", otherwise "Moderate". The tag alone does not change the status, but Single/Concentrated with a price Caution (+8% or more) is raised to At risk.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (units checked, risk + caution, safe spend share, insufficient data) and 3 key findings → price change × volume change scatter (risk in Black, caution, safe and new in brand blues) with a risk/caution table → full verdict table → methodology → suggested next steps). If any unit is at risk, it points you to the Tender Response Analysis menu for alternative suppliers; the importer name can be shown as "Importer A". Use "Legacy-format PDF" for the previous format.',
                     'Spend share (impact) — spend = volume × VWAP, as a share of total base-period spend. Units under 1% are capped at "Caution" even with a risk signal.',
                     'Reliability — if either period has fewer than 3 shipments, the unit price signal is put "On hold"; the supply disruption check still applies.',
                     'Overall — At risk if any risk signal exists or Single/Concentrated + price Caution; Caution if only caution signals exist or the unit was lowered from At risk because of small spend share; otherwise Safe. Units with no transactions in the comparison period are "New"; units whose price is on hold with no supply change are "Insufficient data".',
@@ -6923,8 +7267,17 @@ if selected == T('menu_opt_health'):
                                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", key="health_excel_dl")
             except Exception as e:
                 st.error(str(e))
+        health_blind = st.checkbox(T('ph_rp_blind_toggle'), value=False, key="health_rp_blind")
+        if st.button(T('rp_pdf_btn'), key="health_rp_btn"):
+            with st.spinner(T('rp_pdf_spinner')):
+                try:
+                    _imp_label = T('blind_label', code='A') if health_blind else str(res['importer'])
+                    pdf_bytes = build_health_report(res, _imp_label, health_blind)
+                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="portfolio_health_report.pdf", mime="application/pdf", key="health_rp_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
         with dl2:
-            if st.button(T('pdf_generate_btn'), key="health_pdf_btn"):
+            if st.button(T('p1_rp_legacy_btn'), key="health_pdf_btn"):
                 with st.spinner(T('pdf_generating_msg')):
                     try:
                         kpi_lines = [summary_caption, ' · '.join(f"{label}: {value}" for label, value in kpi_items)]
