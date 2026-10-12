@@ -1039,6 +1039,78 @@ TEXTS = {
         'ph_x_base_share': '기준 기간 비중(%)',
         'ph_x_comp_share': '비교 기간 비중(%)',
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
+        # --- ⑤ 집중도 리스크 새 PDF (rk_rp_) ---
+        'rp_menu_ref': '‘{name}’ 메뉴',
+        'rk_rp_eyebrow': 'Concentration Risk Report',
+        'rk_rp_scope_all': '전체 시장',
+        'rk_rp_blind_toggle': 'PDF에 수입사명 대신 블라인드 표기 (수입사 A)',
+        'rk_rp_s1_eyebrow': '01  Summary',
+        'rk_rp_head': '1위 {name}이(가) 전체 물량의 {p:.1f}%를 차지합니다',
+        'rk_rp_kpi_volume_note': '물량(kg) 기준',
+        'rk_rp_kpi_count': '항목 수',
+        'rk_rp_kpi_count_note': '{axis} · 비중 5% 이상 {n}곳',
+        'rk_rp_f1_danger': '위험 — {reason}',
+        'rk_rp_f1_danger_d': '1위 {name}의 공급이 막히면 전체 물량의 {p:.0f}%가 영향을 받습니다.',
+        'rk_rp_f1_caution': '주의 — {reason}',
+        'rk_rp_f1_caution_d': '위험 기준선({t}%)에 가까워지고 있습니다. 월별 추이를 함께 보세요.',
+        'rk_rp_f1_safe': '안전 — 1위 {p:.1f}%, 상위 3개 {p3:.1f}%로 기준 이내입니다',
+        'rk_rp_f1_safe_d': '한 곳에 대한 물량 의존이 낮습니다.',
+        'rk_rp_f2_up': '1위 비중이 {a:.0f}% → {b:.0f}%로 높아졌습니다',
+        'rk_rp_f2_down': '1위 비중이 {a:.0f}% → {b:.0f}%로 낮아졌습니다',
+        'rk_rp_f2_flat': '1위 비중이 {a:.0f}% → {b:.0f}%로 큰 변화가 없습니다',
+        'rk_rp_f2_d': '처음 {k}개월 평균과 마지막 {k}개월 평균을 비교했습니다 (총 {n}개월, 매달 물량 1위 기준).',
+        'rk_rp_f2_none': '월별 추이를 볼 기간이 부족합니다',
+        'rk_rp_f2_none_d': '추이 비교에는 2개월 이상의 데이터가 필요합니다.',
+        'rk_rp_f3_short': '비중 5% 이상인 항목이 {n}곳뿐이라 대체 여력이 부족합니다',
+        'rk_rp_f3_short_d': '1위 외에 물량을 나눠 받을 만한 곳이 없습니다.',
+        'rk_rp_f3_few': '비중 5% 이상인 항목이 {n}곳입니다',
+        'rk_rp_f3_few_d': '대체 후보가 적어 1위 공급 차질 시 전환 여지가 제한적입니다.',
+        'rk_rp_f3_ok': '비중 5% 이상인 항목이 {n}곳으로 대체 여력이 있습니다',
+        'rk_rp_f3_ok_d': '1위 공급 차질 시 나머지 {n}곳으로 물량을 나눌 수 있습니다.',
+        'rk_rp_s2_eyebrow': '02  Share Distribution',
+        'rk_rp_s2_head': '{axis} 비중 분포',
+        'rk_rp_s2_sub': '선택 기간 전체 물량 대비 각 항목의 물량 비중입니다.',
+        'rk_rp_chart': '물량 비중 상위 항목',
+        'rk_rp_chart_note': 'Black = 위험 기준선({t}%) 이상, Blue = 기준선 미만. 상위 {n}개까지 표시합니다.',
+        'rk_rp_threshold_line': '위험 기준선 {t}%',
+        'rk_rp_th_rank': '순위',
+        'rk_rp_th_name': '이름',
+        'rk_rp_th_volume': '물량(kg)',
+        'rk_rp_th_share': '비중',
+        'rk_rp_th_cum': '누적 비중',
+        'rk_rp_th_month': '월',
+        'rk_rp_th_top1': '1위',
+        'rk_rp_more_rows': '외 {n}개 항목 (비중 합계 {p:.1f}%)',
+        'rk_rp_s3_eyebrow': '03  Monthly Trend',
+        'rk_rp_s3_head': '1위 비중 월별 추이',
+        'rk_rp_s3_sub': '매달 물량 1위 항목의 비중입니다. 달마다 1위가 바뀔 수 있습니다.',
+        'rk_rp_s3_table': '최근 {n}개월 1위',
+        'rk_rp_s4_eyebrow': '04  Methodology',
+        'rk_rp_s4_head': '분석 기준과 데이터 한계',
+        'rk_rp_lbl_scope': '범위',
+        'rk_rp_lbl_axis': '기준',
+        'rk_rp_lbl_share': '비중',
+        'rk_rp_lbl_alt': '대체 여력',
+        'rk_rp_lbl_trend': '월별 추이',
+        'rk_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터, 건별 수입신고 단위',
+        'rk_rp_m_share': '항목별 물량(kg) ÷ 기간 전체 물량. 금액이 아니라 물량 기준',
+        'rk_rp_m_risk': '위험: 1위 ≥ {t}% 또는 상위 3개 ≥ {t3}%. 주의: 1위 ≥ {c1:.0f}% 또는 상위 3개 ≥ {c3}%. 그 외 안전',
+        'rk_rp_m_alt': '비중 5% 이상인 항목 수. 1곳 이하면 대체 여력 부족',
+        'rk_rp_m_trend': '매달 물량 1위 항목의 비중. 처음·마지막 3개월 평균 비교(6개월 미만이면 첫 달과 마지막 달), ±5%p 이내는 변화 없음',
+        'rk_rp_m_blind_on': '수입사명 비공개 (수입사 A로 표기)',
+        'rk_rp_m_blind_off': '수입사명 공개',
+        'rk_rp_unknown1': '통관 데이터에 잡히지 않는 국내 유통·재고 물량',
+        'rk_rp_unknown2': '공급사 사이의 실제 관계 (같은 그룹사·대리점 여부)',
+        'rk_rp_unknown3': '각 공급처의 생산 능력·계약 조건 등 실제 공급 차질 가능성',
+        'rk_rp_close_k1': '진단 결과',
+        'rk_rp_close_k2': '대체 공급처',
+        'rk_rp_close_k3': '모니터링',
+        'rk_rp_close_v1': '{label} — 1위 {name} {p:.1f}%, 상위 3개 {p3:.1f}%',
+        'rk_rp_close_v2_link': '비중 5% 이상 {n}곳 — {menu}에서 대체 공급처 확인',
+        'rk_rp_close_v2_ok': '비중 5% 이상 {n}곳 — 현재 분산 수준 유지',
+        'rk_rp_close_v3_up': '1위 비중 {a:.0f}% → {b:.0f}% 상승 중 — 분기마다 다시 진단',
+        'rk_rp_close_v3': '분기마다 다시 진단해 1위 비중 변화를 확인',
+        'rk_rp_close_note': '비중은 통관 물량 기준 추정치이며 금액 비중과 다를 수 있습니다. 본 자료의 수치는 통관 데이터 기반 추정치로, 계약 판단의 단일 근거로 사용할 수 없습니다.',
         'unit_n_years': '{n}년',
         'unit_n_months': '{n}개월',
         'unit_n_times': '{n}회',
@@ -2113,6 +2185,78 @@ TEXTS = {
         'ph_x_base_share': 'Base period share (%)',
         'ph_x_comp_share': 'Comparison period share (%)',
         'multi_product_label': 'Search products (multi-select)',
+        # --- ⑤ Concentration risk new PDF (rk_rp_) ---
+        'rp_menu_ref': 'the {name} menu',
+        'rk_rp_eyebrow': 'Concentration Risk Report',
+        'rk_rp_scope_all': 'Entire market',
+        'rk_rp_blind_toggle': 'Blind importer names in the PDF (Importer A)',
+        'rk_rp_s1_eyebrow': '01  Summary',
+        'rk_rp_head': 'The top item, {name}, accounts for {p:.1f}% of total volume',
+        'rk_rp_kpi_volume_note': 'By volume (kg)',
+        'rk_rp_kpi_count': 'Items',
+        'rk_rp_kpi_count_note': '{axis} · {n} with share ≥ 5%',
+        'rk_rp_f1_danger': 'Risk — {reason}',
+        'rk_rp_f1_danger_d': 'If supply from {name} stops, {p:.0f}% of total volume is affected.',
+        'rk_rp_f1_caution': 'Caution — {reason}',
+        'rk_rp_f1_caution_d': 'Approaching the risk threshold ({t}%). Check the monthly trend as well.',
+        'rk_rp_f1_safe': 'Safe — top 1 at {p:.1f}% and top 3 at {p3:.1f}%, within thresholds',
+        'rk_rp_f1_safe_d': 'Volume dependence on any single item is low.',
+        'rk_rp_f2_up': 'Top-1 share rose from {a:.0f}% to {b:.0f}%',
+        'rk_rp_f2_down': 'Top-1 share fell from {a:.0f}% to {b:.0f}%',
+        'rk_rp_f2_flat': 'Top-1 share was steady ({a:.0f}% → {b:.0f}%)',
+        'rk_rp_f2_d': 'Average of the first {k} month(s) vs. the last {k} month(s) ({n} months total, top item by volume each month).',
+        'rk_rp_f2_none': 'Not enough months to see a trend',
+        'rk_rp_f2_none_d': 'A trend comparison needs at least 2 months of data.',
+        'rk_rp_f3_short': 'Only {n} item(s) have a share of 5% or more — little room to switch',
+        'rk_rp_f3_short_d': 'No other item takes a meaningful share of volume besides the top one.',
+        'rk_rp_f3_few': '{n} items have a share of 5% or more',
+        'rk_rp_f3_few_d': 'Few alternatives, so switching is limited if the top item is disrupted.',
+        'rk_rp_f3_ok': '{n} items have a share of 5% or more — room to switch',
+        'rk_rp_f3_ok_d': 'If the top item is disrupted, volume can be spread across the other {n}.',
+        'rk_rp_s2_eyebrow': '02  Share Distribution',
+        'rk_rp_s2_head': 'Share distribution — {axis}',
+        'rk_rp_s2_sub': 'Each item\'s share of total volume in the selected period.',
+        'rk_rp_chart': 'Top items by volume share',
+        'rk_rp_chart_note': 'Black = at or above the risk threshold ({t}%), Blue = below. Shows up to the top {n}.',
+        'rk_rp_threshold_line': 'Risk threshold {t}%',
+        'rk_rp_th_rank': 'Rank',
+        'rk_rp_th_name': 'Name',
+        'rk_rp_th_volume': 'Volume (kg)',
+        'rk_rp_th_share': 'Share',
+        'rk_rp_th_cum': 'Cumulative',
+        'rk_rp_th_month': 'Month',
+        'rk_rp_th_top1': 'Top 1',
+        'rk_rp_more_rows': '{n} more items (combined share {p:.1f}%)',
+        'rk_rp_s3_eyebrow': '03  Monthly Trend',
+        'rk_rp_s3_head': 'Top-1 share by month',
+        'rk_rp_s3_sub': 'Share of the top item by volume each month. The top item can change from month to month.',
+        'rk_rp_s3_table': 'Top item, last {n} months',
+        'rk_rp_s4_eyebrow': '04  Methodology',
+        'rk_rp_s4_head': 'Method and data limits',
+        'rk_rp_lbl_scope': 'Scope',
+        'rk_rp_lbl_axis': 'Basis',
+        'rk_rp_lbl_share': 'Share',
+        'rk_rp_lbl_alt': 'Alternatives',
+        'rk_rp_lbl_trend': 'Monthly trend',
+        'rk_rp_m_data': 'Tridge TDS Korean import customs data, one row per import declaration',
+        'rk_rp_m_share': 'Item volume (kg) ÷ total volume in the period. Based on volume, not value',
+        'rk_rp_m_risk': 'Risk: top 1 ≥ {t}% or top 3 ≥ {t3}%. Caution: top 1 ≥ {c1:.0f}% or top 3 ≥ {c3}%. Otherwise safe',
+        'rk_rp_m_alt': 'Number of items with a share of 5% or more. One or fewer means little room to switch',
+        'rk_rp_m_trend': 'Share of the top item each month. Average of the first and last 3 months (first vs. last month if under 6 months); within ±5%p counts as no change',
+        'rk_rp_m_blind_on': 'Importer name hidden (shown as Importer A)',
+        'rk_rp_m_blind_off': 'Importer name shown',
+        'rk_rp_unknown1': 'Domestic distribution and inventory not captured in customs data',
+        'rk_rp_unknown2': 'Actual relationships between suppliers (same group, agents)',
+        'rk_rp_unknown3': 'Real disruption risk such as each supplier\'s capacity and contract terms',
+        'rk_rp_close_k1': 'Result',
+        'rk_rp_close_k2': 'Alternatives',
+        'rk_rp_close_k3': 'Monitoring',
+        'rk_rp_close_v1': '{label} — top 1 {name} {p:.1f}%, top 3 {p3:.1f}%',
+        'rk_rp_close_v2_link': '{n} item(s) with share ≥ 5% — check alternative suppliers in {menu}',
+        'rk_rp_close_v2_ok': '{n} items with share ≥ 5% — keep the current spread',
+        'rk_rp_close_v3_up': 'Top-1 share rising ({a:.0f}% → {b:.0f}%) — re-check every quarter',
+        'rk_rp_close_v3': 'Re-check every quarter to track the top-1 share',
+        'rk_rp_close_note': 'Shares are estimates based on customs volume and may differ from value shares. Figures in this report are estimates from customs data and must not be the sole basis for contract decisions.',
         'unit_n_years': '{n} year(s)',
         'unit_n_months': '{n} months',
         'unit_n_times': '{n}',
@@ -3811,6 +3955,204 @@ def build_bid_report(ctx):
     return rt.make_report(meta, sections)
 
 
+# 사이드바 메뉴 순서 (option_menu와 PDF의 '다른 메뉴 연결' 문구가 함께 쓴다)
+MENU_KEYS = ['menu_opt_customer', 'menu_opt_health', 'menu_opt_market', 'menu_opt_flow', 'menu_opt_risk', 'menu_opt_season',
+             'menu_opt_churn', 'menu_opt_scorer', 'menu_opt_screener', 'menu_opt_bid', 'menu_opt_pivot']
+
+
+def _menu_ref(key):
+    """다른 메뉴를 가리키는 문구용 이름: "'입찰 대응 분석' 메뉴" (새 PDF 테마는 ①~⑳을 '1.'로 바꾸므로 번호 대신 메뉴명)."""
+    assert key in MENU_KEYS, key
+    return T('rp_menu_ref', name=T(key))
+
+
+def _rp_pct(v, digits=1):
+    """부호 있는 퍼센트 (음수는 en dash): +3.2% / –3.2%."""
+    if v is None or pd.isna(v):
+        return '-'
+    return f"+{v:.{digits}f}%" if v >= 0 else f"–{-v:.{digits}f}%"
+
+
+def _rp_ym(p):
+    """Period/Timestamp/'2025-03' → '25.03' (차트 눈금용)."""
+    p = pd.Period(str(p), freq='M')
+    return f"{str(p.year)[2:]}.{p.month:02d}"
+
+
+def _rp_body_header(eyebrow, head, sub=None):
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    import report_theme as rt
+    return [rt.SectionHeader(eyebrow, head, sub), Spacer(1, 2 * mm)]
+
+
+def _rp_summary(rt, eyebrow, headline, cards, findings):
+    """01 요약 섹션: 헤드라인 + KPI 카드 + 핵심 결론 3개 (①과 같은 구성)."""
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    s = [rt.SectionHeader(eyebrow, headline), Spacer(1, 3 * mm), rt.kpi_row(cards), Spacer(1, 9 * mm),
+         rt.h3(T('p1_rp_findings')), Spacer(1, 2 * mm), rt.Rule()]
+    return s + rt.findings_block([(f"{i + 1:02d}",) + f for i, f in enumerate(findings)])
+
+
+def _rp_method(rt, eyebrow, head, rows, unknown_keys):
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    s = [rt.SectionHeader(eyebrow, head), Spacer(1, 2 * mm),
+         rt.methodology_table(rows, header=(T('rp_meth_item'), T('rp_meth_rule'))), Spacer(1, 8 * mm),
+         rt.h3(T('rp_unknown_header')), Spacer(1, 2 * mm), rt.Rule()]
+    return s + rt.dash_list([T(k) for k in unknown_keys])
+
+
+# ---------- ⑤ 집중도 리스크 진단 ----------
+def risk_level(grouped, threshold):
+    """⑤ 위험도 판정 (화면·PDF 공통). 반환: (level 'danger'/'caution'/'safe', 사유 문구)."""
+    top1 = float(grouped.iloc[0]['share'])
+    top3 = float(grouped.iloc[:3]['share'].sum())
+    danger_top3, caution_top1, caution_top3 = min(95, threshold + 30), threshold * 0.6, threshold + 10
+    if top1 >= threshold or top3 >= danger_top3:
+        return 'danger', (T('p4_risk_reason_top1', v=round(top1, 1), t=threshold) if top1 >= threshold
+                          else T('p4_risk_reason_top3', v=round(top3, 1), t=round(danger_top3, 1)))
+    if top1 >= caution_top1 or top3 >= caution_top3:
+        return 'caution', (T('p4_risk_reason_top1', v=round(top1, 1), t=round(caution_top1, 1)) if top1 >= caution_top1
+                           else T('p4_risk_reason_top3', v=round(top3, 1), t=round(caution_top3, 1)))
+    return 'safe', T('p4_risk_reason_ok')
+
+
+def risk_trend_change(trend, k=3):
+    """⑤ 1위 비중 추이: 첫 k개월 평균 vs 마지막 k개월 평균 (데이터가 2k개월 미만이면 첫 달 vs 마지막 달).
+    반환: (방향 'up'/'down'/'flat'/None, 처음, 마지막, 사용한 개월 수)."""
+    s = trend['share'].astype(float).tolist()
+    if len(s) < 2:
+        return None, None, None, 0
+    k = k if len(s) >= 2 * k else 1
+    a, b = float(np.mean(s[:k])), float(np.mean(s[-k:]))
+    return ('up' if b - a >= 5 else 'down' if a - b >= 5 else 'flat'), a, b, k
+
+
+def risk_pdf_share_chart(grouped, threshold, n=12):
+    """⑤ 비중 가로 막대: 위험 기준선 이상 Black, 미만 Blue, 기준선 점선."""
+    import report_theme as rt
+    g = grouped.head(n).iloc[::-1]
+    fig, ax = rt.new_chart(0.27 * len(g) + 0.75)
+    rt.apply_pdf_chart_style(ax, grid_axis='x')
+    y = np.arange(len(g))
+    vals = g['share'].astype(float).values
+    ax.barh(y, vals, height=0.62, color=[rt.HEX['black'] if v >= threshold else rt.HEX['blue'] for v in vals], linewidth=0)
+    hi = max(float(vals.max()), threshold) * 1.15
+    for yi, v in zip(y, vals):
+        ax.text(v + hi * 0.01, yi, f"{v:.1f}%", va='center', ha='left', fontsize=7, color=rt.HEX['black'])
+    ax.axvline(threshold, color=rt.HEX['black'], linewidth=0.9, linestyle=(0, (3, 2)))
+    right = threshold > hi * 0.7  # 기준선이 오른쪽 끝이면 라벨을 왼쪽에 둬 잘리지 않게
+    ax.text(threshold + hi * (-0.012 if right else 0.012), len(g) - 0.35, T('rk_rp_threshold_line', t=threshold), fontsize=7,
+            color=rt.HEX['black'], ha='right' if right else 'left', va='bottom')
+    ax.set_xlim(0, hi)
+    ax.set_ylim(-0.6, len(g) + 0.1)
+    ax.set_yticks(y)
+    ax.set_yticklabels([str(v)[:30] for v in g['name']], fontsize=7.5, color=rt.HEX['black'])
+    ax.xaxis.set_major_formatter(lambda v, _: f"{v:.0f}%")
+    fig.subplots_adjust(left=0.3, right=0.99, top=0.95, bottom=0.08 if len(g) > 6 else 0.16)
+    return rt.chart_image(fig)
+
+
+def risk_pdf_trend_chart(trend, threshold):
+    """⑤ 1위 비중 월별 추이 (Blue 선) + 위험 기준선 점선."""
+    import report_theme as rt
+    fig, ax = rt.new_chart(2.0)
+    rt.apply_pdf_chart_style(ax, grid_axis='y')
+    x = np.arange(len(trend))
+    vals = trend['share'].astype(float).values
+    ax.plot(x, vals, color=rt.HEX['blue'], linewidth=1.6, marker='o', markersize=3)
+    ax.axhline(threshold, color=rt.HEX['black'], linewidth=0.9, linestyle=(0, (3, 2)))
+    ax.text(x[-1], threshold + 1, T('rk_rp_threshold_line', t=threshold), fontsize=7, color=rt.HEX['black'], ha='right', va='bottom')
+    step = max(1, int(np.ceil(len(x) / 12)))
+    ax.set_xticks(x[::step])
+    ax.set_xticklabels([_rp_ym(m) for m in trend['_ym']][::step], fontsize=7)
+    ax.set_ylim(0, min(100, max(float(vals.max()), threshold) * 1.18))
+    ax.yaxis.set_major_formatter(lambda v, _: f"{v:.0f}%")
+    fig.subplots_adjust(left=0.07, right=0.99, top=0.95, bottom=0.14)
+    return rt.chart_image(fig)
+
+
+def build_risk_report(ctx):
+    """⑤ 집중도 리스크 PDF: 표지 → 요약(KPI 4 + 결론 3) → 비중 분포 → 1위 비중 추이 → 방법론 → 클로징."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    grouped, trend, th, axis = ctx['grouped'], ctx['trend'], ctx['threshold'], ctx['axis_label']
+    level, reason = risk_level(grouped, th)
+    level_label = T({'danger': 'p4_risk_danger', 'caution': 'p4_risk_caution', 'safe': 'p4_risk_safe'}[level])
+    top1 = grouped.iloc[0]
+    top1_name, top1_share = str(top1['name']), float(top1['share'])
+    top3 = float(grouped.iloc[:3]['share'].sum())
+    n5 = int((grouped['share'] >= 5).sum())
+    direction, t_a, t_b, k = risk_trend_change(trend)
+    meta = _rp_meta(T('rk_rp_eyebrow'), [ctx['scope_label'], T('menu_opt_risk')], ctx['scope_label'], axis, None,
+                    ctx['period'], ctx['blind'], f"{ctx['scope_label']} {T('menu_opt_risk')}")
+
+    cards = [(T('p4_kpi_top1'), f"{top1_share:.1f}%", top1_name),
+             (T('p4_kpi_top3'), f"{top3:.1f}%", T('rk_rp_kpi_volume_note')),
+             (T('rk_rp_kpi_count'), f"{len(grouped):,}", T('rk_rp_kpi_count_note', axis=axis, n=n5)),
+             (T('p4_kpi_risk'), level_label, reason)]
+    f1 = (T(f'rk_rp_f1_{level}', label=level_label, reason=reason, p=top1_share, p3=top3),
+          T(f'rk_rp_f1_{level}_d', p=top1_share, t=th, name=top1_name))
+    if direction is None:
+        f2 = (T('rk_rp_f2_none'), T('rk_rp_f2_none_d'))
+    else:
+        f2 = (T(f'rk_rp_f2_{direction}', a=t_a, b=t_b), T('rk_rp_f2_d', k=k, n=len(trend)))
+    f3 = ((T('rk_rp_f3_short', n=n5), T('rk_rp_f3_short_d')) if n5 <= 1 else
+          (T('rk_rp_f3_few', n=n5), T('rk_rp_f3_few_d')) if n5 <= 3 else
+          (T('rk_rp_f3_ok', n=n5), T('rk_rp_f3_ok_d', n=n5 - 1)))
+    s1 = _rp_summary(rt, T('rk_rp_s1_eyebrow'), T('rk_rp_head', name=top1_name, p=top1_share), cards, [f1, f2, f3])
+
+    # 02 비중 분포
+    shown = grouped.head(10)  # 차트와 한 쪽에 들어가도록 상위 10개, 나머지는 '외 n개'
+    cum = shown['share'].cumsum()
+    rows = [[str(i + 1), str(r['name']), f"{r['volume']:,.0f}", f"{r['share']:.1f}%", f"{c:.1f}%"]
+            for i, ((_, r), c) in enumerate(zip(shown.iterrows(), cum))]
+    s2 = _rp_body_header(T('rk_rp_s2_eyebrow'), T('rk_rp_s2_head', axis=axis), T('rk_rp_s2_sub'))
+    s2 += [rt.h3(T('rk_rp_chart')), rt.small(T('rk_rp_chart_note', t=th, n=min(12, len(grouped)))), Spacer(1, 2 * mm),
+           risk_pdf_share_chart(grouped, th), Spacer(1, 7 * mm),
+           rt.brand_table([T('rk_rp_th_rank'), T('rk_rp_th_name'), T('rk_rp_th_volume'), T('rk_rp_th_share'), T('rk_rp_th_cum')],
+                          rows, rt.col_widths([8, 46, 18, 13, 15]), right_cols=(0, 2, 3, 4))]
+    if len(grouped) > len(shown):
+        s2 += [Spacer(1, 2 * mm), rt.small(T('rk_rp_more_rows', n=len(grouped) - len(shown),
+                                             p=float(grouped['share'].iloc[len(shown):].sum())))]
+
+    # 03 1위 비중 월별 추이
+    sections = [s1, s2]
+    if len(trend) > 1:
+        last = trend.tail(12)
+        s3 = _rp_body_header(T('rk_rp_s3_eyebrow'), T('rk_rp_s3_head'), T('rk_rp_s3_sub'))
+        s3 += [risk_pdf_trend_chart(trend, th), Spacer(1, 7 * mm), rt.h3(T('rk_rp_s3_table', n=len(last))), Spacer(1, 2.5 * mm),
+               rt.brand_table([T('rk_rp_th_month'), T('rk_rp_th_top1'), T('rk_rp_th_share')],
+                              [[str(r['_ym']), str(r[ctx['axis_col']]), f"{r['share']:.1f}%"] for _, r in last.iterrows()],
+                              rt.col_widths([18, 62, 20]), right_cols=(2,))]
+        sections.append(s3)
+
+    # 04 방법론
+    fmt = lambda t: pd.Timestamp(t).strftime('%Y.%m.%d')
+    meth = [(T('p1_rp_lbl_data'), T('rk_rp_m_data')),
+            (T('rk_rp_lbl_scope'), ctx['scope_label']),
+            (T('p1_rp_lbl_period'), f"{fmt(ctx['period'][0])} – {fmt(ctx['period'][1])}"),
+            (T('rk_rp_lbl_axis'), axis),
+            (T('rk_rp_lbl_share'), T('rk_rp_m_share')),
+            (T('p4_kpi_risk'), T('rk_rp_m_risk', t=th, t3=min(95, th + 30), c1=th * 0.6, c3=th + 10)),
+            (T('rk_rp_lbl_alt'), T('rk_rp_m_alt')),
+            (T('rk_rp_lbl_trend'), T('rk_rp_m_trend')),
+            (T('p1_rp_lbl_blind'), T('rk_rp_m_blind_on') if ctx['blind'] else T('rk_rp_m_blind_off'))]
+    sections.append(_rp_method(rt, T('rk_rp_s4_eyebrow'), T('rk_rp_s4_head'), meth, [f'rk_rp_unknown{i}' for i in range(1, 4)]))
+
+    # 클로징: 대체 공급처가 부족하거나 위험이면 ⑩으로 연결
+    v2 = (T('rk_rp_close_v2_link', n=n5, menu=_menu_ref('menu_opt_bid')) if (n5 <= 1 or level == 'danger')
+          else T('rk_rp_close_v2_ok', n=n5))
+    v3 = T('rk_rp_close_v3_up', a=t_a, b=t_b) if direction == 'up' else T('rk_rp_close_v3')
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('rk_rp_close_note'),
+               'items': [('01', T('rk_rp_close_k1'), T('rk_rp_close_v1', label=level_label, name=top1_name, p=top1_share, p3=top3)),
+                         ('02', T('rk_rp_close_k2'), v2), ('03', T('rk_rp_close_k3'), v3)]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in sections] + [closing])
+
+
 # ============================================================
 # 신규사업 스코어러 (페이지 8) — 원본 HTML 도구의 스코어링 엔진을 그대로 이식
 # ============================================================
@@ -4876,6 +5218,7 @@ GUIDE_CONTENT = {
                     '1위 비중, 상위 3개 합산 비중.',
                     '위험도 배지(안전/주의/위험)와 그 이유 — 기준선을 왜 넘었는지 문장으로 설명.',
                     '월별 1위 비중 추이 — 쏠림이 점점 심해지는지 확인.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개·핵심 결론 3줄(위험도·1위 비중 추이·대체 여력) → 비중 분포 차트·상위 10개 표 → 1위 비중 월별 추이 → 방법론 → 다음 단계 제안)를 내려받습니다. 비중 5% 이상 항목이 1곳뿐이거나 위험이면 "입찰 대응 분석" 메뉴에서 대체 공급처를 확인하도록 안내합니다. 특정 수입사를 골랐다면 수입사명 대신 "수입사 A"로 표기하는 블라인드 옵션을 쓸 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
                 ],
             },
             {
@@ -5117,6 +5460,7 @@ GUIDE_CONTENT = {
                     'Top-1 share and top-3 combined share.',
                     'A risk badge (safe/caution/high) with a plain-language reason.',
                     'Monthly trend of top-1 share, to see if concentration is worsening.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs and 3 key findings (risk level, top-1 share trend, room to switch) → share chart and top-10 table → monthly top-1 share → methodology → suggested next steps). If only one item has a 5%+ share or the level is Risk, it points you to the Tender Response Analysis menu to find alternative suppliers. When one importer is selected, a blind option shows "Importer A" instead of the name. Use "Legacy-format PDF" for the previous format.',
                 ],
             },
             {
@@ -5638,8 +5982,7 @@ with st.sidebar:
     )
     st.session_state.lang = 'ko' if lang_choice == '한국어' else 'en'
     st.markdown("---")
-    _menu_keys = ['menu_opt_customer', 'menu_opt_health', 'menu_opt_market', 'menu_opt_flow', 'menu_opt_risk', 'menu_opt_season',
-                  'menu_opt_churn', 'menu_opt_scorer', 'menu_opt_screener', 'menu_opt_bid', 'menu_opt_pivot']
+    _menu_keys = MENU_KEYS
     selected = option_menu(
         menu_title=T('app_menu_title'),
         options=[T(k) for k in _menu_keys],
@@ -7078,7 +7421,8 @@ if selected == T('menu_opt_risk'):
                     monthly['share'] = monthly['_volume'] / monthly['total'] * 100
                     trend = monthly.sort_values(['_ym', 'share'], ascending=[True, False]).groupby('_ym').first().reset_index().sort_values('_ym')
 
-                    st.session_state.risk_result = {'axis_label': axis_label, 'grouped': grouped, 'threshold': threshold, 'trend': trend}
+                    st.session_state.risk_result = {'axis_label': axis_label, 'axis_col': axis_col, 'grouped': grouped, 'threshold': threshold,
+                                                    'trend': trend, 'scope_entity': scope_entity, 'period': (start_date, end_date)}
                     st.rerun()
 
     if st.session_state.risk_result is not None:
@@ -7088,22 +7432,9 @@ if selected == T('menu_opt_risk'):
         top1 = grouped.iloc[0]
         top3_share = grouped.iloc[:3]['share'].sum()
 
-        danger_top3 = min(95, threshold + 30)
-        caution_top1 = threshold * 0.6
-        caution_top3 = threshold + 10
-
-        if top1['share'] >= threshold or top3_share >= danger_top3:
-            risk_label = T('p4_risk_danger')
-            reason = T('p4_risk_reason_top1', v=round(top1['share'], 1), t=threshold) if top1['share'] >= threshold else T('p4_risk_reason_top3', v=round(top3_share, 1), t=round(danger_top3, 1))
-            risk_color = 'red'
-        elif top1['share'] >= caution_top1 or top3_share >= caution_top3:
-            risk_label = T('p4_risk_caution')
-            reason = T('p4_risk_reason_top1', v=round(top1['share'], 1), t=round(caution_top1, 1)) if top1['share'] >= caution_top1 else T('p4_risk_reason_top3', v=round(top3_share, 1), t=round(caution_top3, 1))
-            risk_color = 'orange'
-        else:
-            risk_label = T('p4_risk_safe')
-            reason = T('p4_risk_reason_ok')
-            risk_color = 'green'
+        _level, reason = risk_level(grouped, threshold)
+        risk_label = T({'danger': 'p4_risk_danger', 'caution': 'p4_risk_caution', 'safe': 'p4_risk_safe'}[_level])
+        risk_color = {'danger': 'red', 'caution': 'orange', 'safe': 'green'}[_level]
 
         c1, c2, c3, c4 = st.columns(4)
         c1.metric(T('p4_kpi_top1'), f"{top1['share']:.1f}%", help=str(top1['name']))
@@ -7135,7 +7466,18 @@ if selected == T('menu_opt_risk'):
         display_df = grouped.rename(columns={'name': T('p4_col_name'), 'volume': T('p4_col_volume'), 'share': T('p4_col_share')})
         st.dataframe(display_df.style.format({T('p4_col_volume'): '{:,.0f}', T('p4_col_share'): '{:.1f}%'}))
 
-        if st.button(T('pdf_generate_btn'), key="risk_pdf_btn"):
+        risk_blind = st.checkbox(T('rk_rp_blind_toggle'), value=False, key="risk_rp_blind") if R.get('scope_entity') else False
+        risk_c1, risk_c2 = st.columns([1, 1])
+        if risk_c1.button(T('rp_pdf_btn'), key="risk_rp_btn"):
+            with st.spinner(T('rp_pdf_spinner')):
+                try:
+                    _ent = R.get('scope_entity')
+                    _scope = (T('blind_label', code='A') if risk_blind else str(_ent)) if _ent else T('rk_rp_scope_all')
+                    pdf_bytes = build_risk_report({**R, 'scope_label': _scope, 'blind': bool(risk_blind) or not _ent})
+                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="concentration_risk_report.pdf", mime="application/pdf", key="risk_rp_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
+        if risk_c2.button(T('p1_rp_legacy_btn'), key="risk_pdf_btn"):
             with st.spinner(T('pdf_generating_msg')):
                 try:
                     pdf_bytes = build_pdf_report(

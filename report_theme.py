@@ -88,6 +88,7 @@ def spaced(c, text, x, y, font, size, color, char_space=0.0):
     t.setFillColor(color)
     t.setCharSpace(char_space)
     t.textLine(clean_text(text))
+    t.setCharSpace(0)  # 자간(Tc)은 PDF 그래픽 상태에 남아 이후 Paragraph 폭을 넓히므로 되돌린다
     c.drawText(t)
 
 
