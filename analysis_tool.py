@@ -2967,6 +2967,7 @@ def apply_blind(df, importer_col, enabled, volume_col=None, mapping=None):
 # ============================================================
 # 공통: 거래 데이터 전처리 (⑨ 범용상품 스크리너, ⑩ 입찰 대응 분석)
 # ============================================================
+TRADE_VALUE_CANDIDATES = ['Value', 'Total Value', 'Amount', 'value', '금액']
 TRADE_HS_CANDIDATES = ['Detailed HS-CODE', 'Detailed HS Code', 'HS Code', 'HS-CODE', 'hs_code', 'HS코드']
 
 
@@ -2974,7 +2975,7 @@ def detect_trade_columns(headers):
     """표준 컬럼 + HS코드 + 금액 컬럼."""
     cols = detect_standard_columns(headers)
     cols['hs'] = find_column(headers, TRADE_HS_CANDIDATES)
-    cols['value'] = find_column(headers, ['Value', 'Total Value', 'Amount', 'value', '금액'])
+    cols['value'] = find_column(headers, TRADE_VALUE_CANDIDATES)
     return cols
 
 
@@ -2983,7 +2984,7 @@ def _clean_text(series):
 
 
 def derive_unit_price(raw_df, cols, tol=0.05):
-    """단가(USD/kg) 공통 계산 (①⑨⑩).
+    """단가(USD/kg) 공통 계산 (①②④⑥⑦⑨⑩⑪, ⑧은 금액 계산에 사용).
     Unit Price가 있으면 그 값을 쓰고, 없거나 빈 행은 금액(Value) ÷ 중량으로 채운다.
     둘 다 있으면 금액÷중량과 tol(5%)보다 크게 다른 행의 비율도 돌려준다.
     반환: (단가 Series, 금액 Series 또는 None, 불일치 비율 또는 None)"""
@@ -3808,6 +3809,7 @@ def detect_scorer_columns(headers):
     base['detailed_hs'] = find_column(headers, ['Detailed HS-CODE', 'Detailed HS Code', 'detailed_hs', 'HS Code', 'HS코드'])
     base['category'] = find_column(headers, ['Category', 'category', '카테고리', '분류'])
     base['label_kr'] = find_column(headers, ['한글품목명', '국문품명', '품명국문', '한글명', 'label_kr', 'Korean Name'])
+    base['value'] = find_column(headers, TRADE_VALUE_CANDIDATES)
     return base
 
 
@@ -6789,8 +6791,10 @@ if selected == T('menu_opt_flow'):
 
         if raw_df is not None:
             headers = st.session_state.flow_headers
-            cols = detect_standard_columns(headers)
-            missing = [k for k in ['date', 'importer', 'exporter', 'origin', 'export_country', 'product', 'volume', 'price'] if not cols[k]]
+            cols = detect_trade_columns(headers)
+            missing = [k for k in ['date', 'importer', 'exporter', 'origin', 'export_country', 'product', 'volume'] if not cols[k]]
+            if not cols['price'] and not cols['value']:
+                missing.append('price')
             if missing:
                 st.error(T('p3_missing_cols_error', cols=', '.join(missing)))
                 st.stop()
@@ -6852,7 +6856,7 @@ if selected == T('menu_opt_flow'):
                 df = raw_df.copy()
                 df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                 df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
-                df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                df['_price'] = derive_unit_price(df, cols)[0]  # Unit Price 우선, 없으면 금액 ÷ 중량
                 df = df.dropna(subset=['_date', '_volume', left_col, right_col])
 
                 def _flow_grouped_for_range(d_start, d_end):
@@ -7333,7 +7337,7 @@ if selected == T('menu_opt_churn'):
 
         if raw_df is not None:
             headers = st.session_state.churn_headers
-            cols = detect_standard_columns(headers)
+            cols = detect_trade_columns(headers)
             missing = [k for k in ['date', 'volume'] if not cols[k]]
             if missing:
                 st.error(T('p6_missing_cols_error', cols=', '.join(missing)))
@@ -7386,8 +7390,9 @@ if selected == T('menu_opt_churn'):
                 df = raw_df.copy()
                 df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                 df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
-                if cols['price']:
-                    df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                has_price = bool(cols['price'] or cols['value'])
+                if has_price:
+                    df['_price'] = derive_unit_price(df, cols)[0]  # Unit Price 우선, 없으면 금액 ÷ 중량
                 df = df.dropna(subset=['_date', '_volume', axis_col])
                 if scope_entity and cols['importer']:
                     df = df[df[cols['importer']].astype(str) == str(scope_entity)]
@@ -7412,7 +7417,7 @@ if selected == T('menu_opt_churn'):
 
                     # --- ① 가격 비교: 신규/유지/이탈 거래처의 물량가중평균단가 ---
                     new_price = lost_price = kept_price = None
-                    if cols['price']:
+                    if has_price:
                         if new_items:
                             v = weighted_avg(b_df[b_df[axis_col].astype(str).isin(new_items)], '_price', '_volume')
                             new_price = float(v) if pd.notna(v) else None
@@ -7532,8 +7537,10 @@ if selected == T('menu_opt_pivot'):
         raw_df = st.session_state.pivot_raw_df
 
         headers = st.session_state.pivot_headers
-        cols = detect_standard_columns(headers)
-        missing = [k for k in ['date', 'volume', 'price'] if not cols[k]]
+        cols = detect_trade_columns(headers)
+        missing = [k for k in ['date', 'volume'] if not cols[k]]
+        if not cols['price'] and not cols['value']:
+            missing.append('price')
         if missing:
             st.error(T('p7_missing_cols_error', cols=', '.join(missing)))
             st.stop()
@@ -7605,7 +7612,7 @@ if selected == T('menu_opt_pivot'):
                 df = raw_df.copy()
                 df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                 df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
-                df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                df['_price'] = derive_unit_price(df, cols)[0]  # Unit Price 우선, 없으면 금액 ÷ 중량
                 df = df[(df['_date'] >= pd.to_datetime(pivot_date_start)) & (df['_date'] <= pd.to_datetime(pivot_date_end))]
 
                 for fcol, vals in filter_selections.items():
@@ -7857,11 +7864,15 @@ if selected == T('menu_opt_scorer'):
                 df = raw_df.copy()
                 df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                 df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
-                has_price = bool(cols['price'])
+                has_price = bool(cols['price'] or cols['value'])
                 if has_price:
-                    # 원본 도구는 '금액(Value)' 컬럼을 직접 쓰지만, 우리 표준 컬럼은 '단가(Unit Price)'라서
-                    # 단가×물량으로 총액을 역산해 동일한 물량가중평균 단가 로직을 그대로 재사용한다.
-                    df['_value'] = pd.to_numeric(df[cols['price']], errors='coerce') * df['_volume']
+                    # 금액(Value) 컬럼이 있으면 그대로 쓰고, 없거나 빈 행만 단가 × 물량으로 채운다 (derive_unit_price와 같은 컬럼 기준).
+                    _val, _from_price = None, None
+                    if cols['value']:
+                        _val = pd.to_numeric(df[cols['value']], errors='coerce')
+                    if cols['price']:
+                        _from_price = pd.to_numeric(df[cols['price']], errors='coerce') * df['_volume']
+                    df['_value'] = _val.fillna(_from_price) if _val is not None and _from_price is not None else (_val if _val is not None else _from_price)
                 else:
                     df['_value'] = None
                 df = df.dropna(subset=['_date', '_volume'])
