@@ -1380,6 +1380,53 @@ TEXTS = {
         'p8_rp_close_v2_none': '-',
         'p8_rp_close_v3': '관심 품목의 대체 공급처와 단가는 {menu}에서 확인',
         'p8_rp_close_note': '점수는 통관 물량·단가로 만든 상대 지표이며 수요·규제·마진을 반영하지 않습니다. 본 자료의 수치는 사업 판단의 단일 근거로 사용할 수 없습니다.',
+        # --- ⑪ 자유 피벗 새 PDF (pv_rp_) ---
+        'pv_rp_eyebrow': 'Pivot Report',
+        'pv_rp_title1': '{rows}',
+        'pv_rp_blind_toggle': 'PDF에 수입사명 대신 블라인드 표기 (수입사 A, B …)',
+        'pv_rp_s1_eyebrow': '01  Summary',
+        'pv_rp_head': '1위 {name} — 물량의 {p:.1f}% ({row})',
+        'pv_rp_kpi_period': '기간',
+        'pv_rp_kpi_filters': '필터 {n}개 적용',
+        'pv_rp_kpi_nofilter': '필터 없음',
+        'pv_rp_kpi_volume': '총 물량',
+        'pv_rp_kpi_vwap_note': '물량가중, USD/kg',
+        'pv_rp_kpi_count_note': '건별 수입신고',
+        'pv_rp_f1': '1위 {name} — 물량의 {p:.1f}% ({row})',
+        'pv_rp_f1_d': '첫 번째 행 기준 {n}개 항목 중 물량 1위입니다 (필터 적용 후 전체 물량 대비).',
+        'pv_rp_f2_time': '물량이 {a} 대비 {b}에 {pct} 변했습니다',
+        'pv_rp_f2_time_d': '{av:,.1f}t → {bv:,.1f}t (첫 기간과 마지막 기간 비교, 기간 중간 값은 표에서 확인).',
+        'pv_rp_f2_top3': '상위 3개가 물량의 {p:.1f}%를 차지합니다',
+        'pv_rp_f2_top3_d': '{names}',
+        'pv_rp_f3': '필터 {n}개를 적용한 결과입니다',
+        'pv_rp_f3_capped': '항목이 많은 칸은 물량 상위 20개 외를 기타로 묶음: {fields}',
+        'pv_rp_f3_capped_only': '항목이 많은 칸은 상위 20개만 따로 보여줍니다',
+        'pv_rp_f3_none': '필터 없이 전체 데이터를 집계했습니다',
+        'pv_rp_f3_none_d': '특정 공급사·원산지·품목만 보려면 필터를 걸어 다시 만드세요.',
+        'pv_rp_s2_eyebrow': '02  Pivot',
+        'pv_rp_s2_head': '피벗: {rows}',
+        'pv_rp_s2_sub': '차트는 첫 번째 지표({metric}) 기준입니다.',
+        'pv_rp_more_rows': '외 {n}행은 앱 화면에서 확인하세요.',
+        'pv_rp_more_cols': '외 {n}열은 앱 화면에서 확인하세요.',
+        'pv_rp_s3_eyebrow': '03  Methodology',
+        'pv_rp_lbl_rows': '행',
+        'pv_rp_lbl_cols': '열',
+        'pv_rp_lbl_metrics': '지표',
+        'pv_rp_lbl_filters': '필터',
+        'pv_rp_lbl_def': '지표 정의',
+        'pv_rp_lbl_other': '기타·합계',
+        'pv_rp_m_def': '평균 단가는 물량가중평균(VWAP, Unit Price 우선·없으면 금액 ÷ 중량). 최대·최소 단가는 건별 단가 기준, 물량 평균은 건당 평균',
+        'pv_rp_m_other': '항목이 20개를 넘는 칸(시간 축 제외)은 물량 상위 20개 외를 기타로 묶음. 합계 열은 열 값을 더하지 않고 행 기준으로 다시 집계',
+        'pv_rp_unknown1': '통관 데이터에 없는 국내 유통·재고·판매 정보',
+        'pv_rp_unknown2': '집계 결과의 원인 (피벗은 숫자를 나눠 볼 뿐, 왜 그런지는 다른 메뉴로 확인)',
+        'pv_rp_close_k1': '핵심 수치',
+        'pv_rp_close_k2': '다음 분석',
+        'pv_rp_close_k3': '조건',
+        'pv_rp_close_v2_product': '품목별 단가 흐름은 {menu}에서 확인',
+        'pv_rp_close_v2_partner': '거래처 쏠림은 {menu}에서 확인',
+        'pv_rp_close_v2_default': '위험 품목은 {menu}에서 확인',
+        'pv_rp_close_v3': '행: {rows} · 지표: {metrics}',
+        'pv_rp_close_note': '피벗 값은 통관 데이터를 선택한 조건으로 나눠 더한 값입니다. 본 자료의 수치는 통관 데이터 기반 추정치로, 계약 판단의 단일 근거로 사용할 수 없습니다.',
         'unit_n_years': '{n}년',
         'unit_n_months': '{n}개월',
         'unit_n_times': '{n}회',
@@ -2795,6 +2842,53 @@ TEXTS = {
         'p8_rp_close_v2_none': '-',
         'p8_rp_close_v3': 'Check alternative suppliers and prices for items of interest in {menu}',
         'p8_rp_close_note': 'Scores are relative indicators from customs volume and price and do not reflect demand, regulation or margins. Figures in this report must not be the sole basis for business decisions.',
+        # --- ⑪ Free pivot new PDF (pv_rp_) ---
+        'pv_rp_eyebrow': 'Pivot Report',
+        'pv_rp_title1': '{rows}',
+        'pv_rp_blind_toggle': 'Blind importer names in the PDF (Importer A, B …)',
+        'pv_rp_s1_eyebrow': '01  Summary',
+        'pv_rp_head': 'Top: {name} — {p:.1f}% of volume ({row})',
+        'pv_rp_kpi_period': 'Period',
+        'pv_rp_kpi_filters': '{n} filter(s) applied',
+        'pv_rp_kpi_nofilter': 'No filters',
+        'pv_rp_kpi_volume': 'Total volume',
+        'pv_rp_kpi_vwap_note': 'Volume-weighted, USD/kg',
+        'pv_rp_kpi_count_note': 'Import declarations',
+        'pv_rp_f1': 'Top: {name} — {p:.1f}% of volume ({row})',
+        'pv_rp_f1_d': 'Largest by volume among {n} items in the first row field (share of total volume after filters).',
+        'pv_rp_f2_time': 'Volume changed {pct} from {a} to {b}',
+        'pv_rp_f2_time_d': '{av:,.1f}t → {bv:,.1f}t (first vs. last period; see the table for the periods in between).',
+        'pv_rp_f2_top3': 'The top 3 account for {p:.1f}% of volume',
+        'pv_rp_f2_top3_d': '{names}',
+        'pv_rp_f3': 'Results with {n} filter(s) applied',
+        'pv_rp_f3_capped': 'Fields with many values keep the top 20 by volume and group the rest as Others: {fields}',
+        'pv_rp_f3_capped_only': 'Fields with many values show only the top 20 separately',
+        'pv_rp_f3_none': 'Aggregated over all data with no filters',
+        'pv_rp_f3_none_d': 'Add filters to focus on specific suppliers, origins or products.',
+        'pv_rp_s2_eyebrow': '02  Pivot',
+        'pv_rp_s2_head': 'Pivot: {rows}',
+        'pv_rp_s2_sub': 'The chart uses the first metric ({metric}).',
+        'pv_rp_more_rows': '{n} more rows are in the app.',
+        'pv_rp_more_cols': '{n} more columns are in the app.',
+        'pv_rp_s3_eyebrow': '03  Methodology',
+        'pv_rp_lbl_rows': 'Rows',
+        'pv_rp_lbl_cols': 'Columns',
+        'pv_rp_lbl_metrics': 'Metrics',
+        'pv_rp_lbl_filters': 'Filters',
+        'pv_rp_lbl_def': 'Definitions',
+        'pv_rp_lbl_other': 'Others & total',
+        'pv_rp_m_def': 'Average price is volume-weighted (VWAP; Unit Price first, otherwise value ÷ weight). Max/min price use per-declaration prices; average volume is per declaration',
+        'pv_rp_m_other': 'Fields (other than time) with more than 20 values keep the top 20 by volume and group the rest as Others. The Total column is re-aggregated per row rather than summing columns',
+        'pv_rp_unknown1': 'Domestic distribution, inventory and sales not in customs data',
+        'pv_rp_unknown2': 'Why the numbers look this way (a pivot only splits the numbers; use other menus for causes)',
+        'pv_rp_close_k1': 'Key figure',
+        'pv_rp_close_k2': 'Next analysis',
+        'pv_rp_close_k3': 'Settings',
+        'pv_rp_close_v2_product': 'Check price movement by product in {menu}',
+        'pv_rp_close_v2_partner': 'Check partner concentration in {menu}',
+        'pv_rp_close_v2_default': 'Check at-risk products in {menu}',
+        'pv_rp_close_v3': 'Rows: {rows} · metrics: {metrics}',
+        'pv_rp_close_note': 'Pivot values are customs data split and summed by the selected settings. Figures in this report are estimates from customs data and must not be the sole basis for contract decisions.',
         'unit_n_years': '{n} year(s)',
         'unit_n_months': '{n} months',
         'unit_n_times': '{n}',
@@ -5489,6 +5583,258 @@ def build_scorer_report(A, B, S, meta, dim_label, blind):
     return rt.make_report(meta_rp, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4, s5)] + [closing])
 
 
+# ---------- ⑪ 자유 피벗 빌더 ----------
+def pivot_is_price_metric(name):
+    return name in (T('p7_metric_price_mean'), T('p7_metric_price_max'), T('p7_metric_price_min'))
+
+
+def pivot_fmt(v, is_price):
+    if v is None or pd.isna(v):
+        return '-'
+    return f"${v:,.2f}" if is_price else f"{v:,.0f}"
+
+
+def _pv_short_metric(metric):
+    """PDF 표 머리글용 짧은 지표명 (좁은 열에서 '평균 단가(VWAP)'가 끊기지 않게)."""
+    return 'VWAP' if metric == T('p7_metric_price_mean') else metric
+
+
+def pivot_flat(idx_val):
+    return ' | '.join(str(x) for x in idx_val) if isinstance(idx_val, tuple) else str(idx_val)
+
+
+def pivot_blind(R, enabled):
+    """⑪ PDF용 블라인드: 행·열이 수입사 차원이면 그 값을, 필터가 수입사 컬럼이면 필터 값을 '수입사 A' 식으로 바꾼 사본."""
+    if not enabled or not R.get('importer_maps'):
+        return R
+    R = dict(R)
+    maps = R['importer_maps']  # {필드명('_row_0' 등 또는 필터 라벨): {원래 이름: 블라인드 이름}}
+    combined = R['combined'].copy()
+    row_fields = R.get('row_fields', [])
+    col_fields = R.get('col_fields', [])
+
+    def _rename_index(index, fields):
+        if isinstance(index, pd.MultiIndex):
+            arrays = [[maps.get(f, {}).get(str(v), v) for v in index.get_level_values(i)] for i, f in enumerate(fields)]
+            return pd.MultiIndex.from_arrays(arrays, names=index.names)
+        f = fields[0] if fields else None
+        return pd.Index([maps.get(f, {}).get(str(v), v) for v in index], name=index.name)
+
+    combined.index = _rename_index(combined.index, row_fields)
+    if col_fields and isinstance(combined.columns, pd.MultiIndex):
+        arrays = [combined.columns.get_level_values(0)] + [
+            [maps.get(f, {}).get(str(v), v) for v in combined.columns.get_level_values(i + 1)] for i, f in enumerate(col_fields)]
+        combined.columns = pd.MultiIndex.from_arrays(arrays, names=combined.columns.names)
+    R['combined'] = combined
+    if R.get('row_totals'):
+        R['row_totals'] = {k: v.set_axis(_rename_index(v.index, row_fields)) for k, v in R['row_totals'].items()}
+    if row_fields and row_fields[0] in maps:
+        R['row_vol'] = R['row_vol'].rename(index=lambda v: maps[row_fields[0]].get(str(v), v))
+    R['filters'] = {lab: [maps.get(lab, {}).get(str(v), v) for v in vals] for lab, vals in R.get('filters', {}).items()}
+    return R
+
+
+def pivot_pdf_chart(R):
+    """⑪ 선택한 보기를 matplotlib로 다시 그린다 (첫 번째 지표). 표만 보기면 None. 파이는 비중 가로 막대로."""
+    import report_theme as rt
+    view = R['view']
+    if view == 'table':
+        return None
+    first = R['value_labels'][0]
+    cdata = R['combined'][first]
+    if isinstance(cdata, pd.Series):
+        cdata = cdata.to_frame(first)
+    is_price = pivot_is_price_metric(first)
+    fmt = (lambda v, _: f"${v:,.2f}") if is_price else (lambda v, _: f"{v:,.0f}")
+    rows = [_rp_short(pivot_flat(i), 26) for i in cdata.index]
+    cols = [_rp_short(pivot_flat(c), 20) for c in cdata.columns]
+    if view == 'heatmap':
+        data = cdata.iloc[:25, :12].astype(float)
+        fig, ax = rt.new_chart(0.24 * len(data) + 0.9)
+        rt.apply_pdf_chart_style(ax, grid_axis=None)
+        from matplotlib.colors import LinearSegmentedColormap
+        cmap = LinearSegmentedColormap.from_list('tridge', ['#FFFFFF', rt.HEX['pale'], rt.HEX['blue']])
+        ax.imshow(data.values, aspect='auto', cmap=cmap)
+        vmax = np.nanmax(data.values) if np.isfinite(data.values).any() else 1
+        for (i, j), v in np.ndenumerate(data.values):
+            if pd.notna(v):
+                ax.text(j, i, pivot_fmt(v, is_price), ha='center', va='center', fontsize=5.8,
+                        color='white' if v > vmax * 0.6 else rt.HEX['black'])
+        ax.set_xticks(range(data.shape[1]))
+        ax.set_xticklabels(cols[:data.shape[1]], fontsize=6.5, rotation=30, ha='right')
+        ax.set_yticks(range(data.shape[0]))
+        ax.set_yticklabels(rows[:data.shape[0]], fontsize=6.8)
+        fig.subplots_adjust(left=0.25, right=0.99, top=0.98, bottom=0.18)
+        return rt.chart_image(fig)
+    if view == 'stacked' and is_price:
+        view = 'bar'  # 단가는 더할 수 없으므로 누적 대신 묶음 막대
+    if view == 'pie' or (cdata.shape[1] == 1 and view in ('bar', 'stacked')):
+        s = cdata.iloc[:, 0].fillna(0).astype(float)
+        if view == 'pie':
+            s = (s / s.sum() * 100 if s.sum() else s).sort_values(ascending=False)
+        s = s.head(20)
+        rows = [_rp_short(pivot_flat(i), 26) for i in s.index]
+        fig, ax = rt.new_chart(0.24 * len(s) + 0.6)
+        rt.apply_pdf_chart_style(ax, grid_axis='x')
+        y = np.arange(len(s))[::-1]
+        ax.barh(y, s.values, height=0.62, color=rt.HEX['blue'], linewidth=0)
+        span = float(s.max()) or 1
+        for yi, v in zip(y, s.values):
+            ax.text(v + span * 0.01, yi, f"{v:.1f}%" if view == 'pie' else pivot_fmt(v, is_price), va='center', fontsize=6.8, color=rt.HEX['black'])
+        ax.set_yticks(y)
+        ax.set_yticklabels(rows[:len(s)], fontsize=7)
+        ax.set_xlim(0, span * 1.18)
+        ax.xaxis.set_major_formatter((lambda v, _: f"{v:.0f}%") if view == 'pie' else fmt)
+        fig.subplots_adjust(left=0.27, right=0.99, top=0.97, bottom=0.08 if len(s) > 6 else 0.16)
+        return rt.chart_image(fig)
+    # 막대·누적 막대·선: 열(나눠보기)은 첫 지표 기준 상위 6개까지
+    data = cdata.iloc[:24].astype(float)
+    if data.shape[1] > 6:
+        keep = data.sum().sort_values(ascending=False).head(6).index
+        data = data[keep]
+        cols = [_rp_short(pivot_flat(c), 20) for c in keep]
+    fig, ax = rt.new_chart(2.5)
+    rt.apply_pdf_chart_style(ax, grid_axis='y')
+    x = np.arange(len(data))
+    if view == 'line':
+        for i, c in enumerate(data.columns):
+            ax.plot(x, data[c].values, color=rt.CHART_COLORS[i % 5], linewidth=1.5, marker='o', markersize=2.5, label=cols[i])
+    else:
+        n = data.shape[1]
+        if view == 'stacked':
+            bottom = np.zeros(len(data))
+            for i, c in enumerate(data.columns):
+                v = np.nan_to_num(data[c].values)
+                ax.bar(x, v, bottom=bottom, width=0.7, color=rt.CHART_COLORS[i % 5], linewidth=0, label=cols[i])
+                bottom += v
+        else:
+            w = 0.8 / n
+            for i, c in enumerate(data.columns):
+                ax.bar(x - 0.4 + w * (i + 0.5), np.nan_to_num(data[c].values), width=w, color=rt.CHART_COLORS[i % 5], linewidth=0, label=cols[i])
+    step = max(1, int(np.ceil(len(x) / 14)))
+    ax.set_xticks(x[::step])
+    ax.set_xticklabels(rows[:len(x)][::step], fontsize=6.8, rotation=30 if max(len(r) for r in rows[:len(x)]) > 6 else 0, ha='right' if max(len(r) for r in rows[:len(x)]) > 6 else 'center')
+    ax.yaxis.set_major_formatter(fmt)
+    if data.shape[1] > 1:
+        ax.legend(loc='lower left', bbox_to_anchor=(0, 1.0), fontsize=6.8, frameon=False, ncol=min(6, data.shape[1]), borderaxespad=0.2)
+    fig.subplots_adjust(left=0.1, right=0.99, top=0.9 if data.shape[1] > 1 else 0.97, bottom=0.25)
+    return rt.chart_image(fig)
+
+
+def build_pivot_report(R, blind):
+    """⑪ 자유 피벗 PDF: 표지 → 요약(KPI 4 + 결론 3) → 차트·피벗 표 → 조건·방법론 → 클로징."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    from xml.sax.saxutils import escape
+    R = pivot_blind(R, blind)
+    if not R.get('row_is_time') and R['row_labels'][0] not in (T('p7_dim_month_only'),):
+        # 시간이 아닌 행은 첫 번째 행 기준 물량 큰 순으로 (기타는 맨 아래)
+        rvol = R['row_vol']
+        first = lambda i: str(i[0] if isinstance(i, tuple) else i)
+        order = sorted(R['combined'].index, key=lambda i: (first(i) == T('p2_others_label'), -float(rvol.get(first(i), 0))))
+        R = {**R, 'combined': R['combined'].loc[order]}
+    k = R['kpi']
+    d0, d1 = R['period']
+    row_label = ' · '.join(R['row_labels'])
+    title = _rp_short(row_label, 30)
+    meta = _rp_meta(T('pv_rp_eyebrow'), [T('pv_rp_title1', rows=title), T('menu_opt_pivot')], title,
+                    ' × '.join(R['col_labels']) if R['col_labels'] else None, None, (d0, d1),
+                    blind or not R.get('importer_maps'), f"{title} {T('menu_opt_pivot')}")
+    n_filters = sum(1 for v in R.get('filters', {}).values() if v)
+    cards = [(T('pv_rp_kpi_period'), f"{pd.Timestamp(d0):%y.%m} – {pd.Timestamp(d1):%y.%m}",
+              T('pv_rp_kpi_filters', n=n_filters) if n_filters else T('pv_rp_kpi_nofilter')),
+             (T('pv_rp_kpi_volume'), f"{k['volume'] / 1000:,.0f}t", T('rk_rp_kpi_volume_note')),
+             (T('p7_metric_price_mean'), '-' if k['vwap'] is None else f"${k['vwap']:,.2f}", T('pv_rp_kpi_vwap_note')),
+             (T('p7_metric_count'), f"{k['count']:,}", T('pv_rp_kpi_count_note'))]
+    rv = R['row_vol']
+    tot = float(rv.sum()) or 1.0
+    top_sorted = rv[rv.index.astype(str) != T('p2_others_label')].sort_values(ascending=False)  # '기타' 묶음은 순위에서 제외
+    if top_sorted.empty:
+        top_sorted = rv.sort_values(ascending=False)
+    f1 = (T('pv_rp_f1', row=R['row_labels'][0], name=_rp_short(top_sorted.index[0], 40), p=float(top_sorted.iloc[0]) / tot * 100),
+          T('pv_rp_f1_d', n=len(rv)))
+    rv = rv[rv.index.astype(str) != T('p2_others_label')]
+    if R.get('row_is_time') and len(rv) >= 2:
+        a, b = float(rv.iloc[0]), float(rv.iloc[-1])
+        chg = (b / a - 1) * 100 if a > 0 else None
+        f2 = (T('pv_rp_f2_time', a=str(rv.index[0]), b=str(rv.index[-1]), pct=_rp_pct(chg)), T('pv_rp_f2_time_d', av=a / 1000, bv=b / 1000))
+    else:
+        top3 = float(top_sorted.head(3).sum()) / tot * 100
+        f2 = (T('pv_rp_f2_top3', p=top3), T('pv_rp_f2_top3_d', names=', '.join(_rp_short(n, 24) for n in top_sorted.index[:3])))
+    filt = [f"{lab}: {', '.join(_rp_short(v, 20) for v in vals[:3])}{' …' if len(vals) > 3 else ''}" for lab, vals in R.get('filters', {}).items() if vals]
+    capped = R.get('capped_fields', [])
+    if capped and not filt:
+        f3 = (T('pv_rp_f3_capped_only'), T('pv_rp_f3_capped', fields=', '.join(capped)))
+    elif filt or capped:
+        f3 = (T('pv_rp_f3', n=len(filt)), (' / '.join(filt) + ('. ' if filt and capped else '') +
+                                            (T('pv_rp_f3_capped', fields=', '.join(capped)) if capped else '')))
+    else:
+        f3 = (T('pv_rp_f3_none'), T('pv_rp_f3_none_d'))
+    s1 = _rp_summary(rt, T('pv_rp_s1_eyebrow'), T('pv_rp_head', row=R['row_labels'][0], name=_rp_short(top_sorted.index[0], 30),
+                                                  p=float(top_sorted.iloc[0]) / tot * 100), cards, [f1, f2, f3])
+
+    # 02 차트 + 피벗 표
+    s2 = _rp_body_header(T('pv_rp_s2_eyebrow'), T('pv_rp_s2_head', rows=row_label), T('pv_rp_s2_sub', metric=R['value_labels'][0]))
+    chart = pivot_pdf_chart(R)
+    if chart is not None:
+        s2 += [chart, Spacer(1, 5 * mm)]
+    combined = R['combined']
+    totals = R.get('row_totals') or {}
+    header, cols_spec = [escape(' | '.join(R['row_labels']))], []
+    for c in combined.columns:
+        metric = c[0] if isinstance(c, tuple) else c
+        sub = pivot_flat(c[1:]) if isinstance(c, tuple) and len(c) > 1 else ''
+        cols_spec.append((c, metric))
+        header.append(escape(_pv_short_metric(metric)) + (f"<br/>{escape(_rp_short(sub, 24))}" if sub else ''))  # 표 머리글은 마크업이라 이름의 &·< 를 이스케이프
+    if R['has_col']:  # 지표별 합계 열을 앞에 (행 기준으로 다시 집계한 값)
+        for metric in reversed(R['value_labels']):
+            if metric in totals:
+                pos = next(i for i, (c, m) in enumerate(cols_spec) if m == metric)
+                cols_spec.insert(pos, (('__total__', metric), metric))
+                header.insert(pos + 1, f"{escape(_pv_short_metric(metric))}<br/>{escape(T('p7_total_col'))}")
+    max_cols = 7
+    shown_cols = cols_spec[:max_cols]
+    header = header[:max_cols + 1]
+    body = []
+    for idx in combined.index[:40]:
+        row = [_rp_short(pivot_flat(idx), 30)]
+        for c, metric in shown_cols:
+            v = totals[metric].get(idx) if isinstance(c, tuple) and c[0] == '__total__' else combined.loc[idx, c]
+            row.append(pivot_fmt(v, pivot_is_price_metric(metric)))
+        body.append(row)
+    widths = rt.col_widths([28] + [72 / len(shown_cols)] * len(shown_cols))
+    s2 += [rt.h3(T('p7_table_subheader')), Spacer(1, 2.5 * mm),
+           rt.brand_table(header, body, widths, right_cols=tuple(range(1, len(shown_cols) + 1)), header_markup=True)]
+    notes = []
+    if len(combined.index) > 40:
+        notes.append(T('pv_rp_more_rows', n=len(combined.index) - 40))
+    if len(cols_spec) > max_cols:
+        notes.append(T('pv_rp_more_cols', n=len(cols_spec) - max_cols))
+    notes += [T('p7_capped_note', field=f, n=20) for f in capped]
+    if notes:
+        s2 += [Spacer(1, 2 * mm), rt.small(' '.join(notes))]
+
+    meth = [(T('p1_rp_lbl_data'), T('rk_rp_m_data')),
+            (T('p1_rp_lbl_period'), f"{pd.Timestamp(d0):%Y.%m.%d} – {pd.Timestamp(d1):%Y.%m.%d}"),
+            (T('pv_rp_lbl_rows'), row_label),
+            (T('pv_rp_lbl_cols'), ' · '.join(R['col_labels']) or '-'),
+            (T('pv_rp_lbl_metrics'), ', '.join(R['value_labels'])),
+            (T('pv_rp_lbl_filters'), ' / '.join(filt) or T('pv_rp_kpi_nofilter')),
+            (T('pv_rp_lbl_def'), T('pv_rp_m_def')),
+            (T('pv_rp_lbl_other'), T('pv_rp_m_other')),
+            (T('p1_rp_lbl_blind'), T('rk_rp_m_blind_on') if blind else T('rk_rp_m_blind_off'))]
+    s3 = _rp_method(rt, T('pv_rp_s3_eyebrow'), T('p1_rp_s4_head'), meth, [f'pv_rp_unknown{i}' for i in range(1, 3)])
+
+    nxt = (T('pv_rp_close_v2_product', menu=_menu_ref('menu_opt_season')) if R.get('row_has_product')
+           else T('pv_rp_close_v2_partner', menu=_menu_ref('menu_opt_risk')) if R.get('row_has_partner')
+           else T('pv_rp_close_v2_default', menu=_menu_ref('menu_opt_health')))
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('pv_rp_close_note'),
+               'items': [('01', T('pv_rp_close_k1'), f1[0]), ('02', T('pv_rp_close_k2'), nxt),
+                         ('03', T('pv_rp_close_k3'), T('pv_rp_close_v3', rows=row_label, metrics=', '.join(R['value_labels'])))]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3)] + [closing])
+
+
 # ============================================================
 # 신규사업 스코어러 (페이지 8) — 원본 HTML 도구의 스코어링 엔진을 그대로 이식
 # ============================================================
@@ -6673,6 +7019,7 @@ GUIDE_CONTENT = {
                 'results': [
                     '고른 조합대로 즉시 표와 차트가 생성됩니다.',
                     '지표를 여러 개 고르면 표·히트맵에는 전부 표시되지만, 막대·선·파이 차트는 첫 번째로 고른 지표만 그려집니다 (단위가 다른 지표를 한 차트에 억지로 섞으면 오히려 헷갈리기 때문입니다).',
+                    'PDF 리포트 — 결과 아래 "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(기간·총 물량·평균 단가(VWAP)·거래 건수)·핵심 결론 3줄(첫 번째 행 1위 비중·기간 변화 또는 상위 3개 비중·적용 필터) → 선택한 보기의 차트와 피벗 표 → 조건·방법론 → 다음 단계 제안)를 내려받습니다. 수입사가 행·열·필터에 있으면 "수입사 A, B …"로 가릴 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
                 ],
             },
             {
@@ -6919,6 +7266,7 @@ GUIDE_CONTENT = {
                 'results': [
                     'A table and chart are generated instantly from your chosen combination.',
                     'With multiple metrics selected, the table and heatmap show all of them, but bar/line/pie charts plot only the first selected metric (mixing metrics with different units in one chart would be confusing).',
+                    'PDF report — "Create PDF report" below the results downloads the new-format report (cover → 4 KPIs (period, total volume, average price (VWAP), transaction count) and 3 key findings (top share of the first row field, change over time or top-3 share, filters applied) → chart of the selected view and the pivot table → settings and methodology → suggested next steps). When importers appear in rows, columns or filters, names can be shown as "Importer A, B …". Use "Legacy-format PDF" for the previous format.',
                 ],
             },
             {
@@ -9395,7 +9743,8 @@ if selected == T('menu_opt_pivot'):
                     else:
                         s = df[DIM_MAP[label]].astype(str)
 
-                    if not isinstance(s.dtype, pd.CategoricalDtype) and s.nunique(dropna=True) > MAX_CATEGORIES:
+                    # 시간 차원(월·연도·분기)은 순서가 있는 축이라 '기타'로 묶지 않는다 (예: 23개월이면 3개월이 기타로 사라지던 문제)
+                    if label not in DATE_DIM_LABELS and s.nunique(dropna=True) > MAX_CATEGORIES:
                         totals = df.assign(_tmp_dim=s).groupby('_tmp_dim')['_volume'].sum()
                         top_vals = set(totals.nlargest(MAX_CATEGORIES).index)
                         s = s.where(s.isin(top_vals), T('p2_others_label'))
@@ -9421,6 +9770,26 @@ if selected == T('menu_opt_pivot'):
                     st.warning(T('p7_no_data_warning'))
                     st.session_state.pivot_result = None
                 else:
+                    # PDF용 요약: 전체 KPI, 첫 번째 행 기준 물량, 수입사 차원 블라인드 매핑, 필터 내용
+                    _priced_all = df[df['_price'].notna() & (df['_volume'] > 0)]
+                    _vw = weighted_avg(_priced_all, '_price', '_volume')
+                    pv_kpi = {'volume': float(df['_volume'].sum()), 'vwap': None if pd.isna(_vw) else float(_vw), 'count': int(len(df))}
+                    row_vol = df.groupby(row_fields[0], observed=True)['_volume'].sum()
+                    row_vol.index = row_vol.index.astype(str)
+                    _others = T('p2_others_label')
+                    importer_maps = {}
+                    for fname, lab in list(zip(row_fields, row_labels)) + list(zip(col_fields, col_labels)):
+                        if lab in DIM_MAP and is_importer_column(DIM_MAP[lab], cols):
+                            _v = df.groupby(fname, observed=True)['_volume'].sum()
+                            importer_maps[fname] = {k: v for k, v in blind_name_map(_v[_v.index.astype(str) != _others]).items()}
+                    _inv_dim = {v: k for k, v in DIM_MAP.items()}
+                    pv_filters = {_inv_dim.get(fcol, str(fcol)): [str(v) for v in vals] for fcol, vals in filter_selections.items() if vals}
+                    for fcol, vals in filter_selections.items():
+                        if vals and is_importer_column(fcol, cols):
+                            importer_maps[_inv_dim.get(fcol, str(fcol))] = blind_name_map(raw_df.groupby(fcol)[cols['volume']].apply(
+                                lambda x: pd.to_numeric(x, errors='coerce').sum()))
+                    row_cols = [DIM_MAP.get(l) for l in row_labels]
+
                     tables, row_totals = {}, {}
                     group_keys = row_fields + col_fields
                     priced = df[df['_price'].notna() & (df['_volume'] > 0)]
@@ -9452,6 +9821,11 @@ if selected == T('menu_opt_pivot'):
                             'combined': combined, 'row_labels': row_labels, 'col_labels': col_labels,
                             'value_labels': value_labels, 'view': VIEW_MAP[view_label], 'has_col': bool(col_fields),
                             'capped_fields': capped_fields, 'row_totals': row_totals,
+                            'row_fields': row_fields, 'col_fields': col_fields, 'kpi': pv_kpi, 'row_vol': row_vol,
+                            'row_is_time': row_labels[0] in (T('p7_row_month'), T('p7_dim_year'), T('p7_dim_quarter')),
+                            'row_has_product': cols['product'] in row_cols,
+                            'row_has_partner': any(c in row_cols for c in (cols['exporter'], cols['importer']) if c),
+                            'importer_maps': importer_maps, 'filters': pv_filters, 'period': (pivot_date_start, pivot_date_end),
                         }
 
         if st.session_state.get('pivot_result'):
@@ -9549,7 +9923,16 @@ if selected == T('menu_opt_pivot'):
                 display_str[c] = display_combined[c].apply(lambda v: _fmt_cell(v, is_price))
             st.dataframe(display_str)
 
-            if st.button(T('pdf_generate_btn'), key="pivot_pdf_btn"):
+            pv_blind = st.checkbox(T('pv_rp_blind_toggle'), value=False, key="pivot_rp_blind") if R.get('importer_maps') else False
+            pv_c1, pv_c2 = st.columns([1, 1])
+            if pv_c1.button(T('rp_pdf_btn'), key="pivot_rp_btn", disabled='kpi' not in R):
+                with st.spinner(T('rp_pdf_spinner')):
+                    try:
+                        pdf_bytes = build_pivot_report(R, bool(pv_blind))
+                        st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="pivot_report_new.pdf", mime="application/pdf", key="pivot_rp_dl")
+                    except Exception as e:
+                        st.error(T('pdf_error_msg', msg=str(e)))
+            if pv_c2.button(T('p1_rp_legacy_btn'), key="pivot_pdf_btn"):
                 with st.spinner(T('pdf_generating_msg')):
                     try:
                         pdf_table = display_combined.reset_index()
