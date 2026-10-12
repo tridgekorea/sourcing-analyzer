@@ -14,7 +14,7 @@
 - `assets/fonts/` — `Pretendard-*.ttf` 5종(새 PDF·PDF 차트), `NanumGothic-Regular.ttf`(기존 PDF·kaleido 차트·사용법 가이드)
 - `assets/logo/` — `tridge_logo_black.png`(밝은 배경), `tridge_logo_white.png`(어두운 배경)
 - `assets/guide/` — 사용법 가이드 PDF에 들어가는 메뉴 스크린샷
-- `tests/` — 고정 테스트. `test_normalize_product_name.py`(① 품목명 정제·포장 단위 구성 변화). 실행: `python tests/test_normalize_product_name.py`
+- `tests/` — 고정 테스트. `test_normalize_product_name.py`(①②⑥ 품목명 정제·품목 묶기·포장 단위 구성 변화). 실행: `python tests/test_normalize_product_name.py`
 
 ## 메뉴 (11개, 사이드바 순서)
 
@@ -29,7 +29,7 @@
 
 1. `TEXTS` 딕셔너리(ko/en) + `T(key, **kwargs)` — 화면·PDF 문구 전부 (접두사: `p1_`~`p8_` 기존 메뉴, `ph_` 헬스체크, `sc_` 스크리너, `bd_` 입찰 대응, `rp_`·`scr_rp_`·`bd_rp_` 새 PDF 양식)
 2. 공용 분석 함수 — `weighted_avg`, `weighted_avg_groupby`, `remove_outliers_iqr` 등
-3. ① 헬퍼 — 품목명 정제 `normalize_product_name`(정제 규칙은 이 함수에서만 관리, 포장 단위·끝 제품 코드만 떼고 같은 이름끼리 묶음), 포장 단위 구성 변화 `pack_mix_change`/`pack_change_text`, 절감 그룹 `split_savings_groups`/`render_savings_cards` + 페이지별 `reset_*_states()` (`reset_analysis_states` … `reset_health_states`, `reset_screener_states`, `reset_bid_states`)
+3. ① 헬퍼 — 품목명 정제 `normalize_product_name`(정제 규칙은 이 함수에서만 관리, 포장 단위·끝 제품 코드만 떼고 같은 이름끼리 묶음), ①②⑥ 공통 품목 묶기 `product_group_labels`(일반 명칭 품목은 HS 10단위로 한 번 더 나눔), 포장 단위 구성 변화 `pack_mix_change`/`pack_change_text`, 절감 그룹 `split_savings_groups`/`render_savings_cards` + 페이지별 `reset_*_states()` (`reset_analysis_states` … `reset_health_states`, `reset_screener_states`, `reset_bid_states`)
 4. 파일/컬럼 헬퍼 — `read_uploaded_table`(HS 등 코드 컬럼은 문자열로 읽고 앞자리 0 복원), `detect_standard_columns`, `detect_extra_dimension_columns`, `build_axis_map`
 5. ② 헬스체크 계산 — `prepare_health_df`, `compute_health_check`, `health_display_table` 등
 6. ⑨⑩ 공통 — 블라인드(`blind_importer_map`, `apply_blind`), 거래 전처리(`detect_trade_columns`, `prepare_trade_df`), ⑨ `compute_screener`, ⑩ `bid_filter`·`bid_supplier_table`·`bid_stability`

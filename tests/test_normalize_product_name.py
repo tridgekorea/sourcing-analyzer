@@ -15,7 +15,7 @@ SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
 
 def _load():
     tree = ast.parse(open(SRC, encoding="utf-8").read())
-    keep = {"normalize_product_name", "pack_mix_change", "pack_change_text", "_split_pack", "cluster_product_names", "pack_month_markers", "T"}
+    keep = {"normalize_product_name", "pack_mix_change", "pack_change_text", "_split_pack", "product_group_labels", "_pad_hs_code", "pack_month_markers", "T"}
     body = [n for n in tree.body
             if (isinstance(n, ast.FunctionDef) and n.name in keep)
             or (isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)
@@ -123,12 +123,30 @@ def test_pack_mix_change():
     assert not f(_g([("250ML", 450), ("", 550)]), _g([("", 1000)]))[0]
 
 
-def test_cluster_product_names_same_rule_as_adoption():
-    """② 헬스체크·⑥ 가격 추세의 품목 묶기도 ①과 같은 기준: 정제된 이름이 표시 이름, 원래 품목명은 목록으로."""
-    groups = NS["cluster_product_names"](["[혼합분유] 혼합분유 (25KG)__MIXED MILK POWDER", "[혼합분유] 혼합분유 (600KG)",
-                                          "칼-맥.디__CAL-MAG.D", "모닌 제로 바닐라", "모닌 제로 카라멜"])
-    assert set(groups) == {"혼합분유", "칼 맥 디", "모닌 제로 바닐라", "모닌 제로 카라멜"}, set(groups)
-    assert len(groups["혼합분유"]) == 2
+def test_product_group_labels_same_rule_as_adoption():
+    """①②⑥ 공통 품목 묶기: 정제된 이름이 표시 이름 (HS 없이 호출하면 정제 이름만으로 묶음)."""
+    disp, key, pack = NS["product_group_labels"](["[혼합분유] 혼합분유 (25KG)__MIXED MILK POWDER", "[혼합분유] 혼합분유 (600KG)",
+                                                  "칼-맥.디__CAL-MAG.D", "모닌 제로 바닐라", "모닌 제로 카라멜"])
+    assert set(disp) == {"혼합분유", "칼 맥 디", "모닌 제로 바닐라", "모닌 제로 카라멜"}, set(disp)
+    assert key[0] == key[1] and list(pack[:2]) == ["25KG", "600KG"]
+
+
+def test_generic_name_split_by_hs():
+    """일반 명칭 품목(분류명 = 품목명)은 HS 10단위로 나눈다. 같은 HS 안의 세부 스펙은 구분하지 않는다."""
+    f = NS["product_group_labels"]
+    # 혼합분유: HS 2개 → 2개 품목 (엑셀에서 앞자리 0이 빠진 9자리 코드도 10자리로 복원)
+    disp, key, _ = f(["[혼합분유] 혼합분유 (25KG)", "[혼합분유] 혼합분유 (25KG)", "혼합분유 (600KG)", "[혼합분유] 혼합분유"],
+                     ["404901000", "0404901000", "404902000", "404902000"])
+    assert key[0] == key[1] and key[2] == key[3] and key[0] != key[2], list(key)
+    assert disp[0] == "혼합분유 (HS 0404901000)" and disp[2] == "혼합분유 (HS 0404902000)", list(disp)
+    # 황기·당귀: HS가 하나뿐이면 나누지 않음
+    disp, key, _ = f(["[황기] 황기 (20KG)", "[황기] 황기", "[당귀] 당귀 (10KG)", "[당귀] 당귀"],
+                     ["1211909099", "1211909099", "1211909099", "1211909099"])
+    assert key[0] == key[1] and key[2] == key[3] and key[0] != key[2], list(key)
+    assert list(disp) == ["황기", "황기", "당귀", "당귀"], list(disp)
+    # 일반 명칭이 아닌 품목(분류명 외 단어가 남음)은 HS가 달라도 그대로
+    _, key, _ = f(["[비타민 C] 아세로라 C(100정)", "[비타민 C] 아세로라 C(300정)"], ["2936270000", "2106909099"])
+    assert key[0] == key[1], list(key)
 
 
 def test_pack_month_markers():

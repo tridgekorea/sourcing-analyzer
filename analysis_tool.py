@@ -577,7 +577,7 @@ TEXTS = {
         'p1_rp_lbl_blind': '블라인드',
         'p1_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터, 건별 수입신고 단위. 파일에서 가장 많이 등장하는 수입사를 분석 대상으로 함',
         'p1_rp_m_period': '계약 전 {b0} – {b1} · 계약 후 {a0} – {a1} (계약일 {c})',
-        'p1_rp_m_cluster': '포장 단위와 제품 코드를 뗀 품목명이 같은 거래끼리 한 품목군으로 묶음 (거래 3건 미만인 품목명은 제외)',
+        'p1_rp_m_cluster': '포장 단위와 제품 코드를 뗀 품목명이 같은 거래끼리 한 품목군으로 묶음 (거래 3건 미만인 품목명은 제외). 일반 명칭 품목은 HS코드 10단위로 구분, 같은 HS 안의 세부 스펙은 구분하지 않음',
         'p1_rp_m_outlier': '품목군·기간별 단가 IQR 1.5배 밖 제외 (제외 비율 최대 7%)',
         'p1_rp_m_price': 'VWAP(물량가중평균), USD/kg',
         'p1_rp_m_saving': '(계약 전 VWAP − 계약 후 VWAP) × 계약 후 물량. 양수 = 절감, 음수 = 비용 증가',
@@ -1039,6 +1039,7 @@ TEXTS = {
         'ph_x_base_share': '기준 기간 비중(%)',
         'ph_x_comp_share': '비교 기간 비중(%)',
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
+        'group_rule_generic_hs': '※ 일반 명칭 품목(예: [혼합분유] 혼합분유)은 HS코드 10단위로 구분하고, 같은 HS 안의 세부 스펙은 구분하지 않습니다.',
         'multi_product_help': '포장 단위(25KG·360정 등)와 끝의 제품 코드만 다른 품목명은 한 품목으로 합쳐져 있어요 (도입 효과 분석과 같은 기준). 여러 품목을 고르면 하나로 합쳐서 분석합니다.',
         'p5_month_label': '{m}월',
         'p5_no_prev_year_caption': '※ 전년도에 해당하는 데이터가 없어 전년 비교선을 표시하지 못했습니다 (최소 13개월치 데이터가 필요합니다).',
@@ -1644,7 +1645,7 @@ TEXTS = {
         'p1_rp_lbl_blind': 'Blind',
         'p1_rp_m_data': 'Tridge TDS Korea import customs data, per declaration. The most frequent importer in the file is analyzed',
         'p1_rp_m_period': 'Before {b0} – {b1} · after {a0} – {a1} (contract date {c})',
-        'p1_rp_m_cluster': 'Trades whose product names match after removing pack sizes and product codes form one item group (names with fewer than 3 trades excluded)',
+        'p1_rp_m_cluster': 'Trades whose product names match after removing pack sizes and product codes form one item group (names with fewer than 3 trades excluded). Generic-name products are separated by 10-digit HS code; detailed specs within the same HS code are not distinguished',
         'p1_rp_m_outlier': 'Unit prices outside 1.5× IQR per item group and period excluded (at most 7%)',
         'p1_rp_m_price': 'VWAP (volume-weighted), USD/kg',
         'p1_rp_m_saving': '(VWAP before − VWAP after) × post-contract volume. Positive = savings, negative = cost increase',
@@ -2106,6 +2107,7 @@ TEXTS = {
         'ph_x_base_share': 'Base period share (%)',
         'ph_x_comp_share': 'Comparison period share (%)',
         'multi_product_label': 'Search products (multi-select)',
+        'group_rule_generic_hs': '※ Generic-name products (e.g. [Mixed Milk Powder] Mixed Milk Powder) are separated by 10-digit HS code; detailed specs within the same HS code are not distinguished.',
         'multi_product_help': "Product names that differ only in pack size (25 KG, 360 tablets, etc.) or a trailing product code are combined into one product (same rule as Adoption Impact). Selecting several products combines them into one analysis.",
         'p5_month_label': 'Month {m}',
         'p5_no_prev_year_caption': '※ No prior-year data available to overlay (needs at least 13 months of history).',
@@ -2668,7 +2670,7 @@ HEALTH_SIGNAL_REASONS = ('ph_reason_disruption', 'ph_reason_squeeze', 'ph_reason
 
 def prepare_health_df(raw_df, cols, unit_col, product_mode):
     """헬스체크용 표준 데이터프레임(_date/_volume/_price/_exporter/_importer/_unit)을 만든다.
-    품목 단위면 cluster_product_names로 표기가 조금씩 다른 품목명을 대표명으로 묶는다."""
+    품목 단위면 product_group_labels(①⑥과 같은 기준)로 표기가 조금씩 다른 품목명을 대표명으로 묶는다."""
     imp = raw_df[cols['importer']]
     df = pd.DataFrame({
         '_date': pd.to_datetime(raw_df[cols['date']], errors='coerce'),
@@ -2683,9 +2685,8 @@ def prepare_health_df(raw_df, cols, unit_col, product_mode):
     df['_unit'] = df['_unit'].astype(str).str.strip()
     df['_raw_name'] = df['_unit']  # 묶기 전 원래 이름 (단위별 원래 품목명 확인용)
     if product_mode:
-        groups = cluster_product_names(df['_unit'].unique())
-        name_to_rep = {name: rep for rep, names in groups.items() for name in names}
-        df['_unit'] = df['_unit'].map(name_to_rep)
+        hs = raw_df.loc[df.index, cols['hs']] if cols.get('hs') else None
+        df['_unit'] = product_group_labels(df['_unit'], hs)[0]
     return df
 
 
@@ -4239,23 +4240,42 @@ def load_uploaded_df(uploaded_file, raw_df_key, headers_key, fileid_key):
     return st.session_state.get(raw_df_key)
 
 
-def cluster_product_names(raw_names):
-    """품목명을 ①과 같은 기준(normalize_product_name)으로 묶은 '품목' 사전 (② 헬스체크, ⑥ 가격 추세 공통).
-    포장 단위·끝 제품 코드만 다른 품목명은 한 품목, 맛·브랜드·대상이 다르면 다른 품목.
-    반환: {정제된 표시 이름: [해당 품목에 속한 원래 품목명 리스트]}"""
-    groups, labels = {}, {}
-    for name in raw_names:
-        clean = normalize_product_name(name)[0]
-        key = clean.replace(' ', '') or str(name)
-        groups.setdefault(key, []).append(name)
-        labels.setdefault(key, Counter())[clean or str(name)] += 1
-    result = {}
-    for key, names in groups.items():
-        label = labels[key].most_common(1)[0][0]
-        if label in result:  # 정제 이름이 겹치는 드문 경우 구분
-            label = f"{label} ({key})"
-        result[label] = sorted(set(names))
-    return result
+def product_group_labels(names, hs=None):
+    """품목 묶기 (①②⑥ 공통, 행 단위). 정제 규칙은 normalize_product_name 하나에서 관리한다.
+    - 기본: 포장 단위·끝 제품 코드만 다른 품목명은 한 품목, 맛·브랜드·대상이 다르면 다른 품목
+    - 일반 명칭 품목(정제한 이름이 대괄호 분류명과 같거나 분류명 단어 외에 남는 단어가 없는 품목, 예: [혼합분유] 혼합분유)은
+      같은 이름 아래 다른 스펙이 섞이므로 HS코드 10단위가 2개 이상이면 HS별로 나눈다. 같은 HS 안의 세부 스펙은 구분하지 않는다.
+    반환: (표시 이름, 묶기 키, 포장 단위) — names와 같은 인덱스의 Series. 키는 공백 없는 한 단어(① TF-IDF용)."""
+    names = pd.Series(names).map(lambda v: v if isinstance(v, str) else ('' if pd.isna(v) else str(v)))
+    if hs is None:
+        hs_s = pd.Series('', index=names.index)
+    else:
+        hs_s = pd.Series(np.asarray(hs, dtype=object), index=names.index).map(
+            lambda v: '' if v is None or (not isinstance(v, str) and pd.isna(v)) else str(_pad_hs_code(str(v).strip())))
+        hs_s = hs_s.where(~hs_s.isin(['nan', 'None']), '')
+
+    def _info(n):
+        clean, pack = normalize_product_name(n)
+        m = re.match(r'\s*\[(.*?)\]', n)
+        cat = normalize_product_name(m.group(1))[0] if m else ''
+        return clean, pack, bool(clean and cat) and set(clean.split()) <= set(cat.split())
+
+    info = {n: _info(n) for n in names.unique()}
+    clean = names.map(lambda n: info[n][0])
+    pack = names.map(lambda n: info[n][1])
+    base = clean.str.replace(' ', '', regex=False)
+    base = base.where(base != '', names)
+    generic = set(base[names.map(lambda n: info[n][2])])
+    has_hs = hs_s != ''
+    hs_n = hs_s[has_hs].groupby(base[has_hs]).nunique()
+    split = base.isin(generic) & has_hs & base.map(hs_n).fillna(0).gt(1)
+    key = base.where(~split, base + '_' + hs_s)
+    label = clean.where(clean != '', names)
+    label = label.where(~split, label + ' (HS ' + hs_s + ')')
+    disp = label.groupby(key).agg(lambda s: s.value_counts().index[0])
+    dup = disp.duplicated(keep=False)
+    disp[dup] = disp[dup] + ' (' + disp.index[dup] + ')'  # 표시 이름이 겹치는 드문 경우 구분
+    return key.map(disp), key, pack
 
 
 def pack_month_markers(df, month_col, pack_col, volume_col):
@@ -4761,7 +4781,7 @@ GUIDE_CONTENT = {
                     '순 절감액 / 절감 합계 / 비용 증가 합계 — 품목군별 절감액(계약 전후 단가 차이 × 계약 후 물량)의 순합계와, 절감·비용 증가 각각의 합계(품목 수 포함).',
                     '품목군별 카드 — 절감 품목, 단가 상승 품목, 변화 미미(절감·증가액이 ±$10 이내, 기준 조정 가능) 세 그룹으로 나뉘어 금액 큰 순으로 보입니다. 그룹마다 처음 12개만 보이고 "전체 보기"로 나머지를 펼칩니다. 계약 후 구매가 없는 품목은 "계약 후 구매 없음"으로 따로 표시하고 합계에서 뺍니다.',
                     '상세 절감 내역 표 — 같은 그룹을 "구분" 열로 보여주며, 결과는 새 양식 PDF 리포트(표지 → KPI 4개·핵심 결론 3줄 → 품목군별 절감 차트·표 → 따로 확인할 품목 → 방법론 → 클로징)로 내려받을 수 있습니다. 구성 변화 품목이 있으면 "구성 변화 품목 제외 시" 순 절감액을 함께 표기합니다. 이전 양식이 필요하면 "기존 양식 PDF" 버튼을 쓰세요.',
-                    '수입 품목군 — 포장 단위(360정·30포·900g 등)와 끝의 제품 코드만 다른 품목명을 같은 품목군으로 묶습니다. 맛·브랜드·대상이 다르면 다른 품목군입니다. 계약 전후로 품목군 안의 주력 포장 단위가 바뀌거나 비중이 20%p 이상 움직이면 "포장 단위 변경"(구성 변화)으로 표시하고, 이 품목을 뺀 순 절감액도 함께 보여줍니다.',
+                    '수입 품목군 — 포장 단위(360정·30포·900g 등)와 끝의 제품 코드만 다른 품목명을 같은 품목군으로 묶습니다. 맛·브랜드·대상이 다르면 다른 품목군입니다. 계약 전후로 품목군 안의 주력 포장 단위가 바뀌거나 비중이 20%p 이상 움직이면 "포장 단위 변경"(구성 변화)으로 표시하고, 이 품목을 뺀 순 절감액도 함께 보여줍니다. 일반 명칭 품목(예: [혼합분유] 혼합분유)은 HS코드 10단위로 구분하고, 같은 HS 안의 세부 스펙은 구분하지 않습니다.',
                     '월별 수입 추이, 최근 3개월 비중 — 최근 구매 패턴 파악.',
                     '계약 이후 새로 생기거나 사라진 품목·원산지·공급사 목록.',
                 ],
@@ -4772,7 +4792,7 @@ GUIDE_CONTENT = {
                 'steps': [
                     '거래 내역 파일을 업로드합니다 (날짜·수입사·공급사·품목·물량·단가 컬럼이 필요합니다).',
                     '점검할 수입사를 선택합니다 (물량 큰 순으로 정렬되며, 파일에 수입사가 1곳뿐이면 자동 적용됩니다).',
-                    '점검 단위를 고릅니다 — 품목(기본), 원산지, 또는 파일에 있는 추가 컬럼(HS코드 등). 품목은 포장 단위(360정·25KG 등)와 끝의 제품 코드만 다른 품목명을 한 단위로 묶고(도입 효과 분석과 같은 기준) 정제된 이름으로 보여줍니다. 묶인 원래 품목명은 결과 표 아래 "단위별 원래 품목명 보기"에서 확인합니다.',
+                    '점검 단위를 고릅니다 — 품목(기본), 원산지, 또는 파일에 있는 추가 컬럼(HS코드 등). 품목은 포장 단위(360정·25KG 등)와 끝의 제품 코드만 다른 품목명을 한 단위로 묶고(도입 효과 분석과 같은 기준) 정제된 이름으로 보여줍니다. 묶인 원래 품목명은 결과 표 아래 "단위별 원래 품목명 보기"에서 확인합니다. 일반 명칭 품목(예: [혼합분유] 혼합분유)은 HS코드 10단위로 구분하고, 같은 HS 안의 세부 스펙은 구분하지 않습니다.',
                     '기준 기간(기본: 데이터 마지막 날짜 기준 최근 6개월)과 비교 기간(기본: 그 직전 6개월)을 선택합니다. 필요하면 "기준값 조정"에서 기준값을 바꿉니다.',
                     '"헬스체크 실행"을 클릭합니다.',
                 ],
@@ -4849,7 +4869,7 @@ GUIDE_CONTENT = {
                 'intro': '특정 품목의 단가가 시기별로 어떻게 움직이는지, 언제 사는 게 유리한지 알고 싶을 때 씁니다. 구매 시점을 계획할 때 참고하세요.',
                 'steps': [
                     '전체 시장 데이터를 업로드합니다.',
-                    '품목을 검색해 하나 이상 선택합니다 (포장 단위·끝의 제품 코드만 다른 품목명은 한 품목으로 합쳐져 있습니다 — 도입 효과 분석과 같은 기준).',
+                    '품목을 검색해 하나 이상 선택합니다 (포장 단위·끝의 제품 코드만 다른 품목명은 한 품목으로 합쳐져 있습니다 — 도입 효과 분석과 같은 기준). 일반 명칭 품목(예: [혼합분유] 혼합분유)은 HS코드 10단위로 구분하고, 같은 HS 안의 세부 스펙은 구분하지 않습니다.',
                     '전년 비교 여부와 비교 축(원산지별/공급사별)을 설정합니다.',
                     '"추세 그리기"를 클릭합니다.',
                 ],
@@ -5002,7 +5022,7 @@ GUIDE_CONTENT = {
                     'Net savings / total savings / total cost increase — the net sum of per-group savings (price difference before vs. after × post-contract volume), plus the savings and cost-increase totals with item counts.',
                     'Cards by product group — split into Savings, Price increases, and Minor change (within ±$10, adjustable), largest amounts first. Each group shows the first 12 cards; "Show all" expands the rest. Items with no purchases after the contract are listed separately as "No purchases after contract" and excluded from the totals.',
                     'Detailed savings table — the same groups appear in a "Group" column, and the results can be downloaded as a new-format PDF report (cover → 4 KPIs and 3 key findings → savings chart and tables by item group → items to check → methodology → closing). When mix-changed items exist, net savings excluding them is shown as well. Use "Legacy-format PDF" if you need the previous format.',
-                    'Import item groups — product names that differ only in pack size (360 tablets, 30 sachets, 900 g, etc.) or a trailing product code form one item group; different flavors, brands, or targets stay separate. When the main pack size changes or a pack size share moves 20%p or more before vs. after the contract, the group is flagged as a "pack size change" (mix change), and net savings excluding it is also shown.',
+                    'Import item groups — product names that differ only in pack size (360 tablets, 30 sachets, 900 g, etc.) or a trailing product code form one item group; different flavors, brands, or targets stay separate. When the main pack size changes or a pack size share moves 20%p or more before vs. after the contract, the group is flagged as a "pack size change" (mix change), and net savings excluding it is also shown. Generic-name products (e.g. [Mixed Milk Powder] Mixed Milk Powder) are separated by 10-digit HS code; detailed specs within the same HS code are not distinguished.',
                     'Monthly import trend and last-3-month share.',
                     'New/lost products, origins, and suppliers since the contract.',
                 ],
@@ -5013,7 +5033,7 @@ GUIDE_CONTENT = {
                 'steps': [
                     'Upload transaction data (date, importer, supplier, product, volume, and unit price columns are required).',
                     'Select the importer to check (sorted by volume; applied automatically if the file has only one importer).',
-                    'Choose the check unit — Product (default), Origin, or an extra column in the file (e.g. HS code). Product names that differ only in pack size (360 tablets, 25 KG, etc.) or a trailing product code form one unit (same rule as Adoption Impact), shown under a cleaned name; the original names are listed under "Original product names by unit" below the results table.',
+                    'Choose the check unit — Product (default), Origin, or an extra column in the file (e.g. HS code). Product names that differ only in pack size (360 tablets, 25 KG, etc.) or a trailing product code form one unit (same rule as Adoption Impact), shown under a cleaned name; the original names are listed under "Original product names by unit" below the results table. Generic-name products (e.g. [Mixed Milk Powder] Mixed Milk Powder) are separated by 10-digit HS code; detailed specs within the same HS code are not distinguished.',
                     'Select the base period (default: last 6 months up to the latest date in the data) and the comparison period (default: the 6 months before that). Adjust thresholds under "Adjust thresholds" if needed.',
                     'Click "Run Health Check".',
                 ],
@@ -5090,7 +5110,7 @@ GUIDE_CONTENT = {
                 'intro': "Use this to see how a product's price moves over time and when it is cheapest to buy — useful for planning purchase timing.",
                 'steps': [
                     'Upload the full market data.',
-                    'Search and select one or more products (names that differ only in pack size or a trailing product code are combined into one product — same rule as Adoption Impact).',
+                    'Search and select one or more products (names that differ only in pack size or a trailing product code are combined into one product — same rule as Adoption Impact). Generic-name products (e.g. [Mixed Milk Powder] Mixed Milk Powder) are separated by 10-digit HS code; detailed specs within the same HS code are not distinguished.',
                     'Set the previous-year overlay and comparison axis.',
                     'Click "Draw trend".',
                 ],
@@ -5724,10 +5744,12 @@ if selected == T('menu_opt_customer'):
                     # 품목군 묶기 (F안): 포장 단위·제품 코드를 뗀 이름이 같은 거래끼리만 묶는다.
                     # 유사도로 묶으면 맛·브랜드·대상만 다른 제품까지 섞여(과병합) 공백 없는 키로 정확히 일치시키고,
                     # 떼어낸 포장 단위는 구성 변화(포장 단위 변경) 판정에 쓴다.
-                    _norm = [normalize_product_name(n) for n in customer_df['product_name']]
-                    customer_df['product_preprocessed'] = [n for n, _ in _norm]
-                    customer_df['pack_unit'] = [p for _, p in _norm]
-                    customer_df['product_key'] = customer_df['product_preprocessed'].str.replace(' ', '', regex=False)
+                    # 일반 명칭 품목(예: [혼합분유] 혼합분유)은 HS코드 10단위로 한 번 더 나눈다 (product_group_labels).
+                    _hs = customer_df[_tcols['hs']] if _tcols['hs'] and _tcols['hs'] in customer_df.columns else None
+                    _disp, _key, _pack = product_group_labels(customer_df['product_name'], _hs)
+                    customer_df['product_preprocessed'] = _disp
+                    customer_df['pack_unit'] = _pack
+                    customer_df['product_key'] = _key
                     vectorizer = TfidfVectorizer(min_df=1, ngram_range=(1,2), token_pattern=r'(?u)\b\w+\b')
                     tfidf_matrix = vectorizer.fit_transform(customer_df['product_key'])
                     # 키가 한 단어라 코사인거리 0(같은 키)끼리만 묶인다. min_samples=3: 거래 3건 미만 품목명은 제외
@@ -5858,6 +5880,7 @@ if selected == T('menu_opt_customer'):
                 T('p1_col_savings'): '${:,.2f}',
             }, na_rep='-'))
             st.caption(T('p1_vwap_note'))
+            st.caption(T('group_rule_generic_hs'))
 
             p1_blind = st.checkbox(T('p1_rp_blind_toggle'), value=False, key="p1_rp_blind")
             pdf_c1, pdf_c2 = st.columns([1, 1])
@@ -6154,6 +6177,8 @@ if selected == T('menu_opt_health'):
         shown_rows = [r for r in rows if r['overall'] in selected_status]
         st.dataframe(health_display_table(shown_rows), hide_index=True, width="stretch")
         st.caption(T('ph_table_notes'))
+        if res['product_mode']:
+            st.caption(T('group_rule_generic_hs'))
         st.caption(T('ph_market_note', season=T('menu_opt_season')))
         if not res['product_mode']:
             st.info(T('ph_mix_notice'))
@@ -6225,6 +6250,8 @@ if selected == T('menu_opt_health'):
                         kpi_lines = [summary_caption, ' · '.join(f"{label}: {value}" for label, value in kpi_items)]
                         kpi_lines += [T('ph_focus_header') + ' — ' + f"{unit}: {reasons}" for unit, reasons in focus_lines]
                         kpi_lines += [T('ph_table_notes'), T('ph_market_note', season=T('menu_opt_season'))]
+                        if res['product_mode']:
+                            kpi_lines.append(T('group_rule_generic_hs'))
                         if not res['product_mode']:
                             kpi_lines.append(T('ph_mix_notice'))
                         pdf_bytes = build_pdf_report(
@@ -7122,10 +7149,11 @@ if selected == T('menu_opt_season'):
             if _mismatch and _mismatch > 0.1:
                 st.warning(T('price_mismatch_warning', pct=_mismatch * 100))
 
-            raw_products = raw_df[cols['product']].dropna().astype(str).unique()
-            product_groups = cluster_product_names(raw_products)
-            selected_reps = st.multiselect(T('multi_product_label'), options=sorted(product_groups.keys()), key="season_products")
+            _prod = raw_df[cols['product']].dropna()
+            row_labels = product_group_labels(_prod.astype(str), raw_df.loc[_prod.index, cols['hs']] if cols.get('hs') else None)[0]
+            selected_reps = st.multiselect(T('multi_product_label'), options=sorted(row_labels.unique()), key="season_products")
             st.caption(T('multi_product_help'))
+            st.caption(T('group_rule_generic_hs'))
 
             col1, col2 = st.columns(2)
             with col1:
@@ -7143,16 +7171,14 @@ if selected == T('menu_opt_season'):
                 if not selected_reps:
                     st.warning(T('p5_no_data_warning'))
                 else:
-                    selected_raw_names = set()
-                    for rep in selected_reps:
-                        selected_raw_names.update(product_groups[rep])
+                    selected_idx = row_labels.index[row_labels.isin(selected_reps)]
 
                     df = raw_df.copy()
                     df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
                     df['_price'] = derive_unit_price(df, cols)[0]  # Unit Price 우선, 없으면 금액 ÷ 중량
                     df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
                     df = df.dropna(subset=['_date', '_price', cols['product']])
-                    sub = df[df[cols['product']].astype(str).isin(selected_raw_names)]
+                    sub = df[df.index.isin(selected_idx)]
 
                     if sub.empty:
                         st.warning(T('p5_no_data_warning'))
@@ -7282,6 +7308,7 @@ if selected == T('menu_opt_season'):
                             f"{T('p5_kpi_current')}: ${current_price:.2f}",
                             f"{T('p5_kpi_yoy')}: {yoy:+.1f}%" if yoy is not None else f"{T('p5_kpi_yoy')}: N/A",
                             f"{T('p5_kpi_frompeak')}: {from_peak:+.1f}%",
+                            T('group_rule_generic_hs'),
                         ],
                         figs=[fig], df_table=overall[['_ym_str', '_price']].rename(columns={'_ym_str': T('p5_axis_month'), '_price': T('p5_axis_price')}),
                         table_title=T('p5_axis_month'),
