@@ -1039,6 +1039,12 @@ TEXTS = {
         'ph_x_base_share': '기준 기간 비중(%)',
         'ph_x_comp_share': '비교 기간 비중(%)',
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
+        'unit_n_years': '{n}년',
+        'unit_n_months': '{n}개월',
+        'unit_n_times': '{n}회',
+        'p8_kpi_window_value': '{n}개월',
+        'p7_filter_value_option': '{val} ({cnt}건)',
+        'p7_month_suffix': '{m}월',
         'group_rule_generic_hs': '※ 일반 명칭 품목(예: [혼합분유] 혼합분유)은 HS코드 10단위로 구분하고, 같은 HS 안의 세부 스펙은 구분하지 않습니다.',
         'multi_product_help': '포장 단위(25KG·360정 등)와 끝의 제품 코드만 다른 품목명은 한 품목으로 합쳐져 있어요 (도입 효과 분석과 같은 기준). 여러 품목을 고르면 하나로 합쳐서 분석합니다.',
         'p5_month_label': '{m}월',
@@ -2107,6 +2113,12 @@ TEXTS = {
         'ph_x_base_share': 'Base period share (%)',
         'ph_x_comp_share': 'Comparison period share (%)',
         'multi_product_label': 'Search products (multi-select)',
+        'unit_n_years': '{n} year(s)',
+        'unit_n_months': '{n} months',
+        'unit_n_times': '{n}',
+        'p8_kpi_window_value': '{n} mo',
+        'p7_filter_value_option': '{val} ({cnt})',
+        'p7_month_suffix': '{m}',
         'group_rule_generic_hs': '※ Generic-name products (e.g. [Mixed Milk Powder] Mixed Milk Powder) are separated by 10-digit HS code; detailed specs within the same HS code are not distinguished.',
         'multi_product_help': "Product names that differ only in pack size (25 KG, 360 tablets, etc.) or a trailing product code are combined into one product (same rule as Adoption Impact). Selecting several products combines them into one analysis.",
         'p5_month_label': 'Month {m}',
@@ -4500,9 +4512,9 @@ def _p8_build_insights(A, B, S, meta):
     months = meta['months']
     if months >= 12 and months % 12 == 0:
         yrs = months // 12
-        month_label = f"{yrs}년" if lang == 'ko' else f"{yrs} year(s)"
+        month_label = T('unit_n_years', n=yrs)
     else:
-        month_label = f"{months}개월" if lang == 'ko' else f"{months} months"
+        month_label = T('unit_n_months', n=months)
     sign, pct = _p8_split_signed_pct(tot_yoy)
     ins.append(T('p8_ins_total', month_label=month_label, sign=sign, pct=pct, ly=_p8_ton(meta['tot_ly']), rec=_p8_ton(meta['tot_rec'])))
 
@@ -4594,7 +4606,7 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
     story = [Paragraph(T('p8_report_subtitle'), small), Paragraph(T('p8_report_title'), styles['Title'])]
     today = _dt.date.today().isoformat()
     months = meta['months']
-    month_label = f"{months}개월" if lang == 'ko' else f"{months} months"
+    month_label = T('unit_n_months', n=months)
     story.append(Paragraph(T('p8_report_meta',
         start=meta['rec_start'].strftime('%Y-%m'), end=meta['latest'].strftime('%Y-%m'),
         ly_start=meta['ly_start'].strftime('%Y-%m'), ly_end=meta['ly_end'].strftime('%Y-%m'),
@@ -4715,7 +4727,7 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
         rows_raw_b = [headers_b]
         for i, (_, r) in enumerate(b_top.iterrows()):
             top_imp_disp = f"{r['top1_imp']} {r['top1_share']:.0f}%" if r['top1_imp'] else '-'
-            rows_raw_b.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_ton(r['vol']), f"{r['ship']}회" if lang == 'ko' else str(r['ship']), top_imp_disp])
+            rows_raw_b.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_ton(r['vol']), T('unit_n_times', n=r['ship']), top_imp_disp])
         col_widths_b = _pdf_table_col_widths(rows_raw_b, doc.width)
         data_b = [[Paragraph(h, header_cell) for h in rows_raw_b[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw_b[1:]]
         t_b = Table(data_b, colWidths=col_widths_b, repeatRows=1)
@@ -7598,8 +7610,7 @@ if selected == T('menu_opt_pivot'):
             fcol = DIM_MAP[fc_label]
             with st.expander(fc_label):
                 value_counts = raw_df[fcol].dropna().astype(str).value_counts()  # 건수 많은 순
-                unit = '건' if st.session_state.lang == 'ko' else ''
-                label_to_value = {f"{val} ({cnt:,}{unit})": val for val, cnt in value_counts.items()}
+                label_to_value = {T('p7_filter_value_option', val=val, cnt=f"{cnt:,}"): val for val, cnt in value_counts.items()}
                 selected_labels = st.multiselect(T('p7_filter_values'), options=list(label_to_value.keys()), key=f"pivot_filter_vals_{fcol}")
                 filter_selections[fcol] = [label_to_value[l] for l in selected_labels]
 
@@ -7633,8 +7644,7 @@ if selected == T('menu_opt_pivot'):
                     elif label == T('p7_dim_quarter'):
                         s = df['_date'].dt.year.astype(str) + '-Q' + df['_date'].dt.quarter.astype('Int64').astype(str)
                     elif label == T('p7_dim_month_only'):
-                        month_unit = '월' if st.session_state.lang == 'ko' else ''
-                        s = df['_date'].dt.month.astype('Int64').astype(str) + month_unit
+                        s = df['_date'].dt.month.astype('Int64').map(lambda m: T('p7_month_suffix', m=m) if pd.notna(m) else '<NA>')
                     else:
                         s = df[DIM_MAP[label]].astype(str)
 
@@ -7767,7 +7777,7 @@ if selected == T('menu_opt_pivot'):
 
             # 지표 종류에 맞춰 숫자 포맷(천단위 콤마·단가는 $ 소수점) 적용 — 단위를 못 알아보는 문제 방지
             def _is_price_metric(name):
-                return ('단가' in name) or ('price' in name.lower())
+                return name in (T('p7_metric_price_mean'), T('p7_metric_price_max'), T('p7_metric_price_min'))
 
             def _fmt_cell(v, is_price):
                 if pd.isna(v):
@@ -7921,8 +7931,7 @@ if selected == T('menu_opt_scorer'):
         a_growing = A[A['yoy'] > 0] if not A.empty else A
 
         c1, c2, c3, c4, c5 = st.columns(5)
-        month_unit = '개월' if st.session_state.lang == 'ko' else ' mo'
-        c1.metric(T('p8_kpi_window'), f"{meta['months']}{month_unit}")
+        c1.metric(T('p8_kpi_window'), T('p8_kpi_window_value', n=meta['months']))
         c2.metric(T('p8_kpi_total_yoy'), f"{tot_yoy:+.0f}%")
         c3.metric(T('p8_kpi_growing'), f"{len(a_growing)}")
         c4.metric(T('p8_kpi_new'), f"{len(B)}")
