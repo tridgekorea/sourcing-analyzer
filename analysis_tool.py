@@ -1084,7 +1084,7 @@ TEXTS = {
         'p7_values_label': '값 (지표, 여러 개 선택 가능)',
         'p7_metric_volume_sum': '물량 합계',
         'p7_metric_volume_mean': '물량 평균',
-        'p7_metric_price_mean': '단가 평균',
+        'p7_metric_price_mean': '평균 단가(VWAP)',
         'p7_metric_price_max': '단가 최대',
         'p7_metric_price_min': '단가 최소',
         'p7_metric_count': '거래건수',
@@ -2158,7 +2158,7 @@ TEXTS = {
         'p7_values_label': 'Values (metrics, multi-select)',
         'p7_metric_volume_sum': 'Total volume',
         'p7_metric_volume_mean': 'Average volume',
-        'p7_metric_price_mean': 'Average price',
+        'p7_metric_price_mean': 'Average price (VWAP)',
         'p7_metric_price_max': 'Max price',
         'p7_metric_price_min': 'Min price',
         'p7_metric_count': 'Transaction count',
@@ -4452,7 +4452,8 @@ def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None, ta
 
         display_table = sec_df.copy()
         for c in display_table.columns:
-            display_table[c] = display_table[c].astype(str)
+            # pandas 3은 astype(str)이 빈 값(NaN)을 문자열로 바꾸지 않아 표 그리기가 깨진다 → 빈 값은 '-'로
+            display_table[c] = display_table[c].astype(object).map(lambda v: '-' if pd.isna(v) else str(v))
 
         header_style = styles['Normal'].clone('PdfTableHeader')
         header_style.textColor = colors.white
@@ -4979,7 +4980,7 @@ GUIDE_CONTENT = {
                     '데이터를 업로드합니다.',
                     '행(기준)을 하나 이상 고릅니다 — 여러 개 고르면 고른 순서대로 중첩됩니다.',
                     '열(나눠보기)을 선택합니다 (선택 사항).',
-                    '값(지표)을 하나 이상 고릅니다 — 물량 합계/평균, 단가 평균/최대/최소, 거래건수 중 복수 선택 가능.',
+                    '값(지표)을 하나 이상 고릅니다 — 물량 합계/평균, 평균 단가(VWAP, 물량가중)/최대/최소 단가, 거래건수 중 복수 선택 가능. 합계 열은 열 값을 더하지 않고 행 기준으로 다시 계산합니다.',
                     '보기(표/히트맵/막대/선/파이/누적막대)를 고르고, 필요하면 필터를 걸어서 "피벗 생성"을 클릭합니다.',
                 ],
                 'results': [
@@ -5220,7 +5221,7 @@ GUIDE_CONTENT = {
                     'Upload the data.',
                     'Pick one or more Row fields — multiple fields nest in the order chosen.',
                     'Optionally pick Column fields.',
-                    'Pick one or more Value metrics — total/average volume, average/max/min price, transaction count (multi-select).',
+                    'Pick one or more Value metrics — total/average volume, average price (VWAP, volume-weighted)/max/min price, transaction count (multi-select). The Total column is recalculated per row rather than summing the columns.',
                     'Pick a View (table/heatmap/bar/line/pie/stacked), optionally filter, then click "Generate pivot".',
                 ],
                 'results': [
@@ -6362,6 +6363,14 @@ if selected == T('menu_opt_market'):
                     if date_col: rename_dict[date_col] = 'date'
                     if product_col: rename_dict[product_col] = 'product_name'
                     if volume_col: rename_dict[volume_col] = 'volume'
+                    # 단가: Unit Price 우선, 없거나 빈 행은 금액 ÷ 중량 (derive_unit_price, 다른 메뉴와 공통)
+                    _tcols = detect_trade_columns(list(market_df.columns))
+                    if volume_col and (price_col or _tcols['value']):
+                        _derived = derive_unit_price(market_df, {**_tcols, 'volume': volume_col, 'price': price_col})[0]
+                        if price_col:
+                            market_df[price_col] = _derived
+                        else:
+                            market_df['unit_price'] = _derived
                     if price_col: rename_dict[price_col] = 'unit_price'
                     if origin_col: rename_dict[origin_col] = 'origin_country'
                     if export_col: rename_dict[export_col] = 'export_country' # <-- 요청 사항 반영
@@ -7571,7 +7580,7 @@ if selected == T('menu_opt_pivot'):
         METRIC_OPTIONS = {
             T('p7_metric_volume_sum'): ('_volume', 'sum'),
             T('p7_metric_volume_mean'): ('_volume', 'mean'),
-            T('p7_metric_price_mean'): ('_price', 'mean'),
+            T('p7_metric_price_mean'): ('_price', 'vwap'),  # 단순 평균이 아니라 물량가중평균
             T('p7_metric_price_max'): ('_price', 'max'),
             T('p7_metric_price_min'): ('_price', 'min'),
             T('p7_metric_count'): (None, 'count'),
@@ -7644,11 +7653,13 @@ if selected == T('menu_opt_pivot'):
                     elif label == T('p7_dim_quarter'):
                         s = df['_date'].dt.year.astype(str) + '-Q' + df['_date'].dt.quarter.astype('Int64').astype(str)
                     elif label == T('p7_dim_month_only'):
-                        s = df['_date'].dt.month.astype('Int64').map(lambda m: T('p7_month_suffix', m=m) if pd.notna(m) else '<NA>')
+                        month_names = [T('p7_month_suffix', m=m) for m in range(1, 13)]
+                        s = pd.Series(pd.Categorical(df['_date'].dt.month.map(lambda m: month_names[int(m) - 1] if pd.notna(m) else None),
+                                                     categories=month_names, ordered=True), index=df.index)  # 문자열 순(10월·11월·1월…)이 아니라 1~12월 순
                     else:
                         s = df[DIM_MAP[label]].astype(str)
 
-                    if s.nunique(dropna=True) > MAX_CATEGORIES:
+                    if not isinstance(s.dtype, pd.CategoricalDtype) and s.nunique(dropna=True) > MAX_CATEGORIES:
                         totals = df.assign(_tmp_dim=s).groupby('_tmp_dim')['_volume'].sum()
                         top_vals = set(totals.nlargest(MAX_CATEGORIES).index)
                         s = s.where(s.isin(top_vals), T('p2_others_label'))
@@ -7674,16 +7685,24 @@ if selected == T('menu_opt_pivot'):
                     st.warning(T('p7_no_data_warning'))
                     st.session_state.pivot_result = None
                 else:
-                    tables = {}
+                    tables, row_totals = {}, {}
                     group_keys = row_fields + col_fields
+                    priced = df[df['_price'].notna() & (df['_volume'] > 0)]
+
+                    def _agg(keys, source_col, aggfunc):
+                        if aggfunc == 'count':
+                            return df.groupby(keys, observed=True).size()
+                        if aggfunc == 'vwap':
+                            return weighted_avg_groupby(priced, keys, '_price', '_volume')
+                        return df.groupby(keys, observed=True)[source_col].agg(aggfunc)
+
                     for vl in value_labels:
                         source_col, aggfunc = METRIC_OPTIONS[vl]
-                        if aggfunc == 'count':
-                            s = df.groupby(group_keys).size()
-                        else:
-                            s = df.groupby(group_keys)[source_col].agg(aggfunc)
+                        s = _agg(group_keys, source_col, aggfunc)
                         if col_fields:
                             tables[vl] = s.unstack(col_fields)
+                            # 합계 열: 열 값을 더하지 않고 행 기준으로 다시 집계 (VWAP·평균·최대·최소도 올바른 값)
+                            row_totals[vl] = _agg(row_fields, source_col, aggfunc)
                         else:
                             tables[vl] = s.rename(vl)
 
@@ -7696,7 +7715,7 @@ if selected == T('menu_opt_pivot'):
                         st.session_state.pivot_result = {
                             'combined': combined, 'row_labels': row_labels, 'col_labels': col_labels,
                             'value_labels': value_labels, 'view': VIEW_MAP[view_label], 'has_col': bool(col_fields),
-                            'capped_fields': capped_fields,
+                            'capped_fields': capped_fields, 'row_totals': row_totals,
                         }
 
         if st.session_state.get('pivot_result'):
@@ -7766,7 +7785,10 @@ if selected == T('menu_opt_pivot'):
                 pieces = []
                 for metric_name in R['value_labels']:
                     sub = display_combined[metric_name]
-                    total_series = sub.sum(axis=1, skipna=True)
+                    total_series = R.get('row_totals', {}).get(metric_name)
+                    if total_series is None:
+                        total_series = sub.sum(axis=1, skipna=True)
+                    total_series = total_series.reindex(sub.index)
                     sub_with_total = pd.concat([total_series.rename(total_label), sub], axis=1)
                     sub_with_total.columns = pd.MultiIndex.from_product([[metric_name], sub_with_total.columns])
                     pieces.append(sub_with_total)
