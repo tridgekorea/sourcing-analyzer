@@ -934,7 +934,7 @@ TEXTS = {
         'ph_unit_label': '점검 단위',
         'ph_unit_product': '품목',
         'ph_unit_origin': '원산지',
-        'ph_unit_caption': '공급사는 공급 구조·공급 변화 판정의 기준 축이라 점검 단위에서 제외됩니다. 품목은 표기가 조금씩 다른 이름을 자동으로 묶어 점검합니다.',
+        'ph_unit_caption': '공급사는 공급 구조·공급 변화 판정의 기준 축이라 점검 단위에서 제외됩니다. 품목은 포장 단위(360정·25KG 등)와 끝의 제품 코드만 다른 품목명을 한 단위로 묶고, 정제된 이름으로 보여줍니다(도입 효과 분석과 같은 기준).',
         'ph_base_period': '기준 기간 (현재)',
         'ph_comp_period': '비교 기간 (직전)',
         'ph_period_overlap_warning': '기준 기간과 비교 기간이 겹칩니다. 겹치는 거래는 양쪽에 모두 반영됩니다.',
@@ -993,6 +993,11 @@ TEXTS = {
         'ph_reason_hold': '선적 {n}건 — 단가 판단 보류',
         'ph_reason_low_share': '금액 비중 {share:.1f}% — 영향이 작아 주의로 조정',
         'ph_reason_new': '비교 기간 거래 없음',
+        'ph_members_expander': '📄 단위별 원래 품목명 보기',
+        'ph_col_members': '원래 품목명',
+        'ph_col_member_count': '품목명 수',
+        'ph_detail_members': '원래 품목명',
+        'ph_x_members': '원래 품목명',
         'ph_table_notes': '※ 금액 = 물량 × 물량가중평균 단가(VWAP), 금액 비중은 기준 기간 전체 금액 대비입니다. 물량 변화는 월평균 비교이며 단독으로는 판정에 쓰지 않습니다. 공급 구조(단일/집중)는 단가 🟡와 겹칠 때만 판정에 반영됩니다.',
         'ph_market_note': '※ 단가 신호는 시장 전체 가격 변동 때문일 수도 있습니다 — 시장 요인인지 확인 필요 ([{season}] 메뉴 참고).',
         'ph_mix_notice': '※ 점검 단위가 품목이 아니라서 한 단위 안에 여러 품목이 섞여 있습니다. 품목 구성이 바뀌면 단가 변화에 영향을 줄 수 있습니다.',
@@ -1034,7 +1039,11 @@ TEXTS = {
         'ph_x_base_share': '기준 기간 비중(%)',
         'ph_x_comp_share': '비교 기간 비중(%)',
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
-        'multi_product_help': '실제 수입신고 명칭은 같은 상품이라도 표기가 조금씩 다를 수 있어요. 관련된 품목명을 모두 선택하면 하나로 합쳐서 분석합니다.',
+        'multi_product_help': '포장 단위(25KG·360정 등)와 끝의 제품 코드만 다른 품목명은 한 품목으로 합쳐져 있어요 (도입 효과 분석과 같은 기준). 여러 품목을 고르면 하나로 합쳐서 분석합니다.',
+        'p5_pack_marker': '포장 구성 변화: {b} {bs:.0f}% → {a} {as_:.0f}%',
+        'p5_pack_marker_legend': '포장 구성 변화',
+        'p5_pack_toggle': '포장 단위별로 보기',
+        'p5_pack_note': '◆ 표시는 직전 달보다 주력 포장 단위가 바뀌었거나 포장 단위별 물량 비중이 20%p 이상 움직인 달입니다 (포장 표기가 없는 거래는 판정에서 제외). 합친 추세선의 단가가 포장 구성 때문에 흔들렸을 수 있습니다.',
         'insight_box_title': '💡 이번 분석에서 확인할 수 있는 것',
         'insight_cheapest_month': '과거 데이터 기준, {month}에 구매하면 평균 대비 가장 저렴했습니다 ({pct}% 낮음).',
         'insight_current_vs_seasonal_avg': '최근월 단가는 계절 평균 대비 {sign}{pct}% {direction}.',
@@ -1990,7 +1999,7 @@ TEXTS = {
         'ph_unit_label': 'Check unit',
         'ph_unit_product': 'Product',
         'ph_unit_origin': 'Origin',
-        'ph_unit_caption': 'Supplier is excluded as a check unit because it is the basis of the supply structure and supply change checks. Product names spelled slightly differently are grouped automatically.',
+        'ph_unit_caption': 'Supplier is excluded as a check unit because it is the basis of the supply structure and supply change checks. Product names that differ only in pack size (360 tablets, 25 KG, etc.) or a trailing product code form one unit, shown under a cleaned name (same rule as Adoption Impact).',
         'ph_base_period': 'Base period (current)',
         'ph_comp_period': 'Comparison period (previous)',
         'ph_period_overlap_warning': 'The base and comparison periods overlap. Overlapping transactions are counted in both.',
@@ -2049,6 +2058,11 @@ TEXTS = {
         'ph_reason_hold': '{n} shipment(s) — unit price on hold',
         'ph_reason_low_share': 'spend share {share:.1f}% — small impact, lowered to Caution',
         'ph_reason_new': 'no transactions in the comparison period',
+        'ph_members_expander': '📄 Original product names by unit',
+        'ph_col_members': 'Original product names',
+        'ph_col_member_count': 'Names',
+        'ph_detail_members': 'Original product names',
+        'ph_x_members': 'Original product names',
         'ph_table_notes': '※ Spend = volume × volume-weighted average price (VWAP); spend share is relative to total base-period spend. Volume change compares monthly averages and is not used on its own. Supply structure (single/concentrated) only affects the status when combined with a price 🟡.',
         'ph_market_note': '※ A unit price signal may come from market-wide price moves — check whether it is a market factor (see [{season}]).',
         'ph_mix_notice': '※ The check unit is not a product, so each unit mixes several products. A change in product mix can affect the unit price change.',
@@ -2090,7 +2104,11 @@ TEXTS = {
         'ph_x_base_share': 'Base period share (%)',
         'ph_x_comp_share': 'Comparison period share (%)',
         'multi_product_label': 'Search products (multi-select)',
-        'multi_product_help': "Import declarations often spell the same product slightly differently. Select all related product names to combine them into one analysis.",
+        'multi_product_help': "Product names that differ only in pack size (25 KG, 360 tablets, etc.) or a trailing product code are combined into one product (same rule as Adoption Impact). Selecting several products combines them into one analysis.",
+        'p5_pack_marker': 'Pack mix change: {b} {bs:.0f}% → {a} {as_:.0f}%',
+        'p5_pack_marker_legend': 'Pack mix change',
+        'p5_pack_toggle': 'Show by pack size',
+        'p5_pack_note': '◆ marks months where the main pack size changed or a pack size share moved 20%p or more vs. the previous month (trades without a pack size are excluded from this check). The combined price line may have moved because of the pack mix.',
         'insight_box_title': '💡 What this analysis shows',
         'insight_cheapest_month': 'Historically, buying in {month} was cheapest on average ({pct}% below average).',
         'insight_current_vs_seasonal_avg': "The latest month's price is {sign}{pct}% {direction} the seasonal average.",
@@ -2659,6 +2677,7 @@ def prepare_health_df(raw_df, cols, unit_col, product_mode):
     df = df.dropna(subset=['_date', '_volume', '_unit', '_importer'])
     df = df[df['_volume'] > 0]
     df['_unit'] = df['_unit'].astype(str).str.strip()
+    df['_raw_name'] = df['_unit']  # 묶기 전 원래 이름 (단위별 원래 품목명 확인용)
     if product_mode:
         groups = cluster_product_names(df['_unit'].unique())
         name_to_rep = {name: rep for rep, names in groups.items() for name in names}
@@ -2709,8 +2728,9 @@ def compute_health_check(df, base_period, comp_period, thresholds):
         else:
             structure = 'normal'
 
+        members = sorted(set(b['_raw_name']) | set(c['_raw_name'])) if '_raw_name' in b.columns else [unit]
         row = {
-            'unit': unit, 'is_new': c_vol <= 0, 'base_volume': b_vol,
+            'unit': unit, 'members': members, 'is_new': c_vol <= 0, 'base_volume': b_vol,
             'amount': b_vol * base_vwap if base_vwap is not None else 0.0, 'share': 0.0,
             'n_suppliers': len(sup_b), 'top1': sup_b.index[0], 'top1_share': top1_share, 'structure': structure,
             'top5': [(s, float(v)) for s, v in share_b.head(5).items()],
@@ -2890,6 +2910,7 @@ def build_health_excel(rows):
         T('ph_x_base_monthly'): round(r['base_monthly'], 0),
         T('ph_x_comp_monthly'): round(r['comp_monthly'], 0),
         T('ph_x_volume_chg'): _r(r['volume_chg'], 1),
+        T('ph_x_members'): ' / '.join(r.get('members', [])),
     } for r in rows])
     summary = pd.concat([health_display_table(rows), numeric], axis=1)
     suppliers = pd.DataFrame([{
@@ -4215,19 +4236,47 @@ def load_uploaded_df(uploaded_file, raw_df_key, headers_key, fileid_key):
 
 
 def cluster_product_names(raw_names):
-    """제품명을 전처리 후 정확히 일치하는 것끼리 묶어 '품목군' 사전을 만든다
-    (같은 상품이라도 실제 수입신고 명칭이 조금씩 다르게 들어오는 문제 대응).
-    반환: {대표명(그룹 내 가장 짧은 원본명): [해당 그룹에 속한 원본 품목명 리스트]}"""
-    groups = {}
+    """품목명을 ①과 같은 기준(normalize_product_name)으로 묶은 '품목' 사전 (② 헬스체크, ⑥ 가격 추세 공통).
+    포장 단위·끝 제품 코드만 다른 품목명은 한 품목, 맛·브랜드·대상이 다르면 다른 품목.
+    반환: {정제된 표시 이름: [해당 품목에 속한 원래 품목명 리스트]}"""
+    groups, labels = {}, {}
     for name in raw_names:
-        key = preprocess_product_name(name) or name
+        clean = normalize_product_name(name)[0]
+        key = clean.replace(' ', '') or str(name)
         groups.setdefault(key, []).append(name)
+        labels.setdefault(key, Counter())[clean or str(name)] += 1
     result = {}
     for key, names in groups.items():
-        uniq = sorted(set(names))
-        rep = min(uniq, key=len)
-        result[rep] = uniq
+        label = labels[key].most_common(1)[0][0]
+        if label in result:  # 정제 이름이 겹치는 드문 경우 구분
+            label = f"{label} ({key})"
+        result[label] = sorted(set(names))
     return result
+
+
+def pack_month_markers(df, month_col, pack_col, volume_col):
+    """⑥ 가격 추세: 직전 달(데이터가 있는 달)보다 포장 단위 구성이 크게 바뀐 달과 설명 문구.
+    판정은 ①의 구성 변화 기준(pack_mix_change: 주력 단위 변경 또는 20%p 이상 이동)을 그대로 쓴다."""
+    def shares(g):
+        g = g[g['pack_unit'] != '']
+        v = g.groupby('pack_unit')['volume'].sum()
+        return v / v.sum() * 100 if v.sum() > 0 else v
+    d = df[[month_col, pack_col, volume_col]].rename(columns={pack_col: 'pack_unit', volume_col: 'volume'})
+    months = sorted(d[month_col].dropna().unique())
+    out = []
+    for prev, cur in zip(months, months[1:]):
+        g_prev, g_cur = d[d[month_col] == prev], d[d[month_col] == cur]
+        changed = pack_mix_change(g_prev, g_cur)
+        if not changed[0]:
+            continue
+        b, a = shares(g_prev), shares(g_cur)
+        if changed[1] == 'share':
+            p = changed[2]
+            text = T('p5_pack_marker', b=p, bs=float(b.get(p, 0)), a=p, as_=float(a.get(p, 0)))
+        else:
+            text = T('p5_pack_marker', b=b.idxmax(), bs=float(b.max()), a=a.idxmax(), as_=float(a.max()))
+        out.append((cur, text))
+    return out
 
 
 def fig_to_png_bytes(fig, width=900, height=500, scale=2):
@@ -4719,7 +4768,7 @@ GUIDE_CONTENT = {
                 'steps': [
                     '거래 내역 파일을 업로드합니다 (날짜·수입사·공급사·품목·물량·단가 컬럼이 필요합니다).',
                     '점검할 수입사를 선택합니다 (물량 큰 순으로 정렬되며, 파일에 수입사가 1곳뿐이면 자동 적용됩니다).',
-                    '점검 단위를 고릅니다 — 품목(기본), 원산지, 또는 파일에 있는 추가 컬럼(HS코드 등). 품목은 표기가 조금씩 다른 이름을 자동으로 묶어 점검합니다.',
+                    '점검 단위를 고릅니다 — 품목(기본), 원산지, 또는 파일에 있는 추가 컬럼(HS코드 등). 품목은 포장 단위(360정·25KG 등)와 끝의 제품 코드만 다른 품목명을 한 단위로 묶고(도입 효과 분석과 같은 기준) 정제된 이름으로 보여줍니다. 묶인 원래 품목명은 결과 표 아래 "단위별 원래 품목명 보기"에서 확인합니다.',
                     '기준 기간(기본: 데이터 마지막 날짜 기준 최근 6개월)과 비교 기간(기본: 그 직전 6개월)을 선택합니다. 필요하면 "기준값 조정"에서 기준값을 바꿉니다.',
                     '"헬스체크 실행"을 클릭합니다.',
                 ],
@@ -4796,7 +4845,7 @@ GUIDE_CONTENT = {
                 'intro': '특정 품목의 단가가 시기별로 어떻게 움직이는지, 언제 사는 게 유리한지 알고 싶을 때 씁니다. 구매 시점을 계획할 때 참고하세요.',
                 'steps': [
                     '전체 시장 데이터를 업로드합니다.',
-                    '품목을 검색해 하나 이상 선택합니다 (표기가 비슷한 품목명은 자동으로 묶여서 후보에 뜹니다).',
+                    '품목을 검색해 하나 이상 선택합니다 (포장 단위·끝의 제품 코드만 다른 품목명은 한 품목으로 합쳐져 있습니다 — 도입 효과 분석과 같은 기준).',
                     '전년 비교 여부와 비교 축(원산지별/공급사별)을 설정합니다.',
                     '"추세 그리기"를 클릭합니다.',
                 ],
@@ -4804,6 +4853,8 @@ GUIDE_CONTENT = {
                     '최근월 평균단가, 전년 동월 대비, 연중 최고가 대비 현재 위치.',
                     '계절 고점 자동 감지 — 매년 특정 시기에 비싸지는 패턴이 있는지.',
                     '"○월에 사면 가장 저렴했다" 같은 인사이트 문장이 자동 생성됩니다.',
+                    '포장 구성 변화 표시 — 직전 달보다 주력 포장 단위가 바뀌었거나 비중이 20%p 이상 움직인 달에 ◆ 마커가 찍히고, 마우스를 올리면 "포장 구성 변화: 25KG 80% → 600KG 60%"처럼 보여줍니다. 대포장·소포장이 섞이면 합친 단가가 포장 구성 때문에 흔들릴 수 있습니다.',
+                    '"포장 단위별로 보기"를 켜면 같은 차트에 포장 단위별 단가 선이 따로 그려집니다 (포장 표기가 없는 거래는 "표기 없음").',
                 ],
                 'tips': ['데이터가 1년치뿐이면 "이 계절 패턴은 우연일 수 있다"는 경고가 함께 표시됩니다 — 2년 이상 데이터가 쌓이면 신뢰도가 높아집니다.'],
             },
@@ -4958,7 +5009,7 @@ GUIDE_CONTENT = {
                 'steps': [
                     'Upload transaction data (date, importer, supplier, product, volume, and unit price columns are required).',
                     'Select the importer to check (sorted by volume; applied automatically if the file has only one importer).',
-                    'Choose the check unit — Product (default), Origin, or an extra column in the file (e.g. HS code). Product names spelled slightly differently are grouped automatically.',
+                    'Choose the check unit — Product (default), Origin, or an extra column in the file (e.g. HS code). Product names that differ only in pack size (360 tablets, 25 KG, etc.) or a trailing product code form one unit (same rule as Adoption Impact), shown under a cleaned name; the original names are listed under "Original product names by unit" below the results table.',
                     'Select the base period (default: last 6 months up to the latest date in the data) and the comparison period (default: the 6 months before that). Adjust thresholds under "Adjust thresholds" if needed.',
                     'Click "Run Health Check".',
                 ],
@@ -5035,7 +5086,7 @@ GUIDE_CONTENT = {
                 'intro': "Use this to see how a product's price moves over time and when it is cheapest to buy — useful for planning purchase timing.",
                 'steps': [
                     'Upload the full market data.',
-                    'Search and select one or more products (similarly-worded variants are grouped automatically as candidates).',
+                    'Search and select one or more products (names that differ only in pack size or a trailing product code are combined into one product — same rule as Adoption Impact).',
                     'Set the previous-year overlay and comparison axis.',
                     'Click "Draw trend".',
                 ],
@@ -5043,6 +5094,8 @@ GUIDE_CONTENT = {
                     "Latest month's average price, year-over-year change, and position vs. the yearly peak.",
                     'Automatic seasonal-peak detection.',
                     'Auto-generated insight sentences like "buying in March was historically cheapest."',
+                    'Pack mix changes — a ◆ marker appears in months where the main pack size changed or a share moved 20%p or more vs. the previous month; hover to see e.g. "Pack mix change: 25KG 80% → 600KG 60%". When bulk and small packs mix, the combined price can move because of the pack mix.',
+                    'Turn on "Show by pack size" to draw a separate price line per pack size on the same chart (trades without a pack size appear as "No pack size").',
                 ],
                 'tips': ['With only one year of data, a warning notes the seasonal pattern could be coincidental — confidence improves with 2+ years of history.'],
             },
@@ -6095,6 +6148,13 @@ if selected == T('menu_opt_health'):
         st.caption(T('ph_market_note', season=T('menu_opt_season')))
         if not res['product_mode']:
             st.info(T('ph_mix_notice'))
+        else:
+            with st.expander(T('ph_members_expander'), expanded=False):
+                st.dataframe(pd.DataFrame({
+                    T('ph_col_unit'): [r['unit'] for r in shown_rows],
+                    T('ph_col_member_count'): [len(r.get('members', [])) for r in shown_rows],
+                    T('ph_col_members'): [' / '.join(r.get('members', [])) for r in shown_rows],
+                }), hide_index=True, width="stretch")
 
         detail_rows = [r for r in shown_rows if r['overall'] in ('risk', 'caution')]
         if detail_rows:
@@ -6107,6 +6167,8 @@ if selected == T('menu_opt_health'):
                     reasons = health_reasons(r)
                     if reasons:
                         st.markdown(f"**{T('ph_col_reason')}**: " + ' / '.join(reasons))
+                    if res['product_mode'] and r.get('members'):
+                        st.caption(f"{T('ph_detail_members')}: " + ' / '.join(r['members']))
                     dc1, dc2, dc3 = st.columns(3)
                     with dc1:
                         st.markdown(f"**{T('ph_detail_top5')}**")
@@ -7083,6 +7145,13 @@ if selected == T('menu_opt_season'):
                     else:
                         sub = sub.copy()
                         sub['_ym'] = sub['_date'].dt.to_period('M')
+                        sub['_pack'] = [normalize_product_name(n)[1] for n in sub[cols['product']].astype(str)]
+                        pack_markers = [(str(ym), text) for ym, text in pack_month_markers(sub, '_ym', '_pack', '_volume')]
+                        pack_series = {}
+                        for pack in sub.groupby('_pack')['_volume'].sum().sort_values(ascending=False).head(5).index:
+                            ps = weighted_avg_groupby(sub[sub['_pack'] == pack], '_ym', '_price', '_volume').reset_index().sort_values('_ym')
+                            ps['_ym_str'] = ps['_ym'].astype(str)
+                            pack_series[pack] = ps
                         sub['_month'] = sub['_date'].dt.month
                         sub['_year'] = sub['_date'].dt.year
 
@@ -7116,6 +7185,7 @@ if selected == T('menu_opt_season'):
                             'breakdown_series': breakdown_series, 'peak_months': peak_months,
                             'cheapest_month': cheapest_month, 'cheapest_month_pct': cheapest_month_pct,
                             'years_count': years_count, 'overall_avg': overall_avg,
+                            'pack_markers': pack_markers, 'pack_series': pack_series,
                         }
                         st.rerun()
 
@@ -7144,6 +7214,7 @@ if selected == T('menu_opt_season'):
         else:
             st.caption(T('p5_no_season'))
 
+        by_pack = st.toggle(T('p5_pack_toggle'), value=False, key="season_by_pack") if len(R.get('pack_series', {})) > 1 else False
         fig = go.Figure()
         if R['breakdown'] == 'none':
             fig.add_trace(go.Scatter(x=overall['_ym_str'], y=overall['_price'], mode='lines+markers', name=T('p5_legend_this_year'), line=dict(color='#0d9488')))
@@ -7159,8 +7230,21 @@ if selected == T('menu_opt_season'):
                 fig.add_trace(go.Scatter(x=overall['_ym_str'], y=prev_year_prices, mode='lines', name=T('p5_legend_prev_year'), line=dict(color='#94a3b8', dash='dash'), connectgaps=True))
                 prev_year_added = True
 
+        if by_pack:  # 같은 차트에 포장 단위별 선 (브랜드 색 순서, 포장 표기 없는 거래는 '표기 없음')
+            pack_colors = ['#171CFD', '#0A0A18', '#3E50FE', '#9BB3FF', '#0706CE']
+            for i, (pack, ps) in enumerate(R['pack_series'].items()):
+                fig.add_trace(go.Scatter(x=ps['_ym_str'], y=ps['_price'], mode='lines+markers', name=pack or T('p1_pack_none'),
+                                         line=dict(color=pack_colors[i % len(pack_colors)], width=1.5), marker=dict(size=5)))
+        if R.get('pack_markers'):
+            m_x = [m for m, _ in R['pack_markers']]
+            m_y = [ym_to_price.get(pd.Period(m, freq='M')) for m in m_x]
+            fig.add_trace(go.Scatter(x=m_x, y=m_y, mode='markers', name=T('p5_pack_marker_legend'),
+                                     marker=dict(symbol='diamond', size=13, color='#0A0A18', line=dict(color='#FFFFFF', width=1)),
+                                     hovertext=[t for _, t in R['pack_markers']], hoverinfo='text'))
         fig.update_layout(title=T('p5_chart_title', product=R['product_label']), xaxis_title=T('p5_axis_month'), yaxis_title=T('p5_axis_price'))
         st.plotly_chart(fig, width="stretch")
+        if R.get('pack_markers'):
+            st.caption(T('p5_pack_note'))
 
         if R['show_prev_year'] and not prev_year_added:
             st.caption('※ ' + ('전년도에 해당하는 데이터가 없어 전년 비교선을 표시하지 못했습니다 (최소 13개월치 데이터가 필요합니다).' if st.session_state.lang == 'ko' else 'No prior-year data available to overlay (needs at least 13 months of history).'))

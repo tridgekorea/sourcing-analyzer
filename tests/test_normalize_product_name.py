@@ -15,7 +15,7 @@ SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
 
 def _load():
     tree = ast.parse(open(SRC, encoding="utf-8").read())
-    keep = {"normalize_product_name", "pack_mix_change", "pack_change_text", "_split_pack", "T"}
+    keep = {"normalize_product_name", "pack_mix_change", "pack_change_text", "_split_pack", "cluster_product_names", "pack_month_markers", "T"}
     body = [n for n in tree.body
             if (isinstance(n, ast.FunctionDef) and n.name in keep)
             or (isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)
@@ -24,7 +24,8 @@ def _load():
     class _St:
         session_state = {"lang": "ko"}
 
-    ns = {"re": re, "np": np, "pd": pd, "st": _St()}
+    from collections import Counter
+    ns = {"re": re, "np": np, "pd": pd, "st": _St(), "Counter": Counter}
     exec(compile(ast.Module(body=body, type_ignores=[]), SRC, "exec"), ns)
     return ns
 
@@ -120,6 +121,24 @@ def test_pack_mix_change():
     # 표기 방식만 바뀐 경우(계약 전 포장 표기 없음 → 계약 후 1000ML 표기)는 경고 아님
     assert not f(_g([("", 900)]), _g([("1000ML", 900)]))[0]
     assert not f(_g([("250ML", 450), ("", 550)]), _g([("", 1000)]))[0]
+
+
+def test_cluster_product_names_same_rule_as_adoption():
+    """② 헬스체크·⑥ 가격 추세의 품목 묶기도 ①과 같은 기준: 정제된 이름이 표시 이름, 원래 품목명은 목록으로."""
+    groups = NS["cluster_product_names"](["[혼합분유] 혼합분유 (25KG)__MIXED MILK POWDER", "[혼합분유] 혼합분유 (600KG)",
+                                          "칼-맥.디__CAL-MAG.D", "모닌 제로 바닐라", "모닌 제로 카라멜"])
+    assert set(groups) == {"혼합분유", "칼 맥 디", "모닌 제로 바닐라", "모닌 제로 카라멜"}, set(groups)
+    assert len(groups["혼합분유"]) == 2
+
+
+def test_pack_month_markers():
+    """⑥: 직전 달보다 주력 포장 단위가 바뀐 달에 마커 (25KG 80% → 600KG 60%)."""
+    df = pd.DataFrame({"ym": ["2026-01", "2026-01", "2026-02", "2026-02", "2026-03", "2026-03"],
+                       "pack": ["25KG", "600KG", "25KG", "600KG", "25KG", "600KG"],
+                       "vol": [800, 200, 400, 600, 380, 620]})
+    marks = NS["pack_month_markers"](df, "ym", "pack", "vol")
+    assert [m for m, _ in marks] == ["2026-02"], marks
+    assert marks[0][1] == "포장 구성 변화: 25KG 80% → 600KG 60%", marks
 
 
 if __name__ == "__main__":
