@@ -1247,6 +1247,71 @@ TEXTS = {
         'ph_rp_close_v2_ok': '위험 단위 없음 — 분기마다 다시 점검',
         'ph_rp_close_v3': '데이터 부족 {h}개 · 신규 {n}개 — 기간을 넓혀 다시 점검, 시세 변화는 {menu}에서 확인',
         'ph_rp_close_note': '판정은 통관 데이터의 단가·물량·공급사 변화로 만든 신호이며, 시세·품질·계약 조건의 영향을 함께 담고 있습니다. 본 자료의 수치는 계약 판단의 단일 근거로 사용할 수 없습니다.',
+        # --- ⑦ 신규·이탈 거래처 새 PDF (ch_rp_) ---
+        'ch_rp_eyebrow': 'Partner Change Report',
+        'ch_rp_blind_toggle': 'PDF에 수입사명 대신 블라인드 표기 (수입사 A, B …)',
+        'ch_rp_s1_eyebrow': '01  Summary',
+        'ch_rp_head': '신규 {n}개 · 유지 {k}개 · 이탈 {m}개',
+        'ch_rp_kpi_new_note': '{t:,.0f}t · 기간 B 물량의 {p:.1f}%',
+        'ch_rp_kpi_kept_note': '기간 B 물량의 {p:.1f}%',
+        'ch_rp_kpi_lost_note': '{t:,.0f}t · 기간 A 물량의 {p:.1f}%',
+        'ch_rp_kpi_top1': '1위 의존도 A → B',
+        'ch_rp_kpi_top1_note': '기간 B 1위: {name}',
+        'ch_rp_f1_none': '두 기간 사이에 신규·이탈 거래처가 없습니다',
+        'ch_rp_f1_none_d': '기간 A와 B 모두 같은 {k}곳과 거래했습니다.',
+        'ch_rp_f1_gain': '신규 물량이 이탈 물량보다 월 {t:,.1f}t 많습니다',
+        'ch_rp_f1_loss': '이탈 물량이 신규 물량보다 월 {t:,.1f}t 많습니다',
+        'ch_rp_f1_d': '월평균 기준 신규 {n:,.1f}t(기간 B), 이탈 {l:,.1f}t(기간 A)입니다. 두 기간 길이가 달라도 비교할 수 있도록 월평균으로 맞췄습니다.',
+        'ch_rp_f2_lower': '같은 품목군 기준 신규 거래처 단가가 유지 거래처보다 {pct:.1f}% 낮습니다',
+        'ch_rp_f2_higher': '같은 품목군 기준 신규 거래처 단가가 유지 거래처보다 {pct:.1f}% 높습니다',
+        'ch_rp_f2_d': '양쪽 모두 거래한 품목군 {k}개(신규 물량의 {cov:.0f}%)에서 품목군별 단가 차이를 신규 물량으로 가중 합산했습니다.',
+        'ch_rp_f3_up': '1위 의존도가 {a:.0f}% → {b:.0f}%로 높아졌습니다',
+        'ch_rp_f3_down': '1위 의존도가 {a:.0f}% → {b:.0f}%로 낮아졌습니다',
+        'ch_rp_f3_flat': '1위 의존도는 {a:.0f}% → {b:.0f}%로 큰 변화가 없습니다',
+        'ch_rp_f3_d': '기간 B 1위: {name}. ±5%p 이내는 변화 없음으로 봅니다.',
+        'ch_rp_s2_eyebrow': '02  New & Lost',
+        'ch_rp_s2_head': '신규·이탈 {axis}',
+        'ch_rp_s2_sub': '기간 A에 없다가 기간 B에 생기면 신규, 기간 A에 있다가 기간 B에 없으면 이탈입니다.',
+        'ch_rp_new_side': '신규 →',
+        'ch_rp_lost_side': '← 이탈',
+        'ch_rp_new_table': '신규 ({n}개)',
+        'ch_rp_lost_table': '이탈 ({n}개)',
+        'ch_rp_th_share': '기간 물량 비중',
+        'ch_rp_more': '외 {n}개',
+        'ch_rp_s3_eyebrow': '03  Price & Concentration',
+        'ch_rp_s3_head': '단가와 집중도',
+        'ch_rp_s3_sub': '신규 거래처 단가는 같은 품목군 안에서 유지 거래처와 비교합니다.',
+        'ch_rp_gap_table': '품목군별 단가 비교 ({k}개, 신규 물량 순)',
+        'ch_rp_gap_note': '기간 B에 신규·유지 거래처가 모두 거래한 품목군만 비교합니다.',
+        'ch_rp_gap_none': '신규·유지 거래처가 함께 거래한 품목군이 없어 같은 품목군 기준 단가 비교는 생략했습니다.',
+        'ch_rp_th_group': '품목군',
+        'ch_rp_th_new': '신규<br/>USD/kg',
+        'ch_rp_th_kept': '유지<br/>USD/kg',
+        'ch_rp_th_gap': '차이',
+        'ch_rp_th_new_vol': '신규 물량<br/>(kg)',
+        'ch_rp_simple_price': '전체 평균 단가 (참고)',
+        'ch_rp_simple_price_note': '품목 구성이 섞인 전체 VWAP입니다. 신규 거래처가 더 싼지는 위의 같은 품목군 비교로 판단하세요.',
+        'ch_rp_th_period': '기간',
+        'ch_rp_period_a': '기간 A',
+        'ch_rp_period_b': '기간 B',
+        'ch_rp_s4_eyebrow': '04  Methodology',
+        'ch_rp_lbl_def': '신규·이탈',
+        'ch_rp_m_period': '기간 A {a0} – {a1} · 기간 B {b0} – {b1}',
+        'ch_rp_m_def': '기간 A에 없고 기간 B에 있으면 신규, 기간 A에 있고 기간 B에 없으면 이탈, 둘 다 있으면 유지',
+        'ch_rp_m_price': '같은 품목군 안에서 신규·유지 거래처 VWAP를 비교하고, 품목군별 차이를 신규 물량으로 가중 합산 (①과 같은 방식). 비교에 쓴 품목군 {k}개. 품목군은 포장 단위·끝 제품 코드만 다른 품목명을 묶고, 일반 명칭 품목은 HS 10단위로 구분',
+        'ch_rp_m_price_none': '신규·유지 거래처가 함께 거래한 품목군이 없어 같은 품목군 기준 비교를 하지 않음',
+        'ch_rp_m_conc': '각 기간 물량 1위 거래처의 물량 비중. ±5%p 이내는 변화 없음',
+        'ch_rp_unknown1': '거래가 끊긴 이유 (계약 종료·품질 문제·수요 감소 등)',
+        'ch_rp_unknown2': '기간 A 이전부터 거래가 있었는지 (기간 A만 보고 신규로 판정)',
+        'ch_rp_unknown3': '통관에 잡히지 않는 국내 대리점 경유 거래',
+        'ch_rp_close_k1': '거래처 변화',
+        'ch_rp_close_k2': '단가',
+        'ch_rp_close_k3': '집중도',
+        'ch_rp_close_v1': '신규 {n} · 유지 {k} · 이탈 {m}',
+        'ch_rp_close_v2_none': '같은 품목군 비교 대상 없음',
+        'ch_rp_close_v3_link': '1위 의존도 {a:.0f}% → {b:.0f}% 상승 — {menu}에서 확인',
+        'ch_rp_close_v3': '1위 의존도 {a:.0f}% → {b:.0f}% — 분기마다 다시 확인',
+        'ch_rp_close_note': '신규·이탈은 선택한 두 기간의 통관 기록만으로 판정합니다. 본 자료의 수치는 통관 데이터 기반 추정치로, 계약 판단의 단일 근거로 사용할 수 없습니다.',
         'unit_n_years': '{n}년',
         'unit_n_months': '{n}개월',
         'unit_n_times': '{n}회',
@@ -2529,6 +2594,71 @@ TEXTS = {
         'ph_rp_close_v2_ok': 'No risk units — re-check every quarter',
         'ph_rp_close_v3': '{h} insufficient-data and {n} new unit(s) — re-check with a longer period; check market prices in {menu}',
         'ph_rp_close_note': 'Verdicts are signals built from changes in customs price, volume and suppliers, and include market, quality and contract effects. Figures in this report must not be the sole basis for contract decisions.',
+        # --- ⑦ New/lost partners new PDF (ch_rp_) ---
+        'ch_rp_eyebrow': 'Partner Change Report',
+        'ch_rp_blind_toggle': 'Blind importer names in the PDF (Importer A, B …)',
+        'ch_rp_s1_eyebrow': '01  Summary',
+        'ch_rp_head': '{n} new · {k} kept · {m} lost',
+        'ch_rp_kpi_new_note': '{t:,.0f}t · {p:.1f}% of period B volume',
+        'ch_rp_kpi_kept_note': '{p:.1f}% of period B volume',
+        'ch_rp_kpi_lost_note': '{t:,.0f}t · {p:.1f}% of period A volume',
+        'ch_rp_kpi_top1': 'Top-1 share A → B',
+        'ch_rp_kpi_top1_note': 'Period B top: {name}',
+        'ch_rp_f1_none': 'No new or lost partners between the two periods',
+        'ch_rp_f1_none_d': 'Both periods traded with the same {k} partner(s).',
+        'ch_rp_f1_gain': 'New partners add {t:,.1f}t/month more than lost partners took',
+        'ch_rp_f1_loss': 'Lost partners took {t:,.1f}t/month more than new partners add',
+        'ch_rp_f1_d': 'Monthly average: new {n:,.1f}t (period B), lost {l:,.1f}t (period A), so periods of different length compare fairly.',
+        'ch_rp_f2_lower': 'Within the same item groups, new partners are {pct:.1f}% cheaper than kept partners',
+        'ch_rp_f2_higher': 'Within the same item groups, new partners are {pct:.1f}% more expensive than kept partners',
+        'ch_rp_f2_d': 'Price gaps in {k} item group(s) traded by both ({cov:.0f}% of new volume), weighted by new-partner volume.',
+        'ch_rp_f3_up': 'Top-1 share rose from {a:.0f}% to {b:.0f}%',
+        'ch_rp_f3_down': 'Top-1 share fell from {a:.0f}% to {b:.0f}%',
+        'ch_rp_f3_flat': 'Top-1 share was steady ({a:.0f}% → {b:.0f}%)',
+        'ch_rp_f3_d': 'Period B top: {name}. Within ±5%p counts as no change.',
+        'ch_rp_s2_eyebrow': '02  New & Lost',
+        'ch_rp_s2_head': 'New and lost — {axis}',
+        'ch_rp_s2_sub': 'New = absent in period A and present in period B; lost = present in period A and absent in period B.',
+        'ch_rp_new_side': 'New →',
+        'ch_rp_lost_side': '← Lost',
+        'ch_rp_new_table': 'New ({n})',
+        'ch_rp_lost_table': 'Lost ({n})',
+        'ch_rp_th_share': 'Share of period',
+        'ch_rp_more': '{n} more',
+        'ch_rp_s3_eyebrow': '03  Price & Concentration',
+        'ch_rp_s3_head': 'Price and concentration',
+        'ch_rp_s3_sub': 'New-partner prices are compared with kept partners within the same item group.',
+        'ch_rp_gap_table': 'Price by item group ({k}, by new volume)',
+        'ch_rp_gap_note': 'Only item groups traded by both new and kept partners in period B are compared.',
+        'ch_rp_gap_none': 'No item group was traded by both new and kept partners, so the same-group price comparison is omitted.',
+        'ch_rp_th_group': 'Item group',
+        'ch_rp_th_new': 'New<br/>USD/kg',
+        'ch_rp_th_kept': 'Kept<br/>USD/kg',
+        'ch_rp_th_gap': 'Gap',
+        'ch_rp_th_new_vol': 'New volume<br/>(kg)',
+        'ch_rp_simple_price': 'Overall average price (reference)',
+        'ch_rp_simple_price_note': 'Whole-basket VWAP with mixed products. Use the same-group comparison above to judge whether new partners are cheaper.',
+        'ch_rp_th_period': 'Period',
+        'ch_rp_period_a': 'Period A',
+        'ch_rp_period_b': 'Period B',
+        'ch_rp_s4_eyebrow': '04  Methodology',
+        'ch_rp_lbl_def': 'New / lost',
+        'ch_rp_m_period': 'Period A {a0} – {a1} · period B {b0} – {b1}',
+        'ch_rp_m_def': 'Absent in A and present in B = new; present in A and absent in B = lost; in both = kept',
+        'ch_rp_m_price': 'New vs. kept partner VWAP compared within each item group, then gaps weighted by new-partner volume (same approach as Adoption Impact). {k} item group(s) used. Item groups combine names differing only in pack size or a trailing product code; generic-name products are split by 10-digit HS code',
+        'ch_rp_m_price_none': 'No item group traded by both new and kept partners, so no same-group comparison',
+        'ch_rp_m_conc': 'Volume share of the top partner in each period. Within ±5%p counts as no change',
+        'ch_rp_unknown1': 'Why a relationship ended (contract end, quality issue, lower demand, etc.)',
+        'ch_rp_unknown2': 'Whether a partner traded before period A (new is judged from period A only)',
+        'ch_rp_unknown3': 'Trades routed through domestic agents not visible in customs data',
+        'ch_rp_close_k1': 'Partner change',
+        'ch_rp_close_k2': 'Price',
+        'ch_rp_close_k3': 'Concentration',
+        'ch_rp_close_v1': '{n} new · {k} kept · {m} lost',
+        'ch_rp_close_v2_none': 'No same-group comparison available',
+        'ch_rp_close_v3_link': 'Top-1 share up {a:.0f}% → {b:.0f}% — check in {menu}',
+        'ch_rp_close_v3': 'Top-1 share {a:.0f}% → {b:.0f}% — re-check every quarter',
+        'ch_rp_close_note': 'New and lost are judged only from customs records in the two selected periods. Figures in this report are estimates from customs data and must not be the sole basis for contract decisions.',
         'unit_n_years': '{n} year(s)',
         'unit_n_months': '{n} months',
         'unit_n_times': '{n}',
@@ -4238,6 +4368,17 @@ def _menu_ref(key):
     return T('rp_menu_ref', name=T(key))
 
 
+def is_importer_column(col, cols):
+    """한국 수입사명이 담긴 컬럼인지 (표준 importer 컬럼 + 'Importer'·'수입사' 같은 추가 컬럼). 블라인드 대상 판별용."""
+    return col is not None and (col == cols.get('importer') or bool(re.search(r'importer|수입사|수입자', str(col), re.I)))
+
+
+def blind_name_map(volume_by_name):
+    """이름 → '수입사 A, B …' (물량 큰 순). volume_by_name: 이름을 인덱스로 한 물량 Series."""
+    order = volume_by_name.sort_values(ascending=False).index
+    return {str(n): T('blind_label', code=_blind_code(i)) for i, n in enumerate(order)}
+
+
 def _rp_pct(v, digits=1):
     """부호 있는 퍼센트 (음수는 en dash): +3.2% / –3.2%."""
     if v is None or pd.isna(v):
@@ -4354,6 +4495,10 @@ def build_risk_report(ctx):
     from reportlab.platypus import Spacer
     from reportlab.lib.units import mm
     grouped, trend, th, axis = ctx['grouped'], ctx['trend'], ctx['threshold'], ctx['axis_label']
+    if ctx['blind'] and ctx.get('axis_is_importer'):
+        nmap = blind_name_map(grouped.set_index('name')['volume'])
+        grouped = grouped.assign(name=grouped['name'].astype(str).map(nmap))
+        trend = trend.assign(**{ctx['axis_col']: trend[ctx['axis_col']].astype(str).map(nmap)})
     level, reason = risk_level(grouped, th)
     level_label = T({'danger': 'p4_risk_danger', 'caution': 'p4_risk_caution', 'safe': 'p4_risk_safe'}[level])
     top1 = grouped.iloc[0]
@@ -4812,6 +4957,187 @@ def build_health_report(res, importer_label, blind):
     v3 = T('ph_rp_close_v3', h=counts.get('insufficient', 0), n=counts.get('new', 0), menu=_menu_ref('menu_opt_season'))
     closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('ph_rp_close_note'),
                'items': [('01', T('ph_rp_close_k1'), v1), ('02', T('ph_rp_close_k2'), v2), ('03', T('ph_rp_close_k3'), v3)]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4)] + [closing])
+
+
+# ---------- ⑦ 신규·이탈 거래처 ----------
+def churn_group_price_gap(b_df, axis_col, product_col, hs_col, new_items, kept_items):
+    """⑦ 신규 vs 유지 거래처 단가를 같은 품목군 안에서 비교한 뒤 신규 물량으로 가중 합산한다 (①과 같은 방식).
+    품목군은 product_group_labels(①②⑥ 공통). 반환: dict(gap_pct, n_groups, coverage, rows) 또는 None(겹치는 품목군 없음)."""
+    d = b_df[b_df['_price'].notna() & (b_df['_volume'] > 0) & b_df[product_col].notna()].copy()
+    if d.empty:
+        return None
+    d['_grp_label'], d['_grp'], _ = product_group_labels(d[product_col].astype(str), d[hs_col] if hs_col else None)
+    who = d[axis_col].astype(str)
+    new_d, kept_d = d[who.isin(new_items)], d[who.isin(kept_items)]
+    if new_d.empty or kept_d.empty:
+        return None
+    vn = weighted_avg_groupby(new_d, '_grp', '_price', '_volume')
+    vk = weighted_avg_groupby(kept_d, '_grp', '_price', '_volume')
+    voln = new_d.groupby('_grp')['_volume'].sum()
+    common = vn.index.intersection(vk.index)
+    common = [g for g in common if pd.notna(vn[g]) and pd.notna(vk[g]) and vk[g] > 0]
+    if not common:
+        return None
+    labels = d.drop_duplicates('_grp').set_index('_grp')['_grp_label']
+    rows = sorted([{'group': str(labels[g]), 'new': float(vn[g]), 'kept': float(vk[g]), 'volume': float(voln[g]),
+                    'gap': (float(vn[g]) / float(vk[g]) - 1) * 100} for g in common], key=lambda r: -r['volume'])
+    diff = sum((r['new'] - r['kept']) * r['volume'] for r in rows)
+    base = sum(r['kept'] * r['volume'] for r in rows)
+    return {'gap_pct': diff / base * 100 if base > 0 else 0.0, 'n_groups': len(rows),
+            'coverage': sum(r['volume'] for r in rows) / float(new_d['_volume'].sum()) * 100, 'rows': rows}
+
+
+def churn_pdf_flow_chart(new_list, lost_list, name_map, n=10):
+    """⑦ 신규(Blue, 오른쪽)·이탈(Black, 왼쪽) 상위 n개 물량 (톤) 양방향 막대."""
+    import report_theme as rt
+    new_top, lost_top = new_list[:n], lost_list[:n]
+    k = max(len(new_top), len(lost_top))
+    if not k:
+        return None
+    fig, ax = rt.new_chart(0.24 * k + 0.7)
+    rt.apply_pdf_chart_style(ax, grid_axis='x')
+    y = np.arange(k)[::-1]
+    span = max([v for _, v in new_top + lost_top] + [1]) / 1000
+    for i, (name, v) in enumerate(new_top):
+        ax.barh(y[i], v / 1000, height=0.6, color=rt.HEX['blue'], linewidth=0)
+        ax.text(v / 1000 + span * 0.02, y[i], str(name_map.get(name, name))[:22], va='center', ha='left', fontsize=6.5, color=rt.HEX['black'])
+    for i, (name, v) in enumerate(lost_top):
+        ax.barh(y[i], -v / 1000, height=0.6, color=rt.HEX['black'], linewidth=0)
+        ax.text(-v / 1000 - span * 0.02, y[i], str(name_map.get(name, name))[:22], va='center', ha='right', fontsize=6.5, color=rt.HEX['black'])
+    ax.axvline(0, color=rt.HEX['black'], linewidth=0.6)
+    ax.set_xlim(-span * 1.9, span * 1.9)
+    ax.set_yticks([])
+    ax.xaxis.set_major_formatter(lambda v, _: f"{abs(v):,.0f}t")
+    ax.text(0.01, 1.0, T('ch_rp_lost_side'), transform=ax.transAxes, fontsize=7.5, color=rt.HEX['black'], va='bottom')
+    ax.text(0.99, 1.0, T('ch_rp_new_side'), transform=ax.transAxes, fontsize=7.5, color=rt.HEX['blue'], va='bottom', ha='right')
+    fig.subplots_adjust(left=0.02, right=0.98, top=0.9, bottom=0.12)
+    return rt.chart_image(fig)
+
+
+def churn_pdf_price_chart(prices):
+    """⑦ 신규/유지/이탈 거래처 VWAP 세로 막대 (신규 Blue, 유지 Pale Blue, 이탈 Black)."""
+    import report_theme as rt
+    items = [(lab, v, c) for lab, v, c in prices if v is not None]
+    if len(items) < 2:
+        return None
+    fig, ax = rt.new_chart(1.8)
+    rt.apply_pdf_chart_style(ax, grid_axis='y')
+    x = np.arange(len(items))
+    ax.bar(x, [v for _, v, _ in items], width=0.5, color=[c for _, _, c in items], linewidth=0)
+    for xi, (_, v, _) in zip(x, items):
+        ax.text(xi, v, f"${v:,.2f}", ha='center', va='bottom', fontsize=7.5, color=rt.HEX['black'])
+    ax.set_xticks(x)
+    ax.set_xticklabels([lab for lab, _, _ in items], fontsize=7.5)
+    ax.yaxis.set_major_formatter(lambda v, _: f"${v:,.2f}")
+    ax.set_ylim(0, max(v for _, v, _ in items) * 1.2)
+    fig.subplots_adjust(left=0.08, right=0.99, top=0.95, bottom=0.14)
+    return rt.chart_image(fig)
+
+
+def build_churn_report(R, blind):
+    """⑦ 신규·이탈 거래처 PDF: 표지 → 요약(KPI 4 + 결론 2~3) → 신규·이탈 목록 → 단가·집중도 → 방법론 → 클로징.
+    추적 기준이 수입사이면 블라인드 시 이름을 '수입사 A' 식으로 바꾼다."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    axis = R['axis_label']
+    name_map = {}
+    if blind and R.get('axis_is_importer'):
+        name_map = blind_name_map(R['all_volume'])
+    nm = lambda n: str(name_map.get(n, n))
+    scope = R['scope_entity'] and (T('blind_label', code='A') if blind and R['scope_entity'] not in name_map else nm(R['scope_entity']))
+    scope = scope or T('rk_rp_scope_all')
+    (a0, a1), (b0, b1) = R['period_a'], R['period_b']
+    ma, mb = _period_months(a0, a1), _period_months(b0, b1)
+    new_vol, lost_vol = sum(v for _, v in R['new_list']), sum(v for _, v in R['lost_list'])
+    meta = _rp_meta(T('ch_rp_eyebrow'), [scope, T('menu_opt_churn')], scope, axis, None, (a0, b1),
+                    blind or not (R.get('axis_is_importer') or R.get('scope_entity')),
+                    f"{scope} {T('menu_opt_churn')}")
+    ta, tb = R.get('top1_share_a'), R.get('top1_share_b')
+    cards = [(T('p6_kpi_new'), f"{len(R['new_list']):,}", T('ch_rp_kpi_new_note', t=new_vol / 1000, p=new_vol / R['total_b'] * 100 if R['total_b'] else 0)),
+             (T('p6_kpi_kept'), f"{R['kept_count']:,}", T('ch_rp_kpi_kept_note', p=R['kept_vol_b'] / R['total_b'] * 100 if R['total_b'] else 0)),
+             (T('p6_kpi_lost'), f"{len(R['lost_list']):,}", T('ch_rp_kpi_lost_note', t=lost_vol / 1000, p=lost_vol / R['total_a'] * 100 if R['total_a'] else 0)),
+             (T('ch_rp_kpi_top1'), '-' if ta is None or tb is None else f"{ta:.0f}% → {tb:.0f}%",
+              T('ch_rp_kpi_top1_note', name=nm(R['top1_name_b'])) if R.get('top1_name_b') is not None else '')]
+    nmo, lmo = new_vol / mb, lost_vol / ma
+    if not R['new_list'] and not R['lost_list']:
+        f1 = (T('ch_rp_f1_none'), T('ch_rp_f1_none_d', k=R['kept_count']))
+    else:
+        f1 = (T('ch_rp_f1_gain' if nmo >= lmo else 'ch_rp_f1_loss', t=abs(nmo - lmo) / 1000),
+              T('ch_rp_f1_d', n=nmo / 1000, l=lmo / 1000))
+    findings = [f1]
+    gap = R.get('group_gap')
+    if gap:
+        findings.append((T('ch_rp_f2_lower' if gap['gap_pct'] < 0 else 'ch_rp_f2_higher', pct=abs(gap['gap_pct'])),
+                         T('ch_rp_f2_d', k=gap['n_groups'], cov=gap['coverage'])))
+    if ta is not None and tb is not None:
+        d = tb - ta
+        findings.append((T('ch_rp_f3_up' if d >= 5 else 'ch_rp_f3_down' if d <= -5 else 'ch_rp_f3_flat', a=ta, b=tb),
+                         T('ch_rp_f3_d', name=nm(R['top1_name_b']))))
+    head = T('ch_rp_head', n=len(R['new_list']), m=len(R['lost_list']), k=R['kept_count'])
+    s1 = _rp_summary(rt, T('ch_rp_s1_eyebrow'), head, cards, findings)
+
+    # 02 신규·이탈 목록
+    s2 = _rp_body_header(T('ch_rp_s2_eyebrow'), T('ch_rp_s2_head', axis=axis), T('ch_rp_s2_sub'))
+    chart = churn_pdf_flow_chart(R['new_list'], R['lost_list'], name_map)
+    if chart is not None:
+        s2 += [chart, Spacer(1, 6 * mm)]
+    for title, lst, total in ((T('ch_rp_new_table', n=len(R['new_list'])), R['new_list'], R['total_b']),
+                              (T('ch_rp_lost_table', n=len(R['lost_list'])), R['lost_list'], R['total_a'])):
+        from reportlab.platypus import KeepTogether
+        block = [rt.h3(title), Spacer(1, 2 * mm)]  # 제목이 쪽 끝에 홀로 남지 않도록 표와 묶는다
+        if lst:
+            block.append(rt.brand_table([T('rk_rp_th_name'), T('rk_rp_th_volume'), T('ch_rp_th_share')],
+                                        [[nm(n), f"{v:,.0f}", f"{v / total * 100:.1f}%" if total else '-'] for n, v in lst[:12]],
+                                        rt.col_widths([60, 22, 18]), right_cols=(1, 2)))
+            if len(lst) > 12:
+                block += [Spacer(1, 1.5 * mm), rt.small(T('ch_rp_more', n=len(lst) - 12))]
+        else:
+            block.append(rt.small(T('p6_no_new') if lst is R['new_list'] else T('p6_no_lost')))
+        s2 += [KeepTogether(block), Spacer(1, 6 * mm)]
+
+    # 03 단가·집중도
+    s3 = _rp_body_header(T('ch_rp_s3_eyebrow'), T('ch_rp_s3_head'), T('ch_rp_s3_sub'))
+    if gap:
+        s3 += [rt.h3(T('ch_rp_gap_table', k=gap['n_groups'])), rt.small(T('ch_rp_gap_note')), Spacer(1, 2.5 * mm),
+               rt.brand_table([T('ch_rp_th_group'), T('ch_rp_th_new'), T('ch_rp_th_kept'), T('ch_rp_th_gap'), T('ch_rp_th_new_vol')],
+                              [[r['group'], f"{r['new']:,.2f}", f"{r['kept']:,.2f}", _rp_pct(r['gap']), f"{r['volume']:,.0f}"] for r in gap['rows'][:12]],
+                              rt.col_widths([36, 16, 16, 14, 18]), right_cols=(1, 2, 3, 4), header_markup=True), Spacer(1, 6 * mm)]
+    else:
+        s3 += [rt.small(T('ch_rp_gap_none')), Spacer(1, 4 * mm)]
+    pchart = churn_pdf_price_chart([(T('p6_kpi_new'), R.get('new_price'), rt.HEX['blue']), (T('p6_kpi_kept'), R.get('kept_price'), rt.HEX['pale']),
+                                    (T('p6_kpi_lost'), R.get('lost_price'), rt.HEX['black'])])
+    if pchart is not None:
+        s3 += [rt.h3(T('ch_rp_simple_price')), rt.small(T('ch_rp_simple_price_note')), Spacer(1, 2 * mm), pchart, Spacer(1, 6 * mm)]
+    if ta is not None and tb is not None:
+        from reportlab.platypus import KeepTogether
+        s3.append(KeepTogether([rt.h3(T('p6_concentration_subheader')), Spacer(1, 2 * mm),
+                                rt.brand_table([T('ch_rp_th_period'), T('rk_rp_th_top1'), T('rk_rp_th_share')],
+                                               [[T('ch_rp_period_a'), nm(R['top1_name_a']), f"{ta:.1f}%"], [T('ch_rp_period_b'), nm(R['top1_name_b']), f"{tb:.1f}%"]],
+                                               rt.col_widths([24, 56, 20]), right_cols=(2,))]))
+
+    fmt = lambda d: pd.Timestamp(d).strftime('%Y.%m.%d')
+    meth = [(T('p1_rp_lbl_data'), T('rk_rp_m_data')),
+            (T('rk_rp_lbl_scope'), scope),
+            (T('p1_rp_lbl_period'), T('ch_rp_m_period', a0=fmt(a0), a1=fmt(a1), b0=fmt(b0), b1=fmt(b1))),
+            (T('rk_rp_lbl_axis'), axis),
+            (T('ch_rp_lbl_def'), T('ch_rp_m_def')),
+            (T('p1_rp_lbl_price'), T('ch_rp_m_price', k=gap['n_groups']) if gap else T('ch_rp_m_price_none')),
+            (T('p6_concentration_subheader'), T('ch_rp_m_conc')),
+            (T('p1_rp_lbl_blind'), T('rk_rp_m_blind_on') if blind else T('rk_rp_m_blind_off'))]
+    s4 = _rp_method(rt, T('ch_rp_s4_eyebrow'), T('p1_rp_s4_head'), meth, [f'ch_rp_unknown{i}' for i in range(1, 4)])
+
+    v2 = findings[1][0] if gap else T('ch_rp_close_v2_none')
+    if ta is not None and tb is not None and tb - ta >= 5:
+        v3 = T('ch_rp_close_v3_link', a=ta, b=tb, menu=_menu_ref('menu_opt_risk'))
+    elif ta is not None and tb is not None:
+        v3 = T('ch_rp_close_v3', a=ta, b=tb)
+    else:
+        v3 = '-'
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('ch_rp_close_note'),
+               'items': [('01', T('ch_rp_close_k1'), T('ch_rp_close_v1', n=len(R['new_list']), k=R['kept_count'], m=len(R['lost_list']))),
+                         ('02', T('ch_rp_close_k2'), v2), ('03', T('ch_rp_close_k3'), v3)]}
     return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4)] + [closing])
 
 
@@ -5918,6 +6244,7 @@ GUIDE_CONTENT = {
                     '신규/유지/이탈 개수와 각각의 목록(물량 포함).',
                     '💰 가격으로 보면 — 신규·유지·이탈 거래처의 평균단가를 비교해서, 이번 변화가 비용 절감으로 이어졌는지 알려줍니다.',
                     '⚠️ 집중도 변화 — 거래처가 줄면서 특정 공급사 의존도가 위험하게 높아졌는지 자동으로 경고합니다.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(신규·유지·이탈·1위 의존도)·핵심 결론 → 신규·이탈 양방향 막대와 목록 → 단가·집중도 → 방법론 → 다음 단계 제안)를 내려받습니다. 신규 거래처 단가는 같은 품목군 안에서 유지 거래처와 비교한 뒤 신규 물량으로 가중 합산합니다(도입 효과 분석과 같은 방식, 겹치는 품목군이 없으면 생략). 1위 의존도가 5%p 이상 오르면 "집중도 리스크 진단" 메뉴로 안내합니다. 수입사 기준이면 이름을 "수입사 A, B …"로 가릴 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
                 ],
             },
             {
@@ -6162,6 +6489,7 @@ GUIDE_CONTENT = {
                     'Counts and lists of new/kept/lost partners, with volume.',
                     '💰 Looking at price — compares average prices across the three groups to show whether the change saved money.',
                     '⚠️ Concentration Change — automatically warns if losing partners pushed dependency on the remaining ones to a risky level.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (new, kept, lost, top-1 share) and key findings → new/lost diverging bars and lists → price and concentration → methodology → suggested next steps). New-partner prices are compared with kept partners within the same item group, then weighted by new-partner volume (same approach as Adoption Impact; omitted if no group overlaps). If the top-1 share rises by 5%p or more, it points you to the Concentration Risk menu. When tracking importers, names can be shown as "Importer A, B …". Use "Legacy-format PDF" for the previous format.',
                 ],
             },
             {
@@ -8097,6 +8425,7 @@ if selected == T('menu_opt_risk'):
                     trend = monthly.sort_values(['_ym', 'share'], ascending=[True, False]).groupby('_ym').first().reset_index().sort_values('_ym')
 
                     st.session_state.risk_result = {'axis_label': axis_label, 'axis_col': axis_col, 'grouped': grouped, 'threshold': threshold,
+                                                    'axis_is_importer': is_importer_column(axis_col, cols),
                                                     'trend': trend, 'scope_entity': scope_entity, 'period': (start_date, end_date)}
                     st.rerun()
 
@@ -8141,14 +8470,15 @@ if selected == T('menu_opt_risk'):
         display_df = grouped.rename(columns={'name': T('p4_col_name'), 'volume': T('p4_col_volume'), 'share': T('p4_col_share')})
         st.dataframe(display_df.style.format({T('p4_col_volume'): '{:,.0f}', T('p4_col_share'): '{:.1f}%'}))
 
-        risk_blind = st.checkbox(T('rk_rp_blind_toggle'), value=False, key="risk_rp_blind") if R.get('scope_entity') else False
+        risk_blind = (st.checkbox(T('rk_rp_blind_toggle'), value=False, key="risk_rp_blind")
+                      if (R.get('scope_entity') or R.get('axis_is_importer')) else False)
         risk_c1, risk_c2 = st.columns([1, 1])
         if risk_c1.button(T('rp_pdf_btn'), key="risk_rp_btn"):
             with st.spinner(T('rp_pdf_spinner')):
                 try:
                     _ent = R.get('scope_entity')
                     _scope = (T('blind_label', code='A') if risk_blind else str(_ent)) if _ent else T('rk_rp_scope_all')
-                    pdf_bytes = build_risk_report({**R, 'scope_label': _scope, 'blind': bool(risk_blind) or not _ent})
+                    pdf_bytes = build_risk_report({**R, 'scope_label': _scope, 'blind': bool(risk_blind) or not (_ent or R.get('axis_is_importer'))})
                     st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="concentration_risk_report.pdf", mime="application/pdf", key="risk_rp_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
@@ -8493,7 +8823,18 @@ if selected == T('menu_opt_churn'):
                     top1_name_a, top1_share_a = _top1_share(a_df)
                     top1_name_b, top1_share_b = _top1_share(b_df)
 
+                    # 신규 vs 유지 단가: 같은 품목군 안에서 비교 (추적 기준이 품목이면 비교 대상이 없어 생략)
+                    group_gap = None
+                    if has_price and cols['product'] and axis_col != cols['product']:
+                        group_gap = churn_group_price_gap(b_df, axis_col, cols['product'], cols.get('hs'), new_items, kept_items)
+                    all_volume = pd.concat([a_df, b_df]).groupby(axis_col)['_volume'].sum().sort_values(ascending=False)
+                    all_volume.index = all_volume.index.astype(str)
+
                     st.session_state.churn_result = {
+                        'axis_is_importer': is_importer_column(axis_col, cols), 'all_volume': all_volume, 'group_gap': group_gap,
+                        'total_a': float(a_df['_volume'].sum()), 'total_b': float(b_df['_volume'].sum()),
+                        'kept_vol_b': float(b_df[b_df[axis_col].astype(str).isin(kept_items)]['_volume'].sum()),
+                        'period_a': (a_start, a_end), 'period_b': (b_start, b_end),
                         'axis_label': axis_label, 'scope_label': scope_label, 'scope_entity': scope_entity,
                         'new_list': new_list, 'lost_list': lost_list, 'kept_count': len(kept_items),
                         'new_price': new_price, 'lost_price': lost_price, 'kept_price': kept_price,
@@ -8556,7 +8897,17 @@ if selected == T('menu_opt_churn'):
             else:
                 st.caption(T('p6_concentration_stable', a=f"{a_pct:.1f}", b=f"{b_pct:.1f}"))
 
-        if st.button(T('pdf_generate_btn'), key="churn_pdf_btn"):
+        churn_blind = (st.checkbox(T('ch_rp_blind_toggle'), value=False, key="churn_rp_blind")
+                       if (R.get('axis_is_importer') or R.get('scope_entity')) else False)
+        churn_c1, churn_c2 = st.columns([1, 1])
+        if churn_c1.button(T('rp_pdf_btn'), key="churn_rp_btn", disabled='period_a' not in R):
+            with st.spinner(T('rp_pdf_spinner')):
+                try:
+                    pdf_bytes = build_churn_report(R, bool(churn_blind))
+                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="partner_change_report.pdf", mime="application/pdf", key="churn_rp_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
+        if churn_c2.button(T('p1_rp_legacy_btn'), key="churn_pdf_btn"):
             with st.spinner(T('pdf_generating_msg')):
                 try:
                     combined = pd.concat([
