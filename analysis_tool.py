@@ -80,7 +80,7 @@ TEXTS = {
         'p1_pack_change_main': '포장 단위 변경: {b} → {a}',
         'p1_pack_change_form': '제형 변경: {b} → {a}',
         'p1_pack_change_share': '포장 단위 비중 변화: {pack} {b:.0f}% → {a:.0f}%',
-        'p1_price_mismatch_warning': '⚠ Unit Price와 금액÷중량이 5% 넘게 다른 행이 {pct:.0f}%입니다. 단가는 파일의 Unit Price를 그대로 썼습니다 — 단위(kg/톤)나 통화가 섞였는지 확인하세요.',
+        'price_mismatch_warning': '⚠ Unit Price와 금액÷중량이 5% 넘게 다른 행이 {pct:.0f}%입니다. 단가는 파일의 Unit Price를 그대로 썼습니다 — 단위(kg/톤)나 통화가 섞였는지 확인하세요.',
         'p1_col_avg_price_before': '계약전 평균단가(물량가중)',
         'p1_col_avg_price_after': '계약후 평균단가(물량가중)',
         'p1_col_volume_after': '계약후 물량',
@@ -1040,6 +1040,8 @@ TEXTS = {
         'ph_x_comp_share': '비교 기간 비중(%)',
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
         'multi_product_help': '포장 단위(25KG·360정 등)와 끝의 제품 코드만 다른 품목명은 한 품목으로 합쳐져 있어요 (도입 효과 분석과 같은 기준). 여러 품목을 고르면 하나로 합쳐서 분석합니다.',
+        'p5_month_label': '{m}월',
+        'p5_no_prev_year_caption': '※ 전년도에 해당하는 데이터가 없어 전년 비교선을 표시하지 못했습니다 (최소 13개월치 데이터가 필요합니다).',
         'p5_pack_marker': '포장 구성 변화: {b} {bs:.0f}% → {a} {as_:.0f}%',
         'p5_pack_marker_legend': '포장 구성 변화',
         'p5_pack_toggle': '포장 단위별로 보기',
@@ -1145,7 +1147,7 @@ TEXTS = {
         'p1_pack_change_main': 'Pack size changed: {b} → {a}',
         'p1_pack_change_form': 'Dosage form changed: {b} → {a}',
         'p1_pack_change_share': 'Pack size share changed: {pack} {b:.0f}% → {a:.0f}%',
-        'p1_price_mismatch_warning': '⚠ In {pct:.0f}% of rows, Unit Price differs from value ÷ weight by more than 5%. The file\'s Unit Price was used as is — check for mixed units (kg/ton) or currencies.',
+        'price_mismatch_warning': '⚠ In {pct:.0f}% of rows, Unit Price differs from value ÷ weight by more than 5%. The file\'s Unit Price was used as is — check for mixed units (kg/ton) or currencies.',
         'p1_col_avg_price_before': 'Avg Price Before (VWAP)',
         'p1_col_avg_price_after': 'Avg Price After (VWAP)',
         'p1_col_volume_after': 'Volume After',
@@ -2105,6 +2107,8 @@ TEXTS = {
         'ph_x_comp_share': 'Comparison period share (%)',
         'multi_product_label': 'Search products (multi-select)',
         'multi_product_help': "Product names that differ only in pack size (25 KG, 360 tablets, etc.) or a trailing product code are combined into one product (same rule as Adoption Impact). Selecting several products combines them into one analysis.",
+        'p5_month_label': 'Month {m}',
+        'p5_no_prev_year_caption': '※ No prior-year data available to overlay (needs at least 13 months of history).',
         'p5_pack_marker': 'Pack mix change: {b} {bs:.0f}% → {a} {as_:.0f}%',
         'p5_pack_marker_legend': 'Pack mix change',
         'p5_pack_toggle': 'Show by pack size',
@@ -2669,7 +2673,7 @@ def prepare_health_df(raw_df, cols, unit_col, product_mode):
     df = pd.DataFrame({
         '_date': pd.to_datetime(raw_df[cols['date']], errors='coerce'),
         '_volume': pd.to_numeric(raw_df[cols['volume']], errors='coerce'),
-        '_price': pd.to_numeric(raw_df[cols['price']], errors='coerce'),
+        '_price': derive_unit_price(raw_df, cols)[0],  # Unit Price 우선, 없으면 금액 ÷ 중량 (①⑨⑩ 공통)
         '_exporter': raw_df[cols['exporter']].fillna('(N/A)').astype(str).str.strip(),
         '_importer': imp.where(imp.isna(), imp.astype(str).str.strip()),
         '_unit': raw_df[unit_col],
@@ -5833,7 +5837,7 @@ if selected == T('menu_opt_customer'):
                 _items = ', '.join(f"{n} ({pack_change_text(r.mix_kind, r.mix_from, r.mix_to, r.mix_b, r.mix_a)})" for n, r in _mixed.iterrows())
                 st.caption(T('p1_mix_changed_caption', n=len(_mixed), items=_items))
             if st.session_state.get('p1_price_mismatch') and st.session_state.p1_price_mismatch > 0.1:
-                st.warning(T('p1_price_mismatch_warning', pct=st.session_state.p1_price_mismatch * 100))
+                st.warning(T('price_mismatch_warning', pct=st.session_state.p1_price_mismatch * 100))
 
             p1_col_names = {
                 'group': T('p1_col_group'),
@@ -6025,11 +6029,16 @@ if selected == T('menu_opt_health'):
 
         if raw_df is not None:
             headers = st.session_state.health_headers
-            cols = detect_standard_columns(headers)
-            missing = [k for k in ['date', 'importer', 'exporter', 'product', 'volume', 'price'] if not cols[k]]
+            cols = detect_trade_columns(headers)
+            missing = [k for k in ['date', 'importer', 'exporter', 'product', 'volume'] if not cols[k]]
+            if not cols['price'] and not cols['value']:
+                missing.append('price')
             if missing:
                 st.error(T('ph_missing_cols_error', cols=', '.join(missing)))
                 st.stop()
+            _mismatch = derive_unit_price(raw_df, cols)[2]
+            if _mismatch and _mismatch > 0.1:
+                st.warning(T('price_mismatch_warning', pct=_mismatch * 100))
 
             _imp = raw_df[cols['importer']].dropna().astype(str).str.strip()
             _imp_vol = pd.to_numeric(raw_df.loc[_imp.index, cols['volume']], errors='coerce').groupby(_imp).sum().sort_values(ascending=False)
@@ -7102,11 +7111,16 @@ if selected == T('menu_opt_season'):
 
         if raw_df is not None:
             headers = st.session_state.season_headers
-            cols = detect_standard_columns(headers)
-            missing = [k for k in ['date', 'product', 'price', 'volume'] if not cols[k]]
+            cols = detect_trade_columns(headers)
+            missing = [k for k in ['date', 'product', 'volume'] if not cols[k]]
+            if not cols['price'] and not cols['value']:
+                missing.append('price')
             if missing:
                 st.error(T('p5_missing_cols_error', cols=', '.join(missing)))
                 st.stop()
+            _mismatch = derive_unit_price(raw_df, cols)[2]
+            if _mismatch and _mismatch > 0.1:
+                st.warning(T('price_mismatch_warning', pct=_mismatch * 100))
 
             raw_products = raw_df[cols['product']].dropna().astype(str).unique()
             product_groups = cluster_product_names(raw_products)
@@ -7135,7 +7149,7 @@ if selected == T('menu_opt_season'):
 
                     df = raw_df.copy()
                     df['_date'] = pd.to_datetime(df[cols['date']], errors='coerce')
-                    df['_price'] = pd.to_numeric(df[cols['price']], errors='coerce')
+                    df['_price'] = derive_unit_price(df, cols)[0]  # Unit Price 우선, 없으면 금액 ÷ 중량
                     df['_volume'] = pd.to_numeric(df[cols['volume']], errors='coerce')
                     df = df.dropna(subset=['_date', '_price', cols['product']])
                     sub = df[df[cols['product']].astype(str).isin(selected_raw_names)]
@@ -7209,7 +7223,7 @@ if selected == T('menu_opt_season'):
         c3.metric(T('p5_kpi_frompeak'), f"{from_peak:+.1f}%")
 
         if R['peak_months']:
-            months_str = ', '.join([f"{m}월" if st.session_state.lang == 'ko' else f"Month {m}" for m in R['peak_months']])
+            months_str = ', '.join(T('p5_month_label', m=m) for m in R['peak_months'])
             st.info(T('p5_season_badge', months=months_str))
         else:
             st.caption(T('p5_no_season'))
@@ -7247,10 +7261,10 @@ if selected == T('menu_opt_season'):
             st.caption(T('p5_pack_note'))
 
         if R['show_prev_year'] and not prev_year_added:
-            st.caption('※ ' + ('전년도에 해당하는 데이터가 없어 전년 비교선을 표시하지 못했습니다 (최소 13개월치 데이터가 필요합니다).' if st.session_state.lang == 'ko' else 'No prior-year data available to overlay (needs at least 13 months of history).'))
+            st.caption(T('p5_no_prev_year_caption'))
 
         st.markdown(f"### {T('insight_box_title')}")
-        month_label = f"{R['cheapest_month']}월" if st.session_state.lang == 'ko' else f"Month {R['cheapest_month']}"
+        month_label = T('p5_month_label', m=R['cheapest_month'])
         st.write("- " + T('insight_cheapest_month', month=month_label, pct=f"{R['cheapest_month_pct']:.1f}"))
         cur_vs_avg_pct = (current_price - R['overall_avg']) / R['overall_avg'] * 100
         direction = T('direction_higher') if cur_vs_avg_pct >= 0 else T('direction_lower')
