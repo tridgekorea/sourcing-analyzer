@@ -73,15 +73,20 @@ TEXTS = {
         'p1_grp_minor_label': '변화 미미',
         'p1_grp_no_purchase_label': '계약 후 구매 없음',
         'p1_savings_detail_subheader': '품목군별 상세 절감 내역',
-        'p1_mix_changed_badge': '품목 구성 변화',
-        'p1_mix_changed_tooltip': '계약 전후로 이 그룹 안에서 실제로 산 품목명이 크게 바뀌었습니다. 절감액이 협상 성과가 아니라 품목 변경 때문일 수 있습니다.',
-        'p1_mix_changed_caption': '⚠ 표시된 품목군은 계약 전후로 실제 구매 품목 구성이 크게 바뀌었습니다 (겹치는 품목명 30% 미만). 절감액을 협상 성과로 해석하기 전에 확인해보세요.',
+        'p1_mix_changed_badge': '포장 단위 변경',
+        'p1_mix_changed_tooltip': '계약 전후로 이 품목군의 주력 포장 단위가 바뀌었거나 포장 단위별 비중이 크게 달라졌습니다. 소포장은 kg당 단가가 높아 절감액이 협상 성과가 아니라 포장 변경 때문일 수 있습니다.',
+        'p1_mix_changed_caption': '⚠ 포장 단위 변경 품목 ({n}개): {items} — 주력 포장 단위가 바뀌었거나 포장 단위별 물량 비중이 20%p 이상 움직였습니다. 절감액을 협상 성과로 해석하기 전에 확인하세요.',
+        'p1_pack_none': '포장 표기 없음',
+        'p1_pack_change_main': '포장 단위 변경: {b} → {a}',
+        'p1_pack_change_form': '제형 변경: {b} → {a}',
+        'p1_pack_change_share': '포장 단위 비중 변화: {pack} {b:.0f}% → {a:.0f}%',
+        'p1_price_mismatch_warning': '⚠ Unit Price와 금액÷중량이 5% 넘게 다른 행이 {pct:.0f}%입니다. 단가는 파일의 Unit Price를 그대로 썼습니다 — 단위(kg/톤)나 통화가 섞였는지 확인하세요.',
         'p1_col_avg_price_before': '계약전 평균단가(물량가중)',
         'p1_col_avg_price_after': '계약후 평균단가(물량가중)',
         'p1_col_volume_after': '계약후 물량',
         'p1_col_savings': '절감액',
-        'p1_col_mix_overlap': '품목 구성 유지율',
-        'p1_col_mix_changed': '구성변화 경고',
+        'p1_col_mix_detail': '포장 단위 변화',
+        'p1_col_mix_changed': '구성 변화 경고',
         'p1_vwap_note': '※ 평균단가는 거래건수가 아니라 물량 기준 가중평균(VWAP)입니다. 이상치는 클러스터·기간별로 자동 제거했습니다.',
         'p1_exp2_title': '2. 수입 품목군 정제 및 군집화 (DBSCAN & PCA)',
         'p1_too_many_clusters_info': '클러스터가 너무 많아, 수입량 기준 상위 {n}개 품목군만 그리드에 시각화합니다.',
@@ -543,7 +548,7 @@ TEXTS = {
         'p1_rp_f3_up_d': '재협상이나 대체 공급처 검토가 필요합니다.',
         'p1_rp_f3_none': '단가가 오른 품목이 없습니다.',
         'p1_rp_f3_none_d': '모든 품목을 계약 전과 같거나 낮은 단가로 구매했습니다.',
-        'p1_rp_f3_mix': ' 구성 변화 경고 품목 {k}개는 절감·증가가 협상 효과가 아니라 품목 구성 변화 때문일 수 있습니다.',
+        'p1_rp_f3_mix': ' 포장 단위가 바뀐 {k}개 품목은 kg당 단가 차이가 협상 효과가 아니라 포장 단위 변화 때문일 수 있습니다.',
         'p1_rp_s2_eyebrow': '02  Savings by Item',
         'p1_rp_s2_head': '품목군별 절감과 비용 증가',
         'p1_rp_s2_sub': '계약 전후 물량가중 단가 차이 × 계약 후 물량으로 계산했습니다.',
@@ -555,15 +560,15 @@ TEXTS = {
         'p1_rp_th_vol': '계약 후<br/>물량(kg)',
         'p1_rp_th_saving': '절감액<br/>USD',
         'p1_rp_th_mix': '구성',
-        'p1_rp_badge_mix': '구성 변화',
+        'p1_rp_badge_mix': '포장 변경',
         'p1_rp_s3_eyebrow': '03  Items to Check',
         'p1_rp_s3_head': '따로 확인할 품목',
-        'p1_rp_s3_sub': '계약 후 구매가 없는 품목과 품목 구성이 크게 바뀐 품목입니다. 절감 판단에서 주의해서 보세요.',
+        'p1_rp_s3_sub': '계약 후 구매가 없는 품목과 포장 단위가 크게 바뀐 품목입니다. 절감 판단에서 주의해서 보세요.',
         'p1_rp_s3_nopurchase': '계약 후 구매 없음 ({n}개)',
         'p1_rp_s3_nopurchase_note': '계약 후 물량이 0이라 절감·비용 증가 합계에서 뺐습니다.',
-        'p1_rp_s3_mix': '구성 변화 경고 ({n}개)',
-        'p1_rp_s3_mix_note': '계약 전후로 같은 품목군 안에서 실제 산 품목명이 30% 미만만 겹칩니다. 단가 차이가 협상 성과가 아닐 수 있습니다.',
-        'p1_rp_th_overlap': '구성 유지율',
+        'p1_rp_s3_mix': '포장 단위 변경 ({n}개)',
+        'p1_rp_s3_mix_note': '같은 품목군 안에서 주력 포장 단위가 바뀌었거나 포장 단위별 물량 비중이 20%p 이상 움직였습니다. 소포장은 kg당 단가가 높아 절감액 해석에 주의가 필요합니다.',
+        'p1_rp_th_overlap': '포장 단위 변화',
         'p1_rp_s3_none': '해당하는 품목이 없습니다.',
         'p1_rp_s4_eyebrow': '04  Methodology',
         'p1_rp_s4_head': '분석 기준과 데이터 한계',
@@ -572,12 +577,14 @@ TEXTS = {
         'p1_rp_lbl_blind': '블라인드',
         'p1_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터, 건별 수입신고 단위. 파일에서 가장 많이 등장하는 수입사를 분석 대상으로 함',
         'p1_rp_m_period': '계약 전 {b0} – {b1} · 계약 후 {a0} – {a1} (계약일 {c})',
-        'p1_rp_m_cluster': '품목명을 정제한 뒤 TF-IDF + DBSCAN(코사인 거리 0.6, 최소 3건)으로 품목군을 묶음. 어느 품목군에도 묶이지 않은 거래는 제외',
+        'p1_rp_m_cluster': '포장 단위와 제품 코드를 뗀 품목명이 같은 거래끼리 한 품목군으로 묶음 (거래 3건 미만인 품목명은 제외)',
         'p1_rp_m_outlier': '품목군·기간별 단가 IQR 1.5배 밖 제외 (제외 비율 최대 7%)',
         'p1_rp_m_price': 'VWAP(물량가중평균), USD/kg',
         'p1_rp_m_saving': '(계약 전 VWAP − 계약 후 VWAP) × 계약 후 물량. 양수 = 절감, 음수 = 비용 증가',
         'p1_rp_m_minor': '절감·증가액 절대값이 ${th:,.0f} 이하인 품목은 변화 미미로 분류해 절감·비용 증가 합계에서 뺌 (순 절감액에는 포함)',
-        'p1_rp_m_mix': '계약 전후 품목명 겹침(자카드)이 30% 미만이면 구성 변화 경고',
+        'p1_rp_m_mix': '품목군 안의 포장 단위별 물량 비중을 계약 전후로 비교해, 주력 포장 단위가 바뀌거나 비중이 20%p 이상 움직이면 구성 변화로 표시 (품목명에 포장 표기가 없는 거래는 비교에서 제외)',
+        'p1_rp_lbl_pack': '포장 단위',
+        'p1_rp_m_pack': '품목명의 숫자+단위(정·포·캡슐·g·ml 등)를 포장 단위로 떼어내고, 끝에 붙은 제품 코드(PEF225, ES 2677 등)를 지운 뒤 이름이 같은 것끼리 한 품목군으로 묶음',
         'p1_rp_m_blind_on': '고객사명 비공개 (수입사 A로 표기)',
         'p1_rp_m_blind_off': '고객사명 공개',
         'p1_rp_unknown1': '같은 기간 시장 전체 시세 변화의 영향 (시장 경쟁력 분석과 함께 보세요)',
@@ -1122,15 +1129,20 @@ TEXTS = {
         'p1_grp_minor_label': 'Minor change',
         'p1_grp_no_purchase_label': 'No purchases after contract',
         'p1_savings_detail_subheader': 'Detailed Savings by Product Group',
-        'p1_mix_changed_badge': 'Product mix changed',
-        'p1_mix_changed_tooltip': 'The actual products purchased within this group changed significantly before vs. after the contract. The savings figure may reflect a product switch rather than negotiation.',
-        'p1_mix_changed_caption': "⚠ Flagged product groups had a major shift in which specific products were purchased before vs. after the contract (less than 30% overlap). Check before interpreting the savings as negotiation success.",
+        'p1_mix_changed_badge': 'Pack size changed',
+        'p1_mix_changed_tooltip': 'The main pack size of this group changed, or volume shares by pack size shifted significantly before vs. after the contract. Smaller packs cost more per kg, so the savings may reflect a pack change rather than negotiation.',
+        'p1_mix_changed_caption': '⚠ Pack size changes ({n}): {items} — the main pack size changed or a pack size share moved 20%p or more. Check before reading the savings as negotiation results.',
+        'p1_pack_none': 'No pack size',
+        'p1_pack_change_main': 'Pack size changed: {b} → {a}',
+        'p1_pack_change_form': 'Dosage form changed: {b} → {a}',
+        'p1_pack_change_share': 'Pack size share changed: {pack} {b:.0f}% → {a:.0f}%',
+        'p1_price_mismatch_warning': '⚠ In {pct:.0f}% of rows, Unit Price differs from value ÷ weight by more than 5%. The file\'s Unit Price was used as is — check for mixed units (kg/ton) or currencies.',
         'p1_col_avg_price_before': 'Avg Price Before (VWAP)',
         'p1_col_avg_price_after': 'Avg Price After (VWAP)',
         'p1_col_volume_after': 'Volume After',
         'p1_col_savings': 'Savings',
-        'p1_col_mix_overlap': 'Product Mix Overlap',
-        'p1_col_mix_changed': 'Mix Changed',
+        'p1_col_mix_detail': 'Pack size change',
+        'p1_col_mix_changed': 'Mix warning',
         'p1_vwap_note': '※ Average price is volume-weighted (VWAP), not a simple transaction average. Outliers are removed automatically per cluster and period.',
         'p1_exp2_title': '2. Import Product Group Refinement & Clustering (DBSCAN & PCA)',
         'p1_too_many_clusters_info': 'Too many clusters — visualizing only the top {n} product groups by import volume.',
@@ -1592,7 +1604,7 @@ TEXTS = {
         'p1_rp_f3_up_d': 'Consider renegotiating or reviewing alternative suppliers.',
         'p1_rp_f3_none': 'No item group saw a price increase.',
         'p1_rp_f3_none_d': 'All item groups were bought at the same or lower prices than before the contract.',
-        'p1_rp_f3_mix': ' For {k} item group(s) flagged for mix change, the difference may come from a change in products bought rather than negotiation.',
+        'p1_rp_f3_mix': ' For {k} item group(s) whose pack size changed, the per-kg price difference may come from the pack change rather than negotiation.',
         'p1_rp_s2_eyebrow': '02  Savings by Item',
         'p1_rp_s2_head': 'Savings and cost increases by item group',
         'p1_rp_s2_sub': 'Volume-weighted price difference before vs. after the contract × post-contract volume.',
@@ -1604,15 +1616,15 @@ TEXTS = {
         'p1_rp_th_vol': 'After<br/>vol. (kg)',
         'p1_rp_th_saving': 'Savings<br/>USD',
         'p1_rp_th_mix': 'Mix',
-        'p1_rp_badge_mix': 'Mix change',
+        'p1_rp_badge_mix': 'Pack change',
         'p1_rp_s3_eyebrow': '03  Items to Check',
         'p1_rp_s3_head': 'Items to check separately',
-        'p1_rp_s3_sub': 'Item groups with no purchases after the contract, and item groups whose product mix changed significantly. Treat their savings with care.',
+        'p1_rp_s3_sub': 'Item groups with no purchases after the contract, and item groups whose pack sizes changed significantly. Treat their savings with care.',
         'p1_rp_s3_nopurchase': 'No purchases after contract ({n})',
         'p1_rp_s3_nopurchase_note': 'Excluded from the savings and cost-increase totals because post-contract volume is 0.',
-        'p1_rp_s3_mix': 'Mix-change warnings ({n})',
-        'p1_rp_s3_mix_note': 'Less than 30% of product names overlap before vs. after the contract within the group; the price difference may not reflect negotiation.',
-        'p1_rp_th_overlap': 'Mix overlap',
+        'p1_rp_s3_mix': 'Pack size changes ({n})',
+        'p1_rp_s3_mix_note': 'Within the group, the main pack size changed or a pack size share moved 20%p or more. Smaller packs cost more per kg, so read the savings with care.',
+        'p1_rp_th_overlap': 'Pack size change',
         'p1_rp_s3_none': 'None.',
         'p1_rp_s4_eyebrow': '04  Methodology',
         'p1_rp_s4_head': 'Criteria and data limits',
@@ -1621,12 +1633,14 @@ TEXTS = {
         'p1_rp_lbl_blind': 'Blind',
         'p1_rp_m_data': 'Tridge TDS Korea import customs data, per declaration. The most frequent importer in the file is analyzed',
         'p1_rp_m_period': 'Before {b0} – {b1} · after {a0} – {a1} (contract date {c})',
-        'p1_rp_m_cluster': 'Product names cleaned, then grouped with TF-IDF + DBSCAN (cosine distance 0.6, min. 3). Trades not grouped are excluded',
+        'p1_rp_m_cluster': 'Trades whose product names match after removing pack sizes and product codes form one item group (names with fewer than 3 trades excluded)',
         'p1_rp_m_outlier': 'Unit prices outside 1.5× IQR per item group and period excluded (at most 7%)',
         'p1_rp_m_price': 'VWAP (volume-weighted), USD/kg',
         'p1_rp_m_saving': '(VWAP before − VWAP after) × post-contract volume. Positive = savings, negative = cost increase',
         'p1_rp_m_minor': 'Item groups with absolute savings/increase of ${th:,.0f} or less are minor and excluded from the savings and cost-increase totals (included in net savings)',
-        'p1_rp_m_mix': 'Mix-change warning when product names overlap (Jaccard) less than 30% before vs. after',
+        'p1_rp_m_mix': 'Volume shares by pack size compared before vs. after; flagged when the main pack size changes or a share moves 20%p or more (trades without a pack size in the name are excluded)',
+        'p1_rp_lbl_pack': 'Pack size',
+        'p1_rp_m_pack': 'Number + unit in the product name (tablets, sachets, capsules, g, ml, etc.) is split off as the pack size, trailing product codes (PEF225, ES 2677, etc.) are removed, and identical names form one item group',
         'p1_rp_m_blind_on': 'Client name withheld (shown as Importer A)',
         'p1_rp_m_blind_off': 'Client name shown',
         'p1_rp_unknown1': 'The effect of market-wide price moves in the same period (see Market Competitiveness Analysis)',
@@ -2136,6 +2150,82 @@ def T(key, **kwargs):
 # 데이터 전처리 및 분석 함수 #
 # --------------------------------#
 
+PACK_UNIT_RE = re.compile(r'(?<![A-Za-z0-9.])(\d+(?:\.\d+)?)\s*(정|포|캡슐|개입|입|개|매|봉|병|캔|팩|EA|PCS|KG|ML|T|G|L)(?![A-Za-z가-힣])', re.I)
+# 끝의 숫자 코드: 영문 1~4자 + 숫자 3자리 이상(ES 2677, A 65200) 또는 숫자만 4자리 이상. 숫자만 3자리(밸런스 위드인 365)는 제품명으로 둔다
+_TRAIL_NUM_CODE_RE = re.compile(r'\s+(?:[A-Z]{1,4}\s*\d{3,}|\d{4,})$')
+_TRAIL_ALNUM_CODE_RE = re.compile(r'\s+(?=[A-Z0-9]*\d)(?=[A-Z0-9]*[A-Z])[A-Z0-9]+$')
+
+
+def normalize_product_name(name):
+    """① 품목군 묶기용 품목명 정제 (정제 규칙은 이 함수 하나에서만 관리).
+    반환: (정제된 이름, 포장 단위). 정제된 이름이 같은 거래끼리 같은 품목군이 된다.
+    - [분류] 대괄호와 '__' 뒤 영문명 제거
+    - 숫자+단위(360정·30포·90캡슐·900G·500ML 등)는 포장 단위로 떼어내 따로 돌려준다
+    - 끝에 붙은 제품 코드(PEF225, ES 2677, 19A) 제거
+    - 단어 경계(공백)는 남기고 대문자로 통일 — 맛·브랜드·대상이 다른 이름은 그대로 다른 품목군"""
+    if not isinstance(name, str):
+        return '', ''
+    text = re.sub(r'\[.*?\]', '', name).split('_')[0]
+    packs = [f"{float(num):g}{unit.upper() if unit.isascii() else unit}" for num, unit in PACK_UNIT_RE.findall(text)]
+    text = PACK_UNIT_RE.sub(' ', text)
+    text = re.sub(r'[^A-Za-z0-9가-힣]+', ' ', text)
+    text = re.sub(r'\s+', ' ', text).strip().upper()
+    while True:
+        trimmed = _TRAIL_ALNUM_CODE_RE.sub('', _TRAIL_NUM_CODE_RE.sub('', text)).strip()
+        if trimmed == text or not trimmed:
+            break
+        text = trimmed
+    return text, ' '.join(packs)
+
+
+def _split_pack(label):
+    """포장 단위 라벨 → (숫자들, 단위 이름). 예: '360정' → (('360',), '정'), '900G 30포' → (('900', '30'), 'G 포')."""
+    nums = tuple(re.findall(r'\d+(?:\.\d+)?', label))
+    units = ' '.join(re.sub(r'[\d.]+', ' ', label).split())
+    return nums, units
+
+
+def pack_mix_change(before_g, after_g, shift_pp=20.0):
+    """같은 품목군의 포장 단위별 물량 비중을 계약 전후로 비교한다.
+    주력 포장 단위가 바뀌거나 어떤 포장 단위의 비중이 shift_pp(%p) 이상 움직이면 구성 변화.
+    품목명에 포장 표기가 없는 거래는 비교에서 뺀다 — 계약 전에는 용량을 안 적다가 이후 적기 시작한 것처럼
+    표기 방식만 바뀐 경우를 포장 변경으로 오인하지 않기 위해서다. (이 제외는 경고 판정에만 적용되고,
+    절감액·VWAP 계산에는 포장 표기가 없는 거래도 그대로 들어간다.)
+    주력 포장 단위의 개수·용량은 같고 단위 이름만 다르면(360정 → 360캡슐) 종류를 'form'(제형 변경)으로 구분한다.
+    반환: (경고 여부, 종류 'main'/'form'/'share'/'', 포장 단위 또는 전 주력, 후 주력 또는 '', 전 비중, 후 비중)"""
+    def shares(g):
+        g = g[g['pack_unit'] != '']
+        v = g.groupby('pack_unit')['volume'].sum()
+        return v / v.sum() * 100 if v.sum() > 0 else v
+    b, a = shares(before_g), shares(after_g)
+    if b.empty or a.empty:
+        return False, '', '', '', np.nan, np.nan
+    top_b, top_a = b.idxmax(), a.idxmax()
+    if top_b != top_a:
+        (nums_b, units_b), (nums_a, units_a) = _split_pack(top_b), _split_pack(top_a)
+        if nums_b and nums_b == nums_a and units_b != units_a:
+            return True, 'form', units_b, units_a, float(b[top_b]), float(a[top_a])
+        return True, 'main', top_b, top_a, float(b[top_b]), float(a[top_a])
+    labels = b.index.union(a.index)
+    diff = a.reindex(labels, fill_value=0) - b.reindex(labels, fill_value=0)
+    big = diff.abs().idxmax()
+    if abs(diff[big]) >= shift_pp:
+        return True, 'share', big, '', float(b.get(big, 0)), float(a.get(big, 0))
+    return False, '', '', '', np.nan, np.nan
+
+
+def pack_change_text(kind, frm, to, b, a):
+    """포장 단위 변화 설명 문구 (화면·PDF 공용)."""
+    label = lambda p: p if p else T('p1_pack_none')
+    if kind == 'main':
+        return T('p1_pack_change_main', b=label(frm), a=label(to))
+    if kind == 'form':
+        return T('p1_pack_change_form', b=frm, a=to)
+    if kind == 'share':
+        return T('p1_pack_change_share', pack=label(frm), b=b, a=a)
+    return ''
+
+
 def preprocess_product_name(name):
     """'REPORTED PRODUCT NAME'을 정제하는 함수"""
     if not isinstance(name, str): return ''
@@ -2336,7 +2426,8 @@ def render_savings_cards(group_df, group_key):
     for i, row in enumerate(visible.itertuples()):
         col = cols[i % 4]
         color, arrow, val = ("blue", "▼", row.savings) if row.savings >= 0 else ("red", "▲", -row.savings)
-        warn_html = f"""<div style="font-size:11px;color:#b3261e;margin-top:4px;" title="{T('p1_mix_changed_tooltip')}">⚠ {T('p1_mix_changed_badge')}</div>""" if row.mix_changed else ""
+        mix_txt = pack_change_text(row.mix_kind, row.mix_from, row.mix_to, row.mix_b, row.mix_a) if row.mix_changed else ''
+        warn_html = f"""<div style="font-size:11px;color:#b3261e;margin-top:4px;" title="{mix_txt} — {T('p1_mix_changed_tooltip')}">⚠ {T('p1_mix_changed_badge')}</div>""" if row.mix_changed else ""
         col.markdown(f"""<div style="border: 1px solid #e6e6e6; border-radius: 0.5rem; padding: 1rem; text-align: center; height: 120px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 1rem;"><strong>{row.Index}</strong><p style="font-size: 1.5rem; font-weight: bold; color: {color}; margin-top: 8px; margin-bottom: 0;">{arrow} ${val:,.0f}</p>{warn_html}</div>""", unsafe_allow_html=True)
     hidden = len(group_df) - P1_CARDS_PER_GROUP
     if hidden > 0:
@@ -2348,7 +2439,7 @@ def reset_analysis_states():
     """모든 분석 상태를 초기화하는 함수"""
     st.session_state.analysis_done = False
     st.session_state.market_analysis_done = False
-    keys_to_reset = ['customer_name', 'plot_df', 'customer_df', 'contract_date', 
+    keys_to_reset = ['customer_name', 'plot_df', 'customer_df', 'contract_date', 'p1_price_mismatch', 
                      'tfidf_matrix', 'savings_df', 'total_savings', 'market_df',
                      'analyzed_product_name', 'p1_minor_threshold',
                      'p1_show_all_saved', 'p1_show_all_increased', 'p1_show_all_minor']
@@ -2865,6 +2956,22 @@ def _clean_text(series):
     return series.where(series.isna(), series.astype(str).str.strip()).fillna('(N/A)')
 
 
+def derive_unit_price(raw_df, cols, tol=0.05):
+    """단가(USD/kg) 공통 계산 (①⑨⑩).
+    Unit Price가 있으면 그 값을 쓰고, 없거나 빈 행은 금액(Value) ÷ 중량으로 채운다.
+    둘 다 있으면 금액÷중량과 tol(5%)보다 크게 다른 행의 비율도 돌려준다.
+    반환: (단가 Series, 금액 Series 또는 None, 불일치 비율 또는 None)"""
+    vol = pd.to_numeric(raw_df[cols['volume']], errors='coerce')
+    price = pd.to_numeric(raw_df[cols['price']], errors='coerce') if cols.get('price') else pd.Series(np.nan, index=raw_df.index)
+    value = pd.to_numeric(raw_df[cols['value']], errors='coerce') if cols.get('value') else None
+    derived = (value / vol).where(vol > 0) if value is not None else pd.Series(np.nan, index=raw_df.index)
+    mismatch = None
+    if cols.get('price') and value is not None:
+        both = (price > 0) & (derived > 0)
+        mismatch = float(((price[both] / derived[both] - 1).abs() > tol).mean()) if both.any() else 0.0
+    return price.where(price.notna(), derived), value, mismatch
+
+
 def prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=1000, trim=(0.01, 0.99)):
     """⑨⑩ 공통 전처리. (df, stats)를 반환한다.
     1) 날짜·중량·단가가 유효한 행만 (단가가 없으면 금액/중량으로 계산)
@@ -2872,9 +2979,9 @@ def prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=1000, trim=(0.01
     3) 기간 필터 → 건당 최소 중량 미만 제외 → HS별 단가 P1~P99 밖 제외"""
     n0 = len(raw_df)
     vol = pd.to_numeric(raw_df[cols['volume']], errors='coerce')
-    price = pd.to_numeric(raw_df[cols['price']], errors='coerce') if cols.get('price') else pd.Series(np.nan, index=raw_df.index)
-    value = pd.to_numeric(raw_df[cols['value']], errors='coerce') if cols.get('value') else price * vol
-    price = price.where(price.notna(), value / vol)
+    price, value, _ = derive_unit_price(raw_df, cols)
+    if value is None:
+        value = price * vol
     d = pd.DataFrame({
         '_date': pd.to_datetime(raw_df[cols['date']], errors='coerce'),
         '_importer': _clean_text(raw_df[cols['importer']]) if cols.get('importer') else '(N/A)',
@@ -3296,15 +3403,16 @@ def build_adoption_report(ctx):
         s3.append(rt.small(T('p1_rp_s3_none')))
     else:
         s3.append(rt.brand_table([T('p1_rp_th_item'), T('p1_rp_th_overlap'), T('p1_rp_th_saving')],
-                                 [[str(n_), '-' if pd.isna(r['mix_overlap']) else f"{r['mix_overlap']:.0%}",
+                                 [[str(n_), pack_change_text(r['mix_kind'], r['mix_from'], r['mix_to'], r['mix_b'], r['mix_a']),
                                    f"{r['savings']:,.0f}" if r['savings'] >= 0 else f"–{-r['savings']:,.0f}"] for n_, r in mixed.iterrows()],
-                                 rt.col_widths([60, 20, 20]), right_cols=(1, 2), header_markup=True))
+                                 rt.col_widths([40, 42, 18]), right_cols=(2,), header_markup=True))
 
     # 04 방법론
     fmt = lambda t: pd.Timestamp(t).strftime('%Y.%m.%d')
     meth = [(T('p1_rp_lbl_data'), T('p1_rp_m_data')),
             (T('p1_rp_lbl_period'), T('p1_rp_m_period', b0=fmt(d0), b1=fmt(contract - pd.Timedelta(days=1)), a0=fmt(contract), a1=fmt(d1), c=fmt(contract))),
-            (T('p1_rp_lbl_cluster'), T('p1_rp_m_cluster')), (T('p1_rp_lbl_outlier'), T('p1_rp_m_outlier')),
+            (T('p1_rp_lbl_cluster'), T('p1_rp_m_cluster')), (T('p1_rp_lbl_pack'), T('p1_rp_m_pack')),
+            (T('p1_rp_lbl_outlier'), T('p1_rp_m_outlier')),
             (T('p1_rp_lbl_price'), T('p1_rp_m_price')), (T('p1_rp_lbl_saving'), T('p1_rp_m_saving')),
             (T('p1_rp_lbl_minor'), T('p1_rp_m_minor', th=th)), (T('p1_rp_lbl_mix'), T('p1_rp_m_mix')),
             (T('p1_rp_lbl_blind'), T('p1_rp_m_blind_on') if ctx['blind'] else T('p1_rp_m_blind_off'))]
@@ -4600,7 +4708,7 @@ GUIDE_CONTENT = {
                     '순 절감액 / 절감 합계 / 비용 증가 합계 — 품목군별 절감액(계약 전후 단가 차이 × 계약 후 물량)의 순합계와, 절감·비용 증가 각각의 합계(품목 수 포함).',
                     '품목군별 카드 — 절감 품목, 단가 상승 품목, 변화 미미(절감·증가액이 ±$10 이내, 기준 조정 가능) 세 그룹으로 나뉘어 금액 큰 순으로 보입니다. 그룹마다 처음 12개만 보이고 "전체 보기"로 나머지를 펼칩니다. 계약 후 구매가 없는 품목은 "계약 후 구매 없음"으로 따로 표시하고 합계에서 뺍니다.',
                     '상세 절감 내역 표 — 같은 그룹을 "구분" 열로 보여주며, 결과는 새 양식 PDF 리포트(표지 → KPI 4개·핵심 결론 3줄 → 품목군별 절감 차트·표 → 따로 확인할 품목 → 방법론 → 클로징)로 내려받을 수 있습니다. 구성 변화 품목이 있으면 "구성 변화 품목 제외 시" 순 절감액을 함께 표기합니다. 이전 양식이 필요하면 "기존 양식 PDF" 버튼을 쓰세요.',
-                    '수입 품목 클러스터 — 표기가 조금씩 다른 품목명을 자동으로 묶어서 정리.',
+                    '수입 품목군 — 포장 단위(360정·30포·900g 등)와 끝의 제품 코드만 다른 품목명을 같은 품목군으로 묶습니다. 맛·브랜드·대상이 다르면 다른 품목군입니다. 계약 전후로 품목군 안의 주력 포장 단위가 바뀌거나 비중이 20%p 이상 움직이면 "포장 단위 변경"(구성 변화)으로 표시하고, 이 품목을 뺀 순 절감액도 함께 보여줍니다.',
                     '월별 수입 추이, 최근 3개월 비중 — 최근 구매 패턴 파악.',
                     '계약 이후 새로 생기거나 사라진 품목·원산지·공급사 목록.',
                 ],
@@ -4839,7 +4947,7 @@ GUIDE_CONTENT = {
                     'Net savings / total savings / total cost increase — the net sum of per-group savings (price difference before vs. after × post-contract volume), plus the savings and cost-increase totals with item counts.',
                     'Cards by product group — split into Savings, Price increases, and Minor change (within ±$10, adjustable), largest amounts first. Each group shows the first 12 cards; "Show all" expands the rest. Items with no purchases after the contract are listed separately as "No purchases after contract" and excluded from the totals.',
                     'Detailed savings table — the same groups appear in a "Group" column, and the results can be downloaded as a new-format PDF report (cover → 4 KPIs and 3 key findings → savings chart and tables by item group → items to check → methodology → closing). When mix-changed items exist, net savings excluding them is shown as well. Use "Legacy-format PDF" if you need the previous format.',
-                    'Import product clusters — similarly-worded product names grouped automatically.',
+                    'Import item groups — product names that differ only in pack size (360 tablets, 30 sachets, 900 g, etc.) or a trailing product code form one item group; different flavors, brands, or targets stay separate. When the main pack size changes or a pack size share moves 20%p or more before vs. after the contract, the group is flagged as a "pack size change" (mix change), and net savings excluding it is also shown.',
                     'Monthly import trend and last-3-month share.',
                     'New/lost products, origins, and suppliers since the contract.',
                 ],
@@ -5495,21 +5603,8 @@ if selected == T('menu_opt_customer'):
             with st.form(key='analysis_form'):
                 df_for_check = None
                 try:
-                    # --- [수정 5] 파일 읽기 오류 방지 로직 (seek(0) 사용) ---
-                    if uploaded_file.name.endswith('.csv'):
-                        try:
-                            uploaded_file.seek(0)
-                            df_for_check = pd.read_csv(uploaded_file, encoding='utf-8')
-                        except UnicodeDecodeError:
-                            try:
-                                uploaded_file.seek(0)
-                                df_for_check = pd.read_csv(uploaded_file, encoding='euc-kr')
-                            except UnicodeDecodeError:
-                                uploaded_file.seek(0)
-                                df_for_check = pd.read_csv(uploaded_file, encoding='cp949')
-                    elif uploaded_file.name.endswith('.xlsx'):
-                         uploaded_file.seek(0)
-                         df_for_check = pd.read_excel(uploaded_file)
+                    # 공통 읽기 함수 (CSV 인코딩 자동 판별, HS 등 코드 컬럼 앞자리 0 보존)
+                    df_for_check = read_uploaded_table(uploaded_file)
 
                     if df_for_check is None:
                         st.error(T('p1_file_read_fail_error'))
@@ -5532,6 +5627,14 @@ if selected == T('menu_opt_customer'):
             if submitted:
                 with st.spinner(T('p1_spinner')):
                     df = df_for_check.copy()
+
+                    # 단가: Unit Price가 없으면 금액(Value) ÷ 중량 (⑨⑩과 같은 공통 함수)
+                    _tcols = detect_trade_columns(list(df.columns))
+                    st.session_state.p1_price_mismatch = None
+                    if _tcols['volume'] and (_tcols['price'] or _tcols['value']):
+                        _price, _, _mismatch = derive_unit_price(df, _tcols)
+                        df[_tcols['price'] or 'Unit Price'] = _price
+                        st.session_state.p1_price_mismatch = _mismatch
                     
                     rename_dict = {
                         'Date': 'date', 
@@ -5561,10 +5664,16 @@ if selected == T('menu_opt_customer'):
                     
                     customer_name = df['importer_name'].mode()[0]
                     customer_df = df[df['importer_name'] == customer_name].copy()
-                    customer_df['product_preprocessed'] = customer_df['product_name'].apply(preprocess_product_name)
-                    vectorizer = TfidfVectorizer(min_df=1, ngram_range=(1,2))
-                    tfidf_matrix = vectorizer.fit_transform(customer_df['product_preprocessed'])
-                    # DBSCAN eps: 0.9는 코사인거리 기준 너무 느슨해서 서로 다른 품목이 한 클러스터로 묶이기 쉬웠음 → 0.6으로 강화
+                    # 품목군 묶기 (F안): 포장 단위·제품 코드를 뗀 이름이 같은 거래끼리만 묶는다.
+                    # 유사도로 묶으면 맛·브랜드·대상만 다른 제품까지 섞여(과병합) 공백 없는 키로 정확히 일치시키고,
+                    # 떼어낸 포장 단위는 구성 변화(포장 단위 변경) 판정에 쓴다.
+                    _norm = [normalize_product_name(n) for n in customer_df['product_name']]
+                    customer_df['product_preprocessed'] = [n for n, _ in _norm]
+                    customer_df['pack_unit'] = [p for _, p in _norm]
+                    customer_df['product_key'] = customer_df['product_preprocessed'].str.replace(' ', '', regex=False)
+                    vectorizer = TfidfVectorizer(min_df=1, ngram_range=(1,2), token_pattern=r'(?u)\b\w+\b')
+                    tfidf_matrix = vectorizer.fit_transform(customer_df['product_key'])
+                    # 키가 한 단어라 코사인거리 0(같은 키)끼리만 묶인다. min_samples=3: 거래 3건 미만 품목명은 제외
                     dbscan = DBSCAN(eps=0.6, min_samples=3, metric='cosine')
                     cluster_labels = dbscan.fit_predict(tfidf_matrix)
                     cluster_name_map = get_cluster_name(cluster_labels, customer_df['product_preprocessed'])
@@ -5612,18 +5721,13 @@ if selected == T('menu_opt_customer'):
                     savings_df.loc[no_after, 'volume_after'] = 0.0
                     savings_df['savings'] = ((savings_df['avg_price_before'] - savings_df['avg_price_after']) * savings_df['volume_after']).where(~no_after, 0.0)
 
-                    # 품목 구성 변화(Mix Drift) 체크: 계약 전후로 같은 클러스터 안에서도 실제 사는 품목명 세트가
-                    # 얼마나 겹치는지 확인. 많이 안 겹치면 "협상 성과"가 아니라 "품목을 바꿔서 생긴 가격차"일 수 있음.
-                    def _mix_overlap(cluster_name):
-                        b = set(before_contract_df.loc[before_contract_df['cluster_name'] == cluster_name, 'product_preprocessed'])
-                        a = set(after_contract_df.loc[after_contract_df['cluster_name'] == cluster_name, 'product_preprocessed'])
-                        if not b or not a:
-                            return None
-                        union = b | a
-                        return len(b & a) / len(union) if union else None
-
-                    savings_df['mix_overlap'] = [_mix_overlap(idx) for idx in savings_df.index]
-                    savings_df['mix_changed'] = savings_df['mix_overlap'].apply(lambda v: v is not None and v < 0.3)
+                    # 구성 변화 체크 (포장 단위 기준): 계약 전후로 품목군 안의 포장 단위별 물량 비중이 크게 바뀌면
+                    # kg당 단가 차이가 "협상 성과"가 아니라 "포장 변경" 때문일 수 있어 경고한다.
+                    _mix = [pack_mix_change(before_contract_df[before_contract_df['cluster_name'] == idx],
+                                            after_contract_df[after_contract_df['cluster_name'] == idx]) for idx in savings_df.index]
+                    for _i, _col in enumerate(['mix_changed', 'mix_kind', 'mix_from', 'mix_to', 'mix_b', 'mix_a']):
+                        savings_df[_col] = [m[_i] for m in _mix] if _mix else []
+                    savings_df['mix_changed'] = savings_df['mix_changed'].astype(bool)
                     savings_df = savings_df.sort_values('savings', ascending=False)
                     total_savings = savings_df.loc[savings_df['volume_after'] > 0, 'savings'].sum()
 
@@ -5672,7 +5776,11 @@ if selected == T('menu_opt_customer'):
             if no_purchase_names:
                 st.caption(T('p1_no_purchase_caption', n=len(no_purchase_names), names=', '.join(no_purchase_names)))
             if savings_df['mix_changed'].any():
-                st.caption(T('p1_mix_changed_caption'))
+                _mixed = savings_df[savings_df['mix_changed']]
+                _items = ', '.join(f"{n} ({pack_change_text(r.mix_kind, r.mix_from, r.mix_to, r.mix_b, r.mix_a)})" for n, r in _mixed.iterrows())
+                st.caption(T('p1_mix_changed_caption', n=len(_mixed), items=_items))
+            if st.session_state.get('p1_price_mismatch') and st.session_state.p1_price_mismatch > 0.1:
+                st.warning(T('p1_price_mismatch_warning', pct=st.session_state.p1_price_mismatch * 100))
 
             p1_col_names = {
                 'group': T('p1_col_group'),
@@ -5680,16 +5788,17 @@ if selected == T('menu_opt_customer'):
                 'avg_price_after': T('p1_col_avg_price_after'),
                 'volume_after': T('p1_col_volume_after'),
                 'savings': T('p1_col_savings'),
-                'mix_overlap': T('p1_col_mix_overlap'),
+                'mix_detail': T('p1_col_mix_detail'),
                 'mix_changed': T('p1_col_mix_changed'),
             }
-            display_savings_df = savings_table_with_group(groups).rename(columns=p1_col_names)
+            _table = savings_table_with_group(groups)
+            _table['mix_detail'] = [pack_change_text(r.mix_kind, r.mix_from, r.mix_to, r.mix_b, r.mix_a) for r in _table.itertuples()]
+            display_savings_df = _table[list(p1_col_names)].rename(columns=p1_col_names)
             st.dataframe(display_savings_df.style.format({
                 T('p1_col_avg_price_before'): '${:,.2f}',
                 T('p1_col_avg_price_after'): '${:,.2f}',
                 T('p1_col_volume_after'): '{:,.0f} KG',
                 T('p1_col_savings'): '${:,.2f}',
-                T('p1_col_mix_overlap'): '{:.0%}',
             }, na_rep='-'))
             st.caption(T('p1_vwap_note'))
 

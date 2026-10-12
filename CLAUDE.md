@@ -14,6 +14,7 @@
 - `assets/fonts/` — `Pretendard-*.ttf` 5종(새 PDF·PDF 차트), `NanumGothic-Regular.ttf`(기존 PDF·kaleido 차트·사용법 가이드)
 - `assets/logo/` — `tridge_logo_black.png`(밝은 배경), `tridge_logo_white.png`(어두운 배경)
 - `assets/guide/` — 사용법 가이드 PDF에 들어가는 메뉴 스크린샷
+- `tests/` — 고정 테스트. `test_normalize_product_name.py`(① 품목명 정제·포장 단위 구성 변화). 실행: `python tests/test_normalize_product_name.py`
 
 ## 메뉴 (11개, 사이드바 순서)
 
@@ -28,7 +29,7 @@
 
 1. `TEXTS` 딕셔너리(ko/en) + `T(key, **kwargs)` — 화면·PDF 문구 전부 (접두사: `p1_`~`p8_` 기존 메뉴, `ph_` 헬스체크, `sc_` 스크리너, `bd_` 입찰 대응, `rp_`·`scr_rp_`·`bd_rp_` 새 PDF 양식)
 2. 공용 분석 함수 — `weighted_avg`, `weighted_avg_groupby`, `remove_outliers_iqr` 등
-3. ① 절감 그룹 헬퍼(`split_savings_groups`, `render_savings_cards`) + 페이지별 `reset_*_states()` (`reset_analysis_states` … `reset_health_states`, `reset_screener_states`, `reset_bid_states`)
+3. ① 헬퍼 — 품목명 정제 `normalize_product_name`(정제 규칙은 이 함수에서만 관리, 포장 단위·끝 제품 코드만 떼고 같은 이름끼리 묶음), 포장 단위 구성 변화 `pack_mix_change`/`pack_change_text`, 절감 그룹 `split_savings_groups`/`render_savings_cards` + 페이지별 `reset_*_states()` (`reset_analysis_states` … `reset_health_states`, `reset_screener_states`, `reset_bid_states`)
 4. 파일/컬럼 헬퍼 — `read_uploaded_table`(HS 등 코드 컬럼은 문자열로 읽고 앞자리 0 복원), `detect_standard_columns`, `detect_extra_dimension_columns`, `build_axis_map`
 5. ② 헬스체크 계산 — `prepare_health_df`, `compute_health_check`, `health_display_table` 등
 6. ⑨⑩ 공통 — 블라인드(`blind_importer_map`, `apply_blind`), 거래 전처리(`detect_trade_columns`, `prepare_trade_df`), ⑨ `compute_screener`, ⑩ `bid_filter`·`bid_supplier_table`·`bid_stability`
@@ -59,7 +60,8 @@
 
 - 새 기능이나 화면 변경만 계획을 먼저 보여주고 승인받은 뒤 구현한다.
 - 메뉴를 추가·삭제·이름 변경하거나 기능이 바뀌면 사용자 가이드(`build_user_guide_pdf`, 가이드 문구 `GUIDE_CONTENT` ko/en)도 같은 작업에서 함께 수정한다.
-- 수정 후에는 `python -m py_compile analysis_tool.py report_theme.py`로 문법 확인까지 한다.
+- 수정 후에는 `python -m py_compile analysis_tool.py report_theme.py`로 문법 확인까지 한다. ① 품목명 정제를 건드렸으면 `python tests/test_normalize_product_name.py`도 돌린다.
+- **단가 계산**: 단가는 `derive_unit_price`(Unit Price 우선, 없으면 금액 ÷ 중량)로 구한다. ①⑨⑩ 공통.
 - 버그 수정처럼 테스트를 통과한 작은 변경은 확인 없이 커밋·푸시까지 진행한다. 그 외 커밋·푸시는 사용자가 요청할 때만 한다.
 - 작업 중 발견한 다른 문제는 바로 고치지 말고, 작업이 끝난 뒤 목록으로만 보고한다.
 - 설명은 짧고 직접적으로. 끝나면 어떤 파일이 바뀌었는지만 명확히 알려준다.
