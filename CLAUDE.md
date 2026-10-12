@@ -21,7 +21,8 @@
 ① 도입 효과 분석 · ② 포트폴리오 헬스체크 · ③ 시장 경쟁력 분석 · ④ 공급망 흐름도 · ⑤ 집중도 리스크 진단 · ⑥ 가격 추세 & 계절성 · ⑦ 신규·이탈 거래처 추적 · ⑧ 신규사업 스코어러 · ⑨ 범용상품 스크리너 · ⑩ 입찰 대응 분석 · ⑪ 자유 피벗 빌더
 
 - 메뉴 목록은 사이드바 `option_menu`의 `_menu_keys`(TEXTS 키 `menu_opt_*`)로 관리한다. 메뉴 key는 `main_menu`로 고정되어 있고, 다른 메뉴로 코드에서 이동할 때는 `st.session_state['_menu_jump'] = 인덱스`를 쓴다(⑨ → ⑩ 넘기기).
-- 새 PDF 양식(`report_theme`) 적용 메뉴: ①(기존 양식은 보조 버튼으로 유지), ⑨, ⑩. 나머지는 기존 `build_pdf_report`(NanumGothic) 양식이며 순서대로 전환 중이다. 사용법 가이드 PDF는 D 단계 마지막에 전환한다.
+- 새 PDF 양식(`report_theme`) 적용 메뉴: ①②⑤⑥⑦⑧⑨⑩⑪ (①②⑤⑥⑦⑧⑪은 기존 양식을 "기존 양식 PDF" 보조 버튼으로 유지). ③은 PDF 없음, ④는 아직 기존 `build_pdf_report`(NanumGothic + kaleido 차트) 양식. 사용법 가이드 PDF는 D 단계 마지막에 전환한다.
+- 새 PDF 리포트 공통 구성: 표지 → 01 요약(KPI 카드 4 + 핵심 결론 3, `_rp_summary`) → 본문 → 방법론·알 수 없는 것(`_rp_method`) → 클로징 "다음 단계 제안". 다른 메뉴로 연결하는 문구는 `_menu_ref(메뉴 키)`("'입찰 대응 분석' 메뉴")를 쓴다 — 새 PDF 테마는 ①~⑳을 '1.'로 바꾸므로 원문자 번호를 넣지 않는다.
 
 ## analysis_tool.py 구조
 
@@ -33,7 +34,7 @@
 4. 파일/컬럼 헬퍼 — `read_uploaded_table`(HS 등 코드 컬럼은 문자열로 읽고 앞자리 0 복원), `detect_standard_columns`, `detect_extra_dimension_columns`, `build_axis_map`
 5. ② 헬스체크 계산 — `prepare_health_df`, `compute_health_check`, `health_display_table` 등
 6. ⑨⑩ 공통 — 블라인드(`blind_importer_map`, `apply_blind`), 거래 전처리(`detect_trade_columns`, `prepare_trade_df`), ⑨ `compute_screener`, ⑩ `bid_filter`·`bid_supplier_table`·`bid_stability`
-7. 새 PDF 리포트 — `_rp_meta`, `build_screener_report`, `build_bid_report` (+ matplotlib 차트 함수)
+7. 새 PDF 리포트 — `_rp_meta`, `build_adoption_report`(①), `build_screener_report`(⑨), `build_bid_report`(⑩), `MENU_KEYS`·`_menu_ref`·`_rp_*` 공통 헬퍼, `build_risk_report`(⑤), `build_season_report`(⑥), `build_health_report`(②), `build_churn_report`(⑦), `build_scorer_report`(⑧), `build_pivot_report`(⑪) (+ 메뉴별 matplotlib 차트 함수)
 8. 스코어러(⑧) 로직 — `detect_scorer_columns`, `_p8_*`, `compute_scorer`
 9. 기존 PDF/차트 출력 — `fig_to_png_bytes`, `_find_korean_font_path`, `build_pdf_report`, `build_scorer_report_pdf`
 10. 사용법 가이드 — `GUIDE_CONTENT`(ko/en 가이드 문구, `TEXTS`가 아님) + `build_user_guide_pdf`
@@ -50,7 +51,7 @@
 - **재사용**: 파일 업로드는 `load_uploaded_df`, 컬럼 인식은 `detect_standard_columns`를 재사용한다. 새로 만들지 않는다.
 - **한글 폰트**: 폰트는 `assets/fonts`에 번들한다. 새 PDF는 Pretendard(ReportLab에서 한글이 깨지는 Inter 금지), 기존 PDF는 NanumGothic. `packages.txt`는 비워둔 상태로 유지한다 (apt 패키지 추가 금지).
 - **새 PDF 양식**: `report_theme`의 블록과 색 토큰만 쓴다(목업 `build_report.py` 기준). PDF 차트는 matplotlib(`report_theme.new_chart`/`apply_pdf_chart_style`/`chart_image`), 화면 차트는 plotly.
-- **블라인드**: 한국 수입사명을 화면·PDF·CSV에 내보낼 때는 반드시 `apply_blind`를 거친다. 해외 공급사명은 그대로 둔다.
+- **블라인드**: 한국 수입사명을 화면·PDF·CSV에 내보낼 때는 반드시 `apply_blind`(또는 이름 목록이면 `blind_name_map`)를 거친다. 기준·행·열·필터로 고른 컬럼이 수입사인지는 `is_importer_column`으로 판별한다(`Importer` 같은 추가 수입사 컬럼 포함). 해외 공급사명은 그대로 둔다.
 - **plotly<6 고정**: `kaleido==0.2.1`(자체 Chromium 내장, apt 불필요)과 호환되는 마지막 계열이라 고정한다. plotly 6+는 kaleido>=1(시스템 Chrome 필요)을 요구해 PDF 차트 내보내기가 깨진다.
 - **건드리지 않는 영역** (요청이 있을 때만 수정):
   - 비밀번호 로직 (`check_password`, `_hash_pw`, `_get_configured_password_hash`, `_save_new_password`)
