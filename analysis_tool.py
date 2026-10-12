@@ -513,6 +513,408 @@ TEXTS = {
         'pdf_generating_msg': 'PDF를 생성하고 있습니다...',
         'pdf_error_msg': 'PDF 생성 중 오류가 발생했습니다: {msg}',
         'pdf_chart_export_warning': '차트 이미지를 PDF에 넣지 못했습니다 (차트가 빠진 채로 생성됩니다): {msg}',
+        # --- ① 도입 효과 분석 PDF (새 양식) ---
+        'p1_rp_eyebrow': 'Adoption Impact Report',
+        'p1_rp_title2': '도입 효과 리포트',
+        'p1_rp_blind_toggle': 'PDF에 고객사명 대신 블라인드 표기 (수입사 A)',
+        'p1_rp_legacy_btn': '기존 양식 PDF',
+        'p1_rp_s1_eyebrow': '01  Executive Summary',
+        'p1_rp_head_save': '계약 후 순 ${x:,.0f} 절감했습니다',
+        'p1_rp_head_loss': '계약 후 비용이 순 ${x:,.0f} 늘었습니다',
+        'p1_rp_kpi_net': '순 절감액',
+        'p1_rp_kpi_net_note_excl': '구성 변화 품목 제외 시 ${y:,.0f}',
+        'p1_rp_kpi_net_note': '단가 차이 × 계약 후 물량',
+        'p1_rp_kpi_saved': '절감 합계 ({n}개)',
+        'p1_rp_kpi_increased': '비용 증가 합계 ({n}개)',
+        'p1_rp_kpi_group_note': '변화 미미 ±${th:,.0f} 제외',
+        'p1_rp_kpi_price': '단가 변화율',
+        'p1_rp_kpi_price_note': '계약 후 물량 기준 VWAP, 계약 전 대비',
+        'p1_rp_findings': '핵심 결론',
+        'p1_rp_excl_suffix': ' (구성 변화 품목 제외 시 ${y:,.0f})',
+        'p1_rp_f1_save': '계약 후 순 ${x:,.0f} 절감{excl}.',
+        'p1_rp_f1_loss': '계약 후 비용이 순 ${x:,.0f} 늘었습니다{excl}.',
+        'p1_rp_f1_d': '절감 품목 {ns}개의 절감 합계 ${s:,.0f}, 단가 상승 품목 {ni}개의 비용 증가 합계 ${i:,.0f}입니다.',
+        'p1_rp_f2': '{name}이(가) 전체 절감의 {p:.0f}%를 차지합니다.',
+        'p1_rp_f2_concentrated': '{name}이(가) 전체 절감의 {p:.0f}%를 차지합니다 — 절감이 한 품목에 집중되어 나머지 품목에 추가 개선 여지가 있습니다.',
+        'p1_rp_f2_d': '계약 전 ${b:.2f} → 계약 후 ${a:.2f}/kg, 계약 후 물량 {v:,.0f}kg 기준입니다.',
+        'p1_rp_f2_none': '변화 미미 기준(±${th:,.0f})을 넘는 절감 품목이 없습니다.',
+        'p1_rp_f2_none_d': '계약 전후 단가 차이가 작거나, 계약 후 구매 물량이 적습니다.',
+        'p1_rp_f3_up': '{names} 등 {n}개 품목은 단가가 올라 비용이 ${x:,.0f} 늘었습니다.',
+        'p1_rp_f3_up_d': '재협상이나 대체 공급처 검토가 필요합니다.',
+        'p1_rp_f3_none': '단가가 오른 품목이 없습니다.',
+        'p1_rp_f3_none_d': '모든 품목을 계약 전과 같거나 낮은 단가로 구매했습니다.',
+        'p1_rp_f3_mix': ' 구성 변화 경고 품목 {k}개는 절감·증가가 협상 효과가 아니라 품목 구성 변화 때문일 수 있습니다.',
+        'p1_rp_s2_eyebrow': '02  Savings by Item',
+        'p1_rp_s2_head': '품목군별 절감과 비용 증가',
+        'p1_rp_s2_sub': '계약 전후 물량가중 단가 차이 × 계약 후 물량으로 계산했습니다.',
+        'p1_rp_chart': '절감·비용 증가 상위 품목군',
+        'p1_rp_chart_note': 'Blue = 절감, Black = 단가 상승으로 비용 증가. 각 상위 {n}개까지 표시합니다.',
+        'p1_rp_th_item': '품목군',
+        'p1_rp_th_before': '계약 전<br/>USD/kg',
+        'p1_rp_th_after': '계약 후<br/>USD/kg',
+        'p1_rp_th_vol': '계약 후<br/>물량(kg)',
+        'p1_rp_th_saving': '절감액<br/>USD',
+        'p1_rp_th_mix': '구성',
+        'p1_rp_badge_mix': '구성 변화',
+        'p1_rp_s3_eyebrow': '03  Items to Check',
+        'p1_rp_s3_head': '따로 확인할 품목',
+        'p1_rp_s3_sub': '계약 후 구매가 없는 품목과 품목 구성이 크게 바뀐 품목입니다. 절감 판단에서 주의해서 보세요.',
+        'p1_rp_s3_nopurchase': '계약 후 구매 없음 ({n}개)',
+        'p1_rp_s3_nopurchase_note': '계약 후 물량이 0이라 절감·비용 증가 합계에서 뺐습니다.',
+        'p1_rp_s3_mix': '구성 변화 경고 ({n}개)',
+        'p1_rp_s3_mix_note': '계약 전후로 같은 품목군 안에서 실제 산 품목명이 30% 미만만 겹칩니다. 단가 차이가 협상 성과가 아닐 수 있습니다.',
+        'p1_rp_th_overlap': '구성 유지율',
+        'p1_rp_s3_none': '해당하는 품목이 없습니다.',
+        'p1_rp_s4_eyebrow': '04  Methodology',
+        'p1_rp_s4_head': '분석 기준과 데이터 한계',
+        'p1_rp_lbl_data': '데이터', 'p1_rp_lbl_period': '기간', 'p1_rp_lbl_cluster': '품목 묶기', 'p1_rp_lbl_outlier': '이상치 제외',
+        'p1_rp_lbl_price': '평균 단가', 'p1_rp_lbl_saving': '절감액', 'p1_rp_lbl_minor': '변화 미미', 'p1_rp_lbl_mix': '구성 변화',
+        'p1_rp_lbl_blind': '블라인드',
+        'p1_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터, 건별 수입신고 단위. 파일에서 가장 많이 등장하는 수입사를 분석 대상으로 함',
+        'p1_rp_m_period': '계약 전 {b0} – {b1} · 계약 후 {a0} – {a1} (계약일 {c})',
+        'p1_rp_m_cluster': '품목명을 정제한 뒤 TF-IDF + DBSCAN(코사인 거리 0.6, 최소 3건)으로 품목군을 묶음. 어느 품목군에도 묶이지 않은 거래는 제외',
+        'p1_rp_m_outlier': '품목군·기간별 단가 IQR 1.5배 밖 제외 (제외 비율 최대 7%)',
+        'p1_rp_m_price': 'VWAP(물량가중평균), USD/kg',
+        'p1_rp_m_saving': '(계약 전 VWAP − 계약 후 VWAP) × 계약 후 물량. 양수 = 절감, 음수 = 비용 증가',
+        'p1_rp_m_minor': '절감·증가액 절대값이 ${th:,.0f} 이하인 품목은 변화 미미로 분류해 절감·비용 증가 합계에서 뺌 (순 절감액에는 포함)',
+        'p1_rp_m_mix': '계약 전후 품목명 겹침(자카드)이 30% 미만이면 구성 변화 경고',
+        'p1_rp_m_blind_on': '고객사명 비공개 (수입사 A로 표기)',
+        'p1_rp_m_blind_off': '고객사명 공개',
+        'p1_rp_unknown1': '같은 기간 시장 전체 시세 변화의 영향 (시장 경쟁력 분석과 함께 보세요)',
+        'p1_rp_unknown2': '품질·규격 변경이나 계약 조건(결제·인코텀즈) 변화에 따른 단가 차이',
+        'p1_rp_unknown3': '관세·국내 물류비 등 도착 이후 비용',
+        'p1_rp_unknown4': '계약이 없었을 때의 단가 (전후 비교는 인과 효과의 추정치입니다)',
+        'p1_rp_close_head': '다음 단계 제안',
+        'p1_rp_close_k1': '성과 보고',
+        'p1_rp_close_k2': '재협상',
+        'p1_rp_close_k3': '확인 필요',
+        'p1_rp_close_v1': '순 ${x:,.0f} 절감{excl} · 주요 절감 품목: {items}',
+        'p1_rp_close_v1_loss': '순 ${x:,.0f} 비용 증가{excl} — 단가 상승 품목부터 원인을 확인하세요',
+        'p1_rp_close_v2': '단가 상승 {n}개 품목(${x:,.0f}): {items}',
+        'p1_rp_close_v2_none': '단가 상승 품목 없음 — 현재 조건 유지',
+        'p1_rp_close_v3': '구성 변화 {k}개 · 계약 후 구매 없음 {m}개 품목',
+        'p1_rp_close_note': '계약 전후 단가 비교는 시장 시세·품질·계약 조건 변화의 영향을 함께 담고 있습니다. 본 자료의 수치는 통관 데이터 기반 추정치입니다.',
+        # --- 새 PDF 양식 공통 (report_theme) ---
+        'rp_lbl_period': '분석 기간',
+        'rp_lbl_data': '데이터',
+        'rp_lbl_date': '작성일',
+        'rp_lbl_scope': '공개 범위',
+        'rp_data_source': 'Tridge TDS · 한국 수입 통관 데이터',
+        'rp_blind_on': 'Blind — 한국 수입사명 비공개',
+        'rp_blind_off': '내부용',
+        'rp_confidential': 'Confidential · 본 자료는 통관 데이터 기반 추정치이며 투자·계약 판단의 단일 근거로 사용할 수 없습니다.',
+        'rp_footer': 'Source: Tridge TDS · VWAP(물량가중평균) 기준 · USD/kg',
+        'rp_period_fmt': '{start} – {end} ({months}개월)',
+        'rp_meth_item': '항목',
+        'rp_meth_rule': '기준',
+        'rp_unknown_header': '이 리포트로 알 수 없는 것',
+        'rp_pdf_btn': '📄 PDF 리포트 만들기',
+        'rp_pdf_dl': '📥 PDF 리포트 다운로드',
+        'rp_pdf_spinner': 'PDF 리포트를 만드는 중입니다...',
+        'rp_count_unit': '{n}개',
+        'rp_company_unit': '{n}곳',
+        'rp_month_unit': '{n}개월',
+        # --- ⑨ 스크리너 PDF ---
+        'scr_rp_eyebrow': 'Commodity Screening Report',
+        'scr_rp_title1': '범용상품 스크리닝',
+        'scr_rp_title2': '리포트',
+        'scr_rp_item': 'HS {n}개 품목 스크리닝',
+        'scr_rp_s1_eyebrow': '01  Executive Summary',
+        'scr_rp_s1_head_a': 'A그룹 {n}개 품목이 입찰·대체 소싱 여지가 큽니다',
+        'scr_rp_s1_head_none': '범용성과 가격 격차를 함께 갖춘 품목은 아직 없습니다',
+        'scr_rp_kpi_note_a': '범용성 상위 · 격차 상위',
+        'scr_rp_kpi_note_b': '범용성 중간',
+        'scr_rp_kpi_note_c': '범용성 상위 · 격차 하위',
+        'scr_rp_kpi_note_d': '범용성 하위',
+        'scr_rp_top_header': 'A그룹 상위 품목 (범용성 순)',
+        'scr_rp_top_none': 'A그룹에 해당하는 품목이 없습니다.',
+        'scr_rp_s2_eyebrow': '02  Quadrant',
+        'scr_rp_s2_head': '범용성 × 격차 4분면',
+        'scr_rp_s2_sub': '가로 = 범용성 백분위, 세로 = 격차 점수, 원 크기 = 연간 수입액',
+        'scr_rp_s2_note': '점선은 분류 경계(범용성 {lo}/{hi}, 격차 {gap})입니다. A그룹 중 수입액 상위 품목에만 HS코드를 표시했습니다. 속 빈 원은 같은 달·같은 원산지 선적이 3건 미만이라 격차를 계산할 수 없는 품목으로, 0선에 표시했습니다.',
+        'scr_rp_th_importers': '수입사',
+        'scr_rp_legend_nogap': '격차 계산 불가',
+        'scr_rp_th_exporters': '공급사',
+        'scr_rp_th_origins': '원산지',
+        'scr_rp_th_cr3': 'CR3',
+        'scr_rp_th_uni': '범용성',
+        'scr_rp_th_gap': '격차',
+        'scr_rp_th_value': '연간 수입액',
+        'scr_rp_s3_eyebrow': '03  Items by Class',
+        'scr_rp_s3_head': '분류별 품목',
+        'scr_rp_s3_sub': '분류마다 범용성 순 상위 {n}개를 보여줍니다. 전체 목록은 화면의 CSV로 내려받을 수 있습니다.',
+        'scr_rp_s4_eyebrow': '04  Methodology',
+        'scr_rp_s4_head': '지표 정의와 데이터 한계',
+        'scr_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터, 건별 수입신고 단위. HS 10단위로 묶음',
+        'scr_rp_m_period': '{period}',
+        'scr_rp_m_prep': '중복 행 제거(신고일·수입자·공급자·중량·금액 동일), 건당 {kg:,}kg 미만 제외, HS별 단가 P1~P99 밖 제외, 거래 {ship}건 미만 HS는 순위 제외',
+        'scr_rp_m_uni': '수입사 수↑·CR3↓·해외 공급사 수↑·원산지 수↑·거래 월 수↑·단가 CV↓를 각각 데이터셋 내 백분위로 바꿔 가중 평균 (가중치 {w})',
+        'scr_rp_m_gap': '같은 달·같은 원산지 안의 단가 (P90−P10)/P50을 셀 물량으로 가중 평균한 격차율의 백분위 (선적 3건 이상인 셀만)',
+        'scr_rp_m_class': '범용성 백분위 {hi} 이상 & 격차 {gap} 이상 → A, 범용성 {hi} 이상 & 격차 {gap} 미만 → C, {lo}~{hi} → B, {lo} 미만 → D',
+        'scr_rp_m_cr3': 'CR3 = 상위 3개 수입사 물량 비중, HHI = 수입사 물량 비중(%) 제곱합',
+        'scr_rp_m_price': '평균 단가는 VWAP(물량가중평균), USD/kg. 단가 CV도 물량가중',
+        'scr_rp_lbl_data': '데이터', 'scr_rp_lbl_period': '기간', 'scr_rp_lbl_prep': '전처리', 'scr_rp_lbl_uni': '범용성 점수',
+        'scr_rp_lbl_gap': '격차 점수', 'scr_rp_lbl_class': '분류', 'scr_rp_lbl_conc': '집중도', 'scr_rp_lbl_price': '단가',
+        'scr_rp_unknown1': '같은 HS 안에서도 스펙·등급이 섞여 있어 생기는 단가 차이 (입찰 대응 분석에서 품명 키워드로 나눠 보세요)',
+        'scr_rp_unknown2': '수입자명이 유통사·대행사로 기록된 경우의 실수요자',
+        'scr_rp_unknown3': '관세·국내 물류비 등 도착 이후 비용',
+        'scr_rp_unknown4': '향후 수요·가격 예측',
+        'scr_rp_close_head': '다음 단계 제안',
+        'scr_rp_close_k1': '우선 검토',
+        'scr_rp_close_k2': '심층 분석',
+        'scr_rp_close_k3': '기준 확인',
+        'scr_rp_close_v1_a': 'A그룹 상위 품목: {items}',
+        'scr_rp_close_v1_none': 'A그룹이 없어 B그룹 상위 품목부터 검토: {items}',
+        'scr_rp_close_v2': '관심 품목을 입찰 대응 분석으로 넘겨 대체 공급처 단가와 공급 안정성을 확인하세요',
+        'scr_rp_close_v3': '분류 경계 범용성 {lo}/{hi}, 격차 {gap} 백분위 · 건당 {kg:,}kg 이상 거래 기준',
+        'scr_rp_close_note': '점수는 업로드한 데이터셋 안에서의 상대 순위입니다. 다른 품목군과 섞어 올리면 순위가 달라집니다. 본 자료의 수치는 통관 데이터 기반 추정치입니다.',
+        # --- ⑩ 입찰 대응 PDF ---
+        'bd_rp_header': '📄 PDF 리포트',
+        'bd_rp_item_label': '리포트 품목명',
+        'bd_rp_spec_label': '스펙 (리포트 표기용)',
+        'bd_rp_stab_label': '공급 안정성 페이지에 넣을 공급사 (공급사별 1페이지)',
+        'bd_rp_eyebrow': 'Bid Response Report',
+        'bd_rp_title2': '입찰 대응 리포트',
+        'bd_rp_s1_eyebrow': '01  Executive Summary',
+        'bd_rp_head_save': '검증된 대체 공급처로 단가 {pct:.0f}% 낮출 수 있습니다',
+        'bd_rp_head_found': '검증된 대체 공급처 {n}곳을 확인했습니다',
+        'bd_rp_head_none': '검증 기준을 통과한 공급처가 아직 없습니다',
+        'bd_rp_kpi1': '최저 검증 공급처 단가',
+        'bd_rp_kpi1_note': 'USD/kg · {basis} · {origin}',
+        'bd_rp_kpi1_none': '검증 통과 공급사 없음',
+        'bd_rp_basis_cif': 'CIF',
+        'bd_rp_basis_tariff': '관세 포함',
+        'bd_rp_kpi2': '현 납품 기준 대비',
+        'bd_rp_kpi2_note': '기준 ${p:.2f}/kg',
+        'bd_rp_kpi_no_base': '기준 공급사 미지정',
+        'bd_rp_kpi3': '연간 절감 추정',
+        'bd_rp_kpi3_note': '연 {t:,.0f}t 가정',
+        'bd_rp_kpi4': '공급 공백',
+        'bd_rp_kpi4_note': '최근 {m}개월 · 1순위 공급사',
+        'bd_rp_findings': '핵심 결론',
+        'bd_rp_f1_two': '{o1}산이 {o2}산보다 kg당 ${d:.2f} 낮습니다.',
+        'bd_rp_f1_two_d': '같은 조건(HS·품명 키워드) 안에서 VWAP를 비교했습니다. 두 원산지 모두 연 {t:,.0f}톤 이상 들어오는 주요 원산지입니다.',
+        'bd_rp_f1_one': '연 {t:,.0f}톤 이상 들어오는 주요 원산지는 {o}({tons:,.0f}t) 한 곳입니다.',
+        'bd_rp_f1_one_d': '다른 원산지는 물량이 적어 단가 비교의 근거가 약합니다.',
+        'bd_rp_f1_none': '연 {t:,.0f}톤 이상 들어오는 주요 원산지가 없습니다.',
+        'bd_rp_f1_none_d': '원산지별 물량이 모두 적어 원산지 간 단가 비교는 참고용으로만 보세요.',
+        'bd_rp_f2_base': '검증 통과 공급사 {n}곳 중 {k}곳이 현 납품 기준보다 10% 이상 저렴합니다.',
+        'bd_rp_f2_nobase': '검증 통과 공급사는 {n}곳입니다.',
+        'bd_rp_f2_d': '검증 기준은 최근 12개월 {ship}건 이상, {ton:,.0f}톤 이상, 한국 수입사 {imp}곳 이상 공급입니다.',
+        'bd_rp_f3_cheap': '{names}는 단가는 낮지만 아직 검증 전 단계입니다.',
+        'bd_rp_f3_cheap_d': '최근 12개월 거래 실적이 적어 입찰 제안의 주력 공급처로는 권하지 않습니다. 보조 옵션으로만 검토하세요.',
+        'bd_rp_f3_none': '검증 전 공급사 중 최저가보다 싼 곳은 없습니다.',
+        'bd_rp_f3_none_d': '현재 최저 비교단가는 검증을 통과한 공급사입니다.',
+        'bd_rp_tariff_missing': '원산지별 관세율이 일부 입력되지 않아 해당 원산지는 CIF 기준으로 비교했습니다. FTA 적용 세율에 따라 순위가 바뀔 수 있습니다.',
+        'bd_rp_tariff_ok': '입력한 원산지별 관세율로 비교단가 = CIF × (1 + 세율)을 계산했습니다.',
+        'bd_rp_s2_eyebrow': '02  Alternative Suppliers',
+        'bd_rp_s2_head': '대체 공급처 비교',
+        'bd_rp_s2_sub': '같은 조건 안에서 원산지·공급사별 VWAP와 검증 지표를 비교했습니다.',
+        'bd_rp_origin_chart': '원산지별 단가 분포',
+        'bd_rp_origin_chart_note': '점 = VWAP, 막대 = P10~P90 범위. 속이 빈 점은 연 {t:,.0f}톤 미만 원산지입니다.',
+        'bd_rp_baseline_line': '현 납품 기준 ${p:.2f}',
+        'bd_rp_rank_header': '공급사 순위 (비교단가 기준)',
+        'bd_rp_th_no': '#',
+        'bd_rp_th_cmp': '비교단가<br/>USD/kg',
+        'bd_rp_th_vs': '기준 대비',
+        'bd_rp_th_ship': '건수',
+        'bd_rp_th_ton': '물량(t)',
+        'bd_rp_th_months': '거래월',
+        'bd_rp_th_imp': '공급<br/>수입사',
+        'bd_rp_th_status': '상태',
+        'bd_rp_base_tag': '기준',
+        'bd_rp_rank_note': '검증 = 최근 12개월 {ship}건 이상 · {ton:,.0f}톤 이상 · 한국 수입사 {imp}곳 이상 공급. 공급 수입사는 실명 없이 수만 표기합니다. 상위 {n}개 공급사만 표시합니다.',
+        'bd_rp_s3_eyebrow': '03  Supply Track Record · {i}/{n}',
+        'bd_rp_s3_sub': '{origin} · 최근 {m}개월 한국향 선적 실적',
+        'bd_rp_s3_kpi1': '연평균 공급량',
+        'bd_rp_s3_kpi1_note': '최근 {m}개월 기준',
+        'bd_rp_s3_kpi2': '공백 월',
+        'bd_rp_s3_kpi2_note': '선적 0건인 달',
+        'bd_rp_s3_kpi3': '거래 한국 수입사',
+        'bd_rp_s3_kpi3_note': '실명 비공개',
+        'bd_rp_s3_kpi4': '단가 변동성',
+        'bd_rp_s3_kpi4_note': '물량가중 단가 변동계수',
+        'bd_rp_s3_chart': '월별 선적 물량',
+        'bd_rp_s3_chart_gap': '빗금 표시는 선적이 없었던 달입니다.',
+        'bd_rp_s3_chart_nogap': '{m}개월 동안 선적이 끊긴 달이 없습니다.',
+        'bd_rp_s3_year': '연도별 요약',
+        'bd_rp_s3_th_year': '기간',
+        'bd_rp_s3_th_ton': '선적 물량(t)',
+        'bd_rp_s3_th_months': '선적 월',
+        'bd_rp_s3_th_vwap': 'VWAP USD/kg',
+        'bd_rp_s3_th_imp': '공급 수입사',
+        'bd_rp_proof': 'Proof Statement',
+        'bd_rp_s4_eyebrow': '04  Methodology',
+        'bd_rp_s4_head': '분석 기준과 데이터 한계',
+        'bd_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터, 건별 수입신고 단위',
+        'bd_rp_m_period': '{period}. 공급 안정성은 기간 마지막 달 기준 최근 36개월',
+        'bd_rp_m_spec': 'HS {hs} · 품명 포함 키워드: {inc} · 제외 키워드: {exc}',
+        'bd_rp_m_dedup': '신고일·수입자·공급자·중량·금액이 모두 같은 행은 1건으로 처리',
+        'bd_rp_m_outlier': '건당 {kg:,}kg 미만 소량 수입, 단가 P1 미만·P99 초과',
+        'bd_rp_m_price': 'VWAP(물량가중평균), USD/kg, CIF 기준',
+        'bd_rp_m_tariff_none': '미반영. 원산지별 세율을 입력하면 비교단가 = CIF × (1 + 세율)',
+        'bd_rp_m_tariff_part': '일부 반영 ({rates}). 입력하지 않은 원산지는 CIF 그대로',
+        'bd_rp_m_tariff_all': '반영 ({rates}). 비교단가 = CIF × (1 + 세율)',
+        'bd_rp_m_blind_on': '한국 수입사명 비공개(물량 순 A/B/C로 치환). 해외 공급사명은 공개',
+        'bd_rp_m_blind_off': '내부용 — 한국 수입사명 공개',
+        'bd_rp_m_verify': '최근 12개월 {ship}건 이상 · {ton:,.0f}톤 이상 · 한국 수입사 {imp}곳 이상',
+        'bd_rp_lbl_data': '데이터', 'bd_rp_lbl_period': '기간', 'bd_rp_lbl_spec': '스펙 분리', 'bd_rp_lbl_dedup': '중복 제거',
+        'bd_rp_lbl_outlier': '이상치 제외', 'bd_rp_lbl_price': '평균 단가', 'bd_rp_lbl_tariff': '관세', 'bd_rp_lbl_blind': '블라인드',
+        'bd_rp_lbl_verify': '검증 기준',
+        'bd_rp_unknown1': '국내 통관·검역·운송·보관비 등 도착 이후 비용',
+        'bd_rp_unknown2': '수입자명이 유통사·대행사로 기록된 경우의 실수요자',
+        'bd_rp_unknown3': '공급사의 품질 규격 세부(수분율, 길이 분포 등)와 인증 현황',
+        'bd_rp_unknown4': '향후 가격 예측. 시세 전망이 필요하면 Tridge Eye와 함께 보세요',
+        'bd_rp_close_head': '입찰 제안 시 권장 구성',
+        'bd_rp_close_k1': '주력 공급처',
+        'bd_rp_close_k2': '백업 공급처',
+        'bd_rp_close_k3': '절감 근거',
+        'bd_rp_close_main': '{name} ({origin}) — ${p:.2f}/kg, 검증 통과, 공백 {gap}개월',
+        'bd_rp_close_backup': '{name} ({origin}) — ${p:.2f}/kg, 수입사 {imp}곳 공급',
+        'bd_rp_close_none': '검증을 통과한 공급사가 없습니다 — 최저 후보 {name}({origin}, ${p:.2f}/kg)의 실적을 더 확인하세요',
+        'bd_rp_close_no_backup': '검증 통과 공급사가 1곳뿐입니다',
+        'bd_rp_close_save': '현 납품 기준 대비 –{pct:.1f}%, 연 {t:,.0f}t 기준 약 ${k:,.0f}K',
+        'bd_rp_close_nosave': '기준 공급사를 지정하지 않아 절감액은 계산하지 않았습니다',
+        'bd_rp_close_nobetter': '현 납품 기준보다 싼 검증 공급사가 없어 절감 근거는 아직 없습니다',
+        'bd_rp_close_note_missing': '관세(일부)·국내 물류비 미반영. 도착 원가 기준 최종 판단 전 원산지별 FTA 세율과 국내 비용을 확인하세요. 본 자료의 수치는 통관 데이터 기반 추정치입니다.',
+        'bd_rp_close_note_ok': '국내 물류비 미반영. 도착 원가 기준 최종 판단 전 국내 비용을 확인하세요. 본 자료의 수치는 통관 데이터 기반 추정치입니다.',
+        # --- 공통: 블라인드 ---
+        'blind_label': '수입사 {code}',
+        'blind_toggle': '한국 수입사명 블라인드 (물량 순 A/B/C…)',
+        # --- ⑨ 범용상품 스크리너 ---
+        'menu_opt_screener': '범용상품 스크리너',
+        'sc_title': '🧭 범용상품 스크리너',
+        'sc_intro': 'HS 10단위 품목별로 시장이 얼마나 열려 있는지(범용성)와 같은 시기·같은 원산지 안에서 단가 차이가 얼마나 큰지(격차)를 함께 보고, 입찰·대체 소싱 여지가 큰 품목을 찾습니다.',
+        'sc_reset_btn': '새로운 스크리닝 시작 (다시하기)',
+        'sc_upload_label': '스크리닝할 시장 데이터 파일을 업로드하세요',
+        'sc_upload_caption': '※ 여러 HS코드·여러 수입사가 섞인 TDS raw file (날짜, 수입사, 공급사, 원산지, HS코드, 물량, 단가 필요)',
+        'sc_missing_cols_error': '필수 컬럼이 없습니다: {cols}',
+        'sc_period_label': '분석 기간 (기본: 최근 12개월)',
+        'sc_min_kg_label': '건당 최소 중량 (kg, 미만 거래 제외)',
+        'sc_min_ship_label': 'HS별 최소 거래 건수 (미만인 HS는 순위에서 제외)',
+        'sc_weights_header': '범용성 점수 가중치',
+        'sc_w_importers': '수입사 수 (많을수록 ↑)',
+        'sc_w_cr3': 'CR3 (낮을수록 ↑)',
+        'sc_w_exporters': '해외 공급사 수 (많을수록 ↑)',
+        'sc_w_origins': '원산지 수 (많을수록 ↑)',
+        'sc_w_months': '거래 발생 월 수 (많을수록 ↑)',
+        'sc_w_cv': '단가 CV (낮을수록 ↑)',
+        'sc_bounds_header': '분류 경계 (백분위)',
+        'sc_bound_hi': '범용성 상위 경계',
+        'sc_bound_lo': '범용성 하위 경계',
+        'sc_bound_gap': '격차 상위 경계 (범용성 상위 안에서 A/C 구분)',
+        'sc_bounds_warning': '하위 경계가 상위 경계보다 높습니다. 경계를 확인해주세요.',
+        'sc_run_btn': '스크리닝 실행',
+        'sc_spinner': '품목별 지표를 계산 중입니다...',
+        'sc_no_data_warning': '조건에 맞는 거래가 없습니다. 기간·최소 중량·최소 건수를 조정해보세요.',
+        'sc_prep_caption': '전처리: 원본 {n0:,}건 → 중복 {dup:,}건, 소량 거래 {small:,}건, 단가 이상치(HS별 P1~P99 밖) {outlier:,}건 제외 → {n:,}건 사용 · 거래 건수 부족으로 순위에서 제외된 HS {skipped}개',
+        'sc_kpi_total': '분석 HS 수',
+        'sc_class_a': 'A 공략 1순위',
+        'sc_class_b': 'B 검토',
+        'sc_class_c': 'C 범용·격차 작음',
+        'sc_class_d': 'D 제한적',
+        'sc_quadrant_header': '📍 범용성 × 격차 4분면',
+        'sc_axis_uni': '범용성 (백분위)',
+        'sc_axis_gap': '격차 점수 (백분위)',
+        'sc_bubble_note': '※ 버블 크기 = 연간 수입액. 세로선은 범용성 경계, 가로선은 격차 경계입니다.',
+        'sc_rank_header': '📋 품목 랭킹',
+        'sc_filter_label': '분류 필터',
+        'sc_col_hs': 'HS코드',
+        'sc_col_name': '대표 품명',
+        'sc_col_class': '분류',
+        'sc_col_uni': '범용성 점수',
+        'sc_col_uni_rank': '범용성 백분위',
+        'sc_col_gap_score': '격차 점수',
+        'sc_col_importers': '수입사 수',
+        'sc_col_cr3': 'CR3(%)',
+        'sc_col_hhi': 'HHI',
+        'sc_col_exporters': '해외 공급사 수',
+        'sc_col_origins': '원산지 수',
+        'sc_col_months': '거래 월 수',
+        'sc_col_freq': '수입사당 연간 건수',
+        'sc_col_cv': '단가 CV(%)',
+        'sc_col_gap': '격차율(%)',
+        'sc_col_value': '연간 수입액(USD)',
+        'sc_col_ship': '거래 건수',
+        'sc_col_vwap': 'VWAP(USD/kg)',
+        'sc_csv_btn': '📥 CSV 다운로드',
+        'sc_goto_header': '➡️ 입찰 대응 분석으로 넘기기',
+        'sc_goto_select': '분석할 품목(HS) 선택',
+        'sc_goto_btn': '선택한 품목으로 입찰 대응 분석 열기',
+        'sc_goto_done': '{hs}를 입찰 대응 분석으로 넘겼습니다. 메뉴가 자동으로 바뀌지 않으면 왼쪽 메뉴에서 [{menu}]를 눌러주세요.',
+        'sc_metric_note': '※ 범용성 점수 = 수입사 수↑·CR3↓·공급사 수↑·원산지 수↑·거래 월 수↑·단가 CV↓를 데이터셋 안에서 백분위로 바꿔 가중 평균한 값. 격차율 = 같은 달·같은 원산지 안의 단가 (P90−P10)/P50을 물량으로 가중 평균한 값(선적 3건 이상인 셀만). 모든 단가는 물량가중(VWAP) 기준 USD/kg입니다.',
+        # --- ⑩ 입찰 대응 분석 ---
+        'menu_opt_bid': '입찰 대응 분석',
+        'bd_title': '📑 입찰 대응 분석',
+        'bd_intro': '한 품목(HS·스펙)에 대해 대체 공급처의 단가·실적을 비교하고, 후보 공급사의 공급 안정성을 확인합니다.',
+        'bd_reset_btn': '새로운 분석 시작 (다시하기)',
+        'bd_upload_label': '분석할 시장 데이터 파일을 업로드하세요',
+        'bd_upload_caption': '※ TDS raw file (날짜, 수입사, 공급사, 원산지, 물량, 단가 필요. HS코드 컬럼이 있으면 HS로 걸러 볼 수 있습니다)',
+        'bd_use_screener_btn': '범용상품 스크리너에 올린 파일 그대로 사용',
+        'bd_missing_cols_error': '필수 컬럼이 없습니다: {cols}',
+        'bd_filter_header': '🔎 분석 대상',
+        'bd_hs_label': 'HS코드',
+        'bd_hs_all': '(전체)',
+        'bd_hs_from_screener': '범용상품 스크리너에서 넘어온 품목: {hs}',
+        'bd_include_label': '품명 포함 키워드 (쉼표로 구분, 하나라도 포함)',
+        'bd_exclude_label': '품명 제외 키워드 (쉼표로 구분, 하나라도 포함되면 제외)',
+        'bd_period_label': '분석 기간 (기본: 최근 12개월)',
+        'bd_min_kg_label': '건당 최소 중량 (kg, 미만 거래 제외)',
+        'bd_prep_caption': '전처리: 원본 {n0:,}건 → 중복 {dup:,}건, 소량 거래 {small:,}건, 단가 이상치(P1~P99 밖) {outlier:,}건 제외 · 필터 적용 후 기간 내 {n:,}건',
+        'bd_no_data_warning': '조건에 맞는 거래가 없습니다. HS코드·키워드·기간·최소 중량을 조정해보세요.',
+        'bd_tab_alt': '대체 공급처',
+        'bd_tab_stability': '공급 안정성',
+        'bd_verify_header': '검증 기준 (기간 마지막 날 기준 최근 12개월)',
+        'bd_verify_ship': '최소 거래 건수',
+        'bd_verify_ton': '최소 물량 (톤)',
+        'bd_verify_imp': '최소 거래 한국 수입사 수',
+        'bd_verified_only': '검증된 공급사만 보기',
+        'bd_badge_verified': '검증',
+        'bd_badge_unverified': '미검증',
+        'bd_tariff_header': '관세율 입력 (선택, 원산지별 %)',
+        'bd_tariff_caption': '※ 관세율을 넣으면 비교단가 = CIF × (1 + 세율)로 계산합니다. 비워두면 CIF 그대로 비교합니다. DB 연동 없이 수기 입력입니다.',
+        'bd_tariff_col_origin': '원산지',
+        'bd_tariff_col_rate': '관세율(%)',
+        'bd_badge_no_tariff': '관세 미반영',
+        'bd_badge_tariff_ok': '관세 반영',
+        'bd_tariff_missing_note': '관세율이 비어 있는 원산지가 있어 일부 비교단가에 관세가 반영되지 않았습니다.',
+        'bd_origin_header': '🌏 원산지별 비교',
+        'bd_origin_chart_title': '원산지별 단가 분포 (USD/kg)',
+        'bd_supplier_header': '🏭 해외 공급사별 비교',
+        'bd_base_label': '기준(현 납품) 공급사',
+        'bd_base_none': '(선택 안 함)',
+        'bd_annual_ton_label': '연간 예상 물량 (톤, 절감액 계산용)',
+        'bd_col_origin': '원산지',
+        'bd_col_exporter': '해외 공급사',
+        'bd_col_status': '검증',
+        'bd_col_vwap': 'VWAP(USD/kg)',
+        'bd_col_cmp': '비교단가(USD/kg)',
+        'bd_col_tariff': '관세율(%)',
+        'bd_col_ship': '건수',
+        'bd_col_ton': '총중량(톤)',
+        'bd_col_months': '거래 월 수',
+        'bd_col_importers': '한국 수입사 수',
+        'bd_col_importer_names': '거래 한국 수입사',
+        'bd_col_last': '최근 거래일',
+        'bd_col_saving_pct': '절감률(%)',
+        'bd_col_saving_amt': '연간 절감액(USD)',
+        'bd_csv_origin_btn': '📥 원산지 표 CSV',
+        'bd_csv_supplier_btn': '📥 공급사 표 CSV',
+        'bd_stab_select': '공급사 선택',
+        'bd_stab_chart_title': '최근 {m}개월 월별 선적 물량 (톤)',
+        'bd_stab_shipped': '선적 물량',
+        'bd_stab_gap': '선적 없음',
+        'bd_stab_kpi_gap': '공백 월 수',
+        'bd_stab_kpi_annual': '연평균 물량 (톤)',
+        'bd_stab_kpi_imp': '거래 한국 수입사 수',
+        'bd_stab_kpi_cv': '단가 CV (%)',
+        'bd_stab_year_header': '연도별 요약 (기간 마지막 달 기준 12개월 단위)',
+        'bd_col_year': '기간',
+        'bd_stab_sentence': '{name}는 최근 {m}개월간 한국에 연평균 {tons:,.0f}톤을 {gap} 공급했습니다. 거래한 한국 수입사는 {imp}곳이고, 단가 변동계수(CV)는 {cv}입니다.',
+        'bd_stab_no_gap': '공백 없이',
+        'bd_stab_with_gap': '{n}개월의 공백을 두고',
+        'bd_stab_no_data': '선택한 공급사의 최근 거래가 없습니다.',
+        'bd_method_note': '※ 단가는 모두 물량가중평균(VWAP) USD/kg입니다. 전처리: 중복 행 제거(신고일·수입자·공급자·중량·금액 동일), 건당 최소 중량 미만 제외, 단가 P1~P99 밖 제외.',
         # --- 포트폴리오 헬스체크 ---
         'ph_title': '🩺 포트폴리오 헬스체크',
         'ph_intro': '한 회사의 수입 데이터로 품목(또는 원산지 등)별 단가 변화·공급 차질·수급 경색을 점검하고, 공급 구조의 취약성과 금액 비중(영향도)을 함께 따져 지금 어디가 위험한지 빠르게 확인합니다.',
@@ -1160,6 +1562,408 @@ TEXTS = {
         'pdf_generating_msg': 'Generating PDF...',
         'pdf_error_msg': 'An error occurred while generating the PDF: {msg}',
         'pdf_chart_export_warning': 'Could not add a chart image to the PDF (the PDF will be generated without it): {msg}',
+        # --- ① Adoption Impact PDF (new template) ---
+        'p1_rp_eyebrow': 'Adoption Impact Report',
+        'p1_rp_title2': 'Adoption Impact Report',
+        'p1_rp_blind_toggle': 'Blind the client name in the PDF (Importer A)',
+        'p1_rp_legacy_btn': 'Legacy-format PDF',
+        'p1_rp_s1_eyebrow': '01  Executive Summary',
+        'p1_rp_head_save': 'Net savings of ${x:,.0f} since the contract',
+        'p1_rp_head_loss': 'Costs rose by a net ${x:,.0f} since the contract',
+        'p1_rp_kpi_net': 'Net savings',
+        'p1_rp_kpi_net_note_excl': '${y:,.0f} excl. mix-changed items',
+        'p1_rp_kpi_net_note': 'Price difference × post-contract volume',
+        'p1_rp_kpi_saved': 'Total savings ({n})',
+        'p1_rp_kpi_increased': 'Total cost increase ({n})',
+        'p1_rp_kpi_group_note': 'Excl. minor changes (±${th:,.0f})',
+        'p1_rp_kpi_price': 'Unit price change',
+        'p1_rp_kpi_price_note': 'VWAP at post-contract volume vs. before',
+        'p1_rp_findings': 'Key findings',
+        'p1_rp_excl_suffix': ' (${y:,.0f} excluding mix-changed items)',
+        'p1_rp_f1_save': 'Net savings of ${x:,.0f} since the contract{excl}.',
+        'p1_rp_f1_loss': 'Costs rose by a net ${x:,.0f} since the contract{excl}.',
+        'p1_rp_f1_d': '{ns} item group(s) saved ${s:,.0f} in total; {ni} item group(s) with higher prices added ${i:,.0f}.',
+        'p1_rp_f2': '{name} accounts for {p:.0f}% of total savings.',
+        'p1_rp_f2_concentrated': '{name} accounts for {p:.0f}% of total savings — savings are concentrated in one item, leaving room to improve the others.',
+        'p1_rp_f2_d': '${b:.2f} → ${a:.2f}/kg before vs. after the contract, on {v:,.0f} kg bought after the contract.',
+        'p1_rp_f2_none': 'No item group saved more than the minor-change threshold (±${th:,.0f}).',
+        'p1_rp_f2_none_d': 'Price differences before and after the contract are small, or post-contract volumes are small.',
+        'p1_rp_f3_up': 'Prices rose for {n} item group(s) such as {names}, adding ${x:,.0f} in cost.',
+        'p1_rp_f3_up_d': 'Consider renegotiating or reviewing alternative suppliers.',
+        'p1_rp_f3_none': 'No item group saw a price increase.',
+        'p1_rp_f3_none_d': 'All item groups were bought at the same or lower prices than before the contract.',
+        'p1_rp_f3_mix': ' For {k} item group(s) flagged for mix change, the difference may come from a change in products bought rather than negotiation.',
+        'p1_rp_s2_eyebrow': '02  Savings by Item',
+        'p1_rp_s2_head': 'Savings and cost increases by item group',
+        'p1_rp_s2_sub': 'Volume-weighted price difference before vs. after the contract × post-contract volume.',
+        'p1_rp_chart': 'Top item groups by savings and cost increase',
+        'p1_rp_chart_note': 'Blue = savings, Black = cost increase from higher prices. Up to the top {n} of each.',
+        'p1_rp_th_item': 'Item group',
+        'p1_rp_th_before': 'Before<br/>USD/kg',
+        'p1_rp_th_after': 'After<br/>USD/kg',
+        'p1_rp_th_vol': 'After<br/>vol. (kg)',
+        'p1_rp_th_saving': 'Savings<br/>USD',
+        'p1_rp_th_mix': 'Mix',
+        'p1_rp_badge_mix': 'Mix change',
+        'p1_rp_s3_eyebrow': '03  Items to Check',
+        'p1_rp_s3_head': 'Items to check separately',
+        'p1_rp_s3_sub': 'Item groups with no purchases after the contract, and item groups whose product mix changed significantly. Treat their savings with care.',
+        'p1_rp_s3_nopurchase': 'No purchases after contract ({n})',
+        'p1_rp_s3_nopurchase_note': 'Excluded from the savings and cost-increase totals because post-contract volume is 0.',
+        'p1_rp_s3_mix': 'Mix-change warnings ({n})',
+        'p1_rp_s3_mix_note': 'Less than 30% of product names overlap before vs. after the contract within the group; the price difference may not reflect negotiation.',
+        'p1_rp_th_overlap': 'Mix overlap',
+        'p1_rp_s3_none': 'None.',
+        'p1_rp_s4_eyebrow': '04  Methodology',
+        'p1_rp_s4_head': 'Criteria and data limits',
+        'p1_rp_lbl_data': 'Data', 'p1_rp_lbl_period': 'Period', 'p1_rp_lbl_cluster': 'Item grouping', 'p1_rp_lbl_outlier': 'Outliers',
+        'p1_rp_lbl_price': 'Average price', 'p1_rp_lbl_saving': 'Savings', 'p1_rp_lbl_minor': 'Minor change', 'p1_rp_lbl_mix': 'Mix change',
+        'p1_rp_lbl_blind': 'Blind',
+        'p1_rp_m_data': 'Tridge TDS Korea import customs data, per declaration. The most frequent importer in the file is analyzed',
+        'p1_rp_m_period': 'Before {b0} – {b1} · after {a0} – {a1} (contract date {c})',
+        'p1_rp_m_cluster': 'Product names cleaned, then grouped with TF-IDF + DBSCAN (cosine distance 0.6, min. 3). Trades not grouped are excluded',
+        'p1_rp_m_outlier': 'Unit prices outside 1.5× IQR per item group and period excluded (at most 7%)',
+        'p1_rp_m_price': 'VWAP (volume-weighted), USD/kg',
+        'p1_rp_m_saving': '(VWAP before − VWAP after) × post-contract volume. Positive = savings, negative = cost increase',
+        'p1_rp_m_minor': 'Item groups with absolute savings/increase of ${th:,.0f} or less are minor and excluded from the savings and cost-increase totals (included in net savings)',
+        'p1_rp_m_mix': 'Mix-change warning when product names overlap (Jaccard) less than 30% before vs. after',
+        'p1_rp_m_blind_on': 'Client name withheld (shown as Importer A)',
+        'p1_rp_m_blind_off': 'Client name shown',
+        'p1_rp_unknown1': 'The effect of market-wide price moves in the same period (see Market Competitiveness Analysis)',
+        'p1_rp_unknown2': 'Price differences from quality/spec changes or contract terms (payment, Incoterms)',
+        'p1_rp_unknown3': 'Costs after arrival, such as tariffs and domestic logistics',
+        'p1_rp_unknown4': 'What prices would have been without the contract (before/after comparison is an estimate of the effect)',
+        'p1_rp_close_head': 'Suggested next steps',
+        'p1_rp_close_k1': 'Report results',
+        'p1_rp_close_k2': 'Renegotiate',
+        'p1_rp_close_k3': 'To check',
+        'p1_rp_close_v1': 'Net savings ${x:,.0f}{excl} · main items: {items}',
+        'p1_rp_close_v1_loss': 'Net cost increase ${x:,.0f}{excl} — start with the item groups whose prices rose',
+        'p1_rp_close_v2': '{n} item group(s) with higher prices (${x:,.0f}): {items}',
+        'p1_rp_close_v2_none': 'No price increases — keep current terms',
+        'p1_rp_close_v3': '{k} mix-change warning(s) · {m} item group(s) with no purchases after the contract',
+        'p1_rp_close_note': 'Before/after price comparisons also reflect market prices, quality, and contract terms. Figures are estimates based on customs data.',
+        # --- New PDF template common (report_theme) ---
+        'rp_lbl_period': 'Period',
+        'rp_lbl_data': 'Data',
+        'rp_lbl_date': 'Date',
+        'rp_lbl_scope': 'Disclosure',
+        'rp_data_source': 'Tridge TDS · Korea import customs data',
+        'rp_blind_on': 'Blind — Korean importer names withheld',
+        'rp_blind_off': 'Internal use',
+        'rp_confidential': 'Confidential · Figures are estimates based on customs data and must not be the sole basis for investment or contract decisions.',
+        'rp_footer': 'Source: Tridge TDS · VWAP (volume-weighted) · USD/kg',
+        'rp_period_fmt': '{start} – {end} ({months} months)',
+        'rp_meth_item': 'Item',
+        'rp_meth_rule': 'Rule',
+        'rp_unknown_header': 'What this report cannot tell you',
+        'rp_pdf_btn': '📄 Create PDF report',
+        'rp_pdf_dl': '📥 Download PDF report',
+        'rp_pdf_spinner': 'Creating the PDF report...',
+        'rp_count_unit': '{n}',
+        'rp_company_unit': '{n}',
+        'rp_month_unit': '{n} mo',
+        # --- ⑨ Screener PDF ---
+        'scr_rp_eyebrow': 'Commodity Screening Report',
+        'scr_rp_title1': 'Commodity Screening',
+        'scr_rp_title2': 'Report',
+        'scr_rp_item': 'Screening of {n} HS codes',
+        'scr_rp_s1_eyebrow': '01  Executive Summary',
+        'scr_rp_s1_head_a': '{n} Class A items offer room for tendering and alternative sourcing',
+        'scr_rp_s1_head_none': 'No item combines high universality with a large price gap yet',
+        'scr_rp_kpi_note_a': 'High universality · large gap',
+        'scr_rp_kpi_note_b': 'Medium universality',
+        'scr_rp_kpi_note_c': 'High universality · small gap',
+        'scr_rp_kpi_note_d': 'Low universality',
+        'scr_rp_top_header': 'Top Class A items (by universality)',
+        'scr_rp_top_none': 'No items fall into Class A.',
+        'scr_rp_s2_eyebrow': '02  Quadrant',
+        'scr_rp_s2_head': 'Universality × Gap quadrant',
+        'scr_rp_s2_sub': 'X = universality percentile, Y = gap score, bubble size = annual import value',
+        'scr_rp_s2_note': 'Dotted lines are class boundaries (universality {lo}/{hi}, gap {gap}). HS codes are labeled only for the top Class A items by import value. Hollow circles are items whose gap cannot be calculated (fewer than 3 shipments per month and origin), shown on the zero line.',
+        'scr_rp_th_importers': 'Imp.',
+        'scr_rp_legend_nogap': 'Gap not computable',
+        'scr_rp_th_exporters': 'Supp.',
+        'scr_rp_th_origins': 'Orig.',
+        'scr_rp_th_cr3': 'CR3',
+        'scr_rp_th_uni': 'Univ.',
+        'scr_rp_th_gap': 'Gap',
+        'scr_rp_th_value': 'Annual value',
+        'scr_rp_s3_eyebrow': '03  Items by Class',
+        'scr_rp_s3_head': 'Items by class',
+        'scr_rp_s3_sub': 'Top {n} items per class by universality. The full list is available as CSV on screen.',
+        'scr_rp_s4_eyebrow': '04  Methodology',
+        'scr_rp_s4_head': 'Metric definitions and data limits',
+        'scr_rp_m_data': 'Tridge TDS Korea import customs data, per declaration, grouped by 10-digit HS code',
+        'scr_rp_m_period': '{period}',
+        'scr_rp_m_prep': 'Duplicates removed (same date, importer, supplier, weight, value); shipments under {kg:,} kg excluded; unit prices outside P1–P99 per HS excluded; HS codes with fewer than {ship} shipments not ranked',
+        'scr_rp_m_uni': 'Weighted average of dataset percentiles for importers↑, CR3↓, overseas suppliers↑, origins↑, months with trade↑, unit price CV↓ (weights {w})',
+        'scr_rp_m_gap': 'Percentile of the gap rate: volume-weighted (P90−P10)/P50 unit price within the same month and origin (cells with 3+ shipments only)',
+        'scr_rp_m_class': 'Universality ≥ {hi} & gap ≥ {gap} → A, universality ≥ {hi} & gap < {gap} → C, {lo}–{hi} → B, below {lo} → D',
+        'scr_rp_m_cr3': 'CR3 = volume share of the top 3 importers; HHI = sum of squared importer shares (%)',
+        'scr_rp_m_price': 'Average prices are VWAP (volume-weighted), USD/kg; unit price CV is also volume-weighted',
+        'scr_rp_lbl_data': 'Data', 'scr_rp_lbl_period': 'Period', 'scr_rp_lbl_prep': 'Preprocessing', 'scr_rp_lbl_uni': 'Universality',
+        'scr_rp_lbl_gap': 'Gap score', 'scr_rp_lbl_class': 'Class', 'scr_rp_lbl_conc': 'Concentration', 'scr_rp_lbl_price': 'Price',
+        'scr_rp_unknown1': 'Price differences caused by mixed specs or grades within the same HS code (split them with product keywords in Tender Response Analysis)',
+        'scr_rp_unknown2': 'The actual buyer when the importer of record is a distributor or agent',
+        'scr_rp_unknown3': 'Costs after arrival, such as tariffs and domestic logistics',
+        'scr_rp_unknown4': 'Future demand or price forecasts',
+        'scr_rp_close_head': 'Suggested next steps',
+        'scr_rp_close_k1': 'Review first',
+        'scr_rp_close_k2': 'Deep dive',
+        'scr_rp_close_k3': 'Criteria',
+        'scr_rp_close_v1_a': 'Top Class A items: {items}',
+        'scr_rp_close_v1_none': 'No Class A items; start with top Class B items: {items}',
+        'scr_rp_close_v2': 'Send items of interest to Tender Response Analysis to check alternative supplier prices and supply stability',
+        'scr_rp_close_v3': 'Class boundaries: universality {lo}/{hi}, gap {gap} percentile · shipments of {kg:,} kg or more',
+        'scr_rp_close_note': 'Scores are relative ranks within the uploaded dataset; mixing other product groups changes the ranking. Figures are estimates based on customs data.',
+        # --- ⑩ Tender PDF ---
+        'bd_rp_header': '📄 PDF report',
+        'bd_rp_item_label': 'Item name for the report',
+        'bd_rp_spec_label': 'Spec (shown in the report)',
+        'bd_rp_stab_label': 'Suppliers for supply stability pages (one page each)',
+        'bd_rp_eyebrow': 'Bid Response Report',
+        'bd_rp_title2': 'Bid Response Report',
+        'bd_rp_s1_eyebrow': '01  Executive Summary',
+        'bd_rp_head_save': 'Verified alternative suppliers can cut the unit price by {pct:.0f}%',
+        'bd_rp_head_found': '{n} verified alternative supplier(s) identified',
+        'bd_rp_head_none': 'No supplier has passed the verification criteria yet',
+        'bd_rp_kpi1': 'Lowest verified price',
+        'bd_rp_kpi1_note': 'USD/kg · {basis} · {origin}',
+        'bd_rp_kpi1_none': 'No verified supplier',
+        'bd_rp_basis_cif': 'CIF',
+        'bd_rp_basis_tariff': 'incl. tariff',
+        'bd_rp_kpi2': 'vs. current supply',
+        'bd_rp_kpi2_note': 'Baseline ${p:.2f}/kg',
+        'bd_rp_kpi_no_base': 'No baseline supplier',
+        'bd_rp_kpi3': 'Estimated annual savings',
+        'bd_rp_kpi3_note': 'Assuming {t:,.0f} t/year',
+        'bd_rp_kpi4': 'Supply gaps',
+        'bd_rp_kpi4_note': 'Last {m} mo · top supplier',
+        'bd_rp_findings': 'Key findings',
+        'bd_rp_f1_two': '{o1} is ${d:.2f}/kg cheaper than {o2}.',
+        'bd_rp_f1_two_d': 'VWAP compared under the same conditions (HS and product keywords). Both are major origins shipping {t:,.0f}+ tons a year.',
+        'bd_rp_f1_one': '{o} ({tons:,.0f} t) is the only major origin shipping {t:,.0f}+ tons a year.',
+        'bd_rp_f1_one_d': 'Other origins have small volumes, so price comparisons with them are weak.',
+        'bd_rp_f1_none': 'No origin ships {t:,.0f}+ tons a year.',
+        'bd_rp_f1_none_d': 'All origins have small volumes; treat origin price comparisons as reference only.',
+        'bd_rp_f2_base': '{k} of {n} verified suppliers are at least 10% cheaper than the current supply.',
+        'bd_rp_f2_nobase': '{n} supplier(s) passed verification.',
+        'bd_rp_f2_d': 'Verification: {ship}+ shipments, {ton:,.0f}+ tons, and {imp}+ Korean importers in the last 12 months.',
+        'bd_rp_f3_cheap': '{names}: low prices, but not yet verified.',
+        'bd_rp_f3_cheap_d': 'Too few trades in the last 12 months to recommend as a main supplier in a bid. Consider only as a backup option.',
+        'bd_rp_f3_none': 'No unverified supplier is cheaper than the lowest verified price.',
+        'bd_rp_f3_none_d': 'The lowest comparison price comes from a verified supplier.',
+        'bd_rp_tariff_missing': 'Tariff rates were not entered for some origins, so those are compared on a CIF basis. Rankings may change with FTA rates.',
+        'bd_rp_tariff_ok': 'Comparison price = CIF × (1 + rate) using the tariff rates entered per origin.',
+        'bd_rp_s2_eyebrow': '02  Alternative Suppliers',
+        'bd_rp_s2_head': 'Alternative suppliers',
+        'bd_rp_s2_sub': 'VWAP and verification metrics compared by origin and supplier under the same conditions.',
+        'bd_rp_origin_chart': 'Unit price range by origin',
+        'bd_rp_origin_chart_note': 'Dot = VWAP, bar = P10–P90. Hollow dots are origins under {t:,.0f} t/year.',
+        'bd_rp_baseline_line': 'Current supply ${p:.2f}',
+        'bd_rp_rank_header': 'Supplier ranking (by comparison price)',
+        'bd_rp_th_no': '#',
+        'bd_rp_th_cmp': 'Price<br/>USD/kg',
+        'bd_rp_th_vs': 'vs. base',
+        'bd_rp_th_ship': 'Ship.',
+        'bd_rp_th_ton': 'Vol. (t)',
+        'bd_rp_th_months': 'Mo.',
+        'bd_rp_th_imp': 'KR<br/>imp.',
+        'bd_rp_th_status': 'Status',
+        'bd_rp_base_tag': 'Baseline',
+        'bd_rp_rank_note': 'Verified = {ship}+ shipments · {ton:,.0f}+ tons · {imp}+ Korean importers in the last 12 months. Importers are shown as counts only. Top {n} suppliers shown.',
+        'bd_rp_s3_eyebrow': '03  Supply Track Record · {i}/{n}',
+        'bd_rp_s3_sub': '{origin} · shipments to Korea, last {m} months',
+        'bd_rp_s3_kpi1': 'Average annual supply',
+        'bd_rp_s3_kpi1_note': 'Based on the last {m} months',
+        'bd_rp_s3_kpi2': 'Gap months',
+        'bd_rp_s3_kpi2_note': 'Months with no shipment',
+        'bd_rp_s3_kpi3': 'Korean importers',
+        'bd_rp_s3_kpi3_note': 'Names withheld',
+        'bd_rp_s3_kpi4': 'Price volatility',
+        'bd_rp_s3_kpi4_note': 'Volume-weighted CV',
+        'bd_rp_s3_chart': 'Monthly shipped volume',
+        'bd_rp_s3_chart_gap': 'Hatched bars are months with no shipment.',
+        'bd_rp_s3_chart_nogap': 'No month without shipments in {m} months.',
+        'bd_rp_s3_year': 'Yearly summary',
+        'bd_rp_s3_th_year': 'Period',
+        'bd_rp_s3_th_ton': 'Shipped (t)',
+        'bd_rp_s3_th_months': 'Shipping months',
+        'bd_rp_s3_th_vwap': 'VWAP USD/kg',
+        'bd_rp_s3_th_imp': 'Korean importers',
+        'bd_rp_proof': 'Proof Statement',
+        'bd_rp_s4_eyebrow': '04  Methodology',
+        'bd_rp_s4_head': 'Criteria and data limits',
+        'bd_rp_m_data': 'Tridge TDS Korea import customs data, per declaration',
+        'bd_rp_m_period': '{period}. Supply stability covers the last 36 months up to the period end',
+        'bd_rp_m_spec': 'HS {hs} · product name includes: {inc} · excludes: {exc}',
+        'bd_rp_m_dedup': 'Rows with the same date, importer, supplier, weight, and value counted once',
+        'bd_rp_m_outlier': 'Shipments under {kg:,} kg; unit prices below P1 or above P99',
+        'bd_rp_m_price': 'VWAP (volume-weighted), USD/kg, CIF',
+        'bd_rp_m_tariff_none': 'Not applied. With rates per origin, comparison price = CIF × (1 + rate)',
+        'bd_rp_m_tariff_part': 'Partly applied ({rates}). Origins without a rate use CIF as is',
+        'bd_rp_m_tariff_all': 'Applied ({rates}). Comparison price = CIF × (1 + rate)',
+        'bd_rp_m_blind_on': 'Korean importer names withheld (replaced by A/B/C by volume). Overseas supplier names shown',
+        'bd_rp_m_blind_off': 'Internal use — Korean importer names shown',
+        'bd_rp_m_verify': '{ship}+ shipments · {ton:,.0f}+ tons · {imp}+ Korean importers in the last 12 months',
+        'bd_rp_lbl_data': 'Data', 'bd_rp_lbl_period': 'Period', 'bd_rp_lbl_spec': 'Spec split', 'bd_rp_lbl_dedup': 'Duplicates',
+        'bd_rp_lbl_outlier': 'Outliers', 'bd_rp_lbl_price': 'Average price', 'bd_rp_lbl_tariff': 'Tariff', 'bd_rp_lbl_blind': 'Blind',
+        'bd_rp_lbl_verify': 'Verification',
+        'bd_rp_unknown1': 'Costs after arrival such as customs, quarantine, transport, and storage in Korea',
+        'bd_rp_unknown2': 'The actual buyer when the importer of record is a distributor or agent',
+        'bd_rp_unknown3': 'Detailed quality specs (moisture, length distribution, etc.) and certifications of suppliers',
+        'bd_rp_unknown4': 'Future price forecasts; use Tridge Eye for market outlooks',
+        'bd_rp_close_head': 'Recommended bid setup',
+        'bd_rp_close_k1': 'Main supplier',
+        'bd_rp_close_k2': 'Backup supplier',
+        'bd_rp_close_k3': 'Savings basis',
+        'bd_rp_close_main': '{name} ({origin}) — ${p:.2f}/kg, verified, {gap} gap month(s)',
+        'bd_rp_close_backup': '{name} ({origin}) — ${p:.2f}/kg, supplies {imp} importer(s)',
+        'bd_rp_close_none': 'No verified supplier — check the track record of the lowest candidate {name} ({origin}, ${p:.2f}/kg)',
+        'bd_rp_close_no_backup': 'Only one supplier passed verification',
+        'bd_rp_close_save': '–{pct:.1f}% vs. current supply, about ${k:,.0f}K at {t:,.0f} t/year',
+        'bd_rp_close_nosave': 'No baseline supplier was selected, so savings were not calculated',
+        'bd_rp_close_nobetter': 'No verified supplier is cheaper than the current supply yet',
+        'bd_rp_close_note_missing': 'Tariffs (partly) and domestic logistics not included. Check FTA rates per origin and domestic costs before a final landed-cost decision. Figures are estimates based on customs data.',
+        'bd_rp_close_note_ok': 'Domestic logistics not included. Check domestic costs before a final landed-cost decision. Figures are estimates based on customs data.',
+        # --- Common: blind ---
+        'blind_label': 'Importer {code}',
+        'blind_toggle': 'Blind Korean importer names (A/B/C… by volume)',
+        # --- ⑨ Commodity Screener ---
+        'menu_opt_screener': 'Commodity Screener',
+        'sc_title': '🧭 Commodity Screener',
+        'sc_intro': 'For each 10-digit HS code, compares how open the market is (universality) with how widely unit prices vary within the same month and origin (gap), to find items with room for tendering or alternative sourcing.',
+        'sc_reset_btn': 'Start a New Screening (Reset)',
+        'sc_upload_label': 'Upload the market data file to screen',
+        'sc_upload_caption': '※ A TDS raw file with multiple HS codes and importers (date, importer, supplier, origin, HS code, volume, and unit price required)',
+        'sc_missing_cols_error': 'Required columns are missing: {cols}',
+        'sc_period_label': 'Analysis period (default: last 12 months)',
+        'sc_min_kg_label': 'Minimum weight per shipment (kg; smaller shipments excluded)',
+        'sc_min_ship_label': 'Minimum shipments per HS (HS codes below this are not ranked)',
+        'sc_weights_header': 'Universality score weights',
+        'sc_w_importers': 'Number of importers (more ↑)',
+        'sc_w_cr3': 'CR3 (lower ↑)',
+        'sc_w_exporters': 'Number of overseas suppliers (more ↑)',
+        'sc_w_origins': 'Number of origins (more ↑)',
+        'sc_w_months': 'Months with trade (more ↑)',
+        'sc_w_cv': 'Unit price CV (lower ↑)',
+        'sc_bounds_header': 'Class boundaries (percentile)',
+        'sc_bound_hi': 'Universality upper boundary',
+        'sc_bound_lo': 'Universality lower boundary',
+        'sc_bound_gap': 'Gap upper boundary (splits A/C within high universality)',
+        'sc_bounds_warning': 'The lower boundary is above the upper boundary. Please check the boundaries.',
+        'sc_run_btn': 'Run Screening',
+        'sc_spinner': 'Calculating metrics per item...',
+        'sc_no_data_warning': 'No trades match the conditions. Try adjusting the period, minimum weight, or minimum shipments.',
+        'sc_prep_caption': 'Preprocessing: {n0:,} raw rows → excluded {dup:,} duplicates, {small:,} small shipments, {outlier:,} price outliers (outside P1–P99 per HS) → {n:,} rows used · {skipped} HS code(s) not ranked due to too few shipments',
+        'sc_kpi_total': 'HS codes analyzed',
+        'sc_class_a': 'A Top target',
+        'sc_class_b': 'B Review',
+        'sc_class_c': 'C Universal, small gap',
+        'sc_class_d': 'D Limited',
+        'sc_quadrant_header': '📍 Universality × Gap quadrant',
+        'sc_axis_uni': 'Universality (percentile)',
+        'sc_axis_gap': 'Gap score (percentile)',
+        'sc_bubble_note': '※ Bubble size = annual import value. Vertical lines are universality boundaries; the horizontal line is the gap boundary.',
+        'sc_rank_header': '📋 Item ranking',
+        'sc_filter_label': 'Class filter',
+        'sc_col_hs': 'HS code',
+        'sc_col_name': 'Representative product name',
+        'sc_col_class': 'Class',
+        'sc_col_uni': 'Universality score',
+        'sc_col_uni_rank': 'Universality percentile',
+        'sc_col_gap_score': 'Gap score',
+        'sc_col_importers': 'Importers',
+        'sc_col_cr3': 'CR3 (%)',
+        'sc_col_hhi': 'HHI',
+        'sc_col_exporters': 'Overseas suppliers',
+        'sc_col_origins': 'Origins',
+        'sc_col_months': 'Months with trade',
+        'sc_col_freq': 'Shipments per importer per year',
+        'sc_col_cv': 'Unit price CV (%)',
+        'sc_col_gap': 'Gap rate (%)',
+        'sc_col_value': 'Annual import value (USD)',
+        'sc_col_ship': 'Shipments',
+        'sc_col_vwap': 'VWAP (USD/kg)',
+        'sc_csv_btn': '📥 Download CSV',
+        'sc_goto_header': '➡️ Send to Tender Response Analysis',
+        'sc_goto_select': 'Item (HS) to analyze',
+        'sc_goto_btn': 'Open Tender Response Analysis for this item',
+        'sc_goto_done': '{hs} was sent to Tender Response Analysis. If the menu does not switch automatically, click [{menu}] in the left menu.',
+        'sc_metric_note': '※ Universality score = weighted average of dataset percentiles for importers↑, CR3↓, suppliers↑, origins↑, months with trade↑, and unit price CV↓. Gap rate = volume-weighted average of (P90−P10)/P50 unit price within the same month and origin (cells with 3+ shipments only). All prices are volume-weighted (VWAP) USD/kg.',
+        # --- ⑩ Tender Response Analysis ---
+        'menu_opt_bid': 'Tender Response Analysis',
+        'bd_title': '📑 Tender Response Analysis',
+        'bd_intro': 'For one item (HS and spec), compares prices and track records of alternative suppliers and checks the supply stability of candidates.',
+        'bd_reset_btn': 'Start a New Analysis (Reset)',
+        'bd_upload_label': 'Upload the market data file to analyze',
+        'bd_upload_caption': '※ TDS raw file (date, importer, supplier, origin, volume, and unit price required; an HS code column lets you filter by HS)',
+        'bd_use_screener_btn': 'Use the file uploaded to the Commodity Screener',
+        'bd_missing_cols_error': 'Required columns are missing: {cols}',
+        'bd_filter_header': '🔎 Analysis target',
+        'bd_hs_label': 'HS code',
+        'bd_hs_all': '(All)',
+        'bd_hs_from_screener': 'Item sent from the Commodity Screener: {hs}',
+        'bd_include_label': 'Product name must include (comma-separated, any match)',
+        'bd_exclude_label': 'Product name must exclude (comma-separated, any match excludes)',
+        'bd_period_label': 'Analysis period (default: last 12 months)',
+        'bd_min_kg_label': 'Minimum weight per shipment (kg; smaller shipments excluded)',
+        'bd_prep_caption': 'Preprocessing: {n0:,} raw rows → excluded {dup:,} duplicates, {small:,} small shipments, {outlier:,} price outliers (outside P1–P99) · {n:,} rows in the period after filters',
+        'bd_no_data_warning': 'No trades match the conditions. Try adjusting the HS code, keywords, period, or minimum weight.',
+        'bd_tab_alt': 'Alternative suppliers',
+        'bd_tab_stability': 'Supply stability',
+        'bd_verify_header': 'Verification criteria (last 12 months up to the period end)',
+        'bd_verify_ship': 'Minimum shipments',
+        'bd_verify_ton': 'Minimum volume (tons)',
+        'bd_verify_imp': 'Minimum Korean importers',
+        'bd_verified_only': 'Show verified suppliers only',
+        'bd_badge_verified': 'Verified',
+        'bd_badge_unverified': 'Unverified',
+        'bd_tariff_header': 'Tariff rates (optional, % by origin)',
+        'bd_tariff_caption': '※ With a tariff rate, comparison price = CIF × (1 + rate). Left blank, CIF is compared as is. Entered manually (no tariff database).',
+        'bd_tariff_col_origin': 'Origin',
+        'bd_tariff_col_rate': 'Tariff (%)',
+        'bd_badge_no_tariff': 'Tariff not applied',
+        'bd_badge_tariff_ok': 'Tariff applied',
+        'bd_tariff_missing_note': 'Some origins have no tariff rate, so tariffs are not reflected in some comparison prices.',
+        'bd_origin_header': '🌏 Comparison by origin',
+        'bd_origin_chart_title': 'Unit price distribution by origin (USD/kg)',
+        'bd_supplier_header': '🏭 Comparison by overseas supplier',
+        'bd_base_label': 'Baseline (current) supplier',
+        'bd_base_none': '(None)',
+        'bd_annual_ton_label': 'Expected annual volume (tons, for savings)',
+        'bd_col_origin': 'Origin',
+        'bd_col_exporter': 'Overseas supplier',
+        'bd_col_status': 'Verification',
+        'bd_col_vwap': 'VWAP (USD/kg)',
+        'bd_col_cmp': 'Comparison price (USD/kg)',
+        'bd_col_tariff': 'Tariff (%)',
+        'bd_col_ship': 'Shipments',
+        'bd_col_ton': 'Total weight (tons)',
+        'bd_col_months': 'Months with trade',
+        'bd_col_importers': 'Korean importers',
+        'bd_col_importer_names': 'Korean importers supplied',
+        'bd_col_last': 'Latest trade',
+        'bd_col_saving_pct': 'Savings (%)',
+        'bd_col_saving_amt': 'Annual savings (USD)',
+        'bd_csv_origin_btn': '📥 Origin table CSV',
+        'bd_csv_supplier_btn': '📥 Supplier table CSV',
+        'bd_stab_select': 'Supplier',
+        'bd_stab_chart_title': 'Monthly shipped volume, last {m} months (tons)',
+        'bd_stab_shipped': 'Shipped volume',
+        'bd_stab_gap': 'No shipment',
+        'bd_stab_kpi_gap': 'Months without shipments',
+        'bd_stab_kpi_annual': 'Average annual volume (tons)',
+        'bd_stab_kpi_imp': 'Korean importers supplied',
+        'bd_stab_kpi_cv': 'Unit price CV (%)',
+        'bd_stab_year_header': 'Yearly summary (12-month blocks ending at the period end)',
+        'bd_col_year': 'Period',
+        'bd_stab_sentence': 'Over the last {m} months, {name} supplied Korea an average of {tons:,.0f} tons a year {gap}. It supplied {imp} Korean importer(s), with a unit price coefficient of variation (CV) of {cv}.',
+        'bd_stab_no_gap': 'without a gap',
+        'bd_stab_with_gap': 'with {n} month(s) without shipments',
+        'bd_stab_no_data': 'The selected supplier has no recent trades.',
+        'bd_method_note': '※ All prices are volume-weighted average (VWAP) USD/kg. Preprocessing: duplicate rows removed (same date, importer, supplier, weight, and value), shipments under the minimum weight excluded, unit prices outside P1–P99 excluded.',
         # --- Portfolio Health Check ---
         'ph_title': '🩺 Portfolio Health Check',
         'ph_intro': "Checks one company's import data per product (or origin, etc.) for unit price changes, supply disruption, and supply squeeze, weighing supply-structure vulnerability and spend share (impact) to quickly show where the risk is right now.",
@@ -1618,6 +2422,20 @@ def reset_health_states():
     st.session_state.health_result = None
 
 
+def reset_screener_states():
+    """범용상품 스크리너 상태만 초기화하는 함수"""
+    st.session_state.scr_raw_df = None
+    st.session_state.scr_headers = None
+    st.session_state.scr_result = None
+
+
+def reset_bid_states():
+    """입찰 대응 분석 상태만 초기화하는 함수"""
+    st.session_state.bid_raw_df = None
+    st.session_state.bid_headers = None
+    st.session_state.bid_hs_preset = None
+
+
 _HS_COL_RE = re.compile(r'(?<![a-z])hs(?![a-z])')
 _CODE_COL_RE = re.compile(r'(?<![a-z])hs(?![a-z])|code|코드')
 
@@ -1995,6 +2813,855 @@ def build_health_excel(rows):
         summary.to_excel(writer, sheet_name=T('ph_sheet_result')[:31], index=False)
         suppliers.to_excel(writer, sheet_name=T('ph_sheet_suppliers')[:31], index=False)
     return buf.getvalue()
+
+
+# ============================================================
+# 공통: 블라인드 처리 (한국 수입사명 → 수입사 A/B/C, 물량 순)
+# 화면·PDF·CSV로 나가는 수입사명은 모두 apply_blind를 거친다. 해외 공급사명은 그대로 둔다.
+# ============================================================
+def _blind_code(i):
+    """0 → A, 25 → Z, 26 → AA ..."""
+    code, i = '', i + 1
+    while i:
+        i, r = divmod(i - 1, 26)
+        code = chr(65 + r) + code
+    return code
+
+
+def blind_importer_map(df, importer_col, volume_col):
+    """수입사명 → '수입사 A' 매핑 (물량 큰 순으로 A, B, C ...)."""
+    vol = df.groupby(importer_col)[volume_col].sum().sort_values(ascending=False)
+    return {name: T('blind_label', code=_blind_code(i)) for i, name in enumerate(vol.index)}
+
+
+def apply_blind(df, importer_col, enabled, volume_col=None, mapping=None):
+    """블라인드가 켜져 있으면 importer_col의 값을 매핑으로 치환한 복사본을 반환한다.
+    importer_col이 '이름1, 이름2' 같은 목록 문자열이어도 각각 치환한다."""
+    if not enabled or importer_col not in df.columns:
+        return df
+    if mapping is None:
+        mapping = blind_importer_map(df, importer_col, volume_col)
+    out = df.copy()
+    out[importer_col] = out[importer_col].map(
+        lambda v: ', '.join(mapping.get(x.strip(), x.strip()) for x in v.split(',')) if isinstance(v, str) else v)
+    return out
+
+
+# ============================================================
+# 공통: 거래 데이터 전처리 (⑨ 범용상품 스크리너, ⑩ 입찰 대응 분석)
+# ============================================================
+TRADE_HS_CANDIDATES = ['Detailed HS-CODE', 'Detailed HS Code', 'HS Code', 'HS-CODE', 'hs_code', 'HS코드']
+
+
+def detect_trade_columns(headers):
+    """표준 컬럼 + HS코드 + 금액 컬럼."""
+    cols = detect_standard_columns(headers)
+    cols['hs'] = find_column(headers, TRADE_HS_CANDIDATES)
+    cols['value'] = find_column(headers, ['Value', 'Total Value', 'Amount', 'value', '금액'])
+    return cols
+
+
+def _clean_text(series):
+    return series.where(series.isna(), series.astype(str).str.strip()).fillna('(N/A)')
+
+
+def prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=1000, trim=(0.01, 0.99)):
+    """⑨⑩ 공통 전처리. (df, stats)를 반환한다.
+    1) 날짜·중량·단가가 유효한 행만 (단가가 없으면 금액/중량으로 계산)
+    2) 중복 제거: 신고일·수입자·공급자·중량·금액이 모두 같은 행
+    3) 기간 필터 → 건당 최소 중량 미만 제외 → HS별 단가 P1~P99 밖 제외"""
+    n0 = len(raw_df)
+    vol = pd.to_numeric(raw_df[cols['volume']], errors='coerce')
+    price = pd.to_numeric(raw_df[cols['price']], errors='coerce') if cols.get('price') else pd.Series(np.nan, index=raw_df.index)
+    value = pd.to_numeric(raw_df[cols['value']], errors='coerce') if cols.get('value') else price * vol
+    price = price.where(price.notna(), value / vol)
+    d = pd.DataFrame({
+        '_date': pd.to_datetime(raw_df[cols['date']], errors='coerce'),
+        '_importer': _clean_text(raw_df[cols['importer']]) if cols.get('importer') else '(N/A)',
+        '_exporter': _clean_text(raw_df[cols['exporter']]) if cols.get('exporter') else '(N/A)',
+        '_origin': _clean_text(raw_df[cols['origin']]) if cols.get('origin') else '(N/A)',
+        '_product': _clean_text(raw_df[cols['product']]) if cols.get('product') else '',
+        '_hs': _clean_text(raw_df[cols['hs']]) if cols.get('hs') else '(N/A)',
+        '_volume': vol, '_price': price, '_amount': value.where(value.notna(), price * vol),
+    })
+    d = d[d['_date'].notna() & (d['_volume'] > 0) & (d['_price'] > 0)]
+    d['_date'] = d['_date'].dt.normalize()
+    before = len(d)
+    d = d.drop_duplicates(subset=['_date', '_importer', '_exporter', '_volume', '_amount'])
+    stats = {'n0': n0, 'dup': before - len(d)}
+    if period is not None:
+        d = d[(d['_date'] >= pd.Timestamp(period[0])) & (d['_date'] <= pd.Timestamp(period[1]))]
+    before = len(d)
+    d = d[d['_volume'] >= min_shipment_kg]
+    stats['small'] = before - len(d)
+    before = len(d)
+    if len(d):
+        lo = d.groupby('_hs')['_price'].transform(lambda p: p.quantile(trim[0]))
+        hi = d.groupby('_hs')['_price'].transform(lambda p: p.quantile(trim[1]))
+        d = d[(d['_price'] >= lo) & (d['_price'] <= hi)]
+    stats['outlier'] = before - len(d)
+    stats['n'] = len(d)
+    d = d.copy()
+    d['_ym'] = d['_date'].dt.to_period('M')
+    return d, stats
+
+
+def default_last_12m(dates):
+    """데이터 마지막 날짜 기준 최근 12개월 (시작일, 종료일)."""
+    dates = pd.to_datetime(dates, errors='coerce').dropna()
+    end = dates.max().date() if len(dates) else datetime.date.today()
+    start = (pd.Timestamp(end) - pd.DateOffset(months=12)).date() + datetime.timedelta(days=1)
+    return start, end
+
+
+def _weighted_cv(g):
+    """물량가중 단가 변동계수(%)."""
+    w, p = g['_volume'], g['_price']
+    tw = w.sum()
+    if len(g) < 2 or tw <= 0:
+        return np.nan
+    m = (p * w).sum() / tw
+    return float(np.sqrt(((p - m) ** 2 * w).sum() / tw) / m * 100) if m > 0 else np.nan
+
+
+def _gap_rate(g, min_cell=3):
+    """같은 달·같은 원산지 셀마다 단가 격차율 (P90−P10)/P50을 구해 셀 물량으로 가중 평균(%)."""
+    rates, weights = [], []
+    for _, c in g.groupby(['_ym', '_origin']):
+        if len(c) < min_cell:
+            continue
+        p10, p50, p90 = c['_price'].quantile([0.1, 0.5, 0.9])
+        if p50 > 0:
+            rates.append((p90 - p10) / p50 * 100)
+            weights.append(c['_volume'].sum())
+    return float(np.average(rates, weights=weights)) if rates else np.nan
+
+
+# ============================================================
+# ⑨ 범용상품 스크리너
+# ============================================================
+SCREENER_COMPONENTS = [('importers', True), ('cr3', False), ('exporters', True), ('origins', True), ('months', True), ('cv', False)]
+SCREENER_DEFAULT_WEIGHTS = {k: 1.0 for k, _ in SCREENER_COMPONENTS}
+SCREENER_CLASS_KEY = {'A': 'sc_class_a', 'B': 'sc_class_b', 'C': 'sc_class_c', 'D': 'sc_class_d'}
+SCREENER_CLASS_COLOR = {'A': '#171CFD', 'B': '#3E50FE', 'C': '#9BB3FF', 'D': '#0A0A18'}
+
+
+def compute_screener(df, period_months, weights, bound_hi=60, bound_lo=30, bound_gap=50, min_shipments=5):
+    """HS별 지표 → 범용성·격차 점수 → A/B/C/D 분류. 반환: (결과 DataFrame, 순위에서 제외된 HS 수)."""
+    years = max(period_months, 1) / 12
+    rows, skipped = [], 0
+    for hs, g in df.groupby('_hs'):
+        if len(g) < min_shipments:
+            skipped += 1
+            continue
+        imp_vol = g.groupby('_importer')['_volume'].sum().sort_values(ascending=False)
+        share = imp_vol / imp_vol.sum() * 100
+        n_imp = len(imp_vol)
+        rows.append({
+            'hs': hs,
+            'name': g['_product'].mode().iloc[0] if g['_product'].notna().any() else '',
+            'importers': n_imp,
+            'cr3': float(share.head(3).sum()),
+            'hhi': float((share ** 2).sum()),
+            'exporters': g['_exporter'].nunique(),
+            'origins': g['_origin'].nunique(),
+            'months': g['_ym'].nunique(),
+            'freq': len(g) / n_imp / years,
+            'cv': _weighted_cv(g),
+            'gap': _gap_rate(g),
+            'value': float(g['_amount'].sum()) / years,
+            'shipments': len(g),
+            'vwap': float(weighted_avg(g, '_price', '_volume')),
+        })
+    res = pd.DataFrame(rows)
+    if res.empty:
+        return res, skipped
+    num, den = pd.Series(0.0, index=res.index), pd.Series(0.0, index=res.index)
+    for key, higher_better in SCREENER_COMPONENTS:
+        pct = res[key].rank(pct=True, ascending=higher_better) * 100
+        w = float(weights.get(key, 0))
+        num += pct.fillna(0) * w
+        den += pct.notna() * w
+    res['uni'] = (num / den.where(den > 0)).round(1)
+    res['uni_rank'] = (res['uni'].rank(pct=True) * 100).round(1)
+    res['gap_score'] = (res['gap'].rank(pct=True) * 100).round(1)
+
+    def _cls(r):
+        if r['uni_rank'] >= bound_hi:
+            return 'A' if pd.notna(r['gap_score']) and r['gap_score'] >= bound_gap else 'C'
+        return 'B' if r['uni_rank'] >= bound_lo else 'D'
+    res['class'] = res.apply(_cls, axis=1)
+    res = res.sort_values(['class', 'uni_rank'], ascending=[True, False]).reset_index(drop=True)
+    return res, skipped
+
+
+def screener_display_table(res):
+    """랭킹 표 (화면·CSV 공용)."""
+    cols = [('hs', 'sc_col_hs'), ('name', 'sc_col_name'), ('class', 'sc_col_class'), ('uni', 'sc_col_uni'),
+            ('uni_rank', 'sc_col_uni_rank'), ('gap_score', 'sc_col_gap_score'), ('importers', 'sc_col_importers'),
+            ('cr3', 'sc_col_cr3'), ('hhi', 'sc_col_hhi'), ('exporters', 'sc_col_exporters'), ('origins', 'sc_col_origins'),
+            ('months', 'sc_col_months'), ('freq', 'sc_col_freq'), ('cv', 'sc_col_cv'), ('gap', 'sc_col_gap'),
+            ('value', 'sc_col_value'), ('shipments', 'sc_col_ship'), ('vwap', 'sc_col_vwap')]
+    out = res[[c for c, _ in cols]].copy()
+    out['class'] = out['class'].map(lambda c: T(SCREENER_CLASS_KEY[c]))
+    for c in ('cr3', 'freq', 'cv', 'gap'):
+        out[c] = out[c].round(1)
+    out['hhi'] = out['hhi'].round(0)
+    out['value'] = out['value'].round(0)
+    out['vwap'] = out['vwap'].round(3)
+    return out.rename(columns={c: T(k) for c, k in cols})
+
+
+def screener_quadrant_fig(res, bound_hi, bound_lo, bound_gap):
+    """범용성 백분위 × 격차 점수 4분면 산점도 (버블 = 연간 수입액)."""
+    fig = go.Figure()
+    max_val = max(float(res['value'].max()), 1.0)
+    for cls in ['A', 'B', 'C', 'D']:
+        sub = res[res['class'] == cls]
+        if sub.empty:
+            continue
+        fig.add_trace(go.Scatter(
+            x=sub['uni_rank'], y=sub['gap_score'].fillna(0), mode='markers', name=T(SCREENER_CLASS_KEY[cls]),
+            marker=dict(size=sub['value'], sizemode='area', sizeref=2.0 * max_val / (48 ** 2), sizemin=5,
+                        color=SCREENER_CLASS_COLOR[cls], line=dict(width=0.5, color='#FFFFFF')),
+            text=sub['hs'] + ' ' + sub['name'].astype(str),
+            hovertemplate='%{text}<br>' + T('sc_axis_uni') + ': %{x:.0f}<br>' + T('sc_axis_gap') + ': %{y:.0f}<extra></extra>',
+        ))
+    for x in (bound_lo, bound_hi):
+        fig.add_vline(x=x, line_width=1, line_dash='dot', line_color='rgba(10,10,24,0.35)')
+    fig.add_hline(y=bound_gap, line_width=1, line_dash='dot', line_color='rgba(10,10,24,0.35)')
+    fig.update_layout(xaxis_title=T('sc_axis_uni'), yaxis_title=T('sc_axis_gap'), xaxis_range=[-3, 103], yaxis_range=[-3, 103],
+                      height=520, legend_title_text='', plot_bgcolor='#FFFFFF')
+    fig.update_xaxes(gridcolor='rgba(10,10,24,0.08)')
+    fig.update_yaxes(gridcolor='rgba(10,10,24,0.08)')
+    return fig
+
+
+# ============================================================
+# ⑩ 입찰 대응 분석
+# ============================================================
+BID_DEFAULT_VERIFY = {'min_ship': 3, 'min_ton': 10.0, 'min_imp': 2}
+
+
+def _split_keywords(text):
+    return [k.strip().lower() for k in re.split(r'[,\n]+', text or '') if k.strip()]
+
+
+def bid_filter(df, hs=None, include='', exclude=''):
+    """HS + 품명 포함/제외 키워드(스펙 분리) 필터."""
+    d = df if not hs else df[df['_hs'] == hs]
+    name = d['_product'].astype(str).str.lower()
+    inc, exc = _split_keywords(include), _split_keywords(exclude)
+    if inc:
+        d = d[name.apply(lambda n: any(k in n for k in inc))]
+        name = d['_product'].astype(str).str.lower()
+    if exc:
+        d = d[~name.apply(lambda n: any(k in n for k in exc))]
+    return d
+
+
+def bid_supplier_table(df, by, period_end, verify, tariffs=None):
+    """원산지별(by='_origin') 또는 해외 공급사별(by='_exporter') 비교표.
+    검증 = 기간 마지막 날 기준 최근 12개월 건수·물량·수입사 수가 모두 기준 이상.
+    비교단가 = VWAP × (1 + 원산지 관세율), 관세율이 없으면 VWAP 그대로."""
+    if df.empty:
+        return pd.DataFrame()
+    tariffs = tariffs or {}
+    recent = df[df['_date'] > pd.Timestamp(period_end) - pd.DateOffset(months=12)]
+    rows = []
+    for key, g in df.groupby(by):
+        r = recent[recent[by] == key]
+        origin = key if by == '_origin' else g['_origin'].mode().iloc[0]
+        rate = tariffs.get(origin)
+        vwap = float(weighted_avg(g, '_price', '_volume'))
+        imp_vol = g.groupby('_importer')['_volume'].sum().sort_values(ascending=False)
+        rows.append({
+            'key': key, 'origin': origin, 'vwap': vwap,
+            'tariff': rate, 'cmp': vwap * (1 + rate / 100) if rate is not None else vwap,
+            'shipments': len(g), 'tons': float(g['_volume'].sum()) / 1000, 'months': g['_ym'].nunique(),
+            'importers': len(imp_vol), 'importer_names': ', '.join(imp_vol.index), 'last': g['_date'].max().date(),
+            'verified': (len(r) >= verify['min_ship']) and (r['_volume'].sum() >= verify['min_ton'] * 1000)
+                        and (r['_importer'].nunique() >= verify['min_imp']),
+        })
+    return pd.DataFrame(rows).sort_values('cmp').reset_index(drop=True)
+
+
+def bid_add_savings(table, base_key, annual_tons):
+    """기준 공급사 대비 절감률(%)·연간 절감액(USD = 단가차 × 연간 물량)."""
+    table = table.copy()
+    if base_key is None or base_key not in set(table['key']):
+        table['saving_pct'] = np.nan
+        table['saving_amt'] = np.nan
+        return table
+    base = float(table.loc[table['key'] == base_key, 'cmp'].iloc[0])
+    table['saving_pct'] = (base - table['cmp']) / base * 100 if base > 0 else np.nan
+    table['saving_amt'] = (base - table['cmp']) * annual_tons * 1000
+    return table
+
+
+def bid_stability(df, exporter, end_date, months=36):
+    """공급사의 최근 N개월 월별 선적·공백 월·연평균 물량·수입사 수·단가 CV·연도별 요약."""
+    end = pd.Timestamp(end_date).to_period('M')
+    first = max(end - (months - 1), df['_ym'].min()) if len(df) else end - (months - 1)
+    g = df[(df['_exporter'] == exporter) & (df['_ym'] >= first) & (df['_ym'] <= end)]
+    month_index = pd.period_range(first, end, freq='M')
+    monthly = g.groupby('_ym')['_volume'].sum().reindex(month_index, fill_value=0) / 1000
+    n_months = len(month_index)
+    # 연도별 요약: 기간 마지막 달에서 거꾸로 12개월씩 끊는다 (예: 2023.10 – 2024.09). 맨 앞 구간은 12개월보다 짧을 수 있다.
+    blocks = []
+    blk_end = end
+    while blk_end >= first:
+        blk_start = max(blk_end - 11, first)
+        y = g[(g['_ym'] >= blk_start) & (g['_ym'] <= blk_end)]
+        blocks.append({'label': f"{blk_start.strftime('%Y.%m')} – {blk_end.strftime('%Y.%m')}", 'span': (blk_end - blk_start).n + 1,
+                       'shipments': len(y), 'tons': y['_volume'].sum() / 1000,
+                       'vwap': weighted_avg(y, '_price', '_volume') if len(y) else np.nan,
+                       'months': y['_ym'].nunique(), 'importers': y['_importer'].nunique()})
+        blk_end = blk_start - 1
+    yearly = pd.DataFrame(blocks[::-1]).set_index('label') if blocks and len(g) else pd.DataFrame()
+    return {
+        'monthly': monthly, 'n_months': n_months, 'gap_months': int((monthly == 0).sum()),
+        'annual_tons': float(monthly.sum()) / (n_months / 12) if n_months else 0.0,
+        'importers': int(g['_importer'].nunique()), 'cv': _weighted_cv(g), 'yearly': yearly, 'empty': g.empty,
+    }
+
+
+def bid_stability_sentence(name, stab):
+    gap = T('bd_stab_no_gap') if stab['gap_months'] == 0 else T('bd_stab_with_gap', n=stab['gap_months'])
+    cv = '-' if pd.isna(stab['cv']) else f"{stab['cv']:.0f}%"
+    return T('bd_stab_sentence', name=name, m=stab['n_months'], tons=stab['annual_tons'], gap=gap, imp=stab['importers'], cv=cv)
+
+
+def bid_stability_fig(stab):
+    """월별 선적 막대. 선적 없는 달은 빗금 막대로 표시."""
+    months = [str(p) for p in stab['monthly'].index]
+    vals = stab['monthly'].values
+    top = max(float(vals.max()) if len(vals) else 0, 1.0)
+    fig = go.Figure()
+    fig.add_bar(x=months, y=vals, name=T('bd_stab_shipped'), marker_color='#171CFD')
+    gaps = [top if v == 0 else None for v in vals]
+    fig.add_bar(x=months, y=gaps, name=T('bd_stab_gap'), marker=dict(color='rgba(0,0,0,0)', line=dict(color='#9BB3FF', width=1),
+                pattern=dict(shape='/', fgcolor='#9BB3FF', size=6)))
+    fig.update_layout(barmode='overlay', height=360, plot_bgcolor='#FFFFFF', xaxis_title='', yaxis_title='ton', legend_title_text='')
+    fig.update_yaxes(gridcolor='rgba(10,10,24,0.08)')
+    return fig
+
+
+def _badge_html(text, dark):
+    bg = '#0A0A18' if dark else '#171CFD'
+    return f"<span style='background:{bg};color:#FFFFFF;padding:2px 8px;border-radius:4px;font-size:12px;'>{text}</span>"
+
+
+# ============================================================
+# 새 PDF 양식 (report_theme) — ⑨ 범용상품 스크리너 / ⑩ 입찰 대응 분석
+# ============================================================
+def _rp_meta(eyebrow, title_lines, item, spec, hs, period, blind, doc_title):
+    """make_report에 넘길 meta. 표지·푸터 문구는 현재 언어의 TEXTS에서 가져온다."""
+    start, end = pd.Timestamp(period[0]), pd.Timestamp(period[1])
+    months = max(1, round((end - start).days / 30.44))
+    return {
+        'eyebrow': eyebrow, 'title_lines': title_lines, 'item': item, 'spec': spec, 'hs': hs,
+        'period': T('rp_period_fmt', start=start.strftime('%Y.%m'), end=end.strftime('%Y.%m'), months=months),
+        'date': datetime.date.today().strftime('%Y.%m.%d'), 'blind': blind, 'doc_title': doc_title,
+        'labels': {'period': T('rp_lbl_period'), 'data': T('rp_lbl_data'), 'date': T('rp_lbl_date'), 'scope': T('rp_lbl_scope'),
+                   'data_source': T('rp_data_source'), 'blind_on': T('rp_blind_on'), 'blind_off': T('rp_blind_off'),
+                   'confidential': T('rp_confidential'), 'footer': T('rp_footer')},
+    }
+
+
+def adoption_pdf_chart(groups, n=10):
+    """① 절감·비용 증가 상위 품목군 가로 막대 (절감 Blue, 증가 Black). 값 라벨은 막대 끝 바깥에 둬 겹치지 않게."""
+    import report_theme as rt
+    import matplotlib.ticker as mticker
+    rows = list(groups['saved'].head(n)['savings'].items()) + list(groups['increased'].head(n)['savings'].items())
+    if not rows:
+        return None
+    rows = rows[::-1]  # 가로 막대는 아래부터 그리므로, 절감 1위가 맨 위에 오게 뒤집는다
+    labels = [str(k)[:28] for k, _ in rows]
+    vals = [float(v) for _, v in rows]
+    fig, ax = rt.new_chart(0.27 * len(rows) + 0.7)
+    rt.apply_pdf_chart_style(ax, grid_axis='x')
+    y = np.arange(len(rows))
+    ax.barh(y, vals, height=0.62, color=[rt.HEX['blue'] if v > 0 else rt.HEX['black'] for v in vals], linewidth=0)
+    span = max(max(abs(v) for v in vals), 1.0)
+    for yi, v in zip(y, vals):
+        txt = f"${v:,.0f}" if v > 0 else f"–${-v:,.0f}"
+        ax.text(v + (span * 0.015 if v > 0 else -span * 0.015), yi, txt, va='center', ha='left' if v > 0 else 'right',
+                fontsize=7, color=rt.HEX['black'])
+    ax.axvline(0, color=rt.HEX['black'], linewidth=0.6)
+    lo = min(min(vals), 0)
+    hi = max(max(vals), 0)
+    ax.set_xlim(lo - span * 0.22 if lo < 0 else -span * 0.02, hi + span * 0.22 if hi > 0 else span * 0.02)
+    ax.set_yticks(y)
+    ax.set_yticklabels(labels, fontsize=7.5, color=rt.HEX['black'])
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:,.0f}" if v >= 0 else f"–${-v:,.0f}"))
+    fig.subplots_adjust(left=0.27, right=0.99, top=0.97, bottom=0.08 if len(rows) > 6 else 0.16)
+    return rt.chart_image(fig)
+
+
+def build_adoption_report(ctx):
+    """① 도입 효과 분석 PDF: 표지 → 요약(KPI 4 + 결론 3) → 품목군별 절감(차트 + 그룹별 표)
+    → 따로 확인할 품목(계약 후 구매 없음·구성 변화) → 방법론·데이터 한계 → 클로징."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    groups, th = ctx['groups'], ctx['minor_th']
+    sv = ctx['savings_df']
+    valid = sv[sv['volume_after'] > 0]
+    net = float(valid['savings'].sum())
+    net_excl = float(valid.loc[~valid['mix_changed'], 'savings'].sum())
+    differ = round(net) != round(net_excl)
+    saved_total = float(groups['saved']['savings'].sum())
+    inc_total = float(-groups['increased']['savings'].sum())
+    before_cost = float((valid['avg_price_before'] * valid['volume_after']).sum())
+    after_cost = float((valid['avg_price_after'] * valid['volume_after']).sum())
+    price_chg = (after_cost / before_cost - 1) * 100 if before_cost > 0 else None
+    customer = ctx['customer_label']
+    plot_df, contract = ctx['plot_df'], pd.Timestamp(ctx['contract_date'])
+    d0, d1 = plot_df['date'].min(), plot_df['date'].max()
+    meta = _rp_meta(T('p1_rp_eyebrow'), [customer, T('p1_rp_title2')], customer, None, None, (d0, d1), ctx['blind'],
+                    f"{customer} {T('p1_rp_title2')}")
+    excl_txt = T('p1_rp_excl_suffix', y=abs(net_excl)) if differ else ''
+
+    # 01 요약
+    headline = T('p1_rp_head_save', x=net) if net > 0 else T('p1_rp_head_loss', x=-net)
+    cards = [
+        (T('p1_rp_kpi_net'), (f"${net:,.0f}" if net >= 0 else f"–${-net:,.0f}"),
+         T('p1_rp_kpi_net_note_excl', y=net_excl) if differ else T('p1_rp_kpi_net_note')),
+        (T('p1_rp_kpi_saved', n=len(groups['saved'])), f"${saved_total:,.0f}", T('p1_rp_kpi_group_note', th=th)),
+        (T('p1_rp_kpi_increased', n=len(groups['increased'])), f"${inc_total:,.0f}", T('p1_rp_kpi_group_note', th=th)),
+        (T('p1_rp_kpi_price'), '-' if price_chg is None else (f"–{-price_chg:.1f}%" if price_chg < 0 else f"+{price_chg:.1f}%"),
+         T('p1_rp_kpi_price_note')),
+    ]
+    f1 = ((T('p1_rp_f1_save', x=net, excl=excl_txt) if net > 0 else T('p1_rp_f1_loss', x=-net, excl=excl_txt)),
+          T('p1_rp_f1_d', ns=len(groups['saved']), s=saved_total, ni=len(groups['increased']), i=inc_total))
+    if len(groups['saved']):
+        top = groups['saved'].iloc[0]
+        top_name = str(groups['saved'].index[0])
+        share = float(top['savings']) / saved_total * 100 if saved_total > 0 else 0
+        f2 = ((T('p1_rp_f2_concentrated', name=top_name, p=share) if share >= 50 else T('p1_rp_f2', name=top_name, p=share)),
+              T('p1_rp_f2_d', b=float(top['avg_price_before']), a=float(top['avg_price_after']), v=float(top['volume_after'])))
+    else:
+        f2 = (T('p1_rp_f2_none', th=th), T('p1_rp_f2_none_d'))
+    n_mix = int(sv['mix_changed'].sum())
+    mix_txt = T('p1_rp_f3_mix', k=n_mix) if n_mix else ''
+    if len(groups['increased']):
+        names = ', '.join(str(i) for i in groups['increased'].index[:2])
+        f3 = (T('p1_rp_f3_up', names=names, n=len(groups['increased']), x=inc_total), T('p1_rp_f3_up_d') + mix_txt)
+    else:
+        f3 = (T('p1_rp_f3_none'), T('p1_rp_f3_none_d') + mix_txt)
+    s1 = [rt.SectionHeader(T('p1_rp_s1_eyebrow'), headline), Spacer(1, 3 * mm), rt.kpi_row(cards), Spacer(1, 9 * mm),
+          rt.h3(T('p1_rp_findings')), Spacer(1, 2 * mm), rt.Rule()]
+    s1 += rt.findings_block([('01',) + f1, ('02',) + f2, ('03',) + f3])
+
+    # 02 품목군별 절감
+    header = [T('p1_rp_th_item'), T('p1_rp_th_before'), T('p1_rp_th_after'), T('p1_rp_th_vol'), T('p1_rp_th_saving'), T('p1_rp_th_mix')]
+    widths = rt.col_widths([34, 13, 13, 15, 15, 13])
+
+    def _rows(g):
+        out = []
+        for name, r in g.iterrows():
+            sav = float(r['savings'])
+            out.append([str(name), f"{r['avg_price_before']:.2f}", '-' if pd.isna(r['avg_price_after']) else f"{r['avg_price_after']:.2f}",
+                        f"{r['volume_after']:,.0f}", f"{sav:,.0f}" if sav >= 0 else f"–{-sav:,.0f}",
+                        rt.status_badge(T('p1_rp_badge_mix'), False) if r['mix_changed'] else ''])
+        return out
+
+    s2 = [rt.SectionHeader(T('p1_rp_s2_eyebrow'), T('p1_rp_s2_head'), T('p1_rp_s2_sub')), Spacer(1, 2 * mm)]
+    chart = adoption_pdf_chart(groups)
+    if chart is not None:
+        s2 += [rt.h3(T('p1_rp_chart')), rt.small(T('p1_rp_chart_note', n=10)), Spacer(1, 2 * mm), chart, Spacer(1, 7 * mm)]
+    group_titles = {'saved': T('p1_group_saved', n=len(groups['saved']), amount=saved_total),
+                    'increased': T('p1_group_increased', n=len(groups['increased']), amount=inc_total),
+                    'minor': T('p1_group_minor', n=len(groups['minor']))}
+    for key in ('saved', 'increased', 'minor'):
+        if groups[key].empty:
+            continue
+        s2 += [rt.h3(group_titles[key]), Spacer(1, 2.5 * mm),
+               rt.brand_table(header, _rows(groups[key]), widths, right_cols=(1, 2, 3, 4), header_markup=True), Spacer(1, 7 * mm)]
+
+    # 03 따로 확인할 품목
+    nop = groups['no_purchase']
+    mixed = valid[valid['mix_changed']]
+    s3 = [rt.SectionHeader(T('p1_rp_s3_eyebrow'), T('p1_rp_s3_head'), T('p1_rp_s3_sub')), Spacer(1, 2 * mm),
+          rt.h3(T('p1_rp_s3_nopurchase', n=len(nop))), rt.small(T('p1_rp_s3_nopurchase_note')), Spacer(1, 2.5 * mm)]
+    if nop.empty:
+        s3.append(rt.small(T('p1_rp_s3_none')))
+    else:
+        s3.append(rt.brand_table([T('p1_rp_th_item'), T('p1_rp_th_before')],
+                                 [[str(n_), f"{r['avg_price_before']:.2f}"] for n_, r in nop.iterrows()],
+                                 rt.col_widths([70, 30]), right_cols=(1,), header_markup=True))
+    s3 += [Spacer(1, 8 * mm), rt.h3(T('p1_rp_s3_mix', n=len(mixed))), rt.small(T('p1_rp_s3_mix_note')), Spacer(1, 2.5 * mm)]
+    if mixed.empty:
+        s3.append(rt.small(T('p1_rp_s3_none')))
+    else:
+        s3.append(rt.brand_table([T('p1_rp_th_item'), T('p1_rp_th_overlap'), T('p1_rp_th_saving')],
+                                 [[str(n_), '-' if pd.isna(r['mix_overlap']) else f"{r['mix_overlap']:.0%}",
+                                   f"{r['savings']:,.0f}" if r['savings'] >= 0 else f"–{-r['savings']:,.0f}"] for n_, r in mixed.iterrows()],
+                                 rt.col_widths([60, 20, 20]), right_cols=(1, 2), header_markup=True))
+
+    # 04 방법론
+    fmt = lambda t: pd.Timestamp(t).strftime('%Y.%m.%d')
+    meth = [(T('p1_rp_lbl_data'), T('p1_rp_m_data')),
+            (T('p1_rp_lbl_period'), T('p1_rp_m_period', b0=fmt(d0), b1=fmt(contract - pd.Timedelta(days=1)), a0=fmt(contract), a1=fmt(d1), c=fmt(contract))),
+            (T('p1_rp_lbl_cluster'), T('p1_rp_m_cluster')), (T('p1_rp_lbl_outlier'), T('p1_rp_m_outlier')),
+            (T('p1_rp_lbl_price'), T('p1_rp_m_price')), (T('p1_rp_lbl_saving'), T('p1_rp_m_saving')),
+            (T('p1_rp_lbl_minor'), T('p1_rp_m_minor', th=th)), (T('p1_rp_lbl_mix'), T('p1_rp_m_mix')),
+            (T('p1_rp_lbl_blind'), T('p1_rp_m_blind_on') if ctx['blind'] else T('p1_rp_m_blind_off'))]
+    s4 = [rt.SectionHeader(T('p1_rp_s4_eyebrow'), T('p1_rp_s4_head')), Spacer(1, 2 * mm),
+          rt.methodology_table(meth, header=(T('rp_meth_item'), T('rp_meth_rule'))), Spacer(1, 8 * mm),
+          rt.h3(T('rp_unknown_header')), Spacer(1, 2 * mm), rt.Rule()]
+    s4 += rt.dash_list([T(f'p1_rp_unknown{i}') for i in range(1, 5)])
+
+    # 클로징
+    top_items = ', '.join(str(i) for i in groups['saved'].index[:3]) or '-'
+    v1 = T('p1_rp_close_v1', x=net, excl=excl_txt, items=top_items) if net > 0 else T('p1_rp_close_v1_loss', x=-net, excl=excl_txt)
+    v2 = (T('p1_rp_close_v2', n=len(groups['increased']), x=inc_total, items=', '.join(str(i) for i in groups['increased'].index[:3]))
+          if len(groups['increased']) else T('p1_rp_close_v2_none'))
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('p1_rp_close_note'),
+               'items': [('01', T('p1_rp_close_k1'), v1), ('02', T('p1_rp_close_k2'), v2),
+                         ('03', T('p1_rp_close_k3'), T('p1_rp_close_v3', k=n_mix, m=len(nop)))]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4)] + [closing])
+
+
+def _rp_money_k(v):
+    return f"${v / 1000:,.0f}K"
+
+
+def screener_pdf_quadrant(res, bound_hi, bound_lo, bound_gap):
+    """⑨ 4분면 산점도 (matplotlib, 브랜드 색). 라벨은 A그룹 수입액 상위 몇 개만, 서로 겹치지 않게 엇갈려 배치."""
+    import report_theme as rt
+    fig, ax = rt.new_chart(3.6)
+    max_val = max(float(res['value'].max()), 1.0)
+    for cls in ['D', 'C', 'B', 'A']:
+        sub = res[res['class'] == cls]
+        if sub.empty:
+            continue
+        face = rt.CLASS_HEX[cls]
+        has_gap = sub['gap_score'].notna()
+        ax.scatter(sub.loc[has_gap, 'uni_rank'], sub.loc[has_gap, 'gap_score'], s=18 + 420 * (sub.loc[has_gap, 'value'] / max_val),
+                   color=face, edgecolor='white', linewidth=0.6, label=T(SCREENER_CLASS_KEY[cls]), zorder=3)
+        if (~has_gap).any():  # 격차를 계산할 수 없는 품목 (같은 달·원산지 셀의 선적이 3건 미만): 0선에 속 빈 원
+            ax.scatter(sub.loc[~has_gap, 'uni_rank'], [0] * int((~has_gap).sum()), s=18 + 420 * (sub.loc[~has_gap, 'value'] / max_val),
+                       color='white', edgecolor=face, linewidth=1.2, zorder=3)
+    if res['gap_score'].isna().any():  # 범례용 표본 하나: 속 빈 원 = 격차 계산 불가
+        ax.scatter([], [], s=30, color='white', edgecolor=rt.HEX['black'], linewidth=1.2, label=T('scr_rp_legend_nogap'))
+    for x in (bound_lo, bound_hi):
+        ax.axvline(x, color=rt.HEX['black'], linewidth=0.8, linestyle=(0, (3, 2)), zorder=2)
+    ax.axhline(bound_gap, color=rt.HEX['black'], linewidth=0.8, linestyle=(0, (3, 2)), zorder=2)
+    top_a = res[res['class'] == 'A'].sort_values('value', ascending=False).head(5)
+    placed = []
+    for _, r in top_a.iterrows():
+        x, y = float(r['uni_rank']), float(r['gap_score'] if pd.notna(r['gap_score']) else 0)
+        dy = 4
+        while any(abs(x - px) < 9 and abs(y + dy - py) < 4 for px, py in placed):
+            dy += 4
+        placed.append((x, y + dy))
+        ax.annotate(str(r['hs']), (x, y), xytext=(min(x, 96), min(y + dy, 106)), fontsize=6.6, color=rt.HEX['black'],
+                    ha='right' if x > 90 else 'center', va='bottom',
+                    arrowprops=dict(arrowstyle='-', color=rt.HEX['black'], lw=0.4) if dy > 4 else None)
+    ax.set_xlim(-3, 103)
+    ax.set_ylim(-3, 112)
+    ax.set_xlabel(T('sc_axis_uni'), fontsize=7.5, color=rt.HEX['black'])
+    ax.set_ylabel(T('sc_axis_gap'), fontsize=7.5, color=rt.HEX['black'])
+    leg = ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=5, frameon=False, fontsize=7.2, markerscale=0.6)
+    for t in leg.get_texts():
+        t.set_color(rt.HEX['black'])
+    for h in leg.legend_handles:
+        h.set_sizes([30])
+    fig.subplots_adjust(left=0.07, right=0.99, top=0.97, bottom=0.2)
+    return rt.chart_image(fig)
+
+
+def build_screener_report(R, weights, min_kg, min_ship, top_n=15):
+    """⑨ PDF: 표지 → 요약(분류별 품목 수, A그룹 Top) → 4분면 → 분류별 품목 표 → 지표 정의 → 클로징."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    res, (bound_hi, bound_lo, bound_gap) = R['res'], R['bounds']
+    counts = res['class'].value_counts()
+    meta = _rp_meta(T('scr_rp_eyebrow'), [T('scr_rp_title1'), T('scr_rp_title2')], T('scr_rp_item', n=len(res)), None, None,
+                    R['period'], False, T('sc_title'))
+
+    n_a = int(counts.get('A', 0))
+    s1 = [rt.SectionHeader(T('scr_rp_s1_eyebrow'), T('scr_rp_s1_head_a', n=n_a) if n_a else T('scr_rp_s1_head_none')), Spacer(1, 3 * mm)]
+    s1.append(rt.kpi_row([(T(SCREENER_CLASS_KEY[c]), T('rp_count_unit', n=int(counts.get(c, 0))), T(f'scr_rp_kpi_note_{c.lower()}'))
+                          for c in 'ABCD']))
+    s1 += [Spacer(1, 9 * mm), rt.h3(T('scr_rp_top_header')), Spacer(1, 2.5 * mm)]
+    top_a = res[res['class'] == 'A'].sort_values('uni_rank', ascending=False).head(10)
+    if top_a.empty:
+        s1.append(rt.small(T('scr_rp_top_none')))
+    else:
+        rows = [[str(i), r['hs'], r['name'], f"{r['uni_rank']:.0f}", f"{r['gap_score']:.0f}", f"{r['importers']}",
+                 f"{r['cr3']:.0f}%", _rp_money_k(r['value'])] for i, (_, r) in enumerate(top_a.iterrows(), 1)]
+        s1.append(rt.brand_table([T('bd_rp_th_no'), T('sc_col_hs'), T('sc_col_name'), T('scr_rp_th_uni'), T('scr_rp_th_gap'),
+                                  T('scr_rp_th_importers'), T('scr_rp_th_cr3'), T('scr_rp_th_value')], rows,
+                                 rt.col_widths([5, 15, 31, 11, 9, 10, 10, 14]), right_cols=(3, 4, 5, 6, 7)))
+
+    s2 = [rt.SectionHeader(T('scr_rp_s2_eyebrow'), T('scr_rp_s2_head'), T('scr_rp_s2_sub')), Spacer(1, 2 * mm),
+          screener_pdf_quadrant(res, bound_hi, bound_lo, bound_gap), Spacer(1, 3 * mm),
+          rt.small(T('scr_rp_s2_note', lo=bound_lo, hi=bound_hi, gap=bound_gap))]
+
+    s3 = [rt.SectionHeader(T('scr_rp_s3_eyebrow'), T('scr_rp_s3_head'), T('scr_rp_s3_sub', n=top_n)), Spacer(1, 2 * mm)]
+    header = [T('sc_col_hs'), T('sc_col_name'), T('scr_rp_th_uni'), T('scr_rp_th_gap'), T('scr_rp_th_importers'),
+              T('scr_rp_th_cr3'), T('scr_rp_th_exporters'), T('scr_rp_th_origins'), T('scr_rp_th_value')]
+    for cls in 'ABCD':
+        sub = res[res['class'] == cls].sort_values('uni_rank', ascending=False)
+        if sub.empty:
+            continue
+        s3 += [rt.badge_note(rt.class_badge(cls, T(SCREENER_CLASS_KEY[cls])), T('rp_count_unit', n=len(sub)), badge_w=38 * mm),
+               Spacer(1, 2 * mm)]
+        rows = [[r['hs'], r['name'], f"{r['uni_rank']:.0f}", '-' if pd.isna(r['gap_score']) else f"{r['gap_score']:.0f}",
+                 f"{r['importers']}", f"{r['cr3']:.0f}%", f"{r['exporters']}", f"{r['origins']}", _rp_money_k(r['value'])]
+                for _, r in sub.head(top_n).iterrows()]
+        s3 += [rt.brand_table(header, rows, rt.col_widths([15, 24, 11, 8, 9, 10, 9, 9, 14]), right_cols=(2, 3, 4, 5, 6, 7, 8)),
+               Spacer(1, 7 * mm)]
+
+    w_txt = ', '.join(f"{T(f'sc_w_{k}').split(' (')[0]} {weights[k]:g}" for k, _ in SCREENER_COMPONENTS)
+    meth = [(T('scr_rp_lbl_data'), T('scr_rp_m_data')), (T('scr_rp_lbl_period'), meta['period']),
+            (T('scr_rp_lbl_prep'), T('scr_rp_m_prep', kg=int(min_kg), ship=int(min_ship))),
+            (T('scr_rp_lbl_uni'), T('scr_rp_m_uni', w=w_txt)), (T('scr_rp_lbl_gap'), T('scr_rp_m_gap')),
+            (T('scr_rp_lbl_class'), T('scr_rp_m_class', hi=bound_hi, lo=bound_lo, gap=bound_gap)),
+            (T('scr_rp_lbl_conc'), T('scr_rp_m_cr3')), (T('scr_rp_lbl_price'), T('scr_rp_m_price'))]
+    s4 = [rt.SectionHeader(T('scr_rp_s4_eyebrow'), T('scr_rp_s4_head')), Spacer(1, 2 * mm),
+          rt.methodology_table(meth, header=(T('rp_meth_item'), T('rp_meth_rule'))), Spacer(1, 8 * mm),
+          rt.h3(T('rp_unknown_header')), Spacer(1, 2 * mm), rt.Rule()]
+    s4 += rt.dash_list([T(f'scr_rp_unknown{i}') for i in range(1, 5)])
+
+    pick = res[res['class'] == 'A'] if n_a else res[res['class'] == 'B']
+    items_txt = ', '.join(f"{r['hs']} {r['name']}" for _, r in pick.sort_values('uni_rank', ascending=False).head(3).iterrows()) or '-'
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('scr_rp_close_head'), 'note': T('scr_rp_close_note'),
+               'items': [('01', T('scr_rp_close_k1'), T('scr_rp_close_v1_a', items=items_txt) if n_a else T('scr_rp_close_v1_none', items=items_txt)),
+                         ('02', T('scr_rp_close_k2'), T('scr_rp_close_v2')),
+                         ('03', T('scr_rp_close_k3'), T('scr_rp_close_v3', lo=bound_lo, hi=bound_hi, gap=bound_gap, kg=int(min_kg)))]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4)] + [closing])
+
+
+def bid_pdf_origin_chart(df, origin_tbl, base_price, major_tons):
+    """⑩ 원산지별 단가 분포: 점 = VWAP, 막대 = P10~P90, 연 major_tons 미만 원산지는 속 빈 점. 현 납품 기준 점선."""
+    import report_theme as rt
+    import matplotlib.ticker as mticker
+    years = max((df['_date'].max() - df['_date'].min()).days / 365.25, 1 / 12)
+    top = df.groupby('_origin')['_volume'].sum().sort_values(ascending=False).head(10).index
+    stats = []
+    for o in top:
+        g = df[df['_origin'] == o]
+        p10, p90 = g['_price'].quantile([0.1, 0.9])
+        stats.append((o, float(weighted_avg(g, '_price', '_volume')), float(p10), float(p90), g['_volume'].sum() / 1000 / years))
+    stats.sort(key=lambda x: -x[1])
+    fig, ax = rt.new_chart(0.42 * len(stats) + 0.75)
+    rt.apply_pdf_chart_style(ax, grid_axis='x')
+    for yi, (o, vwap, p10, p90, tons) in enumerate(stats):
+        thin = tons < major_tons
+        ax.plot([p10, p90], [yi, yi], color=rt.HEX['black'], alpha=0.25, linewidth=2.2, solid_capstyle='round')
+        ax.scatter([vwap], [yi], s=46, color='#FFFFFF' if thin else rt.HEX['blue'], edgecolor=rt.HEX['blue'], linewidth=1.4, zorder=3)
+        ax.text(vwap, yi + 0.3, f"${vwap:.2f}", va='bottom', ha='center', fontsize=7.2, color=rt.HEX['black'])
+    lo = min(s[2] for s in stats)
+    hi = max(s[3] for s in stats)
+    if base_price is not None:
+        hi = max(hi, base_price)
+        lo = min(lo, base_price)
+        ax.axvline(base_price, color=rt.HEX['black'], linewidth=1, linestyle=(0, (3, 2)))
+        ax.text(base_price + (hi - lo) * 0.01, len(stats) - 0.45, T('bd_rp_baseline_line', p=base_price), fontsize=7.2,
+                color=rt.HEX['black'], va='bottom')
+    pad = (hi - lo) * 0.08 or hi * 0.05
+    ax.set_xlim(lo - pad, hi + pad)
+    ax.set_ylim(-0.6, len(stats) - 0.1 + (0.4 if base_price is not None else 0))
+    ax.set_yticks(range(len(stats)))
+    ax.set_yticklabels([f"{o}  ({t:,.0f}t)" for o, _, _, _, t in stats], fontsize=8, color=rt.HEX['black'])
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.2f}"))
+    fig.subplots_adjust(left=0.22, right=0.99, top=0.95, bottom=0.12 if len(stats) > 3 else 0.2)
+    return rt.chart_image(fig)
+
+
+def bid_pdf_monthly_chart(stab):
+    """⑩ 월별 선적 막대 (톤). 선적 없는 달은 빗금 막대."""
+    import report_theme as rt
+    import matplotlib.ticker as mticker
+    vals = stab['monthly'].values.astype(float)
+    labels = [f"{str(p.year)[2:]}.{p.month:02d}" for p in stab['monthly'].index]
+    fig, ax = rt.new_chart(2.1)
+    rt.apply_pdf_chart_style(ax, grid_axis='y')
+    x = np.arange(len(vals))
+    ax.bar(x, vals, width=0.72, color=rt.HEX['blue'], linewidth=0)
+    base = vals[vals > 0].mean() if (vals > 0).any() else 1.0
+    gaps = x[vals == 0]
+    if len(gaps):
+        ax.bar(gaps, [base * 0.12] * len(gaps), width=0.72, color='white', edgecolor=rt.HEX['black'], linewidth=0.8, hatch='////')
+    step = 3 if len(vals) > 12 else 1
+    ax.set_xticks(x[::step])
+    ax.set_xticklabels(labels[::step], fontsize=7)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:,.0f}t"))
+    fig.subplots_adjust(left=0.07, right=0.995, top=0.96, bottom=0.14)
+    return rt.chart_image(fig)
+
+
+def build_bid_report(ctx):
+    """⑩ PDF: 표지 → 요약(KPI 4 + 핵심 결론 3 + 관세 배지) → 대체 공급처(원산지 차트 + 공급사 순위표)
+    → 공급 안정성(공급사별 1페이지) → 방법론·데이터 한계 → Black 클로징. 목업(build_report.py)과 같은 구성."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer, PageBreak, TableStyle
+    from reportlab.lib.units import mm
+    sup, verify, annual_t = ctx['sup_tbl'], ctx['verify'], ctx['annual_tons']
+    base_key = ctx['base_key']
+    base_row = sup[sup['key'] == base_key].iloc[0] if base_key is not None and base_key in set(sup['key']) else None
+    base_cmp = float(base_row['cmp']) if base_row is not None else None
+    cand = sup[sup['key'] != base_key]
+    verified = cand[cand['verified']].sort_values('cmp')
+    basis = T('bd_rp_basis_cif') if ctx['tariff_missing'] else T('bd_rp_basis_tariff')
+    stab_cache = {}
+
+    def _stab(name):
+        if name not in stab_cache:
+            stab_cache[name] = bid_stability(ctx['scoped'], name, ctx['period'][1])
+        return stab_cache[name]
+
+    meta = _rp_meta(T('bd_rp_eyebrow'), [ctx['item'], T('bd_rp_title2')], ctx['item'], ctx['spec'] or None,
+                    ctx['hs'], ctx['period'], ctx['blind'], f"{ctx['item']} {T('bd_rp_title2')}")
+
+    # 01 요약
+    best = verified.iloc[0] if len(verified) else None
+    save_pct = (base_cmp - float(best['cmp'])) / base_cmp * 100 if (best is not None and base_cmp) else None
+    if save_pct is not None and save_pct > 0:
+        headline = T('bd_rp_head_save', pct=save_pct)
+    elif len(verified):
+        headline = T('bd_rp_head_found', n=len(verified))
+    else:
+        headline = T('bd_rp_head_none')
+    best_gap = _stab(best['key'])['gap_months'] if best is not None else None
+    m36 = _stab(best['key'])['n_months'] if best is not None else 36
+    cards = [
+        (T('bd_rp_kpi1'), f"${best['cmp']:.2f}" if best is not None else '-',
+         T('bd_rp_kpi1_note', basis=basis, origin=best['origin']) if best is not None else T('bd_rp_kpi1_none')),
+        (T('bd_rp_kpi2'), f"–{save_pct:.1f}%" if save_pct is not None and save_pct > 0 else (f"+{-save_pct:.1f}%" if save_pct is not None else '-'),
+         T('bd_rp_kpi2_note', p=base_cmp) if base_cmp else T('bd_rp_kpi_no_base')),
+        (T('bd_rp_kpi3'), _rp_money_k((base_cmp - float(best['cmp'])) * annual_t * 1000) if (save_pct is not None and save_pct > 0) else '-',
+         T('bd_rp_kpi3_note', t=annual_t) if base_cmp else T('bd_rp_kpi_no_base')),
+        (T('bd_rp_kpi4'), T('rp_month_unit', n=best_gap) if best_gap is not None else '-', T('bd_rp_kpi4_note', m=m36)),
+    ]
+    major_t = 500.0
+    df = ctx['df']
+    years = max((df['_date'].max() - df['_date'].min()).days / 365.25, 1 / 12)
+    o_vol = (df.groupby('_origin')['_volume'].sum() / 1000 / years)
+    o_vwap = weighted_avg_groupby(df, '_origin', '_price', '_volume')
+    major = [o for o in o_vol.index if o_vol[o] >= major_t]
+    if len(major) >= 2:
+        cheap, dear = min(major, key=lambda o: o_vwap[o]), max(major, key=lambda o: o_vwap[o])
+        f1 = (T('bd_rp_f1_two', o1=cheap, o2=dear, d=float(o_vwap[dear] - o_vwap[cheap])), T('bd_rp_f1_two_d', t=major_t))
+    elif len(major) == 1:
+        f1 = (T('bd_rp_f1_one', o=major[0], tons=float(o_vol[major[0]]), t=major_t), T('bd_rp_f1_one_d'))
+    else:
+        f1 = (T('bd_rp_f1_none', t=major_t), T('bd_rp_f1_none_d'))
+    if base_cmp:
+        k = int((verified['cmp'] <= base_cmp * 0.9).sum())
+        f2 = (T('bd_rp_f2_base', n=len(verified), k=k), T('bd_rp_f2_d', ship=verify['min_ship'], ton=verify['min_ton'], imp=verify['min_imp']))
+    else:
+        f2 = (T('bd_rp_f2_nobase', n=len(verified)), T('bd_rp_f2_d', ship=verify['min_ship'], ton=verify['min_ton'], imp=verify['min_imp']))
+    floor = float(best['cmp']) if best is not None else np.inf
+    cheap_unv = cand[(~cand['verified']) & (cand['cmp'] < floor)].sort_values('cmp')
+    if len(cheap_unv):
+        names = ', '.join(f"{r['key']}({r['origin']})" for _, r in cheap_unv.head(2).iterrows())
+        f3 = (T('bd_rp_f3_cheap', names=names), T('bd_rp_f3_cheap_d'))
+    else:
+        f3 = (T('bd_rp_f3_none'), T('bd_rp_f3_none_d'))
+    s1 = [rt.SectionHeader(T('bd_rp_s1_eyebrow'), headline), Spacer(1, 3 * mm), rt.kpi_row(cards), Spacer(1, 9 * mm),
+          rt.h3(T('bd_rp_findings')), Spacer(1, 2 * mm), rt.Rule()]
+    s1 += rt.findings_block([('01',) + f1, ('02',) + f2, ('03',) + f3])
+    s1 += [Spacer(1, 7 * mm),
+           rt.badge_note(rt.status_badge(T('bd_badge_no_tariff'), False) if ctx['tariff_missing'] else rt.status_badge(T('bd_badge_tariff_ok'), True),
+                         T('bd_rp_tariff_missing') if ctx['tariff_missing'] else T('bd_rp_tariff_ok'))]
+
+    # 02 대체 공급처
+    s2 = [rt.SectionHeader(T('bd_rp_s2_eyebrow'), T('bd_rp_s2_head'), T('bd_rp_s2_sub')), Spacer(1, 2 * mm),
+          rt.h3(T('bd_rp_origin_chart')), rt.small(T('bd_rp_origin_chart_note', t=major_t)), Spacer(1, 2 * mm),
+          bid_pdf_origin_chart(df, ctx['origin_tbl'], float(base_row['vwap']) if base_row is not None else None, major_t),
+          Spacer(1, 7 * mm), rt.h3(T('bd_rp_rank_header')), Spacer(1, 2.5 * mm)]
+    top_n = 12
+    ranked = pd.concat([cand[cand['verified']].sort_values('cmp'), cand[~cand['verified']].sort_values('cmp')]).head(top_n)
+    rows = []
+    for i, (_, r) in enumerate(ranked.iterrows(), 1):
+        vs = f"{(r['cmp'] - base_cmp) / base_cmp * 100:+.1f}%" if base_cmp else '-'
+        rows.append([str(i), r['key'], r['origin'], f"{r['cmp']:.2f}", vs, f"{r['shipments']:,}", f"{r['tons']:,.0f}",
+                     f"{r['months']}", T('rp_company_unit', n=r['importers']),
+                     rt.status_badge(T('bd_badge_verified'), True) if r['verified'] else rt.status_badge(T('bd_badge_unverified'), False)])
+    if base_row is not None:
+        rows.append(['–', base_row['key'], base_row['origin'], f"{base_cmp:.2f}", T('bd_rp_base_tag'), '–', '–', '–', '–', ''])
+    tbl = rt.brand_table([T('bd_rp_th_no'), T('bd_col_exporter'), T('bd_col_origin'), T('bd_rp_th_cmp'), T('bd_rp_th_vs'),
+                          T('bd_rp_th_ship'), T('bd_rp_th_ton'), T('bd_rp_th_months'), T('bd_rp_th_imp'), T('bd_rp_th_status')],
+                         rows, rt.col_widths([7, 44, 17, 17, 17, 11, 15, 13, 14, 19]), right_cols=(3, 4, 5, 6, 7, 8), header_markup=True)
+    if base_row is not None:
+        tbl.setStyle(TableStyle([("LINEABOVE", (0, len(rows)), (-1, len(rows)), 0.8, rt.BLACK)]))
+    s2 += [tbl, Spacer(1, 3 * mm),
+           rt.small(T('bd_rp_rank_note', ship=verify['min_ship'], ton=verify['min_ton'], imp=verify['min_imp'], n=top_n))]
+
+    # 03 공급 안정성 (공급사별 1페이지)
+    s3 = []
+    picks = [p for p in ctx['stab_suppliers'] if p in set(sup['key'])]
+    for idx, name in enumerate(picks):
+        st_ = _stab(name)
+        if st_['empty']:
+            continue
+        if s3:
+            s3.append(PageBreak())
+        origin = sup.loc[sup['key'] == name, 'origin'].iloc[0]
+        m = st_['n_months']
+        s3 += [rt.SectionHeader(T('bd_rp_s3_eyebrow', i=idx + 1, n=len(picks)), name, T('bd_rp_s3_sub', origin=origin, m=m)),
+               Spacer(1, 2 * mm),
+               rt.kpi_row([(T('bd_rp_s3_kpi1'), f"{st_['annual_tons']:,.0f}t", T('bd_rp_s3_kpi1_note', m=m)),
+                           (T('bd_rp_s3_kpi2'), T('rp_month_unit', n=st_['gap_months']), T('bd_rp_s3_kpi2_note')),
+                           (T('bd_rp_s3_kpi3'), T('rp_company_unit', n=st_['importers']), T('bd_rp_s3_kpi3_note')),
+                           (T('bd_rp_s3_kpi4'), '-' if pd.isna(st_['cv']) else f"{st_['cv']:.0f}%", T('bd_rp_s3_kpi4_note'))]),
+               Spacer(1, 8 * mm), rt.h3(T('bd_rp_s3_chart')),
+               rt.small(T('bd_rp_s3_chart_gap') if st_['gap_months'] else T('bd_rp_s3_chart_nogap', m=m)),
+               Spacer(1, 2 * mm), bid_pdf_monthly_chart(st_), Spacer(1, 8 * mm), rt.h3(T('bd_rp_s3_year')), Spacer(1, 2.5 * mm)]
+        yrows = [[label, f"{r['tons']:,.0f}", f"{int(r['months'])}/{int(r['span'])}", '-' if pd.isna(r['vwap']) else f"{r['vwap']:.2f}",
+                  T('rp_company_unit', n=int(r['importers']))] for label, r in st_['yearly'].iterrows()]
+        s3 += [rt.brand_table([T('bd_rp_s3_th_year'), T('bd_rp_s3_th_ton'), T('bd_rp_s3_th_months'), T('bd_rp_s3_th_vwap'), T('bd_rp_s3_th_imp')],
+                              yrows, rt.col_widths([28, 18, 18, 18, 18]), right_cols=(1, 2, 3, 4)),
+               Spacer(1, 8 * mm), rt.proof_box(T('bd_rp_proof'), bid_stability_sentence(name, st_))]
+
+    # 04 방법론
+    rates = ', '.join(f"{o} {r:g}%" for o, r in ctx['tariffs'].items())
+    if not ctx['tariffs']:
+        tariff_txt = T('bd_rp_m_tariff_none')
+    elif ctx['tariff_missing']:
+        tariff_txt = T('bd_rp_m_tariff_part', rates=rates)
+    else:
+        tariff_txt = T('bd_rp_m_tariff_all', rates=rates)
+    meth = [(T('bd_rp_lbl_data'), T('bd_rp_m_data')), (T('bd_rp_lbl_period'), T('bd_rp_m_period', period=meta['period'])),
+            (T('bd_rp_lbl_spec'), T('bd_rp_m_spec', hs=ctx['hs'] or T('bd_hs_all'), inc=ctx['include'] or '-', exc=ctx['exclude'] or '-')),
+            (T('bd_rp_lbl_dedup'), T('bd_rp_m_dedup')), (T('bd_rp_lbl_outlier'), T('bd_rp_m_outlier', kg=int(ctx['min_kg']))),
+            (T('bd_rp_lbl_price'), T('bd_rp_m_price')), (T('bd_rp_lbl_tariff'), tariff_txt),
+            (T('bd_rp_lbl_verify'), T('bd_rp_m_verify', ship=verify['min_ship'], ton=verify['min_ton'], imp=verify['min_imp'])),
+            (T('bd_rp_lbl_blind'), T('bd_rp_m_blind_on') if ctx['blind'] else T('bd_rp_m_blind_off'))]
+    s4 = [rt.SectionHeader(T('bd_rp_s4_eyebrow'), T('bd_rp_s4_head')), Spacer(1, 2 * mm),
+          rt.methodology_table(meth, header=(T('rp_meth_item'), T('rp_meth_rule'))), Spacer(1, 8 * mm),
+          rt.h3(T('rp_unknown_header')), Spacer(1, 2 * mm), rt.Rule()]
+    s4 += rt.dash_list([T(f'bd_rp_unknown{i}') for i in range(1, 5)])
+
+    # 클로징
+    if best is not None:
+        main_txt = T('bd_rp_close_main', name=best['key'], origin=best['origin'], p=float(best['cmp']), gap=best_gap)
+    else:
+        low = cand.sort_values('cmp').iloc[0]
+        main_txt = T('bd_rp_close_none', name=low['key'], origin=low['origin'], p=float(low['cmp']))
+    if len(verified) >= 2:
+        b2 = verified.iloc[1]
+        backup_txt = T('bd_rp_close_backup', name=b2['key'], origin=b2['origin'], p=float(b2['cmp']), imp=int(b2['importers']))
+    else:
+        backup_txt = T('bd_rp_close_no_backup')
+    if save_pct is not None and save_pct > 0:
+        save_txt = T('bd_rp_close_save', pct=save_pct, t=annual_t, k=(base_cmp - float(best['cmp'])) * annual_t)
+    else:
+        save_txt = T('bd_rp_close_nosave') if not base_cmp else T('bd_rp_close_nobetter')
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('bd_rp_close_head'),
+               'items': [('01', T('bd_rp_close_k1'), main_txt), ('02', T('bd_rp_close_k2'), backup_txt), ('03', T('bd_rp_close_k3'), save_txt)],
+               'note': T('bd_rp_close_note_missing') if ctx['tariff_missing'] else T('bd_rp_close_note_ok')}
+    sections = [{'kind': 'body', 'flow': s1}, {'kind': 'body', 'flow': s2}]
+    if s3:
+        sections.append({'kind': 'body', 'flow': s3})
+    sections += [{'kind': 'body', 'flow': s4}, closing]
+    return rt.make_report(meta, sections)
 
 
 # ============================================================
@@ -2916,7 +4583,7 @@ GUIDE_CONTENT = {
                 'results': [
                     '모든 메뉴는 CSV 또는 XLSX 파일을 업로드하면서 시작합니다.',
                     '컬럼명은 정확히 같지 않아도 자동으로 인식됩니다 (예: "Date", "date", "거래일자" 모두 인식). 다만 날짜·물량·단가에 해당하는 컬럼은 반드시 있어야 합니다.',
-                    'HS코드, Incoterm처럼 표준 항목 외의 컬럼도 파일에 있으면 자동으로 인식되어, 일부 메뉴(포트폴리오 헬스체크·공급망 흐름도·집중도 진단·신규 이탈 거래처·피벗 빌더·신규사업 스코어러)의 축/필터 선택지에 그대로 추가됩니다.',
+                    'HS코드, Incoterm처럼 표준 항목 외의 컬럼도 파일에 있으면 자동으로 인식되어, 일부 메뉴(포트폴리오 헬스체크·공급망 흐름도·집중도 진단·신규 이탈 거래처·피벗 빌더·신규사업 스코어러·범용상품 스크리너·입찰 대응 분석)의 축/필터 선택지에 그대로 추가됩니다.',
                 ],
             },
             {
@@ -2932,7 +4599,7 @@ GUIDE_CONTENT = {
                 'results': [
                     '순 절감액 / 절감 합계 / 비용 증가 합계 — 품목군별 절감액(계약 전후 단가 차이 × 계약 후 물량)의 순합계와, 절감·비용 증가 각각의 합계(품목 수 포함).',
                     '품목군별 카드 — 절감 품목, 단가 상승 품목, 변화 미미(절감·증가액이 ±$10 이내, 기준 조정 가능) 세 그룹으로 나뉘어 금액 큰 순으로 보입니다. 그룹마다 처음 12개만 보이고 "전체 보기"로 나머지를 펼칩니다. 계약 후 구매가 없는 품목은 "계약 후 구매 없음"으로 따로 표시하고 합계에서 뺍니다.',
-                    '상세 절감 내역 표 — 같은 그룹을 "구분" 열로 보여주며, 결과는 PDF 보고서(KPI 3개 + 그룹별 섹션)로 내려받을 수 있습니다.',
+                    '상세 절감 내역 표 — 같은 그룹을 "구분" 열로 보여주며, 결과는 새 양식 PDF 리포트(표지 → KPI 4개·핵심 결론 3줄 → 품목군별 절감 차트·표 → 따로 확인할 품목 → 방법론 → 클로징)로 내려받을 수 있습니다. 구성 변화 품목이 있으면 "구성 변화 품목 제외 시" 순 절감액을 함께 표기합니다. 이전 양식이 필요하면 "기존 양식 PDF" 버튼을 쓰세요.',
                     '수입 품목 클러스터 — 표기가 조금씩 다른 품목명을 자동으로 묶어서 정리.',
                     '월별 수입 추이, 최근 3개월 비중 — 최근 구매 패턴 파악.',
                     '계약 이후 새로 생기거나 사라진 품목·원산지·공급사 목록.',
@@ -3051,7 +4718,7 @@ GUIDE_CONTENT = {
             {
                 'heading': '🔬 ⑧ 신규사업 스코어러',
                 'image': 'p7_scorer.png',
-                'intro': '시장 전체 데이터에서 "최근 급상승한 기존 품목"과 "완전히 새로 등장한 품목"을 찾아, 새로운 소싱 기회의 우선순위를 매기고 싶을 때 씁니다. 다른 8개 메뉴가 "우리가 이미 하는 거래"를 들여다본다면, 이 메뉴는 "아직 안 하고 있지만 해볼 만한 것"을 찾아줍니다.',
+                'intro': '시장 전체 데이터에서 "최근 급상승한 기존 품목"과 "완전히 새로 등장한 품목"을 찾아, 새로운 소싱 기회의 우선순위를 매기고 싶을 때 씁니다. 다른 메뉴들이 "우리가 이미 하는 거래"를 들여다본다면, 이 메뉴는 "아직 안 하고 있지만 해볼 만한 것"을 찾아줍니다.',
                 'steps': [
                     'HS코드명/Detailed HS-CODE 등이 포함된 전체 시장 데이터를 업로드합니다.',
                     '분석 기간, 최소 물량 기준, 분석 기준(HS코드명/품목명/수입사 등)을 설정합니다.',
@@ -3066,7 +4733,49 @@ GUIDE_CONTENT = {
                 'tips': ['적합도 기준을 안 넣어도 분석 자체는 되지만, 넣으면 "우리 사업 맥락에서" 우선순위가 훨씬 정교해집니다.'],
             },
             {
-                'heading': '🧩 ⑨ 자유 피벗 빌더',
+                'heading': '🧭 ⑨ 범용상품 스크리너',
+                'intro': '여러 HS코드가 섞인 시장 데이터에서, 시장이 열려 있어 공급사를 바꾸기 쉽고(범용성) 같은 시기·같은 원산지 안에서도 단가 차이가 큰(격차) 품목을 찾고 싶을 때 씁니다. 입찰이나 대체 소싱으로 단가를 낮출 여지가 큰 품목을 고르는 첫 단계입니다.',
+                'steps': [
+                    '여러 HS코드·여러 수입사가 섞인 시장 데이터를 업로드합니다 (날짜·수입사·공급사·원산지·HS코드·물량·단가 필요).',
+                    '분석 기간(기본: 최근 12개월), 건당 최소 중량(기본 1,000kg), HS별 최소 거래 건수를 정합니다.',
+                    '필요하면 사이드바에서 범용성 점수 가중치와 분류 경계(기본 60/30, 격차 50)를 조정합니다.',
+                    '"스크리닝 실행"을 클릭합니다.',
+                ],
+                'results': [
+                    '지표(HS 10단위별) — 수입사 수, CR3, HHI, 해외 공급사 수, 원산지 수, 거래 발생 월 수, 수입사당 연간 건수, 단가 CV, 격차율, 연간 수입액.',
+                    '범용성 점수 — 수입사 수↑·CR3↓·공급사 수↑·원산지 수↑·거래 월 수↑·단가 CV↓를 데이터셋 안에서 백분위로 바꿔 가중 평균한 값.',
+                    '격차 점수 — 같은 달·같은 원산지 안의 단가 (P90−P10)/P50을 물량으로 가중 평균한 격차율의 백분위.',
+                    '분류 — 범용성 상위 & 격차 상위 = A(공략 1순위), 범용성 상위 & 격차 하위 = C, 범용성 중간 = B, 범용성 하위 = D.',
+                    '4분면 산점도(버블 = 연간 수입액), 랭킹 표, CSV와 PDF 리포트 다운로드.',
+                    '품목을 고르고 "입찰 대응 분석 열기"를 누르면 같은 파일과 HS코드가 입찰 대응 분석으로 넘어갑니다.',
+                ],
+                'tips': [
+                    '전처리: 중복 행(신고일·수입자·공급자·중량·금액 동일) 제거, 건당 최소 중량 미만 제외, HS별 단가 P1~P99 밖 제외. 평균 단가는 모두 물량가중(VWAP)입니다.',
+                    '점수는 업로드한 데이터셋 안에서의 상대 순위라, 다른 품목군과 섞어 올리면 순위가 달라집니다.',
+                ],
+            },
+            {
+                'heading': '📑 ⑩ 입찰 대응 분석',
+                'intro': '한 품목(HS·스펙)에 대해 입찰 제안서를 준비할 때 씁니다. 원산지·해외 공급사별 단가와 거래 실적을 비교해 검증된 대체 공급처를 찾고, 후보 공급사가 한국에 얼마나 꾸준히 공급해왔는지 확인합니다.',
+                'steps': [
+                    '시장 데이터를 업로드하거나, 범용상품 스크리너에서 품목을 넘겨받습니다 (HS코드가 자동 선택됩니다).',
+                    'HS코드, 품명 포함/제외 키워드(같은 HS 안의 스펙 분리), 기간(기본: 최근 12개월), 건당 최소 중량을 정합니다.',
+                    '[대체 공급처] 탭에서 검증 기준(최근 12개월 3건·10톤·한국 수입사 2곳 이상)을 확인하고, 필요하면 원산지별 관세율을 입력합니다.',
+                    '기준(현 납품) 공급사와 연간 물량(톤)을 넣으면 후보별 절감률과 연간 절감액이 계산됩니다.',
+                    '[공급 안정성] 탭에서 공급사를 골라 최근 36개월 선적 실적을 확인하고, 아래에서 PDF 리포트를 만듭니다.',
+                ],
+                'results': [
+                    '원산지별·공급사별 비교표 — VWAP, 비교단가, 건수, 총중량, 거래 월 수, 공급받는 한국 수입사 수, 최근 거래일, 검증 여부.',
+                    '관세 — 관세율을 넣으면 비교단가 = CIF × (1 + 세율), 비워두면 CIF 그대로. 하나라도 비어 있으면 "관세 미반영" 배지가 화면과 PDF에 표시됩니다.',
+                    '공급 안정성 — 월별 선적 막대(선적 없는 달은 빗금), 공백 월 수, 연평균 물량, 거래 한국 수입사 수, 단가 CV, 연도별 요약과 자동 요약 문장.',
+                    'PDF 리포트 — 표지 → 요약(KPI 4개 + 핵심 결론 3줄 + 관세 배지) → 대체 공급처 → 공급 안정성(공급사별 1페이지) → 방법론·데이터 한계 → 클로징.',
+                ],
+                'tips': [
+                    '"한국 수입사명 블라인드"를 켜두면 화면·CSV·PDF에서 한국 수입사명이 물량 순으로 수입사 A/B/C로 바뀝니다. 해외 공급사명은 그대로 보입니다.',
+                ],
+            },
+            {
+                'heading': '🧩 ⑪ 자유 피벗 빌더',
                 'image': 'p8_pivot.png',
                 'intro': '정해진 화면으로는 답이 안 나올 때, 엑셀 피벗테이블처럼 원하는 축과 지표를 직접 조합해서 나만의 표·차트를 만들고 싶을 때 씁니다.',
                 'steps': [
@@ -3084,7 +4793,10 @@ GUIDE_CONTENT = {
             {
                 'heading': '📄 공통 — PDF 다운로드',
                 'intro': '각 분석 결과 화면 하단의 "📄 PDF 보고서 생성" 버튼을 누르면, 해당 화면의 차트와 표가 담긴 PDF가 만들어지고 "📥 PDF 다운로드" 버튼으로 저장할 수 있습니다.',
-                'tips': ['지금 읽고 계신 이 가이드 자체도 사이드바의 "📖 사용법 가이드" 버튼으로 언제든 다시 받을 수 있습니다.'],
+                'tips': [
+                    '도입 효과 분석, 범용상품 스크리너, 입찰 대응 분석의 PDF는 새 리포트 양식(표지 → 요약 KPI·핵심 결론 → 본문 → 방법론·데이터 한계 → 클로징, Pretendard 글꼴, Tridge 브랜드 색)으로 만들어집니다. 다른 메뉴도 순서대로 새 양식으로 바뀔 예정입니다.',
+                    '지금 읽고 계신 이 가이드 자체도 사이드바의 "📖 사용법 가이드" 버튼으로 언제든 다시 받을 수 있습니다.',
+                ],
             },
         ],
     },
@@ -3110,7 +4822,7 @@ GUIDE_CONTENT = {
                 'results': [
                     'Every menu starts by uploading a CSV or XLSX file.',
                     'Column names do not need to match exactly (e.g. "Date", "date" are both recognized), but date, volume, and unit price columns must be present.',
-                    'Columns beyond the standard set (e.g. HS Code, Incoterm) are auto-detected and added as axis/filter options in several menus (Portfolio Health Check, Supply Chain Flow, Concentration Risk, New/Lost Partners, Pivot Builder, New Business Scorer).',
+                    'Columns beyond the standard set (e.g. HS Code, Incoterm) are auto-detected and added as axis/filter options in several menus (Portfolio Health Check, Supply Chain Flow, Concentration Risk, New/Lost Partners, Pivot Builder, New Business Scorer, Commodity Screener, Tender Response Analysis).',
                 ],
             },
             {
@@ -3126,7 +4838,7 @@ GUIDE_CONTENT = {
                 'results': [
                     'Net savings / total savings / total cost increase — the net sum of per-group savings (price difference before vs. after × post-contract volume), plus the savings and cost-increase totals with item counts.',
                     'Cards by product group — split into Savings, Price increases, and Minor change (within ±$10, adjustable), largest amounts first. Each group shows the first 12 cards; "Show all" expands the rest. Items with no purchases after the contract are listed separately as "No purchases after contract" and excluded from the totals.',
-                    'Detailed savings table — the same groups appear in a "Group" column, and the results can be downloaded as a PDF report (3 KPIs + a section per group).',
+                    'Detailed savings table — the same groups appear in a "Group" column, and the results can be downloaded as a new-format PDF report (cover → 4 KPIs and 3 key findings → savings chart and tables by item group → items to check → methodology → closing). When mix-changed items exist, net savings excluding them is shown as well. Use "Legacy-format PDF" if you need the previous format.',
                     'Import product clusters — similarly-worded product names grouped automatically.',
                     'Monthly import trend and last-3-month share.',
                     'New/lost products, origins, and suppliers since the contract.',
@@ -3245,7 +4957,7 @@ GUIDE_CONTENT = {
             {
                 'heading': '🔬 ⑧ New Business Scorer',
                 'image': 'p7_scorer.png',
-                'intro': 'Use this to find "recently surging existing items" and "brand-new entrants" across the whole market, ranked by opportunity. While the other 8 menus examine trade you already do, this one surfaces opportunities you are not yet pursuing.',
+                'intro': 'Use this to find "recently surging existing items" and "brand-new entrants" across the whole market, ranked by opportunity. While the other menus examine trade you already do, this one surfaces opportunities you are not yet pursuing.',
                 'steps': [
                     'Upload full market data that includes HS Code Name / Detailed HS-CODE if possible.',
                     'Set the analysis window, minimum volume threshold, and analysis dimension.',
@@ -3260,7 +4972,49 @@ GUIDE_CONTENT = {
                 'tips': ['Analysis works without fit criteria, but filling them in makes the ranking far more relevant to your specific business.'],
             },
             {
-                'heading': '🧩 ⑨ Free Pivot Builder',
+                'heading': '🧭 ⑨ Commodity Screener',
+                'intro': 'Use this on market data with many HS codes to find items where the market is open enough to switch suppliers (universality) and unit prices vary widely within the same month and origin (gap) — the first step in picking items where tendering or alternative sourcing can lower prices.',
+                'steps': [
+                    'Upload market data with multiple HS codes and importers (date, importer, supplier, origin, HS code, volume, and unit price required).',
+                    'Set the period (default: last 12 months), minimum weight per shipment (default 1,000 kg), and minimum shipments per HS.',
+                    'If needed, adjust universality weights and class boundaries (default 60/30, gap 50) in the sidebar.',
+                    'Click "Run Screening".',
+                ],
+                'results': [
+                    'Metrics per 10-digit HS — importers, CR3, HHI, overseas suppliers, origins, months with trade, shipments per importer per year, unit price CV, gap rate, annual import value.',
+                    'Universality score — weighted average of dataset percentiles for importers↑, CR3↓, suppliers↑, origins↑, months with trade↑, and unit price CV↓.',
+                    'Gap score — percentile of the volume-weighted (P90−P10)/P50 unit price within the same month and origin.',
+                    'Classes — high universality & high gap = A (top target), high universality & low gap = C, medium universality = B, low universality = D.',
+                    'Quadrant scatter (bubble = annual import value), ranking table, CSV and PDF report downloads.',
+                    'Pick an item and click "Open Tender Response Analysis" to send the same file and HS code there.',
+                ],
+                'tips': [
+                    'Preprocessing: duplicates removed (same date, importer, supplier, weight, value), shipments under the minimum weight excluded, unit prices outside P1–P99 per HS excluded. All average prices are volume-weighted (VWAP).',
+                    'Scores are relative ranks within the uploaded dataset; mixing other product groups changes the ranking.',
+                ],
+            },
+            {
+                'heading': '📑 ⑩ Tender Response Analysis',
+                'intro': 'Use this when preparing a bid for one item (HS and spec). It compares prices and track records by origin and overseas supplier to find verified alternative suppliers, and shows how consistently candidates have supplied Korea.',
+                'steps': [
+                    'Upload market data, or receive an item from the Commodity Screener (the HS code is selected automatically).',
+                    'Set the HS code, product keywords to include/exclude (to split specs within an HS code), the period (default: last 12 months), and the minimum weight per shipment.',
+                    'In [Alternative suppliers], check the verification criteria (3+ shipments, 10+ tons, 2+ Korean importers in the last 12 months) and enter tariff rates per origin if needed.',
+                    'Enter the baseline (current) supplier and annual volume (tons) to see savings rates and annual savings per candidate.',
+                    'In [Supply stability], pick a supplier to review its last 36 months of shipments, then create the PDF report below.',
+                ],
+                'results': [
+                    'Comparison tables by origin and supplier — VWAP, comparison price, shipments, total weight, months with trade, Korean importers supplied, latest trade, verification.',
+                    'Tariffs — with a rate, comparison price = CIF × (1 + rate); blank means CIF as is. If any rate is blank, a "Tariff not applied" badge appears on screen and in the PDF.',
+                    'Supply stability — monthly shipment bars (hatched for months without shipments), gap months, average annual volume, Korean importers supplied, unit price CV, yearly summary, and an auto-generated summary sentence.',
+                    'PDF report — cover → summary (4 KPIs + 3 key findings + tariff badge) → alternative suppliers → supply stability (one page per supplier) → methodology and data limits → closing.',
+                ],
+                'tips': [
+                    'With "Blind Korean importer names" on, Korean importer names become Importer A/B/C (by volume) on screen, in CSV, and in the PDF. Overseas supplier names stay visible.',
+                ],
+            },
+            {
+                'heading': '🧩 ⑪ Free Pivot Builder',
                 'image': 'p8_pivot.png',
                 'intro': 'Use this when no fixed screen answers your question — build your own table or chart by freely combining axes and metrics, Excel-pivot-table style.',
                 'steps': [
@@ -3278,7 +5032,10 @@ GUIDE_CONTENT = {
             {
                 'heading': '📄 Common — PDF Download',
                 'intro': 'Click "📄 Generate PDF Report" at the bottom of any results screen to build a PDF with that screen\'s charts and tables, then save it via "📥 Download PDF".',
-                'tips': ['This very guide can be re-downloaded anytime from the "📖 User Guide" button in the sidebar.'],
+                'tips': [
+                    'PDFs from Adoption Impact, the Commodity Screener, and Tender Response Analysis use the new report template (cover → summary KPIs and key findings → body → methodology and data limits → closing, Pretendard font, Tridge brand colors). Other menus will move to the new template step by step.',
+                    'This very guide can be re-downloaded anytime from the "📖 User Guide" button in the sidebar.',
+                ],
             },
         ],
     },
@@ -3637,6 +5394,16 @@ if 'health_raw_df' not in st.session_state:
     st.session_state.health_headers = None
     st.session_state.health_result = None
 
+if 'scr_raw_df' not in st.session_state:
+    st.session_state.scr_raw_df = None
+    st.session_state.scr_headers = None
+    st.session_state.scr_result = None
+
+if 'bid_raw_df' not in st.session_state:
+    st.session_state.bid_raw_df = None
+    st.session_state.bid_headers = None
+    st.session_state.bid_hs_preset = None
+
 # --- [비밀번호 기능] 비밀번호가 맞을 때까지 이 아래 앱 본문을 그리지 않음 ---
 if not check_password():
     st.stop()
@@ -3671,12 +5438,16 @@ with st.sidebar:
     )
     st.session_state.lang = 'ko' if lang_choice == '한국어' else 'en'
     st.markdown("---")
+    _menu_keys = ['menu_opt_customer', 'menu_opt_health', 'menu_opt_market', 'menu_opt_flow', 'menu_opt_risk', 'menu_opt_season',
+                  'menu_opt_churn', 'menu_opt_scorer', 'menu_opt_screener', 'menu_opt_bid', 'menu_opt_pivot']
     selected = option_menu(
         menu_title=T('app_menu_title'),
-        options=[T('menu_opt_customer'), T('menu_opt_health'), T('menu_opt_market'), T('menu_opt_flow'), T('menu_opt_risk'), T('menu_opt_season'), T('menu_opt_churn'), T('menu_opt_scorer'), T('menu_opt_pivot')],
-        icons=["person-bounding-box", "heart-pulse", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "binoculars", "grid-3x3"],
+        options=[T(k) for k in _menu_keys],
+        icons=["person-bounding-box", "heart-pulse", "graph-up-arrow", "diagram-3", "exclamation-triangle", "calendar3", "arrow-left-right", "binoculars", "funnel", "clipboard-check", "grid-3x3"],
         menu_icon="cast",
         default_index=0,
+        manual_select=st.session_state.pop('_menu_jump', None),  # 다른 메뉴에서 코드로 이동할 때만 값이 있음
+        key='main_menu',
         styles={
             "container": {"padding": "0", "background-color": "#26224F"},
             "icon": {"color": "#C8C5E8", "font-size": "15px"},
@@ -3685,10 +5456,15 @@ with st.sidebar:
             "menu-title": {"color": "#FFFFFF"},
         },
     )
+    # key를 고정하면 언어를 바꾼 직후 이전 언어 라벨이 돌아올 수 있어, 현재 언어 라벨로 맞춘다.
+    for _k in _menu_keys:
+        if selected in (TEXTS['ko'][_k], TEXTS['en'][_k]):
+            selected = T(_k)
+            break
     st.markdown("---")
     try:
         _guide_pdf_bytes = build_user_guide_pdf(st.session_state.lang)
-        st.download_button(T('guide_download_btn'), data=_guide_pdf_bytes, file_name="user_guide.pdf", mime="application/pdf", use_container_width=True)
+        st.download_button(T('guide_download_btn'), data=_guide_pdf_bytes, file_name="user_guide.pdf", mime="application/pdf", width="stretch")
     except Exception:
         pass  # 가이드 PDF 생성에 실패해도 앱 나머지 기능에는 영향 없도록 조용히 넘어감
     st.markdown("---")
@@ -3917,7 +5693,21 @@ if selected == T('menu_opt_customer'):
             }, na_rep='-'))
             st.caption(T('p1_vwap_note'))
 
-            if st.button(T('pdf_generate_btn'), key="p1_pdf_btn"):
+            p1_blind = st.checkbox(T('p1_rp_blind_toggle'), value=False, key="p1_rp_blind")
+            pdf_c1, pdf_c2 = st.columns([1, 1])
+            if pdf_c1.button(T('rp_pdf_btn'), key="p1_pdf_btn"):
+                with st.spinner(T('rp_pdf_spinner')):
+                    try:
+                        _cust = st.session_state.customer_name
+                        _label = apply_blind(pd.DataFrame({'c': [_cust]}), 'c', p1_blind, mapping={_cust: T('blind_label', code='A')})['c'].iloc[0]
+                        pdf_bytes = build_adoption_report({
+                            'savings_df': savings_df, 'groups': groups, 'minor_th': minor_th, 'customer_label': str(_label),
+                            'plot_df': st.session_state.plot_df, 'contract_date': st.session_state.contract_date, 'blind': p1_blind,
+                        })
+                        st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="adoption_impact_report.pdf", mime="application/pdf", key="p1_pdf_dl")
+                    except Exception as e:
+                        st.error(T('pdf_error_msg', msg=str(e)))
+            if pdf_c2.button(T('p1_rp_legacy_btn'), key="p1_pdf_legacy_btn"):
                 with st.spinner(T('pdf_generating_msg')):
                     try:
                         def _pdf_rows(g):
@@ -3938,7 +5728,7 @@ if selected == T('menu_opt_customer'):
                                       + [T('p1_total_savings_caption', date=st.session_state.contract_date.date(), th=minor_th)],
                             figs=[], tables=pdf_sections,
                         )
-                        st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="adoption_impact.pdf", mime="application/pdf", key="p1_pdf_dl")
+                        st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="adoption_impact.pdf", mime="application/pdf", key="p1_pdf_legacy_dl")
                     except Exception as e:
                         st.error(T('pdf_error_msg', msg=str(e)))
 
@@ -3958,7 +5748,7 @@ if selected == T('menu_opt_customer'):
                                   title=f"<b>{T('p1_scatter_title', customer=st.session_state.customer_name)}</b><br><span style='font-size: 0.8em; color:grey;'>{T('p1_scatter_subtitle', n=len(top_clusters_for_viz))}</span>", 
                                   labels={'x': T('axis_pca1'), 'y': T('axis_pca2')}, hover_data=['product_name'])
                 fig1.update_traces(marker=dict(size=8, opacity=0.8))
-                st.plotly_chart(fig1, use_container_width=True)
+                st.plotly_chart(fig1, width="stretch")
                 st.subheader(T('p1_cluster_list_subheader'))
                 plot_df_sorted = st.session_state.plot_df.copy()
                 plot_df_sorted['cluster_name'] = pd.Categorical(plot_df_sorted['cluster_name'], categories=cluster_volume_sorted.index.tolist(), ordered=True)
@@ -3974,7 +5764,7 @@ if selected == T('menu_opt_customer'):
                           title=f"<b>{T('p1_monthly_chart_title', customer=st.session_state.customer_name)}</b>", 
                           labels={'year_month_str': T('axis_yearmonth'), 'volume': T('axis_volume_kg'), 'cluster_name': T('legend_cluster')}, 
                           category_orders={'cluster_name': sorted_clusters})
-            st.plotly_chart(fig2, use_container_width=True)
+            st.plotly_chart(fig2, width="stretch")
             
             st.markdown("---")
 
@@ -3991,7 +5781,7 @@ if selected == T('menu_opt_customer'):
                                      title=f"<b>{T('p1_recent3m_pie_title', customer=st.session_state.customer_name)}</b><br><span style='font-size: 0.8em; color:grey;'>{T('p1_recent3m_pie_subtitle', start=three_months_ago.strftime('%Y-%m-%d'), end=latest_date.strftime('%Y-%m-%d'))}</span>")
                     fig_pie.update_traces(textposition='inside', textinfo='percent')
                     fig_pie.update_layout(showlegend=True)
-                    st.plotly_chart(fig_pie, use_container_width=True)
+                    st.plotly_chart(fig_pie, width="stretch")
                 else:
                     st.info(T('p1_no_recent_data_info'))
             else:
@@ -4191,7 +5981,7 @@ if selected == T('menu_opt_health'):
         selected_labels = st.multiselect(T('ph_filter_label'), options=list(status_labels), default=list(status_labels), key="health_filter")
         selected_status = {status_labels[l] for l in selected_labels if l in status_labels}
         shown_rows = [r for r in rows if r['overall'] in selected_status]
-        st.dataframe(health_display_table(shown_rows), hide_index=True, use_container_width=True)
+        st.dataframe(health_display_table(shown_rows), hide_index=True, width="stretch")
         st.caption(T('ph_table_notes'))
         st.caption(T('ph_market_note', season=T('menu_opt_season')))
         if not res['product_mode']:
@@ -4211,17 +6001,17 @@ if selected == T('menu_opt_health'):
                     dc1, dc2, dc3 = st.columns(3)
                     with dc1:
                         st.markdown(f"**{T('ph_detail_top5')}**")
-                        st.dataframe(pd.DataFrame(r['top5'], columns=share_cols).style.format(share_fmt), hide_index=True, use_container_width=True)
+                        st.dataframe(pd.DataFrame(r['top5'], columns=share_cols).style.format(share_fmt), hide_index=True, width="stretch")
                     with dc2:
                         st.markdown(f"**{T('ph_detail_lost')}**")
                         if r['lost']:
-                            st.dataframe(pd.DataFrame(r['lost'], columns=share_cols).style.format(share_fmt), hide_index=True, use_container_width=True)
+                            st.dataframe(pd.DataFrame(r['lost'], columns=share_cols).style.format(share_fmt), hide_index=True, width="stretch")
                         else:
                             st.caption(T('ph_detail_no_lost'))
                     with dc3:
                         st.markdown(f"**{T('ph_detail_new_sup')}**")
                         if r['new_suppliers']:
-                            st.dataframe(pd.DataFrame(r['new_suppliers'], columns=share_cols).style.format(share_fmt), hide_index=True, use_container_width=True)
+                            st.dataframe(pd.DataFrame(r['new_suppliers'], columns=share_cols).style.format(share_fmt), hide_index=True, width="stretch")
                         else:
                             st.caption(T('ph_detail_no_new'))
                     if r['replace_ratio'] is not None:
@@ -4485,7 +6275,7 @@ if selected == T('menu_opt_market'):
             fig_comp = px.scatter(market_df, x='volume', y='unit_price', trendline="lowess", trendline_color_override="red", hover_data=['importer_name', 'date'], 
                                   title=f"<b>{T('p2_scatter_title')}</b><br><span style='font-size: 0.8em; color:grey;'>{T('p2_scatter_subtitle')}</span>",
                                   labels={'volume': T('axis_volume_kg'), 'unit_price': T('axis_unit_price')})
-            st.plotly_chart(fig_comp, use_container_width=True)
+            st.plotly_chart(fig_comp, width="stretch")
             
             st.markdown(f"##### {T('p2_top10_subheader')}")
             # --- [수정 17] 필터링된 랭킹 사용 ---
@@ -4525,7 +6315,7 @@ if selected == T('menu_opt_market'):
                 fig_comp_trend.add_trace(go.Scatter(x=top_competitors_avg_monthly_comp.index.to_timestamp(), y=top_competitors_avg_monthly_comp, mode='lines+markers', name=T('legend_top_group_avg_index'), line=dict(color='green', dash='dash')))
 
             fig_comp_trend.update_layout(title=f"<b>{T('p2_comp_trend_chart_title', product=analyzed_product_name)}</b>", xaxis_title=T('axis_yearmonth'), yaxis_title=T('axis_comp_index'))
-            st.plotly_chart(fig_comp_trend, use_container_width=True)
+            st.plotly_chart(fig_comp_trend, width="stretch")
             st.caption(T('p2_comp_trend_caption'))
             st.markdown("---")
 
@@ -4549,7 +6339,7 @@ if selected == T('menu_opt_market'):
                 st.success(T('p2_benchmark_success', customer=customer_name))
 
             fig4.update_layout(title=f"<b>{T('p2_price_trend_chart_title', product=analyzed_product_name)}</b>", xaxis_title=T('axis_yearmonth'), yaxis_title=T('axis_avg_unit_price'))
-            st.plotly_chart(fig4, use_container_width=True)
+            st.plotly_chart(fig4, width="stretch")
 
             st.markdown(f"##### {T('p2_price_compare_subheader')}")
             col1, col2, col3 = st.columns(3)
@@ -4608,7 +6398,7 @@ if selected == T('menu_opt_market'):
                                   title=f"<b>{T('p2_ms_pie_title', product=analyzed_product_name, year=selected_year_ms)}</b><br><span style='font-size: 0.8em; color:grey;'>{T('p2_ms_pie_subtitle')}</span>", 
                                   hole=0.3, color_discrete_map=color_map_pie)
                     fig5.update_traces(textposition='inside', textinfo='percent+label')
-                    st.plotly_chart(fig5, use_container_width=True)
+                    st.plotly_chart(fig5, width="stretch")
             with col2:
                 years_with_data_price = sorted(market_df['year'].unique(), reverse=True)
                 if years_with_data_price:
@@ -4625,7 +6415,7 @@ if selected == T('menu_opt_market'):
                     color_map_bar[customer_name] = 'red'
 
                     fig6 = px.bar(avg_price_by_importer, x='importer_name', y='unit_price', title=f"<b>{T('p2_price_bar_title', year=selected_year_price)}</b><br><span style='font-size: 0.8em; color:grey;'>{T('p2_price_bar_subtitle')}</span>", labels={'importer_name': T('axis_importer'), 'unit_price': T('axis_avg_unit_price')}, color='importer_name', color_discrete_map=color_map_bar)
-                    st.plotly_chart(fig6, use_container_width=True)
+                    st.plotly_chart(fig6, width="stretch")
         
         # --- [수정 23] 'export_country' 컬럼도 확인하도록 if문 변경 ---
         if 'Exporter' in market_df.columns and 'origin_country' in market_df.columns and 'export_country' in market_df.columns:
@@ -4642,7 +6432,7 @@ if selected == T('menu_opt_market'):
                     fig9 = px.box(exporter_analysis_df_top10, x='quarter', y='unit_price', color='Exporter', 
                                   title=f"<b>{T('p2_exporter_box_title', year=selected_year_exporter)}</b><br><span style='font-size: 0.8em; color:grey;'>{T('p2_exporter_box_subtitle')}</span>", 
                                   labels={'quarter': T('axis_quarter'), 'unit_price': T('axis_unit_price')})
-                    st.plotly_chart(fig9, use_container_width=True)
+                    st.plotly_chart(fig9, width="stretch")
                     with st.expander(T('p2_detail_data_expander')):
                         summary_df_exp = exporter_analysis_df_top10.groupby('Exporter')['unit_price'].agg(['max', 'min']).reset_index()
                         exp_vwap = weighted_avg_groupby(exporter_analysis_df_top10, 'Exporter', 'unit_price', 'volume')
@@ -4689,7 +6479,7 @@ if selected == T('menu_opt_market'):
                                 yaxis2=dict(title=T('axis_avg_import_price'), overlaying='y', side='right'),
                                 legend=dict(x=0, y=1.1, orientation='h')
                             )
-                            st.plotly_chart(fig8, use_container_width=True)
+                            st.plotly_chart(fig8, width="stretch")
 
                             st.subheader(T('p2_price_dist_subheader'))
                             top_10_importers_by_vol = single_exporter_df.groupby('importer_name')['volume'].sum().nlargest(10).index
@@ -4704,7 +6494,7 @@ if selected == T('menu_opt_market'):
                             fig10 = px.box(single_exporter_df_top10, x='importer_name', y='unit_price', 
                                            title=f"<b>{T('p2_exporter_box2_title', exporter=exporter)}</b><br><span style='font-size: 0.8em; color:grey;'>{T('p2_exporter_box2_subtitle')}</span>", 
                                            labels={'importer_name': T('col_importer'), 'unit_price': T('axis_unit_price')}, color='importer_name', color_discrete_map=color_map_box)
-                            st.plotly_chart(fig10, use_container_width=True)
+                            st.plotly_chart(fig10, width="stretch")
                             with st.expander(T('p2_detail_data_expander')):
                                 summary_df_imp = single_exporter_df_top10.groupby('importer_name')['unit_price'].agg(['max', 'min']).reset_index()
                                 imp_vwap = weighted_avg_groupby(single_exporter_df_top10, 'importer_name', 'unit_price', 'volume')
@@ -4926,7 +6716,7 @@ if selected == T('menu_opt_flow'):
                 link=dict(source=[0] * n_targets, target=list(range(1, n_targets + 1)), value=grouped['volume'].tolist(), color=['rgba(13,148,136,0.35)'] * n_targets)
             )])
             fig.update_layout(title=T('p3_sankey_title', left=R['left_entity'], right_axis=R['right_axis_label']), font_size=13, height=max(350, 60 * n_targets))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
             pdf_figs.append(fig)
 
             if R.get('truncated'):
@@ -4956,7 +6746,7 @@ if selected == T('menu_opt_flow'):
                         link=dict(source=[0] * n_targets, target=list(range(1, n_targets + 1)), value=grouped['volume'].tolist(), color=['rgba(13,148,136,0.35)'] * n_targets)
                     )])
                     fig.update_layout(font_size=11, height=max(300, 50 * n_targets), margin=dict(l=10, r=10, t=10, b=10))
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, width="stretch")
                     pdf_figs.append(fig)
 
             st.subheader(T('p3_table_subheader'))
@@ -5100,14 +6890,14 @@ if selected == T('menu_opt_risk'):
         fig.add_trace(go.Bar(y=display_grouped['name'], x=display_grouped['share'], orientation='h', marker_color=bar_colors))
         fig.add_vline(x=threshold, line_dash='dash', line_color='#e11d48')
         fig.update_layout(title=T('p4_bar_chart_title', axis=R['axis_label'], t=threshold), xaxis_title=T('p4_axis_share'), yaxis=dict(autorange='reversed'))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
         figs_for_pdf = [fig]
         if len(R['trend']) > 1:
             fig2 = go.Figure()
             fig2.add_trace(go.Scatter(x=R['trend']['_ym'], y=R['trend']['share'], mode='lines+markers', line=dict(color='#0d9488')))
             fig2.update_layout(title=T('p4_trend_chart_title'), xaxis_title=T('axis_yearmonth'), yaxis_title=T('p4_axis_share'))
-            st.plotly_chart(fig2, use_container_width=True)
+            st.plotly_chart(fig2, width="stretch")
             figs_for_pdf.append(fig2)
 
         display_df = grouped.rename(columns={'name': T('p4_col_name'), 'volume': T('p4_col_volume'), 'share': T('p4_col_share')})
@@ -5261,7 +7051,7 @@ if selected == T('menu_opt_season'):
                 prev_year_added = True
 
         fig.update_layout(title=T('p5_chart_title', product=R['product_label']), xaxis_title=T('p5_axis_month'), yaxis_title=T('p5_axis_price'))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
         if R['show_prev_year'] and not prev_year_added:
             st.caption('※ ' + ('전년도에 해당하는 데이터가 없어 전년 비교선을 표시하지 못했습니다 (최소 13개월치 데이터가 필요합니다).' if st.session_state.lang == 'ko' else 'No prior-year data available to overlay (needs at least 13 months of history).'))
@@ -5683,7 +7473,7 @@ if selected == T('menu_opt_pivot'):
                 fig.update_layout(title=first_metric, height=max(350, 32 * len(y_labels)))
                 if len(R['row_labels']) > 1 or len(R['col_labels']) > 1:
                     st.caption(T('p7_heatmap_needs_dims_note'))
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width="stretch")
             else:
                 if multi_metric:
                     st.caption(T('p7_multi_metric_chart_note'))
@@ -5708,7 +7498,7 @@ if selected == T('menu_opt_pivot'):
                     else:
                         fig.add_trace(go.Scatter(x=x_labels, y=y, mode='lines+markers', line=dict(color='#0d9488')))
                     fig.update_layout(yaxis_title=first_metric)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width="stretch")
 
             st.subheader(T('p7_table_subheader'))
             for capped_label in R.get('capped_fields', []):
@@ -5907,7 +7697,7 @@ if selected == T('menu_opt_scorer'):
             fig = go.Figure()
             fig.add_trace(go.Bar(y=names, x=scores, orientation='h', marker_color=colors_bar))
             fig.update_layout(title=T('p8_chart_title'), xaxis_title=T('p8_col_score'))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
             s_rows = []
             for i, s in enumerate(S_top):
@@ -5925,7 +7715,7 @@ if selected == T('menu_opt_scorer'):
                     T('p8_col_flags'): flags,
                 })
             s_df = pd.DataFrame(s_rows)
-            st.dataframe(s_df, use_container_width=True)
+            st.dataframe(s_df, width="stretch")
         else:
             st.caption(T('p8_no_data_warning'))
 
@@ -5941,7 +7731,7 @@ if selected == T('menu_opt_scorer'):
                         T('p8_col_reason'): _p8_reason_a(r, r['dim_is_importer']),
                         T('p8_col_flags'): _p8_flags_a(r),
                     })
-                st.dataframe(pd.DataFrame(a_rows), use_container_width=True)
+                st.dataframe(pd.DataFrame(a_rows), width="stretch")
             else:
                 st.caption(T('p8_no_data_warning'))
 
@@ -5956,7 +7746,7 @@ if selected == T('menu_opt_scorer'):
                         T('p8_col_reason'): _p8_reason_b(r),
                         T('p8_col_flags'): _p8_flags_b(r),
                     })
-                st.dataframe(pd.DataFrame(b_rows), use_container_width=True)
+                st.dataframe(pd.DataFrame(b_rows), width="stretch")
             else:
                 st.caption(T('p8_no_data_warning'))
 
@@ -5965,5 +7755,292 @@ if selected == T('menu_opt_scorer'):
                 try:
                     pdf_bytes = build_scorer_report_pdf(A, B, S, meta, R['dim_label'])
                     st.download_button(T('p8_download_report_btn'), data=pdf_bytes, file_name="new_business_scorer_report.pdf", mime="application/pdf", key="scorer_pdf_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
+
+
+# ==============================================================================
+# 페이지 ⑨: 범용상품 스크리너
+# ==============================================================================
+if selected == T('menu_opt_screener'):
+    st.title(T('sc_title'))
+    st.write(T('sc_intro'))
+
+    if st.session_state.scr_result is not None:
+        st.button(T('sc_reset_btn'), on_click=reset_screener_states)
+
+    if st.session_state.scr_result is None:
+        scr_file = st.file_uploader(T('sc_upload_label'), type=['csv', 'xlsx'], key="scr_uploader")
+        st.caption(T('sc_upload_caption'))
+        raw_df = load_uploaded_df(scr_file, 'scr_raw_df', 'scr_headers', 'scr_fileid')
+
+        if raw_df is not None:
+            cols = detect_trade_columns(st.session_state.scr_headers)
+            missing = [k for k in ['date', 'importer', 'exporter', 'origin', 'hs', 'volume'] if not cols[k]]
+            if not cols['price'] and not cols['value']:
+                missing.append('price')
+            if missing:
+                st.error(T('sc_missing_cols_error', cols=', '.join(missing)))
+                st.stop()
+
+            d_start, d_end = default_last_12m(raw_df[cols['date']])
+            c1, c2 = st.columns(2)
+            with c1:
+                period = st.date_input(T('sc_period_label'), value=(d_start, d_end), key="scr_period")
+            with c2:
+                min_kg = st.slider(T('sc_min_kg_label'), 0, 10000, 1000, 100, key="scr_min_kg")
+            min_ship = st.number_input(T('sc_min_ship_label'), min_value=1, value=5, step=1, key="scr_min_ship")
+
+            with st.sidebar.expander(T('sc_weights_header'), expanded=False):
+                weights = {k: st.slider(T(f'sc_w_{k}'), 0.0, 3.0, SCREENER_DEFAULT_WEIGHTS[k], 0.5, key=f"scr_w_{k}")
+                           for k, _ in SCREENER_COMPONENTS}
+            with st.sidebar.expander(T('sc_bounds_header'), expanded=False):
+                bound_hi = st.slider(T('sc_bound_hi'), 10, 95, 60, 5, key="scr_bound_hi")
+                bound_lo = st.slider(T('sc_bound_lo'), 5, 90, 30, 5, key="scr_bound_lo")
+                bound_gap = st.slider(T('sc_bound_gap'), 10, 90, 50, 5, key="scr_bound_gap")
+                if bound_lo >= bound_hi:
+                    st.warning(T('sc_bounds_warning'))
+
+            if st.button(T('sc_run_btn')):
+                if not isinstance(period, (tuple, list)) or len(period) != 2:
+                    st.warning(T('sc_no_data_warning'))
+                    st.stop()
+                with st.spinner(T('sc_spinner')):
+                    df, stats = prepare_trade_df(raw_df, cols, period=period, min_shipment_kg=min_kg)
+                    months = max(1, round((pd.Timestamp(period[1]) - pd.Timestamp(period[0])).days / 30.44))
+                    res, skipped = compute_screener(df, months, weights, bound_hi, bound_lo, bound_gap, min_ship)
+                if res.empty:
+                    st.warning(T('sc_no_data_warning'))
+                else:
+                    st.session_state.scr_result = {'res': res, 'stats': stats, 'skipped': skipped,
+                                                   'bounds': (bound_hi, bound_lo, bound_gap), 'period': tuple(period),
+                                                   'weights': dict(weights), 'min_kg': min_kg, 'min_ship': min_ship}
+                    st.rerun()
+
+    if st.session_state.scr_result is not None:
+        R = st.session_state.scr_result
+        res, (bound_hi, bound_lo, bound_gap) = R['res'], R['bounds']
+        st.caption(T('sc_prep_caption', skipped=R['skipped'], **R['stats']))
+        counts = res['class'].value_counts()
+        kpis = [(T('sc_kpi_total'), len(res))] + [(T(SCREENER_CLASS_KEY[c]), int(counts.get(c, 0))) for c in 'ABCD']
+        for kcol, (label, value) in zip(st.columns(len(kpis)), kpis):
+            kcol.metric(label, value)
+
+        st.subheader(T('sc_quadrant_header'))
+        st.plotly_chart(screener_quadrant_fig(res, bound_hi, bound_lo, bound_gap), width="stretch")
+        st.caption(T('sc_bubble_note'))
+
+        st.subheader(T('sc_rank_header'))
+        class_labels = {T(SCREENER_CLASS_KEY[c]): c for c in 'ABCD' if counts.get(c)}
+        picked = st.multiselect(T('sc_filter_label'), options=list(class_labels), default=list(class_labels), key="scr_filter")
+        shown = res[res['class'].isin({class_labels[p] for p in picked if p in class_labels})]
+        table = screener_display_table(shown)
+        st.dataframe(table, hide_index=True, width="stretch")
+        st.caption(T('sc_metric_note'))
+        st.download_button(T('sc_csv_btn'), data=table.to_csv(index=False).encode('utf-8-sig'),
+                           file_name="commodity_screener.csv", mime="text/csv", key="scr_csv")
+        if st.button(T('rp_pdf_btn'), key="scr_pdf_btn"):
+            with st.spinner(T('rp_pdf_spinner')):
+                try:
+                    pdf_bytes = build_screener_report(R, R.get('weights', SCREENER_DEFAULT_WEIGHTS), R.get('min_kg', 1000), R.get('min_ship', 5))
+                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="commodity_screener_report.pdf", mime="application/pdf", key="scr_pdf_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
+
+        st.subheader(T('sc_goto_header'))
+        hs_options = list(res['hs'])
+        hs_pick = st.selectbox(T('sc_goto_select'), options=hs_options,
+                               format_func=lambda h: f"{h} · {res.loc[res['hs'] == h, 'name'].iloc[0]} ({res.loc[res['hs'] == h, 'class'].iloc[0]})",
+                               key="scr_goto_hs")
+        if st.button(T('sc_goto_btn'), key="scr_goto_btn"):
+            st.session_state.bid_hs_preset = hs_pick
+            if st.session_state.get('bid_raw_df') is None:
+                st.session_state.bid_raw_df = st.session_state.scr_raw_df
+                st.session_state.bid_headers = st.session_state.scr_headers
+            st.session_state['_menu_jump'] = 9  # 메뉴 순서상 ⑩ 입찰 대응 분석
+            st.success(T('sc_goto_done', hs=hs_pick, menu=T('menu_opt_bid')))
+            st.rerun()
+
+
+# ==============================================================================
+# 페이지 ⑩: 입찰 대응 분석
+# ==============================================================================
+if selected == T('menu_opt_bid'):
+    st.title(T('bd_title'))
+    st.write(T('bd_intro'))
+
+    if st.session_state.bid_raw_df is not None:
+        st.button(T('bd_reset_btn'), on_click=reset_bid_states)
+
+    if st.session_state.bid_raw_df is None:
+        bid_file = st.file_uploader(T('bd_upload_label'), type=['csv', 'xlsx'], key="bid_uploader")
+        st.caption(T('bd_upload_caption'))
+        if st.session_state.get('scr_raw_df') is not None and st.button(T('bd_use_screener_btn')):
+            st.session_state.bid_raw_df = st.session_state.scr_raw_df
+            st.session_state.bid_headers = st.session_state.scr_headers
+            st.rerun()
+        load_uploaded_df(bid_file, 'bid_raw_df', 'bid_headers', 'bid_fileid')
+        if st.session_state.bid_raw_df is not None:
+            st.rerun()
+
+    raw_df = st.session_state.bid_raw_df
+    if raw_df is not None:
+        cols = detect_trade_columns(st.session_state.bid_headers)
+        missing = [k for k in ['date', 'importer', 'exporter', 'origin', 'volume'] if not cols[k]]
+        if not cols['price'] and not cols['value']:
+            missing.append('price')
+        if missing:
+            st.error(T('bd_missing_cols_error', cols=', '.join(missing)))
+            st.stop()
+
+        st.subheader(T('bd_filter_header'))
+        full_df, stats = prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=st.session_state.get('bid_min_kg', 1000))
+        hs_list = sorted(full_df['_hs'].unique()) if cols['hs'] else []
+        preset = st.session_state.get('bid_hs_preset')
+        if preset:
+            st.caption(T('bd_hs_from_screener', hs=preset))
+        f1, f2 = st.columns(2)
+        with f1:
+            hs_opts = [T('bd_hs_all')] + hs_list
+            hs_sel = st.selectbox(T('bd_hs_label'), options=hs_opts, index=hs_opts.index(preset) if preset in hs_opts else 0, key="bid_hs")
+            include_kw = st.text_input(T('bd_include_label'), key="bid_include")
+        with f2:
+            d_start, d_end = default_last_12m(full_df['_date'])
+            period = st.date_input(T('bd_period_label'), value=(d_start, d_end), key="bid_period")
+            exclude_kw = st.text_input(T('bd_exclude_label'), key="bid_exclude")
+        g1, g2 = st.columns(2)
+        with g1:
+            st.slider(T('bd_min_kg_label'), 0, 10000, 1000, 100, key="bid_min_kg")
+        with g2:
+            blind_on = st.checkbox(T('blind_toggle'), value=True, key="bid_blind")
+
+        if not isinstance(period, (tuple, list)) or len(period) != 2:
+            st.stop()
+        scoped = bid_filter(full_df, None if hs_sel == T('bd_hs_all') else hs_sel, include_kw, exclude_kw)
+        in_period = scoped[(scoped['_date'] >= pd.Timestamp(period[0])) & (scoped['_date'] <= pd.Timestamp(period[1]))]
+        st.caption(T('bd_prep_caption', n0=stats['n0'], dup=stats['dup'], small=stats['small'], outlier=stats['outlier'], n=len(in_period)))
+        if in_period.empty:
+            st.warning(T('bd_no_data_warning'))
+            st.stop()
+        blind_map = blind_importer_map(in_period, '_importer', '_volume') if blind_on else None
+
+        tab_alt, tab_stab = st.tabs([T('bd_tab_alt'), T('bd_tab_stability')])
+        with tab_alt:
+            with st.expander(T('bd_verify_header'), expanded=False):
+                v1, v2, v3 = st.columns(3)
+                verify = {
+                    'min_ship': v1.number_input(T('bd_verify_ship'), min_value=0, value=BID_DEFAULT_VERIFY['min_ship'], step=1, key="bid_v_ship"),
+                    'min_ton': v2.number_input(T('bd_verify_ton'), min_value=0.0, value=BID_DEFAULT_VERIFY['min_ton'], step=1.0, key="bid_v_ton"),
+                    'min_imp': v3.number_input(T('bd_verify_imp'), min_value=0, value=BID_DEFAULT_VERIFY['min_imp'], step=1, key="bid_v_imp"),
+                }
+            origins = sorted(in_period['_origin'].unique())
+            st.markdown(f"**{T('bd_tariff_header')}**")
+            tariff_df = st.data_editor(pd.DataFrame({T('bd_tariff_col_origin'): origins, T('bd_tariff_col_rate'): [None] * len(origins)}),
+                                       hide_index=True, disabled=[T('bd_tariff_col_origin')], key="bid_tariff_editor",
+                                       column_config={T('bd_tariff_col_rate'): st.column_config.NumberColumn(min_value=0.0, max_value=1000.0, step=0.1)})
+            st.caption(T('bd_tariff_caption'))
+            tariffs = {o: float(r) for o, r in zip(tariff_df[T('bd_tariff_col_origin')], tariff_df[T('bd_tariff_col_rate')]) if pd.notna(r)}
+            tariff_missing = len(tariffs) < len(origins)
+            st.markdown(_badge_html(T('bd_badge_no_tariff'), dark=True) if tariff_missing else _badge_html(T('bd_badge_tariff_ok'), dark=False), unsafe_allow_html=True)
+            if tariff_missing:
+                st.caption(T('bd_tariff_missing_note'))
+
+            def _view(table, key_label):
+                by_origin = key_label == T('bd_col_origin')
+                out = pd.DataFrame({
+                    key_label: table['key'],
+                    T('bd_col_status'): table['verified'].map(lambda v: T('bd_badge_verified') if v else T('bd_badge_unverified')),
+                    **({} if by_origin else {T('bd_col_origin'): table['origin']}),
+                    T('bd_col_vwap'): table['vwap'].round(3),
+                    T('bd_col_tariff'): table['tariff'],
+                    T('bd_col_cmp'): table['cmp'].round(3),
+                    T('bd_col_ship'): table['shipments'],
+                    T('bd_col_ton'): table['tons'].round(1),
+                    T('bd_col_months'): table['months'],
+                    T('bd_col_importers'): table['importers'],
+                    T('bd_col_importer_names'): table['importer_names'],
+                    T('bd_col_last'): table['last'],
+                })
+                if 'saving_pct' in table:
+                    out[T('bd_col_saving_pct')] = table['saving_pct'].round(1)
+                    out[T('bd_col_saving_amt')] = table['saving_amt'].round(0)
+                return apply_blind(out, T('bd_col_importer_names'), blind_on, mapping=blind_map)
+
+            st.subheader(T('bd_origin_header'))
+            origin_tbl = bid_supplier_table(in_period, '_origin', period[1], verify, tariffs)
+            top_origins = in_period.groupby('_origin')['_volume'].sum().sort_values(ascending=False).head(12).index
+            box = px.box(in_period[in_period['_origin'].isin(top_origins)], x='_origin', y='_price', points=False,
+                         category_orders={'_origin': list(top_origins)}, color_discrete_sequence=['#171CFD'])
+            box.update_layout(title=T('bd_origin_chart_title'), xaxis_title='', yaxis_title='USD/kg', height=380, plot_bgcolor='#FFFFFF')
+            box.update_yaxes(gridcolor='rgba(10,10,24,0.08)')
+            st.plotly_chart(box, width="stretch")
+            origin_view = _view(origin_tbl, T('bd_col_origin'))
+            st.dataframe(origin_view, hide_index=True, width="stretch")
+            st.download_button(T('bd_csv_origin_btn'), data=origin_view.to_csv(index=False).encode('utf-8-sig'),
+                               file_name="tender_origins.csv", mime="text/csv", key="bid_csv_origin")
+
+            st.subheader(T('bd_supplier_header'))
+            sup_tbl = bid_supplier_table(in_period, '_exporter', period[1], verify, tariffs)
+            s1, s2, s3 = st.columns([2, 1, 1])
+            with s1:
+                base_opts = [T('bd_base_none')] + list(sup_tbl['key'])
+                base_sel = st.selectbox(T('bd_base_label'), options=base_opts, key="bid_base")
+            with s2:
+                annual_tons = st.number_input(T('bd_annual_ton_label'), min_value=0.0, value=100.0, step=10.0, key="bid_annual_tons")
+            with s3:
+                verified_only = st.checkbox(T('bd_verified_only'), value=False, key="bid_verified_only")
+            sup_tbl = bid_add_savings(sup_tbl, None if base_sel == T('bd_base_none') else base_sel, annual_tons)
+            shown_sup = sup_tbl[sup_tbl['verified'] | (sup_tbl['key'] == base_sel)] if verified_only else sup_tbl
+            sup_view = _view(shown_sup, T('bd_col_exporter'))
+            st.dataframe(sup_view, hide_index=True, width="stretch")
+            st.download_button(T('bd_csv_supplier_btn'), data=sup_view.to_csv(index=False).encode('utf-8-sig'),
+                               file_name="tender_suppliers.csv", mime="text/csv", key="bid_csv_supplier")
+            st.caption(T('bd_method_note'))
+
+        with tab_stab:
+            sup_rank = in_period.groupby('_exporter')['_volume'].sum().sort_values(ascending=False)
+            stab_sel = st.selectbox(T('bd_stab_select'), options=list(sup_rank.index), key="bid_stab_sup")
+            stab = bid_stability(scoped, stab_sel, period[1])
+            if stab['empty']:
+                st.info(T('bd_stab_no_data'))
+            else:
+                st.info(bid_stability_sentence(stab_sel, stab))
+                k1, k2, k3, k4 = st.columns(4)
+                k1.metric(T('bd_stab_kpi_gap'), stab['gap_months'])
+                k2.metric(T('bd_stab_kpi_annual'), f"{stab['annual_tons']:,.0f}")
+                k3.metric(T('bd_stab_kpi_imp'), stab['importers'])
+                k4.metric(T('bd_stab_kpi_cv'), '-' if pd.isna(stab['cv']) else f"{stab['cv']:.1f}")
+                fig = bid_stability_fig(stab)
+                fig.update_layout(title=T('bd_stab_chart_title', m=stab['n_months']))
+                st.plotly_chart(fig, width="stretch")
+                st.markdown(f"**{T('bd_stab_year_header')}**")
+                yearly = stab['yearly'].drop(columns=['span']).reset_index().rename(columns={
+                    'label': T('bd_col_year'), 'shipments': T('bd_col_ship'), 'tons': T('bd_col_ton'),
+                    'vwap': T('bd_col_vwap'), 'months': T('bd_col_months'), 'importers': T('bd_col_importers')})
+                st.dataframe(yearly.style.format({T('bd_col_ship'): '{:,.0f}', T('bd_col_ton'): '{:,.1f}', T('bd_col_vwap'): '{:,.3f}',
+                                                  T('bd_col_months'): '{:,.0f}', T('bd_col_importers'): '{:,.0f}'}),
+                             hide_index=True, width="stretch")
+
+        st.divider()
+        st.subheader(T('bd_rp_header'))
+        default_item = in_period['_product'].mode().iloc[0] if in_period['_product'].astype(str).str.len().gt(0).any() else (hs_sel or '')
+        r1, r2 = st.columns(2)
+        with r1:
+            rp_item = st.text_input(T('bd_rp_item_label'), value=str(default_item)[:40], key="bid_rp_item")
+        with r2:
+            rp_spec = st.text_input(T('bd_rp_spec_label'), value=include_kw, key="bid_rp_spec")
+        default_stab = list(sup_tbl[sup_tbl['verified']].sort_values('cmp')['key'].head(2)) or list(sup_tbl.sort_values('cmp')['key'].head(1))
+        rp_stab = st.multiselect(T('bd_rp_stab_label'), options=list(sup_tbl['key']), default=default_stab, key="bid_rp_stab")
+        if st.button(T('rp_pdf_btn'), key="bid_pdf_btn"):
+            with st.spinner(T('rp_pdf_spinner')):
+                try:
+                    pdf_bytes = build_bid_report({
+                        'df': in_period, 'scoped': scoped, 'origin_tbl': origin_tbl, 'sup_tbl': sup_tbl, 'verify': verify,
+                        'annual_tons': annual_tons, 'base_key': None if base_sel == T('bd_base_none') else base_sel,
+                        'tariffs': tariffs, 'tariff_missing': tariff_missing, 'period': tuple(period), 'item': rp_item or '-',
+                        'spec': rp_spec, 'hs': None if hs_sel == T('bd_hs_all') else hs_sel, 'include': include_kw, 'exclude': exclude_kw,
+                        'min_kg': st.session_state.get('bid_min_kg', 1000), 'blind': blind_on, 'stab_suppliers': rp_stab,
+                    })
+                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="tender_response_report.pdf", mime="application/pdf", key="bid_pdf_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
