@@ -1312,6 +1312,74 @@ TEXTS = {
         'ch_rp_close_v3_link': '1위 의존도 {a:.0f}% → {b:.0f}% 상승 — {menu}에서 확인',
         'ch_rp_close_v3': '1위 의존도 {a:.0f}% → {b:.0f}% — 분기마다 다시 확인',
         'ch_rp_close_note': '신규·이탈은 선택한 두 기간의 통관 기록만으로 판정합니다. 본 자료의 수치는 통관 데이터 기반 추정치로, 계약 판단의 단일 근거로 사용할 수 없습니다.',
+        # --- ⑧ 신규사업 스코어러 새 PDF (p8_rp_) ---
+        'p8_rp_eyebrow': 'New Business Scorer Report',
+        'p8_rp_blind_toggle': 'PDF에 수입사명 대신 블라인드 표기 (수입사 A, B …)',
+        'p8_rp_s1_eyebrow': '01  Summary',
+        'p8_rp_head': '{name}이(가) 점수 {score:.0f}점으로 가장 유망합니다',
+        'p8_rp_head_none': '조건을 만족하는 후보가 없습니다',
+        'p8_rp_kpi_window_note': '{a} – {b} vs 전년 동기',
+        'p8_rp_kpi_yoy_note': '{ly:,.0f}t → {rec:,.0f}t',
+        'p8_rp_kpi_growing': '성장 품목',
+        'p8_rp_kpi_growing_note': '전년 대비 물량 증가 · 기존 {n}개 중',
+        'p8_rp_kpi_new_note': '최근 처음 등장 · 선적 {s}회 이상',
+        'p8_rp_f1': '1위 {name} ({type}) — {score:.0f}점',
+        'p8_rp_f1_none': '조건을 만족하는 후보가 없습니다',
+        'p8_rp_f1_none_d': '최소 물량·선적 기준을 낮추거나 분석 기간을 늘려 다시 실행해 보세요.',
+        'p8_rp_f2_up': '전체 물량이 전년 동기 대비 {pct} 늘었습니다',
+        'p8_rp_f2_down': '전체 물량이 전년 동기 대비 {pct} 줄었습니다',
+        'p8_rp_f2_none': '전년 동기 물량이 없어 시장 증감을 계산하지 못했습니다',
+        'p8_rp_f2_d': '기존 품목 {n}개 중 {g}개({p:.0f}%)가 늘었고, 신규진입은 {b}개입니다.',
+        'p8_rp_f3': '성장 품목 중 단가도 오른 품목 {u}개, 단가가 내린 품목 {d}개',
+        'p8_rp_f3_d': '물량과 단가가 함께 오르면 수요 강세(프리미엄), 물량은 늘고 단가가 내리면 공급 확대·코모디티화 신호로 봅니다.',
+        'p8_rp_f3_none': '단가 신호는 보지 않았습니다',
+        'p8_rp_f3_none_d': '파일에 단가·금액 컬럼이 없거나 성장 품목이 없습니다.',
+        'p8_rp_s2_eyebrow': '02  Top 10',
+        'p8_rp_s2_head': '통합 순위 TOP 10',
+        'p8_rp_s2_sub': '기존·급상승 품목과 신규진입 품목을 한 점수(0–100)로 함께 줄 세웠습니다.',
+        'p8_rp_chart_note': 'Blue = 기존·급상승, Black = 신규진입.',
+        'p8_rp_th_key': '핵심 수치',
+        'p8_rp_s3_eyebrow': '03  Growth Map',
+        'p8_rp_s3_head': '성장 지도와 신규진입',
+        'p8_rp_s3_sub': '기존 품목은 성장률과 규모로, 신규진입 품목은 물량과 선적 횟수로 봅니다.',
+        'p8_rp_map': '기존 품목 성장 지도',
+        'p8_rp_map_note': '점 크기 = 점수, 숫자 = TOP 10 순위. 성장률 300% 이상은 오른쪽 끝에 모아 표시합니다.',
+        'p8_rp_axis_yoy': '전년 동기 대비 물량 변화',
+        'p8_rp_axis_vol': '최근 물량 (로그)',
+        'p8_rp_new_table': '신규진입 품목 ({n}개)',
+        'p8_rp_new_note': '최근 기간에 처음 등장하고 선적 {s}회 이상인 품목입니다.',
+        'p8_rp_th_origin': '원산지',
+        'p8_rp_s4_eyebrow': '04  Details',
+        'p8_rp_s4_head': '상위 5개 후보 상세',
+        'p8_rp_s4_sub': '점수 근거와 확인할 점입니다.',
+        'p8_rp_d_volume': '물량',
+        'p8_rp_d_price': '단가 변화',
+        'p8_rp_d_value': '내용',
+        'p8_rp_s5_eyebrow': '05  Methodology',
+        'p8_rp_lbl_score_a': '기존 품목 점수',
+        'p8_rp_lbl_score_b': '신규진입 점수',
+        'p8_rp_lbl_fit': '적합도',
+        'p8_rp_lbl_min': '최소 조건',
+        'p8_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터 {n:,}건 · 카테고리 {cat}',
+        'p8_rp_m_period': '최근 {m}개월({a} – {b})과 전년 동기({la} – {lb}) 비교',
+        'p8_rp_m_score_a': '{preset}: 성장 {g:.0f}% · 규모 {s:.0f}% · 진입 용이성 {e:.0f}% · 단가 {p:.0f}% 가중(각 지표는 후보 안 상대 순위). 저베이스·단일선적 편중은 –10점, 프리미엄 +4점·코모디티화 –6점',
+        'p8_rp_m_score_b': '물량 35% · 선적 횟수 35% · 진입 용이성(1위 수입사 비중의 반대) 30%. 단일선적 편중 –10점, 표기변형 의심 –15점',
+        'p8_rp_m_fit': '입력한 공급사·원산지·키워드와 겹치는 정도를 {w}% 반영. 사분면은 점수·적합도 중앙값 기준',
+        'p8_rp_m_fit_none': '적합도 입력이 없어 반영하지 않음',
+        'p8_rp_m_min': '최근 물량 {floor:,}kg 이상, 신규진입은 선적 {s}회 이상',
+        'p8_rp_m_price': '금액 컬럼이 있으면 금액 ÷ 물량, 없을 때만 단가 × 물량으로 VWAP 계산',
+        'p8_rp_unknown1': '국내 수요·판매 가격 등 수입 이후 시장 상황',
+        'p8_rp_unknown2': '규제·인증 등 진입 장벽',
+        'p8_rp_unknown3': '점수는 업로드한 데이터 안의 상대 순위이며, 다른 카테고리와 섞으면 순위가 달라짐',
+        'p8_rp_close_k1': '우선 검토',
+        'p8_rp_close_k2': '범용성 확인',
+        'p8_rp_close_k3': '공급처 확인',
+        'p8_rp_close_v1': '상위 후보: {items}',
+        'p8_rp_close_v1_none': '조건을 만족하는 후보 없음 — 기준을 낮춰 다시 실행',
+        'p8_rp_close_v2_link': '{name} — {menu}에서 범용성 확인',
+        'p8_rp_close_v2_none': '-',
+        'p8_rp_close_v3': '관심 품목의 대체 공급처와 단가는 {menu}에서 확인',
+        'p8_rp_close_note': '점수는 통관 물량·단가로 만든 상대 지표이며 수요·규제·마진을 반영하지 않습니다. 본 자료의 수치는 사업 판단의 단일 근거로 사용할 수 없습니다.',
         'unit_n_years': '{n}년',
         'unit_n_months': '{n}개월',
         'unit_n_times': '{n}회',
@@ -2659,6 +2727,74 @@ TEXTS = {
         'ch_rp_close_v3_link': 'Top-1 share up {a:.0f}% → {b:.0f}% — check in {menu}',
         'ch_rp_close_v3': 'Top-1 share {a:.0f}% → {b:.0f}% — re-check every quarter',
         'ch_rp_close_note': 'New and lost are judged only from customs records in the two selected periods. Figures in this report are estimates from customs data and must not be the sole basis for contract decisions.',
+        # --- ⑧ New business scorer new PDF (p8_rp_) ---
+        'p8_rp_eyebrow': 'New Business Scorer Report',
+        'p8_rp_blind_toggle': 'Blind importer names in the PDF (Importer A, B …)',
+        'p8_rp_s1_eyebrow': '01  Summary',
+        'p8_rp_head': '{name} is the most promising, scoring {score:.0f}',
+        'p8_rp_head_none': 'No candidates meet the criteria',
+        'p8_rp_kpi_window_note': '{a} – {b} vs. prior year',
+        'p8_rp_kpi_yoy_note': '{ly:,.0f}t → {rec:,.0f}t',
+        'p8_rp_kpi_growing': 'Growing items',
+        'p8_rp_kpi_growing_note': 'Volume up YoY · of {n} existing',
+        'p8_rp_kpi_new_note': 'First seen recently · {s}+ shipments',
+        'p8_rp_f1': 'No. 1: {name} ({type}) — {score:.0f}',
+        'p8_rp_f1_none': 'No candidates meet the criteria',
+        'p8_rp_f1_none_d': 'Lower the minimum volume or shipment count, or lengthen the window, and run again.',
+        'p8_rp_f2_up': 'Total volume grew {pct} vs. the same period last year',
+        'p8_rp_f2_down': 'Total volume fell {pct} vs. the same period last year',
+        'p8_rp_f2_none': 'No prior-year volume, so market growth could not be calculated',
+        'p8_rp_f2_d': '{g} of {n} existing items ({p:.0f}%) grew, and {b} are new entries.',
+        'p8_rp_f3': 'Among growing items, {u} also rose in price and {d} fell in price',
+        'p8_rp_f3_d': 'Volume and price rising together suggests strong demand (premium); volume up with price down suggests more supply or commoditisation.',
+        'p8_rp_f3_none': 'Price signals were not assessed',
+        'p8_rp_f3_none_d': 'The file has no price or value column, or no growing items.',
+        'p8_rp_s2_eyebrow': '02  Top 10',
+        'p8_rp_s2_head': 'Combined top 10',
+        'p8_rp_s2_sub': 'Existing growth items and new entries ranked on one 0–100 score.',
+        'p8_rp_chart_note': 'Blue = existing growth, Black = new entry.',
+        'p8_rp_th_key': 'Key figures',
+        'p8_rp_s3_eyebrow': '03  Growth Map',
+        'p8_rp_s3_head': 'Growth map and new entries',
+        'p8_rp_s3_sub': 'Existing items are read by growth and size; new entries by volume and shipment count.',
+        'p8_rp_map': 'Growth map of existing items',
+        'p8_rp_map_note': 'Dot size = score, numbers = top-10 rank. Growth of 300% or more is pinned to the right edge.',
+        'p8_rp_axis_yoy': 'Volume change vs. prior year',
+        'p8_rp_axis_vol': 'Recent volume (log)',
+        'p8_rp_new_table': 'New entries ({n})',
+        'p8_rp_new_note': 'Items first seen in the recent window with {s}+ shipments.',
+        'p8_rp_th_origin': 'Origin',
+        'p8_rp_s4_eyebrow': '04  Details',
+        'p8_rp_s4_head': 'Top 5 candidates in detail',
+        'p8_rp_s4_sub': 'Why each scored as it did and what to check.',
+        'p8_rp_d_volume': 'Volume',
+        'p8_rp_d_price': 'Price change',
+        'p8_rp_d_value': 'Detail',
+        'p8_rp_s5_eyebrow': '05  Methodology',
+        'p8_rp_lbl_score_a': 'Existing score',
+        'p8_rp_lbl_score_b': 'New-entry score',
+        'p8_rp_lbl_fit': 'Fit',
+        'p8_rp_lbl_min': 'Minimums',
+        'p8_rp_m_data': 'Tridge TDS Korean import customs data, {n:,} records · category {cat}',
+        'p8_rp_m_period': 'Last {m} months ({a} – {b}) vs. the same period a year earlier ({la} – {lb})',
+        'p8_rp_m_score_a': '{preset}: growth {g:.0f}% · size {s:.0f}% · ease of entry {e:.0f}% · price {p:.0f}% (each a relative rank among candidates). Low base and single-shipment skew –10; premium +4, commoditisation –6',
+        'p8_rp_m_score_b': 'Volume 35% · shipment count 35% · ease of entry (inverse of top importer share) 30%. Single-shipment skew –10, suspected name variant –15',
+        'p8_rp_m_fit': 'Overlap with the suppliers, origins and keywords you entered, weighted {w}%. Quadrants split at the median score and fit',
+        'p8_rp_m_fit_none': 'No fit inputs, so not applied',
+        'p8_rp_m_min': 'Recent volume of {floor:,} kg or more; new entries need {s}+ shipments',
+        'p8_rp_m_price': 'VWAP from value ÷ volume when a value column exists, otherwise unit price × volume',
+        'p8_rp_unknown1': 'Post-import market conditions such as domestic demand and selling prices',
+        'p8_rp_unknown2': 'Entry barriers such as regulation and certification',
+        'p8_rp_unknown3': 'Scores are relative ranks within the uploaded data; mixing categories changes the ranking',
+        'p8_rp_close_k1': 'Review first',
+        'p8_rp_close_k2': 'Check genericness',
+        'p8_rp_close_k3': 'Check suppliers',
+        'p8_rp_close_v1': 'Top candidates: {items}',
+        'p8_rp_close_v1_none': 'No candidates — lower the criteria and run again',
+        'p8_rp_close_v2_link': '{name} — check how generic it is in {menu}',
+        'p8_rp_close_v2_none': '-',
+        'p8_rp_close_v3': 'Check alternative suppliers and prices for items of interest in {menu}',
+        'p8_rp_close_note': 'Scores are relative indicators from customs volume and price and do not reflect demand, regulation or margins. Figures in this report must not be the sole basis for business decisions.',
         'unit_n_years': '{n} year(s)',
         'unit_n_months': '{n} months',
         'unit_n_times': '{n}',
@@ -4388,6 +4524,12 @@ def _rp_pct(v, digits=1):
     return f"+{v:.{digits}f}%" if v >= 0 else f"–{-v:.{digits}f}%"
 
 
+def _rp_short(text, n=48):
+    """긴 이름(HS 품목 설명 등)은 PDF 헤드라인·표에서 n자로 줄인다."""
+    text = str(text)
+    return text if len(text) <= n else text[:n - 1].rstrip() + '…'
+
+
 def _rp_ym(p):
     """Period/Timestamp/'2025-03' → '25.03' (차트 눈금용)."""
     p = pd.Period(str(p), freq='M')
@@ -5141,6 +5283,212 @@ def build_churn_report(R, blind):
     return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4)] + [closing])
 
 
+# ---------- ⑧ 신규사업 스코어러 ----------
+def scorer_blind(A, B, S, enabled):
+    """⑧ PDF용 블라인드: 상위 수입사(top1_imp)와, 분석 기준이 수입사면 품목 이름 자리까지 '수입사 A' 식으로 바꾼 복사본."""
+    if not enabled:
+        return A, B, S
+    vol = {}
+    for df_, vcol in ((A, 'rec_vol'), (B, 'vol')):
+        if df_ is not None and not df_.empty:
+            for _, r in df_.iterrows():
+                if r.get('top1_imp'):
+                    vol[str(r['top1_imp'])] = vol.get(str(r['top1_imp']), 0) + float(r[vcol])
+                if r.get('dim_is_importer'):
+                    vol[str(r['display_name'])] = vol.get(str(r['display_name']), 0) + float(r[vcol])
+    nmap = blind_name_map(pd.Series(vol, dtype=float)) if vol else {}
+
+    def _row(r):
+        r = r.copy()
+        if r.get('top1_imp'):
+            r['top1_imp'] = nmap.get(str(r['top1_imp']), r['top1_imp'])
+        if r.get('dim_is_importer'):
+            r['display_name'] = nmap.get(str(r['display_name']), r['display_name'])
+        return r
+
+    A2 = A.apply(_row, axis=1) if not A.empty else A
+    B2 = B.apply(_row, axis=1) if not B.empty else B
+    S2 = []
+    for s_ in S:
+        r = _row(s_['row'])
+        S2.append({**s_, 'row': r, 'name': r['display_name']})
+    return A2, B2, S2
+
+
+def scorer_pdf_top_chart(S_top):
+    """⑧ 통합 TOP 점수 가로 막대 (기존·급상승 Blue, 신규진입 Black)."""
+    import report_theme as rt
+    if not S_top:
+        return None
+    items = S_top[::-1]
+    fig, ax = rt.new_chart(0.26 * len(items) + 0.6)
+    rt.apply_pdf_chart_style(ax, grid_axis='x')
+    y = np.arange(len(items))
+    vals = [float(s['score']) for s in items]
+    ax.barh(y, vals, height=0.62, color=[rt.HEX['blue'] if s['type'] == 'existing' else rt.HEX['black'] for s in items], linewidth=0)
+    for yi, v in zip(y, vals):
+        ax.text(v + 1, yi, f"{v:.0f}", va='center', fontsize=7, color=rt.HEX['black'])
+    ax.set_yticks(y)
+    ax.set_yticklabels([f"{len(items) - i}. {str(s['name'])[:24]}" for i, s in enumerate(items)], fontsize=7.5)
+    ax.set_xlim(0, 108)
+    fig.subplots_adjust(left=0.3, right=0.99, top=0.97, bottom=0.1 if len(items) > 6 else 0.18)
+    return rt.chart_image(fig)
+
+
+def scorer_pdf_growth_map(A_growing, rank_of):
+    """⑧ 성장 지도: 가로 = 전년 동기 대비 물량 변화(%), 세로 = 최근 물량(톤, 로그), 점 크기 = 점수.
+    통합 TOP 10에 든 품목은 순위 번호를 단다."""
+    import report_theme as rt
+    if A_growing is None or A_growing.empty:
+        return None
+    fig, ax = rt.new_chart(2.8)
+    rt.apply_pdf_chart_style(ax)
+    x = A_growing['yoy'].clip(upper=300).astype(float).values
+    yv = (A_growing['rec_vol'].astype(float) / 1000).clip(lower=0.01).values
+    size = 14 + A_growing['final_score'].astype(float).values * 2.4
+    top = np.array([str(k) in rank_of for k in A_growing['display_name']])
+    ax.scatter(x[~top], yv[~top], s=size[~top], color=rt.HEX['pale'], alpha=0.8, edgecolor='white', linewidth=0.5, zorder=2)
+    ax.scatter(x[top], yv[top], s=size[top], color=rt.HEX['blue'], alpha=0.95, edgecolor='white', linewidth=0.6, zorder=3)
+    for xi, yi, name in zip(x[top], yv[top], A_growing['display_name'][top]):
+        ax.annotate(str(rank_of[str(name)]), (xi, yi), xytext=(4, 3), textcoords='offset points', fontsize=6.8, fontweight='bold',
+                    color=rt.HEX['black'])
+    ax.set_yscale('log')
+    ax.tick_params(axis='y', which='minor', length=0, labelleft=False)
+    ax.xaxis.set_major_formatter(lambda v, _: f"+{v:.0f}%" if v < 300 else "+300%+")
+    ax.yaxis.set_major_formatter(lambda v, _: f"{v:,.0f}t" if v >= 1 else f"{v:g}t")
+    ax.set_xlabel(T('p8_rp_axis_yoy'), fontsize=7.5)
+    ax.set_ylabel(T('p8_rp_axis_vol'), fontsize=7.5)
+    x_hi = min(320.0, max(60.0, float(np.nanmax(x)) * 1.2))  # 데이터 범위에 맞추되 300% 상한
+    ax.set_xlim(-x_hi * 0.03, x_hi)
+    fig.subplots_adjust(left=0.09, right=0.96, top=0.96, bottom=0.15)  # 오른쪽 끝 눈금 글자가 잘리지 않게
+    return rt.chart_image(fig)
+
+
+def build_scorer_report(A, B, S, meta, dim_label, blind):
+    """⑧ 신규사업 스코어러 PDF: 표지 → 요약(KPI 4 + 결론 3) → 통합 TOP 10 → 성장 지도·신규진입 → 상위 5 상세 → 방법론 → 클로징."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer, KeepTogether
+    from reportlab.lib.units import mm
+    A, B, S = scorer_blind(A, B, S, blind)
+    months = meta['months']
+    tot_yoy = (meta['tot_rec'] - meta['tot_ly']) / meta['tot_ly'] * 100 if meta['tot_ly'] > 0 else None
+    a_growing = A[A['yoy'] > 0] if not A.empty else A
+    n_exist = len(A)
+    title = meta.get('cat_label') or dim_label
+    meta_rp = _rp_meta(T('p8_rp_eyebrow'), [title, T('menu_opt_scorer')], title, dim_label, None,
+                       (meta['rec_start'], meta['latest']), blind, f"{title} {T('menu_opt_scorer')}")
+    fmt_ym = lambda t: pd.Timestamp(t).strftime('%Y.%m')
+    type_label = lambda s_: T('p8_type_existing') if s_['type'] == 'existing' else T('p8_type_new')
+    reason = lambda s_: (_p8_reason_a(s_['row'], s_['row'].get('dim_is_importer', False)) if s_['type'] == 'existing'
+                         else _p8_reason_b(s_['row']))
+
+    cards = [(T('p8_kpi_window'), T('p8_kpi_window_value', n=months),
+              T('p8_rp_kpi_window_note', a=fmt_ym(meta['rec_start']), b=fmt_ym(meta['latest']))),
+             (T('p8_kpi_total_yoy'), _rp_pct(tot_yoy, 0), T('p8_rp_kpi_yoy_note', ly=meta['tot_ly'] / 1000, rec=meta['tot_rec'] / 1000)),
+             (T('p8_rp_kpi_growing'), f"{len(a_growing):,}", T('p8_rp_kpi_growing_note', n=n_exist)),
+             (T('p8_kpi_new'), f"{len(B):,}", T('p8_rp_kpi_new_note', s=meta.get('minship', '-')))]
+    if S:
+        top = S[0]
+        head = T('p8_rp_head', name=_rp_short(top['name'], 40), score=top['score'])
+        f1 = (T('p8_rp_f1', name=_rp_short(top['name'], 60), type=type_label(top), score=top['score']), reason(top))
+    else:
+        head = T('p8_rp_head_none')
+        f1 = (T('p8_rp_f1_none'), T('p8_rp_f1_none_d'))
+    share_g = len(a_growing) / n_exist * 100 if n_exist else 0
+    f2 = ((T('p8_rp_f2_up' if (tot_yoy or 0) >= 0 else 'p8_rp_f2_down', pct=_rp_pct(tot_yoy, 0)) if tot_yoy is not None else T('p8_rp_f2_none')),
+          T('p8_rp_f2_d', g=len(a_growing), n=n_exist, p=share_g, b=len(B)))
+    if meta['has_price'] and not a_growing.empty:
+        prem = int((a_growing['price_signal'] == T('p8_signal_premium')).sum())
+        comm = int((a_growing['price_signal'] == T('p8_signal_commodity')).sum())
+        f3 = (T('p8_rp_f3', u=prem, d=comm), T('p8_rp_f3_d'))
+    else:
+        f3 = (T('p8_rp_f3_none'), T('p8_rp_f3_none_d'))
+    s1 = _rp_summary(rt, T('p8_rp_s1_eyebrow'), head, cards, [f1, f2, f3])
+
+    # 02 통합 TOP 10
+    S_top = S[:10]
+    s2 = _rp_body_header(T('p8_rp_s2_eyebrow'), T('p8_rp_s2_head'), T('p8_rp_s2_sub'))
+    if S_top:
+        quad_on = meta.get('has_ctx')
+        header = ['#', T('p8_col_type'), T('p8_col_item'), T('p8_col_score')] + ([T('p8_col_fit'), T('p8_col_quadrant')] if quad_on else []) + [T('p8_rp_th_key')]
+        rows = []
+        for i, s_ in enumerate(S_top):
+            r = s_['row']
+            key_txt = (f"{T('p8_label_growth')} {_p8_fmt_pct(r['yoy'])} · {_p8_ton(r['rec_vol'])}" if s_['type'] == 'existing'
+                       else f"{_p8_ton(r['vol'])} · {T('unit_n_times', n=r['ship'])}")
+            row = [str(i + 1), rt.Badge(type_label(s_), rt.BLUE if s_['type'] == 'existing' else rt.BLACK), _rp_short(s_['name'], 56), f"{s_['score']:.0f}"]
+            if quad_on:
+                row += ['-' if r.get('fit_score') is None or pd.isna(r.get('fit_score')) else f"{r['fit_score']:.0f}", str(r.get('quadrant', '-'))]
+            rows.append(row + [key_txt])
+        widths = rt.col_widths([4, 15, 31, 8] + ([8, 12] if quad_on else []) + [22 if quad_on else 42])
+        s2 += [scorer_pdf_top_chart(S_top), Spacer(1, 2 * mm), rt.small(T('p8_rp_chart_note')), Spacer(1, 5 * mm),
+               rt.brand_table(header, rows, widths, right_cols=(0, 3, 4) if quad_on else (0, 3))]
+    else:
+        s2.append(rt.small(T('p8_no_data_warning')))
+
+    # 03 성장 지도 + 신규진입
+    rank_of = {str(s_['name']): i + 1 for i, s_ in enumerate(S_top) if s_['type'] == 'existing'}
+    s3 = _rp_body_header(T('p8_rp_s3_eyebrow'), T('p8_rp_s3_head'), T('p8_rp_s3_sub'))
+    gmap = scorer_pdf_growth_map(a_growing, rank_of)
+    if gmap is not None:
+        s3 += [rt.h3(T('p8_rp_map')), rt.small(T('p8_rp_map_note')), Spacer(1, 2 * mm), gmap, Spacer(1, 6 * mm)]
+    s3 += [rt.h3(T('p8_rp_new_table', n=len(B))), rt.small(T('p8_rp_new_note', s=meta.get('minship', '-'))), Spacer(1, 2.5 * mm)]
+    if not B.empty:
+        s3.append(rt.brand_table([T('p8_col_item'), T('p8_col_score'), T('p8_col_vol'), T('p8_col_ship'), T('p8_rp_th_origin'), T('p8_col_top_importer')],
+                                 [[_rp_short(r['display_name'], 56), f"{r['final_score']:.0f}", f"{r['vol']:,.0f}", f"{r['ship']}", str(r.get('origin') or '-'),
+                                   f"{r['top1_imp']} {r['top1_share']:.0f}%" if r.get('top1_imp') else '-'] for _, r in B.head(12).iterrows()],
+                                 rt.col_widths([32, 8, 14, 8, 12, 26]), right_cols=(1, 2, 3)))
+        if len(B) > 12:
+            s3 += [Spacer(1, 1.5 * mm), rt.small(T('ch_rp_more', n=len(B) - 12))]
+    else:
+        s3.append(rt.small(T('p8_no_data_warning')))
+
+    # 04 상위 5 상세
+    s4 = _rp_body_header(T('p8_rp_s4_eyebrow'), T('p8_rp_s4_head'), T('p8_rp_s4_sub'))
+    for i, s_ in enumerate(S[:5]):
+        r = s_['row']
+        if s_['type'] == 'existing':
+            facts = [(T('p8_rp_d_volume'), f"{_p8_ton(r['ly_vol'])} → {_p8_ton(r['rec_vol'])} ({_p8_fmt_pct(r['yoy'])})"),
+                     (T('p8_rp_d_price'), '-' if r.get('price_yoy') is None or pd.isna(r.get('price_yoy')) else
+                      f"{_p8_fmt_pct(r['price_yoy'])}" + (f" · {r['price_signal']}" if r.get('price_signal') not in (None, '-') else ''))]
+        else:
+            facts = [(T('p8_rp_d_volume'), f"{_p8_ton(r['vol'])} · {T('unit_n_times', n=r['ship'])}"),
+                     (T('p8_rp_th_origin'), str(r.get('origin') or '-'))]
+        facts += [(T('p8_col_top_importer'), f"{r['top1_imp']} {r['top1_share']:.0f}%" if r.get('top1_imp') and not r.get('dim_is_importer') else '-'),
+                  (T('p8_col_reason'), reason(s_))]
+        flags = _p8_flags_a(r) if s_['type'] == 'existing' else _p8_flags_b(r)
+        if flags != '-':
+            facts.append((T('p8_col_flags'), flags))
+        s4.append(KeepTogether([rt.h3(f"{i + 1}. {s_['name']} — {type_label(s_)} · {T('p8_col_score')} {s_['score']:.0f}"), Spacer(1, 2 * mm),
+                                rt.methodology_table(facts, header=(T('rp_meth_item'), T('p8_rp_d_value'))), Spacer(1, 6 * mm)]))
+    if not S:
+        s4.append(rt.small(T('p8_no_data_warning')))
+
+    w = P8_PRESET_WEIGHTS.get(meta.get('preset', 'growth'), P8_PRESET_WEIGHTS['growth'])
+    meth = [(T('p1_rp_lbl_data'), T('p8_rp_m_data', n=meta.get('n_tx', 0), cat=meta.get('cat_label', '-'))),
+            (T('rk_rp_lbl_axis'), dim_label),
+            (T('p1_rp_lbl_period'), T('p8_rp_m_period', m=months, a=fmt_ym(meta['rec_start']), b=fmt_ym(meta['latest']),
+                                      la=fmt_ym(meta['ly_start']), lb=fmt_ym(meta['ly_end']))),
+            (T('p8_rp_lbl_score_a'), T('p8_rp_m_score_a', preset=meta.get('preset_label', '-'), g=w['growth'] * 100, s=w['size'] * 100,
+                                       e=w['ease'] * 100, p=w['price'] * 100)),
+            (T('p8_rp_lbl_score_b'), T('p8_rp_m_score_b')),
+            (T('p8_rp_lbl_fit'), T('p8_rp_m_fit', w=meta.get('fitw_pct', 0)) if meta.get('has_ctx') else T('p8_rp_m_fit_none')),
+            (T('p8_rp_lbl_min'), T('p8_rp_m_min', floor=meta.get('floor', 0), s=meta.get('minship', '-'))),
+            (T('p1_rp_lbl_price'), T('p8_rp_m_price') if meta['has_price'] else T('p8_kpi_price_none')),
+            (T('p1_rp_lbl_blind'), T('rk_rp_m_blind_on') if blind else T('rk_rp_m_blind_off'))]
+    s5 = _rp_method(rt, T('p8_rp_s5_eyebrow'), T('p1_rp_s4_head'), meth, [f'p8_rp_unknown{i}' for i in range(1, 4)])
+
+    if S:
+        v1 = T('p8_rp_close_v1', items=', '.join(_rp_short(s_['name'], 30) for s_ in S[:3]))
+        v2 = T('p8_rp_close_v2_link', name=_rp_short(S[0]['name'], 40), menu=_menu_ref('menu_opt_screener'))
+    else:
+        v1, v2 = T('p8_rp_close_v1_none'), T('p8_rp_close_v2_none')
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('p8_rp_close_note'),
+               'items': [('01', T('p8_rp_close_k1'), v1), ('02', T('p8_rp_close_k2'), v2),
+                         ('03', T('p8_rp_close_k3'), T('p8_rp_close_v3', menu=_menu_ref('menu_opt_bid')))]}
+    return rt.make_report(meta_rp, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4, s5)] + [closing])
+
+
 # ============================================================
 # 신규사업 스코어러 (페이지 8) — 원본 HTML 도구의 스코어링 엔진을 그대로 이식
 # ============================================================
@@ -5216,6 +5564,14 @@ def _p8_fit_of(supplier_set, origin_set, name_text, fit_ctx):
     if moat: why_parts.append(T('p8_fitwhy_moat'))
     why = '·'.join(why_parts) if why_parts else T('p8_fitwhy_none')
     return score, why
+
+
+# ⑧ 기존 품목 점수 프리셋 가중치 (성장·규모·진입 용이성·단가)
+P8_PRESET_WEIGHTS = {
+    'growth': {'growth': .5, 'size': .2, 'ease': .2, 'price': .1},
+    'size': {'growth': .2, 'size': .45, 'ease': .15, 'price': .2},
+    'easy': {'growth': .25, 'size': .15, 'ease': .45, 'price': .15},
+}
 
 
 def compute_scorer(df, dim_col, months, floor, minship, new_key_col, preset, fit_ctx, fitw,
@@ -5295,11 +5651,7 @@ def compute_scorer(df, dim_col, months, floor, minship, new_key_col, preset, fit
         ease_arr = [50.0 if r['dim_is_importer'] else 100 - r['top1_share'] for _, r in pos_a.iterrows()]
         price_arr = [0 if pd.isna(v) else v for v in pos_a['price_yoy'].tolist()] if has_price else []
 
-        W = {
-            'growth': {'growth': .5, 'size': .2, 'ease': .2, 'price': .1},
-            'size': {'growth': .2, 'size': .45, 'ease': .15, 'price': .2},
-            'easy': {'growth': .25, 'size': .15, 'ease': .45, 'price': .15},
-        }.get(preset, {'growth': .5, 'size': .2, 'ease': .2, 'price': .1})
+        W = P8_PRESET_WEIGHTS.get(preset, P8_PRESET_WEIGHTS['growth'])
 
         def _score_a(row):
             if row['yoy'] <= 0:
@@ -6261,6 +6613,7 @@ GUIDE_CONTENT = {
                     '통합 추천 순위(TOP 10) — 기존 급상승 품목과 신규 진입 품목을 하나의 점수로 비교한 최종 순위.',
                     '적합도 기준을 입력했다면, 4분면(우선 타깃/성장 주도/안전 인접/후순위)까지 자동 분류됩니다.',
                     '⚠ 저베이스 반등, ⚠ 단일선적 편중, ⚠ 표기변형 의심 같은 주의 플래그로 착시 데이터를 걸러줍니다.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(분석 윈도우·전체 물량 YoY·성장 품목·신규진입)·핵심 결론 3줄 → 통합 TOP 10 차트·표 → 기존 품목 성장 지도·신규진입 표 → 상위 5개 상세 → 방법론 → 다음 단계 제안)를 내려받습니다. 1위 후보는 "범용상품 스크리너" 메뉴에서 범용성을 확인하도록 안내하고, 상위 수입사명은 "수입사 A, B …"로 가릴 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
                 ],
                 'tips': ['적합도 기준을 안 넣어도 분석 자체는 되지만, 넣으면 "우리 사업 맥락에서" 우선순위가 훨씬 정교해집니다.'],
             },
@@ -6506,6 +6859,7 @@ GUIDE_CONTENT = {
                     'Combined Recommendation Ranking (Top 10) — surging existing items and new entrants ranked on one scale.',
                     'If fit criteria were entered, items are auto-classified into a quadrant (Priority Target / Growth-led / Safe Adjacent / Lower Priority).',
                     'Warning flags such as low-base rebound, single-shipment skew, and possible re-labeling filter out misleading data.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (window, total volume YoY, growing items, new entries) and 3 key findings → combined top-10 chart and table → growth map of existing items and new-entry table → top-5 details → methodology → suggested next steps). It points you to the Commodity Screener menu to check how generic the top candidate is, and top importer names can be shown as "Importer A, B …". Use "Legacy-format PDF" for the previous format.',
                 ],
                 'tips': ['Analysis works without fit criteria, but filling them in makes the ranking far more relevant to your specific business.'],
             },
@@ -9323,7 +9677,9 @@ if selected == T('menu_opt_scorer'):
                         if mode_cat:
                             cat_label = str(mode_cat)
                     meta.update({'n_tx': n_tx, 'n_imp': n_imp, 'n_prod': n_prod, 'n_origin': n_origin,
-                                 'span_str': span_str, 'cat_label': cat_label})
+                                 'span_str': span_str, 'cat_label': cat_label,
+                                 'floor': floor, 'minship': minship, 'preset': preset_map[preset_label],
+                                 'preset_label': preset_label, 'fitw_pct': fitw_pct})
                     st.session_state.scorer_result = {'A': A, 'B': B, 'S': S, 'meta': meta, 'dim_label': dim_label}
                     st.rerun()
 
@@ -9408,11 +9764,20 @@ if selected == T('menu_opt_scorer'):
             else:
                 st.caption(T('p8_no_data_warning'))
 
-        if st.button(T('p8_generate_report_btn'), key="scorer_pdf_btn"):
+        scorer_blind_on = st.checkbox(T('p8_rp_blind_toggle'), value=False, key="scorer_rp_blind")
+        sc_c1, sc_c2 = st.columns([1, 1])
+        if sc_c1.button(T('rp_pdf_btn'), key="scorer_rp_btn"):
+            with st.spinner(T('rp_pdf_spinner')):
+                try:
+                    pdf_bytes = build_scorer_report(A, B, S, meta, R['dim_label'], scorer_blind_on)
+                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="new_business_scorer_report.pdf", mime="application/pdf", key="scorer_rp_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
+        if sc_c2.button(T('p1_rp_legacy_btn'), key="scorer_pdf_btn"):
             with st.spinner(T('pdf_generating_msg')):
                 try:
                     pdf_bytes = build_scorer_report_pdf(A, B, S, meta, R['dim_label'])
-                    st.download_button(T('p8_download_report_btn'), data=pdf_bytes, file_name="new_business_scorer_report.pdf", mime="application/pdf", key="scorer_pdf_dl")
+                    st.download_button(T('p8_download_report_btn'), data=pdf_bytes, file_name="new_business_scorer_legacy.pdf", mime="application/pdf", key="scorer_pdf_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
 
