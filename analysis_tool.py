@@ -1111,6 +1111,75 @@ TEXTS = {
         'rk_rp_close_v3_up': '1위 비중 {a:.0f}% → {b:.0f}% 상승 중 — 분기마다 다시 진단',
         'rk_rp_close_v3': '분기마다 다시 진단해 1위 비중 변화를 확인',
         'rk_rp_close_note': '비중은 통관 물량 기준 추정치이며 금액 비중과 다를 수 있습니다. 본 자료의 수치는 통관 데이터 기반 추정치로, 계약 판단의 단일 근거로 사용할 수 없습니다.',
+        # --- ⑥ 가격 추세 & 계절성 새 PDF (ss_rp_) ---
+        'ss_rp_eyebrow': 'Price Trend Report',
+        'ss_rp_s1_eyebrow': '01  Summary',
+        'ss_rp_head_low': '최근 단가 ${p:,.2f}는 기간 평균보다 {pct:.1f}% 낮습니다',
+        'ss_rp_head_high': '최근 단가 ${p:,.2f}는 기간 평균보다 {pct:.1f}% 높습니다',
+        'ss_rp_kpi_current_note': '{ym} VWAP, USD/kg',
+        'ss_rp_kpi_yoy_note': '전년 {ym} ${p:,.2f}',
+        'ss_rp_kpi_yoy_none': '전년 동월 데이터 없음',
+        'ss_rp_kpi_peak_note': '고점 {ym} ${p:,.2f}',
+        'ss_rp_kpi_cheapest': '가장 싼 달',
+        'ss_rp_kpi_cheapest_note': '기간 평균보다 {pct:.1f}% 낮음',
+        'ss_rp_kpi_lowconf': '데이터 24개월 미만 — 참고용',
+        'ss_rp_kpi_peak': '고점 대비',
+        'ss_rp_f1_low': '최근 단가 ${p:,.2f}는 계절 평균보다 {pct:.1f}% 낮습니다',
+        'ss_rp_f1_high': '최근 단가 ${p:,.2f}는 계절 평균보다 {pct:.1f}% 높습니다',
+        'ss_rp_f1_flat': '최근 단가 ${p:,.2f}는 계절 평균과 비슷합니다',
+        'ss_rp_head_flat': '최근 단가 ${p:,.2f}는 기간 평균과 비슷합니다',
+        'ss_rp_close_v2_flat': '현재 단가가 계절 평균과 비슷함 — 가격보다 공급 조건 위주로 검토',
+        'ss_rp_f1_d': '계절 평균은 분석 기간 전체의 물량가중 평균 단가(${avg:,.2f})입니다.',
+        'ss_rp_lowconf_suffix': ' 데이터가 {n}개월치라 계절 평균의 신뢰도가 낮습니다.',
+        'ss_rp_f2': '{cm}이 가장 싸고 {em}이 가장 비쌉니다',
+        'ss_rp_f2_d': '달별 단가 차이는 기간 평균의 {spread:.1f}%입니다. 구매 시점을 {cm} 전후로 검토할 수 있습니다.',
+        'ss_rp_f2_none': '계절 패턴은 판단을 보류합니다',
+        'ss_rp_f2_none_d': '{n}개월치 데이터라 달별 차이가 우연일 수 있습니다. 24개월 이상 데이터가 필요합니다.',
+        'ss_rp_f3_pack': '{n}개 달에 포장 구성이 바뀌었습니다',
+        'ss_rp_f3_pack_d': 'kg당 단가 변동의 일부는 포장 단위 변화 때문일 수 있습니다: {months}',
+        'ss_rp_f3_breakdown': '{lo}이(가) {hi}보다 {pct:.1f}% 쌉니다',
+        'ss_rp_f3_breakdown_d': '물량 상위 {n}곳의 기간 전체 물량가중 평균 단가를 비교했습니다.',
+        'ss_rp_f3_range': '월별 단가는 ${lo:,.2f}에서 ${hi:,.2f} 사이였습니다',
+        'ss_rp_f3_range_d': '최저 {lo_ym}, 최고 {hi_ym}입니다.',
+        'ss_rp_s2_eyebrow': '02  Monthly Trend',
+        'ss_rp_s2_head': '월별 단가 추세',
+        'ss_rp_s2_sub': '달마다 물량가중 평균 단가(VWAP)입니다. 점선은 1년 전 같은 달입니다.',
+        'ss_rp_legend_vwap': '월별 VWAP',
+        'ss_rp_s2_table': '최근 {n}개월',
+        'ss_rp_th_vwap': 'VWAP<br/>USD/kg',
+        'ss_rp_th_prev': '전년 동월<br/>USD/kg',
+        'ss_rp_th_yoy': '전년 대비',
+        'ss_rp_th_pack': '포장 구성',
+        'ss_rp_badge_pack': '포장 변화',
+        'ss_rp_s3_eyebrow': '03  Seasonality',
+        'ss_rp_s3_head': '달별 단가 (연도 무관)',
+        'ss_rp_s3_sub': '모든 연도의 같은 달을 묶어 물량가중 평균을 냈습니다.',
+        'ss_rp_month_note': 'Blue = 가장 싼 달, Black = 가장 비싼 달, 점선 = 기간 평균(${avg:,.2f}).',
+        'ss_rp_month_lowconf': '데이터가 {n}개월치라 달별 패턴은 참고용입니다 (24개월 이상 권장).',
+        'ss_rp_bk_origin': '원산지',
+        'ss_rp_bk_exporter': '공급사',
+        'ss_rp_bk_head': '{bk}별 비교 (물량 상위 {n}곳)',
+        'ss_rp_s4_eyebrow': '04  Methodology',
+        'ss_rp_months_with_data': '개월 데이터',
+        'ss_rp_lbl_prev': '전년 비교',
+        'ss_rp_lbl_season': '계절성',
+        'ss_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터, 건별 수입신고 단위. 시장 전체 거래',
+        'ss_rp_m_product': '선택한 품목(포장 단위·끝 제품 코드만 다른 품목명은 한 품목)의 거래를 합쳐 분석.',
+        'ss_rp_m_price': 'Unit Price 우선, 없으면 금액 ÷ 중량. 월별 VWAP(물량가중평균), USD/kg',
+        'ss_rp_m_prev': '같은 달 1년 전 VWAP와 비교. 1년 전 같은 달 거래가 없으면 표시하지 않음',
+        'ss_rp_m_season': '같은 달(연도 무관) 거래를 묶은 VWAP. 첫 달부터 마지막 달까지 24개월 미만이면 참고용',
+        'ss_rp_m_pack': '직전 달보다 주력 포장 단위가 바뀌거나 비중이 20%p 이상 움직인 달 (포장 표기 없는 거래 제외)',
+        'ss_rp_unknown1': '품질 등급·규격 차이에 따른 단가 차이 (같은 품목 안에서 구분하지 않음)',
+        'ss_rp_unknown2': '향후 단가 (과거 패턴은 미래 가격을 보장하지 않음)',
+        'ss_rp_unknown3': '관세·국내 물류비 등 도착 이후 비용',
+        'ss_rp_close_k1': '현재 수준',
+        'ss_rp_close_k2': '구매 시점',
+        'ss_rp_close_k3': '확인 필요',
+        'ss_rp_close_v1': '최근 ${p:,.2f} — 계절 평균 대비 {pct}, 전년 동월 대비 {yoy}',
+        'ss_rp_close_v2_low': '현재 단가가 계절 평균보다 {pct:.1f}% 낮음 — 계약 고정 시점 검토',
+        'ss_rp_close_v2_wait': '현재 단가가 계절 평균보다 높음 — {cm} 전후 구매 검토',
+        'ss_rp_close_v2_data': '현재 단가가 계절 평균보다 높음 — 24개월 이상 데이터로 계절 패턴 재확인',
+        'ss_rp_close_note': '월별 단가는 통관 신고 기준 추정치이며, 품질·규격·계약 조건 차이를 반영하지 않습니다. 본 자료의 수치는 계약 판단의 단일 근거로 사용할 수 없습니다.',
         'unit_n_years': '{n}년',
         'unit_n_months': '{n}개월',
         'unit_n_times': '{n}회',
@@ -2257,6 +2326,75 @@ TEXTS = {
         'rk_rp_close_v3_up': 'Top-1 share rising ({a:.0f}% → {b:.0f}%) — re-check every quarter',
         'rk_rp_close_v3': 'Re-check every quarter to track the top-1 share',
         'rk_rp_close_note': 'Shares are estimates based on customs volume and may differ from value shares. Figures in this report are estimates from customs data and must not be the sole basis for contract decisions.',
+        # --- ⑥ Price trend & seasonality new PDF (ss_rp_) ---
+        'ss_rp_eyebrow': 'Price Trend Report',
+        'ss_rp_s1_eyebrow': '01  Summary',
+        'ss_rp_head_low': 'The latest price, ${p:,.2f}, is {pct:.1f}% below the period average',
+        'ss_rp_head_high': 'The latest price, ${p:,.2f}, is {pct:.1f}% above the period average',
+        'ss_rp_kpi_current_note': '{ym} VWAP, USD/kg',
+        'ss_rp_kpi_yoy_note': 'Prior year {ym} ${p:,.2f}',
+        'ss_rp_kpi_yoy_none': 'No prior-year month',
+        'ss_rp_kpi_peak_note': 'Peak {ym} ${p:,.2f}',
+        'ss_rp_kpi_cheapest': 'Cheapest month',
+        'ss_rp_kpi_cheapest_note': '{pct:.1f}% below the period average',
+        'ss_rp_kpi_lowconf': 'Under 24 months of data — indicative',
+        'ss_rp_kpi_peak': 'vs. peak',
+        'ss_rp_f1_low': 'The latest price, ${p:,.2f}, is {pct:.1f}% below the seasonal average',
+        'ss_rp_f1_high': 'The latest price, ${p:,.2f}, is {pct:.1f}% above the seasonal average',
+        'ss_rp_f1_flat': 'The latest price, ${p:,.2f}, is in line with the seasonal average',
+        'ss_rp_head_flat': 'The latest price, ${p:,.2f}, is in line with the period average',
+        'ss_rp_close_v2_flat': 'Current price in line with the seasonal average — focus on supply terms rather than price',
+        'ss_rp_f1_d': 'The seasonal average is the volume-weighted average price over the whole period (${avg:,.2f}).',
+        'ss_rp_lowconf_suffix': ' With only {n} months of data, the seasonal average is less reliable.',
+        'ss_rp_f2': '{cm} is the cheapest and {em} the most expensive',
+        'ss_rp_f2_d': 'The month-to-month spread is {spread:.1f}% of the period average. Consider buying around {cm}.',
+        'ss_rp_f2_none': 'Seasonal pattern: no call yet',
+        'ss_rp_f2_none_d': 'With {n} months of data, monthly differences may be coincidental. At least 24 months are needed.',
+        'ss_rp_f3_pack': 'The pack mix changed in {n} month(s)',
+        'ss_rp_f3_pack_d': 'Part of the price-per-kg movement may come from pack size changes: {months}',
+        'ss_rp_f3_breakdown': '{lo} is {pct:.1f}% cheaper than {hi}',
+        'ss_rp_f3_breakdown_d': 'Compares the whole-period volume-weighted average price of the top {n} by volume.',
+        'ss_rp_f3_range': 'Monthly prices ranged from ${lo:,.2f} to ${hi:,.2f}',
+        'ss_rp_f3_range_d': 'Low in {lo_ym}, high in {hi_ym}.',
+        'ss_rp_s2_eyebrow': '02  Monthly Trend',
+        'ss_rp_s2_head': 'Monthly price trend',
+        'ss_rp_s2_sub': 'Volume-weighted average price (VWAP) per month. The dashed line is the same month a year earlier.',
+        'ss_rp_legend_vwap': 'Monthly VWAP',
+        'ss_rp_s2_table': 'Last {n} months',
+        'ss_rp_th_vwap': 'VWAP<br/>USD/kg',
+        'ss_rp_th_prev': 'Prior year<br/>USD/kg',
+        'ss_rp_th_yoy': 'YoY',
+        'ss_rp_th_pack': 'Pack mix',
+        'ss_rp_badge_pack': 'Pack change',
+        'ss_rp_s3_eyebrow': '03  Seasonality',
+        'ss_rp_s3_head': 'Price by calendar month',
+        'ss_rp_s3_sub': 'Volume-weighted average of the same month across all years.',
+        'ss_rp_month_note': 'Blue = cheapest month, Black = most expensive month, dashed = period average (${avg:,.2f}).',
+        'ss_rp_month_lowconf': 'With {n} months of data, the monthly pattern is indicative only (24+ months recommended).',
+        'ss_rp_bk_origin': 'origin',
+        'ss_rp_bk_exporter': 'supplier',
+        'ss_rp_bk_head': 'By {bk} (top {n} by volume)',
+        'ss_rp_s4_eyebrow': '04  Methodology',
+        'ss_rp_months_with_data': ' months with data',
+        'ss_rp_lbl_prev': 'Prior year',
+        'ss_rp_lbl_season': 'Seasonality',
+        'ss_rp_m_data': 'Tridge TDS Korean import customs data, one row per import declaration. Whole-market trades',
+        'ss_rp_m_product': 'Trades of the selected product(s) combined (names differing only in pack size or a trailing product code count as one product).',
+        'ss_rp_m_price': 'Unit Price first, otherwise value ÷ weight. Monthly VWAP (volume-weighted average), USD/kg',
+        'ss_rp_m_prev': 'Compared with the VWAP of the same month a year earlier. Not shown if that month had no trades',
+        'ss_rp_m_season': 'VWAP of trades in the same calendar month (any year). Indicative only if the first-to-last month span is under 24 months',
+        'ss_rp_m_pack': 'Months where the main pack size changed or a pack size share moved 20%p or more vs. the previous month (trades without a pack size excluded)',
+        'ss_rp_unknown1': 'Price differences from quality grade or specification (not separated within a product)',
+        'ss_rp_unknown2': 'Future prices (past patterns do not guarantee future prices)',
+        'ss_rp_unknown3': 'Post-arrival costs such as tariffs and domestic logistics',
+        'ss_rp_close_k1': 'Current level',
+        'ss_rp_close_k2': 'Buying timing',
+        'ss_rp_close_k3': 'To check',
+        'ss_rp_close_v1': 'Latest ${p:,.2f} — {pct} vs. seasonal average, {yoy} YoY',
+        'ss_rp_close_v2_low': 'Current price {pct:.1f}% below the seasonal average — consider locking in a contract',
+        'ss_rp_close_v2_wait': 'Current price above the seasonal average — consider buying around {cm}',
+        'ss_rp_close_v2_data': 'Current price above the seasonal average — re-check the pattern with 24+ months of data',
+        'ss_rp_close_note': 'Monthly prices are estimates from customs declarations and do not reflect quality, specification or contract differences. Figures in this report must not be the sole basis for contract decisions.',
         'unit_n_years': '{n} year(s)',
         'unit_n_months': '{n} months',
         'unit_n_times': '{n}',
@@ -4153,6 +4291,188 @@ def build_risk_report(ctx):
     return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in sections] + [closing])
 
 
+# ---------- ⑥ 가격 추세 & 계절성 ----------
+def season_pdf_trend_chart(overall, prev_prices, markers):
+    """⑥ 월별 VWAP(Blue) + 전년 동월(Black 점선) + 포장 구성 변화 달(◆ Black)."""
+    import report_theme as rt
+    fig, ax = rt.new_chart(2.3)
+    rt.apply_pdf_chart_style(ax, grid_axis='y')
+    x = np.arange(len(overall))
+    y = overall['_price'].astype(float).values
+    ax.plot(x, y, color=rt.HEX['blue'], linewidth=1.7, marker='o', markersize=2.8, label=T('ss_rp_legend_vwap'))
+    if prev_prices is not None:
+        py = np.array([np.nan if v is None else float(v) for v in prev_prices])
+        if np.isfinite(py).any():
+            ax.plot(x, py, color=rt.HEX['black'], alpha=0.55, linewidth=1.1, linestyle=(0, (3, 2)), label=T('p5_legend_prev_year'))
+    if markers:
+        pos = {str(m): i for i, m in enumerate(overall['_ym_str'])}
+        mx = [pos[m] for m, _ in markers if m in pos]
+        ax.scatter(mx, [y[i] for i in mx], marker='D', s=26, color=rt.HEX['black'], edgecolor='white', linewidth=0.6, zorder=4,
+                   label=T('p5_pack_marker_legend'))
+    step = max(1, int(np.ceil(len(x) / 12)))
+    ax.set_xticks(x[::step])
+    ax.set_xticklabels([_rp_ym(m) for m in overall['_ym_str']][::step], fontsize=7)
+    ax.yaxis.set_major_formatter(lambda v, _: f"${v:,.2f}")
+    ax.legend(loc='upper left', fontsize=7, frameon=False, ncol=3)
+    lo, hi = float(np.nanmin(y)), float(np.nanmax(y))
+    ax.set_ylim(lo - (hi - lo) * 0.15 - 0.01, hi + (hi - lo) * 0.3 + 0.01)
+    fig.subplots_adjust(left=0.08, right=0.99, top=0.95, bottom=0.13)
+    return rt.chart_image(fig)
+
+
+def season_pdf_month_chart(month_avg, overall_avg):
+    """⑥ 달별(연도 무관) VWAP 막대: 가장 싼 달 Blue, 가장 비싼 달 Black, 나머지 Pale Blue, 기간 평균 점선."""
+    import report_theme as rt
+    fig, ax = rt.new_chart(2.0)
+    rt.apply_pdf_chart_style(ax, grid_axis='y')
+    ma = month_avg.dropna()
+    lo_m, hi_m = ma.idxmin(), ma.idxmax()
+    colors_ = [rt.HEX['blue'] if m == lo_m else rt.HEX['black'] if m == hi_m else rt.HEX['pale'] for m in ma.index]
+    ax.bar(ma.index.astype(int), ma.values, width=0.66, color=colors_, linewidth=0)
+    ax.axhline(overall_avg, color=rt.HEX['black'], linewidth=0.9, linestyle=(0, (3, 2)))
+    ax.set_xticks(range(1, 13))
+    ax.set_xticklabels([T('p7_month_suffix', m=m) for m in range(1, 13)], fontsize=7)
+    span = float(ma.max() - ma.min()) or float(ma.max()) * 0.1
+    ax.set_ylim(max(0, float(ma.min()) - span * 0.8), float(ma.max()) + span * 0.45)
+    ax.yaxis.set_major_formatter(lambda v, _: f"${v:,.2f}")
+    fig.subplots_adjust(left=0.08, right=0.99, top=0.95, bottom=0.13)
+    return rt.chart_image(fig)
+
+
+def season_pdf_breakdown_chart(series):
+    """⑥ 원산지·공급사별 월별 VWAP (물량 상위 5개, 브랜드 색 순서)."""
+    import report_theme as rt
+    months = sorted({m for s in series.values() for m in s['_ym_str']})
+    pos = {m: i for i, m in enumerate(months)}
+    fig, ax = rt.new_chart(2.3)
+    rt.apply_pdf_chart_style(ax, grid_axis='y')
+    for i, (name, s) in enumerate(series.items()):
+        y = pd.Series(s['_price'].astype(float).values, index=s['_ym_str']).reindex(months)  # 거래 없는 달은 선을 끊는다
+        ax.plot(range(len(months)), y.values, color=rt.CHART_COLORS[i % 5],
+                linewidth=1.4, marker='o', markersize=2.4, label=str(name)[:24])
+    step = max(1, int(np.ceil(len(months) / 12)))
+    ax.set_xticks(range(0, len(months), step))
+    ax.set_xticklabels([_rp_ym(m) for m in months][::step], fontsize=7)
+    ax.yaxis.set_major_formatter(lambda v, _: f"${v:,.2f}")
+    ax.legend(loc='upper left', fontsize=7, frameon=False, ncol=3)
+    ymin, ymax = ax.get_ylim()
+    ax.set_ylim(ymin, ymax + (ymax - ymin) * 0.25)
+    fig.subplots_adjust(left=0.08, right=0.99, top=0.95, bottom=0.13)
+    return rt.chart_image(fig)
+
+
+def season_summary(R):
+    """⑥ 화면·PDF 공통 지표: 최근 월 단가, 전년 동월 대비, 고점 대비, 기간 평균 대비."""
+    overall = R['overall']
+    ym_to_price = dict(zip(overall['_ym'], overall['_price']))
+    cur_ym, cur = overall['_ym'].iloc[-1], float(overall['_price'].iloc[-1])
+    peak_i = int(overall['_price'].astype(float).values.argmax())
+    peak_ym, peak = overall['_ym'].iloc[peak_i], float(overall['_price'].iloc[peak_i])
+    prev = ym_to_price.get(cur_ym - 12)
+    return {'cur_ym': cur_ym, 'cur': cur, 'peak_ym': peak_ym, 'peak': peak, 'from_peak': (cur - peak) / peak * 100,
+            'prev': None if prev is None else float(prev), 'yoy': (cur - prev) / prev * 100 if prev else None,
+            'vs_avg': (cur - R['overall_avg']) / R['overall_avg'] * 100, 'ym_to_price': ym_to_price}
+
+
+def build_season_report(R):
+    """⑥ 가격 추세 & 계절성 PDF: 표지 → 요약(KPI 4 + 결론 3) → 월별 추세 → 계절성(+원산지·공급사 비교) → 방법론 → 클로징."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    overall = R['overall']
+    m = season_summary(R)
+    month_avg = R['month_avg'].dropna()
+    span = len(pd.period_range(overall['_ym'].iloc[0], overall['_ym'].iloc[-1], freq='M'))  # 첫 달~마지막 달 개월 수
+    enough = span >= 24
+    cm, em = int(month_avg.idxmin()), int(month_avg.idxmax())
+    spread = (float(month_avg.max()) - float(month_avg.min())) / R['overall_avg'] * 100
+    product = R['product_label'] if len(R['product_label']) <= 40 else R['product_label'][:38] + '…'
+    d0 = overall['_ym'].iloc[0].start_time
+    d1 = overall['_ym'].iloc[-1].end_time
+    meta = _rp_meta(T('ss_rp_eyebrow'), [product, T('menu_opt_season')], product, None, None, (d0, d1), True,
+                    f"{product} {T('menu_opt_season')}")
+    month_name = lambda k: T('p5_month_label', m=k)
+
+    cards = [(T('p5_kpi_current'), f"${m['cur']:,.2f}", T('ss_rp_kpi_current_note', ym=str(m['cur_ym']))),
+             (T('p5_kpi_yoy'), _rp_pct(m['yoy']),
+              T('ss_rp_kpi_yoy_note', ym=str(m['cur_ym'] - 12), p=m['prev']) if m['prev'] is not None else T('ss_rp_kpi_yoy_none')),
+             (T('ss_rp_kpi_peak'), _rp_pct(m['from_peak']), T('ss_rp_kpi_peak_note', ym=str(m['peak_ym']), p=m['peak'])),
+             (T('ss_rp_kpi_cheapest'), month_name(cm),
+              T('ss_rp_kpi_cheapest_note', pct=R['cheapest_month_pct']) if enough else T('ss_rp_kpi_lowconf'))]
+    pos = 'flat' if abs(m['vs_avg']) < 1 else ('low' if m['vs_avg'] < 0 else 'high')
+    low = pos == 'low'
+    f1 = (T(f'ss_rp_f1_{pos}', p=m['cur'], pct=abs(m['vs_avg'])),
+          T('ss_rp_f1_d', avg=R['overall_avg']) + ('' if enough else T('ss_rp_lowconf_suffix', n=span)))
+    f2 = ((T('ss_rp_f2', cm=month_name(cm), em=month_name(em)), T('ss_rp_f2_d', spread=spread, cm=month_name(cm)))
+          if enough else (T('ss_rp_f2_none'), T('ss_rp_f2_none_d', n=span)))
+    bsum = R.get('breakdown_summary') or []
+    if R.get('pack_markers'):
+        f3 = (T('ss_rp_f3_pack', n=len(R['pack_markers'])),
+              T('ss_rp_f3_pack_d', months=', '.join(mm_ for mm_, _ in R['pack_markers'][:4])))
+    elif len(bsum) >= 2:
+        lo_b = min(bsum, key=lambda b: b['vwap'])
+        hi_b = max(bsum, key=lambda b: b['vwap'])
+        f3 = (T('ss_rp_f3_breakdown', lo=lo_b['name'], hi=hi_b['name'], pct=(hi_b['vwap'] - lo_b['vwap']) / hi_b['vwap'] * 100),
+              T('ss_rp_f3_breakdown_d', n=len(bsum)))
+    else:
+        lo_i, hi_i = int(overall['_price'].values.argmin()), int(overall['_price'].values.argmax())
+        f3 = (T('ss_rp_f3_range', lo=float(overall['_price'].iloc[lo_i]), hi=float(overall['_price'].iloc[hi_i])),
+              T('ss_rp_f3_range_d', lo_ym=str(overall['_ym'].iloc[lo_i]), hi_ym=str(overall['_ym'].iloc[hi_i])))
+    head = T(f'ss_rp_head_{pos}', p=m['cur'], pct=abs(m['vs_avg']))
+    s1 = _rp_summary(rt, T('ss_rp_s1_eyebrow'), head, cards, [f1, f2, f3])
+
+    # 02 월별 추세
+    prev_prices = [m['ym_to_price'].get(ym - 12) for ym in overall['_ym']] if R['show_prev_year'] else None
+    s2 = _rp_body_header(T('ss_rp_s2_eyebrow'), T('ss_rp_s2_head'), T('ss_rp_s2_sub'))
+    s2 += [season_pdf_trend_chart(overall, prev_prices, R.get('pack_markers')), Spacer(1, 2 * mm)]
+    if R.get('pack_markers'):
+        s2.append(rt.small(T('p5_pack_note')))
+    if R['show_prev_year'] and not any(v is not None for v in (prev_prices or [])):
+        s2.append(rt.small(T('p5_no_prev_year_caption')))
+    marker_text = dict(R.get('pack_markers') or [])
+    last = overall.tail(12)
+    rows = []
+    for _, r in last.iterrows():
+        pv = m['ym_to_price'].get(r['_ym'] - 12)
+        rows.append([str(r['_ym']), f"{r['_price']:,.2f}", '-' if pv is None else f"{pv:,.2f}",
+                     '-' if pv is None else _rp_pct((r['_price'] - pv) / pv * 100),
+                     rt.status_badge(T('ss_rp_badge_pack'), False) if str(r['_ym']) in marker_text else ''])
+    s2 += [Spacer(1, 5 * mm), rt.h3(T('ss_rp_s2_table', n=len(last))), Spacer(1, 2.5 * mm),
+           rt.brand_table([T('rk_rp_th_month'), T('ss_rp_th_vwap'), T('ss_rp_th_prev'), T('ss_rp_th_yoy'), T('ss_rp_th_pack')],
+                          rows, rt.col_widths([16, 20, 20, 18, 26]), right_cols=(1, 2, 3), header_markup=True)]
+
+    # 03 계절성 (+ 원산지·공급사 비교)
+    s3 = _rp_body_header(T('ss_rp_s3_eyebrow'), T('ss_rp_s3_head'), T('ss_rp_s3_sub'))
+    s3 += [season_pdf_month_chart(month_avg, R['overall_avg']), Spacer(1, 2 * mm),
+           rt.small(T('ss_rp_month_note', avg=R['overall_avg']) + ('' if enough else ' ' + T('ss_rp_month_lowconf', n=span)))]
+    if len(bsum) >= 2:
+        bk = T('ss_rp_bk_origin') if R['breakdown'] == 'origin' else T('ss_rp_bk_exporter')
+        series = {b['name']: R['breakdown_series'][b['name']] for b in bsum if b['name'] in R['breakdown_series']}
+        s3 += [Spacer(1, 7 * mm), rt.h3(T('ss_rp_bk_head', bk=bk, n=len(bsum))), Spacer(1, 2 * mm),
+               season_pdf_breakdown_chart(series), Spacer(1, 4 * mm),
+               rt.brand_table([T('rk_rp_th_name'), T('ss_rp_th_vwap'), T('rk_rp_th_volume'), T('rk_rp_th_share')],
+                              [[b['name'], f"{b['vwap']:,.2f}", f"{b['volume']:,.0f}", f"{b['share']:.1f}%"] for b in bsum],
+                              rt.col_widths([46, 18, 20, 16]), right_cols=(1, 2, 3), header_markup=True)]
+
+    meth = [(T('p1_rp_lbl_data'), T('ss_rp_m_data')),
+            (T('p1_rp_lbl_period'), f"{d0:%Y.%m} – {d1:%Y.%m} ({len(overall)}{T('ss_rp_months_with_data')})"),
+            (T('p1_rp_lbl_cluster'), T('ss_rp_m_product') + ' ' + T('group_rule_generic_hs').lstrip('※ ')),
+            (T('p1_rp_lbl_price'), T('ss_rp_m_price')),
+            (T('ss_rp_lbl_prev'), T('ss_rp_m_prev')),
+            (T('ss_rp_lbl_season'), T('ss_rp_m_season')),
+            (T('p1_rp_lbl_mix'), T('ss_rp_m_pack'))]
+    s4 = _rp_method(rt, T('ss_rp_s4_eyebrow'), T('p1_rp_s4_head'), meth, [f'ss_rp_unknown{i}' for i in range(1, 4)])
+
+    v2 = (T('ss_rp_close_v2_low', pct=abs(m['vs_avg'])) if low
+          else T('ss_rp_close_v2_flat') if pos == 'flat'
+          else T('ss_rp_close_v2_wait', cm=month_name(cm)) if enough else T('ss_rp_close_v2_data'))
+    v3 = f3[0]
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('ss_rp_close_note'),
+               'items': [('01', T('ss_rp_close_k1'), T('ss_rp_close_v1', p=m['cur'], pct=_rp_pct(m['vs_avg']), yoy=_rp_pct(m['yoy']))),
+                         ('02', T('ss_rp_close_k2'), v2), ('03', T('ss_rp_close_k3'), v3)]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3, s4)] + [closing])
+
+
 # ============================================================
 # 신규사업 스코어러 (페이지 8) — 원본 HTML 도구의 스코어링 엔진을 그대로 이식
 # ============================================================
@@ -5237,6 +5557,7 @@ GUIDE_CONTENT = {
                     '"○월에 사면 가장 저렴했다" 같은 인사이트 문장이 자동 생성됩니다.',
                     '포장 구성 변화 표시 — 직전 달보다 주력 포장 단위가 바뀌었거나 비중이 20%p 이상 움직인 달에 ◆ 마커가 찍히고, 마우스를 올리면 "포장 구성 변화: 25KG 80% → 600KG 60%"처럼 보여줍니다. 대포장·소포장이 섞이면 합친 단가가 포장 구성 때문에 흔들릴 수 있습니다.',
                     '"포장 단위별로 보기"를 켜면 같은 차트에 포장 단위별 단가 선이 따로 그려집니다 (포장 표기가 없는 거래는 "표기 없음").',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(최근 단가·전년 동월 대비·고점 대비·가장 싼 달)·핵심 결론 3줄 → 월별 추세 차트(전년 점선·포장 변화 ◆)와 최근 12개월 표 → 달별 단가·원산지/공급사 비교 → 방법론 → 다음 단계 제안)를 내려받습니다. 현재 단가가 계절 평균보다 낮으면 "계약 고정 시점 검토"를 제안합니다. 계절 패턴은 첫 달부터 마지막 달까지 24개월 이상일 때만 판단합니다. 이전 양식은 "기존 양식 PDF" 버튼.',
                 ],
                 'tips': ['데이터가 1년치뿐이면 "이 계절 패턴은 우연일 수 있다"는 경고가 함께 표시됩니다 — 2년 이상 데이터가 쌓이면 신뢰도가 높아집니다.'],
             },
@@ -5479,6 +5800,7 @@ GUIDE_CONTENT = {
                     'Auto-generated insight sentences like "buying in March was historically cheapest."',
                     'Pack mix changes — a ◆ marker appears in months where the main pack size changed or a share moved 20%p or more vs. the previous month; hover to see e.g. "Pack mix change: 25KG 80% → 600KG 60%". When bulk and small packs mix, the combined price can move because of the pack mix.',
                     'Turn on "Show by pack size" to draw a separate price line per pack size on the same chart (trades without a pack size appear as "No pack size").',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (latest price, YoY, vs. peak, cheapest month) and 3 key findings → monthly trend chart (prior year dashed, pack changes ◆) with a last-12-months table → price by calendar month and origin/supplier comparison → methodology → suggested next steps). If the current price is below the seasonal average, it suggests reviewing when to lock in a contract. The seasonal pattern is judged only when the data spans 24 months or more. Use "Legacy-format PDF" for the previous format.',
                 ],
                 'tips': ['With only one year of data, a warning notes the seasonal pattern could be coincidental — confidence improves with 2+ years of history.'],
             },
@@ -7579,12 +7901,17 @@ if selected == T('menu_opt_season'):
                             peak_months = sorted(monthly_avg_latest_year[monthly_avg_latest_year > lyr_mean * 1.05].index.tolist())
 
                         breakdown_series = {}
+                        breakdown_summary = []
                         if breakdown != 'none':
                             bcol = cols[breakdown]
                             for name, g in sub.groupby(bcol):
                                 s = weighted_avg_groupby(g, '_ym', '_price', '_volume').reset_index().sort_values('_ym')
                                 s['_ym_str'] = s['_ym'].astype(str)
                                 breakdown_series[str(name)] = s
+                            _bvol = sub.groupby(bcol)['_volume'].sum().sort_values(ascending=False)
+                            for name in _bvol.head(5).index:  # PDF 비교용: 물량 상위 5곳의 기간 전체 VWAP
+                                breakdown_summary.append({'name': str(name), 'vwap': float(weighted_avg(sub[sub[bcol] == name], '_price', '_volume')),
+                                                          'volume': float(_bvol[name]), 'share': float(_bvol[name] / _bvol.sum() * 100)})
 
                         st.session_state.season_result = {
                             'product_label': ', '.join(selected_reps), 'overall': overall,
@@ -7593,6 +7920,7 @@ if selected == T('menu_opt_season'):
                             'cheapest_month': cheapest_month, 'cheapest_month_pct': cheapest_month_pct,
                             'years_count': years_count, 'overall_avg': overall_avg,
                             'pack_markers': pack_markers, 'pack_series': pack_series,
+                            'month_avg': month_avg, 'breakdown_summary': breakdown_summary,
                         }
                         st.rerun()
 
@@ -7666,7 +7994,15 @@ if selected == T('menu_opt_season'):
         if R['years_count'] < 2:
             st.warning(T('insight_low_confidence', years=R['years_count']))
 
-        if st.button(T('pdf_generate_btn'), key="season_pdf_btn"):
+        season_c1, season_c2 = st.columns([1, 1])
+        if season_c1.button(T('rp_pdf_btn'), key="season_rp_btn"):
+            with st.spinner(T('rp_pdf_spinner')):
+                try:
+                    pdf_bytes = build_season_report(R)
+                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="price_trend_report.pdf", mime="application/pdf", key="season_rp_dl")
+                except Exception as e:
+                    st.error(T('pdf_error_msg', msg=str(e)))
+        if season_c2.button(T('p1_rp_legacy_btn'), key="season_pdf_btn"):
             with st.spinner(T('pdf_generating_msg')):
                 try:
                     pdf_bytes = build_pdf_report(
