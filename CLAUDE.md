@@ -64,6 +64,8 @@
 - 메뉴를 추가·삭제·이름 변경하거나 기능이 바뀌면 사용자 가이드(`build_user_guide_pdf`, 가이드 문구 `GUIDE_CONTENT` ko/en)도 같은 작업에서 함께 수정한다.
 - 수정 후에는 `python -m py_compile analysis_tool.py report_theme.py`로 문법 확인까지 한다. ① 품목명 정제를 건드렸으면 `python tests/test_normalize_product_name.py`도 돌린다.
 - **단가 계산**: 단가는 `derive_unit_price`(Unit Price 우선, 없으면 금액 ÷ 중량)로 구한다. 단가를 쓰는 메뉴는 컬럼 인식에 `detect_trade_columns`(금액 컬럼 포함)를 쓴다. ⑧ 스코어러는 금액 컬럼이 있으면 그대로, 없을 때만 단가 × 중량.
+- **부분월**: 업로드 직후(`load_uploaded_df`, ①③은 각 화면) 마지막 달 건수가 직전 3개월 평균의 50% 미만이면 `split_partial_month`로 빼고 안내한다("부분월 포함"으로 되돌림). 원본은 `세션키__full`. 기본 기간(최근 12개월 등)도 뺀 표 기준이다.
+- **⑨⑩ 스펙 분리**: 품목분류(Category, `_cat`)와 키워드(`bid_filter` — 품명 한글·영문 + Product Description, 쉼표·| 구분, 대소문자 무시). ⑨는 HS + 품목분류 단위가 기본이고 HS 안 물량 5% 미만 품목분류는 제외(`screener_category_filter`).
 - 버그 수정처럼 테스트를 통과한 작은 변경은 확인 없이 커밋·푸시까지 진행한다. 그 외 커밋·푸시는 사용자가 요청할 때만 한다.
 - 작업 중 발견한 다른 문제는 바로 고치지 말고, 작업이 끝난 뒤 목록으로만 보고한다.
 - 설명은 짧고 직접적으로. 끝나면 어떤 파일이 바뀌었는지만 명확히 알려준다.

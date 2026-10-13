@@ -719,7 +719,7 @@ TEXTS = {
         'bd_rp_s4_head': '분석 기준과 데이터 한계',
         'bd_rp_m_data': 'Tridge TDS 한국 수입 통관 데이터, 건별 수입신고 단위',
         'bd_rp_m_period': '{period}. 공급 안정성은 기간 마지막 달 기준 최근 36개월',
-        'bd_rp_m_spec': 'HS {hs} · 품명 포함 키워드: {inc} · 제외 키워드: {exc}',
+        'bd_rp_m_spec': 'HS {hs} · 품목분류: {cat} · 품명 포함 키워드: {inc} · 제외 키워드: {exc} (품명 한글·영문과 Product Description에서 검색)',
         'bd_rp_m_dedup': '신고일·수입자·공급자·중량·금액이 모두 같은 행은 1건으로 처리',
         'bd_rp_m_outlier': '건당 {kg:,}kg 미만 소량 수입, 단가 P1 미만·P99 초과',
         'bd_rp_m_price': 'VWAP(물량가중평균), USD/kg, CIF 기준',
@@ -827,8 +827,8 @@ TEXTS = {
         'bd_hs_label': 'HS코드',
         'bd_hs_all': '(전체)',
         'bd_hs_from_screener': '범용상품 스크리너에서 넘어온 품목: {hs}',
-        'bd_include_label': '품명 포함 키워드 (쉼표로 구분, 하나라도 포함)',
-        'bd_exclude_label': '품명 제외 키워드 (쉼표로 구분, 하나라도 포함되면 제외)',
+        'bd_include_label': '품명 포함 키워드 (쉼표 또는 | 로 구분, 하나라도 포함 — 품명 한글·영문과 Product Description에서 대소문자 무시로 검색)',
+        'bd_exclude_label': '품명 제외 키워드 (쉼표 또는 | 로 구분, 하나라도 포함되면 제외 — 같은 범위에서 검색)',
         'bd_period_label': '분석 기간 (기본: 최근 12개월)',
         'bd_min_kg_label': '건당 최소 중량 (kg, 미만 거래 제외)',
         'bd_prep_caption': '전처리: 원본 {n0:,}건 → 중복 {dup:,}건, 소량 거래 {small:,}건, 단가 이상치(P1~P99 밖) {outlier:,}건 제외 · 필터 적용 후 기간 내 {n:,}건',
@@ -1004,6 +1004,21 @@ TEXTS = {
         'ph_x_comp_share': '비교 기간 비중(%)',
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
         # --- ⑤ 집중도 리스크 새 PDF (rk_rp_) ---
+        'pm_note': '※ {ym} 부분월 제외({n:,}건) — 마지막 달 건수가 직전 3개월 평균({avg:,.0f}건)의 50% 미만이라 집계 중인 달로 봅니다.',
+        'pm_include': '부분월 포함',
+        'sc_split_cat': 'HS 10단위 + 품목분류(Category)로 나누기',
+        'sc_split_cat_help': '같은 HS 안에서도 품목분류가 다르면(예: 냉동감자 HS의 빵류·즉석조리식품) 다른 품목으로 봅니다. 같은 HS 안에서 물량 비중 5% 미만인 품목분류는 제외합니다.',
+        'sc_cat_excluded': '※ 같은 HS 안에서 물량 비중 {th:g}% 미만인 품목분류 {n}개 제외 ({rows:,}건, {kg:,.0f}kg)',
+        'sc_cat_excluded_expander': '제외된 품목분류 보기',
+        'sc_col_category': '품목분류',
+        'sc_col_share': 'HS 내 물량 비중(%)',
+        'sc_col_rows': '건수',
+        'sc_col_kg': '물량(kg)',
+        'bd_cat_label': '품목분류 (Category)',
+        'bd_cat_help': '기본은 선택한 HS에서 물량 1위 품목분류만 봅니다. 같은 HS라도 품목분류가 다르면 다른 스펙일 수 있습니다.',
+        'scr_rp_lbl_cat': '품목 단위',
+        'scr_rp_m_cat_on': 'HS 10단위 + 품목분류(Category). 같은 HS 안에서 물량 비중 {th:g}% 미만인 품목분류는 제외({n}개)',
+        'scr_rp_m_cat_off': 'HS 10단위',
         'rp_menu_ref': '‘{name}’ 메뉴',
         'axis_extra_suffix': ' (원본)',
         'rk_rp_eyebrow': 'Concentration Risk Report',
@@ -2200,7 +2215,7 @@ TEXTS = {
         'bd_rp_s4_head': 'Criteria and data limits',
         'bd_rp_m_data': 'Tridge TDS Korea import customs data, per declaration',
         'bd_rp_m_period': '{period}. Supply stability covers the last 36 months up to the period end',
-        'bd_rp_m_spec': 'HS {hs} · product name includes: {inc} · excludes: {exc}',
+        'bd_rp_m_spec': 'HS {hs} · category: {cat} · product name includes: {inc} · excludes: {exc} (searched in the Korean/English product name and Product Description)',
         'bd_rp_m_dedup': 'Rows with the same date, importer, supplier, weight, and value counted once',
         'bd_rp_m_outlier': 'Shipments under {kg:,} kg; unit prices below P1 or above P99',
         'bd_rp_m_price': 'VWAP (volume-weighted), USD/kg, CIF',
@@ -2308,8 +2323,8 @@ TEXTS = {
         'bd_hs_label': 'HS code',
         'bd_hs_all': '(All)',
         'bd_hs_from_screener': 'Item sent from the Commodity Screener: {hs}',
-        'bd_include_label': 'Product name must include (comma-separated, any match)',
-        'bd_exclude_label': 'Product name must exclude (comma-separated, any match excludes)',
+        'bd_include_label': 'Product name must include (separate with , or |, any match — searches the full product name in Korean and English plus Product Description, case-insensitive)',
+        'bd_exclude_label': 'Product name must exclude (separate with , or |, any match excludes — same search scope)',
         'bd_period_label': 'Analysis period (default: last 12 months)',
         'bd_min_kg_label': 'Minimum weight per shipment (kg; smaller shipments excluded)',
         'bd_prep_caption': 'Preprocessing: {n0:,} raw rows → excluded {dup:,} duplicates, {small:,} small shipments, {outlier:,} price outliers (outside P1–P99) · {n:,} rows in the period after filters',
@@ -2485,6 +2500,21 @@ TEXTS = {
         'ph_x_comp_share': 'Comparison period share (%)',
         'multi_product_label': 'Search products (multi-select)',
         # --- ⑤ Concentration risk new PDF (rk_rp_) ---
+        'pm_note': '※ {ym} excluded as a partial month ({n:,} rows) — the last month has under 50% of the previous 3-month average ({avg:,.0f} rows), so it is treated as still being collected.',
+        'pm_include': 'Include partial month',
+        'sc_split_cat': 'Split by 10-digit HS + Category',
+        'sc_split_cat_help': 'Within one HS code, different categories (e.g. bakery or ready meals under the frozen-fries HS) are treated as different products. Categories under 5% of the HS volume are excluded.',
+        'sc_cat_excluded': '※ Excluded {n} category(ies) under {th:g}% of their HS volume ({rows:,} rows, {kg:,.0f} kg)',
+        'sc_cat_excluded_expander': 'Show excluded categories',
+        'sc_col_category': 'Category',
+        'sc_col_share': 'Share of HS volume (%)',
+        'sc_col_rows': 'Rows',
+        'sc_col_kg': 'Volume (kg)',
+        'bd_cat_label': 'Category',
+        'bd_cat_help': 'By default only the largest category (by volume) in the selected HS is used. Different categories under one HS may be different specs.',
+        'scr_rp_lbl_cat': 'Product unit',
+        'scr_rp_m_cat_on': '10-digit HS + Category. Categories under {th:g}% of their HS volume are excluded ({n})',
+        'scr_rp_m_cat_off': '10-digit HS',
         'rp_menu_ref': 'the {name} menu',
         'axis_extra_suffix': ' (raw)',
         'rk_rp_eyebrow': 'Concentration Risk Report',
@@ -3811,6 +3841,8 @@ def detect_trade_columns(headers):
     cols = detect_standard_columns(headers)
     cols['hs'] = find_column(headers, TRADE_HS_CANDIDATES)
     cols['value'] = find_column(headers, TRADE_VALUE_CANDIDATES)
+    cols['category'] = find_column(headers, ['Category', 'category', '카테고리', '품목분류'])
+    cols['desc'] = find_column(headers, ['Product Description', 'product_description', '품목설명', '상품설명'])
     return cols
 
 
@@ -3851,6 +3883,8 @@ def prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=1000, trim=(0.01
         '_origin': _clean_text(raw_df[cols['origin']]) if cols.get('origin') else '(N/A)',
         '_product': _clean_text(raw_df[cols['product']]) if cols.get('product') else '',
         '_hs': _clean_text(raw_df[cols['hs']]) if cols.get('hs') else '(N/A)',
+        '_cat': _clean_text(raw_df[cols['category']]) if cols.get('category') else '(N/A)',
+        '_desc': raw_df[cols['desc']].fillna('').astype(str) if cols.get('desc') else '',
         '_volume': vol, '_price': price, '_amount': value.where(value.notna(), price * vol),
     })
     d = d[d['_date'].notna() & (d['_volume'] > 0) & (d['_price'] > 0)]
@@ -3911,15 +3945,31 @@ def _gap_rate(g, min_cell=3):
 # ============================================================
 SCREENER_COMPONENTS = [('importers', True), ('cr3', False), ('exporters', True), ('origins', True), ('months', True), ('cv', False)]
 SCREENER_DEFAULT_WEIGHTS = {k: 1.0 for k, _ in SCREENER_COMPONENTS}
+SCREENER_CAT_MIN_SHARE = 5.0  # HS + 품목분류 단위에서 같은 HS 안 물량 비중이 이보다 작은 품목분류는 제외(%)
 SCREENER_CLASS_KEY = {'A': 'sc_class_a', 'B': 'sc_class_b', 'C': 'sc_class_c', 'D': 'sc_class_d'}
 SCREENER_CLASS_COLOR = {'A': '#171CFD', 'B': '#3E50FE', 'C': '#9BB3FF', 'D': '#0A0A18'}
 
 
-def compute_screener(df, period_months, weights, bound_hi=60, bound_lo=30, bound_gap=50, min_shipments=5):
-    """HS별 지표 → 범용성·격차 점수 → A/B/C/D 분류. 반환: (결과 DataFrame, 순위에서 제외된 HS 수)."""
+def screener_category_filter(df, min_share=5.0):
+    """⑨ HS + 품목분류 단위: 같은 HS 안에서 물량 비중 min_share% 미만인 품목분류를 뺀다.
+    반환: (남은 거래, 제외 목록 DataFrame[hs, category, share, rows, kg])."""
+    if df.empty or '_cat' not in df.columns:
+        return df, pd.DataFrame(columns=['hs', 'category', 'share', 'rows', 'kg'])
+    g = df.groupby(['_hs', '_cat']).agg(rows=('_volume', 'size'), kg=('_volume', 'sum')).reset_index()
+    g['share'] = g['kg'] / g.groupby('_hs')['kg'].transform('sum') * 100
+    small = g[g['share'] < min_share]
+    keep = ~df.set_index(['_hs', '_cat']).index.isin(list(zip(small['_hs'], small['_cat'])))
+    excluded = small.rename(columns={'_hs': 'hs', '_cat': 'category'})[['hs', 'category', 'share', 'rows', 'kg']]
+    return df[keep], excluded.sort_values(['hs', 'share'], ascending=[True, False]).reset_index(drop=True)
+
+
+def compute_screener(df, period_months, weights, bound_hi=60, bound_lo=30, bound_gap=50, min_shipments=5, by_category=False):
+    """HS별(by_category면 HS + 품목분류별) 지표 → 범용성·격차 점수 → A/B/C/D 분류.
+    반환: (결과 DataFrame, 순위에서 제외된 단위 수)."""
     years = max(period_months, 1) / 12
     rows, skipped = [], 0
-    for hs, g in df.groupby('_hs'):
+    for key, g in df.groupby(['_hs', '_cat'] if by_category else '_hs'):
+        hs, cat = (key if by_category else (key, None))
         if len(g) < min_shipments:
             skipped += 1
             continue
@@ -3927,7 +3977,7 @@ def compute_screener(df, period_months, weights, bound_hi=60, bound_lo=30, bound
         share = imp_vol / imp_vol.sum() * 100
         n_imp = len(imp_vol)
         rows.append({
-            'hs': hs,
+            'hs': hs, **({'category': cat} if by_category else {}),
             'name': g['_product'].mode().iloc[0] if g['_product'].notna().any() else '',
             'importers': n_imp,
             'cr3': float(share.head(3).sum()),
@@ -3971,6 +4021,8 @@ def screener_display_table(res):
             ('cr3', 'sc_col_cr3'), ('hhi', 'sc_col_hhi'), ('exporters', 'sc_col_exporters'), ('origins', 'sc_col_origins'),
             ('months', 'sc_col_months'), ('freq', 'sc_col_freq'), ('cv', 'sc_col_cv'), ('gap', 'sc_col_gap'),
             ('value', 'sc_col_value'), ('shipments', 'sc_col_ship'), ('vwap', 'sc_col_vwap')]
+    if 'category' in res.columns:
+        cols.insert(1, ('category', 'sc_col_category'))
     out = res[[c for c, _ in cols]].copy()
     out['class'] = out['class'].map(lambda c: T(SCREENER_CLASS_KEY[c]))
     for c in ('cr3', 'freq', 'cv', 'gap'):
@@ -4013,19 +4065,24 @@ BID_DEFAULT_VERIFY = {'min_ship': 3, 'min_ton': 10.0, 'min_imp': 2}
 
 
 def _split_keywords(text):
-    return [k.strip().lower() for k in re.split(r'[,\n]+', text or '') if k.strip()]
+    """키워드 입력을 쉼표·| ·줄바꿈으로 나눠 소문자 목록으로."""
+    return [k.strip().lower() for k in re.split(r'[,|\n]+', text or '') if k.strip()]
 
 
-def bid_filter(df, hs=None, include='', exclude=''):
-    """HS + 품명 포함/제외 키워드(스펙 분리) 필터."""
+def bid_filter(df, hs=None, include='', exclude='', categories=None):
+    """HS + 품목분류 + 품명 포함/제외 키워드(스펙 분리) 필터.
+    키워드는 원래 품명 전체(한글 + '__' 뒤 영문)와 Product Description을 합친 글에서 대소문자 무시로 찾는다."""
     d = df if not hs else df[df['_hs'] == hs]
-    name = d['_product'].astype(str).str.lower()
+    if categories:
+        d = d[d['_cat'].isin(categories)]
+    desc = d['_desc'].astype(str) if '_desc' in d.columns else ''
+    text = (d['_product'].astype(str) + ' ' + desc).str.lower()
     inc, exc = _split_keywords(include), _split_keywords(exclude)
     if inc:
-        d = d[name.apply(lambda n: any(k in n for k in inc))]
-        name = d['_product'].astype(str).str.lower()
+        keep = text.apply(lambda n: any(k in n for k in inc))
+        d, text = d[keep], text[keep]
     if exc:
-        d = d[~name.apply(lambda n: any(k in n for k in exc))]
+        d = d[~text.apply(lambda n: any(k in n for k in exc))]
     return d
 
 
@@ -4349,6 +4406,8 @@ def build_screener_report(R, weights, min_kg, min_ship, top_n=15):
     from reportlab.platypus import Spacer
     from reportlab.lib.units import mm
     res, (bound_hi, bound_lo, bound_gap) = R['res'], R['bounds']
+    if 'category' in res.columns:  # HS + 품목분류 단위면 품목명 앞에 품목분류를 붙여 구분
+        res = res.assign(name='[' + res['category'].astype(str) + '] ' + res['name'].astype(str))
     counts = res['class'].value_counts()
     meta = _rp_meta(T('scr_rp_eyebrow'), [T('scr_rp_title1'), T('scr_rp_title2')], T('scr_rp_item', n=len(res)), None, None,
                     R['period'], False, T('sc_title'))
@@ -4392,7 +4451,9 @@ def build_screener_report(R, weights, min_kg, min_ship, top_n=15):
             (T('scr_rp_lbl_prep'), T('scr_rp_m_prep', kg=int(min_kg), ship=int(min_ship))),
             (T('scr_rp_lbl_uni'), T('scr_rp_m_uni', w=w_txt)), (T('scr_rp_lbl_gap'), T('scr_rp_m_gap')),
             (T('scr_rp_lbl_class'), T('scr_rp_m_class', hi=bound_hi, lo=bound_lo, gap=bound_gap)),
-            (T('scr_rp_lbl_conc'), T('scr_rp_m_cr3')), (T('scr_rp_lbl_price'), T('scr_rp_m_price'))]
+            (T('scr_rp_lbl_conc'), T('scr_rp_m_cr3')), (T('scr_rp_lbl_price'), T('scr_rp_m_price')),
+            (T('scr_rp_lbl_cat'), T('scr_rp_m_cat_on', th=SCREENER_CAT_MIN_SHARE, n=len(R.get('cat_excluded', [])))
+                                  if R.get('by_category') else T('scr_rp_m_cat_off'))]
     s4 = [rt.SectionHeader(T('scr_rp_s4_eyebrow'), T('scr_rp_s4_head')), Spacer(1, 2 * mm),
           rt.methodology_table(meth, header=(T('rp_meth_item'), T('rp_meth_rule'))), Spacer(1, 8 * mm),
           rt.h3(T('rp_unknown_header')), Spacer(1, 2 * mm), rt.Rule()]
@@ -4599,7 +4660,8 @@ def build_bid_report(ctx):
     else:
         tariff_txt = T('bd_rp_m_tariff_all', rates=rates)
     meth = [(T('bd_rp_lbl_data'), T('bd_rp_m_data')), (T('bd_rp_lbl_period'), T('bd_rp_m_period', period=meta['period'])),
-            (T('bd_rp_lbl_spec'), T('bd_rp_m_spec', hs=ctx['hs'] or T('bd_hs_all'), inc=ctx['include'] or '-', exc=ctx['exclude'] or '-')),
+            (T('bd_rp_lbl_spec'), T('bd_rp_m_spec', hs=ctx['hs'] or T('bd_hs_all'), cat=', '.join(ctx.get('categories') or []) or '-',
+                                    inc=ctx['include'] or '-', exc=ctx['exclude'] or '-')),
             (T('bd_rp_lbl_dedup'), T('bd_rp_m_dedup')), (T('bd_rp_lbl_outlier'), T('bd_rp_m_outlier', kg=int(ctx['min_kg']))),
             (T('bd_rp_lbl_price'), T('bd_rp_m_price')), (T('bd_rp_lbl_tariff'), tariff_txt),
             (T('bd_rp_lbl_verify'), T('bd_rp_m_verify', ship=verify['min_ship'], ton=verify['min_ton'], imp=verify['min_imp'])),
@@ -6451,6 +6513,53 @@ def _p8_flags_b(r):
     return ' '.join(f) if f else '-'
 
 
+def detect_partial_month(dates, ratio=0.5):
+    """데이터 마지막 달의 건수가 직전 3개월 평균의 ratio 미만이면 부분월(아직 집계 중인 달)로 본다.
+    반환: {'ym': '2026-05', 'n': 건수, 'avg': 직전 3개월 평균} 또는 None."""
+    ym = pd.to_datetime(dates, errors='coerce').dropna().dt.to_period('M')
+    if ym.empty:
+        return None
+    counts = ym.value_counts().reindex(pd.period_range(ym.min(), ym.max(), freq='M'), fill_value=0)
+    if len(counts) < 4:
+        return None
+    avg = float(counts.iloc[-4:-1].mean())
+    if avg > 0 and counts.iloc[-1] < avg * ratio:
+        return {'ym': str(counts.index[-1]), 'n': int(counts.iloc[-1]), 'avg': avg}
+    return None
+
+
+def split_partial_month(df):
+    """(부분월을 뺀 표, 부분월 정보 또는 None). 날짜 컬럼은 표준 컬럼 인식으로 찾는다."""
+    date_col = detect_standard_columns(list(df.columns))['date'] if df is not None else None
+    info = detect_partial_month(df[date_col]) if date_col else None
+    if not info:
+        return df, None
+    ym = pd.to_datetime(df[date_col], errors='coerce').dt.to_period('M').astype(str)
+    return df[ym != info['ym']], info
+
+
+def _partial_month_toggle(raw_df_key):
+    full = st.session_state.get(f'{raw_df_key}__full')
+    if full is not None:
+        st.session_state[raw_df_key] = full if st.session_state.get(f'{raw_df_key}__incl') else st.session_state[f'{raw_df_key}__trim']
+
+
+def partial_month_notice(raw_df_key):
+    """부분월을 뺐다면 안내 문구와 '부분월 포함' 체크를 보여준다 (체크하면 원래 표로 되돌림)."""
+    info = st.session_state.get(f'{raw_df_key}__partial')
+    if not info or st.session_state.get(raw_df_key) is None:
+        return
+    st.caption(T('pm_note', ym=info['ym'], n=info['n'], avg=info['avg']))
+    st.checkbox(T('pm_include'), value=False, key=f'{raw_df_key}__incl', on_change=_partial_month_toggle, args=(raw_df_key,))
+
+
+def copy_uploaded_df(src_key, dst_key):
+    """다른 메뉴가 올린 표를 넘겨받을 때 부분월 정보까지 같이 복사한다 (⑨ → ⑩)."""
+    for suffix in ('', '__full', '__trim', '__partial'):
+        st.session_state[dst_key + suffix] = st.session_state.get(src_key + suffix)
+    st.session_state[f'{dst_key}__incl'] = st.session_state.get(f'{src_key}__incl', False)
+
+
 def load_uploaded_df(uploaded_file, raw_df_key, headers_key, fileid_key):
     """파일이 '새로' 업로드된 경우에만 실제로 파싱하고, 그 외에는 세션에 캐시된 걸 그대로 재사용한다.
     (이게 없으면 위젯을 하나 바꿀 때마다 Streamlit이 스크립트를 처음부터 다시 실행하면서
@@ -6463,9 +6572,16 @@ def load_uploaded_df(uploaded_file, raw_df_key, headers_key, fileid_key):
         if raw_df is None:
             st.error(T('p1_file_read_fail_error'))
             st.stop()
-        st.session_state[raw_df_key] = raw_df
+        # 마지막 달이 부분월이면 기본으로 뺀다 (원본은 '__full'에 두고 '부분월 포함'을 켜면 되돌린다)
+        trimmed, info = split_partial_month(raw_df)
+        st.session_state[f'{raw_df_key}__full'] = raw_df
+        st.session_state[f'{raw_df_key}__trim'] = trimmed
+        st.session_state[f'{raw_df_key}__partial'] = info
+        st.session_state[f'{raw_df_key}__incl'] = False
+        st.session_state[raw_df_key] = trimmed
         st.session_state[headers_key] = list(raw_df.columns)
         st.session_state[fileid_key] = file_id
+    partial_month_notice(raw_df_key)
     return st.session_state.get(raw_df_key)
 
 
@@ -6575,6 +6691,7 @@ GUIDE_CONTENT = {
                 'intro': '왼쪽 사이드바 상단 "🌐 Language / 언어"에서 한국어·English를 고르면 화면 전체(제목, 버튼, 차트, 표 컬럼명까지) 언어가 즉시 전환됩니다.',
                 'results': [
                     '모든 메뉴는 CSV 또는 XLSX 파일을 업로드하면서 시작합니다.',
+                    '마지막 달이 아직 집계 중인 부분월(건수가 직전 3개월 평균의 50% 미만)이면 기본으로 빼고 "2026-05 부분월 제외(212건)"처럼 표시합니다. "부분월 포함"을 켜면 다시 넣습니다. "최근 12개월" 같은 기본 기간도 부분월을 뺀 기준입니다.',
                     '컬럼명은 정확히 같지 않아도 자동으로 인식됩니다 (예: "Date", "date", "거래일자" 모두 인식). 다만 날짜·물량·단가에 해당하는 컬럼은 반드시 있어야 합니다.',
                     'HS코드, Incoterm처럼 표준 항목 외의 컬럼도 파일에 있으면 자동으로 인식되어, 일부 메뉴(포트폴리오 헬스체크·공급망 흐름도·집중도 진단·신규 이탈 거래처·피벗 빌더·신규사업 스코어러·범용상품 스크리너·입찰 대응 분석)의 축/필터 선택지에 그대로 추가됩니다.',
                 ],
@@ -6741,6 +6858,7 @@ GUIDE_CONTENT = {
                 'steps': [
                     '여러 HS코드·여러 수입사가 섞인 시장 데이터를 업로드합니다 (날짜·수입사·공급사·원산지·HS코드·물량·단가 필요).',
                     '분석 기간(기본: 최근 12개월), 건당 최소 중량(기본 1,000kg), HS별 최소 거래 건수를 정합니다.',
+                    '"HS 10단위 + 품목분류(Category)로 나누기"(기본 켬)를 켜면 같은 HS 안에서도 품목분류별로 따로 봅니다. 같은 HS 안에서 물량 비중 5% 미만인 품목분류(예: 냉동감자 HS의 빵류·즉석조리식품)는 빼고, 제외 목록과 건수를 결과 위에 보여줍니다.',
                     '필요하면 사이드바에서 범용성 점수 가중치와 분류 경계(기본 60/30, 격차 50)를 조정합니다.',
                     '"스크리닝 실행"을 클릭합니다.',
                 ],
@@ -6763,7 +6881,7 @@ GUIDE_CONTENT = {
                 'intro': '한 품목(HS·스펙)에 대해 입찰 제안서를 준비할 때 씁니다. 원산지·해외 공급사별 단가와 거래 실적을 비교해 검증된 대체 공급처를 찾고, 후보 공급사가 한국에 얼마나 꾸준히 공급해왔는지 확인합니다.',
                 'steps': [
                     '시장 데이터를 업로드하거나, 범용상품 스크리너에서 품목을 넘겨받습니다 (HS코드가 자동 선택됩니다).',
-                    'HS코드, 품명 포함/제외 키워드(같은 HS 안의 스펙 분리), 기간(기본: 최근 12개월), 건당 최소 중량을 정합니다.',
+                    'HS코드, 품목분류(기본: 그 HS에서 물량 1위 품목분류만), 품명 포함/제외 키워드(쉼표 또는 | 로 구분 — 품명 한글·영문과 Product Description에서 대소문자 무시로 검색), 기간(기본: 최근 12개월), 건당 최소 중량을 정합니다.',
                     '[대체 공급처] 탭에서 검증 기준(최근 12개월 3건·10톤·한국 수입사 2곳 이상)을 확인하고, 필요하면 원산지별 관세율을 입력합니다.',
                     '기준(현 납품) 공급사와 연간 물량(톤)을 넣으면 후보별 절감률과 연간 절감액이 계산됩니다.',
                     '[공급 안정성] 탭에서 공급사를 골라 최근 36개월 선적 실적을 확인하고, 아래에서 PDF 리포트를 만듭니다.',
@@ -6838,6 +6956,7 @@ GUIDE_CONTENT = {
                 'intro': 'Choose 한국어 or English under "🌐 Language / 언어" at the top of the sidebar to switch the entire interface — titles, buttons, charts, and even table column names — instantly.',
                 'results': [
                     'Every menu starts by uploading a CSV or XLSX file.',
+                    'If the last month is still being collected (fewer than 50% of the previous 3-month average rows), it is excluded by default and shown as e.g. "2026-05 excluded as a partial month (212 rows)". Tick "Include partial month" to add it back. Default periods such as the last 12 months are based on the data without the partial month.',
                     'Column names do not need to match exactly (e.g. "Date", "date" are both recognized), but date, volume, and unit price columns must be present.',
                     'Columns beyond the standard set (e.g. HS Code, Incoterm) are auto-detected and added as axis/filter options in several menus (Portfolio Health Check, Supply Chain Flow, Concentration Risk, New/Lost Partners, Pivot Builder, New Business Scorer, Commodity Screener, Tender Response Analysis).',
                 ],
@@ -7004,6 +7123,7 @@ GUIDE_CONTENT = {
                 'steps': [
                     'Upload market data with multiple HS codes and importers (date, importer, supplier, origin, HS code, volume, and unit price required).',
                     'Set the period (default: last 12 months), minimum weight per shipment (default 1,000 kg), and minimum shipments per HS.',
+                    'With "Split by 10-digit HS + Category" (on by default), each category within an HS code is scored separately. Categories under 5% of their HS volume (e.g. bakery or ready meals under the frozen-fries HS) are excluded, and the excluded list and row counts are shown above the results.',
                     'If needed, adjust universality weights and class boundaries (default 60/30, gap 50) in the sidebar.',
                     'Click "Run Screening".',
                 ],
@@ -7026,7 +7146,7 @@ GUIDE_CONTENT = {
                 'intro': 'Use this when preparing a bid for one item (HS and spec). It compares prices and track records by origin and overseas supplier to find verified alternative suppliers, and shows how consistently candidates have supplied Korea.',
                 'steps': [
                     'Upload market data, or receive an item from the Commodity Screener (the HS code is selected automatically).',
-                    'Set the HS code, product keywords to include/exclude (to split specs within an HS code), the period (default: last 12 months), and the minimum weight per shipment.',
+                    'Set the HS code, category (default: only the largest category by volume in that HS), product name include/exclude keywords (separate with , or | — searched case-insensitively in the Korean/English product name and Product Description), the period (default: last 12 months), and minimum weight per shipment.',
                     'In [Alternative suppliers], check the verification criteria (3+ shipments, 10+ tons, 2+ Korean importers in the last 12 months) and enter tariff rates per origin if needed.',
                     'Enter the baseline (current) supplier and annual volume (tons) to see savings rates and annual savings per candidate.',
                     'In [Supply stability], pick a supplier to review its last 36 months of shipments, then create the PDF report below.',
@@ -7503,6 +7623,11 @@ if selected == T('menu_opt_customer'):
                     if df_for_check is None:
                         st.error(T('p1_file_read_fail_error'))
                         st.stop()
+                    _trim, _pm = split_partial_month(df_for_check)
+                    if _pm:
+                        st.caption(T('pm_note', ym=_pm['ym'], n=_pm['n'], avg=_pm['avg']))
+                        if not st.checkbox(T('pm_include'), value=False, key="p1_incl_partial"):
+                            df_for_check = _trim
                     # --- [수정 5] 끝 ---
 
                     customer_name_input = None
@@ -8083,6 +8208,11 @@ if selected == T('menu_opt_market'):
                         st.error(T('p1_file_read_fail_error'))
                         st.stop()
                     # --- [수정 6] 끝 ---
+                    _trim, _pm = split_partial_month(market_df_for_importers)
+                    if _pm:
+                        st.caption(T('pm_note', ym=_pm['ym'], n=_pm['n'], avg=_pm['avg']))
+                        if not st.checkbox(T('pm_include'), value=False, key="market_incl_partial"):
+                            market_df_for_importers = _trim
                     
                     if 'Raw Importer Name' in market_df_for_importers.columns:
                         importer_list = sorted(market_df_for_importers['Raw Importer Name'].unique())
@@ -9315,6 +9445,7 @@ if selected == T('menu_opt_pivot'):
 
     if st.session_state.pivot_raw_df is not None:
         st.button(T('p7_reset_btn'), on_click=reset_pivot_states)
+        partial_month_notice('pivot_raw_df')
         raw_df = st.session_state.pivot_raw_df
 
         headers = st.session_state.pivot_headers
@@ -9846,6 +9977,8 @@ if selected == T('menu_opt_screener'):
             with c2:
                 min_kg = st.slider(T('sc_min_kg_label'), 0, 10000, 1000, 100, key="scr_min_kg")
             min_ship = st.number_input(T('sc_min_ship_label'), min_value=1, value=5, step=1, key="scr_min_ship")
+            by_cat = (st.checkbox(T('sc_split_cat'), value=True, key="scr_split_cat", help=T('sc_split_cat_help'))
+                      if cols.get('category') else False)
 
             with st.sidebar.expander(T('sc_weights_header'), expanded=False):
                 weights = {k: st.slider(T(f'sc_w_{k}'), 0.0, 3.0, SCREENER_DEFAULT_WEIGHTS[k], 0.5, key=f"scr_w_{k}")
@@ -9863,20 +9996,31 @@ if selected == T('menu_opt_screener'):
                     st.stop()
                 with st.spinner(T('sc_spinner')):
                     df, stats = prepare_trade_df(raw_df, cols, period=period, min_shipment_kg=min_kg)
+                    cat_excluded = None
+                    if by_cat:
+                        df, cat_excluded = screener_category_filter(df, SCREENER_CAT_MIN_SHARE)
                     months = max(1, round((pd.Timestamp(period[1]) - pd.Timestamp(period[0])).days / 30.44))
-                    res, skipped = compute_screener(df, months, weights, bound_hi, bound_lo, bound_gap, min_ship)
+                    res, skipped = compute_screener(df, months, weights, bound_hi, bound_lo, bound_gap, min_ship, by_category=by_cat)
                 if res.empty:
                     st.warning(T('sc_no_data_warning'))
                 else:
                     st.session_state.scr_result = {'res': res, 'stats': stats, 'skipped': skipped,
                                                    'bounds': (bound_hi, bound_lo, bound_gap), 'period': tuple(period),
-                                                   'weights': dict(weights), 'min_kg': min_kg, 'min_ship': min_ship}
+                                                   'weights': dict(weights), 'min_kg': min_kg, 'min_ship': min_ship,
+                                                   'by_category': by_cat, 'cat_excluded': cat_excluded}
                     st.rerun()
 
     if st.session_state.scr_result is not None:
         R = st.session_state.scr_result
         res, (bound_hi, bound_lo, bound_gap) = R['res'], R['bounds']
         st.caption(T('sc_prep_caption', skipped=R['skipped'], **R['stats']))
+        cx = R.get('cat_excluded')
+        if cx is not None and len(cx):
+            st.caption(T('sc_cat_excluded', th=SCREENER_CAT_MIN_SHARE, n=len(cx), rows=int(cx['rows'].sum()), kg=float(cx['kg'].sum())))
+            with st.expander(T('sc_cat_excluded_expander'), expanded=False):
+                st.dataframe(cx.rename(columns={'hs': T('sc_col_hs'), 'category': T('sc_col_category'), 'share': T('sc_col_share'),
+                                                'rows': T('sc_col_rows'), 'kg': T('sc_col_kg')}).round({T('sc_col_share'): 1, T('sc_col_kg'): 0}),
+                             hide_index=True, width="stretch")
         counts = res['class'].value_counts()
         kpis = [(T('sc_kpi_total'), len(res))] + [(T(SCREENER_CLASS_KEY[c]), int(counts.get(c, 0))) for c in 'ABCD']
         for kcol, (label, value) in zip(st.columns(len(kpis)), kpis):
@@ -9904,14 +10048,17 @@ if selected == T('menu_opt_screener'):
                     st.error(T('pdf_error_msg', msg=str(e)))
 
         st.subheader(T('sc_goto_header'))
-        hs_options = list(res['hs'])
-        hs_pick = st.selectbox(T('sc_goto_select'), options=hs_options,
-                               format_func=lambda h: f"{h} · {res.loc[res['hs'] == h, 'name'].iloc[0]} ({res.loc[res['hs'] == h, 'class'].iloc[0]})",
-                               key="scr_goto_hs")
+        _has_cat = 'category' in res.columns
+        pick_i = st.selectbox(T('sc_goto_select'), options=list(range(len(res))),
+                              format_func=lambda i: f"{res.at[i, 'hs']} · " + (f"[{res.at[i, 'category']}] " if _has_cat else '')
+                                                    + f"{res.at[i, 'name']} ({res.at[i, 'class']})",
+                              key="scr_goto_hs")
+        hs_pick = res.at[pick_i, 'hs']
         if st.button(T('sc_goto_btn'), key="scr_goto_btn"):
             st.session_state.bid_hs_preset = hs_pick
+            st.session_state.bid_cat_preset = res.at[pick_i, 'category'] if _has_cat else None
             if st.session_state.get('bid_raw_df') is None:
-                st.session_state.bid_raw_df = st.session_state.scr_raw_df
+                copy_uploaded_df('scr_raw_df', 'bid_raw_df')
                 st.session_state.bid_headers = st.session_state.scr_headers
             st.session_state['_menu_jump'] = 9  # 메뉴 순서상 ⑩ 입찰 대응 분석
             st.success(T('sc_goto_done', hs=hs_pick, menu=T('menu_opt_bid')))
@@ -9932,7 +10079,7 @@ if selected == T('menu_opt_bid'):
         bid_file = st.file_uploader(T('bd_upload_label'), type=['csv', 'xlsx'], key="bid_uploader")
         st.caption(T('bd_upload_caption'))
         if st.session_state.get('scr_raw_df') is not None and st.button(T('bd_use_screener_btn')):
-            st.session_state.bid_raw_df = st.session_state.scr_raw_df
+            copy_uploaded_df('scr_raw_df', 'bid_raw_df')
             st.session_state.bid_headers = st.session_state.scr_headers
             st.rerun()
         load_uploaded_df(bid_file, 'bid_raw_df', 'bid_headers', 'bid_fileid')
@@ -9950,6 +10097,7 @@ if selected == T('menu_opt_bid'):
             st.stop()
 
         st.subheader(T('bd_filter_header'))
+        partial_month_notice('bid_raw_df')
         full_df, stats = prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=st.session_state.get('bid_min_kg', 1000))
         hs_list = sorted(full_df['_hs'].unique()) if cols['hs'] else []
         preset = st.session_state.get('bid_hs_preset')
@@ -9959,6 +10107,13 @@ if selected == T('menu_opt_bid'):
         with f1:
             hs_opts = [T('bd_hs_all')] + hs_list
             hs_sel = st.selectbox(T('bd_hs_label'), options=hs_opts, index=hs_opts.index(preset) if preset in hs_opts else 0, key="bid_hs")
+            # 품목분류: 선택한 HS 안에서 물량 순, 기본은 물량 1위만 (⑨에서 넘어왔으면 그 품목분류)
+            _cat_base = full_df if hs_sel == T('bd_hs_all') else full_df[full_df['_hs'] == hs_sel]
+            cat_opts = list(_cat_base.groupby('_cat')['_volume'].sum().sort_values(ascending=False).index) if cols.get('category') else []
+            cat_preset = st.session_state.get('bid_cat_preset')
+            cat_default = [cat_preset] if cat_preset in cat_opts else cat_opts[:1]
+            cat_sel = (st.multiselect(T('bd_cat_label'), options=cat_opts, default=cat_default, key=f"bid_cat_{hs_sel}", help=T('bd_cat_help'))
+                       if cat_opts else [])
             include_kw = st.text_input(T('bd_include_label'), key="bid_include")
         with f2:
             d_start, d_end = default_last_12m(full_df['_date'])
@@ -9972,7 +10127,7 @@ if selected == T('menu_opt_bid'):
 
         if not isinstance(period, (tuple, list)) or len(period) != 2:
             st.stop()
-        scoped = bid_filter(full_df, None if hs_sel == T('bd_hs_all') else hs_sel, include_kw, exclude_kw)
+        scoped = bid_filter(full_df, None if hs_sel == T('bd_hs_all') else hs_sel, include_kw, exclude_kw, categories=cat_sel or None)
         in_period = scoped[(scoped['_date'] >= pd.Timestamp(period[0])) & (scoped['_date'] <= pd.Timestamp(period[1]))]
         st.caption(T('bd_prep_caption', n0=stats['n0'], dup=stats['dup'], small=stats['small'], outlier=stats['outlier'], n=len(in_period)))
         if in_period.empty:
@@ -10095,6 +10250,7 @@ if selected == T('menu_opt_bid'):
                         'annual_tons': annual_tons, 'base_key': None if base_sel == T('bd_base_none') else base_sel,
                         'tariffs': tariffs, 'tariff_missing': tariff_missing, 'period': tuple(period), 'item': rp_item or '-',
                         'spec': rp_spec, 'hs': None if hs_sel == T('bd_hs_all') else hs_sel, 'include': include_kw, 'exclude': exclude_kw,
+                        'categories': cat_sel,
                         'min_kg': st.session_state.get('bid_min_kg', 1000), 'blind': blind_on, 'stab_suppliers': rp_stab,
                     })
                     st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="tender_response_report.pdf", mime="application/pdf", key="bid_pdf_dl")

@@ -8,3 +8,4 @@
 - ⑪ 피벗 PDF 블라인드: 필터로 고른 수입사는 전체 물량 순위 기준 코드(예: '수입사 AS')가 붙는다 — 한 곳만 골라도 'A'가 아니다.
 - `assets/fonts`에 Pretendard 라이선스(OFL) 파일이 없다 (NanumGothic OFL.txt는 폰트와 함께 삭제).
 - 일부 화면 제목이 사이드바 메뉴 이름과 다르다: ③ '시장 경쟁력 상세 분석 (Drill-down)', ④ '공급망 흐름도 (Sankey)', ⑧ '원료 수입 신규사업 스코어러', 영문 ⑤ 'Concentration Risk Diagnosis'. 가이드는 사이드바 메뉴 이름 기준.
+- ③ 시장 경쟁력 분석은 공통 읽기 함수(`read_uploaded_table`)를 쓰지 않아 HS 앞자리 0 복원·한글 NFC 정규화가 적용되지 않는다.
