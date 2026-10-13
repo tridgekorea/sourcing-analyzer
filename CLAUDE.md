@@ -53,7 +53,7 @@
 - **한글 폰트**: 폰트는 `assets/fonts`에 번들한다. PDF·PDF 차트는 Pretendard(ReportLab에서 한글이 깨지는 Inter 금지) + 한자·가나만 Noto Sans SC 서브셋. 업로드한 표의 문자열은 `read_uploaded_table`에서 NFC로 정규화한다(자모 분리형 한글 방지). `packages.txt`는 비워둔 상태로 유지한다 (apt 패키지 추가 금지).
 - **새 PDF 양식**: `report_theme`의 블록과 색 토큰만 쓴다(목업 `build_report.py` 기준). 텍스트는 `P`/`spaced`/`text_width`를 거치면 한글 NFC 정규화와 CJK 대체 폰트가 자동 적용된다 — Paragraph를 직접 만들 때는 `cjk_markup`을 씌운다. PDF 차트는 matplotlib(`report_theme.new_chart`/`apply_pdf_chart_style`/`chart_image`), 화면 차트는 plotly.
 - **블라인드**: 한국 수입사명을 화면·PDF·CSV에 내보낼 때는 반드시 `apply_blind`(또는 이름 목록이면 `blind_name_map`)를 거친다. 기준·행·열·필터로 고른 컬럼이 수입사인지는 `is_importer_column`으로 판별한다(`Importer` 같은 추가 수입사 컬럼 포함). 해외 공급사명은 그대로 둔다.
-- **plotly<6 고정**: kaleido 의존성은 없앴다. 고정 해제는 화면 차트 확인 후 별도 커밋으로 진행한다.
+- **plotly 범위**: `plotly>=5.24,<8`. kaleido(차트 이미지 변환)는 쓰지 않는다 — PDF 차트는 matplotlib. 8.x로 올릴 때는 11개 메뉴 화면 차트를 다시 확인한다.
 - **건드리지 않는 영역** (요청이 있을 때만 수정):
   - 비밀번호 로직 (`check_password`, `_hash_pw`, `_get_configured_password_hash`, `_save_new_password`)
   - 사이드바 브랜딩 — 네이비 `#26224F`, 인디고 `#4F46E5`, 로고 SVG
