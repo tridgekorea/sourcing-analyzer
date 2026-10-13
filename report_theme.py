@@ -8,6 +8,7 @@ PDF 차트는 matplotlib으로 그린다(Pretendard를 파일에서 직접 등�
 import io
 import os
 import re
+import unicodedata
 from xml.sax.saxutils import escape
 
 from PIL import Image
@@ -59,6 +60,50 @@ for _name in W.values():
     if _name not in pdfmetrics.getRegisteredFontNames():
         pdfmetrics.registerFont(TTFont(_name, os.path.join(FONT_DIR, f"{_name}.ttf")))
 
+# ── CJK 대체 폰트 ──────────────────────────────────────────
+# Pretendard에 없는 한자·가나(중국·일본 공급사명 등)만 Noto Sans SC 서브셋(OFL, 상용 한자·가나 약 1.1만 자)으로 찍는다.
+CJK = "NotoSansSC-Subset"
+CJK_FAMILY = "Noto Sans SC"
+if CJK not in pdfmetrics.getRegisteredFontNames():
+    pdfmetrics.registerFont(TTFont(CJK, os.path.join(FONT_DIR, f"{CJK}.ttf")))
+_PRE_CHARS = set(pdfmetrics.getFont(W["R"]).face.charToGlyph)
+_CJK_CHARS = set(pdfmetrics.getFont(CJK).face.charToGlyph)
+
+
+def _needs_cjk(ch):
+    o = ord(ch)
+    return o not in _PRE_CHARS and o in _CJK_CHARS
+
+
+def text_runs(text):
+    """[(대체 폰트 필요 여부, 조각), ...] — Pretendard에 없는 글자 묶음만 CJK 폰트로 찍기 위한 분할."""
+    runs = []
+    for ch in text:
+        flag = _needs_cjk(ch)
+        if runs and runs[-1][0] == flag:
+            runs[-1][1] += ch
+        else:
+            runs.append([flag, ch])
+    return [(f, t) for f, t in runs]
+
+
+def text_width(text, font, size):
+    return sum(pdfmetrics.stringWidth(t, CJK if f else font, size) for f, t in text_runs(text))
+
+
+def cjk_markup(markup):
+    """Paragraph 마크업 문자열의 글자 부분(태그 밖)에서 대체가 필요한 글자 묶음을 <font name=CJK>로 감싼다."""
+    if not any(_needs_cjk(ch) for ch in markup):
+        return markup
+    parts = re.split(r"(<[^>]+>)", markup)
+    out = []
+    for part in parts:
+        if part.startswith("<"):
+            out.append(part)
+        else:
+            out.append("".join(f'<font name="{CJK}">{t}</font>' if f else t for f, t in text_runs(part)))
+    return "".join(out)
+
 # ── 레이아웃 ───────────────────────────────────────────────
 PW, PH = A4
 MX = 18 * mm
@@ -76,18 +121,19 @@ _EMOJI_RE = re.compile("[\U0001F000-\U0001FAFF⌀-⏿☀-➿⬀-⯿︀-️‍]+ 
 
 
 def clean_text(text):
-    """Pretendard에 글리프가 없는 이모지는 지우고 ①~⑳은 '1.'~'20.'으로 바꾼다."""
-    text = "" if text is None else str(text)
+    """Pretendard에 글리프가 없는 이모지는 지우고 ①~⑳은 '1.'~'20.'으로 바꾼다. 한글은 완성형(NFC)으로 맞춘다."""
+    text = "" if text is None else unicodedata.normalize("NFC", str(text))
     text = re.sub("[①-⑳]", lambda m: f"{ord(m.group()) - 0x245F}.", text)
     return re.sub(" {2,}", " ", _EMOJI_RE.sub("", text)).strip()
 
 
 def spaced(c, text, x, y, font, size, color, char_space=0.0):
     t = c.beginText(x, y)
-    t.setFont(font, size)
     t.setFillColor(color)
     t.setCharSpace(char_space)
-    t.textLine(clean_text(text))
+    for is_cjk, part in text_runs(clean_text(text)):  # Pretendard에 없는 글자만 CJK 폰트로
+        t.setFont(CJK if is_cjk else font, size)
+        t.textOut(part)
     t.setCharSpace(0)  # 자간(Tc)은 PDF 그래픽 상태에 남아 이후 Paragraph 폭을 넓히므로 되돌린다
     c.drawText(t)
 
@@ -97,10 +143,32 @@ def fit_lines(text, font, size, width, max_lines=2, min_size=None):
     text = clean_text(text)
     min_size = min_size or size * 0.75
     s = size
-    while s > min_size and pdfmetrics.stringWidth(text, font, s) > width:
+    while s > min_size and text_width(text, font, s) > width:
         s -= 0.5
-    lines = simpleSplit(text, font, s, width) or [""]
+    lines = _split_lines(text, font, s, width) or [""]
     return lines[:max_lines], s
+
+
+def _split_lines(text, font, size, width):
+    """공백 기준 줄바꿈(대체 폰트 글자 폭 포함). 공백 없이 긴 덩어리는 글자 단위로 자른다."""
+    lines, cur = [], ""
+    for word in text.split(" "):
+        cand = f"{cur} {word}" if cur else word
+        if text_width(cand, font, size) <= width:
+            cur = cand
+            continue
+        if cur:
+            lines.append(cur)
+        cur = ""
+        for ch in word:
+            if cur and text_width(cur + ch, font, size) > width:
+                lines.append(cur)
+                cur = ch
+            else:
+                cur += ch
+    if cur:
+        lines.append(cur)
+    return lines
 
 
 # ── 스타일 (목업과 동일) ───────────────────────────────────
@@ -132,7 +200,7 @@ def P(text, style="body", markup=False):
     """Paragraph. markup=False면 &·< 등을 이스케이프한다 (회사명에 '&'가 들어가도 깨지지 않도록)."""
     st = S[style] if isinstance(style, str) else style
     text = clean_text(text)
-    return Paragraph(text if markup else escape(text), st)
+    return Paragraph(cjk_markup(text if markup else escape(text)), st)
 
 
 def h3(text):
@@ -189,7 +257,7 @@ class Badge(Flowable):
     def __init__(self, text, fill=BLACK, size=7.4, text_color=WHITE):
         super().__init__()
         self.text, self.fill, self.size, self.text_color = clean_text(text), fill, size, text_color
-        self.w = pdfmetrics.stringWidth(self.text, W["SB"], size) + 10
+        self.w = text_width(self.text, W["SB"], size) + 10
         self.h = size + 7
 
     def wrap(self, aw, ah):
@@ -199,9 +267,7 @@ class Badge(Flowable):
         c = self.canv
         c.setFillColor(self.fill)
         c.roundRect(0, 0, self.w, self.h, 2, stroke=0, fill=1)
-        c.setFillColor(self.text_color)
-        c.setFont(W["SB"], self.size)
-        c.drawString(5, 4.2, self.text)
+        spaced(c, self.text, 5, 4.2, W["SB"], self.size, self.text_color)
 
 
 def status_badge(text, confirmed):
@@ -217,7 +283,7 @@ def class_badge(cls, label):
 def kpi_card(label, value, note, w, h=None):
     # 큰 숫자(Light 22pt)가 카드 폭을 넘으면 한 줄에 들어갈 때까지 글자 크기를 줄인다 (최소 14pt)
     size, avail = 22, w - 20
-    while size > 14 and pdfmetrics.stringWidth(clean_text(value), W["L"], size) > avail:
+    while size > 14 and text_width(clean_text(value), W["L"], size) > avail:
         size -= 1
     val_style = S["kpi_val"] if size == 22 else ps(f"kpi_val_{size}", W["L"], size, size * 1.18)
     inner = [P(label, "kpi_label"), Spacer(1, 5), P(value, val_style), Spacer(1, 4), P(note, "kpi_note")]
@@ -340,7 +406,8 @@ def _plt():
         from matplotlib import font_manager
         for name in W.values():
             font_manager.fontManager.addfont(os.path.join(FONT_DIR, f"{name}.ttf"))
-        matplotlib.rcParams["font.family"] = "Pretendard"
+        font_manager.fontManager.addfont(os.path.join(FONT_DIR, f"{CJK}.ttf"))
+        matplotlib.rcParams["font.family"] = ["Pretendard", CJK_FAMILY]  # Pretendard에 없는 한자·가나는 Noto Sans SC로
         matplotlib.rcParams["axes.unicode_minus"] = False
         _MPL["plt"], _MPL["mpl"] = plt, matplotlib
     return _MPL["plt"]
@@ -430,7 +497,7 @@ def _page_callbacks(meta):
         for i, (k, v) in enumerate(rows):
             x = MX + i * colw
             spaced(c, k, x, yy + 3 * mm, W["SB"], 7.5, WHITE, 0.4)
-            p = Paragraph(escape(clean_text(v)), ps("m", W["L"], 8.6, 12.5, WHITE))
+            p = Paragraph(cjk_markup(escape(clean_text(v))), ps("m", W["L"], 8.6, 12.5, WHITE))
             _, h = p.wrap(colw - 6 * mm, 30 * mm)
             p.drawOn(c, x, yy - h - 1 * mm)
         spaced(c, L["confidential"], MX, 16 * mm, W["L"], 7.2, WHITE, 0)
@@ -444,7 +511,7 @@ def _page_callbacks(meta):
         right = " · ".join(p for p in [meta.get("item"), meta.get("spec")] if p)
         lines, size = fit_lines(right, W["L"], 7.5, BODY_W * 0.6, max_lines=1, min_size=6.5)
         txt = lines[0] if lines else ""
-        spaced(c, txt, PW - MX - pdfmetrics.stringWidth(txt, W["L"], size), PH - 16.4 * mm, W["L"], size, BLACK)
+        spaced(c, txt, PW - MX - text_width(txt, W["L"], size), PH - 16.4 * mm, W["L"], size, BLACK)
         c.setStrokeColor(black_a(0.12))
         c.setLineWidth(0.5)
         c.line(MX, 15 * mm, PW - MX, 15 * mm)
@@ -493,13 +560,13 @@ class ClosingBlock(Flowable):
             c.line(0, y + 16, self.aw, y + 16)
             spaced(c, n, 0, y - 8, W["XL"], 22, WHITE)
             spaced(c, k, 22 * mm, y - 1, W["SB"], 9, WHITE, 0.3)
-            p = Paragraph(escape(clean_text(v)), ps("cv", W["L"], 11, 16, WHITE))
+            p = Paragraph(cjk_markup(escape(clean_text(v))), ps("cv", W["L"], 11, 16, WHITE))
             _, ph_ = p.wrap(self.aw - 22 * mm, 40)
             p.drawOn(c, 22 * mm, y - 6 - ph_)
             y -= max(62, ph_ + 30)
         c.setStrokeColor(white_a(0.2))
         c.line(0, y + 16, self.aw, y + 16)
-        p = Paragraph(escape(clean_text(self.note)), ps("dn", W["L"], 8.4, 13, WHITE))
+        p = Paragraph(cjk_markup(escape(clean_text(self.note))), ps("dn", W["L"], 8.4, 13, WHITE))
         _, ph_ = p.wrap(self.aw, 60)
         p.drawOn(c, 0, y - 10 - ph_)
 

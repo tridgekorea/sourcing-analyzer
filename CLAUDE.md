@@ -11,7 +11,8 @@
 - `analysis_tool.py` — 앱 전체 (문구, 계산, 화면, 기존 PDF, 사용법 가이드)
 - `report_theme.py` — 새 PDF 리포트 공통 테마. 폰트·색 토큰·로고·페이지 템플릿(표지/본문/클로징)·KPI 카드·브랜드 표·배지·증빙 박스·클로징 블록, PDF 차트(matplotlib) 스타일. 진입점 `make_report(meta, sections)`. 문구는 넣지 않고 `analysis_tool.py`의 `TEXTS`에서 넘겨받는다
 - `build_report.py` — PDF 디자인 목업(가상 데이터). 새 PDF 디자인의 기준이며 앱에서는 쓰지 않는다
-- `assets/fonts/` — `Pretendard-*.ttf` 5종(새 PDF·PDF 차트), `NanumGothic-Regular.ttf`(기존 PDF·kaleido 차트·사용법 가이드)
+- `assets/fonts/` — `Pretendard-*.ttf` 5종(새 PDF·PDF 차트), `NotoSansSC-Subset.ttf`(Pretendard에 없는 한자·가나 대체용 서브셋, OFL — `NotoSansSC-OFL.txt`), `NanumGothic-Regular.ttf`(기존 PDF·kaleido 차트·사용법 가이드)
+- `BACKLOG.md` — 작업 중 발견했지만 고치지 않은 문제(고객 숫자·결론에 영향 없는 것)
 - `assets/logo/` — `tridge_logo_black.png`(밝은 배경), `tridge_logo_white.png`(어두운 배경)
 - `assets/guide/` — 사용법 가이드 PDF에 들어가는 메뉴 스크린샷
 - `tests/` — 고정 테스트. `test_normalize_product_name.py`(①②⑥ 품목명 정제·품목 묶기·포장 단위 구성 변화). 실행: `python tests/test_normalize_product_name.py`
@@ -50,7 +51,7 @@
 - **세션 상태**: 새 페이지를 만들면 세션 상태 초기화 블록과 `reset_*_states()` 함수를 짝으로 만든다.
 - **재사용**: 파일 업로드는 `load_uploaded_df`, 컬럼 인식은 `detect_standard_columns`를 재사용한다. 새로 만들지 않는다.
 - **한글 폰트**: 폰트는 `assets/fonts`에 번들한다. 새 PDF는 Pretendard(ReportLab에서 한글이 깨지는 Inter 금지), 기존 PDF는 NanumGothic. `packages.txt`는 비워둔 상태로 유지한다 (apt 패키지 추가 금지).
-- **새 PDF 양식**: `report_theme`의 블록과 색 토큰만 쓴다(목업 `build_report.py` 기준). PDF 차트는 matplotlib(`report_theme.new_chart`/`apply_pdf_chart_style`/`chart_image`), 화면 차트는 plotly.
+- **새 PDF 양식**: `report_theme`의 블록과 색 토큰만 쓴다(목업 `build_report.py` 기준). 텍스트는 `P`/`spaced`/`text_width`를 거치면 한글 NFC 정규화와 CJK 대체 폰트가 자동 적용된다 — Paragraph를 직접 만들 때는 `cjk_markup`을 씌운다. PDF 차트는 matplotlib(`report_theme.new_chart`/`apply_pdf_chart_style`/`chart_image`), 화면 차트는 plotly.
 - **블라인드**: 한국 수입사명을 화면·PDF·CSV에 내보낼 때는 반드시 `apply_blind`(또는 이름 목록이면 `blind_name_map`)를 거친다. 기준·행·열·필터로 고른 컬럼이 수입사인지는 `is_importer_column`으로 판별한다(`Importer` 같은 추가 수입사 컬럼 포함). 해외 공급사명은 그대로 둔다.
 - **plotly<6 고정**: `kaleido==0.2.1`(자체 Chromium 내장, apt 불필요)과 호환되는 마지막 계열이라 고정한다. plotly 6+는 kaleido>=1(시스템 Chrome 필요)을 요구해 PDF 차트 내보내기가 깨진다.
 - **건드리지 않는 영역** (요청이 있을 때만 수정):

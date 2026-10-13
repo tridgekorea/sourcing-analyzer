@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import re
+import unicodedata
 import time
 import datetime
 import os   # <--- [비밀번호 기능] 환경변수(Codespaces secret) 읽기용
@@ -438,7 +439,7 @@ TEXTS = {
         'p5_no_data_warning': '선택하신 품목에 해당하는 데이터가 없습니다.',
         'p5_kpi_current': '최근월 평균단가',
         'p5_kpi_yoy': '전년 동월 대비',
-        'p5_kpi_frompeak': '연중 최고 대비 현재',
+        'p5_kpi_frompeak': '기간 내 최고 대비 현재',
         'p5_season_badge': '계절 고점: {months}',
         'p5_no_season': '뚜렷한 계절 패턴 없음',
         'p5_chart_title': "'{product}' 월별 평균 단가 추이",
@@ -1444,7 +1445,7 @@ TEXTS = {
         'insight_box_title': '💡 이번 분석에서 확인할 수 있는 것',
         'insight_cheapest_month': '과거 데이터 기준, {month}에 구매하면 평균 대비 가장 저렴했습니다 ({pct}% 낮음).',
         'insight_current_vs_seasonal_avg': '최근월 단가는 계절 평균 대비 {sign}{pct}% {direction}.',
-        'insight_low_confidence': '⚠️ 이 품목은 데이터가 {years}년치뿐이라, 지금 나온 "계절 패턴"이 우연일 수도 있습니다. 2년 이상 데이터가 쌓이면 신뢰도가 높아집니다.',
+        'insight_low_confidence': '⚠️ 이 품목은 데이터가 {months}개월치(첫 달~마지막 달)뿐이라, 지금 나온 "계절 패턴"이 우연일 수도 있습니다. 24개월 이상 데이터가 쌓이면 신뢰도가 높아집니다.',
         'direction_higher': '높습니다',
         'direction_lower': '낮습니다',
         'p6_scope_label': '범위',
@@ -1900,7 +1901,7 @@ TEXTS = {
         'p5_no_data_warning': 'No data found for the selected product.',
         'p5_kpi_current': 'Latest month avg price',
         'p5_kpi_yoy': 'YoY (same month)',
-        'p5_kpi_frompeak': 'Current vs. yearly peak',
+        'p5_kpi_frompeak': 'Current vs. period peak',
         'p5_season_badge': 'Seasonal peak: {months}',
         'p5_no_season': 'No clear seasonal pattern',
         'p5_chart_title': "'{product}' Monthly Average Price Trend",
@@ -2906,7 +2907,7 @@ TEXTS = {
         'insight_box_title': '💡 What this analysis shows',
         'insight_cheapest_month': 'Historically, buying in {month} was cheapest on average ({pct}% below average).',
         'insight_current_vs_seasonal_avg': "The latest month's price is {sign}{pct}% {direction} the seasonal average.",
-        'insight_low_confidence': '⚠️ This product only has {years} year(s) of data, so the "seasonal pattern" shown may be coincidental. Confidence improves with 2+ years of history.',
+        'insight_low_confidence': '⚠️ This product only has {months} months of data (first to last month), so the "seasonal pattern" shown may be coincidental. Confidence improves with 24+ months of history.',
         'direction_higher': 'higher',
         'direction_lower': 'lower',
         'p6_scope_label': 'Scope',
@@ -3393,6 +3394,10 @@ def read_uploaded_table(uploaded_file):
         for c in df.columns:
             if is_hs_column(c):
                 df[c] = df[c].map(_pad_hs_code)
+            elif df[c].dtype == object or str(df[c].dtype) in ('str', 'string'):
+                # 맥에서 만든 파일 등은 한글이 자모 분리형(NFD)으로 들어와 PDF·차트에서 글자가 깨지고,
+                # 같은 이름이 서로 다른 값으로 집계된다 → 완성형(NFC)으로 통일
+                df[c] = df[c].map(lambda v: unicodedata.normalize('NFC', v) if isinstance(v, str) else v)
     return df
 
 
@@ -6919,14 +6924,14 @@ GUIDE_CONTENT = {
                     '"추세 그리기"를 클릭합니다.',
                 ],
                 'results': [
-                    '최근월 평균단가, 전년 동월 대비, 연중 최고가 대비 현재 위치.',
+                    '최근월 평균단가, 전년 동월 대비, 기간 내 최고가 대비 현재 위치.',
                     '계절 고점 자동 감지 — 매년 특정 시기에 비싸지는 패턴이 있는지.',
                     '"○월에 사면 가장 저렴했다" 같은 인사이트 문장이 자동 생성됩니다.',
                     '포장 구성 변화 표시 — 직전 달보다 주력 포장 단위가 바뀌었거나 비중이 20%p 이상 움직인 달에 ◆ 마커가 찍히고, 마우스를 올리면 "포장 구성 변화: 25KG 80% → 600KG 60%"처럼 보여줍니다. 대포장·소포장이 섞이면 합친 단가가 포장 구성 때문에 흔들릴 수 있습니다.',
                     '"포장 단위별로 보기"를 켜면 같은 차트에 포장 단위별 단가 선이 따로 그려집니다 (포장 표기가 없는 거래는 "표기 없음").',
                     'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(최근 단가·전년 동월 대비·고점 대비·가장 싼 달)·핵심 결론 3줄 → 월별 추세 차트(전년 점선·포장 변화 ◆)와 최근 12개월 표 → 달별 단가·원산지/공급사 비교 → 방법론 → 다음 단계 제안)를 내려받습니다. 현재 단가가 계절 평균보다 낮으면 "계약 고정 시점 검토"를 제안합니다. 계절 패턴은 첫 달부터 마지막 달까지 24개월 이상일 때만 판단합니다. 이전 양식은 "기존 양식 PDF" 버튼.',
                 ],
-                'tips': ['데이터가 1년치뿐이면 "이 계절 패턴은 우연일 수 있다"는 경고가 함께 표시됩니다 — 2년 이상 데이터가 쌓이면 신뢰도가 높아집니다.'],
+                'tips': ['데이터가 첫 달부터 마지막 달까지 24개월이 안 되면 "이 계절 패턴은 우연일 수 있다"는 경고가 함께 표시됩니다 — 24개월 이상 쌓이면 신뢰도가 높아집니다.'],
             },
             {
                 'heading': '🔀 ⑦ 신규·이탈 거래처 추적',
@@ -7166,14 +7171,14 @@ GUIDE_CONTENT = {
                     'Click "Draw trend".',
                 ],
                 'results': [
-                    "Latest month's average price, year-over-year change, and position vs. the yearly peak.",
+                    "Latest month's average price, year-over-year change, and position vs. the period peak.",
                     'Automatic seasonal-peak detection.',
                     'Auto-generated insight sentences like "buying in March was historically cheapest."',
                     'Pack mix changes — a ◆ marker appears in months where the main pack size changed or a share moved 20%p or more vs. the previous month; hover to see e.g. "Pack mix change: 25KG 80% → 600KG 60%". When bulk and small packs mix, the combined price can move because of the pack mix.',
                     'Turn on "Show by pack size" to draw a separate price line per pack size on the same chart (trades without a pack size appear as "No pack size").',
                     'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (latest price, YoY, vs. peak, cheapest month) and 3 key findings → monthly trend chart (prior year dashed, pack changes ◆) with a last-12-months table → price by calendar month and origin/supplier comparison → methodology → suggested next steps). If the current price is below the seasonal average, it suggests reviewing when to lock in a contract. The seasonal pattern is judged only when the data spans 24 months or more. Use "Legacy-format PDF" for the previous format.',
                 ],
-                'tips': ['With only one year of data, a warning notes the seasonal pattern could be coincidental — confidence improves with 2+ years of history.'],
+                'tips': ['If the data spans less than 24 months (first to last month), a warning notes the seasonal pattern could be coincidental — confidence improves with 24+ months of history.'],
             },
             {
                 'heading': '🔀 ⑦ New/Lost Trading Partners',
@@ -9274,6 +9279,8 @@ if selected == T('menu_opt_season'):
 
                         month_avg = weighted_avg_groupby(sub, '_month', '_price', '_volume')
                         years_count = sub['_year'].nunique()
+                        # 계절 패턴 신뢰도는 달력 연도 수가 아니라 첫 달~마지막 달 개월 수로 본다 (PDF와 같은 24개월 기준)
+                        span_months = len(pd.period_range(sub['_ym'].min(), sub['_ym'].max(), freq='M'))
                         overall_avg = weighted_avg(sub, '_price', '_volume')
                         cheapest_month = int(month_avg.idxmin())
                         cheapest_month_pct = (overall_avg - month_avg.min()) / overall_avg * 100
@@ -9303,7 +9310,7 @@ if selected == T('menu_opt_season'):
                             'show_prev_year': show_prev_year, 'breakdown': breakdown,
                             'breakdown_series': breakdown_series, 'peak_months': peak_months,
                             'cheapest_month': cheapest_month, 'cheapest_month_pct': cheapest_month_pct,
-                            'years_count': years_count, 'overall_avg': overall_avg,
+                            'years_count': years_count, 'span_months': span_months, 'overall_avg': overall_avg,
                             'pack_markers': pack_markers, 'pack_series': pack_series,
                             'month_avg': month_avg, 'breakdown_summary': breakdown_summary,
                         }
@@ -9376,8 +9383,9 @@ if selected == T('menu_opt_season'):
         direction = T('direction_higher') if cur_vs_avg_pct >= 0 else T('direction_lower')
         sign = '+' if cur_vs_avg_pct >= 0 else ''
         st.write("- " + T('insight_current_vs_seasonal_avg', sign=sign, pct=f"{abs(cur_vs_avg_pct):.1f}", direction=direction))
-        if R['years_count'] < 2:
-            st.warning(T('insight_low_confidence', years=R['years_count']))
+        _span = R.get('span_months') or len(pd.period_range(overall['_ym'].iloc[0], overall['_ym'].iloc[-1], freq='M'))
+        if _span < 24:
+            st.warning(T('insight_low_confidence', months=_span))
 
         season_c1, season_c2 = st.columns([1, 1])
         if season_c1.button(T('rp_pdf_btn'), key="season_rp_btn"):
