@@ -8,4 +8,3 @@
 - ⑪ 피벗 PDF 블라인드: 필터로 고른 수입사는 전체 물량 순위 기준 코드(예: '수입사 AS')가 붙는다 — 한 곳만 골라도 'A'가 아니다.
 - `assets/fonts`에 Pretendard 라이선스(OFL) 파일이 없다 (NanumGothic OFL.txt는 폰트와 함께 삭제).
 - 사용법 가이드의 메뉴 스크린샷(`assets/guide/`)은 예전 화면이다 — 마지막에 한 번에 교체 예정.
-- **[숫자 영향 · 영문 화면]** `build_axis_map`: 파일의 추가 컬럼 이름이 표준 축 라벨과 같으면(영문 `Importer`) 추가 컬럼이 표준 축(`Raw Importer Name`)을 덮어쓴다. 영문 화면에서 ④⑤⑦⑪ 등의 'Importer' 기준이 다른 컬럼으로 집계된다.

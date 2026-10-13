@@ -1005,6 +1005,7 @@ TEXTS = {
         'multi_product_label': '품목 검색 (여러 개 선택 가능)',
         # --- ⑤ 집중도 리스크 새 PDF (rk_rp_) ---
         'rp_menu_ref': '‘{name}’ 메뉴',
+        'axis_extra_suffix': ' (원본)',
         'rk_rp_eyebrow': 'Concentration Risk Report',
         'rk_rp_scope_all': '전체 시장',
         'rk_rp_blind_toggle': 'PDF에 수입사명 대신 블라인드 표기 (수입사 A)',
@@ -2485,6 +2486,7 @@ TEXTS = {
         'multi_product_label': 'Search products (multi-select)',
         # --- ⑤ Concentration risk new PDF (rk_rp_) ---
         'rp_menu_ref': 'the {name} menu',
+        'axis_extra_suffix': ' (raw)',
         'rk_rp_eyebrow': 'Concentration Risk Report',
         'rk_rp_scope_all': 'Entire market',
         'rk_rp_blind_toggle': 'Blind importer names in the PDF (Importer A)',
@@ -3474,9 +3476,13 @@ def build_axis_map(standard_pairs, df, cols):
     """(라벨, 컬럼명) 표준 축 목록 + 파일에서 동적으로 찾은 추가 컬럼들을 합쳐
     선택창(selectbox)에 바로 쓸 수 있는 {라벨: 컬럼명} dict를 만든다."""
     axis_map = {label: col for label, col in standard_pairs if col}
+    taken = {str(label).lower() for label in axis_map}
     for extra_col in detect_extra_dimension_columns(df, cols):
         if extra_col not in axis_map.values():
-            axis_map[extra_col] = extra_col
+            # 추가 컬럼 이름이 표준 축 라벨과 같으면(영문 'Importer' 등) 표준 축을 덮어쓰지 않도록 이름 뒤에 표시를 붙인다
+            label = f"{extra_col}{T('axis_extra_suffix')}" if str(extra_col).lower() in taken else extra_col
+            axis_map[label] = extra_col
+            taken.add(str(label).lower())
     return axis_map
 
 
