@@ -6551,6 +6551,11 @@ GUIDE_CONTENT = {
         'cover_lbl_date': '작성일', 'cover_lbl_scope': '대상', 'cover_scope': '고객사 데이터 분석가',
         'cover_note': '화면과 PDF의 수치는 통관 데이터 기반 추정치입니다.',
         'footer': 'Tridge Sourcing Analyzer · 사용 가이드',
+        'close_head': '처음 쓰신다면 이 순서로',
+        'close_items': [('점검', '‘포트폴리오 헬스체크’로 지금 위험한 품목부터 확인'),
+                        ('원인', '‘집중도 리스크 진단’·‘가격 추세 & 계절성’·‘신규·이탈 거래처 추적’으로 이유 파악'),
+                        ('행동', '‘범용상품 스크리너’·‘입찰 대응 분석’으로 대체 공급처를 찾고, ‘도입 효과 분석’으로 계약 성과 확인')],
+        'close_note': '화면과 PDF의 수치는 통관 데이터 기반 추정치이며, 계약 판단의 단일 근거로 사용할 수 없습니다. 사이드바의 "📖 사용법 가이드 (PDF)"로 이 문서를 언제든 다시 받을 수 있습니다.',
         'intro': '이 문서는 앱의 각 기능을 처음 쓰시는 분도 화면을 보면서 그대로 따라 할 수 있도록 정리한 가이드입니다. 왼쪽 사이드바의 "📖 사용법 가이드" 버튼을 누르면 언제든 최신 버전을 다시 받으실 수 있습니다.',
         'label_steps': '따라하기',
         'label_results': '결과 해석',
@@ -6567,7 +6572,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🌐 언어 전환 & 공통 파일 업로드 규칙',
-                'intro': '왼쪽 사이드바 상단의 "한국어 / English" 버튼으로 화면 전체(제목, 버튼, 차트, 표 컬럼명까지) 언어가 즉시 전환됩니다.',
+                'intro': '왼쪽 사이드바 상단 "🌐 Language / 언어"에서 한국어·English를 고르면 화면 전체(제목, 버튼, 차트, 표 컬럼명까지) 언어가 즉시 전환됩니다.',
                 'results': [
                     '모든 메뉴는 CSV 또는 XLSX 파일을 업로드하면서 시작합니다.',
                     '컬럼명은 정확히 같지 않아도 자동으로 인식됩니다 (예: "Date", "date", "거래일자" 모두 인식). 다만 날짜·물량·단가에 해당하는 컬럼은 반드시 있어야 합니다.',
@@ -6576,7 +6581,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '💲 ① 도입 효과 분석',
-                'image': 'p1_customer.png',
+                'image': 'ko/p01_adoption.png',
                 'intro': '계약을 시작한 뒤로 우리(또는 특정 수입사)의 구매 단가가 실제로 얼마나 절감됐는지 숫자로 확인하고 싶을 때 씁니다. 계약 갱신이나 성과 보고 자료를 만들 때 가장 먼저 여는 화면이에요. 트릿지 도입(계약일) 전후 비교용이며, 현재 상태 점검은 포트폴리오 헬스체크를 사용하세요.',
                 'steps': [
                     '거래 내역 파일을 업로드합니다 (여러 회사 데이터가 섞여 있어도 자동으로 가장 많이 등장하는 회사를 기준으로 분석합니다).',
@@ -6595,6 +6600,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🩺 ② 포트폴리오 헬스체크',
+                'image': 'ko/p02_health.png',
                 'intro': '계약 여부와 상관없이, 지금 어느 품목이 위험한지 빠르게 훑어보고 싶을 때 씁니다. 한 회사의 수입 데이터로 품목(또는 원산지·HS코드 등)별 변화 신호를 찾고, 공급 구조의 취약성·금액 비중(영향도)·선적 건수(신뢰도)를 함께 따져 위험 / 주의 / 안전으로 판정합니다.',
                 'steps': [
                     '거래 내역 파일을 업로드합니다 (날짜·수입사·공급사·품목·물량·단가 컬럼이 필요합니다).',
@@ -6622,7 +6628,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🏆 ③ 시장 경쟁력 분석',
-                'image': 'p2_market.png',
+                'image': 'ko/p03_market.png',
                 'intro': '특정 품목을 두고 여러 수입사가 같은 시장에서 경쟁하고 있을 때, 우리 회사가 그중 얼마나 잘 사고 있는지(=구매 경쟁력)를 확인하고 싶을 때 씁니다.',
                 'steps': [
                     '한 품목에 대해 여러 회사의 거래 데이터가 섞인 시장 데이터를 업로드합니다.',
@@ -6639,8 +6645,8 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '🔀 ④ 공급망 흐름도 (Sankey)',
-                'image': 'p3_flow.png',
+                'heading': '🔀 ④ 공급망 흐름도',
+                'image': 'ko/p04_flow.png',
                 'intro': '특정 공급사·수입사·원산지 "하나"를 골랐을 때, 그 대상이 정확히 어디서 와서 어디로 흘러가는지 시각적으로 보고 싶을 때 씁니다. 예: "이 공급사는 어느 나라로 얼마나 수출하고 있지?"',
                 'steps': [
                     '전체 시장 데이터를 업로드합니다.',
@@ -6658,7 +6664,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '⚠️ ⑤ 집중도 리스크 진단',
-                'image': 'p4_risk.png',
+                'image': 'ko/p05_risk.png',
                 'intro': '특정 공급사·원산지·품목 "하나"에 거래가 너무 쏠려있어서 위험하지는 않은지 자동으로 점검하고 싶을 때 씁니다. 공급망 리스크 관리 관점에서 정기적으로 확인하면 좋습니다.',
                 'steps': [
                     '전체 시장 데이터를 업로드합니다.',
@@ -6675,7 +6681,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '📈 ⑥ 가격 추세 & 계절성',
-                'image': 'p5_season.png',
+                'image': 'ko/p06_season.png',
                 'intro': '특정 품목의 단가가 시기별로 어떻게 움직이는지, 언제 사는 게 유리한지 알고 싶을 때 씁니다. 구매 시점을 계획할 때 참고하세요.',
                 'steps': [
                     '전체 시장 데이터를 업로드합니다.',
@@ -6695,7 +6701,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🔀 ⑦ 신규·이탈 거래처 추적',
-                'image': 'p6_churn.png',
+                'image': 'ko/p07_churn.png',
                 'intro': '임의의 두 기간을 비교해서, 그 사이에 새로 생기거나 사라진 거래처(공급사/원산지/품목/수입사)를 찾고 싶을 때 씁니다. "우리가 최근에 거래처를 바꿨는데 그게 잘한 선택이었나?"에 답합니다.',
                 'steps': [
                     '전체 시장 데이터를 업로드합니다.',
@@ -6712,7 +6718,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🔬 ⑧ 신규사업 스코어러',
-                'image': 'p7_scorer.png',
+                'image': 'ko/p08_scorer.png',
                 'intro': '시장 전체 데이터에서 "최근 급상승한 기존 품목"과 "완전히 새로 등장한 품목"을 찾아, 새로운 소싱 기회의 우선순위를 매기고 싶을 때 씁니다. 다른 메뉴들이 "우리가 이미 하는 거래"를 들여다본다면, 이 메뉴는 "아직 안 하고 있지만 해볼 만한 것"을 찾아줍니다.',
                 'steps': [
                     'HS코드명/Detailed HS-CODE 등이 포함된 전체 시장 데이터를 업로드합니다.',
@@ -6730,6 +6736,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🧭 ⑨ 범용상품 스크리너',
+                'image': 'ko/p09_screener.png',
                 'intro': '여러 HS코드가 섞인 시장 데이터에서, 시장이 열려 있어 공급사를 바꾸기 쉽고(범용성) 같은 시기·같은 원산지 안에서도 단가 차이가 큰(격차) 품목을 찾고 싶을 때 씁니다. 입찰이나 대체 소싱으로 단가를 낮출 여지가 큰 품목을 고르는 첫 단계입니다.',
                 'steps': [
                     '여러 HS코드·여러 수입사가 섞인 시장 데이터를 업로드합니다 (날짜·수입사·공급사·원산지·HS코드·물량·단가 필요).',
@@ -6752,6 +6759,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '📑 ⑩ 입찰 대응 분석',
+                'image': 'ko/p10_bid.png',
                 'intro': '한 품목(HS·스펙)에 대해 입찰 제안서를 준비할 때 씁니다. 원산지·해외 공급사별 단가와 거래 실적을 비교해 검증된 대체 공급처를 찾고, 후보 공급사가 한국에 얼마나 꾸준히 공급해왔는지 확인합니다.',
                 'steps': [
                     '시장 데이터를 업로드하거나, 범용상품 스크리너에서 품목을 넘겨받습니다 (HS코드가 자동 선택됩니다).',
@@ -6772,7 +6780,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🧩 ⑪ 자유 피벗 빌더',
-                'image': 'p8_pivot.png',
+                'image': 'ko/p11_pivot.png',
                 'intro': '정해진 화면으로는 답이 안 나올 때, 엑셀 피벗테이블처럼 원하는 축과 지표를 직접 조합해서 나만의 표·차트를 만들고 싶을 때 씁니다.',
                 'steps': [
                     '데이터를 업로드합니다.',
@@ -6788,11 +6796,12 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '📄 공통 — PDF 다운로드',
-                'intro': '각 분석 결과 화면 하단의 "📄 PDF 보고서 생성" 버튼을 누르면, 해당 화면의 차트와 표가 담긴 PDF가 만들어지고 "📥 PDF 다운로드" 버튼으로 저장할 수 있습니다.',
+                'heading': '📄 공통 — PDF 리포트',
+                'intro': '분석 결과 화면 아래의 "📄 PDF 리포트 만들기" 버튼을 누르면 리포트가 만들어지고, 이어서 나오는 "📥 PDF 리포트 다운로드" 버튼으로 저장합니다. ③ 시장 경쟁력 분석을 뺀 10개 메뉴에서 PDF 리포트를 만들 수 있습니다.',
                 'tips': [
-                    '도입 효과 분석, 범용상품 스크리너, 입찰 대응 분석의 PDF는 새 리포트 양식(표지 → 요약 KPI·핵심 결론 → 본문 → 방법론·데이터 한계 → 클로징, Pretendard 글꼴, Tridge 브랜드 색)으로 만들어집니다. 다른 메뉴도 순서대로 새 양식으로 바뀔 예정입니다.',
-                    '지금 읽고 계신 이 가이드 자체도 사이드바의 "📖 사용법 가이드" 버튼으로 언제든 다시 받을 수 있습니다.',
+                    '모든 PDF 리포트는 같은 양식입니다 — 표지 → 요약(KPI 4개·핵심 결론 3줄) → 본문(차트·표) → 방법론과 "이 리포트로 알 수 없는 것" → 다음 단계 제안(마지막 Black 페이지).',
+                    '한국 수입사명이 나오는 메뉴는 PDF에서 이름을 "수입사 A, B …"로 가리는 블라인드 옵션이 있습니다. 해외 공급사명은 그대로 표시됩니다.',
+                    '지금 읽고 계신 이 가이드도 사이드바의 "📖 사용법 가이드 (PDF)" 버튼으로 언제든 다시 받을 수 있습니다.',
                 ],
             },
         ],
@@ -6805,6 +6814,11 @@ GUIDE_CONTENT = {
         'cover_lbl_date': 'Date', 'cover_lbl_scope': 'Audience', 'cover_scope': 'Client data analysts',
         'cover_note': 'Figures on screen and in PDFs are estimates based on customs data.',
         'footer': 'Tridge Sourcing Analyzer · User Guide',
+        'close_head': 'New here? Try this order',
+        'close_items': [('Check', 'Start with Portfolio Health Check to find at-risk products'),
+                        ('Diagnose', 'Use Concentration Risk, Price Trend & Seasonality, and New/Lost Trading Partners to see why'),
+                        ('Act', 'Find alternative suppliers with Commodity Screener and Tender Response Analysis, then confirm contract results in Adoption Impact')],
+        'close_note': 'Figures on screen and in PDFs are estimates from customs data and must not be the sole basis for contract decisions. Download this guide again anytime from "📖 User Guide (PDF)" in the sidebar.',
         'intro': 'This guide walks first-time users through every feature step by step. You can re-download the latest version anytime via the "📖 User Guide" button in the sidebar.',
         'label_steps': 'Steps',
         'label_results': 'What the results mean',
@@ -6813,7 +6827,7 @@ GUIDE_CONTENT = {
                 'heading': '🔒 Login',
                 'intro': 'The first time you run this app, you will be asked to set a password yourself. From then on, log in with that same password.',
                 'steps': [
-                    'Enter the same password in both the "new password" and "confirm" fields.',
+                    'Enter the same password in both the "New password" and "Confirm password" fields.',
                     'Click "Set password and start" to enter the app immediately.',
                     'On future visits, enter that password on the "🔒 Restricted Access" screen.',
                 ],
@@ -6821,7 +6835,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🌐 Language Toggle & Common File Upload Rules',
-                'intro': 'Use the "한국어 / English" buttons at the top of the sidebar to switch the entire interface — titles, buttons, charts, and even table column names — instantly.',
+                'intro': 'Choose 한국어 or English under "🌐 Language / 언어" at the top of the sidebar to switch the entire interface — titles, buttons, charts, and even table column names — instantly.',
                 'results': [
                     'Every menu starts by uploading a CSV or XLSX file.',
                     'Column names do not need to match exactly (e.g. "Date", "date" are both recognized), but date, volume, and unit price columns must be present.',
@@ -6830,7 +6844,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '💲 ① Adoption Impact',
-                'image': 'p1_customer.png',
+                'image': 'en/p01_adoption.png',
                 'intro': "Use this when you want to prove, in numbers, how much a company's purchase price dropped after a contract started. It's usually the first screen opened for renewal or performance reporting. It is meant for before/after comparison around the Tridge adoption (contract) date — to check the current state, use Portfolio Health Check.",
                 'steps': [
                     'Upload transaction data (if multiple companies are mixed in, the most frequent one is used automatically).',
@@ -6849,6 +6863,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🩺 ② Portfolio Health Check',
+                'image': 'en/p02_health.png',
                 'intro': "Use this when you want a quick scan of which products are at risk right now, regardless of any contract. It looks for change signals per product (or origin, HS code, etc.) in one company's import data, then weighs supply-structure vulnerability, spend share (impact), and shipment count (reliability) to rate each unit At risk / Caution / Safe.",
                 'steps': [
                     'Upload transaction data (date, importer, supplier, product, volume, and unit price columns are required).',
@@ -6876,7 +6891,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🏆 ③ Market Competitiveness Analysis',
-                'image': 'p2_market.png',
+                'image': 'en/p03_market.png',
                 'intro': 'Use this when several importers compete for the same product, and you want to see how competitively your company is buying.',
                 'steps': [
                     "Upload market data with multiple companies' transactions for one product.",
@@ -6893,8 +6908,8 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '🔀 ④ Supply Chain Flow (Sankey)',
-                'image': 'p3_flow.png',
+                'heading': '🔀 ④ Supply Chain Flow',
+                'image': 'en/p04_flow.png',
                 'intro': 'Use this to see exactly where a single supplier, importer, or origin flows from and to. E.g. "Where does this supplier export to, and how much?"',
                 'steps': [
                     'Upload the full market data.',
@@ -6911,8 +6926,8 @@ GUIDE_CONTENT = {
                 'tips': ['"Origin" is where the product was produced; "Export destination" is where it was sold — easy to mix up, so check the on-screen hint.'],
             },
             {
-                'heading': '⚠️ ⑤ Concentration Risk Diagnosis',
-                'image': 'p4_risk.png',
+                'heading': '⚠️ ⑤ Concentration Risk',
+                'image': 'en/p05_risk.png',
                 'intro': 'Use this to automatically check whether your trade is dangerously concentrated in a single supplier, origin, or product. Good to check periodically for supply chain risk management.',
                 'steps': [
                     'Upload the full market data.',
@@ -6929,7 +6944,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '📈 ⑥ Price Trend & Seasonality',
-                'image': 'p5_season.png',
+                'image': 'en/p06_season.png',
                 'intro': "Use this to see how a product's price moves over time and when it is cheapest to buy — useful for planning purchase timing.",
                 'steps': [
                     'Upload the full market data.',
@@ -6949,7 +6964,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🔀 ⑦ New/Lost Trading Partners',
-                'image': 'p6_churn.png',
+                'image': 'en/p07_churn.png',
                 'intro': 'Use this to compare any two periods and find trading partners (supplier/origin/product/importer) that appeared or disappeared — answering "did switching partners actually pay off?"',
                 'steps': [
                     'Upload the full market data.',
@@ -6966,7 +6981,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🔬 ⑧ New Business Scorer',
-                'image': 'p7_scorer.png',
+                'image': 'en/p08_scorer.png',
                 'intro': 'Use this to find "recently surging existing items" and "brand-new entrants" across the whole market, ranked by opportunity. While the other menus examine trade you already do, this one surfaces opportunities you are not yet pursuing.',
                 'steps': [
                     'Upload full market data that includes HS Code Name / Detailed HS-CODE if possible.',
@@ -6984,6 +6999,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🧭 ⑨ Commodity Screener',
+                'image': 'en/p09_screener.png',
                 'intro': 'Use this on market data with many HS codes to find items where the market is open enough to switch suppliers (universality) and unit prices vary widely within the same month and origin (gap) — the first step in picking items where tendering or alternative sourcing can lower prices.',
                 'steps': [
                     'Upload market data with multiple HS codes and importers (date, importer, supplier, origin, HS code, volume, and unit price required).',
@@ -7006,6 +7022,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '📑 ⑩ Tender Response Analysis',
+                'image': 'en/p10_bid.png',
                 'intro': 'Use this when preparing a bid for one item (HS and spec). It compares prices and track records by origin and overseas supplier to find verified alternative suppliers, and shows how consistently candidates have supplied Korea.',
                 'steps': [
                     'Upload market data, or receive an item from the Commodity Screener (the HS code is selected automatically).',
@@ -7026,7 +7043,7 @@ GUIDE_CONTENT = {
             },
             {
                 'heading': '🧩 ⑪ Free Pivot Builder',
-                'image': 'p8_pivot.png',
+                'image': 'en/p11_pivot.png',
                 'intro': 'Use this when no fixed screen answers your question — build your own table or chart by freely combining axes and metrics, Excel-pivot-table style.',
                 'steps': [
                     'Upload the data.',
@@ -7042,11 +7059,12 @@ GUIDE_CONTENT = {
                 ],
             },
             {
-                'heading': '📄 Common — PDF Download',
-                'intro': 'Click "📄 Generate PDF Report" at the bottom of any results screen to build a PDF with that screen\'s charts and tables, then save it via "📥 Download PDF".',
+                'heading': '📄 Common — PDF Reports',
+                'intro': 'Click "📄 Create PDF report" below the results to build the report, then save it with the "📥 Download PDF report" button that appears. Every menu except ③ Market Competitiveness Analysis offers a PDF report.',
                 'tips': [
-                    'PDFs from Adoption Impact, the Commodity Screener, and Tender Response Analysis use the new report template (cover → summary KPIs and key findings → body → methodology and data limits → closing, Pretendard font, Tridge brand colors). Other menus will move to the new template step by step.',
-                    'This very guide can be re-downloaded anytime from the "📖 User Guide" button in the sidebar.',
+                    'All PDF reports share one layout — cover → summary (4 KPIs and 3 key findings) → body (charts and tables) → methodology and "what this report cannot tell you" → suggested next steps (final black page).',
+                    'Menus that show Korean importer names offer a blind option that shows them as "Importer A, B …" in the PDF. Overseas supplier names are shown as is.',
+                    'This very guide can be re-downloaded anytime from the "📖 User Guide (PDF)" button in the sidebar.',
                 ],
             },
         ],
@@ -7073,27 +7091,28 @@ def build_user_guide_pdf(lang):
     if content.get('intro'):
         flow += [rt.P(content['intro']), Spacer(1, 6 * mm)]
     for sec in content['sections']:
-        block = [rt.Rule(), Spacer(1, 4 * mm), rt.P(sec['heading'], rt.ps('gh', rt.W['M'], 13, 18)), Spacer(1, 2 * mm)]
+        # 제목 · 소개 · 화면 스크린샷을 한 덩어리로 묶어, 스크린샷이 다음 섹션 제목 옆으로 밀리지 않게 한다
+        head = [rt.Rule(), Spacer(1, 4 * mm), rt.P(sec['heading'], rt.ps('gh', rt.W['M'], 13, 18)), Spacer(1, 2 * mm)]
         if sec.get('intro'):
-            block += [rt.P(sec['intro']), Spacer(1, 3 * mm)]
-        if sec.get('steps'):
-            block += [rt.P(content['label_steps'], 'kpi_label'), Spacer(1, 1.5 * mm), _steps(sec['steps']), Spacer(1, 3 * mm)]
-        if sec.get('results'):
-            dashes = rt.dash_list(sec['results'])  # '결과 해석' 제목은 첫 항목과 묶어 쪽 끝에 홀로 남지 않게
-            block += [KeepTogether([rt.P(content['label_results'], 'kpi_label'), Spacer(1, 1 * mm), dashes[0]])] + dashes[1:] + [Spacer(1, 3 * mm)]
-        for tip in sec.get('tips', []):
-            block += [rt.badge_note(rt.Badge('Tip', rt.BLUE), tip), Spacer(1, 2 * mm)]
-        flow.append(KeepTogether(block[:6]))  # 제목이 쪽 끝에 홀로 남지 않도록 앞부분은 묶는다
-        flow += block[6:]
+            head += [rt.P(sec['intro']), Spacer(1, 3 * mm)]
         img_path = os.path.join(assets_dir, sec['image']) if sec.get('image') else None
         if img_path and os.path.exists(img_path):
             try:
                 with PILImage.open(img_path) as im:
                     iw, ih = im.size
                 w = rt.BODY_W * 0.8
-                flow += [Spacer(1, 2 * mm), RLImage(img_path, width=w, height=w * ih / iw)]
+                head += [RLImage(img_path, width=w, height=w * ih / iw), Spacer(1, 4 * mm)]
             except Exception:
                 pass
+        flow.append(KeepTogether(head))
+        if sec.get('steps'):
+            flow.append(KeepTogether([rt.P(content['label_steps'], 'kpi_label'), Spacer(1, 1.5 * mm), _steps(sec['steps'])]))
+            flow.append(Spacer(1, 3 * mm))
+        if sec.get('results'):
+            dashes = rt.dash_list(sec['results'])  # '결과 해석' 제목은 첫 항목과 묶어 쪽 끝에 홀로 남지 않게
+            flow += [KeepTogether([rt.P(content['label_results'], 'kpi_label'), Spacer(1, 1 * mm), dashes[0]])] + dashes[1:] + [Spacer(1, 3 * mm)]
+        for tip in sec.get('tips', []):
+            flow += [rt.badge_note(rt.Badge('Tip', rt.BLUE), tip), Spacer(1, 2 * mm)]
         flow.append(Spacer(1, 8 * mm))
 
     meta = {'eyebrow': content['cover_eyebrow'], 'title_lines': [content['doc_title']], 'item': content['doc_title'],
@@ -7102,7 +7121,9 @@ def build_user_guide_pdf(lang):
             'labels': {'period': content['cover_lbl_menus'], 'data': content['cover_lbl_data'], 'date': content['cover_lbl_date'],
                        'scope': content['cover_lbl_scope'], 'data_source': content['cover_data'], 'blind_off': content['cover_scope'],
                        'confidential': content['cover_note'], 'footer': content['footer']}}
-    return rt.make_report(meta, [{'kind': 'body', 'flow': flow}])
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': content['close_head'], 'note': content['close_note'],
+               'items': [(f"{i + 1:02d}", k, v) for i, (k, v) in enumerate(content['close_items'])]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': flow}, closing])
 
 
 def find_column(columns, candidates):

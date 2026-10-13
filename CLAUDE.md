@@ -14,7 +14,7 @@
 - `assets/fonts/` — `Pretendard-*.ttf` 5종(새 PDF·PDF 차트), `NotoSansSC-Subset.ttf`(Pretendard에 없는 한자·가나 대체용 서브셋, OFL — `NotoSansSC-OFL.txt`)
 - `BACKLOG.md` — 작업 중 발견했지만 고치지 않은 문제(고객 숫자·결론에 영향 없는 것)
 - `assets/logo/` — `tridge_logo_black.png`(밝은 배경), `tridge_logo_white.png`(어두운 배경)
-- `assets/guide/` — 사용법 가이드 PDF에 들어가는 메뉴 스크린샷
+- `assets/guide/ko`, `assets/guide/en` — 사용법 가이드 PDF에 들어가는 메뉴별 스크린샷(언어별 11장, `p01_adoption.png`~`p11_pivot.png`). 수입사명은 블라인드한 데이터로 캡처한다
 - `tests/` — 고정 테스트. `test_normalize_product_name.py`(①②⑥ 품목명 정제·품목 묶기·포장 단위 구성 변화). 실행: `python tests/test_normalize_product_name.py`
 
 ## 메뉴 (11개, 사이드바 순서)
