@@ -290,7 +290,6 @@ TEXTS = {
         'p8_col_rec_vol': '최근 물량',
         'p8_col_ly_vol': '전년 물량',
         'p8_col_delta': '증가량',
-        'p8_col_price_yoy': '단가 YoY',
         'p8_col_concentration': '집중도',
         'p8_col_vol': '최근 물량',
         'p8_col_ship': '선적횟수',
@@ -329,38 +328,7 @@ TEXTS = {
         'p8_dim_product': 'Reported Product Name',
         'p8_dim_importer': 'Importer',
         'p8_dim_origin': 'Origin Country',
-        'p8_report_title': '수입 신규사업 스코어링 리포트',
-        'p8_report_subtitle': 'SOURCING OPPORTUNITY SCORER',
-        'p8_report_meta': '분석기간 {start} ~ {end} · 전년 동기({ly_start}~{ly_end}) 대비 · 윈도우 {months} · 발행 {today}',
-        'p8_report_insights_header': '◆ 핵심 인사이트',
-        'p8_report_data_summary': '분석 데이터: 거래 {n_tx}건 · 기간 {span} · 수입사 {n_imp}곳 · 품목 {n_prod}종 · 원산지 {n_origin}개국',
-        'p8_report_top10_header': '★ 추천 TOP 10 (진입매력도 점수 통합순위)',
-        'p8_report_top10_sub': '기존 급상승 품목과 신규 진입 품목을 하나의 점수(성장률·규모·가격추세·집중도 종합)로 통합 정렬했습니다.',
-        'p8_report_section_a_header': 'A. 급상승 기존 품목 상세 (상위 {n})',
-        'p8_report_section_a_sub': '작년에도 수입되던 품목 중 물량이 늘어난 항목, 점수순.',
-        'p8_report_section_b_header': 'B. 신규 진입 품목 상세 (상위 {n})',
-        'p8_report_section_b_sub': '과거에는 없다가 최근 처음 등장한 항목(최소 선적·물량 하한 적용), 점수순.',
-        'p8_report_footer': '데이터: 업로드된 거래내역. 최근 기간 합계를 전년 동기 같은 기간과 비교(YoY)했습니다. 신규는 과거 전체 기간에 없다가 최근 등장한 항목 기준입니다. 진입매력도 점수는 성장률·물량규모·(가능시)단가추세·수입사 집중도를 정규화해 합산한 자체 지표이며, 저베이스 반등·단일선적 편중·표기변형 의심 항목은 감점됩니다. 관세율·수입규제·물류비·계약조건 등은 반영하지 않으므로 1차 스크리닝 용도로만 사용하고, 최종 판단 전 사람의 검수를 거치시기 바랍니다.',
-        'p8_ins_total': '최근 {month_label} 총 수입은 전년 동기 대비 {sign}{pct}% ({ly} → {rec}).',
-        'p8_ins_top_candidate': '진입매력도 최고 후보: {name} ({type}, 점수 {score}).',
-        'p8_ins_top_growth': '성장률 최고: {name} — {sign}{pct}%.',
-        'p8_ins_top_new': '신규 진입 주도: {name} ({vol}{origin_part}).',
-        'p8_ins_top_new_origin_part': ', 주력 수입국 {origin}',
-        'p8_ins_price_up': '단가도 함께 오른 품목: {name} — 단가 {sign}{pct}%.',
-        'p8_ins_fit': '적합도 반영 결과 우선 타깃(성장·적합 모두 상위) {n}건 도출{rep_part}.',
-        'p8_ins_fit_rep_part': ' — 대표: {name} (적합도 {fit})',
-        'p8_detail_a_narrative': '전년 대비 {sign}{pct}% ({ly}→{rec}), 점유율 {share}%.{tags}',
-        'p8_detail_big_tag': ' 대형 물량',
-        'p8_detail_lowbase_tag': ' 저베이스',
-        'p8_detail_b_narrative': '{tag} 최근 {vol} · 선적 {ship}회 · 주수입사 {imp} {share}%.{suspect}',
-        'p8_detail_new_tag': '신규',
-        'p8_detail_suspect_tag': ' 표기변형 의심',
-        'p8_generate_report_btn': '📊 리포트 PDF 생성 (상세)',
-        'p8_download_report_btn': '📥 리포트 PDF 다운로드',
         'p8_cat_all': '전체 품목',
-        'p8_report_excluded_note_a': '※ 저베이스(작년 물량 거의 0)로 수치가 왜곡된 {n}건은 상세 목록에서 제외했습니다.',
-        'p8_report_excluded_note_b': '※ 표기변형 의심(기존 품목이 이름만 바뀐 것으로 추정되는) {n}건은 상세 목록에서 제외했습니다.',
-        'p8_report_note_col': '비고',
 
         'p3_title': '🔀 공급망 흐름도 (Sankey)',
         'p3_upload_label': '전체 시장/공급망 데이터를 업로드하세요',
@@ -514,16 +482,11 @@ TEXTS = {
         'p7_table_subheader': '데이터 표',
         'p7_total_col': '합계',
 
-        'pdf_generate_btn': '📄 PDF 보고서 생성',
-        'pdf_download_btn': '📥 PDF 다운로드',
-        'pdf_generating_msg': 'PDF를 생성하고 있습니다...',
         'pdf_error_msg': 'PDF 생성 중 오류가 발생했습니다: {msg}',
-        'pdf_chart_export_warning': '차트 이미지를 PDF에 넣지 못했습니다 (차트가 빠진 채로 생성됩니다): {msg}',
         # --- ① 도입 효과 분석 PDF (새 양식) ---
         'p1_rp_eyebrow': 'Adoption Impact Report',
         'p1_rp_title2': '도입 효과 리포트',
         'p1_rp_blind_toggle': 'PDF에 고객사명 대신 블라인드 표기 (수입사 A)',
-        'p1_rp_legacy_btn': '기존 양식 PDF',
         'p1_rp_s1_eyebrow': '01  Executive Summary',
         'p1_rp_head_save': '계약 후 순 ${x:,.0f} 절감했습니다',
         'p1_rp_head_loss': '계약 후 비용이 순 ${x:,.0f} 늘었습니다',
@@ -1428,8 +1391,63 @@ TEXTS = {
         'pv_rp_close_v2_default': '위험 품목은 {menu}에서 확인',
         'pv_rp_close_v3': '행: {rows} · 지표: {metrics}',
         'pv_rp_close_note': '피벗 값은 통관 데이터를 선택한 조건으로 나눠 더한 값입니다. 본 자료의 수치는 통관 데이터 기반 추정치로, 계약 판단의 단일 근거로 사용할 수 없습니다.',
-        'unit_n_years': '{n}년',
-        'unit_n_months': '{n}개월',
+        # --- ④ 공급망 흐름도 새 PDF (fl_rp_) ---
+        'fl_rp_eyebrow': 'Supply Flow Report',
+        'fl_rp_blind_toggle': 'PDF에 수입사명 대신 블라인드 표기 (수입사 A, B …)',
+        'fl_rp_s1_eyebrow': '01  Summary',
+        'fl_rp_head': '{left}의 물량 {p:.1f}%가 {name}에 몰려 있습니다',
+        'fl_rp_kpi_volume': '총 물량',
+        'fl_rp_kpi_volume_note': '{a} – {b}',
+        'fl_rp_kpi_count': '상대 항목 수',
+        'fl_rp_kpi_count_note': '{axis} 기준',
+        'fl_rp_kpi_top1': '1위 비중',
+        'fl_rp_f1': '1위 {name} — 물량의 {p:.1f}%',
+        'fl_rp_f1_d': '{left}의 거래를 {axis} 기준으로 나눴을 때 가장 큰 흐름입니다.',
+        'fl_rp_f2': '상위 3개 흐름이 물량의 {p:.1f}%를 차지합니다',
+        'fl_rp_f3': '{lo} ${a:,.2f} vs {hi} ${b:,.2f}/kg',
+        'fl_rp_f3_d': '상위 흐름 중 물량가중 평균 단가가 가장 낮은 곳과 높은 곳입니다. 품목 구성이 다르면 단가 차이가 품목 차이일 수 있습니다.',
+        'fl_rp_f3_none': '단가를 비교할 흐름이 부족합니다',
+        'fl_rp_f3_none_d': '단가가 있는 흐름이 2개 미만입니다.',
+        'fl_rp_c_head': '{left}의 물량이 기간 A 대비 {pct} 변했습니다',
+        'fl_rp_kpi_a': '기간 A 물량',
+        'fl_rp_kpi_b': '기간 B 물량',
+        'fl_rp_kpi_chg': '물량 변화',
+        'fl_rp_kpi_chg_note': '기간 A 대비 B (기간 길이 그대로)',
+        'fl_rp_kpi_new': '새 흐름',
+        'fl_rp_kpi_new_note': '사라진 흐름 {n}개',
+        'fl_rp_c_f1_up': '전체 물량이 기간 A 대비 {pct} 늘었습니다',
+        'fl_rp_c_f1_down': '전체 물량이 기간 A 대비 {pct} 줄었습니다',
+        'fl_rp_c_f1_d': '{a:,.0f}t → {b:,.0f}t. 두 기간 길이가 다르면 월평균으로 다시 보세요.',
+        'fl_rp_c_f2': '가장 크게 는 흐름: {name} (+{t:,.0f}t)',
+        'fl_rp_c_f2_d': '{a:,.0f}t → {b:,.0f}t',
+        'fl_rp_c_f2_none': '물량이 는 흐름이 없습니다',
+        'fl_rp_c_f3': '가장 크게 준 흐름: {name} (–{t:,.0f}t)',
+        'fl_rp_c_f3_d': '{a:,.0f}t → {b:,.0f}t',
+        'fl_rp_c_f3_none': '물량이 준 흐름이 없습니다',
+        'fl_rp_s2_eyebrow': '02  Flows',
+        'fl_rp_s2_head': '상위 흐름: {path}',
+        'fl_rp_s2_sub': '화면의 흐름도(Sankey)를 물량 순 막대로 옮겼습니다.',
+        'fl_rp_s2c_head': '기간 비교: {path}',
+        'fl_rp_s2c_sub': '두 기간 중 큰 쪽 물량 기준 상위 흐름입니다.',
+        'fl_rp_th_a': '기간 A<br/>(kg)',
+        'fl_rp_th_b': '기간 B<br/>(kg)',
+        'fl_rp_th_diff': '차이<br/>(kg)',
+        'fl_rp_th_pct': '변화율',
+        'fl_rp_s3_eyebrow': '03  Methodology',
+        'fl_rp_lbl_left': '기준',
+        'fl_rp_lbl_right': '상대 축',
+        'fl_rp_m_price': 'Unit Price 우선, 없으면 금액 ÷ 중량. 흐름별 VWAP(물량가중평균), USD/kg',
+        'fl_rp_m_other': '단일 기간은 물량 상위 {n}개 외를 기타로 묶음 (기타 단가는 물량가중)',
+        'fl_rp_unknown1': '통관 이후 국내 유통 경로 (흐름은 통관 신고 기준)',
+        'fl_rp_unknown2': '흐름별 품목 구성 차이 (단가 비교 시 같은 품목인지 확인 필요)',
+        'fl_rp_close_k1': '핵심 흐름',
+        'fl_rp_close_k2': '다음 분석',
+        'fl_rp_close_k3': '변화 확인',
+        'fl_rp_close_v2_partner': '거래처 쏠림은 {menu}에서 확인',
+        'fl_rp_close_v2_price': '흐름별 단가 추세는 {menu}에서 확인',
+        'fl_rp_close_v3_single': '기간 비교 모드로 흐름이 어떻게 바뀌었는지 확인',
+        'fl_rp_close_v3_compare': '새 흐름 {n}개 · 사라진 흐름 {g}개 — {menu}에서 상세 확인',
+        'fl_rp_close_note': '흐름은 통관 신고의 물량을 선택한 축으로 나눈 값입니다. 본 자료의 수치는 통관 데이터 기반 추정치로, 계약 판단의 단일 근거로 사용할 수 없습니다.',
         'unit_n_times': '{n}회',
         'p8_kpi_window_value': '{n}개월',
         'p7_filter_value_option': '{val} ({cnt}건)',
@@ -1752,7 +1770,6 @@ TEXTS = {
         'p8_col_rec_vol': 'Recent Volume',
         'p8_col_ly_vol': 'Last Year Volume',
         'p8_col_delta': 'Change',
-        'p8_col_price_yoy': 'Price YoY',
         'p8_col_concentration': 'Concentration',
         'p8_col_vol': 'Recent Volume',
         'p8_col_ship': 'Shipments',
@@ -1791,38 +1808,7 @@ TEXTS = {
         'p8_dim_product': 'Reported Product Name',
         'p8_dim_importer': 'Importer',
         'p8_dim_origin': 'Origin Country',
-        'p8_report_title': 'Import New-Business Scoring Report',
-        'p8_report_subtitle': 'SOURCING OPPORTUNITY SCORER',
-        'p8_report_meta': 'Period {start} ~ {end} · vs. same period last year ({ly_start}~{ly_end}) · Window {months} · Published {today}',
-        'p8_report_insights_header': '◆ Key Insights',
-        'p8_report_data_summary': 'Data analyzed: {n_tx} transactions · {span} · {n_imp} importers · {n_prod} products · {n_origin} origin countries',
-        'p8_report_top10_header': '★ Top 10 Recommendations (Combined Opportunity Score)',
-        'p8_report_top10_sub': 'Surging existing items and new entrants ranked together on one score (growth, size, price trend, concentration).',
-        'p8_report_section_a_header': 'A. Surging Existing Items — Detail (Top {n})',
-        'p8_report_section_a_sub': 'Items imported last year too, with growing volume, ranked by score.',
-        'p8_report_section_b_header': 'B. New Entrant Items — Detail (Top {n})',
-        'p8_report_section_b_sub': 'Items absent in the entire prior history but recently appearing (min. shipment/volume applied), ranked by score.',
-        'p8_report_footer': 'Data: uploaded transaction records. Recent-period totals compared to the same period last year (YoY). "New" means absent from the entire prior history but appearing recently. The opportunity score is a proprietary normalized combination of growth rate, volume, (where available) price trend, and importer concentration; low-base rebounds, single-shipment skew, and possible re-labeling are penalized. Tariffs, import regulations, logistics costs, and contract terms are not reflected — use this for initial screening only, and have a person review before final decisions.',
-        'p8_ins_total': 'Total imports over the last {month_label} were {sign}{pct}% vs. the same period last year ({ly} → {rec}).',
-        'p8_ins_top_candidate': 'Top opportunity candidate: {name} ({type}, score {score}).',
-        'p8_ins_top_growth': 'Highest growth: {name} — {sign}{pct}%.',
-        'p8_ins_top_new': 'Leading new entrant: {name} ({vol}{origin_part}).',
-        'p8_ins_top_new_origin_part': ', primarily from {origin}',
-        'p8_ins_price_up': 'Price also rose for: {name} — price {sign}{pct}%.',
-        'p8_ins_fit': 'With fit criteria applied, {n} "Priority Target" (both high growth and high fit) items were found{rep_part}.',
-        'p8_ins_fit_rep_part': ' — top example: {name} (fit {fit})',
-        'p8_detail_a_narrative': '{sign}{pct}% vs. last year ({ly}→{rec}), share {share}%.{tags}',
-        'p8_detail_big_tag': ' Large volume',
-        'p8_detail_lowbase_tag': ' Low base',
-        'p8_detail_b_narrative': '{tag} Recent {vol} · {ship} shipments · top importer {imp} {share}%.{suspect}',
-        'p8_detail_new_tag': 'New',
-        'p8_detail_suspect_tag': ' Possible re-labeling',
-        'p8_generate_report_btn': '📊 Generate Detailed Report PDF',
-        'p8_download_report_btn': '📥 Download Report PDF',
         'p8_cat_all': 'All items',
-        'p8_report_excluded_note_a': '※ {n} items with a near-zero prior-year base (distorted figures) were excluded from the detail list.',
-        'p8_report_excluded_note_b': '※ {n} items suspected to be re-labeled existing products were excluded from the detail list.',
-        'p8_report_note_col': 'Note',
 
         'p3_title': '🔀 Supply Chain Flow (Sankey)',
         'p3_upload_label': 'Upload the full market/supply chain data',
@@ -1976,16 +1962,11 @@ TEXTS = {
         'p7_table_subheader': 'Data table',
         'p7_total_col': 'Total',
 
-        'pdf_generate_btn': '📄 Generate PDF Report',
-        'pdf_download_btn': '📥 Download PDF',
-        'pdf_generating_msg': 'Generating PDF...',
         'pdf_error_msg': 'An error occurred while generating the PDF: {msg}',
-        'pdf_chart_export_warning': 'Could not add a chart image to the PDF (the PDF will be generated without it): {msg}',
         # --- ① Adoption Impact PDF (new template) ---
         'p1_rp_eyebrow': 'Adoption Impact Report',
         'p1_rp_title2': 'Adoption Impact Report',
         'p1_rp_blind_toggle': 'Blind the client name in the PDF (Importer A)',
-        'p1_rp_legacy_btn': 'Legacy-format PDF',
         'p1_rp_s1_eyebrow': '01  Executive Summary',
         'p1_rp_head_save': 'Net savings of ${x:,.0f} since the contract',
         'p1_rp_head_loss': 'Costs rose by a net ${x:,.0f} since the contract',
@@ -2890,8 +2871,63 @@ TEXTS = {
         'pv_rp_close_v2_default': 'Check at-risk products in {menu}',
         'pv_rp_close_v3': 'Rows: {rows} · metrics: {metrics}',
         'pv_rp_close_note': 'Pivot values are customs data split and summed by the selected settings. Figures in this report are estimates from customs data and must not be the sole basis for contract decisions.',
-        'unit_n_years': '{n} year(s)',
-        'unit_n_months': '{n} months',
+        # --- ④ Supply flow new PDF (fl_rp_) ---
+        'fl_rp_eyebrow': 'Supply Flow Report',
+        'fl_rp_blind_toggle': 'Blind importer names in the PDF (Importer A, B …)',
+        'fl_rp_s1_eyebrow': '01  Summary',
+        'fl_rp_head': '{p:.1f}% of {left} volume flows to {name}',
+        'fl_rp_kpi_volume': 'Total volume',
+        'fl_rp_kpi_volume_note': '{a} – {b}',
+        'fl_rp_kpi_count': 'Counterparts',
+        'fl_rp_kpi_count_note': 'By {axis}',
+        'fl_rp_kpi_top1': 'Top-1 share',
+        'fl_rp_f1': 'Top: {name} — {p:.1f}% of volume',
+        'fl_rp_f1_d': 'The largest flow when {left} trades are split by {axis}.',
+        'fl_rp_f2': 'The top 3 flows account for {p:.1f}% of volume',
+        'fl_rp_f3': '{lo} ${a:,.2f} vs. {hi} ${b:,.2f}/kg',
+        'fl_rp_f3_d': 'Lowest and highest volume-weighted price among the top flows. Different product mixes can explain part of the gap.',
+        'fl_rp_f3_none': 'Not enough flows to compare prices',
+        'fl_rp_f3_none_d': 'Fewer than two flows have a price.',
+        'fl_rp_c_head': '{left} volume changed {pct} from period A',
+        'fl_rp_kpi_a': 'Period A volume',
+        'fl_rp_kpi_b': 'Period B volume',
+        'fl_rp_kpi_chg': 'Volume change',
+        'fl_rp_kpi_chg_note': 'Period B vs. A (as selected)',
+        'fl_rp_kpi_new': 'New flows',
+        'fl_rp_kpi_new_note': '{n} flow(s) disappeared',
+        'fl_rp_c_f1_up': 'Total volume grew {pct} vs. period A',
+        'fl_rp_c_f1_down': 'Total volume fell {pct} vs. period A',
+        'fl_rp_c_f1_d': '{a:,.0f}t → {b:,.0f}t. If the periods differ in length, compare monthly averages.',
+        'fl_rp_c_f2': 'Largest increase: {name} (+{t:,.0f}t)',
+        'fl_rp_c_f2_d': '{a:,.0f}t → {b:,.0f}t',
+        'fl_rp_c_f2_none': 'No flow increased',
+        'fl_rp_c_f3': 'Largest decrease: {name} (–{t:,.0f}t)',
+        'fl_rp_c_f3_d': '{a:,.0f}t → {b:,.0f}t',
+        'fl_rp_c_f3_none': 'No flow decreased',
+        'fl_rp_s2_eyebrow': '02  Flows',
+        'fl_rp_s2_head': 'Top flows: {path}',
+        'fl_rp_s2_sub': 'The on-screen Sankey shown as bars ordered by volume.',
+        'fl_rp_s2c_head': 'Period comparison: {path}',
+        'fl_rp_s2c_sub': 'Top flows by the larger of the two periods.',
+        'fl_rp_th_a': 'Period A<br/>(kg)',
+        'fl_rp_th_b': 'Period B<br/>(kg)',
+        'fl_rp_th_diff': 'Change<br/>(kg)',
+        'fl_rp_th_pct': 'Change %',
+        'fl_rp_s3_eyebrow': '03  Methodology',
+        'fl_rp_lbl_left': 'Basis',
+        'fl_rp_lbl_right': 'Counterpart axis',
+        'fl_rp_m_price': 'Unit Price first, otherwise value ÷ weight. VWAP (volume-weighted) per flow, USD/kg',
+        'fl_rp_m_other': 'Single period: flows beyond the top {n} by volume are grouped as Others (Others price is volume-weighted)',
+        'fl_rp_unknown1': 'Domestic distribution after customs (flows follow customs declarations)',
+        'fl_rp_unknown2': 'Differences in product mix between flows (check products before comparing prices)',
+        'fl_rp_close_k1': 'Key flow',
+        'fl_rp_close_k2': 'Next analysis',
+        'fl_rp_close_k3': 'Track change',
+        'fl_rp_close_v2_partner': 'Check partner concentration in {menu}',
+        'fl_rp_close_v2_price': 'Check price trends by flow in {menu}',
+        'fl_rp_close_v3_single': 'Use period comparison to see how the flows changed',
+        'fl_rp_close_v3_compare': '{n} new and {g} disappeared flow(s) — see {menu} for detail',
+        'fl_rp_close_note': 'Flows are customs declaration volumes split by the selected axes. Figures in this report are estimates from customs data and must not be the sole basis for contract decisions.',
         'unit_n_times': '{n}',
         'p8_kpi_window_value': '{n} mo',
         'p7_filter_value_option': '{val} ({cnt})',
@@ -5840,6 +5876,146 @@ def build_pivot_report(R, blind):
     return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3)] + [closing])
 
 
+# ---------- ④ 공급망 흐름도 ----------
+def flow_pdf_bars(names, values, shares, others_label):
+    """④ 상위 흐름 가로 막대 (톤, Blue · 기타 Pale Blue) + 비중 라벨. 화면의 Sankey를 PDF에서는 막대로 보여준다."""
+    import report_theme as rt
+    n = len(names)
+    fig, ax = rt.new_chart(0.28 * n + 0.6)
+    rt.apply_pdf_chart_style(ax, grid_axis='x')
+    y = np.arange(n)[::-1]
+    t = np.array(values, dtype=float) / 1000
+    ax.barh(y, t, height=0.62, color=[rt.HEX['pale'] if nm == others_label else rt.HEX['blue'] for nm in names], linewidth=0)
+    span = float(t.max()) or 1
+    for yi, v, sh in zip(y, t, shares):
+        ax.text(v + span * 0.01, yi, f"{v:,.0f}t · {sh:.1f}%", va='center', fontsize=7, color=rt.HEX['black'])
+    ax.set_yticks(y)
+    ax.set_yticklabels([_rp_short(nm, 28) for nm in names], fontsize=7.5)
+    ax.set_xlim(0, span * 1.25)
+    ax.xaxis.set_major_formatter(lambda v, _: f"{v:,.0f}t")
+    fig.subplots_adjust(left=0.3, right=0.99, top=0.97, bottom=0.08 if n > 6 else 0.16)
+    return rt.chart_image(fig)
+
+
+def flow_pdf_compare_bars(merged, rcol, n=10):
+    """④ 기간 비교: 상위 n개 흐름의 기간 A(Pale Blue)·B(Blue) 물량 가로 막대."""
+    import report_theme as rt
+    top = merged.assign(_m=merged[['volume_a', 'volume_b']].max(axis=1)).sort_values('_m', ascending=False).head(n)
+    k = len(top)
+    fig, ax = rt.new_chart(0.36 * k + 0.7)
+    rt.apply_pdf_chart_style(ax, grid_axis='x')
+    y = np.arange(k)[::-1]
+    ax.barh(y + 0.19, top['volume_a'].values / 1000, height=0.36, color=rt.HEX['pale'], linewidth=0, label=T('p3_period_a'))
+    ax.barh(y - 0.19, top['volume_b'].values / 1000, height=0.36, color=rt.HEX['blue'], linewidth=0, label=T('p3_period_b'))
+    ax.set_yticks(y)
+    ax.set_yticklabels([_rp_short(v, 28) for v in top[rcol].astype(str)], fontsize=7.5)
+    ax.xaxis.set_major_formatter(lambda v, _: f"{v:,.0f}t")
+    ax.legend(loc='lower left', bbox_to_anchor=(0, 1.0), fontsize=7, frameon=False, ncol=2, borderaxespad=0.2)
+    fig.subplots_adjust(left=0.3, right=0.99, top=0.93, bottom=0.08 if k > 6 else 0.16)
+    return rt.chart_image(fig)
+
+
+def build_flow_report(R, blind):
+    """④ 공급망 흐름도 PDF: 표지 → 요약(KPI 4 + 결론 3) → 상위 흐름 막대·표(또는 기간 비교) → 방법론 → 클로징.
+    기준 항목·상대 항목이 수입사이면 블라인드 시 '수입사 A' 식으로 바꾼다."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer
+    from reportlab.lib.units import mm
+    rcol, others = R['right_col'], T('p2_others_label')
+    left = T('blind_label', code='A') if blind and R.get('left_is_importer') else str(R['left_entity'])
+    flows = R['merged'] if R['mode'] == 'compare' else R['grouped']
+    nmap = {}
+    if blind and R.get('right_is_importer'):
+        vcol = 'volume_b' if R['mode'] == 'compare' else 'volume'
+        vols = flows.set_index(flows[rcol].astype(str))[vcol]
+        nmap = blind_name_map(vols[vols.index != others])
+    nm = lambda v: nmap.get(str(v), str(v))
+    path = f"{R['left_axis_label']} → {R['right_axis_label']}"
+    if R['mode'] == 'compare':
+        period = (min(R['a_start'], R['b_start']), max(R['a_end'], R['b_end']))
+    else:
+        period = (R['start_date'], R['end_date'])
+    meta = _rp_meta(T('fl_rp_eyebrow'), [left, T('menu_opt_flow')], left, path, None, period,
+                    blind or not (R.get('left_is_importer') or R.get('right_is_importer')), f"{left} {T('menu_opt_flow')}")
+    fmt = lambda d: pd.Timestamp(d).strftime('%Y.%m.%d')
+
+    if R['mode'] == 'single':
+        g = R['grouped']
+        total = float(g['volume'].sum()) or 1.0
+        real = g[g[rcol].astype(str) != others]
+        top = real.iloc[0] if len(real) else g.iloc[0]
+        vw = (g['volume'] * g['avg_price']).sum() / g['volume'].sum() if g['avg_price'].notna().any() else None
+        cards = [(T('fl_rp_kpi_volume'), f"{total / 1000:,.0f}t", T('fl_rp_kpi_volume_note', a=fmt(period[0]), b=fmt(period[1]))),
+                 (T('fl_rp_kpi_count'), f"{R.get('n_total', len(g)):,}", T('fl_rp_kpi_count_note', axis=R['right_axis_label'])),
+                 (T('fl_rp_kpi_top1'), f"{float(top['volume']) / total * 100:.1f}%", nm(top[rcol])),
+                 (T('p7_metric_price_mean'), '-' if vw is None or pd.isna(vw) else f"${vw:,.2f}", T('pv_rp_kpi_vwap_note'))]
+        f1 = (T('fl_rp_f1', name=nm(top[rcol]), p=float(top['volume']) / total * 100), T('fl_rp_f1_d', left=left, axis=R['right_axis_label']))
+        top3 = float(real.head(3)['volume'].sum()) / total * 100
+        f2 = (T('fl_rp_f2', p=top3), ', '.join(nm(v) for v in real.head(3)[rcol]))
+        priced = real.dropna(subset=['avg_price'])
+        if len(priced) >= 2:
+            lo, hi = priced.loc[priced['avg_price'].idxmin()], priced.loc[priced['avg_price'].idxmax()]
+            f3 = (T('fl_rp_f3', lo=nm(lo[rcol]), hi=nm(hi[rcol]), a=float(lo['avg_price']), b=float(hi['avg_price'])), T('fl_rp_f3_d'))
+        else:
+            f3 = (T('fl_rp_f3_none'), T('fl_rp_f3_none_d'))
+        head = T('fl_rp_head', left=left, name=nm(top[rcol]), p=float(top['volume']) / total * 100)
+        s2 = _rp_body_header(T('fl_rp_s2_eyebrow'), T('fl_rp_s2_head', path=path), T('fl_rp_s2_sub'))
+        shares = (g['volume'] / total * 100).tolist()
+        s2 += [flow_pdf_bars([nm(v) for v in g[rcol]], g['volume'].tolist(), shares, others), Spacer(1, 2 * mm)]
+        if R.get('truncated'):
+            s2.append(rt.small(T('p3_others_note', n=R['top_n'])))
+        s2 += [Spacer(1, 5 * mm), rt.brand_table([T('rk_rp_th_name'), T('rk_rp_th_volume'), T('rk_rp_th_share'), T('ss_rp_th_vwap')],
+                                                 [[nm(r[rcol]), f"{r['volume']:,.0f}", f"{s_:.1f}%", '-' if pd.isna(r['avg_price']) else f"{r['avg_price']:,.2f}"]
+                                                  for (_, r), s_ in zip(g.iterrows(), shares)],
+                                                 rt.col_widths([46, 20, 14, 20]), right_cols=(1, 2, 3), header_markup=True)]
+        next_change = T('fl_rp_close_v3_single')
+    else:
+        m = R['merged']
+        ta, tb = float(m['volume_a'].sum()), float(m['volume_b'].sum())
+        chg = (tb / ta - 1) * 100 if ta > 0 else None
+        new_flows = m[(m['volume_a'] <= 0) & (m['volume_b'] > 0)]
+        gone = m[(m['volume_a'] > 0) & (m['volume_b'] <= 0)]
+        up = m.loc[m['diff'].idxmax()] if len(m) else None
+        dn = m.loc[m['diff'].idxmin()] if len(m) else None
+        cards = [(T('fl_rp_kpi_a'), f"{ta / 1000:,.0f}t", f"{fmt(R['a_start'])} – {fmt(R['a_end'])}"),
+                 (T('fl_rp_kpi_b'), f"{tb / 1000:,.0f}t", f"{fmt(R['b_start'])} – {fmt(R['b_end'])}"),
+                 (T('fl_rp_kpi_chg'), _rp_pct(chg), T('fl_rp_kpi_chg_note')),
+                 (T('fl_rp_kpi_new'), f"{len(new_flows):,}", T('fl_rp_kpi_new_note', n=len(gone)))]
+        f1 = (T('fl_rp_c_f1_up' if (chg or 0) >= 0 else 'fl_rp_c_f1_down', pct=_rp_pct(chg)), T('fl_rp_c_f1_d', a=ta / 1000, b=tb / 1000))
+        f2 = ((T('fl_rp_c_f2', name=nm(up[rcol]), t=float(up['diff']) / 1000), T('fl_rp_c_f2_d', a=float(up['volume_a']) / 1000, b=float(up['volume_b']) / 1000))
+              if up is not None and up['diff'] > 0 else (T('fl_rp_c_f2_none'), '-'))
+        f3 = ((T('fl_rp_c_f3', name=nm(dn[rcol]), t=-float(dn['diff']) / 1000), T('fl_rp_c_f3_d', a=float(dn['volume_a']) / 1000, b=float(dn['volume_b']) / 1000))
+              if dn is not None and dn['diff'] < 0 else (T('fl_rp_c_f3_none'), '-'))
+        head = T('fl_rp_c_head', left=left, pct=_rp_pct(chg))
+        s2 = _rp_body_header(T('fl_rp_s2_eyebrow'), T('fl_rp_s2c_head', path=path), T('fl_rp_s2c_sub'))
+        m2 = m.assign(**{rcol: m[rcol].map(nm)})
+        s2 += [flow_pdf_compare_bars(m2, rcol), Spacer(1, 5 * mm),
+               rt.brand_table([T('rk_rp_th_name'), T('fl_rp_th_a'), T('fl_rp_th_b'), T('fl_rp_th_diff'), T('fl_rp_th_pct')],
+                              [[str(r[rcol]), f"{r['volume_a']:,.0f}", f"{r['volume_b']:,.0f}", f"{r['diff']:+,.0f}".replace('-', '–'),
+                                '-' if r['diff_pct'] is None or pd.isna(r['diff_pct']) else _rp_pct(r['diff_pct'])] for _, r in m2.head(15).iterrows()],
+                              rt.col_widths([40, 16, 16, 16, 12]), right_cols=(1, 2, 3, 4), header_markup=True)]
+        if len(m2) > 15:
+            s2 += [Spacer(1, 1.5 * mm), rt.small(T('ch_rp_more', n=len(m2) - 15))]
+        next_change = T('fl_rp_close_v3_compare', n=len(new_flows), g=len(gone), menu=_menu_ref('menu_opt_churn'))
+    s1 = _rp_summary(rt, T('fl_rp_s1_eyebrow'), head, cards, [f1, f2, f3])
+
+    meth = [(T('p1_rp_lbl_data'), T('rk_rp_m_data')),
+            (T('p1_rp_lbl_period'), (T('ch_rp_m_period', a0=fmt(R['a_start']), a1=fmt(R['a_end']), b0=fmt(R['b_start']), b1=fmt(R['b_end']))
+                                     if R['mode'] == 'compare' else f"{fmt(period[0])} – {fmt(period[1])}")),
+            (T('fl_rp_lbl_left'), f"{R['left_axis_label']}: {left}"),
+            (T('fl_rp_lbl_right'), R['right_axis_label']),
+            (T('rk_rp_lbl_share'), T('rk_rp_m_share')),
+            (T('p1_rp_lbl_price'), T('fl_rp_m_price')),
+            (T('pv_rp_lbl_other'), T('fl_rp_m_other', n=R.get('top_n', 8))),
+            (T('p1_rp_lbl_blind'), T('rk_rp_m_blind_on') if blind else T('rk_rp_m_blind_off'))]
+    s3 = _rp_method(rt, T('fl_rp_s3_eyebrow'), T('p1_rp_s4_head'), meth, ['fl_rp_unknown1', 'fl_rp_unknown2'])
+    nxt = (T('fl_rp_close_v2_partner', menu=_menu_ref('menu_opt_risk')) if R.get('right_is_partner')
+           else T('fl_rp_close_v2_price', menu=_menu_ref('menu_opt_season')))
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('fl_rp_close_note'),
+               'items': [('01', T('fl_rp_close_k1'), f1[0]), ('02', T('fl_rp_close_k2'), nxt), ('03', T('fl_rp_close_k3'), next_change)]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3)] + [closing])
+
+
 # ============================================================
 # 신규사업 스코어러 (페이지 8) — 원본 HTML 도구의 스코어링 엔진을 그대로 이식
 # ============================================================
@@ -6350,440 +6526,11 @@ def pack_month_markers(df, month_col, pack_col, volume_col):
     return out
 
 
-def fig_to_png_bytes(fig, width=900, height=500, scale=2):
-    """Plotly figure를 PNG 바이트로 변환 (PDF에 삽입하기 위함). kaleido 필요.
-    kaleido는 시스템 폰트를 쓰므로 한글이 깨지지 않도록 복사본에 NanumGothic을 지정한다 (원본 fig는 그대로)."""
-    try:
-        export_fig = go.Figure(fig)
-        export_fig.update_layout(font_family='NanumGothic')
-        return export_fig.to_image(format="png", width=width, height=height, scale=scale)
-    except Exception as e:
-        st.warning(T('pdf_chart_export_warning', msg=e))
-        return None
-
-
-def _find_korean_font_path():
-    """시스템에서 한글을 지원하는 .ttf 폰트 파일 경로를 찾는다 (없으면 None).
-    matplotlib.font_manager는 자체 캐시가 낡아있을 수 있어 신뢰하지 않고, 파일시스템에서 직접 찾는다.
-    reportlab의 TTFont는 .ttc(트루타입 컬렉션)를 지원하지 않으므로 .ttf 파일만 대상으로 한다.
-    리포에 번들된 assets/fonts/NanumGothic-Regular.ttf를 최우선으로 쓰고, 없을 때만 시스템 경로를 찾는다."""
-    import glob
-    bundled_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'fonts', 'NanumGothic-Regular.ttf')
-    if os.path.isfile(bundled_path):
-        return bundled_path
-    search_patterns = [
-        '/usr/share/fonts/**/NanumGothic.ttf',
-        '/usr/share/fonts/**/Nanum*.ttf',
-        '/usr/share/fonts/**/NotoSansKR*.ttf',
-        '/usr/share/fonts/**/NotoSansCJK*.ttf',
-        '/usr/share/fonts/**/malgun.ttf',
-        '/System/Library/Fonts/**/*.ttf',
-    ]
-    for pattern in search_patterns:
-        matches = [m for m in glob.glob(pattern, recursive=True) if m.lower().endswith('.ttf')]
-        if matches:
-            return matches[0]
-    return None
-
-
-def install_bundled_font_for_charts():
-    """번들 폰트를 ~/.fonts/에 복사해 kaleido(차트 PNG 내보내기)가 한글 폰트를 찾을 수 있게 한다.
-    이미 있으면 건너뛰고, 실패해도 앱은 계속 동작한다."""
-    try:
-        import shutil
-        src = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'fonts', 'NanumGothic-Regular.ttf')
-        dst_dir = os.path.join(os.path.expanduser('~'), '.fonts')
-        dst = os.path.join(dst_dir, 'NanumGothic-Regular.ttf')
-        if os.path.isfile(src) and not os.path.isfile(dst):
-            os.makedirs(dst_dir, exist_ok=True)
-            shutil.copyfile(src, dst)
-    except Exception:
-        pass
-
-
-def _pdf_table_col_widths(rows_as_str, total_width, min_ratio=0.05, max_ratio=0.32):
-    """표 각 컬럼의 폭을, 그 컬럼에 실제로 들어가는 글자 수 비례로 배분한다.
-    (min/max 클램프를 걸어서 어떤 컬럼은 안 보일 만큼 좁아지거나, 다른 컬럼을 다 밀어낼 만큼
-    넓어지는 걸 방지 — 긴 '근거' 같은 텍스트 컬럼은 대신 뒤에서 Paragraph로 줄바꿈 처리한다.)"""
-    ncols = len(rows_as_str[0])
-    max_lens = []
-    for c in range(ncols):
-        col_vals = [row[c] for row in rows_as_str]
-        max_lens.append(max((len(v) for v in col_vals), default=1) or 1)
-    total_len = sum(max_lens) or 1
-    raw = [total_width * (l / total_len) for l in max_lens]
-    min_w, max_w = total_width * min_ratio, total_width * max_ratio
-    clamped = [max(min_w, min(max_w, w)) for w in raw]
-    scale = total_width / sum(clamped)
-    return [w * scale for w in clamped]
-
-
-_PDF_EMOJI_RE = re.compile('[\U0001F000-\U0001FAFF\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF\uFE00-\uFE0F\u200D]+ ?')  # 이모지(+ 뒤따르는 공백 1칸)
-
-
-def _pdf_safe_text(text):
-    """PDF 전용 글자 정리: 번들 폰트(NanumGothic)에 글리프가 없어 빈칸으로 찍히는 글자를 처리한다.
-    ①~⑳은 '1.'~'20.'으로 바꾸고 이모지는 제거한다 (화면 문구는 그대로 두고 PDF에만 적용)."""
-    if not isinstance(text, str):
-        return text
-    text = re.sub('[①-⑳]', lambda m: f"{ord(m.group()) - 0x245F}.", text)
-    text = _PDF_EMOJI_RE.sub('', text)
-    return re.sub(' {2,}', ' ', text).strip()
-
-
-def _pdf_safe_paragraph(paragraph_cls):
-    """reportlab Paragraph를 감싸 모든 PDF 텍스트가 _pdf_safe_text를 거치게 한다."""
-    return lambda text, *args, **kwargs: paragraph_cls(_pdf_safe_text(text), *args, **kwargs)
-
-
-def build_pdf_report(title, kpi_lines, figs, df_table=None, table_title=None, tables=None):
-    """제목 + KPI 텍스트 + Plotly 차트(이미지로 변환) + 표를 하나의 PDF로 조립해 바이트로 반환.
-    tables에 [(섹션 제목, DataFrame), ...]을 넘기면 df_table 뒤에 섹션별 표를 차례로 붙인다.
-    reportlab + kaleido 필요."""
-    import io
-    from reportlab.lib.pagesizes import A4
-    from reportlab.lib.units import mm
-    from reportlab.platypus import SimpleDocTemplate, Image as RLImage, Paragraph, Spacer, Table, TableStyle
-    from reportlab.lib.styles import getSampleStyleSheet
-    from reportlab.lib import colors
-    from reportlab.pdfbase import pdfmetrics
-    from reportlab.pdfbase.ttfonts import TTFont
-    Paragraph = _pdf_safe_paragraph(Paragraph)  # ①~⑨·이모지 빈칸 방지
-
-    buf = io.BytesIO()
-    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=15 * mm, rightMargin=15 * mm)
-    styles = getSampleStyleSheet()
-
-    font_name = 'Helvetica'
-    try:
-        found_path = _find_korean_font_path()
-        if found_path:
-            pdfmetrics.registerFont(TTFont('KoreanFont', found_path))
-            font_name = 'KoreanFont'
-    except Exception:
-        pass
-    for s in styles.byName.values():
-        s.fontName = font_name
-
-    story = [Paragraph(title, styles['Title']), Spacer(1, 6)]
-    for line in kpi_lines:
-        story.append(Paragraph(line, styles['Normal']))
-    story.append(Spacer(1, 10))
-
-    for fig in figs:
-        img_bytes = fig_to_png_bytes(fig)
-        if img_bytes:
-            story.append(RLImage(io.BytesIO(img_bytes), width=180 * mm, height=180 * mm * 500 / 900))
-            story.append(Spacer(1, 8))
-
-    sections = ([(table_title, df_table)] if df_table is not None else []) + list(tables or [])
-    for sec_title, sec_df in sections:
-        if sec_df is None or sec_df.empty:
-            continue
-        if sec_title:
-            story.append(Paragraph(sec_title, styles['Heading3']))
-
-        display_table = sec_df.copy()
-        for c in display_table.columns:
-            # pandas 3은 astype(str)이 빈 값(NaN)을 문자열로 바꾸지 않아 표 그리기가 깨진다 → 빈 값은 '-'로
-            display_table[c] = display_table[c].astype(object).map(lambda v: '-' if pd.isna(v) else str(v))
-
-        header_style = styles['Normal'].clone('PdfTableHeader')
-        header_style.textColor = colors.white
-        header_style.fontSize = 7.5
-        header_style.leading = 9.5
-        cell_style = styles['Normal'].clone('PdfTableCell')
-        cell_style.fontSize = 7.5
-        cell_style.leading = 9.5
-
-        headers = [str(c) for c in display_table.columns]
-        rows_as_str = [headers] + display_table.values.tolist()
-        total_width = doc.width  # 페이지 여백을 뺀 실제 사용 가능 폭
-        col_widths = _pdf_table_col_widths(rows_as_str, total_width)
-
-        data = [[Paragraph(h, header_style) for h in headers]]
-        for row in display_table.values.tolist():
-            data.append([Paragraph(v, cell_style) for v in row])
-
-        t = Table(data, colWidths=col_widths, repeatRows=1)
-        t.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d9488')),
-            ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
-        ]))
-        story.append(t)
-        story.append(Spacer(1, 10))
-
-    doc.build(story)
-    buf.seek(0)
-    return buf.getvalue()
-
-
-# ============================================================
-# 신규사업 스코어러 전용 — "리포트" PDF (원본 buildReport() 100% 이식)
-# 범용 build_pdf_report()보다 훨씬 상세한, 보고용 리포트 포맷
-# ============================================================
 def _p8_ton(v):
+    """⑧ 물량 표기 (톤)."""
     if v is None or pd.isna(v):
         return '-'
     return f"{v / 1000:,.1f}t"
-
-
-def _p8_split_signed_pct(v, cap=999):
-    """부호와 숫자를 분리해서 반환 (극단치는 상한선 캡). 템플릿의 {sign}{pct}%에 그대로 끼워 넣는다."""
-    if v is None or pd.isna(v):
-        return '', 'N/A'
-    if abs(v) >= cap:
-        return ('+' if v >= 0 else '-'), f'{cap}+'
-    return ('+' if v >= 0 else ''), f'{v:.0f}'
-
-
-def _p8_build_insights(A, B, S, meta):
-    lang = st.session_state.lang
-    ins = []
-    tot_yoy = ((meta['tot_rec'] - meta['tot_ly']) / meta['tot_ly'] * 100) if meta['tot_ly'] > 0 else 0
-    months = meta['months']
-    if months >= 12 and months % 12 == 0:
-        yrs = months // 12
-        month_label = T('unit_n_years', n=yrs)
-    else:
-        month_label = T('unit_n_months', n=months)
-    sign, pct = _p8_split_signed_pct(tot_yoy)
-    ins.append(T('p8_ins_total', month_label=month_label, sign=sign, pct=pct, ly=_p8_ton(meta['tot_ly']), rec=_p8_ton(meta['tot_rec'])))
-
-    if S:
-        top = S[0]
-        type_label = T('p8_type_existing') if top['type'] == 'existing' else T('p8_type_new')
-        ins.append(T('p8_ins_top_candidate', name=top['name'], type=type_label, score=top['score']))
-
-    if not A.empty:
-        pos_a = A[A['yoy'] > 0]
-        if not pos_a.empty:
-            top_a = pos_a.loc[pos_a['yoy'].idxmax()]
-            sign2, pct2 = _p8_split_signed_pct(top_a['yoy'])
-            ins.append(T('p8_ins_top_growth', name=top_a['display_name'], sign=sign2, pct=pct2))
-
-    if not B.empty:
-        top_b = B.iloc[0]
-        origin_part = T('p8_ins_top_new_origin_part', origin=top_b['origin']) if top_b.get('origin') else ''
-        ins.append(T('p8_ins_top_new', name=top_b['display_name'], vol=_p8_ton(top_b['vol']), origin_part=origin_part))
-
-    if meta.get('has_price') and not A.empty and 'price_yoy' in A.columns:
-        priced = A.dropna(subset=['price_yoy'])
-        if not priced.empty:
-            top_p = priced.loc[priced['price_yoy'].idxmax()]
-            sign3, pct3 = _p8_split_signed_pct(top_p['price_yoy'])
-            ins.append(T('p8_ins_price_up', name=top_p['display_name'], sign=sign3, pct=pct3))
-
-    if meta.get('has_ctx'):
-        prio_a = A[A.get('quadrant', pd.Series(dtype=object)) == T('p8_quad_priority')] if not A.empty and 'quadrant' in A.columns else pd.DataFrame()
-        prio_b = B[B.get('quadrant', pd.Series(dtype=object)) == T('p8_quad_priority')] if not B.empty and 'quadrant' in B.columns else pd.DataFrame()
-        prio_count = len(prio_a) + len(prio_b)
-        rep_part = ''
-        combined_prio = pd.concat([prio_a, prio_b]) if (not prio_a.empty or not prio_b.empty) else pd.DataFrame()
-        if not combined_prio.empty:
-            best = combined_prio.loc[combined_prio['fit_score'].fillna(0).idxmax()]
-            rep_part = T('p8_ins_fit_rep_part', name=best['display_name'], fit=best['fit_score'])
-        ins.append(T('p8_ins_fit', n=prio_count, rep_part=rep_part))
-
-    return ins
-
-
-def build_scorer_report_pdf(A, B, S, meta, dim_label):
-    """신규사업 스코어러 전용 상세 리포트 PDF — 핵심 인사이트, TOP10, 품목별 서술형 상세까지 포함."""
-    import io
-    import datetime as _dt
-    from reportlab.lib.pagesizes import A4
-    from reportlab.lib.units import mm
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image as RLImage, KeepTogether
-    from reportlab.lib.styles import getSampleStyleSheet
-    from reportlab.lib import colors
-    from reportlab.pdfbase import pdfmetrics
-    from reportlab.pdfbase.ttfonts import TTFont
-    Paragraph = _pdf_safe_paragraph(Paragraph)  # ①~⑨·이모지 빈칸 방지
-
-    lang = st.session_state.lang
-    buf = io.BytesIO()
-    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=15 * mm, rightMargin=15 * mm)
-    styles = getSampleStyleSheet()
-
-    font_name = 'Helvetica'
-    try:
-        found_path = _find_korean_font_path()
-        if found_path:
-            pdfmetrics.registerFont(TTFont('KoreanFont', found_path))
-            font_name = 'KoreanFont'
-    except Exception:
-        pass
-    for s in styles.byName.values():
-        s.fontName = font_name
-
-    normal = styles['Normal']
-    normal.fontSize = 9
-    normal.leading = 13
-    small = normal.clone('Small')
-    small.fontSize = 7.5
-    small.leading = 10
-    small.textColor = colors.HexColor('#5c554a')
-    header_cell = normal.clone('HeaderCell')
-    header_cell.fontSize = 7.5
-    header_cell.textColor = colors.white
-    body_cell = normal.clone('BodyCell')
-    body_cell.fontSize = 7.5
-    body_cell.leading = 10
-    narrative_cell = normal.clone('NarrativeCell')
-    narrative_cell.fontSize = 7.5
-    narrative_cell.leading = 10
-    narrative_cell.textColor = colors.HexColor('#5c554a')
-
-    story = [Paragraph(T('p8_report_subtitle'), small), Paragraph(T('p8_report_title'), styles['Title'])]
-    today = _dt.date.today().isoformat()
-    months = meta['months']
-    month_label = T('unit_n_months', n=months)
-    story.append(Paragraph(T('p8_report_meta',
-        start=meta['rec_start'].strftime('%Y-%m'), end=meta['latest'].strftime('%Y-%m'),
-        ly_start=meta['ly_start'].strftime('%Y-%m'), ly_end=meta['ly_end'].strftime('%Y-%m'),
-        months=month_label, today=today), small))
-    story.append(Spacer(1, 10))
-
-    # KPI
-    tot_yoy = ((meta['tot_rec'] - meta['tot_ly']) / meta['tot_ly'] * 100) if meta['tot_ly'] > 0 else 0
-    a_growing = A[A['yoy'] > 0] if not A.empty else A
-    kpi_data = [
-        [Paragraph(T('p8_kpi_total_yoy'), body_cell), Paragraph(T('p8_kpi_growing'), body_cell), Paragraph(T('p8_kpi_new'), body_cell)],
-        [Paragraph(f"{tot_yoy:+.0f}%", styles['Heading2']), Paragraph(str(len(a_growing)), styles['Heading2']), Paragraph(str(len(B)), styles['Heading2'])],
-    ]
-    kpi_t = Table(kpi_data, colWidths=[doc.width / 3] * 3)
-    kpi_t.setStyle(TableStyle([
-        ('BOX', (0, 0), (-1, -1), 0.5, colors.HexColor('#ddd4c4')),
-        ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#ddd4c4')),
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#faf7f0')),
-        ('TOPPADDING', (0, 0), (-1, -1), 6), ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
-    ]))
-    story.append(kpi_t)
-    story.append(Spacer(1, 10))
-
-    # 핵심 인사이트
-    insights = _p8_build_insights(A, B, S, meta)
-    ins_block = [Paragraph(T('p8_report_insights_header'), styles['Heading3'])]
-    for line in insights:
-        ins_block.append(Paragraph('• ' + line, normal))
-    story.append(KeepTogether(ins_block))
-    story.append(Spacer(1, 6))
-
-    story.append(Paragraph(T('p8_report_data_summary',
-        n_tx=f"{meta.get('n_tx', 0):,}", span=meta.get('span_str', ''),
-        n_imp=f"{meta.get('n_imp', 0):,}", n_prod=f"{meta.get('n_prod', 0):,}", n_origin=f"{meta.get('n_origin', 0):,}"), small))
-    story.append(Spacer(1, 10))
-
-    # TOP 10
-    story.append(Paragraph(T('p8_report_top10_header'), styles['Heading2']))
-    story.append(Paragraph(T('p8_report_top10_sub'), small))
-    S_top = S[:10]
-    has_ctx = meta.get('has_ctx')
-    if S_top:
-        names = [s['name'] for s in S_top][::-1]
-        scores = [s['score'] for s in S_top][::-1]
-        bar_colors = ['#e11d48' if s['type'] == 'new' else '#0d9488' for s in S_top][::-1]
-        fig = go.Figure()
-        fig.add_trace(go.Bar(y=names, x=scores, orientation='h', marker_color=bar_colors))
-        chart_h = max(220, 32 * len(S_top))
-        fig.update_layout(margin=dict(l=160, r=30, t=10, b=30), height=chart_h, font=dict(size=13))
-        img_bytes = fig_to_png_bytes(fig, width=800, height=chart_h)
-        if img_bytes:
-            story.append(RLImage(io.BytesIO(img_bytes), width=170 * mm, height=170 * mm * chart_h / 800))
-            story.append(Spacer(1, 4))
-
-        headers = ['#', T('p8_col_type'), T('p8_col_item'), T('p8_col_score')]
-        if has_ctx:
-            headers += [T('p8_col_fit'), T('p8_col_quadrant')]
-        headers += [T('p8_col_reason')]
-        rows_raw = [headers]
-        for i, s in enumerate(S_top):
-            r = s['row']
-            reason = _p8_reason_a(r, r.get('dim_is_importer', False)) if s['type'] == 'existing' else _p8_reason_b(r)
-            row = [str(i + 1), T('p8_type_existing') if s['type'] == 'existing' else T('p8_type_new'), s['name'], str(s['score'])]
-            if has_ctx:
-                row += [str(r['fit_score']) if r.get('fit_score') is not None else '-', r.get('quadrant', '-')]
-            row += [reason]
-            rows_raw.append(row)
-        col_widths = _pdf_table_col_widths(rows_raw, doc.width)
-        data = [[Paragraph(h, header_cell) for h in rows_raw[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw[1:]]
-        t = Table(data, colWidths=col_widths, repeatRows=1)
-        t.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#17140f')),
-            ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
-        ]))
-        story.append(t)
-    story.append(Spacer(1, 14))
-
-    # Section A 상세
-    if not a_growing.empty:
-        # 저베이스(작년 물량이 거의 0) 항목은 점유율과 무관하게 상세 목록에서 제외한다
-        # (감점만으로는 리스트가 노이즈로 채워지는 걸 못 막았고, '상위 15'는 진짜 볼만한 기회만 보여줘야 함)
-        meaningful_a = a_growing[~a_growing['low_base']]
-        excluded_n = len(a_growing) - len(meaningful_a)
-        a_top = meaningful_a.head(15)
-        headers_a = ['#', T('p8_col_item'), T('p8_col_score'), T('p8_col_yoy'), T('p8_col_rec_vol'), T('p8_col_ly_vol'), T('p8_col_concentration'), T('p8_report_note_col')]
-        rows_raw_a = [headers_a]
-        for i, (_, r) in enumerate(a_top.iterrows()):
-            big = bool(meta['tot_rec']) and r['rec_vol'] >= meta['tot_rec'] * 0.1
-            note = T('p8_detail_big_tag').strip() if big else '-'
-            rows_raw_a.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_fmt_pct(r['yoy']),
-                                _p8_ton(r['rec_vol']), _p8_ton(r['ly_vol']), f"{r['share']:.1f}%", note])
-        col_widths_a = _pdf_table_col_widths(rows_raw_a, doc.width)
-        data_a = [[Paragraph(h, header_cell) for h in rows_raw_a[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw_a[1:]]
-        t_a = Table(data_a, colWidths=col_widths_a, repeatRows=1)
-        t_a.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0d9488')),
-            ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
-        ]))
-        excluded_note = [Paragraph(T('p8_report_excluded_note_a', n=excluded_n), small)] if excluded_n > 0 else []
-        story.append(KeepTogether([
-            Paragraph(T('p8_report_section_a_header', n=len(a_top)), styles['Heading2']),
-            Paragraph(T('p8_report_section_a_sub'), small),
-            Spacer(1, 4), t_a,
-        ] + excluded_note))
-        story.append(Spacer(1, 14))
-
-    # Section B 상세
-    if not B.empty:
-        # 표기변형 의심(사실상 기존 품목이 이름만 바뀐 것) 항목은 무조건 제외
-        meaningful_b = B[~B['suspect']]
-        excluded_n_b = len(B) - len(meaningful_b)
-        b_top = meaningful_b.head(15)
-        headers_b = ['#', T('p8_col_item'), T('p8_col_score'), T('p8_col_vol'), T('p8_col_ship'), T('p8_col_top_importer')]
-        rows_raw_b = [headers_b]
-        for i, (_, r) in enumerate(b_top.iterrows()):
-            top_imp_disp = f"{r['top1_imp']} {r['top1_share']:.0f}%" if r['top1_imp'] else '-'
-            rows_raw_b.append([str(i + 1), r['display_name'], str(r['final_score']), _p8_ton(r['vol']), T('unit_n_times', n=r['ship']), top_imp_disp])
-        col_widths_b = _pdf_table_col_widths(rows_raw_b, doc.width)
-        data_b = [[Paragraph(h, header_cell) for h in rows_raw_b[0]]] + [[Paragraph(v, body_cell) for v in row] for row in rows_raw_b[1:]]
-        t_b = Table(data_b, colWidths=col_widths_b, repeatRows=1)
-        t_b.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#e11d48')),
-            ('GRID', (0, 0), (-1, -1), 0.4, colors.grey),
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f5f6f8')]),
-        ]))
-        excluded_note_b = [Paragraph(T('p8_report_excluded_note_b', n=excluded_n_b), small)] if excluded_n_b > 0 else []
-        story.append(KeepTogether([
-            Paragraph(T('p8_report_section_b_header', n=len(b_top)), styles['Heading2']),
-            Paragraph(T('p8_report_section_b_sub'), small),
-            Spacer(1, 4), t_b,
-        ] + excluded_note_b))
-        story.append(Spacer(1, 14))
-
-    story.append(Paragraph(T('p8_report_footer'), small))
-
-    doc.build(story)
-    buf.seek(0)
-    return buf.getvalue()
 
 
 # --------------------------------#
@@ -6792,6 +6539,12 @@ def build_scorer_report_pdf(A, B, S, meta, dim_label):
 GUIDE_CONTENT = {
     'ko': {
         'doc_title': '소싱 분석기 사용 가이드',
+        'cover_eyebrow': 'User Guide',
+        'cover_lbl_menus': '구성', 'cover_menus': '11개 메뉴 · 화면별 따라하기와 결과 해석',
+        'cover_lbl_data': '데이터', 'cover_data': 'Tridge TDS · 한국 수입 통관 데이터',
+        'cover_lbl_date': '작성일', 'cover_lbl_scope': '대상', 'cover_scope': '고객사 데이터 분석가',
+        'cover_note': '화면과 PDF의 수치는 통관 데이터 기반 추정치입니다.',
+        'footer': 'Tridge Sourcing Analyzer · 사용 가이드',
         'intro': '이 문서는 앱의 각 기능을 처음 쓰시는 분도 화면을 보면서 그대로 따라 할 수 있도록 정리한 가이드입니다. 왼쪽 사이드바의 "📖 사용법 가이드" 버튼을 누르면 언제든 최신 버전을 다시 받으실 수 있습니다.',
         'label_steps': '따라하기',
         'label_results': '결과 해석',
@@ -6828,7 +6581,7 @@ GUIDE_CONTENT = {
                 'results': [
                     '순 절감액 / 절감 합계 / 비용 증가 합계 — 품목군별 절감액(계약 전후 단가 차이 × 계약 후 물량)의 순합계와, 절감·비용 증가 각각의 합계(품목 수 포함).',
                     '품목군별 카드 — 절감 품목, 단가 상승 품목, 변화 미미(절감·증가액이 ±$10 이내, 기준 조정 가능) 세 그룹으로 나뉘어 금액 큰 순으로 보입니다. 그룹마다 처음 12개만 보이고 "전체 보기"로 나머지를 펼칩니다. 계약 후 구매가 없는 품목은 "계약 후 구매 없음"으로 따로 표시하고 합계에서 뺍니다.',
-                    '상세 절감 내역 표 — 같은 그룹을 "구분" 열로 보여주며, 결과는 새 양식 PDF 리포트(표지 → KPI 4개·핵심 결론 3줄 → 품목군별 절감 차트·표 → 따로 확인할 품목 → 방법론 → 클로징)로 내려받을 수 있습니다. 구성 변화 품목이 있으면 "구성 변화 품목 제외 시" 순 절감액을 함께 표기합니다. 이전 양식이 필요하면 "기존 양식 PDF" 버튼을 쓰세요.',
+                    '상세 절감 내역 표 — 같은 그룹을 "구분" 열로 보여주며, 결과는 새 양식 PDF 리포트(표지 → KPI 4개·핵심 결론 3줄 → 품목군별 절감 차트·표 → 따로 확인할 품목 → 방법론 → 클로징)로 내려받을 수 있습니다. 구성 변화 품목이 있으면 "구성 변화 품목 제외 시" 순 절감액을 함께 표기합니다.',
                     '수입 품목군 — 포장 단위(360정·30포·900g 등)와 끝의 제품 코드만 다른 품목명을 같은 품목군으로 묶습니다. 맛·브랜드·대상이 다르면 다른 품목군입니다. 계약 전후로 품목군 안의 주력 포장 단위가 바뀌거나 비중이 20%p 이상 움직이면 "포장 단위 변경"(구성 변화)으로 표시하고, 이 품목을 뺀 순 절감액도 함께 보여줍니다. 일반 명칭 품목(예: [혼합분유] 혼합분유)은 HS코드 10단위로 구분하고, 같은 HS 안의 세부 스펙은 구분하지 않습니다.',
                     '월별 수입 추이, 최근 3개월 비중 — 최근 구매 패턴 파악.',
                     '계약 이후 새로 생기거나 사라진 품목·원산지·공급사 목록.',
@@ -6849,7 +6602,7 @@ GUIDE_CONTENT = {
                     '공급 차질(변화 신호) — 비교 기간 비중 10% 이상인 주요 공급사가 기준 기간에 사라졌는데, 신규 공급사가 빠진 물량(월평균)의 50%도 채우지 못했으면 위험. 50% 이상 채웠으면 신호가 아니라 "전환"으로 표시하고, 단가까지 내려갔으면 "전환·단가 개선"으로 표시합니다.',
                     '물량 변화 — 두 기간의 월평균 물량 변화율. 단독으로는 판정에 쓰지 않고 수치만 보여줍니다. 단, 물량 -15% 이하이면서 단가 +8% 이상이면 "수급 경색"으로 위험.',
                     '공급 구조(취약성) — 공급사 1곳이면 "단일", 1위 비중 70% 이상이면 "집중", 50% 미만이면 "분산", 그 사이는 "보통". 태그만으로는 판정에 영향이 없지만, 단일·집중이면서 단가 주의(+8% 이상)이면 위험으로 올립니다.',
-                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(점검 단위·위험+주의·안전 금액 비중·데이터 부족)·핵심 결론 3줄 → 단가 변화 × 물량 변화 산점도(위험 Black·주의·안전·신규 색 구분)와 위험·주의 표 → 전체 판정 표 → 방법론 → 다음 단계 제안)를 내려받습니다. 위험 단위가 있으면 "입찰 대응 분석" 메뉴에서 대체 공급처를 확인하도록 안내하고, 수입사명은 "수입사 A"로 가릴 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(점검 단위·위험+주의·안전 금액 비중·데이터 부족)·핵심 결론 3줄 → 단가 변화 × 물량 변화 산점도(위험 Black·주의·안전·신규 색 구분)와 위험·주의 표 → 전체 판정 표 → 방법론 → 다음 단계 제안)를 내려받습니다. 위험 단위가 있으면 "입찰 대응 분석" 메뉴에서 대체 공급처를 확인하도록 안내하고, 수입사명은 "수입사 A"로 가릴 수 있습니다.',
                     '금액 비중(영향도) — 금액 = 물량 × VWAP, 기준 기간 전체 금액 대비 비중. 1% 미만인 단위는 신호가 있어도 종합 판정이 최대 "주의"입니다.',
                     '신뢰도 — 두 기간 중 하나라도 선적이 3건 미만이면 단가 신호는 "판단 보류"로 두고, 공급 차질 판정은 그대로 합니다.',
                     '종합 판정 — 위험 신호가 하나라도 있거나 단일·집중 + 단가 주의이면 위험, 주의 신호만 있거나 금액 비중이 작아 위험에서 내려온 경우 주의, 나머지는 안전. 비교 기간에 거래가 없던 단위는 "신규", 단가가 판단 보류이고 공급 변화도 없으면 "데이터 부족".',
@@ -6893,6 +6646,7 @@ GUIDE_CONTENT = {
                     'Sankey 다이어그램 — 굵기가 물량 비중을 의미합니다.',
                     '정렬된 상세 표 — 물량, 비중, 평균 단가.',
                     '"두 기간 비교하기"를 켜면 기간 A/B 흐름도를 나란히 놓고, 어느 흐름이 늘고 줄었는지 증감표까지 확인할 수 있습니다.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(총 물량·상대 항목 수·1위 비중·평균 단가(VWAP))·핵심 결론 3줄 → 상위 흐름 가로 막대와 표(기간 비교면 기간 A·B 막대와 차이 표) → 방법론 → 다음 단계 제안)를 내려받습니다. 화면의 흐름도(Sankey)는 PDF에서 물량 순 막대로 바뀝니다. 기준·상대 축이 수입사면 이름을 "수입사 A, B …"로 가릴 수 있습니다.',
                 ],
                 'tips': ['"원산지"는 물건이 생산된 나라, "수출대상국"은 물건이 팔려나가는 나라로 서로 다른 개념입니다 — 헷갈리기 쉬우니 화면의 안내 문구를 확인하세요.'],
             },
@@ -6910,7 +6664,7 @@ GUIDE_CONTENT = {
                     '1위 비중, 상위 3개 합산 비중.',
                     '위험도 배지(안전/주의/위험)와 그 이유 — 기준선을 왜 넘었는지 문장으로 설명.',
                     '월별 1위 비중 추이 — 쏠림이 점점 심해지는지 확인.',
-                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개·핵심 결론 3줄(위험도·1위 비중 추이·대체 여력) → 비중 분포 차트·상위 10개 표 → 1위 비중 월별 추이 → 방법론 → 다음 단계 제안)를 내려받습니다. 비중 5% 이상 항목이 1곳뿐이거나 위험이면 "입찰 대응 분석" 메뉴에서 대체 공급처를 확인하도록 안내합니다. 특정 수입사를 골랐다면 수입사명 대신 "수입사 A"로 표기하는 블라인드 옵션을 쓸 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개·핵심 결론 3줄(위험도·1위 비중 추이·대체 여력) → 비중 분포 차트·상위 10개 표 → 1위 비중 월별 추이 → 방법론 → 다음 단계 제안)를 내려받습니다. 비중 5% 이상 항목이 1곳뿐이거나 위험이면 "입찰 대응 분석" 메뉴에서 대체 공급처를 확인하도록 안내합니다. 특정 수입사를 골랐다면 수입사명 대신 "수입사 A"로 표기하는 블라인드 옵션을 쓸 수 있습니다.',
                 ],
             },
             {
@@ -6929,7 +6683,7 @@ GUIDE_CONTENT = {
                     '"○월에 사면 가장 저렴했다" 같은 인사이트 문장이 자동 생성됩니다.',
                     '포장 구성 변화 표시 — 직전 달보다 주력 포장 단위가 바뀌었거나 비중이 20%p 이상 움직인 달에 ◆ 마커가 찍히고, 마우스를 올리면 "포장 구성 변화: 25KG 80% → 600KG 60%"처럼 보여줍니다. 대포장·소포장이 섞이면 합친 단가가 포장 구성 때문에 흔들릴 수 있습니다.',
                     '"포장 단위별로 보기"를 켜면 같은 차트에 포장 단위별 단가 선이 따로 그려집니다 (포장 표기가 없는 거래는 "표기 없음").',
-                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(최근 단가·전년 동월 대비·고점 대비·가장 싼 달)·핵심 결론 3줄 → 월별 추세 차트(전년 점선·포장 변화 ◆)와 최근 12개월 표 → 달별 단가·원산지/공급사 비교 → 방법론 → 다음 단계 제안)를 내려받습니다. 현재 단가가 계절 평균보다 낮으면 "계약 고정 시점 검토"를 제안합니다. 계절 패턴은 첫 달부터 마지막 달까지 24개월 이상일 때만 판단합니다. 이전 양식은 "기존 양식 PDF" 버튼.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(최근 단가·전년 동월 대비·고점 대비·가장 싼 달)·핵심 결론 3줄 → 월별 추세 차트(전년 점선·포장 변화 ◆)와 최근 12개월 표 → 달별 단가·원산지/공급사 비교 → 방법론 → 다음 단계 제안)를 내려받습니다. 현재 단가가 계절 평균보다 낮으면 "계약 고정 시점 검토"를 제안합니다. 계절 패턴은 첫 달부터 마지막 달까지 24개월 이상일 때만 판단합니다.',
                 ],
                 'tips': ['데이터가 첫 달부터 마지막 달까지 24개월이 안 되면 "이 계절 패턴은 우연일 수 있다"는 경고가 함께 표시됩니다 — 24개월 이상 쌓이면 신뢰도가 높아집니다.'],
             },
@@ -6947,7 +6701,7 @@ GUIDE_CONTENT = {
                     '신규/유지/이탈 개수와 각각의 목록(물량 포함).',
                     '💰 가격으로 보면 — 신규·유지·이탈 거래처의 평균단가를 비교해서, 이번 변화가 비용 절감으로 이어졌는지 알려줍니다.',
                     '⚠️ 집중도 변화 — 거래처가 줄면서 특정 공급사 의존도가 위험하게 높아졌는지 자동으로 경고합니다.',
-                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(신규·유지·이탈·1위 의존도)·핵심 결론 → 신규·이탈 양방향 막대와 목록 → 단가·집중도 → 방법론 → 다음 단계 제안)를 내려받습니다. 신규 거래처 단가는 같은 품목군 안에서 유지 거래처와 비교한 뒤 신규 물량으로 가중 합산합니다(도입 효과 분석과 같은 방식, 겹치는 품목군이 없으면 생략). 1위 의존도가 5%p 이상 오르면 "집중도 리스크 진단" 메뉴로 안내합니다. 수입사 기준이면 이름을 "수입사 A, B …"로 가릴 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(신규·유지·이탈·1위 의존도)·핵심 결론 → 신규·이탈 양방향 막대와 목록 → 단가·집중도 → 방법론 → 다음 단계 제안)를 내려받습니다. 신규 거래처 단가는 같은 품목군 안에서 유지 거래처와 비교한 뒤 신규 물량으로 가중 합산합니다(도입 효과 분석과 같은 방식, 겹치는 품목군이 없으면 생략). 1위 의존도가 5%p 이상 오르면 "집중도 리스크 진단" 메뉴로 안내합니다. 수입사 기준이면 이름을 "수입사 A, B …"로 가릴 수 있습니다.',
                 ],
             },
             {
@@ -6964,7 +6718,7 @@ GUIDE_CONTENT = {
                     '통합 추천 순위(TOP 10) — 기존 급상승 품목과 신규 진입 품목을 하나의 점수로 비교한 최종 순위.',
                     '적합도 기준을 입력했다면, 4분면(우선 타깃/성장 주도/안전 인접/후순위)까지 자동 분류됩니다.',
                     '⚠ 저베이스 반등, ⚠ 단일선적 편중, ⚠ 표기변형 의심 같은 주의 플래그로 착시 데이터를 걸러줍니다.',
-                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(분석 윈도우·전체 물량 YoY·성장 품목·신규진입)·핵심 결론 3줄 → 통합 TOP 10 차트·표 → 기존 품목 성장 지도·신규진입 표 → 상위 5개 상세 → 방법론 → 다음 단계 제안)를 내려받습니다. 1위 후보는 "범용상품 스크리너" 메뉴에서 범용성을 확인하도록 안내하고, 상위 수입사명은 "수입사 A, B …"로 가릴 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
+                    'PDF 리포트 — "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(분석 윈도우·전체 물량 YoY·성장 품목·신규진입)·핵심 결론 3줄 → 통합 TOP 10 차트·표 → 기존 품목 성장 지도·신규진입 표 → 상위 5개 상세 → 방법론 → 다음 단계 제안)를 내려받습니다. 1위 후보는 "범용상품 스크리너" 메뉴에서 범용성을 확인하도록 안내하고, 상위 수입사명은 "수입사 A, B …"로 가릴 수 있습니다.',
                 ],
                 'tips': ['적합도 기준을 안 넣어도 분석 자체는 되지만, 넣으면 "우리 사업 맥락에서" 우선순위가 훨씬 정교해집니다.'],
             },
@@ -7024,7 +6778,7 @@ GUIDE_CONTENT = {
                 'results': [
                     '고른 조합대로 즉시 표와 차트가 생성됩니다.',
                     '지표를 여러 개 고르면 표·히트맵에는 전부 표시되지만, 막대·선·파이 차트는 첫 번째로 고른 지표만 그려집니다 (단위가 다른 지표를 한 차트에 억지로 섞으면 오히려 헷갈리기 때문입니다).',
-                    'PDF 리포트 — 결과 아래 "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(기간·총 물량·평균 단가(VWAP)·거래 건수)·핵심 결론 3줄(첫 번째 행 1위 비중·기간 변화 또는 상위 3개 비중·적용 필터) → 선택한 보기의 차트와 피벗 표 → 조건·방법론 → 다음 단계 제안)를 내려받습니다. 수입사가 행·열·필터에 있으면 "수입사 A, B …"로 가릴 수 있습니다. 이전 양식은 "기존 양식 PDF" 버튼.',
+                    'PDF 리포트 — 결과 아래 "PDF 리포트 만들기"로 새 양식 리포트(표지 → KPI 4개(기간·총 물량·평균 단가(VWAP)·거래 건수)·핵심 결론 3줄(첫 번째 행 1위 비중·기간 변화 또는 상위 3개 비중·적용 필터) → 선택한 보기의 차트와 피벗 표 → 조건·방법론 → 다음 단계 제안)를 내려받습니다. 수입사가 행·열·필터에 있으면 "수입사 A, B …"로 가릴 수 있습니다.',
                 ],
             },
             {
@@ -7039,6 +6793,12 @@ GUIDE_CONTENT = {
     },
     'en': {
         'doc_title': 'Sourcing Analyzer User Guide',
+        'cover_eyebrow': 'User Guide',
+        'cover_lbl_menus': 'Contents', 'cover_menus': '11 menus · step-by-step and how to read results',
+        'cover_lbl_data': 'Data', 'cover_data': 'Tridge TDS · Korean import customs data',
+        'cover_lbl_date': 'Date', 'cover_lbl_scope': 'Audience', 'cover_scope': 'Client data analysts',
+        'cover_note': 'Figures on screen and in PDFs are estimates based on customs data.',
+        'footer': 'Tridge Sourcing Analyzer · User Guide',
         'intro': 'This guide walks first-time users through every feature step by step. You can re-download the latest version anytime via the "📖 User Guide" button in the sidebar.',
         'label_steps': 'Steps',
         'label_results': 'What the results mean',
@@ -7075,7 +6835,7 @@ GUIDE_CONTENT = {
                 'results': [
                     'Net savings / total savings / total cost increase — the net sum of per-group savings (price difference before vs. after × post-contract volume), plus the savings and cost-increase totals with item counts.',
                     'Cards by product group — split into Savings, Price increases, and Minor change (within ±$10, adjustable), largest amounts first. Each group shows the first 12 cards; "Show all" expands the rest. Items with no purchases after the contract are listed separately as "No purchases after contract" and excluded from the totals.',
-                    'Detailed savings table — the same groups appear in a "Group" column, and the results can be downloaded as a new-format PDF report (cover → 4 KPIs and 3 key findings → savings chart and tables by item group → items to check → methodology → closing). When mix-changed items exist, net savings excluding them is shown as well. Use "Legacy-format PDF" if you need the previous format.',
+                    'Detailed savings table — the same groups appear in a "Group" column, and the results can be downloaded as a new-format PDF report (cover → 4 KPIs and 3 key findings → savings chart and tables by item group → items to check → methodology → closing). When mix-changed items exist, net savings excluding them is shown as well.',
                     'Import item groups — product names that differ only in pack size (360 tablets, 30 sachets, 900 g, etc.) or a trailing product code form one item group; different flavors, brands, or targets stay separate. When the main pack size changes or a pack size share moves 20%p or more before vs. after the contract, the group is flagged as a "pack size change" (mix change), and net savings excluding it is also shown. Generic-name products (e.g. [Mixed Milk Powder] Mixed Milk Powder) are separated by 10-digit HS code; detailed specs within the same HS code are not distinguished.',
                     'Monthly import trend and last-3-month share.',
                     'New/lost products, origins, and suppliers since the contract.',
@@ -7096,7 +6856,7 @@ GUIDE_CONTENT = {
                     'Supply disruption (change signal) — a major supplier (10%+ share in the comparison period) is gone in the base period and new suppliers replaced less than 50% of its monthly volume: At risk. If 50% or more was replaced it is not a signal but tagged "Switched", or "Switched · better price" if the unit price also fell.',
                     'Volume change — change in monthly average volume. Shown as a number only and not used on its own; but volume -15% or less together with unit price +8% or more is a "supply squeeze" (At risk).',
                     'Supply structure (vulnerability) — one supplier is "Single", top supplier 70%+ is "Concentrated", below 50% is "Diversified", otherwise "Moderate". The tag alone does not change the status, but Single/Concentrated with a price Caution (+8% or more) is raised to At risk.',
-                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (units checked, risk + caution, safe spend share, insufficient data) and 3 key findings → price change × volume change scatter (risk in Black, caution, safe and new in brand blues) with a risk/caution table → full verdict table → methodology → suggested next steps). If any unit is at risk, it points you to the Tender Response Analysis menu for alternative suppliers; the importer name can be shown as "Importer A". Use "Legacy-format PDF" for the previous format.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (units checked, risk + caution, safe spend share, insufficient data) and 3 key findings → price change × volume change scatter (risk in Black, caution, safe and new in brand blues) with a risk/caution table → full verdict table → methodology → suggested next steps). If any unit is at risk, it points you to the Tender Response Analysis menu for alternative suppliers; the importer name can be shown as "Importer A".',
                     'Spend share (impact) — spend = volume × VWAP, as a share of total base-period spend. Units under 1% are capped at "Caution" even with a risk signal.',
                     'Reliability — if either period has fewer than 3 shipments, the unit price signal is put "On hold"; the supply disruption check still applies.',
                     'Overall — At risk if any risk signal exists or Single/Concentrated + price Caution; Caution if only caution signals exist or the unit was lowered from At risk because of small spend share; otherwise Safe. Units with no transactions in the comparison period are "New"; units whose price is on hold with no supply change are "Insufficient data".',
@@ -7140,6 +6900,7 @@ GUIDE_CONTENT = {
                     'A Sankey diagram — ribbon width represents volume share.',
                     'A sorted detail table with volume, share, and average price.',
                     'Enabling "Compare two periods" shows Period A/B side by side plus a change table.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (total volume, counterparts, top-1 share, average price (VWAP)) and 3 key findings → top-flow bar chart and table (or period A/B bars and a change table in comparison mode) → methodology → suggested next steps). The on-screen Sankey becomes bars ordered by volume in the PDF. When either axis is an importer, names can be shown as "Importer A, B …".',
                 ],
                 'tips': ['"Origin" is where the product was produced; "Export destination" is where it was sold — easy to mix up, so check the on-screen hint.'],
             },
@@ -7157,7 +6918,7 @@ GUIDE_CONTENT = {
                     'Top-1 share and top-3 combined share.',
                     'A risk badge (safe/caution/high) with a plain-language reason.',
                     'Monthly trend of top-1 share, to see if concentration is worsening.',
-                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs and 3 key findings (risk level, top-1 share trend, room to switch) → share chart and top-10 table → monthly top-1 share → methodology → suggested next steps). If only one item has a 5%+ share or the level is Risk, it points you to the Tender Response Analysis menu to find alternative suppliers. When one importer is selected, a blind option shows "Importer A" instead of the name. Use "Legacy-format PDF" for the previous format.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs and 3 key findings (risk level, top-1 share trend, room to switch) → share chart and top-10 table → monthly top-1 share → methodology → suggested next steps). If only one item has a 5%+ share or the level is Risk, it points you to the Tender Response Analysis menu to find alternative suppliers. When one importer is selected, a blind option shows "Importer A" instead of the name.',
                 ],
             },
             {
@@ -7176,7 +6937,7 @@ GUIDE_CONTENT = {
                     'Auto-generated insight sentences like "buying in March was historically cheapest."',
                     'Pack mix changes — a ◆ marker appears in months where the main pack size changed or a share moved 20%p or more vs. the previous month; hover to see e.g. "Pack mix change: 25KG 80% → 600KG 60%". When bulk and small packs mix, the combined price can move because of the pack mix.',
                     'Turn on "Show by pack size" to draw a separate price line per pack size on the same chart (trades without a pack size appear as "No pack size").',
-                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (latest price, YoY, vs. peak, cheapest month) and 3 key findings → monthly trend chart (prior year dashed, pack changes ◆) with a last-12-months table → price by calendar month and origin/supplier comparison → methodology → suggested next steps). If the current price is below the seasonal average, it suggests reviewing when to lock in a contract. The seasonal pattern is judged only when the data spans 24 months or more. Use "Legacy-format PDF" for the previous format.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (latest price, YoY, vs. peak, cheapest month) and 3 key findings → monthly trend chart (prior year dashed, pack changes ◆) with a last-12-months table → price by calendar month and origin/supplier comparison → methodology → suggested next steps). If the current price is below the seasonal average, it suggests reviewing when to lock in a contract. The seasonal pattern is judged only when the data spans 24 months or more.',
                 ],
                 'tips': ['If the data spans less than 24 months (first to last month), a warning notes the seasonal pattern could be coincidental — confidence improves with 24+ months of history.'],
             },
@@ -7194,7 +6955,7 @@ GUIDE_CONTENT = {
                     'Counts and lists of new/kept/lost partners, with volume.',
                     '💰 Looking at price — compares average prices across the three groups to show whether the change saved money.',
                     '⚠️ Concentration Change — automatically warns if losing partners pushed dependency on the remaining ones to a risky level.',
-                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (new, kept, lost, top-1 share) and key findings → new/lost diverging bars and lists → price and concentration → methodology → suggested next steps). New-partner prices are compared with kept partners within the same item group, then weighted by new-partner volume (same approach as Adoption Impact; omitted if no group overlaps). If the top-1 share rises by 5%p or more, it points you to the Concentration Risk menu. When tracking importers, names can be shown as "Importer A, B …". Use "Legacy-format PDF" for the previous format.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (new, kept, lost, top-1 share) and key findings → new/lost diverging bars and lists → price and concentration → methodology → suggested next steps). New-partner prices are compared with kept partners within the same item group, then weighted by new-partner volume (same approach as Adoption Impact; omitted if no group overlaps). If the top-1 share rises by 5%p or more, it points you to the Concentration Risk menu. When tracking importers, names can be shown as "Importer A, B …".',
                 ],
             },
             {
@@ -7211,7 +6972,7 @@ GUIDE_CONTENT = {
                     'Combined Recommendation Ranking (Top 10) — surging existing items and new entrants ranked on one scale.',
                     'If fit criteria were entered, items are auto-classified into a quadrant (Priority Target / Growth-led / Safe Adjacent / Lower Priority).',
                     'Warning flags such as low-base rebound, single-shipment skew, and possible re-labeling filter out misleading data.',
-                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (window, total volume YoY, growing items, new entries) and 3 key findings → combined top-10 chart and table → growth map of existing items and new-entry table → top-5 details → methodology → suggested next steps). It points you to the Commodity Screener menu to check how generic the top candidate is, and top importer names can be shown as "Importer A, B …". Use "Legacy-format PDF" for the previous format.',
+                    'PDF report — "Create PDF report" downloads the new-format report (cover → 4 KPIs (window, total volume YoY, growing items, new entries) and 3 key findings → combined top-10 chart and table → growth map of existing items and new-entry table → top-5 details → methodology → suggested next steps). It points you to the Commodity Screener menu to check how generic the top candidate is, and top importer names can be shown as "Importer A, B …".',
                 ],
                 'tips': ['Analysis works without fit criteria, but filling them in makes the ranking far more relevant to your specific business.'],
             },
@@ -7271,7 +7032,7 @@ GUIDE_CONTENT = {
                 'results': [
                     'A table and chart are generated instantly from your chosen combination.',
                     'With multiple metrics selected, the table and heatmap show all of them, but bar/line/pie charts plot only the first selected metric (mixing metrics with different units in one chart would be confusing).',
-                    'PDF report — "Create PDF report" below the results downloads the new-format report (cover → 4 KPIs (period, total volume, average price (VWAP), transaction count) and 3 key findings (top share of the first row field, change over time or top-3 share, filters applied) → chart of the selected view and the pivot table → settings and methodology → suggested next steps). When importers appear in rows, columns or filters, names can be shown as "Importer A, B …". Use "Legacy-format PDF" for the previous format.',
+                    'PDF report — "Create PDF report" below the results downloads the new-format report (cover → 4 KPIs (period, total volume, average price (VWAP), transaction count) and 3 key findings (top share of the first row field, change over time or top-3 share, filters applied) → chart of the selected view and the pivot table → settings and methodology → suggested next steps). When importers appear in rows, columns or filters, names can be shown as "Importer A, B …".',
                 ],
             },
             {
@@ -7286,85 +7047,56 @@ GUIDE_CONTENT = {
     },
 }
 def build_user_guide_pdf(lang):
-    """앱 전체 사용법을 스크린샷과 함께 정리한 PDF 가이드를 생성해 바이트로 반환한다."""
-    import io
-    import os
-    from reportlab.lib.pagesizes import A4
+    """앱 전체 사용법을 스크린샷과 함께 정리한 PDF 가이드 (새 리포트 테마: Pretendard, 표지 → 본문)."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer, Table, TableStyle, KeepTogether, Image as RLImage
     from reportlab.lib.units import mm
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem, Image as RLImage, KeepTogether
-    from reportlab.lib.styles import getSampleStyleSheet
-    from reportlab.lib import colors
-    from reportlab.pdfbase import pdfmetrics
-    from reportlab.pdfbase.ttfonts import TTFont
-    Paragraph = _pdf_safe_paragraph(Paragraph)  # ①~⑨·이모지 빈칸 방지
+    from PIL import Image as PILImage
 
     content = GUIDE_CONTENT.get(lang, GUIDE_CONTENT['ko'])
     assets_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets', 'guide')
 
-    buf = io.BytesIO()
-    doc = SimpleDocTemplate(buf, pagesize=A4, topMargin=15 * mm, bottomMargin=15 * mm, leftMargin=18 * mm, rightMargin=18 * mm)
-    styles = getSampleStyleSheet()
+    def _steps(items):
+        rows = [[rt.P(f"{i + 1}", 'cell_b'), rt.P(t)] for i, t in enumerate(items)]
+        tbl = Table(rows, colWidths=[7 * mm, rt.BODY_W - 7 * mm])
+        tbl.setStyle(TableStyle([('VALIGN', (0, 0), (-1, -1), 'TOP'), ('LEFTPADDING', (0, 0), (-1, -1), 0),
+                                 ('TOPPADDING', (0, 0), (-1, -1), 2), ('BOTTOMPADDING', (0, 0), (-1, -1), 2)]))
+        return tbl
 
-    font_name = 'Helvetica'
-    try:
-        found_path = _find_korean_font_path()
-        if found_path:
-            pdfmetrics.registerFont(TTFont('KoreanFont', found_path))
-            font_name = 'KoreanFont'
-    except Exception:
-        pass
-    for s in styles.byName.values():
-        s.fontName = font_name
-    styles['Normal'].fontSize = 9.5
-    styles['Normal'].leading = 13
-    tip_style = styles['Normal'].clone('TipStyle')
-    tip_style.textColor = colors.HexColor('#6b7280')
-    tip_style.fontSize = 8.5
-
-    story = [Paragraph(content['doc_title'], styles['Title'])]
+    flow = [rt.SectionHeader(content['cover_eyebrow'], content['doc_title']), Spacer(1, 2 * mm)]
     if content.get('intro'):
-        story.append(Paragraph(content['intro'], styles['Normal']))
-    story.append(Spacer(1, 10))
-
+        flow += [rt.P(content['intro']), Spacer(1, 6 * mm)]
     for sec in content['sections']:
-        block = [Paragraph(sec['heading'], styles['Heading2'])]
+        block = [rt.Rule(), Spacer(1, 4 * mm), rt.P(sec['heading'], rt.ps('gh', rt.W['M'], 13, 18)), Spacer(1, 2 * mm)]
         if sec.get('intro'):
-            block.append(Paragraph(sec['intro'], styles['Normal']))
-            block.append(Spacer(1, 4))
+            block += [rt.P(sec['intro']), Spacer(1, 3 * mm)]
         if sec.get('steps'):
-            block.append(Paragraph(content['label_steps'], styles['Heading4']))
-            items = [ListItem(Paragraph(b, styles['Normal'])) for b in sec['steps']]
-            block.append(ListFlowable(items, bulletType='1', leftIndent=14))
-            block.append(Spacer(1, 4))
+            block += [rt.P(content['label_steps'], 'kpi_label'), Spacer(1, 1.5 * mm), _steps(sec['steps']), Spacer(1, 3 * mm)]
         if sec.get('results'):
-            block.append(Paragraph(content['label_results'], styles['Heading4']))
-            items = [ListItem(Paragraph(b, styles['Normal']), bulletColor='#0d9488') for b in sec['results']]
-            block.append(ListFlowable(items, bulletType='bullet', leftIndent=14))
-            block.append(Spacer(1, 4))
-        if sec.get('tips'):
-            for tip in sec['tips']:
-                block.append(Paragraph('💡 ' + tip, tip_style))
-        story.append(KeepTogether(block))
+            dashes = rt.dash_list(sec['results'])  # '결과 해석' 제목은 첫 항목과 묶어 쪽 끝에 홀로 남지 않게
+            block += [KeepTogether([rt.P(content['label_results'], 'kpi_label'), Spacer(1, 1 * mm), dashes[0]])] + dashes[1:] + [Spacer(1, 3 * mm)]
+        for tip in sec.get('tips', []):
+            block += [rt.badge_note(rt.Badge('Tip', rt.BLUE), tip), Spacer(1, 2 * mm)]
+        flow.append(KeepTogether(block[:6]))  # 제목이 쪽 끝에 홀로 남지 않도록 앞부분은 묶는다
+        flow += block[6:]
+        img_path = os.path.join(assets_dir, sec['image']) if sec.get('image') else None
+        if img_path and os.path.exists(img_path):
+            try:
+                with PILImage.open(img_path) as im:
+                    iw, ih = im.size
+                w = rt.BODY_W * 0.8
+                flow += [Spacer(1, 2 * mm), RLImage(img_path, width=w, height=w * ih / iw)]
+            except Exception:
+                pass
+        flow.append(Spacer(1, 8 * mm))
 
-        img_file = sec.get('image')
-        if img_file:
-            img_path = os.path.join(assets_dir, img_file)
-            if os.path.exists(img_path):
-                try:
-                    from PIL import Image as PILImage
-                    with PILImage.open(img_path) as im:
-                        iw, ih = im.size
-                    disp_w = 110 * mm
-                    disp_h = disp_w * ih / iw
-                    story.append(Spacer(1, 4))
-                    story.append(RLImage(img_path, width=disp_w, height=disp_h))
-                except Exception:
-                    pass
-        story.append(Spacer(1, 12))
-
-    doc.build(story)
-    buf.seek(0)
-    return buf.getvalue()
+    meta = {'eyebrow': content['cover_eyebrow'], 'title_lines': [content['doc_title']], 'item': content['doc_title'],
+            'period': content['cover_menus'], 'date': datetime.date.today().strftime('%Y.%m.%d'), 'blind': False,
+            'doc_title': content['doc_title'],
+            'labels': {'period': content['cover_lbl_menus'], 'data': content['cover_lbl_data'], 'date': content['cover_lbl_date'],
+                       'scope': content['cover_lbl_scope'], 'data_source': content['cover_data'], 'blind_off': content['cover_scope'],
+                       'confidential': content['cover_note'], 'footer': content['footer']}}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': flow}])
 
 
 def find_column(columns, candidates):
@@ -7490,7 +7222,6 @@ def check_password():
 # --------------------------#
 
 st.set_page_config(layout="wide")
-install_bundled_font_for_charts()
 
 # --------------------------#
 #  <<< 인쇄용 CSS 추가 >>>  #
@@ -7942,8 +7673,7 @@ if selected == T('menu_opt_customer'):
             st.caption(T('group_rule_generic_hs'))
 
             p1_blind = st.checkbox(T('p1_rp_blind_toggle'), value=False, key="p1_rp_blind")
-            pdf_c1, pdf_c2 = st.columns([1, 1])
-            if pdf_c1.button(T('rp_pdf_btn'), key="p1_pdf_btn"):
+            if st.button(T('rp_pdf_btn'), key="p1_pdf_btn"):
                 with st.spinner(T('rp_pdf_spinner')):
                     try:
                         _cust = st.session_state.customer_name
@@ -7953,30 +7683,6 @@ if selected == T('menu_opt_customer'):
                             'plot_df': st.session_state.plot_df, 'contract_date': st.session_state.contract_date, 'blind': p1_blind,
                         })
                         st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="adoption_impact_report.pdf", mime="application/pdf", key="p1_pdf_dl")
-                    except Exception as e:
-                        st.error(T('pdf_error_msg', msg=str(e)))
-            if pdf_c2.button(T('p1_rp_legacy_btn'), key="p1_pdf_legacy_btn"):
-                with st.spinner(T('pdf_generating_msg')):
-                    try:
-                        def _pdf_rows(g):
-                            fmt = lambda v, f: '-' if pd.isna(v) else f.format(v)
-                            return pd.DataFrame({
-                                T('legend_cluster'): [str(i) for i in g.index],
-                                T('p1_col_avg_price_before'): [fmt(v, '${:,.2f}') for v in g['avg_price_before']],
-                                T('p1_col_avg_price_after'): [fmt(v, '${:,.2f}') for v in g['avg_price_after']],
-                                T('p1_col_volume_after'): [fmt(v, '{:,.0f} KG') for v in g['volume_after']],
-                                T('p1_col_savings'): [fmt(v, '${:,.2f}') for v in g['savings']],
-                                T('p1_col_mix_changed'): ['⚠ ' + T('p1_mix_changed_badge') if v else '' for v in g['mix_changed']],
-                            })
-                        pdf_sections = [(group_titles[k], _pdf_rows(groups[k])) for k in ('saved', 'increased', 'minor')]
-                        pdf_sections.append((f"{T('p1_grp_no_purchase_label')} ({len(no_purchase_names)})", _pdf_rows(groups['no_purchase'])))
-                        pdf_bytes = build_pdf_report(
-                            title=f"{T('p1_title')} — {st.session_state.customer_name}",
-                            kpi_lines=[f"{label}: {value}" for label, value in [kpi_net, kpi_saved, kpi_increased]]
-                                      + [T('p1_total_savings_caption', date=st.session_state.contract_date.date(), th=minor_th)],
-                            figs=[], tables=pdf_sections,
-                        )
-                        st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="adoption_impact.pdf", mime="application/pdf", key="p1_pdf_legacy_dl")
                     except Exception as e:
                         st.error(T('pdf_error_msg', msg=str(e)))
 
@@ -8311,24 +8017,6 @@ if selected == T('menu_opt_health'):
                     st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="portfolio_health_report.pdf", mime="application/pdf", key="health_rp_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
-        with dl2:
-            if st.button(T('p1_rp_legacy_btn'), key="health_pdf_btn"):
-                with st.spinner(T('pdf_generating_msg')):
-                    try:
-                        kpi_lines = [summary_caption, ' · '.join(f"{label}: {value}" for label, value in kpi_items)]
-                        kpi_lines += [T('ph_focus_header') + ' — ' + f"{unit}: {reasons}" for unit, reasons in focus_lines]
-                        kpi_lines += [T('ph_table_notes'), T('ph_market_note', season=T('menu_opt_season'))]
-                        if res['product_mode']:
-                            kpi_lines.append(T('group_rule_generic_hs'))
-                        if not res['product_mode']:
-                            kpi_lines.append(T('ph_mix_notice'))
-                        pdf_bytes = build_pdf_report(
-                            title=T('ph_title'), kpi_lines=kpi_lines, figs=[],
-                            df_table=health_display_table(rows, plain=True), table_title=T('ph_table_header'),
-                        )
-                        st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="portfolio_health_check.pdf", mime="application/pdf", key="health_pdf_dl")
-                    except Exception as e:
-                        st.error(T('pdf_error_msg', msg=str(e)))
 
 # ==============================================================================
 # 페이지 2: 시장 경쟁력 분석 (모든 수정 사항이 이 섹션에 적용됨)
@@ -8933,6 +8621,10 @@ if selected == T('menu_opt_flow'):
                 df['_price'] = derive_unit_price(df, cols)[0]  # Unit Price 우선, 없으면 금액 ÷ 중량
                 df = df.dropna(subset=['_date', '_volume', left_col, right_col])
 
+                # PDF 블라인드·다음 분석 안내용: 기준·상대 축이 수입사(거래처)인지
+                _flow_flags = {'left_is_importer': is_importer_column(left_col, cols), 'right_is_importer': is_importer_column(right_col, cols),
+                               'right_is_partner': is_importer_column(right_col, cols) or right_col == cols['exporter']}
+
                 def _flow_grouped_for_range(d_start, d_end):
                     m = (df['_date'] >= pd.to_datetime(d_start)) & (df['_date'] <= pd.to_datetime(d_end)) & (df[left_col].astype(str) == str(left_entity))
                     s = df[m]
@@ -8948,6 +8640,7 @@ if selected == T('menu_opt_flow'):
                         st.warning(T('p3_no_data_warning'))
                     else:
                         TOP_N = 8
+                        n_total = len(grouped)
                         truncated = len(grouped) > TOP_N
                         if truncated:
                             top = grouped.iloc[:TOP_N].copy()
@@ -8960,6 +8653,7 @@ if selected == T('menu_opt_flow'):
                             'mode': 'single', 'left_axis_label': left_axis_label, 'left_entity': left_entity,
                             'right_axis_label': right_axis_label, 'grouped': grouped, 'right_col': right_col,
                             'start_date': start_date, 'end_date': end_date, 'top_n': TOP_N, 'truncated': truncated,
+                            'n_total': n_total, **_flow_flags,
                         }
                         st.rerun()
                 else:
@@ -8981,14 +8675,12 @@ if selected == T('menu_opt_flow'):
                             'mode': 'compare', 'left_axis_label': left_axis_label, 'left_entity': left_entity,
                             'right_axis_label': right_axis_label, 'right_col': right_col,
                             'grouped_a': grouped_a.head(8), 'grouped_b': grouped_b.head(8), 'merged': merged,
-                            'a_start': a_start, 'a_end': a_end, 'b_start': b_start, 'b_end': b_end,
+                            'a_start': a_start, 'a_end': a_end, 'b_start': b_start, 'b_end': b_end, **_flow_flags,
                         }
                         st.rerun()
 
     if st.session_state.flow_result is not None:
         R = st.session_state.flow_result
-        pdf_figs = []
-        pdf_table = None
 
         if R['mode'] == 'single':
             grouped = R['grouped']
@@ -9002,7 +8694,6 @@ if selected == T('menu_opt_flow'):
             )])
             fig.update_layout(title=T('p3_sankey_title', left=R['left_entity'], right_axis=R['right_axis_label']), font_size=13, height=max(350, 60 * n_targets))
             st.plotly_chart(fig, width="stretch")
-            pdf_figs.append(fig)
 
             if R.get('truncated'):
                 st.caption(T('p3_others_note', n=R['top_n']))
@@ -9014,7 +8705,6 @@ if selected == T('menu_opt_flow'):
             display_df = display_df.rename(columns={R['right_col']: category_col_label, 'volume': T('p3_col_volume'), 'avg_price': T('p3_col_avg_price'), 'share': T('p3_col_share')})
             display_df = display_df[[category_col_label, T('p3_col_volume'), T('p3_col_share'), T('p3_col_avg_price')]]
             st.dataframe(display_df.style.format({T('p3_col_volume'): '{:,.0f}', T('p3_col_share'): '{:.1%}', T('p3_col_avg_price'): '${:,.2f}'}))
-            pdf_table = display_df
         else:
             st.subheader(T('p3_compare_subheader', left=R['left_entity'], right_axis=R['right_axis_label']))
             colA, colB = st.columns(2)
@@ -9032,23 +8722,19 @@ if selected == T('menu_opt_flow'):
                     )])
                     fig.update_layout(font_size=11, height=max(300, 50 * n_targets), margin=dict(l=10, r=10, t=10, b=10))
                     st.plotly_chart(fig, width="stretch")
-                    pdf_figs.append(fig)
 
             st.subheader(T('p3_table_subheader'))
             category_col_label = T('p3_col_category', right_axis=R['right_axis_label'])
             merged = R['merged'].rename(columns={R['right_col']: category_col_label, 'volume_a': T('p3_compare_col_a'), 'volume_b': T('p3_compare_col_b'), 'diff': T('p3_compare_col_diff'), 'diff_pct': T('p3_compare_col_diff_pct')})
             st.dataframe(merged.style.format({T('p3_compare_col_a'): '{:,.0f}', T('p3_compare_col_b'): '{:,.0f}', T('p3_compare_col_diff'): '{:+,.0f}', T('p3_compare_col_diff_pct'): '{:+.1f}%'}))
-            pdf_table = merged
 
-        if st.button(T('pdf_generate_btn'), key="flow_pdf_btn"):
-            with st.spinner(T('pdf_generating_msg')):
+        flow_blind = (st.checkbox(T('fl_rp_blind_toggle'), value=False, key="flow_rp_blind")
+                      if (R.get('left_is_importer') or R.get('right_is_importer')) else False)
+        if st.button(T('rp_pdf_btn'), key="flow_rp_btn", disabled='left_is_importer' not in R):
+            with st.spinner(T('rp_pdf_spinner')):
                 try:
-                    pdf_bytes = build_pdf_report(
-                        title=T('p3_title'),
-                        kpi_lines=[f"{T('p3_left_entity_label')}: {R['left_entity']} ({R['left_axis_label']})"],
-                        figs=pdf_figs, df_table=pdf_table, table_title=T('p3_table_subheader'),
-                    )
-                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="supply_chain_flow.pdf", mime="application/pdf", key="flow_pdf_dl")
+                    pdf_bytes = build_flow_report(R, bool(flow_blind))
+                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="supply_flow_report.pdf", mime="application/pdf", key="flow_rp_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
 
@@ -9179,25 +8865,13 @@ if selected == T('menu_opt_risk'):
 
         risk_blind = (st.checkbox(T('rk_rp_blind_toggle'), value=False, key="risk_rp_blind")
                       if (R.get('scope_entity') or R.get('axis_is_importer')) else False)
-        risk_c1, risk_c2 = st.columns([1, 1])
-        if risk_c1.button(T('rp_pdf_btn'), key="risk_rp_btn"):
+        if st.button(T('rp_pdf_btn'), key="risk_rp_btn"):
             with st.spinner(T('rp_pdf_spinner')):
                 try:
                     _ent = R.get('scope_entity')
                     _scope = (T('blind_label', code='A') if risk_blind else str(_ent)) if _ent else T('rk_rp_scope_all')
                     pdf_bytes = build_risk_report({**R, 'scope_label': _scope, 'blind': bool(risk_blind) or not (_ent or R.get('axis_is_importer'))})
                     st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="concentration_risk_report.pdf", mime="application/pdf", key="risk_rp_dl")
-                except Exception as e:
-                    st.error(T('pdf_error_msg', msg=str(e)))
-        if risk_c2.button(T('p1_rp_legacy_btn'), key="risk_pdf_btn"):
-            with st.spinner(T('pdf_generating_msg')):
-                try:
-                    pdf_bytes = build_pdf_report(
-                        title=T('p4_title'),
-                        kpi_lines=[f"{T('p4_kpi_top1')}: {top1['share']:.1f}%", f"{T('p4_kpi_top3')}: {top3_share:.1f}%", f"{T('p4_kpi_risk')}: {risk_label} ({reason})"],
-                        figs=figs_for_pdf, df_table=display_df, table_title=T('p4_col_name'),
-                    )
-                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="concentration_risk.pdf", mime="application/pdf", key="risk_pdf_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
 
@@ -9387,29 +9061,11 @@ if selected == T('menu_opt_season'):
         if _span < 24:
             st.warning(T('insight_low_confidence', months=_span))
 
-        season_c1, season_c2 = st.columns([1, 1])
-        if season_c1.button(T('rp_pdf_btn'), key="season_rp_btn"):
+        if st.button(T('rp_pdf_btn'), key="season_rp_btn"):
             with st.spinner(T('rp_pdf_spinner')):
                 try:
                     pdf_bytes = build_season_report(R)
                     st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="price_trend_report.pdf", mime="application/pdf", key="season_rp_dl")
-                except Exception as e:
-                    st.error(T('pdf_error_msg', msg=str(e)))
-        if season_c2.button(T('p1_rp_legacy_btn'), key="season_pdf_btn"):
-            with st.spinner(T('pdf_generating_msg')):
-                try:
-                    pdf_bytes = build_pdf_report(
-                        title=T('p5_title'),
-                        kpi_lines=[
-                            f"{T('p5_kpi_current')}: ${current_price:.2f}",
-                            f"{T('p5_kpi_yoy')}: {yoy:+.1f}%" if yoy is not None else f"{T('p5_kpi_yoy')}: N/A",
-                            f"{T('p5_kpi_frompeak')}: {from_peak:+.1f}%",
-                            T('group_rule_generic_hs'),
-                        ],
-                        figs=[fig], df_table=overall[['_ym_str', '_price']].rename(columns={'_ym_str': T('p5_axis_month'), '_price': T('p5_axis_price')}),
-                        table_title=T('p5_axis_month'),
-                    )
-                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="price_seasonality.pdf", mime="application/pdf", key="season_pdf_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
 
@@ -9609,26 +9265,11 @@ if selected == T('menu_opt_churn'):
 
         churn_blind = (st.checkbox(T('ch_rp_blind_toggle'), value=False, key="churn_rp_blind")
                        if (R.get('axis_is_importer') or R.get('scope_entity')) else False)
-        churn_c1, churn_c2 = st.columns([1, 1])
-        if churn_c1.button(T('rp_pdf_btn'), key="churn_rp_btn", disabled='period_a' not in R):
+        if st.button(T('rp_pdf_btn'), key="churn_rp_btn", disabled='period_a' not in R):
             with st.spinner(T('rp_pdf_spinner')):
                 try:
                     pdf_bytes = build_churn_report(R, bool(churn_blind))
                     st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="partner_change_report.pdf", mime="application/pdf", key="churn_rp_dl")
-                except Exception as e:
-                    st.error(T('pdf_error_msg', msg=str(e)))
-        if churn_c2.button(T('p1_rp_legacy_btn'), key="churn_pdf_btn"):
-            with st.spinner(T('pdf_generating_msg')):
-                try:
-                    combined = pd.concat([
-                        (new_df if new_df is not None else pd.DataFrame(columns=[T('p6_col_name'), T('p6_col_volume')])).assign(**{T('p6_kpi_new'): 'O'}),
-                    ], ignore_index=True) if new_df is not None else None
-                    pdf_bytes = build_pdf_report(
-                        title=T('p6_title'),
-                        kpi_lines=[f"{T('p6_kpi_new')}: {len(R['new_list'])}", f"{T('p6_kpi_kept')}: {R['kept_count']}", f"{T('p6_kpi_lost')}: {len(R['lost_list'])}"],
-                        figs=[], df_table=new_df, table_title=T('p6_new_header'),
-                    )
-                    st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="new_lost_partners.pdf", mime="application/pdf", key="churn_pdf_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
 
@@ -9932,29 +9573,11 @@ if selected == T('menu_opt_pivot'):
             st.dataframe(display_str)
 
             pv_blind = st.checkbox(T('pv_rp_blind_toggle'), value=False, key="pivot_rp_blind") if R.get('importer_maps') else False
-            pv_c1, pv_c2 = st.columns([1, 1])
-            if pv_c1.button(T('rp_pdf_btn'), key="pivot_rp_btn", disabled='kpi' not in R):
+            if st.button(T('rp_pdf_btn'), key="pivot_rp_btn", disabled='kpi' not in R):
                 with st.spinner(T('rp_pdf_spinner')):
                     try:
                         pdf_bytes = build_pivot_report(R, bool(pv_blind))
                         st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="pivot_report_new.pdf", mime="application/pdf", key="pivot_rp_dl")
-                    except Exception as e:
-                        st.error(T('pdf_error_msg', msg=str(e)))
-            if pv_c2.button(T('p1_rp_legacy_btn'), key="pivot_pdf_btn"):
-                with st.spinner(T('pdf_generating_msg')):
-                    try:
-                        pdf_table = display_combined.reset_index()
-                        pdf_table.columns = [_flat_label(c) for c in pdf_table.columns]
-                        pdf_bytes = build_pdf_report(
-                            title=T('p7_title'),
-                            kpi_lines=[
-                                f"{T('p7_row_label_multi')}: {', '.join(R['row_labels'])}",
-                                f"{T('p7_col_label_multi')}: {', '.join(R['col_labels']) if R['col_labels'] else '-'}",
-                                f"{T('p7_values_label')}: {', '.join(R['value_labels'])}",
-                            ],
-                            figs=[fig] if fig else [], df_table=pdf_table, table_title=T('p7_table_subheader'),
-                        )
-                        st.download_button(T('pdf_download_btn'), data=pdf_bytes, file_name="pivot_report.pdf", mime="application/pdf", key="pivot_pdf_dl")
                     except Exception as e:
                         st.error(T('pdf_error_msg', msg=str(e)))
 
@@ -10156,19 +9779,11 @@ if selected == T('menu_opt_scorer'):
                 st.caption(T('p8_no_data_warning'))
 
         scorer_blind_on = st.checkbox(T('p8_rp_blind_toggle'), value=False, key="scorer_rp_blind")
-        sc_c1, sc_c2 = st.columns([1, 1])
-        if sc_c1.button(T('rp_pdf_btn'), key="scorer_rp_btn"):
+        if st.button(T('rp_pdf_btn'), key="scorer_rp_btn"):
             with st.spinner(T('rp_pdf_spinner')):
                 try:
                     pdf_bytes = build_scorer_report(A, B, S, meta, R['dim_label'], scorer_blind_on)
                     st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="new_business_scorer_report.pdf", mime="application/pdf", key="scorer_rp_dl")
-                except Exception as e:
-                    st.error(T('pdf_error_msg', msg=str(e)))
-        if sc_c2.button(T('p1_rp_legacy_btn'), key="scorer_pdf_btn"):
-            with st.spinner(T('pdf_generating_msg')):
-                try:
-                    pdf_bytes = build_scorer_report_pdf(A, B, S, meta, R['dim_label'])
-                    st.download_button(T('p8_download_report_btn'), data=pdf_bytes, file_name="new_business_scorer_legacy.pdf", mime="application/pdf", key="scorer_pdf_dl")
                 except Exception as e:
                     st.error(T('pdf_error_msg', msg=str(e)))
 
