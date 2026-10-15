@@ -7365,6 +7365,9 @@ GUIDE_CONTENT = {
                     '벤치마킹 시뮬레이션 — 그 그룹만큼만 샀어도 얼마를 아꼈을지.',
                     '시장 점유율, 원산지(수출국) 필터.',
                     '공급망(공급사·원산지)별 더 저렴한 대안 소싱 옵션.',
+                    'PDF 리포트 — 결과 화면 아래 "📄 PDF 리포트" 영역에서 품목(HS + 품목분류)을 고르고 필요하면 포함/제외 키워드로 스펙을 좁힙니다. 같은 달·같은 원산지·같은 스펙의 시장 거래와 비교해 시장 대비 단가(%), 연 100t 이상 수입사 중 순위, 시장 평균·P25 수준이었을 때의 차이($), 시장보다 높았던 달 수를 보여줍니다.',
+                    'PDF 구성: 요약 → 품목별 진단(품목당 1쪽: 월별 고객사 vs 시장 VWAP·P25–P75 띠, 수입사별 단가 분포 점) → 같은 원산지의 대체 공급처(검증·가격 안정성·월 매칭 절감) → 방법론. 그 달 고객사 외 수입사가 5곳 이상인 달만 비교하고, 비교 가능한 달이 6개월 미만인 품목은 "비교 데이터 부족"으로 표시해 결론에서 뺍니다.',
+                    'PDF에는 고객사명만 나오고, 다른 한국 수입사는 이름 없이 순위·점으로만 나타냅니다.',
                 ],
             },
             {
@@ -7522,8 +7525,19 @@ GUIDE_CONTENT = {
                 ],
             },
             {
+                'heading': '🧪 품목별 스펙 분리 예시',
+                'intro': '같은 HS코드 안에도 규격이 다른 상품이 섞여 있습니다. ③ 시장 경쟁력 분석과 ⑩ 입찰 대응 분석에서는 품목분류(Category)와 포함/제외 키워드로 비교 대상을 같은 스펙으로 맞춘 뒤 비교하세요. 키워드는 쉼표나 | 로 구분하고, 품명(한글·영문)과 Product Description에서 대소문자 구분 없이 찾습니다.',
+                'results': [
+                    '냉동 닭다리살 (HS 0207141010) — 포함 "LEG MEAT|BONELESS". 같은 HS에 뼈 있는 "FROZEN CHICKEN LEG"가 섞여 있어, 그대로 두면 정육 단가가 시장보다 높아 보입니다.',
+                    '모짜렐라 치즈 (HS 0406101010, 품목분류 치즈) — 포함 "LOW MOISTURE|PART SKIM|SHRED|BLOCK", 제외 "FRESH|BUFFALO|STRING". 생모짜렐라·버팔로·스트링 치즈는 단가대가 달라 피자용 모짜렐라와 섞으면 비교가 흐려집니다.',
+                    '냉동 감자 (HS 2004100000) — 품목분류 "서류가공품"만. 같은 HS에 빵류·즉석조리식품 등이 섞여 있어 품목분류로 감자 가공품만 남깁니다.',
+                    '양념 닭고기 (HS 0207141010) — 품목분류 "양념육"은 별도 품목으로 봅니다. 양념 원가가 더해져 정육과 단가를 직접 비교할 수 없습니다.',
+                ],
+                'tips': ['키워드를 넣은 뒤 남은 건수가 너무 적으면(예: 비교 가능한 달 6개월 미만) 포함 키워드를 하나씩 줄여 보세요.'],
+            },
+            {
                 'heading': '📄 공통 — PDF 리포트',
-                'intro': '분석 결과 화면 아래의 "📄 PDF 리포트 만들기" 버튼을 누르면 리포트가 만들어지고, 이어서 나오는 "📥 PDF 리포트 다운로드" 버튼으로 저장합니다. ③ 시장 경쟁력 분석을 뺀 10개 메뉴에서 PDF 리포트를 만들 수 있습니다.',
+                'intro': '분석 결과 화면 아래의 "📄 PDF 리포트 만들기" 버튼을 누르면 리포트가 만들어지고, 이어서 나오는 "📥 PDF 리포트 다운로드" 버튼으로 저장합니다. 11개 메뉴 모두 PDF 리포트를 만들 수 있습니다 (③ 시장 경쟁력 분석은 결과 화면 아래 "📄 PDF 리포트" 영역).',
                 'tips': [
                     '모든 PDF 리포트는 같은 양식입니다 — 표지 → 요약(KPI 4개·핵심 결론 3줄) → 본문(차트·표) → 방법론과 "이 리포트로 알 수 없는 것" → 다음 단계 제안(마지막 Black 페이지).',
                     '한국 수입사명이 나오는 메뉴는 PDF에서 이름을 "수입사 A, B …"로 가리는 블라인드 옵션이 있습니다. 해외 공급사명은 그대로 표시됩니다.',
@@ -7632,6 +7646,9 @@ GUIDE_CONTENT = {
                     'Benchmarking simulation — potential savings if you matched that group.',
                     'Market share and an origin (export country) filter.',
                     'Cheaper alternative sourcing options by supplier/origin.',
+                    'PDF report — in the "📄 PDF report" area below the results, pick items (HS + Category) and narrow the spec with include/exclude keywords if needed. The client is compared with market trades of the same month, origin and spec: price vs market (%), rank among importers with 100t+ a year, the gap at the market average and P25 ($), and months above market.',
+                    'PDF layout: summary → item diagnosis (one page per item: monthly client vs market VWAP with a P25–P75 band, and importer price dots) → alternative suppliers from the same origin (verification, price stability, month-matched saving) → methodology. A month counts only if at least 5 other importers traded; items with fewer than 6 comparable months are marked "not enough data" and left out of the conclusions.',
+                    'The PDF shows only the client name; other Korean importers appear only as ranks and dots.',
                 ],
             },
             {
@@ -7789,8 +7806,19 @@ GUIDE_CONTENT = {
                 ],
             },
             {
+                'heading': '🧪 Spec separation examples',
+                'intro': 'One HS code can contain products with different specs. In ③ Market Competitiveness Analysis and ⑩ Tender Response Analysis, match the comparison to the same spec with Category and include/exclude keywords. Separate keywords with commas or |; they are matched case-insensitively in the product name (Korean and English) and Product Description.',
+                'results': [
+                    'Frozen chicken leg meat (HS 0207141010) — include "LEG MEAT|BONELESS". Bone-in "FROZEN CHICKEN LEG" shares the HS code; left in, boneless prices look higher than the market.',
+                    'Mozzarella (HS 0406101010, Category cheese) — include "LOW MOISTURE|PART SKIM|SHRED|BLOCK", exclude "FRESH|BUFFALO|STRING". Fresh, buffalo and string cheese sit in different price ranges and blur the comparison with pizza mozzarella.',
+                    'Frozen potatoes (HS 2004100000) — only the Category for processed potatoes. Bakery and ready meals share the HS code, so keep only the potato products by Category.',
+                    'Marinated chicken (HS 0207141010) — treat the marinated-meat Category as a separate item. Marinade adds cost, so its price cannot be compared directly with plain meat.',
+                ],
+                'tips': ['If too few rows remain after adding keywords (e.g., fewer than 6 comparable months), remove include keywords one at a time.'],
+            },
+            {
                 'heading': '📄 Common — PDF Reports',
-                'intro': 'Click "📄 Create PDF report" below the results to build the report, then save it with the "📥 Download PDF report" button that appears. Every menu except ③ Market Competitiveness Analysis offers a PDF report.',
+                'intro': 'Click "📄 Create PDF report" below the results to build the report, then save it with the "📥 Download PDF report" button that appears. All 11 menus offer a PDF report (for ③ Market Competitiveness Analysis, use the "📄 PDF report" area below the results).',
                 'tips': [
                     'All PDF reports share one layout — cover → summary (4 KPIs and 3 key findings) → body (charts and tables) → methodology and "what this report cannot tell you" → suggested next steps (final black page).',
                     'Menus that show Korean importer names offer a blind option that shows them as "Importer A, B …" in the PDF. Overseas supplier names are shown as is.',

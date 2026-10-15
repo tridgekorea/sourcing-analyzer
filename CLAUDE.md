@@ -22,7 +22,7 @@
 ① 도입 효과 분석 · ② 포트폴리오 헬스체크 · ③ 시장 경쟁력 분석 · ④ 공급망 흐름도 · ⑤ 집중도 리스크 진단 · ⑥ 가격 추세 & 계절성 · ⑦ 신규·이탈 거래처 추적 · ⑧ 신규사업 스코어러 · ⑨ 범용상품 스크리너 · ⑩ 입찰 대응 분석 · ⑪ 자유 피벗 빌더
 
 - 메뉴 목록은 사이드바 `option_menu`의 `_menu_keys`(TEXTS 키 `menu_opt_*`)로 관리한다. 메뉴 key는 `main_menu`로 고정되어 있고, 다른 메뉴로 코드에서 이동할 때는 `st.session_state['_menu_jump'] = 인덱스`를 쓴다(⑨ → ⑩ 넘기기).
-- PDF 리포트는 11개 메뉴 중 ③(PDF 없음)을 뺀 10개가 모두 `report_theme` 양식이다. 사용법 가이드 PDF도 같은 테마(Pretendard, 표지 → 본문). 기존 NanumGothic·kaleido 양식은 없앴다.
+- PDF 리포트는 11개 메뉴 모두 `report_theme` 양식이다(③은 기존 화면 아래 별도 "PDF 리포트" 영역, `build_market_report`). 사용법 가이드 PDF도 같은 테마(Pretendard, 표지 → 본문). 기존 NanumGothic·kaleido 양식은 없앴다.
 - PDF 리포트 공통 구성: 표지 → 01 요약(KPI 카드 4 + 핵심 결론 3, `_rp_summary`) → 본문 → 방법론·알 수 없는 것(`_rp_method`) → 클로징 "다음 단계 제안". 다른 메뉴로 연결하는 문구는 `_menu_ref(메뉴 키)`("'입찰 대응 분석' 메뉴")를 쓴다 — 새 PDF 테마는 ①~⑳을 '1.'로 바꾸므로 원문자 번호를 넣지 않는다.
 
 ## analysis_tool.py 구조
@@ -35,7 +35,7 @@
 4. 파일/컬럼 헬퍼 — `read_uploaded_table`(HS 등 코드 컬럼은 문자열로 읽고 앞자리 0 복원), `detect_standard_columns`, `detect_extra_dimension_columns`, `build_axis_map`
 5. ② 헬스체크 계산 — `prepare_health_df`, `compute_health_check`, `health_display_table` 등
 6. ⑨⑩ 공통 — 블라인드(`blind_importer_map`, `apply_blind`), 거래 전처리(`detect_trade_columns`, `prepare_trade_df`), ⑨ `compute_screener`, ⑩ `bid_filter`·`bid_supplier_table`·`bid_stability`
-7. 새 PDF 리포트 — `_rp_meta`, `build_adoption_report`(①), `build_screener_report`(⑨), `build_bid_report`(⑩), `MENU_KEYS`·`_menu_ref`·`_rp_*` 공통 헬퍼, `build_risk_report`(⑤), `build_season_report`(⑥), `build_health_report`(②), `build_churn_report`(⑦), `build_scorer_report`(⑧), `build_pivot_report`(⑪), `build_flow_report`(④) (+ 메뉴별 matplotlib 차트 함수)
+7. 새 PDF 리포트 — `_rp_meta`, `build_adoption_report`(①), `build_screener_report`(⑨), `build_bid_report`(⑩), `MENU_KEYS`·`_menu_ref`·`_rp_*` 공통 헬퍼, `build_risk_report`(⑤), `build_season_report`(⑥), `build_health_report`(②), `build_churn_report`(⑦), `build_scorer_report`(⑧), `build_pivot_report`(⑪), `build_flow_report`(④), `build_market_report`(③) — ②③ 공통 시장 비교 `compute_market_item`(같은 달·같은 원산지·같은 스펙, 그 달 비교 수입사 5곳 이상)·`market_alt_suppliers` (+ 메뉴별 matplotlib 차트 함수)
 8. 스코어러(⑧) 로직 — `detect_scorer_columns`, `_p8_*`, `compute_scorer`
 9. (삭제됨) 기존 PDF·kaleido 차트 출력
 10. 사용법 가이드 — `GUIDE_CONTENT`(ko/en 가이드 문구·표지 문구, `TEXTS`가 아님) + `build_user_guide_pdf`(report_theme)
