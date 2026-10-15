@@ -33,7 +33,7 @@
 2. 공용 분석 함수 — `weighted_avg`, `weighted_avg_groupby`, `remove_outliers_iqr` 등
 3. ① 헬퍼 — 품목명 정제 `normalize_product_name`(정제 규칙은 이 함수에서만 관리, 포장 단위·끝 제품 코드만 떼고 같은 이름끼리 묶음), ①②⑥ 공통 품목 묶기 `product_group_labels`(일반 명칭 품목은 HS 10단위로 한 번 더 나눔), 포장 단위 구성 변화 `pack_mix_change`/`pack_change_text`, 절감 그룹 `split_savings_groups`/`render_savings_cards` + 페이지별 `reset_*_states()` (`reset_analysis_states` … `reset_health_states`, `reset_screener_states`, `reset_bid_states`)
 4. 파일/컬럼 헬퍼 — `read_uploaded_table`(HS 등 코드 컬럼은 문자열로 읽고 앞자리 0 복원), `detect_standard_columns`, `detect_extra_dimension_columns`, `build_axis_map`
-5. ② 헬스체크 계산 — `prepare_health_df`, `compute_health_check`, `health_display_table` 등
+5. (② 헬스체크 계산은 7번 ③ 공통 시장 비교 뒤로 옮김: `health_item_metrics`(6항목 숫자)·`health_item_judge`(기준값 `HC_DEFAULT_TH`로 판정)·`compute_health_items`·`health_judge_all`·`build_health_report`)
 6. ⑨⑩ 공통 — 블라인드(`blind_importer_map`, `apply_blind`), 거래 전처리(`detect_trade_columns`, `prepare_trade_df`), ⑨ `compute_screener`, ⑩ `bid_filter`·`bid_supplier_table`·`bid_stability`
 7. 새 PDF 리포트 — `_rp_meta`, `build_adoption_report`(①), `build_screener_report`(⑨), `build_bid_report`(⑩), `MENU_KEYS`·`_menu_ref`·`_rp_*` 공통 헬퍼, `build_risk_report`(⑤), `build_season_report`(⑥), `build_health_report`(②), `build_churn_report`(⑦), `build_scorer_report`(⑧), `build_pivot_report`(⑪), `build_flow_report`(④), `build_market_report`(③) — ②③ 공통 시장 비교 `compute_market_item`(같은 달·같은 원산지·같은 스펙, 그 달 비교 수입사 5곳 이상)·`market_alt_suppliers` (+ 메뉴별 matplotlib 차트 함수)
 8. 스코어러(⑧) 로직 — `detect_scorer_columns`, `_p8_*`, `compute_scorer`

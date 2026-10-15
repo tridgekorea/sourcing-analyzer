@@ -254,9 +254,9 @@ class Rule(Flowable):
 class Badge(Flowable):
     """상태 배지: Blue(확정/검증) 또는 Black(미정/미검증/관세 미반영) + 라벨. 밝은 배경(C 분류)은 검은 글씨."""
 
-    def __init__(self, text, fill=BLACK, size=7.4, text_color=WHITE):
+    def __init__(self, text, fill=BLACK, size=7.4, text_color=WHITE, border=None):
         super().__init__()
-        self.text, self.fill, self.size, self.text_color = clean_text(text), fill, size, text_color
+        self.text, self.fill, self.size, self.text_color, self.border = clean_text(text), fill, size, text_color, border
         self.w = text_width(self.text, W["SB"], size) + 10
         self.h = size + 7
 
@@ -266,7 +266,10 @@ class Badge(Flowable):
     def draw(self):
         c = self.canv
         c.setFillColor(self.fill)
-        c.roundRect(0, 0, self.w, self.h, 2, stroke=0, fill=1)
+        if self.border is not None:  # 흰 바탕 배지(판단 보류 등)는 테두리로 구분
+            c.setStrokeColor(self.border)
+            c.setLineWidth(0.6)
+        c.roundRect(0, 0, self.w, self.h, 2, stroke=1 if self.border is not None else 0, fill=1)
         spaced(c, self.text, 5, 4.2, W["SB"], self.size, self.text_color)
 
 
@@ -437,15 +440,16 @@ def apply_pdf_chart_style(ax, grid_axis="both"):
     return ax
 
 
-def chart_image(fig):
-    """matplotlib figure → 본문 폭에 꼭 맞는 PDF 이미지 (300dpi)."""
+def chart_image(fig, width=None):
+    """matplotlib figure → 본문 폭(또는 width)에 꼭 맞는 PDF 이미지 (300dpi)."""
     plt = _plt()
     buf = io.BytesIO()
     w_in, h_in = fig.get_size_inches()
     fig.savefig(buf, format="png", dpi=300, facecolor="white")
     plt.close(fig)
     buf.seek(0)
-    return RLImage(buf, width=BODY_W, height=BODY_W * h_in / w_in)
+    width = width or BODY_W
+    return RLImage(buf, width=width, height=width * h_in / w_in)
 
 
 # ── 페이지 템플릿 ──────────────────────────────────────────
