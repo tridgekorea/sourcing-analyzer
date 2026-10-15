@@ -854,7 +854,7 @@ TEXTS = {
         'bd_supplier_header': '🏭 해외 공급사별 비교',
         'bd_base_label': '기준(현 납품) 공급사',
         'bd_base_none': '(선택 안 함)',
-        'bd_annual_ton_label': '연간 예상 물량 (톤, 절감액 계산용)',
+        'bd_annual_ton_label': '연간 예상 물량 (톤, PDF의 연간 절감 추정용)',
         'bd_col_origin': '원산지',
         'bd_col_exporter': '해외 공급사',
         'bd_col_status': '검증',
@@ -885,7 +885,7 @@ TEXTS = {
         'bd_stab_no_gap': '공백 없이',
         'bd_stab_with_gap': '{n}개월의 공백을 두고',
         'bd_stab_no_data': '선택한 공급사의 최근 거래가 없습니다.',
-        'bd_method_note': '※ 단가는 모두 물량가중평균(VWAP) USD/kg입니다. 전처리: 중복 행 제거(신고일·수입자·공급자·중량·금액 동일), 건당 최소 중량 미만 제외, 단가 P1~P99 밖 제외.',
+        'bd_method_note': '※ 단가는 모두 물량가중평균(VWAP) USD/kg입니다. 전처리: 중복 행 제거(신고일·수입자·공급자·중량·금액 동일), 건당 최소 중량 미만 제외, 단가 P1~P99 밖 제외. 절감액은 월 매칭(같은 달 단가 차이 × 그 달 기준 물량의 합)이고, 가격 안정성은 공급사 월별 VWAP의 변동계수(6% 미만 안정, 10% 이상 변동 큼)입니다.',
         # --- 포트폴리오 헬스체크 ---
         'ph_title': '🩺 포트폴리오 헬스체크',
         'ph_intro': '한 회사의 수입 데이터로 품목(또는 원산지 등)별 단가 변화·공급 차질·수급 경색을 점검하고, 공급 구조의 취약성과 금액 비중(영향도)을 함께 따져 지금 어디가 위험한지 빠르게 확인합니다.',
@@ -1019,6 +1019,24 @@ TEXTS = {
         'scr_rp_lbl_cat': '품목 단위',
         'scr_rp_m_cat_on': 'HS 10단위 + 품목분류(Category). 같은 HS 안에서 물량 비중 {th:g}% 미만인 품목분류는 제외({n}개)',
         'scr_rp_m_cat_off': 'HS 10단위',
+        'dup_keep_toggle': '동일 행을 별도 컨테이너로 보기 (중복 제거 안 함)',
+        'dup_keep_help': '신고일·수입사·공급사·중량·금액이 모두 같은 행은 기본적으로 중복 신고로 보고 한 건만 남깁니다. 같은 날 같은 조건의 컨테이너가 여러 개라면 켜세요.',
+        'dup_removed_caption': '※ 중복 행 {n:,}건 · {kg:,.0f}kg 제거 (신고일·수입사·공급사·중량·금액이 모두 같은 행)',
+        'dup_kept_caption': '※ 동일 행 {n:,}건 · {kg:,.0f}kg을 별도 컨테이너로 보고 그대로 둡니다',
+        'bd_col_stab': '가격 안정성',
+        'bd_col_mcv': '월별 단가 CV(%)',
+        'bd_stab_stable': '안정',
+        'bd_stab_mid': '보통',
+        'bd_stab_volatile': '변동 큼',
+        'bd_stab_na': '판단 불가',
+        'bd_col_saving_month': '절감액(월 매칭, USD)',
+        'bd_col_matched': '겹친 달',
+        'bd_matched_few': '{n} (적음)',
+        'bd_rp_th_stab': '가격<br/>안정성',
+        'bd_rp_lbl_saving': '절감액',
+        'bd_rp_m_saving': '월 매칭: 기준 공급사와 후보 공급사가 모두 거래한 달마다 (기준 비교단가 − 후보 비교단가) × 그 달 기준 물량을 합산. 겹친 달이 {m}개월 미만이면 "적음" 표시. 연간 절감 추정 = 월 매칭 절감률 × 기준 비교단가 × 연간 예상 물량',
+        'bd_rp_lbl_stab': '가격 안정성',
+        'bd_rp_m_stab': '공급사 월별 VWAP의 변동계수(표준편차 ÷ 평균). {lo}% 미만 안정, {hi}% 이상 변동 큼, 그 사이 보통. 거래 월 3개월 미만은 판단 불가',
         'rp_menu_ref': '‘{name}’ 메뉴',
         'axis_extra_suffix': ' (원본)',
         'rk_rp_eyebrow': 'Concentration Risk Report',
@@ -2350,7 +2368,7 @@ TEXTS = {
         'bd_supplier_header': '🏭 Comparison by overseas supplier',
         'bd_base_label': 'Baseline (current) supplier',
         'bd_base_none': '(None)',
-        'bd_annual_ton_label': 'Expected annual volume (tons, for savings)',
+        'bd_annual_ton_label': 'Expected annual volume (tons, for the annual estimate in the PDF)',
         'bd_col_origin': 'Origin',
         'bd_col_exporter': 'Overseas supplier',
         'bd_col_status': 'Verification',
@@ -2381,7 +2399,7 @@ TEXTS = {
         'bd_stab_no_gap': 'without a gap',
         'bd_stab_with_gap': 'with {n} month(s) without shipments',
         'bd_stab_no_data': 'The selected supplier has no recent trades.',
-        'bd_method_note': '※ All prices are volume-weighted average (VWAP) USD/kg. Preprocessing: duplicate rows removed (same date, importer, supplier, weight, and value), shipments under the minimum weight excluded, unit prices outside P1–P99 excluded.',
+        'bd_method_note': '※ All prices are volume-weighted average (VWAP) USD/kg. Preprocessing: duplicate rows removed (same date, importer, supplier, weight, and value), shipments under the minimum weight excluded, unit prices outside P1–P99 excluded. Savings are month-matched (same-month price gap × baseline volume that month, summed); price stability is the coefficient of variation of the monthly VWAP of each supplier (under 6% stable, 10% or more volatile).',
         # --- Portfolio Health Check ---
         'ph_title': '🩺 Portfolio Health Check',
         'ph_intro': "Checks one company's import data per product (or origin, etc.) for unit price changes, supply disruption, and supply squeeze, weighing supply-structure vulnerability and spend share (impact) to quickly show where the risk is right now.",
@@ -2515,6 +2533,24 @@ TEXTS = {
         'scr_rp_lbl_cat': 'Product unit',
         'scr_rp_m_cat_on': '10-digit HS + Category. Categories under {th:g}% of their HS volume are excluded ({n})',
         'scr_rp_m_cat_off': '10-digit HS',
+        'dup_keep_toggle': 'Treat identical rows as separate containers (do not remove duplicates)',
+        'dup_keep_help': 'Rows with the same date, importer, supplier, weight and value are treated as duplicate filings and kept once by default. Turn this on if several identical containers arrived on the same day.',
+        'dup_removed_caption': '※ Removed {n:,} duplicate rows · {kg:,.0f} kg (same date, importer, supplier, weight and value)',
+        'dup_kept_caption': '※ Keeping {n:,} identical rows · {kg:,.0f} kg as separate containers',
+        'bd_col_stab': 'Price stability',
+        'bd_col_mcv': 'Monthly price CV (%)',
+        'bd_stab_stable': 'Stable',
+        'bd_stab_mid': 'Moderate',
+        'bd_stab_volatile': 'Volatile',
+        'bd_stab_na': 'N/A',
+        'bd_col_saving_month': 'Savings (month-matched, USD)',
+        'bd_col_matched': 'Months matched',
+        'bd_matched_few': '{n} (few)',
+        'bd_rp_th_stab': 'Price<br/>stability',
+        'bd_rp_lbl_saving': 'Savings',
+        'bd_rp_m_saving': 'Month-matched: for each month both the baseline and the candidate traded, (baseline comparison price − candidate comparison price) × baseline volume that month, summed. Marked "few" if fewer than {m} months overlap. Annual estimate = month-matched savings rate × baseline comparison price × expected annual volume',
+        'bd_rp_lbl_stab': 'Price stability',
+        'bd_rp_m_stab': 'Coefficient of variation (std ÷ mean) of the supplier\'s monthly VWAP. Under {lo}% stable, {hi}% or more volatile, otherwise moderate. N/A with fewer than 3 trading months',
         'rp_menu_ref': 'the {name} menu',
         'axis_extra_suffix': ' (raw)',
         'rk_rp_eyebrow': 'Concentration Risk Report',
@@ -3866,7 +3902,7 @@ def derive_unit_price(raw_df, cols, tol=0.05):
     return price.where(price.notna(), derived), value, mismatch
 
 
-def prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=1000, trim=(0.01, 0.99)):
+def prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=1000, trim=(0.01, 0.99), keep_dups=False):
     """⑨⑩ 공통 전처리. (df, stats)를 반환한다.
     1) 날짜·중량·단가가 유효한 행만 (단가가 없으면 금액/중량으로 계산)
     2) 중복 제거: 신고일·수입자·공급자·중량·금액이 모두 같은 행
@@ -3889,9 +3925,12 @@ def prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=1000, trim=(0.01
     })
     d = d[d['_date'].notna() & (d['_volume'] > 0) & (d['_price'] > 0)]
     d['_date'] = d['_date'].dt.normalize()
-    before = len(d)
-    d = d.drop_duplicates(subset=['_date', '_importer', '_exporter', '_volume', '_amount'])
-    stats = {'n0': n0, 'dup': before - len(d)}
+    # 중복: 신고일·수입사·공급사·중량·금액이 모두 같은 행. 기본은 한 건만 남기고, keep_dups면 별도 컨테이너로 보고 둔다
+    dup_mask = d.duplicated(subset=['_date', '_importer', '_exporter', '_volume', '_amount'])
+    stats = {'n0': n0, 'dup': 0 if keep_dups else int(dup_mask.sum()), 'dup_rows': int(dup_mask.sum()),
+             'dup_kg': float(d.loc[dup_mask, '_volume'].sum()), 'keep_dups': bool(keep_dups)}
+    if not keep_dups:
+        d = d[~dup_mask]
     if period is not None:
         d = d[(d['_date'] >= pd.Timestamp(period[0])) & (d['_date'] <= pd.Timestamp(period[1]))]
     before = len(d)
@@ -3907,6 +3946,14 @@ def prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=1000, trim=(0.01
     d = d.copy()
     d['_ym'] = d['_date'].dt.to_period('M')
     return d, stats
+
+
+def dup_caption(stats):
+    """중복 행 처리 안내 문구 (⑨⑩)."""
+    if not stats.get('dup_rows'):
+        return None
+    key = 'dup_kept_caption' if stats.get('keep_dups') else 'dup_removed_caption'
+    return T(key, n=stats['dup_rows'], kg=stats['dup_kg'])
 
 
 def default_last_12m(dates):
@@ -4101,8 +4148,11 @@ def bid_supplier_table(df, by, period_end, verify, tariffs=None):
         rate = tariffs.get(origin)
         vwap = float(weighted_avg(g, '_price', '_volume'))
         imp_vol = g.groupby('_importer')['_volume'].sum().sort_values(ascending=False)
+        mv = weighted_avg_groupby(g, '_ym', '_price', '_volume').dropna()  # 월별 VWAP
+        mcv = float(mv.std(ddof=0) / mv.mean() * 100) if len(mv) >= 3 and mv.mean() > 0 else np.nan
         rows.append({
-            'key': key, 'origin': origin, 'vwap': vwap,
+            'key': key, 'origin': origin, 'vwap': vwap, 'mcv': mcv,
+            'stab': None if pd.isna(mcv) else ('stable' if mcv < BID_STAB_CV[0] else 'volatile' if mcv >= BID_STAB_CV[1] else 'mid'),
             'tariff': rate, 'cmp': vwap * (1 + rate / 100) if rate is not None else vwap,
             'shipments': len(g), 'tons': float(g['_volume'].sum()) / 1000, 'months': g['_ym'].nunique(),
             'importers': len(imp_vol), 'importer_names': ', '.join(imp_vol.index), 'last': g['_date'].max().date(),
@@ -4112,16 +4162,41 @@ def bid_supplier_table(df, by, period_end, verify, tariffs=None):
     return pd.DataFrame(rows).sort_values('cmp').reset_index(drop=True)
 
 
-def bid_add_savings(table, base_key, annual_tons):
-    """기준 공급사 대비 절감률(%)·연간 절감액(USD = 단가차 × 연간 물량)."""
+BID_STAB_CV = (6.0, 10.0)   # 가격 안정성: 월별 VWAP CV가 앞 값 미만이면 안정, 뒤 값 이상이면 변동 큼
+BID_MATCH_MIN_MONTHS = 3    # 월 매칭 절감액: 겹친 달이 이보다 적으면 '적음' 표시
+
+
+def bid_add_savings(table, base_key, df, tariffs=None, min_months=BID_MATCH_MIN_MONTHS):
+    """기준 공급사 대비 절감액을 '월 매칭'으로 계산한다 (공급사 표 by='_exporter').
+    두 공급사가 모두 거래한 달마다 (기준 비교단가 − 후보 비교단가) × 그 달 기준 물량을 더한다.
+    비교단가 = 월 VWAP × (1 + 원산지 관세율). 반환 열: saving_pct, saving_amt(USD), matched(겹친 달 수), matched_few."""
     table = table.copy()
-    if base_key is None or base_key not in set(table['key']):
-        table['saving_pct'] = np.nan
-        table['saving_amt'] = np.nan
+    for c in ('saving_pct', 'saving_amt', 'matched'):
+        table[c] = np.nan
+    table['matched_few'] = False
+    if base_key is None or base_key not in set(table['key']) or df.empty:
         return table
-    base = float(table.loc[table['key'] == base_key, 'cmp'].iloc[0])
-    table['saving_pct'] = (base - table['cmp']) / base * 100 if base > 0 else np.nan
-    table['saving_amt'] = (base - table['cmp']) * annual_tons * 1000
+    tariffs = tariffs or {}
+    rate = {r['key']: 1 + (tariffs.get(r['origin']) or 0) / 100 for _, r in table.iterrows()}
+    mp = weighted_avg_groupby(df, ['_exporter', '_ym'], '_price', '_volume')
+    mvol = df.groupby(['_exporter', '_ym'])['_volume'].sum()
+    if base_key not in mp.index.get_level_values(0):
+        return table
+    bp, bv = mp.loc[base_key] * rate.get(base_key, 1), mvol.loc[base_key]
+    for i, r in table.iterrows():
+        if r['key'] == base_key or r['key'] not in mp.index.get_level_values(0):
+            continue
+        cp = mp.loc[r['key']] * rate.get(r['key'], 1)
+        months = bp.index.intersection(cp.index)
+        months = [m for m in months if pd.notna(bp[m]) and pd.notna(cp[m])]
+        table.at[i, 'matched'] = len(months)
+        table.at[i, 'matched_few'] = len(months) < min_months
+        if not months:
+            continue
+        diff = sum((bp[m] - cp[m]) * bv[m] for m in months)
+        base_cost = sum(bp[m] * bv[m] for m in months)
+        table.at[i, 'saving_amt'] = diff
+        table.at[i, 'saving_pct'] = diff / base_cost * 100 if base_cost > 0 else np.nan
     return table
 
 
@@ -4550,9 +4625,12 @@ def build_bid_report(ctx):
     meta = _rp_meta(T('bd_rp_eyebrow'), [ctx['item'], T('bd_rp_title2')], ctx['item'], ctx['spec'] or None,
                     ctx['hs'], ctx['period'], ctx['blind'], f"{ctx['item']} {T('bd_rp_title2')}")
 
-    # 01 요약
+    # 01 요약 — 절감률은 월 매칭(같은 달끼리 비교) 값을 쓰고, 겹친 달이 없으면 기간 VWAP 차이로 대신한다
     best = verified.iloc[0] if len(verified) else None
-    save_pct = (base_cmp - float(best['cmp'])) / base_cmp * 100 if (best is not None and base_cmp) else None
+    save_pct = None
+    if best is not None and base_cmp:
+        mp_ = best.get('saving_pct') if 'saving_pct' in best else np.nan
+        save_pct = float(mp_) if pd.notna(mp_) else (base_cmp - float(best['cmp'])) / base_cmp * 100
     if save_pct is not None and save_pct > 0:
         headline = T('bd_rp_head_save', pct=save_pct)
     elif len(verified):
@@ -4566,7 +4644,7 @@ def build_bid_report(ctx):
          T('bd_rp_kpi1_note', basis=basis, origin=best['origin']) if best is not None else T('bd_rp_kpi1_none')),
         (T('bd_rp_kpi2'), f"–{save_pct:.1f}%" if save_pct is not None and save_pct > 0 else (f"+{-save_pct:.1f}%" if save_pct is not None else '-'),
          T('bd_rp_kpi2_note', p=base_cmp) if base_cmp else T('bd_rp_kpi_no_base')),
-        (T('bd_rp_kpi3'), _rp_money_k((base_cmp - float(best['cmp'])) * annual_t * 1000) if (save_pct is not None and save_pct > 0) else '-',
+        (T('bd_rp_kpi3'), _rp_money_k(save_pct / 100 * base_cmp * annual_t * 1000) if (save_pct is not None and save_pct > 0) else '-',
          T('bd_rp_kpi3_note', t=annual_t) if base_cmp else T('bd_rp_kpi_no_base')),
         (T('bd_rp_kpi4'), T('rp_month_unit', n=best_gap) if best_gap is not None else '-', T('bd_rp_kpi4_note', m=m36)),
     ]
@@ -4611,15 +4689,20 @@ def build_bid_report(ctx):
     ranked = pd.concat([cand[cand['verified']].sort_values('cmp'), cand[~cand['verified']].sort_values('cmp')]).head(top_n)
     rows = []
     for i, (_, r) in enumerate(ranked.iterrows(), 1):
-        vs = f"{(r['cmp'] - base_cmp) / base_cmp * 100:+.1f}%" if base_cmp else '-'
-        rows.append([str(i), r['key'], r['origin'], f"{r['cmp']:.2f}", vs, f"{r['shipments']:,}", f"{r['tons']:,.0f}",
+        if base_cmp and pd.notna(r.get('saving_pct', np.nan)):  # 월 매칭 절감률 (후보가 싸면 –)
+            vs = _rp_pct(-float(r['saving_pct'])) + (' *' if r.get('matched_few') else '')
+        else:
+            vs = _rp_pct((r['cmp'] - base_cmp) / base_cmp * 100) if base_cmp else '-'
+        stab = T(f"bd_stab_{r['stab']}") if isinstance(r.get('stab'), str) else T('bd_stab_na')
+        rows.append([str(i), r['key'], r['origin'], f"{r['cmp']:.2f}", vs, stab, f"{r['shipments']:,}", f"{r['tons']:,.0f}",
                      f"{r['months']}", T('rp_company_unit', n=r['importers']),
                      rt.status_badge(T('bd_badge_verified'), True) if r['verified'] else rt.status_badge(T('bd_badge_unverified'), False)])
     if base_row is not None:
-        rows.append(['–', base_row['key'], base_row['origin'], f"{base_cmp:.2f}", T('bd_rp_base_tag'), '–', '–', '–', '–', ''])
-    tbl = rt.brand_table([T('bd_rp_th_no'), T('bd_col_exporter'), T('bd_col_origin'), T('bd_rp_th_cmp'), T('bd_rp_th_vs'),
+        rows.append(['–', base_row['key'], base_row['origin'], f"{base_cmp:.2f}", T('bd_rp_base_tag'),
+                     T(f"bd_stab_{base_row['stab']}") if isinstance(base_row.get('stab'), str) else T('bd_stab_na'), '–', '–', '–', '–', ''])
+    tbl = rt.brand_table([T('bd_rp_th_no'), T('bd_col_exporter'), T('bd_col_origin'), T('bd_rp_th_cmp'), T('bd_rp_th_vs'), T('bd_rp_th_stab'),
                           T('bd_rp_th_ship'), T('bd_rp_th_ton'), T('bd_rp_th_months'), T('bd_rp_th_imp'), T('bd_rp_th_status')],
-                         rows, rt.col_widths([7, 44, 17, 17, 17, 11, 15, 13, 14, 19]), right_cols=(3, 4, 5, 6, 7, 8), header_markup=True)
+                         rows, rt.col_widths([7, 40, 15, 15, 16, 14, 10, 13, 12, 13, 19]), right_cols=(3, 4, 6, 7, 8, 9), header_markup=True)
     if base_row is not None:
         tbl.setStyle(TableStyle([("LINEABOVE", (0, len(rows)), (-1, len(rows)), 0.8, rt.BLACK)]))
     s2 += [tbl, Spacer(1, 3 * mm),
@@ -4664,6 +4747,8 @@ def build_bid_report(ctx):
                                     inc=ctx['include'] or '-', exc=ctx['exclude'] or '-')),
             (T('bd_rp_lbl_dedup'), T('bd_rp_m_dedup')), (T('bd_rp_lbl_outlier'), T('bd_rp_m_outlier', kg=int(ctx['min_kg']))),
             (T('bd_rp_lbl_price'), T('bd_rp_m_price')), (T('bd_rp_lbl_tariff'), tariff_txt),
+            (T('bd_rp_lbl_saving'), T('bd_rp_m_saving', m=BID_MATCH_MIN_MONTHS)),
+            (T('bd_rp_lbl_stab'), T('bd_rp_m_stab', lo=f"{BID_STAB_CV[0]:g}", hi=f"{BID_STAB_CV[1]:g}")),
             (T('bd_rp_lbl_verify'), T('bd_rp_m_verify', ship=verify['min_ship'], ton=verify['min_ton'], imp=verify['min_imp'])),
             (T('bd_rp_lbl_blind'), T('bd_rp_m_blind_on') if ctx['blind'] else T('bd_rp_m_blind_off'))]
     s4 = [rt.SectionHeader(T('bd_rp_s4_eyebrow'), T('bd_rp_s4_head')), Spacer(1, 2 * mm),
@@ -4683,7 +4768,7 @@ def build_bid_report(ctx):
     else:
         backup_txt = T('bd_rp_close_no_backup')
     if save_pct is not None and save_pct > 0:
-        save_txt = T('bd_rp_close_save', pct=save_pct, t=annual_t, k=(base_cmp - float(best['cmp'])) * annual_t)
+        save_txt = T('bd_rp_close_save', pct=save_pct, t=annual_t, k=save_pct / 100 * base_cmp * annual_t)
     else:
         save_txt = T('bd_rp_close_nosave') if not base_cmp else T('bd_rp_close_nobetter')
     closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('bd_rp_close_head'),
@@ -6859,6 +6944,7 @@ GUIDE_CONTENT = {
                     '여러 HS코드·여러 수입사가 섞인 시장 데이터를 업로드합니다 (날짜·수입사·공급사·원산지·HS코드·물량·단가 필요).',
                     '분석 기간(기본: 최근 12개월), 건당 최소 중량(기본 1,000kg), HS별 최소 거래 건수를 정합니다.',
                     '"HS 10단위 + 품목분류(Category)로 나누기"(기본 켬)를 켜면 같은 HS 안에서도 품목분류별로 따로 봅니다. 같은 HS 안에서 물량 비중 5% 미만인 품목분류(예: 냉동감자 HS의 빵류·즉석조리식품)는 빼고, 제외 목록과 건수를 결과 위에 보여줍니다.',
+                    '"동일 행을 별도 컨테이너로 보기"를 켜면 중복으로 보이는 행(신고일·수입사·공급사·중량·금액 동일)을 지우지 않습니다. 기본은 한 건만 남기고 지운 건수·물량을 결과에 표시합니다.',
                     '필요하면 사이드바에서 범용성 점수 가중치와 분류 경계(기본 60/30, 격차 50)를 조정합니다.',
                     '"스크리닝 실행"을 클릭합니다.',
                 ],
@@ -6883,7 +6969,8 @@ GUIDE_CONTENT = {
                     '시장 데이터를 업로드하거나, 범용상품 스크리너에서 품목을 넘겨받습니다 (HS코드가 자동 선택됩니다).',
                     'HS코드, 품목분류(기본: 그 HS에서 물량 1위 품목분류만), 품명 포함/제외 키워드(쉼표 또는 | 로 구분 — 품명 한글·영문과 Product Description에서 대소문자 무시로 검색), 기간(기본: 최근 12개월), 건당 최소 중량을 정합니다.',
                     '[대체 공급처] 탭에서 검증 기준(최근 12개월 3건·10톤·한국 수입사 2곳 이상)을 확인하고, 필요하면 원산지별 관세율을 입력합니다.',
-                    '기준(현 납품) 공급사와 연간 물량(톤)을 넣으면 후보별 절감률과 연간 절감액이 계산됩니다.',
+                    '기준(현 납품) 공급사를 고르면 후보별 절감액을 "월 매칭"으로 계산합니다 — 두 공급사가 모두 거래한 달마다 (기준 단가 − 후보 단가) × 그 달 기준 물량을 더하고, 겹친 달이 3개월 미만이면 "적음"으로 표시합니다. 연간 예상 물량(톤)은 PDF의 연간 절감 추정에 쓰입니다. "가격 안정성" 열은 공급사 월별 VWAP의 변동계수로, 6% 미만 안정·10% 이상 변동 큼입니다.',
+                    '"동일 행을 별도 컨테이너로 보기"를 켜면 신고일·수입사·공급사·중량·금액이 모두 같은 행을 지우지 않습니다 (기본은 한 건만 남기고, 지운 건수와 물량을 표시).',
                     '[공급 안정성] 탭에서 공급사를 골라 최근 36개월 선적 실적을 확인하고, 아래에서 PDF 리포트를 만듭니다.',
                 ],
                 'results': [
@@ -7124,6 +7211,7 @@ GUIDE_CONTENT = {
                     'Upload market data with multiple HS codes and importers (date, importer, supplier, origin, HS code, volume, and unit price required).',
                     'Set the period (default: last 12 months), minimum weight per shipment (default 1,000 kg), and minimum shipments per HS.',
                     'With "Split by 10-digit HS + Category" (on by default), each category within an HS code is scored separately. Categories under 5% of their HS volume (e.g. bakery or ready meals under the frozen-fries HS) are excluded, and the excluded list and row counts are shown above the results.',
+                    'Turn on "Treat identical rows as separate containers" to keep rows that look like duplicates (same date, importer, supplier, weight and value). By default they are kept once and the removed count and volume are shown with the results.',
                     'If needed, adjust universality weights and class boundaries (default 60/30, gap 50) in the sidebar.',
                     'Click "Run Screening".',
                 ],
@@ -7148,7 +7236,8 @@ GUIDE_CONTENT = {
                     'Upload market data, or receive an item from the Commodity Screener (the HS code is selected automatically).',
                     'Set the HS code, category (default: only the largest category by volume in that HS), product name include/exclude keywords (separate with , or | — searched case-insensitively in the Korean/English product name and Product Description), the period (default: last 12 months), and minimum weight per shipment.',
                     'In [Alternative suppliers], check the verification criteria (3+ shipments, 10+ tons, 2+ Korean importers in the last 12 months) and enter tariff rates per origin if needed.',
-                    'Enter the baseline (current) supplier and annual volume (tons) to see savings rates and annual savings per candidate.',
+                    'Pick the baseline (current) supplier to get month-matched savings per candidate — for each month both traded, (baseline price − candidate price) × baseline volume that month, summed; marked "few" if fewer than 3 months overlap. The expected annual volume (tons) is used for the annual estimate in the PDF. The "Price stability" column is the coefficient of variation of the monthly VWAP of each supplier: under 6% stable, 10% or more volatile.',
+                    'Turn on "Treat identical rows as separate containers" to keep rows with the same date, importer, supplier, weight and value (by default they are kept once, and the removed count and volume are shown).',
                     'In [Supply stability], pick a supplier to review its last 36 months of shipments, then create the PDF report below.',
                 ],
                 'results': [
@@ -9979,6 +10068,7 @@ if selected == T('menu_opt_screener'):
             min_ship = st.number_input(T('sc_min_ship_label'), min_value=1, value=5, step=1, key="scr_min_ship")
             by_cat = (st.checkbox(T('sc_split_cat'), value=True, key="scr_split_cat", help=T('sc_split_cat_help'))
                       if cols.get('category') else False)
+            keep_dups = st.checkbox(T('dup_keep_toggle'), value=False, key="scr_keep_dups", help=T('dup_keep_help'))
 
             with st.sidebar.expander(T('sc_weights_header'), expanded=False):
                 weights = {k: st.slider(T(f'sc_w_{k}'), 0.0, 3.0, SCREENER_DEFAULT_WEIGHTS[k], 0.5, key=f"scr_w_{k}")
@@ -9995,7 +10085,7 @@ if selected == T('menu_opt_screener'):
                     st.warning(T('sc_no_data_warning'))
                     st.stop()
                 with st.spinner(T('sc_spinner')):
-                    df, stats = prepare_trade_df(raw_df, cols, period=period, min_shipment_kg=min_kg)
+                    df, stats = prepare_trade_df(raw_df, cols, period=period, min_shipment_kg=min_kg, keep_dups=keep_dups)
                     cat_excluded = None
                     if by_cat:
                         df, cat_excluded = screener_category_filter(df, SCREENER_CAT_MIN_SHARE)
@@ -10014,6 +10104,8 @@ if selected == T('menu_opt_screener'):
         R = st.session_state.scr_result
         res, (bound_hi, bound_lo, bound_gap) = R['res'], R['bounds']
         st.caption(T('sc_prep_caption', skipped=R['skipped'], **R['stats']))
+        if dup_caption(R['stats']):
+            st.caption(dup_caption(R['stats']))
         cx = R.get('cat_excluded')
         if cx is not None and len(cx):
             st.caption(T('sc_cat_excluded', th=SCREENER_CAT_MIN_SHARE, n=len(cx), rows=int(cx['rows'].sum()), kg=float(cx['kg'].sum())))
@@ -10098,7 +10190,8 @@ if selected == T('menu_opt_bid'):
 
         st.subheader(T('bd_filter_header'))
         partial_month_notice('bid_raw_df')
-        full_df, stats = prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=st.session_state.get('bid_min_kg', 1000))
+        full_df, stats = prepare_trade_df(raw_df, cols, period=None, min_shipment_kg=st.session_state.get('bid_min_kg', 1000),
+                                          keep_dups=st.session_state.get('bid_keep_dups', False))
         hs_list = sorted(full_df['_hs'].unique()) if cols['hs'] else []
         preset = st.session_state.get('bid_hs_preset')
         if preset:
@@ -10124,12 +10217,15 @@ if selected == T('menu_opt_bid'):
             st.slider(T('bd_min_kg_label'), 0, 10000, 1000, 100, key="bid_min_kg")
         with g2:
             blind_on = st.checkbox(T('blind_toggle'), value=True, key="bid_blind")
+            st.checkbox(T('dup_keep_toggle'), value=False, key="bid_keep_dups", help=T('dup_keep_help'))
 
         if not isinstance(period, (tuple, list)) or len(period) != 2:
             st.stop()
         scoped = bid_filter(full_df, None if hs_sel == T('bd_hs_all') else hs_sel, include_kw, exclude_kw, categories=cat_sel or None)
         in_period = scoped[(scoped['_date'] >= pd.Timestamp(period[0])) & (scoped['_date'] <= pd.Timestamp(period[1]))]
         st.caption(T('bd_prep_caption', n0=stats['n0'], dup=stats['dup'], small=stats['small'], outlier=stats['outlier'], n=len(in_period)))
+        if dup_caption(stats):
+            st.caption(dup_caption(stats))
         if in_period.empty:
             st.warning(T('bd_no_data_warning'))
             st.stop()
@@ -10165,6 +10261,8 @@ if selected == T('menu_opt_bid'):
                     T('bd_col_vwap'): table['vwap'].round(3),
                     T('bd_col_tariff'): table['tariff'],
                     T('bd_col_cmp'): table['cmp'].round(3),
+                    T('bd_col_stab'): table['stab'].map(lambda v: T(f'bd_stab_{v}') if isinstance(v, str) else T('bd_stab_na')),
+                    T('bd_col_mcv'): table['mcv'].round(1),
                     T('bd_col_ship'): table['shipments'],
                     T('bd_col_ton'): table['tons'].round(1),
                     T('bd_col_months'): table['months'],
@@ -10174,7 +10272,9 @@ if selected == T('menu_opt_bid'):
                 })
                 if 'saving_pct' in table:
                     out[T('bd_col_saving_pct')] = table['saving_pct'].round(1)
-                    out[T('bd_col_saving_amt')] = table['saving_amt'].round(0)
+                    out[T('bd_col_saving_month')] = table['saving_amt'].round(0)
+                    out[T('bd_col_matched')] = [('-' if pd.isna(m) else (T('bd_matched_few', n=int(m)) if few else str(int(m))))
+                                                for m, few in zip(table['matched'], table['matched_few'])]
                 return apply_blind(out, T('bd_col_importer_names'), blind_on, mapping=blind_map)
 
             st.subheader(T('bd_origin_header'))
@@ -10200,7 +10300,7 @@ if selected == T('menu_opt_bid'):
                 annual_tons = st.number_input(T('bd_annual_ton_label'), min_value=0.0, value=100.0, step=10.0, key="bid_annual_tons")
             with s3:
                 verified_only = st.checkbox(T('bd_verified_only'), value=False, key="bid_verified_only")
-            sup_tbl = bid_add_savings(sup_tbl, None if base_sel == T('bd_base_none') else base_sel, annual_tons)
+            sup_tbl = bid_add_savings(sup_tbl, None if base_sel == T('bd_base_none') else base_sel, in_period, tariffs)
             shown_sup = sup_tbl[sup_tbl['verified'] | (sup_tbl['key'] == base_sel)] if verified_only else sup_tbl
             sup_view = _view(shown_sup, T('bd_col_exporter'))
             st.dataframe(sup_view, hide_index=True, width="stretch")
