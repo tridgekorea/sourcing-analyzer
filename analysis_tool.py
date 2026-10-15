@@ -1037,6 +1037,93 @@ TEXTS = {
         'bd_rp_m_saving': '월 매칭: 기준 공급사와 후보 공급사가 모두 거래한 달마다 (기준 비교단가 − 후보 비교단가) × 그 달 기준 물량을 합산. 겹친 달이 {m}개월 미만이면 "적음" 표시. 연간 절감 추정 = 월 매칭 절감률 × 기준 비교단가 × 연간 예상 물량',
         'bd_rp_lbl_stab': '가격 안정성',
         'bd_rp_m_stab': '공급사 월별 VWAP의 변동계수(표준편차 ÷ 평균). {lo}% 미만 안정, {hi}% 이상 변동 큼, 그 사이 보통. 거래 월 3개월 미만은 판단 불가',
+        # ③ 시장 경쟁력 새 PDF
+        'mk_rp_header': '📄 PDF 리포트 (같은 달·같은 원산지·같은 스펙 시장 비교)',
+        'mk_rp_intro': '위 화면과 별개로, 품목 스펙(HS + 품목분류 + 키워드)을 맞춘 시장 거래와 같은 달·같은 원산지끼리 비교합니다. 고객사가 산 품목 중 물량 상위 품목이 자동으로 들어가며, 키워드로 스펙을 좁힐 수 있습니다.',
+        'mk_rp_need_cols': 'PDF 리포트에는 날짜·수입사·공급사·원산지·HS코드·중량·단가(또는 금액) 컬럼이 필요합니다.',
+        'mk_rp_no_customer': '전처리 후 남은 데이터에 고객사 거래가 없습니다.',
+        'mk_rp_no_items': '리포트에 넣을 품목을 1개 이상 선택하세요.',
+        'mk_rp_no_result': '선택한 품목에서 고객사 거래를 찾지 못했습니다. HS·품목분류·키워드를 확인하세요.',
+        'mk_rp_spec_caption': '포함/제외 키워드는 쉼표나 | 로 구분하고, 품명(한글·영문)과 Product Description에서 대소문자 구분 없이 찾습니다. 시장 거래와 고객사 거래 모두에 같은 조건이 적용됩니다.',
+        'mk_rp_blind_note': '※ PDF에는 고객사명만 표시하고, 다른 한국 수입사는 이름 없이 점·순위로만 나타냅니다. 해외 공급사명은 그대로 표시합니다.',
+        'mk_col_use': '포함', 'mk_col_name': '품목명', 'mk_col_hs': 'HS', 'mk_col_cat': '품목분류', 'mk_col_tons': '고객사 물량(t)',
+        'mk_col_inc': '포함 키워드', 'mk_col_exc': '제외 키워드',
+        'mk_rp_legend_band': '시장 P25–P75', 'mk_rp_legend_market': '시장 VWAP', 'mk_rp_legend_customer': '고객사',
+        'mk_rp_dist_you': '고객사 {r}/{n}위', 'mk_rp_dist_median': '중앙값 ${p:,.2f}',
+        'mk_rp_eyebrow': 'Market Competitiveness Report',
+        'mk_rp_s1_eyebrow': '01 — 요약',
+        'mk_rp_head': '같은 조건의 시장 대비 단가 {p}',
+        'mk_rp_head_none': '시장과 비교할 수 있는 달이 부족합니다',
+        'mk_rp_kpi_prem': '시장 대비 단가', 'mk_rp_kpi_prem_note': '비교 가능한 {n}개 품목, 같은 달·원산지 물량가중',
+        'mk_rp_kpi_rank': '수입사 순위', 'mk_rp_kpi_rank_note': '{item} · {o}, 연 100t 이상 수입사 중 (낮은 단가 순)',
+        'mk_rp_kpi_improve': '시장 평균 시 개선 여지', 'mk_rp_kpi_improve_note': '시장보다 높았던 품목의 (고객사 − 시장) × 물량 합',
+        'mk_rp_none': '없음',
+        'mk_rp_kpi_months': '시장보다 높았던 달', 'mk_rp_kpi_months_note': '{item}, 12개월 중 비교 가능 {n}개월',
+        'mk_rp_f1_keep': '{item}: 시장 하위 25% 단가 — 현 조건 유지 권장',
+        'mk_rp_f1_keep_d': '{o} 수입사 {n}곳 중 {r}위, 시장 대비 {p:+.1f}%',
+        'mk_rp_f1_below': '{item}: 시장 평균보다 낮은 단가 (시장 대비 {p:+.1f}%)',
+        'mk_rp_f1_below_d': '하위 25%에는 들지 않지만 같은 달·같은 원산지 시장 평균보다 낮게 사고 있습니다.',
+        'mk_rp_f1_none': '비교 가능한 품목 중 시장 평균보다 낮게 산 품목은 없습니다',
+        'mk_rp_f1_none_d': '비교 가능한 품목 모두 같은 달·같은 원산지 시장 평균 이상입니다.',
+        'mk_rp_f2': '{item}: 시장 대비 {p:+.1f}%, 개선 여지 kg당 ${k:,.3f}',
+        'mk_rp_f2_d': '비교 가능한 {m}개월 기준, 시장 평균 단가였다면 ${x:,.0f} 차이',
+        'mk_rp_f2_none': '전 품목 시장 평균 이하',
+        'mk_rp_f2_none_d': '비교 가능한 품목 중 시장 평균보다 높게 산 품목은 없습니다.',
+        'mk_rp_f3': '{item}: 공급사를 유지한 채 재협상 여지',
+        'mk_rp_f3_d': '같은 공급사에서 산 다른 수입사보다 높았던 달 {a}/{b}개월',
+        'mk_rp_f3_none': '같은 공급사 내 단가는 대체로 타 수입사 수준',
+        'mk_rp_f3_none_d': '같은 공급사를 쓰는 다른 수입사보다 높았던 달이 절반 미만입니다.',
+        'mk_rp_badge_insuff': '비교 데이터 부족',
+        'mk_rp_insuff_note': '{items}: 비교 가능한 달이 {m}개월 미만이라 결론에서 뺐습니다 (품목 페이지에는 참고로 표시).',
+        'mk_rp_insuff_item': '비교 가능한 달이 {n}개월로 {m}개월 미만입니다. 이 품목의 숫자는 참고용이며 요약 결론에서 뺐습니다.',
+        'mk_rp_item_eyebrow': '02 — 품목별 진단 {i}/{n}',
+        'mk_rp_item_sub': '주 원산지 {o} · {a} ~ {b}',
+        'mk_rp_spec': '스펙: HS {hs} · 품목분류 {cat} · 포함 {inc} · 제외 {exc}',
+        'mk_rp_k_cust': '고객사 VWAP', 'mk_rp_k_cust_note': '12개월 {t:,.0f}t',
+        'mk_rp_k_mkt': '시장 VWAP', 'mk_rp_k_mkt_note': '같은 달끼리 비교 시 고객사 {p}',
+        'mk_rp_k_p25': '시장 P25', 'mk_rp_k_p25_note': '시장 거래 물량가중 하위 25% 단가',
+        'mk_rp_k_sup': '주 공급사 비중',
+        'mk_rp_chart_monthly': '월별 단가: 고객사 vs 시장',
+        'mk_rp_chart_monthly_note': '주 원산지, $/kg. 고객사 외 수입사가 {k}곳 미만인 달은 시장 값을 비웁니다.',
+        'mk_rp_chart_dist': '{o} 수입사별 12개월 단가 분포',
+        'mk_rp_chart_dist_note': '점 하나 = 수입사 1곳 (12개월 {t:,}t 이상), 고객사만 표시. 점선 = 중앙값',
+        'mk_rp_box_eyebrow': '개선 여지',
+        'mk_rp_box_improve': '비교 가능한 {m}개월 동안 시장 평균 단가였다면 ${x:,.0f}, 시장 P25 수준이었다면 ${y:,.0f} 차이가 납니다. 같은 공급사를 쓰는 다른 수입사보다 높았던 달은 {a}/{b}개월입니다.',
+        'mk_rp_box_good': '비교 가능한 {m}개월 동안 시장 평균보다 ${x:,.0f} 낮게 샀습니다. 같은 공급사를 쓰는 다른 수입사보다 높았던 달은 {a}/{b}개월입니다.',
+        'mk_rp_box_insuff': '비교 가능한 달이 적어 개선 여지를 계산하지 않았습니다. 12개월 단가 기준 순위는 {r}/{n}위입니다.',
+        'mk_rp_alt_eyebrow': '03 — 대체 공급처',
+        'mk_rp_alt_head': '{item}: 같은 원산지의 다른 공급사',
+        'mk_rp_alt_sub': '{o} 원산지, 같은 스펙. 단가가 낮은 순',
+        'mk_rp_th_vwap': 'VWAP<br/>($/kg)', 'mk_rp_th_vs': '고객사<br/>대비', 'mk_rp_th_ton': '물량<br/>(t)', 'mk_rp_th_imp': '공급<br/>수입사',
+        'mk_rp_th_months': '거래<br/>개월', 'mk_rp_th_saving': '월 매칭<br/>절감($)',
+        'mk_rp_alt_note': '월 매칭 절감 = 고객사와 그 공급사가 모두 거래한 달마다 (고객사 단가 − 공급사 단가) × 고객사 물량, 전량 전환 이론치. 1순위 추천: 검증 + 가격 안정(또는 보통) + {m}개월 이상 공급 + 고객사보다 저렴.',
+        'mk_rp_rec1_eyebrow': '추천 1 — 검증·안정 공급사',
+        'mk_rp_rec1': '{name}: ${p:,.2f}/kg (고객사 대비 {vs}), 12개월 중 {m}개월 공급. 물량의 30%를 옮기면 월 매칭 기준 약 ${x:,.0f} 차이.',
+        'mk_rp_rec1_none': '고객사보다 저렴하면서 검증·가격 안정 조건을 모두 갖춘 공급사는 없습니다.',
+        'mk_rp_rec2_badge': '규격 확인 필요',
+        'mk_rp_rec2': '{name}: ${p:,.2f}/kg (고객사 대비 {vs})로 더 싸지만 월별 단가 변동이 큽니다(변동계수 {cv:.0f}%). 규격서·샘플 확인이 필요합니다.',
+        'mk_rp_alt_none': '같은 원산지·같은 스펙의 다른 공급사가 없습니다.',
+        'mk_rp_s4_eyebrow': '04 — 방법론',
+        'mk_rp_lbl_spec': '품목 스펙', 'mk_rp_lbl_compare': '비교 원칙',
+        'mk_rp_m_period': '품목별로 데이터의 마지막 완전한 달까지 최근 12개월 ({w})',
+        'mk_rp_m_partial': '마지막 달 {ym}은 건수가 적은 부분월({n:,}건)이라 뺐습니다.',
+        'mk_rp_m_dup': '신고일·수입사·공급사·중량·금액이 모두 같은 행 {n:,}건({kg:,.0f}kg)을 중복으로 보고 한 건만 남김',
+        'mk_rp_m_dup_kept': '동일 행 {n:,}건을 별도 컨테이너로 보고 그대로 둠',
+        'mk_rp_m_price': '물량가중 평균 단가(VWAP) = Σ(단가 × 중량) ÷ Σ중량. 단가가 없으면 금액 ÷ 중량. P25·P75는 물량가중 분위수',
+        'mk_rp_m_compare': '같은 달·같은 원산지·같은 스펙끼리만 비교. 그 달 고객사 외 수입사가 {k}곳 이상일 때만 사용, 비교 가능한 달이 {m}개월 미만인 품목은 "비교 데이터 부족". 순위는 12개월 {t:,}t 이상 수입사 기준',
+        'mk_rp_m_saving': '고객사와 공급사가 모두 거래한 달마다 (고객사 단가 − 공급사 단가) × 그 달 고객사 물량, 전량 전환 이론치',
+        'mk_rp_m_blind': '고객사명만 표시. 다른 한국 수입사는 이름 없이 순위·분포로만 표시. 해외 공급사명은 그대로',
+        'mk_rp_unknown1': '관세·국내 물류비 — 수입 단가(CIF 기준)만 비교했습니다.',
+        'mk_rp_unknown2': '품질 등급과 계약 조건(결제 조건, 물량 약정, 납기) — 같은 스펙 안의 차이는 반영하지 못합니다.',
+        'mk_rp_unknown3': '중복으로 본 동일 행이 실제로는 별도 컨테이너라면 물량과 개선 여지가 과소 추정됩니다.',
+        'mk_rp_close_k1': '개선 품목', 'mk_rp_close_k2': '양호 품목', 'mk_rp_close_k3': '재협상 근거',
+        'mk_rp_close_v1': '{item}: {menu}로 대체 공급처를 확인하세요.',
+        'mk_rp_close_v1_none': '시장 평균보다 높게 산 품목이 없습니다. 분기마다 같은 기준으로 다시 확인하세요.',
+        'mk_rp_close_v2': '{item}: 현 조건을 유지하고, 물량을 늘릴 때도 같은 조건을 확보하세요.',
+        'mk_rp_close_v2_none': '비교 가능한 품목 중 시장 평균보다 낮게 산 품목이 없습니다. 개선 품목부터 확인하세요.',
+        'mk_rp_close_v3': '{item}: 같은 공급사의 다른 수입사보다 높았던 {a}/{b}개월의 월별 근거로 재협상하세요.',
+        'mk_rp_close_v3_none': '같은 공급사 내 단가 차이는 크지 않습니다. 시장 평균과의 차이를 근거로 쓰세요.',
+        'mk_rp_close_note': '모든 숫자는 CIF 수입 단가 기준이며 관세·국내 물류비·품질 등급은 반영하지 않았습니다.',
         'rp_menu_ref': '‘{name}’ 메뉴',
         'axis_extra_suffix': ' (원본)',
         'rk_rp_eyebrow': 'Concentration Risk Report',
@@ -2551,6 +2638,93 @@ TEXTS = {
         'bd_rp_m_saving': 'Month-matched: for each month both the baseline and the candidate traded, (baseline comparison price − candidate comparison price) × baseline volume that month, summed. Marked "few" if fewer than {m} months overlap. Annual estimate = month-matched savings rate × baseline comparison price × expected annual volume',
         'bd_rp_lbl_stab': 'Price stability',
         'bd_rp_m_stab': 'Coefficient of variation (std ÷ mean) of the supplier\'s monthly VWAP. Under {lo}% stable, {hi}% or more volatile, otherwise moderate. N/A with fewer than 3 trading months',
+        # ③ Market competitiveness new PDF
+        'mk_rp_header': '📄 PDF report (same month · same origin · same spec market comparison)',
+        'mk_rp_intro': 'Separately from the screen above, this compares the client with market trades of the same spec (HS + Category + keywords), month by month and origin by origin. The client\'s top items by volume are filled in automatically; narrow the spec with keywords.',
+        'mk_rp_need_cols': 'The PDF report needs date, importer, supplier, origin, HS code, weight and unit price (or value) columns.',
+        'mk_rp_no_customer': 'No client trades remain after preprocessing.',
+        'mk_rp_no_items': 'Select at least one item for the report.',
+        'mk_rp_no_result': 'No client trades were found for the selected items. Check the HS, Category and keywords.',
+        'mk_rp_spec_caption': 'Separate keywords with commas or |. They are matched case-insensitively in the product name (Korean and English) and Product Description. The same rule applies to the market and to the client.',
+        'mk_rp_blind_note': '※ The PDF shows only the client name. Other Korean importers appear only as dots and ranks, without names. Overseas supplier names are shown as is.',
+        'mk_col_use': 'Include', 'mk_col_name': 'Item', 'mk_col_hs': 'HS', 'mk_col_cat': 'Category', 'mk_col_tons': 'Client volume (t)',
+        'mk_col_inc': 'Include keywords', 'mk_col_exc': 'Exclude keywords',
+        'mk_rp_legend_band': 'Market P25–P75', 'mk_rp_legend_market': 'Market VWAP', 'mk_rp_legend_customer': 'Client',
+        'mk_rp_dist_you': 'Client {r}/{n}', 'mk_rp_dist_median': 'Median ${p:,.2f}',
+        'mk_rp_eyebrow': 'Market Competitiveness Report',
+        'mk_rp_s1_eyebrow': '01 — Summary',
+        'mk_rp_head': 'Price vs the same-condition market: {p}',
+        'mk_rp_head_none': 'Not enough months to compare with the market',
+        'mk_rp_kpi_prem': 'Price vs market', 'mk_rp_kpi_prem_note': '{n} comparable item(s), volume-weighted by month and origin',
+        'mk_rp_kpi_rank': 'Importer rank', 'mk_rp_kpi_rank_note': '{item} · {o}, among importers with 100t+ a year (lowest price first)',
+        'mk_rp_kpi_improve': 'Gap at market average', 'mk_rp_kpi_improve_note': '(client − market) × volume, items above market',
+        'mk_rp_none': 'None',
+        'mk_rp_kpi_months': 'Months above market', 'mk_rp_kpi_months_note': '{item}, {n} comparable month(s) of 12',
+        'mk_rp_f1_keep': '{item}: in the market\'s lowest 25% — keep current terms',
+        'mk_rp_f1_keep_d': 'Rank {r} of {n} {o} importers, {p:+.1f}% vs market',
+        'mk_rp_f1_below': '{item}: below the market average ({p:+.1f}% vs market)',
+        'mk_rp_f1_below_d': 'Not in the lowest 25%, but below the same-month, same-origin market average.',
+        'mk_rp_f1_none': 'No comparable item was bought below the market average',
+        'mk_rp_f1_none_d': 'Every comparable item is at or above the same-month, same-origin market average.',
+        'mk_rp_f2': '{item}: {p:+.1f}% vs market, gap ${k:,.3f} per kg',
+        'mk_rp_f2_d': 'Over {m} comparable month(s), ${x:,.0f} difference at the market average price',
+        'mk_rp_f2_none': 'All items at or below the market average',
+        'mk_rp_f2_none_d': 'No comparable item was bought above the market average.',
+        'mk_rp_f3': '{item}: room to renegotiate with the current supplier',
+        'mk_rp_f3_d': 'Above other importers of the same supplier in {a} of {b} month(s)',
+        'mk_rp_f3_none': 'Prices within the same supplier are mostly in line with other importers',
+        'mk_rp_f3_none_d': 'Above other importers of the same supplier in less than half of the months.',
+        'mk_rp_badge_insuff': 'Not enough data',
+        'mk_rp_insuff_note': '{items}: fewer than {m} comparable months, so left out of the conclusions (shown on the item page for reference).',
+        'mk_rp_insuff_item': 'Only {n} comparable month(s), fewer than {m}. The figures for this item are for reference and are left out of the summary.',
+        'mk_rp_item_eyebrow': '02 — Item diagnosis {i}/{n}',
+        'mk_rp_item_sub': 'Main origin {o} · {a} – {b}',
+        'mk_rp_spec': 'Spec: HS {hs} · Category {cat} · include {inc} · exclude {exc}',
+        'mk_rp_k_cust': 'Client VWAP', 'mk_rp_k_cust_note': '{t:,.0f}t in 12 months',
+        'mk_rp_k_mkt': 'Market VWAP', 'mk_rp_k_mkt_note': 'Client {p}, same-month basis',
+        'mk_rp_k_p25': 'Market P25', 'mk_rp_k_p25_note': 'Volume-weighted 25th percentile of market trades',
+        'mk_rp_k_sup': 'Main supplier share',
+        'mk_rp_chart_monthly': 'Monthly price: client vs market',
+        'mk_rp_chart_monthly_note': 'Main origin, $/kg. Market values are blank in months with fewer than {k} other importers.',
+        'mk_rp_chart_dist': '12-month price by importer, {o}',
+        'mk_rp_chart_dist_note': 'One dot = one importer ({t:,}t+ in 12 months); only the client is labelled. Dashed line = median',
+        'mk_rp_box_eyebrow': 'Room for improvement',
+        'mk_rp_box_improve': 'Over {m} comparable month(s), buying at the market average would have made a ${x:,.0f} difference, and at the market P25 ${y:,.0f}. The client paid more than other importers of the same supplier in {a} of {b} month(s).',
+        'mk_rp_box_good': 'Over {m} comparable month(s), the client bought ${x:,.0f} below the market average. The client paid more than other importers of the same supplier in {a} of {b} month(s).',
+        'mk_rp_box_insuff': 'Too few comparable months to estimate the gap. On the 12-month price, the client ranks {r} of {n}.',
+        'mk_rp_alt_eyebrow': '03 — Alternative suppliers',
+        'mk_rp_alt_head': '{item}: other suppliers from the same origin',
+        'mk_rp_alt_sub': '{o} origin, same spec. Lowest price first',
+        'mk_rp_th_vwap': 'VWAP<br/>($/kg)', 'mk_rp_th_vs': 'vs<br/>client', 'mk_rp_th_ton': 'Volume<br/>(t)', 'mk_rp_th_imp': 'Korean<br/>buyers',
+        'mk_rp_th_months': 'Months', 'mk_rp_th_saving': 'Matched<br/>saving ($)',
+        'mk_rp_alt_note': 'Month-matched saving = for each month both the client and the supplier traded, (client price − supplier price) × client volume; theoretical full switch. Recommendation 1: verified + stable (or moderate) price + supplied in {m}+ months + cheaper than the client.',
+        'mk_rp_rec1_eyebrow': 'Recommendation 1 — verified, stable supplier',
+        'mk_rp_rec1': '{name}: ${p:,.2f}/kg ({vs} vs client), supplied in {m} of 12 months. Moving 30% of the volume would make about ${x:,.0f} difference on a month-matched basis.',
+        'mk_rp_rec1_none': 'No supplier is cheaper than the client while also verified and price-stable.',
+        'mk_rp_rec2_badge': 'Check spec',
+        'mk_rp_rec2': '{name}: ${p:,.2f}/kg ({vs} vs client) is cheaper, but its monthly price varies a lot (CV {cv:.0f}%). Check the specification sheet and samples.',
+        'mk_rp_alt_none': 'No other supplier with the same origin and spec.',
+        'mk_rp_s4_eyebrow': '04 — Methodology',
+        'mk_rp_lbl_spec': 'Item spec', 'mk_rp_lbl_compare': 'Comparison rules',
+        'mk_rp_m_period': 'For each item, the last 12 months up to the last complete month in the data ({w})',
+        'mk_rp_m_partial': 'The last month {ym} is a partial month ({n:,} rows) and was left out.',
+        'mk_rp_m_dup': '{n:,} rows ({kg:,.0f} kg) with the same date, importer, supplier, weight and value were treated as duplicates and kept once',
+        'mk_rp_m_dup_kept': '{n:,} identical rows were kept as separate containers',
+        'mk_rp_m_price': 'Volume-weighted average price (VWAP) = Σ(price × weight) ÷ Σ weight; value ÷ weight when the price is missing. P25 and P75 are volume-weighted percentiles',
+        'mk_rp_m_compare': 'Only the same month, origin and spec are compared. A month counts only if at least {k} other importers traded; items with fewer than {m} comparable months are marked "not enough data". Ranks use importers with {t:,}t+ in 12 months',
+        'mk_rp_m_saving': 'For each month both the client and the supplier traded, (client price − supplier price) × client volume that month; theoretical full switch',
+        'mk_rp_m_blind': 'Only the client name is shown. Other Korean importers appear only as ranks and dots. Overseas supplier names are shown as is',
+        'mk_rp_unknown1': 'Tariffs and domestic logistics — only import (CIF) prices are compared.',
+        'mk_rp_unknown2': 'Quality grade and contract terms (payment, volume commitment, lead time) — differences within the same spec are not reflected.',
+        'mk_rp_unknown3': 'If identical rows treated as duplicates were really separate containers, volume and the improvement gap are underestimated.',
+        'mk_rp_close_k1': 'Items to improve', 'mk_rp_close_k2': 'Items in good shape', 'mk_rp_close_k3': 'Renegotiation evidence',
+        'mk_rp_close_v1': '{item}: check alternative suppliers in {menu}.',
+        'mk_rp_close_v1_none': 'No item was bought above the market average. Re-check every quarter on the same basis.',
+        'mk_rp_close_v2': '{item}: keep the current terms, and secure the same terms when volume grows.',
+        'mk_rp_close_v2_none': 'No comparable item was bought below the market average. Start with the items to improve.',
+        'mk_rp_close_v3': '{item}: renegotiate with the monthly evidence — above other importers of the same supplier in {a} of {b} month(s).',
+        'mk_rp_close_v3_none': 'Price gaps within the same supplier are small. Use the gap to the market average as evidence.',
+        'mk_rp_close_note': 'All figures are CIF import prices; tariffs, domestic logistics and quality grade are not reflected.',
         'rp_menu_ref': 'the {name} menu',
         'axis_extra_suffix': ' (raw)',
         'rk_rp_eyebrow': 'Concentration Risk Report',
@@ -3373,7 +3547,7 @@ def reset_market_analysis_states():
     st.session_state.market_analysis_done = False
     keys_to_reset = ['market_df', 'analyzed_product_name', 'selected_customer', 
                      'market_contract_date', 'top_competitors_list',
-                     'all_competitors_ranked']
+                     'all_competitors_ranked', 'market_rp_raw', 'market_rp_partial']
     for key in keys_to_reset:
         if key in st.session_state:
             del st.session_state[key]
@@ -6169,6 +6343,353 @@ def build_flow_report(R, blind):
     return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in (s1, s2, s3)] + [closing])
 
 
+# ---------- ③ 시장 경쟁력 리포트 · ②③ 공통 시장 비교 (같은 달·같은 원산지·같은 스펙) ----------
+MK_MIN_IMPORTERS = 5        # 월별 비교: 그 달·그 원산지에 고객사 외 수입사가 이 수 이상일 때만 사용
+MK_MIN_MONTHS = 6           # 비교 가능한 달이 이보다 적으면 결론에서 빼고 '비교 데이터 부족'
+MK_RANK_MIN_KG = 100_000    # 수입사 순위·분포: 기간 내 물량 100t 이상 수입사만
+MK_REC_MIN_MONTHS = 10      # 대체 공급처 1순위: 12개월 중 이만큼 이상 공급한 곳
+
+
+def _wq(prices, weights, q):
+    """물량가중 분위수."""
+    p, w = np.asarray(prices, dtype=float), np.asarray(weights, dtype=float)
+    o = np.argsort(p)
+    p, w = p[o], w[o]
+    c = np.cumsum(w) / w.sum()
+    return float(p[min(np.searchsorted(c, q), len(p) - 1)])
+
+
+def _vwap(g):
+    return float((g['_price'] * g['_volume']).sum() / g['_volume'].sum()) if len(g) and g['_volume'].sum() > 0 else np.nan
+
+
+def market_spec_candidates(full, customer, top=5):
+    """③ 고객사가 산 품목 후보: HS + 품목분류별 물량 순 (스펙 표 기본값)."""
+    c = full[full['_importer'] == customer]
+    if c.empty:
+        return pd.DataFrame(columns=['hs', 'cat', 'tons', 'name'])
+    g = c.groupby(['_hs', '_cat']).agg(tons=('_volume', 'sum')).reset_index().sort_values('tons', ascending=False).head(top)
+    names = []
+    for _, r in g.iterrows():
+        p = c[(c['_hs'] == r['_hs']) & (c['_cat'] == r['_cat'])]['_product'].astype(str)
+        nm = re.sub(r'^\s*\[[^\]]*\]\s*', '', p.mode().iloc[0]) if len(p) else str(r['_cat'])
+        names.append(nm.split('__')[0].strip()[:30] or str(r['_cat']))
+    g['name'] = names
+    g['tons'] = g['tons'] / 1000
+    return g.rename(columns={'_hs': 'hs', '_cat': 'cat'}).reset_index(drop=True)
+
+
+def compute_market_item(full, customer, spec):
+    """③ 한 품목(HS + 품목분류 + 키워드)의 시장 비교. 같은 달·같은 원산지·같은 스펙끼리, 고객사 외 수입사 5곳 이상인 달만.
+    기간은 그 품목 데이터의 마지막 완전한 달 기준 최근 12개월(마지막 달이 부분월이면 뺌)."""
+    d = bid_filter(full, spec['hs'], spec.get('include', ''), spec.get('exclude', ''), categories=[spec['cat']] if spec.get('cat') else None)
+    out = {'spec': spec, 'ok': False}
+    c_all = d[d['_importer'] == customer]
+    if d.empty or c_all.empty:
+        return out
+    cnt = d.groupby('_ym').size()
+    cnt = cnt.reindex(pd.period_range(cnt.index.min(), cnt.index.max(), freq='M'), fill_value=0)
+    end = cnt.index[-1]
+    partial = None
+    if len(cnt) >= 4 and cnt.iloc[-1] < cnt.iloc[-4:-1].mean() * 0.5:
+        partial = {'ym': str(end), 'n': int(cnt.iloc[-1])}
+        end = end - 1
+    start = end - 11
+    d = d[(d['_ym'] >= start) & (d['_ym'] <= end)]
+    c, o = d[d['_importer'] == customer], d[d['_importer'] != customer]
+    if c.empty:
+        return out
+    origin = c.groupby('_origin')['_volume'].sum().idxmax()
+    months = pd.period_range(start, end, freq='M')
+
+    # 월·원산지 셀 비교
+    cells = []
+    for (ym, org), cg in c.groupby(['_ym', '_origin']):
+        mg = o[(o['_ym'] == ym) & (o['_origin'] == org)]
+        n_imp = int(mg['_importer'].nunique())
+        row = {'ym': ym, 'origin': org, 'cv': _vwap(cg), 'vol': float(cg['_volume'].sum()), 'n_imp': n_imp,
+               'mv': np.nan, 'p25': np.nan, 'p75': np.nan}
+        if n_imp >= MK_MIN_IMPORTERS:
+            row.update(mv=_vwap(mg), p25=_wq(mg['_price'], mg['_volume'], 0.25), p75=_wq(mg['_price'], mg['_volume'], 0.75))
+        cells.append(row)
+    cells = pd.DataFrame(cells)
+    okc = cells.dropna(subset=['mv'])
+    comp_months = int(okc['ym'].nunique())
+    diff_m = okc.assign(d=(okc['cv'] - okc['mv']) * okc['vol']).groupby('ym')['d'].sum()
+    premium = float(((okc['cv'] - okc['mv']) * okc['vol']).sum() / (okc['mv'] * okc['vol']).sum() * 100) if len(okc) else np.nan
+    improve_mkt = float(((okc['cv'] - okc['mv']) * okc['vol']).sum()) if len(okc) else np.nan
+    improve_p25 = float(((okc['cv'] - okc['p25']) * okc['vol']).sum()) if len(okc) else np.nan
+    comp_vol = float(okc['vol'].sum()) if len(okc) else 0.0
+
+    # 주 원산지 월별 선 (차트용)
+    oc, oo = c[c['_origin'] == origin], o[o['_origin'] == origin]
+    series = []
+    for ym in months:
+        cg, mg = oc[oc['_ym'] == ym], oo[oo['_ym'] == ym]
+        enough = mg['_importer'].nunique() >= MK_MIN_IMPORTERS
+        series.append({'ym': ym, 'cv': _vwap(cg) if len(cg) else np.nan,
+                       'mv': _vwap(mg) if enough else np.nan,
+                       'p25': _wq(mg['_price'], mg['_volume'], .25) if enough else np.nan,
+                       'p75': _wq(mg['_price'], mg['_volume'], .75) if enough else np.nan})
+    series = pd.DataFrame(series)
+
+    # 주 원산지 수입사별 연간 VWAP 분포·순위 (100t 이상)
+    od = d[d['_origin'] == origin]
+    iv = od.groupby('_importer').agg(vol=('_volume', 'sum'))
+    iv['vwap'] = od.groupby('_importer').apply(_vwap)
+    big = iv[(iv['vol'] >= MK_RANK_MIN_KG) | (iv.index == customer)].sort_values('vwap')
+    rank = int(list(big.index).index(customer) + 1) if customer in big.index else None
+
+    # 같은 공급사를 쓰는 타 수입사 대비 (월 단위)
+    same = {}
+    for (ym, ex), cg in c.groupby(['_ym', '_exporter']):
+        og = o[(o['_ym'] == ym) & (o['_exporter'] == ex)]
+        if len(og):
+            same.setdefault(ym, []).append(_vwap(cg) > _vwap(og))
+    same_months, same_higher = len(same), int(sum(any(v) for v in same.values()))
+
+    top_sup = oc.groupby('_exporter')['_volume'].sum().sort_values(ascending=False)
+    out.update(ok=True, start=start, end=end, partial=partial, origin=origin, cells=cells, comp_months=comp_months,
+               months_above=int((diff_m > 0).sum()), premium=premium, improve_mkt=improve_mkt, improve_p25=improve_p25,
+               comp_vol=comp_vol, series=series, dist=big, rank=rank, n_rank=len(big), n_importers=int(iv.shape[0]),
+               cust_vwap=_vwap(oc), mkt_vwap=_vwap(oo), mkt_p25=_wq(oo['_price'], oo['_volume'], .25) if len(oo) else np.nan,
+               mkt_median_imp=float(big['vwap'].median()) if len(big) else np.nan,
+               top_supplier=top_sup.index[0] if len(top_sup) else None,
+               top_supplier_share=float(top_sup.iloc[0] / top_sup.sum() * 100) if len(top_sup) else np.nan,
+               same_months=same_months, same_higher=same_higher, cust_tons=float(c['_volume'].sum()) / 1000,
+               insufficient=comp_months < MK_MIN_MONTHS, d=d, cust=c)
+    out['rank_pct'] = rank / len(big) * 100 if rank else np.nan
+    return out
+
+
+def market_alt_suppliers(item, verify=None):
+    """③ 대체 공급처: 같은 원산지·같은 스펙의 해외 공급사. 월 매칭 절감액 = 고객사와 그 공급사가 모두 거래한 달의
+    (고객사 단가 − 공급사 단가) × 그 달 고객사 물량 합 (전량 전환 이론치)."""
+    verify = verify or BID_DEFAULT_VERIFY
+    d, c, end = item['d'], item['cust'], item['end']
+    od = d[d['_origin'] == item['origin']]
+    cm = c[c['_origin'] == item['origin']].groupby('_ym').apply(lambda g: pd.Series({'p': _vwap(g), 'v': g['_volume'].sum()}))
+    recent = od[od['_ym'] > end - 12]
+    rows = []
+    for ex, g in od.groupby('_exporter'):
+        mv = g.groupby('_ym').apply(_vwap)
+        mcv = float(mv.std(ddof=0) / mv.mean() * 100) if len(mv) >= 3 and mv.mean() > 0 else np.nan
+        com = cm.index.intersection(mv.index)
+        r = recent[recent['_exporter'] == ex]
+        rows.append({'exporter': ex, 'vwap': _vwap(g), 'tons': float(g['_volume'].sum()) / 1000, 'importers': int(g['_importer'].nunique()),
+                     'months': int(g['_ym'].nunique()), 'mcv': mcv,
+                     'stab': None if pd.isna(mcv) else ('stable' if mcv < BID_STAB_CV[0] else 'volatile' if mcv >= BID_STAB_CV[1] else 'mid'),
+                     'saving': float(((cm.loc[com, 'p'] - mv[com]) * cm.loc[com, 'v']).sum()) if len(com) else np.nan,
+                     'matched': len(com),
+                     'verified': (len(r) >= verify['min_ship']) and (r['_volume'].sum() >= verify['min_ton'] * 1000)
+                                 and (r['_importer'].nunique() >= verify['min_imp'])})
+    t = pd.DataFrame(rows)
+    if t.empty:
+        return t, None, None
+    t['vs'] = (t['vwap'] / item['cust_vwap'] - 1) * 100
+    t = t.sort_values('vwap').reset_index(drop=True)
+    cheaper = t[(t['vwap'] < item['cust_vwap']) & t['verified']]
+    pool = cheaper[(cheaper['stab'].isin(['stable', 'mid'])) & (cheaper['months'] >= MK_REC_MIN_MONTHS)]
+    rec1 = None
+    if len(pool):
+        pool = pool.assign(_s=pool['stab'].map({'stable': 0, 'mid': 1}))
+        rec1 = pool.sort_values(['_s', 'vwap']).iloc[0]
+    lim = rec1['vwap'] if rec1 is not None else item['cust_vwap']
+    vol = t[(t['vwap'] < lim) & (t['stab'] == 'volatile') & (t['tons'] >= 10)]
+    rec2 = vol.sort_values('vwap').iloc[0] if len(vol) else None
+    return t, rec1, rec2
+
+
+def market_item_label(it):
+    sp = it['spec']
+    return sp.get('name') or str(sp.get('cat') or sp['hs'])
+
+
+def market_pdf_monthly_chart(it):
+    """③ 품목 월별 단가: 고객사(Blue 선) + 시장 VWAP(Black 선) + 시장 P25–P75 띠(#9BB3FF). 비교 불가한 달은 비움."""
+    import report_theme as rt
+    s = it['series']
+    fig, ax = rt.new_chart(2.3)
+    rt.apply_pdf_chart_style(ax, grid_axis='y')
+    x = np.arange(len(s))
+    ax.fill_between(x, s['p25'].astype(float), s['p75'].astype(float), color=rt.HEX['pale'], alpha=0.55, linewidth=0, label=T('mk_rp_legend_band'))
+    ax.plot(x, s['mv'].astype(float), color=rt.HEX['black'], linewidth=1.4, marker='o', markersize=2.6, label=T('mk_rp_legend_market'))
+    ax.plot(x, s['cv'].astype(float), color=rt.HEX['blue'], linewidth=1.8, marker='o', markersize=3, label=T('mk_rp_legend_customer'))
+    ax.set_xticks(x)
+    ax.set_xticklabels([_rp_ym(m) for m in s['ym']], fontsize=7)
+    ax.yaxis.set_major_formatter(lambda v, _: f"${v:,.2f}")
+    ax.legend(loc='lower left', bbox_to_anchor=(0, 1.0), fontsize=7, frameon=False, ncol=3, borderaxespad=0.2)
+    fig.subplots_adjust(left=0.08, right=0.99, top=0.9, bottom=0.12)
+    return rt.chart_image(fig)
+
+
+def market_pdf_dist_chart(it):
+    """③ 수입사별 연간 단가 분포 (주 원산지, 100t 이상): 점 = 수입사 1곳, 고객사만 Blue, 중앙값 점선. 타 수입사명은 표시하지 않는다."""
+    import report_theme as rt
+    dist = it['dist']
+    fig, ax = rt.new_chart(1.5)
+    rt.apply_pdf_chart_style(ax, grid_axis='x')
+    rng = np.random.default_rng(7)
+    others = dist[dist.index != it['cust_name']]
+    ax.scatter(others['vwap'], rng.uniform(-0.3, 0.3, len(others)), s=16, color=rt.HEX['black'], alpha=0.3, linewidth=0)
+    if it['cust_name'] in dist.index:
+        cv = float(dist.loc[it['cust_name'], 'vwap'])
+        ax.scatter([cv], [0], s=70, color=rt.HEX['blue'], edgecolor='white', linewidth=0.8, zorder=3)
+        ax.annotate(T('mk_rp_dist_you', r=it['rank'], n=it['n_rank']), (cv, 0.08), xytext=(cv, 0.62), textcoords='data',
+                    ha='center', va='bottom', fontsize=7, color=rt.HEX['blue'],
+                    arrowprops={'arrowstyle': '-', 'color': rt.HEX['blue'], 'linewidth': 0.7})
+    med = it['mkt_median_imp']
+    ax.axvline(med, color=rt.HEX['black'], linewidth=0.9, linestyle=(0, (3, 2)))
+    ax.text(med, -0.42, ' ' + T('mk_rp_dist_median', p=med), fontsize=6.8, ha='left', va='center', color=rt.HEX['black'])
+    ax.set_ylim(-0.5, 0.85)
+    ax.set_yticks([])
+    ax.xaxis.set_major_formatter(lambda v, _: f"${v:,.2f}")
+    fig.subplots_adjust(left=0.03, right=0.98, top=0.95, bottom=0.2)
+    return rt.chart_image(fig)
+
+
+def build_market_report(R):
+    """③ 시장 경쟁력 PDF: 표지 → 요약(KPI 4 + 결론 3) → 품목별 진단(품목당 1페이지) → 대체 공급처 → 방법론·데이터 한계 → 클로징.
+    비교는 같은 달·같은 원산지·같은 스펙(HS + 품목분류 + 키워드)끼리, 고객사 외 수입사 5곳 이상인 달만 쓴다."""
+    import report_theme as rt
+    from reportlab.platypus import Spacer, KeepTogether
+    from reportlab.lib.units import mm
+    cust = R['customer']
+    items = [it for it in R['items'] if it['ok']]
+    for it in items:
+        it['cust_name'] = cust
+    good = [it for it in items if not it['insufficient']]
+    main = max(items, key=lambda it: it['cust_tons'])
+    start = min(it['start'] for it in items)
+    end = max(it['end'] for it in items)
+    meta = _rp_meta(T('mk_rp_eyebrow'), [cust, T('menu_opt_market')], cust, None, None,
+                    (start.start_time, end.end_time), R['blind'], f"{cust} {T('menu_opt_market')}")
+
+    # 01 요약
+    num = sum(((it['cells'].dropna(subset=['mv'])['cv'] - it['cells'].dropna(subset=['mv'])['mv']) * it['cells'].dropna(subset=['mv'])['vol']).sum() for it in good)
+    den = sum((it['cells'].dropna(subset=['mv'])['mv'] * it['cells'].dropna(subset=['mv'])['vol']).sum() for it in good)
+    prem_all = num / den * 100 if den else np.nan
+    improve_all = sum(max(it['improve_mkt'], 0) for it in good)
+    cards = [(T('mk_rp_kpi_prem'), _rp_pct(prem_all), T('mk_rp_kpi_prem_note', n=len(good))),
+             (T('mk_rp_kpi_rank'), f"{main['rank']}/{main['n_rank']}" if main['rank'] else '-',
+              T('mk_rp_kpi_rank_note', item=_rp_short(market_item_label(main), 16), o=main['origin'])),
+             (T('mk_rp_kpi_improve'), f"${improve_all:,.0f}" if improve_all > 0 else T('mk_rp_none'), T('mk_rp_kpi_improve_note')),
+             (T('mk_rp_kpi_months'), f"{main['months_above']}/12" if not main['insufficient'] else '-',
+              T('mk_rp_kpi_months_note', item=_rp_short(market_item_label(main), 16), n=main['comp_months']))]
+    low = [it for it in good if it['rank_pct'] <= 25]
+    if low:
+        it = min(low, key=lambda x: x['rank_pct'])
+        f1 = (T('mk_rp_f1_keep', item=market_item_label(it)), T('mk_rp_f1_keep_d', r=it['rank'], n=it['n_rank'], o=it['origin'], p=it['premium']))
+    else:
+        below = [it for it in good if it['premium'] < 0]
+        f1 = ((T('mk_rp_f1_below', item=market_item_label(below[0]), p=below[0]['premium']), T('mk_rp_f1_below_d'))
+              if below else (T('mk_rp_f1_none'), T('mk_rp_f1_none_d')))
+    high = [it for it in good if it['premium'] > 0 and it['improve_mkt'] > 0]
+    if high:
+        it = max(high, key=lambda x: x['improve_mkt'])
+        per_kg = it['improve_mkt'] / (it['comp_vol'] or 1)
+        f2 = (T('mk_rp_f2', item=market_item_label(it), p=it['premium'], k=per_kg), T('mk_rp_f2_d', x=it['improve_mkt'], m=it['comp_months']))
+    else:
+        f2 = (T('mk_rp_f2_none'), T('mk_rp_f2_none_d'))
+    reneg = [it for it in good if it['same_months'] and it['same_higher'] * 2 >= it['same_months']]
+    if reneg:
+        it = max(reneg, key=lambda x: x['same_higher'])
+        f3 = (T('mk_rp_f3', item=market_item_label(it)), T('mk_rp_f3_d', a=it['same_higher'], b=it['same_months']))
+    else:
+        f3 = (T('mk_rp_f3_none'), T('mk_rp_f3_none_d'))
+    head = T('mk_rp_head', p=_rp_pct(prem_all)) if pd.notna(prem_all) else T('mk_rp_head_none')
+    sections = [_rp_summary(rt, T('mk_rp_s1_eyebrow'), head, cards, [f1, f2, f3])]
+    if R.get('insufficient_names'):
+        sections[0] += [Spacer(1, 5 * mm), rt.badge_note(rt.status_badge(T('mk_rp_badge_insuff'), False),
+                                                        T('mk_rp_insuff_note', items=', '.join(R['insufficient_names']), m=MK_MIN_MONTHS))]
+
+    # 02 품목별 진단
+    for i, it in enumerate(items):
+        sp = it['spec']
+        spec_txt = T('mk_rp_spec', hs=sp['hs'], cat=sp.get('cat') or '-', inc=sp.get('include') or '-', exc=sp.get('exclude') or '-')
+        s = [rt.SectionHeader(T('mk_rp_item_eyebrow', i=i + 1, n=len(items)), market_item_label(it),
+                              T('mk_rp_item_sub', o=it['origin'], a=str(it['start']), b=str(it['end']))), Spacer(1, 1 * mm), rt.small(spec_txt), Spacer(1, 3 * mm),
+             rt.kpi_row([(T('mk_rp_k_cust'), f"${it['cust_vwap']:,.2f}", T('mk_rp_k_cust_note', t=it['cust_tons'])),
+                         (T('mk_rp_k_mkt'), f"${it['mkt_vwap']:,.2f}", T('mk_rp_k_mkt_note', p=_rp_pct(it['premium']))),
+                         (T('mk_rp_k_p25'), f"${it['mkt_p25']:,.2f}", T('mk_rp_k_p25_note')),
+                         (T('mk_rp_k_sup'), f"{it['top_supplier_share']:.0f}%", _rp_short(it['top_supplier'] or '-', 26))]),
+             Spacer(1, 5 * mm)]
+        if it['insufficient']:
+            s += [rt.badge_note(rt.status_badge(T('mk_rp_badge_insuff'), False), T('mk_rp_insuff_item', n=it['comp_months'], m=MK_MIN_MONTHS)), Spacer(1, 3 * mm)]
+        s += [rt.h3(T('mk_rp_chart_monthly')), rt.small(T('mk_rp_chart_monthly_note', k=MK_MIN_IMPORTERS)), Spacer(1, 1.5 * mm),
+              market_pdf_monthly_chart(it), Spacer(1, 4 * mm),
+              rt.h3(T('mk_rp_chart_dist', o=it['origin'])), rt.small(T('mk_rp_chart_dist_note', t=MK_RANK_MIN_KG // 1000)), Spacer(1, 1.5 * mm),
+              market_pdf_dist_chart(it), Spacer(1, 4 * mm)]
+        if it['insufficient']:
+            box = T('mk_rp_box_insuff', r=it['rank'], n=it['n_rank'])
+        elif it['improve_mkt'] > 0:
+            box = T('mk_rp_box_improve', x=it['improve_mkt'], y=max(it['improve_p25'], 0), m=it['comp_months'], a=it['same_higher'], b=it['same_months'])
+        else:
+            box = T('mk_rp_box_good', x=-it['improve_mkt'], m=it['comp_months'], a=it['same_higher'], b=it['same_months'])
+        s.append(KeepTogether([rt.proof_box(T('mk_rp_box_eyebrow'), box)]))
+        sections.append(s)
+
+    # 03 대체 공급처 (개선 여지가 가장 큰 품목, 없으면 주 품목)
+    alt_item = max(high, key=lambda x: x['improve_mkt']) if high else main
+    t, rec1, rec2 = market_alt_suppliers(alt_item)
+    s = [rt.SectionHeader(T('mk_rp_alt_eyebrow'), T('mk_rp_alt_head', item=market_item_label(alt_item)),
+                          T('mk_rp_alt_sub', o=alt_item['origin'])), Spacer(1, 2 * mm)]
+    if t is not None and not t.empty:
+        rows = []
+        for _, r in t.head(12).iterrows():
+            rows.append([_rp_short(r['exporter'], 44), f"{r['vwap']:.2f}", _rp_pct(r['vs']), f"{r['tons']:,.0f}", f"{r['importers']}",
+                         f"{r['months']}/12", T(f"bd_stab_{r['stab']}") if isinstance(r['stab'], str) else T('bd_stab_na'),
+                         '-' if pd.isna(r['saving']) else (f"{r['saving']:,.0f}" if r['saving'] >= 0 else f"–{-r['saving']:,.0f}"),
+                         rt.status_badge(T('bd_badge_verified'), True) if r['verified'] else rt.status_badge(T('bd_badge_unverified'), False)])
+        s += [rt.brand_table([T('bd_col_exporter'), T('mk_rp_th_vwap'), T('mk_rp_th_vs'), T('mk_rp_th_ton'), T('mk_rp_th_imp'), T('mk_rp_th_months'),
+                              T('bd_rp_th_stab'), T('mk_rp_th_saving'), T('bd_rp_th_status')],
+                             rows, rt.col_widths([28, 10, 10, 10, 9, 9, 13, 14, 12]), right_cols=(1, 2, 3, 4, 5, 7), header_markup=True),
+              Spacer(1, 2 * mm), rt.small(T('mk_rp_alt_note', m=MK_REC_MIN_MONTHS)), Spacer(1, 5 * mm)]
+        if rec1 is not None:
+            s += [rt.proof_box(T('mk_rp_rec1_eyebrow'), T('mk_rp_rec1', name=rec1['exporter'], p=rec1['vwap'], vs=_rp_pct(rec1['vs']),
+                                                          m=rec1['months'], x=max(rec1['saving'], 0) * 0.3 if pd.notna(rec1['saving']) else 0)),
+                  Spacer(1, 3 * mm)]
+        else:
+            s += [rt.small(T('mk_rp_rec1_none')), Spacer(1, 3 * mm)]
+        if rec2 is not None:
+            s += [rt.badge_note(rt.status_badge(T('mk_rp_rec2_badge'), False),
+                                T('mk_rp_rec2', name=rec2['exporter'], p=rec2['vwap'], vs=_rp_pct(rec2['vs']), cv=rec2['mcv']))]
+    else:
+        s.append(rt.small(T('mk_rp_alt_none')))
+    sections.append(s)
+
+    # 04 방법론
+    st_ = R['stats']
+    specs = ' / '.join(f"{market_item_label(it)}: HS {it['spec']['hs']} · {it['spec'].get('cat') or '-'}"
+                       + (f" · +{it['spec']['include']}" if it['spec'].get('include') else '') + (f" · −{it['spec']['exclude']}" if it['spec'].get('exclude') else '')
+                       for it in items)
+    pm = R.get('partial')
+    meth = [(T('p1_rp_lbl_data'), T('rk_rp_m_data')),
+            (T('p1_rp_lbl_period'), T('mk_rp_m_period', w=', '.join(sorted({f"{it['start']}~{it['end']}" for it in items})))
+                                  + ''.join(' ' + T('mk_rp_m_partial', ym=k_, n=n_) for k_, n_ in
+                                            sorted({p_['ym']: p_['n'] for p_ in ([pm] if pm else []) + [it['partial'] for it in items if it['partial']]}.items()))),
+            (T('bd_rp_lbl_dedup'), T('mk_rp_m_dup', n=st_.get('dup_rows', 0), kg=st_.get('dup_kg', 0.0)) if not st_.get('keep_dups') else T('mk_rp_m_dup_kept', n=st_.get('dup_rows', 0))),
+            (T('mk_rp_lbl_spec'), specs),
+            (T('bd_rp_lbl_outlier'), T('bd_rp_m_outlier', kg=int(R['min_kg']))),
+            (T('p1_rp_lbl_price'), T('mk_rp_m_price')),
+            (T('mk_rp_lbl_compare'), T('mk_rp_m_compare', k=MK_MIN_IMPORTERS, m=MK_MIN_MONTHS, t=MK_RANK_MIN_KG // 1000)),
+            (T('bd_rp_lbl_verify'), T('bd_rp_m_verify', ship=BID_DEFAULT_VERIFY['min_ship'], ton=BID_DEFAULT_VERIFY['min_ton'], imp=BID_DEFAULT_VERIFY['min_imp'])),
+            (T('bd_rp_lbl_saving'), T('mk_rp_m_saving')),
+            (T('p1_rp_lbl_blind'), T('mk_rp_m_blind'))]
+    sections.append(_rp_method(rt, T('mk_rp_s4_eyebrow'), T('p1_rp_s4_head'), meth, [f'mk_rp_unknown{i}' for i in range(1, 4)]))
+
+    # 클로징
+    v1 = (T('mk_rp_close_v1', item=market_item_label(max(high, key=lambda x: x['improve_mkt'])), menu=_menu_ref('menu_opt_bid'))
+          if high else T('mk_rp_close_v1_none'))
+    v2 = T('mk_rp_close_v2', item=', '.join(market_item_label(x) for x in (low or [it for it in good if it['premium'] <= 0])[:2])) \
+        if (low or [it for it in good if it['premium'] <= 0]) else T('mk_rp_close_v2_none')
+    v3 = (T('mk_rp_close_v3', item=market_item_label(reneg[0]), a=reneg[0]['same_higher'], b=reneg[0]['same_months']) if reneg
+          else T('mk_rp_close_v3_none'))
+    closing = {'kind': 'closing', 'eyebrow': 'Summary', 'headline': T('p1_rp_close_head'), 'note': T('mk_rp_close_note'),
+               'items': [('01', T('mk_rp_close_k1'), v1), ('02', T('mk_rp_close_k2'), v2), ('03', T('mk_rp_close_k3'), v3)]}
+    return rt.make_report(meta, [{'kind': 'body', 'flow': f} for f in sections] + [closing])
+
+
 # ============================================================
 # 신규사업 스코어러 (페이지 8) — 원본 HTML 도구의 스코어링 엔진을 그대로 이식
 # ============================================================
@@ -7565,6 +8086,8 @@ if 'analysis_done' not in st.session_state:
 if 'market_analysis_done' not in st.session_state:
     st.session_state.market_analysis_done = False
     st.session_state.market_df = None
+    st.session_state.market_rp_raw = None
+    st.session_state.market_rp_partial = None
     st.session_state.analyzed_product_name = None
     st.session_state.selected_customer = None
     st.session_state.market_contract_date = None
@@ -8334,6 +8857,16 @@ if selected == T('menu_opt_market'):
             if market_submitted and customer_name_selection and analyzed_product_name_input:
                 with st.spinner(T('p2_processing_spinner')):
                     market_df = market_df_for_importers.copy()
+                    # PDF 리포트용 원본: read_uploaded_table로 다시 읽어 HS 앞자리 0·NFC를 맞추고 부분월 선택을 그대로 따른다
+                    _rp_raw, _rp_pm = read_uploaded_table(market_file), None
+                    if _rp_raw is not None:
+                        _rp_trim, _rp_pm = split_partial_month(_rp_raw)
+                        if _rp_pm and not st.session_state.get('market_incl_partial', False):
+                            _rp_raw = _rp_trim
+                        else:
+                            _rp_pm = None
+                    st.session_state.market_rp_raw = _rp_raw
+                    st.session_state.market_rp_partial = _rp_pm
                     
                     # --- [수정 8] 'Export Country' 컬럼을 동적으로 찾도록 수정 (KeyError 해결) ---
                     # 컬럼을 동적으로 찾기
@@ -8778,6 +9311,71 @@ if selected == T('menu_opt_market'):
         # --- [수정 28] 경고 메시지 변경 ---
         else:
             st.warning(T('p2_no_supply_chain_cols_warning'))
+
+        # ---------- 새 양식 PDF 리포트 (같은 달·같은 원산지·같은 스펙 시장 비교) ----------
+        st.markdown("---")
+        st.subheader(T('mk_rp_header'))
+        st.caption(T('mk_rp_intro'))
+        _mk_raw = st.session_state.get('market_rp_raw')
+        _mk_cols = detect_trade_columns(list(_mk_raw.columns)) if _mk_raw is not None else {}
+        if _mk_raw is None or not all(_mk_cols.get(k) for k in ('date', 'importer', 'exporter', 'origin', 'hs', 'volume')):
+            st.info(T('mk_rp_need_cols'))
+        else:
+            mk_keep_dups = st.checkbox(T('dup_keep_toggle'), value=False, key="mk_keep_dups", help=T('dup_keep_help'))
+            mk_full, mk_stats = prepare_trade_df(_mk_raw, _mk_cols, keep_dups=mk_keep_dups)
+            if mk_stats['dup_rows']:
+                st.caption(T('dup_kept_caption' if mk_keep_dups else 'dup_removed_caption', n=mk_stats['dup_rows'], kg=mk_stats['dup_kg']))
+            # 품목 후보: HS + 품목분류 단위, 같은 HS 안 물량 5% 미만 품목분류는 제외
+            mk_cx = None
+            if _mk_cols.get('category'):
+                mk_cand_base, mk_cx = screener_category_filter(mk_full, SCREENER_CAT_MIN_SHARE)
+            else:
+                mk_cand_base = mk_full
+            if mk_cx is not None and len(mk_cx):
+                st.caption(T('sc_cat_excluded', th=SCREENER_CAT_MIN_SHARE, n=len(mk_cx), rows=int(mk_cx['rows'].sum()), kg=float(mk_cx['kg'].sum())))
+                with st.expander(T('sc_cat_excluded_expander'), expanded=False):
+                    st.dataframe(mk_cx.rename(columns={'hs': T('sc_col_hs'), 'category': T('sc_col_category'), 'share': T('sc_col_share'),
+                                                       'rows': T('sc_col_rows'), 'kg': T('sc_col_kg')}).round({T('sc_col_share'): 1, T('sc_col_kg'): 0}),
+                                 hide_index=True, width="stretch")
+            mk_cand = market_spec_candidates(mk_cand_base, customer_name, top=8)
+            if mk_cand.empty:
+                st.warning(T('mk_rp_no_customer'))
+            else:
+                mk_ed = pd.DataFrame({'use': [i < 3 for i in range(len(mk_cand))], 'name': mk_cand['name'], 'hs': mk_cand['hs'],
+                                      'cat': mk_cand['cat'], 'tons': mk_cand['tons'].round(1), 'include': '', 'exclude': ''})
+                mk_ed = st.data_editor(mk_ed, key=f"mk_spec_{customer_name}_{mk_keep_dups}", hide_index=True, width="stretch",
+                                       disabled=['hs', 'cat', 'tons'],
+                                       column_config={'use': st.column_config.CheckboxColumn(T('mk_col_use')),
+                                                      'name': st.column_config.TextColumn(T('mk_col_name')),
+                                                      'hs': st.column_config.TextColumn(T('mk_col_hs')),
+                                                      'cat': st.column_config.TextColumn(T('mk_col_cat')),
+                                                      'tons': st.column_config.NumberColumn(T('mk_col_tons'), format="%.1f"),
+                                                      'include': st.column_config.TextColumn(T('mk_col_inc')),
+                                                      'exclude': st.column_config.TextColumn(T('mk_col_exc'))})
+                st.caption(T('mk_rp_spec_caption'))
+                st.caption(T('mk_rp_blind_note'))
+                if st.button(T('rp_pdf_btn'), key="mk_rp_btn"):
+                    mk_sel = mk_ed[mk_ed['use'].fillna(False).astype(bool)]
+                    if mk_sel.empty:
+                        st.warning(T('mk_rp_no_items'))
+                    else:
+                        with st.spinner(T('rp_pdf_spinner')):
+                            try:
+                                mk_items = [compute_market_item(mk_full, customer_name,
+                                                                {'name': str(r['name'] or '').strip(), 'hs': r['hs'], 'cat': r['cat'],
+                                                                 'include': str(r['include'] or '').strip(), 'exclude': str(r['exclude'] or '').strip()})
+                                            for _, r in mk_sel.iterrows()]
+                                if not any(it['ok'] for it in mk_items):
+                                    st.warning(T('mk_rp_no_result'))
+                                else:
+                                    mk_R = {'customer': customer_name, 'items': mk_items, 'stats': mk_stats, 'min_kg': 1000, 'blind': True,
+                                            'partial': st.session_state.get('market_rp_partial'),
+                                            'insufficient_names': [market_item_label(it) for it in mk_items if it['ok'] and it['insufficient']]}
+                                    pdf_bytes = build_market_report(mk_R)
+                                    st.download_button(T('rp_pdf_dl'), data=pdf_bytes, file_name="market_competitiveness_report.pdf",
+                                                       mime="application/pdf", key="mk_rp_dl")
+                            except Exception as e:
+                                st.error(T('pdf_error_msg', msg=str(e)))
 
 # ==============================================================================
 # 페이지 3: 공급망 흐름도 (Sankey)
